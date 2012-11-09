@@ -1,0 +1,21 @@
+From: Meredith, Kelly M. 
+Sent: Wednesday, September 19, 2012 9:53 PM
+To: Beasley, William H.
+Subject: RE: Gen1 height heritability at .90.
+
+Updated to include males with AFI data
+________________________________________
+From: Beasley, William H.
+Sent: Wednesday, September 19, 2012 4:28 PM
+To: Meredith, Kelly M.
+Subject: RE: Gen1 height heritability at .90.
+I’ll wait until tomorrow then for the males.  I have plenty of other stuff to work on.  Thanks for the good explanations.
+ 
+From: Meredith, Kelly M. 
+Sent: Wednesday, September 19, 2012 4:25 PM
+To: Beasley, William H.
+Subject: RE: Gen1 height heritability at .90.
+ 
+The AFM data and AFI data I worked on recently was for Gen2.  
+ 
+I have these for Gen1 from my thesis, but I only have AFI set up for females (male and female questions were separately listed in the NLSY questions list), I can give you the female only data set now (attached). I'll just give you those variables, the other variables I have in that data set are not likely to be useful (items like how many years they lived with each parent). 

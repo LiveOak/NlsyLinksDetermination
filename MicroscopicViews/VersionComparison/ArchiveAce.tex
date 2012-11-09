@@ -1,0 +1,400 @@
+\documentclass{article}\usepackage{graphicx, color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\definecolor{fgcolor}{rgb}{0.2, 0.2, 0.2}
+\newcommand{\hlnumber}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlfunctioncall}[1]{\textcolor[rgb]{0.501960784313725,0,0.329411764705882}{\textbf{#1}}}%
+\newcommand{\hlstring}[1]{\textcolor[rgb]{0.6,0.6,1}{#1}}%
+\newcommand{\hlkeyword}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
+\newcommand{\hlargument}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hlcomment}[1]{\textcolor[rgb]{0.180392156862745,0.6,0.341176470588235}{#1}}%
+\newcommand{\hlroxygencomment}[1]{\textcolor[rgb]{0.43921568627451,0.47843137254902,0.701960784313725}{#1}}%
+\newcommand{\hlformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hleqformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hlassignement}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
+\newcommand{\hlpackage}[1]{\textcolor[rgb]{0.588235294117647,0.709803921568627,0.145098039215686}{#1}}%
+\newcommand{\hlslot}[1]{\textit{#1}}%
+\newcommand{\hlsymbol}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlprompt}[1]{\textcolor[rgb]{0.2,0.2,0.2}{#1}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}%\documentclass{scrartcl}
+\usepackage[margin=.5in]{geometry}
+% \usepackage[float]
+\usepackage[section]{placeins} %This silently puts a \FloatBarrier com?mand before each sec?tion. http://robjhyndman.com/researchtips/latex-floats/
+\usepackage{titling}
+\setlength{\droptitle}{-4em} %Reduce the space before the title
+\posttitle{\par\end{center}\vspace{-2em}} %Reduce the space between the title and Author
+
+
+\title{Comparison of Versions of Kinship Links}
+\author{Joe Rodger's BG Team}
+\begin{document}
+\maketitle
+% \raggedbottom
+\setcounter{totalnumber}{8} %maximum number of floats on a page; http://robjhyndman.com/researchtips/latex-floats/
+% \restylefloat{figure}
+
+\setlength{\parindent}{0pt}%http://tex.stackexchange.com/questions/49188/how-to-insert-vertical-space-between-paragraphs
+
+
+
+
+
+
+
+\textbf{Outcome}: HeightZAgeGender;\\
+\textbf{RelationshipPath}: Gen2Siblings [ID:2];
+\textbf{Newer Links Version}: 51;
+\textbf{Older Links Version}: 50;
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+Newer Links:
+Older Links: Resumed inclusion of Gen2
+R Groups specifically excluded: { 0, 0.375 }
+Drop pair if housemates are not confirmed in the same generation: FALSE\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+
+
+\section{Ace - Comparison of $R$ Variants} 
+(See the final table for an explanation of the different $R$ variants.)
+
+% latex table generated in R 2.15.2 by xtable 1.7-0 package
+% Fri Nov 09 13:58:59 2012
+\begin{table}[ht]
+\begin{center}
+{\large
+\begin{tabular}{l|rrrr|rrrr}
+  \hline
+$R$ Variant & $a_{new}^2$ & $c_{new}^2$ & $e_{new}^2$ & $N_{new}$ & $a_{old}^2$ & $c_{old}^2$ & $e_{old}^2$ & $N_{old}$ \\ 
+  \hline
+R & .79 & .03 & .18 & 5838 & .79 & .03 & .18 & 5838 \\ 
+  RPass1 & .79 & .03 & .18 & 5830 & .79 & .03 & .18 & 5830 \\ 
+  RImplicit & .79 & .03 & .18 & 5618 & .79 & .03 & .18 & 5618 \\ 
+  RImplicitPass1 & .86 & .00 & .14 & 4912 & .86 & .00 & .14 & 4912 \\ 
+  RExplicit & .70 & .07 & .22 & 5665 & .70 & .07 & .22 & 5665 \\ 
+  RExplicitPass1 & .69 & .08 & .23 & 5640 & .69 & .08 & .23 & 5640 \\ 
+  RImplicit2004 & .81 & .02 & .17 & 4882 & .81 & .02 & .17 & 4882 \\ 
+   \hline
+\end{tabular}
+}
+\caption{Comparison of R Variants (by rows) and of Links Versions (left vs right side).}
+\end{center}
+\end{table}
+
+
+
+
+\section{Subgroups --  R }% latex table generated in R 2.15.2 by xtable 1.7-0 package
+% Fri Nov 09 13:58:59 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rlrrrrrrl}
+  \hline
+R & Included in SEM & $N_{Pairs}$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
+  \hline
+0.250 & TRUE & 1862 & 1.04 & 1.04 & 0.27 & 0.26 & 1.0 & TRUE \\ 
+  0.375 & FALSE & 46 & 1.07 & 0.96 & 0.43 & 0.42 & 0.8 & TRUE \\ 
+  0.500 & TRUE & 3960 & 0.97 & 0.96 & 0.39 & 0.41 & 0.8 & TRUE \\ 
+  0.750 & FALSE & 0 &  &  &  &  &  & FALSE \\ 
+  1.000 & TRUE & 16 & 0.99 & 1.06 & 0.95 & 0.92 & 0.2 & TRUE \\ 
+   \hline
+\end{tabular}
+\caption{R -- Newer Version of Links}
+\end{center}
+\end{table}
+% latex table generated in R 2.15.2 by xtable 1.7-0 package
+% Fri Nov 09 13:58:59 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rlrrrrrrl}
+  \hline
+R & Included in SEM & $N_{Pairs}$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
+  \hline
+0.250 & TRUE & 1862 & 1.04 & 1.04 & 0.27 & 0.26 & 1.0 & TRUE \\ 
+  0.375 & FALSE & 46 & 1.07 & 0.96 & 0.43 & 0.42 & 0.8 & TRUE \\ 
+  0.500 & TRUE & 3960 & 0.97 & 0.96 & 0.39 & 0.41 & 0.8 & TRUE \\ 
+  0.750 & FALSE & 0 &  &  &  &  &  & FALSE \\ 
+  1.000 & TRUE & 16 & 0.99 & 1.06 & 0.95 & 0.92 & 0.2 & TRUE \\ 
+   \hline
+\end{tabular}
+\caption{R -- Older Version of Links}
+\end{center}
+\end{table}
+\newpage 
+\section{Subgroups --  RPass1 }% latex table generated in R 2.15.2 by xtable 1.7-0 package
+% Fri Nov 09 13:58:59 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rlrrrrrrl}
+  \hline
+RPass1 & Included in SEM & $N_{Pairs}$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
+  \hline
+0.250 & TRUE & 1858 & 1.04 & 1.04 & 0.27 & 0.26 & 1.0 & TRUE \\ 
+  0.375 & FALSE & 45 & 1.09 & 0.98 & 0.44 & 0.43 & 0.9 & TRUE \\ 
+  0.500 & TRUE & 3956 & 0.97 & 0.96 & 0.39 & 0.40 & 0.8 & TRUE \\ 
+  0.750 & FALSE & 0 &  &  &  &  &  & FALSE \\ 
+  1.000 & TRUE & 16 & 0.99 & 1.06 & 0.95 & 0.92 & 0.2 & TRUE \\ 
+   \hline
+\end{tabular}
+\caption{RPass1 -- Newer Version of Links}
+\end{center}
+\end{table}
+% latex table generated in R 2.15.2 by xtable 1.7-0 package
+% Fri Nov 09 13:58:59 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rlrrrrrrl}
+  \hline
+RPass1 & Included in SEM & $N_{Pairs}$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
+  \hline
+0.250 & TRUE & 1858 & 1.04 & 1.04 & 0.27 & 0.26 & 1.0 & TRUE \\ 
+  0.375 & FALSE & 45 & 1.09 & 0.98 & 0.44 & 0.43 & 0.9 & TRUE \\ 
+  0.500 & TRUE & 3956 & 0.97 & 0.96 & 0.39 & 0.40 & 0.8 & TRUE \\ 
+  0.750 & FALSE & 0 &  &  &  &  &  & FALSE \\ 
+  1.000 & TRUE & 16 & 0.99 & 1.06 & 0.95 & 0.92 & 0.2 & TRUE \\ 
+   \hline
+\end{tabular}
+\caption{RPass1 -- Older Version of Links}
+\end{center}
+\end{table}
+\section{Subgroups --  RImplicit }% latex table generated in R 2.15.2 by xtable 1.7-0 package
+% Fri Nov 09 13:58:59 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rlrrrrrrl}
+  \hline
+RImplicit & Included in SEM & $N_{Pairs}$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
+  \hline
+0.250 & TRUE & 1743 & 1.05 & 1.04 & 0.27 & 0.26 & 1.0 & TRUE \\ 
+  0.500 & TRUE & 3859 & 0.98 & 0.97 & 0.40 & 0.41 & 0.8 & TRUE \\ 
+  0.750 & FALSE & 0 &  &  &  &  &  & FALSE \\ 
+  1.000 & TRUE & 16 & 0.99 & 1.06 & 0.95 & 0.92 & 0.2 & TRUE \\ 
+   \hline
+\end{tabular}
+\caption{RImplicit -- Newer Version of Links}
+\end{center}
+\end{table}
+% latex table generated in R 2.15.2 by xtable 1.7-0 package
+% Fri Nov 09 13:58:59 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rlrrrrrrl}
+  \hline
+RImplicit & Included in SEM & $N_{Pairs}$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
+  \hline
+0.250 & TRUE & 1743 & 1.05 & 1.04 & 0.27 & 0.26 & 1.0 & TRUE \\ 
+  0.500 & TRUE & 3859 & 0.98 & 0.97 & 0.40 & 0.41 & 0.8 & TRUE \\ 
+  0.750 & FALSE & 0 &  &  &  &  &  & FALSE \\ 
+  1.000 & TRUE & 16 & 0.99 & 1.06 & 0.95 & 0.92 & 0.2 & TRUE \\ 
+   \hline
+\end{tabular}
+\caption{RImplicit -- Older Version of Links}
+\end{center}
+\end{table}
+\newpage 
+\section{Subgroups --  RImplicitPass1 }% latex table generated in R 2.15.2 by xtable 1.7-0 package
+% Fri Nov 09 13:58:59 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rlrrrrrrl}
+  \hline
+RImplicitPass1 & Included in SEM & $N_{Pairs}$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
+  \hline
+0.250 & TRUE & 1383 & 1.04 & 1.04 & 0.25 & 0.24 & 1.0 & TRUE \\ 
+  0.500 & TRUE & 3513 & 0.98 & 0.97 & 0.40 & 0.41 & 0.8 & TRUE \\ 
+  0.750 & FALSE & 0 &  &  &  &  &  & FALSE \\ 
+  1.000 & TRUE & 16 & 0.99 & 1.06 & 0.95 & 0.92 & 0.2 & TRUE \\ 
+   \hline
+\end{tabular}
+\caption{RImplicitPass1 -- Newer Version of Links}
+\end{center}
+\end{table}
+% latex table generated in R 2.15.2 by xtable 1.7-0 package
+% Fri Nov 09 13:58:59 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rlrrrrrrl}
+  \hline
+RImplicitPass1 & Included in SEM & $N_{Pairs}$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
+  \hline
+0.250 & TRUE & 1383 & 1.04 & 1.04 & 0.25 & 0.24 & 1.0 & TRUE \\ 
+  0.500 & TRUE & 3513 & 0.98 & 0.97 & 0.40 & 0.41 & 0.8 & TRUE \\ 
+  0.750 & FALSE & 0 &  &  &  &  &  & FALSE \\ 
+  1.000 & TRUE & 16 & 0.99 & 1.06 & 0.95 & 0.92 & 0.2 & TRUE \\ 
+   \hline
+\end{tabular}
+\caption{RImplicitPass1 -- Older Version of Links}
+\end{center}
+\end{table}
+\section{Subgroups --  RExplicit }% latex table generated in R 2.15.2 by xtable 1.7-0 package
+% Fri Nov 09 13:58:59 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rlrrrrrrl}
+  \hline
+RExplicit & Included in SEM & $N_{Pairs}$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
+  \hline
+0.250 & TRUE & 1767 & 1.05 & 1.03 & 0.29 & 0.28 & 1.0 & TRUE \\ 
+  0.375 & FALSE & 180 & 0.90 & 1.16 & 0.14 & 0.14 & 1.0 & TRUE \\ 
+  0.500 & TRUE & 3882 & 0.98 & 0.96 & 0.39 & 0.41 & 0.8 & TRUE \\ 
+  1.000 & TRUE & 16 & 0.99 & 1.06 & 0.95 & 0.92 & 0.2 & TRUE \\ 
+   \hline
+\end{tabular}
+\caption{RExplicit -- Newer Version of Links}
+\end{center}
+\end{table}
+% latex table generated in R 2.15.2 by xtable 1.7-0 package
+% Fri Nov 09 13:58:59 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rlrrrrrrl}
+  \hline
+RExplicit & Included in SEM & $N_{Pairs}$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
+  \hline
+0.250 & TRUE & 1767 & 1.05 & 1.03 & 0.29 & 0.28 & 1.0 & TRUE \\ 
+  0.375 & FALSE & 180 & 0.90 & 1.16 & 0.14 & 0.14 & 1.0 & TRUE \\ 
+  0.500 & TRUE & 3882 & 0.98 & 0.96 & 0.39 & 0.41 & 0.8 & TRUE \\ 
+  1.000 & TRUE & 16 & 0.99 & 1.06 & 0.95 & 0.92 & 0.2 & TRUE \\ 
+   \hline
+\end{tabular}
+\caption{RExplicit -- Older Version of Links}
+\end{center}
+\end{table}
+\newpage 
+\section{Subgroups --  RExplicitPass1 }% latex table generated in R 2.15.2 by xtable 1.7-0 package
+% Fri Nov 09 13:58:59 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rlrrrrrrl}
+  \hline
+RExplicitPass1 & Included in SEM & $N_{Pairs}$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
+  \hline
+0.250 & TRUE & 1765 & 1.05 & 1.03 & 0.29 & 0.28 & 1.0 & TRUE \\ 
+  0.375 & FALSE & 180 & 0.90 & 1.16 & 0.14 & 0.14 & 1.0 & TRUE \\ 
+  0.500 & TRUE & 3860 & 0.98 & 0.95 & 0.39 & 0.40 & 0.8 & TRUE \\ 
+  1.000 & TRUE & 15 & 1.05 & 1.13 & 1.01 & 0.92 & 0.2 & TRUE \\ 
+   \hline
+\end{tabular}
+\caption{RExplicitPass1 -- Newer Version of Links}
+\end{center}
+\end{table}
+% latex table generated in R 2.15.2 by xtable 1.7-0 package
+% Fri Nov 09 13:58:59 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rlrrrrrrl}
+  \hline
+RExplicitPass1 & Included in SEM & $N_{Pairs}$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
+  \hline
+0.250 & TRUE & 1765 & 1.05 & 1.03 & 0.29 & 0.28 & 1.0 & TRUE \\ 
+  0.375 & FALSE & 180 & 0.90 & 1.16 & 0.14 & 0.14 & 1.0 & TRUE \\ 
+  0.500 & TRUE & 3860 & 0.98 & 0.95 & 0.39 & 0.40 & 0.8 & TRUE \\ 
+  1.000 & TRUE & 15 & 1.05 & 1.13 & 1.01 & 0.92 & 0.2 & TRUE \\ 
+   \hline
+\end{tabular}
+\caption{RExplicitPass1 -- Older Version of Links}
+\end{center}
+\end{table}
+\section{Subgroups --  RImplicit2004 }% latex table generated in R 2.15.2 by xtable 1.7-0 package
+% Fri Nov 09 13:58:59 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rlrrrrrrl}
+  \hline
+RImplicit2004 & Included in SEM & $N_{Pairs}$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
+  \hline
+0.250 & TRUE & 1466 & 1.01 & 1.03 & 0.26 & 0.26 & 1.0 & TRUE \\ 
+  0.375 & FALSE & 962 & 1.00 & 0.92 & 0.30 & 0.32 & 0.8 & TRUE \\ 
+  0.500 & TRUE & 3401 & 0.98 & 0.98 & 0.40 & 0.41 & 0.8 & TRUE \\ 
+  1.000 & TRUE & 15 & 1.01 & 1.13 & 1.00 & 0.93 & 0.2 & TRUE \\ 
+   \hline
+\end{tabular}
+\caption{RImplicit2004 -- Newer Version of Links}
+\end{center}
+\end{table}
+% latex table generated in R 2.15.2 by xtable 1.7-0 package
+% Fri Nov 09 13:58:59 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rlrrrrrrl}
+  \hline
+RImplicit2004 & Included in SEM & $N_{Pairs}$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
+  \hline
+0.250 & TRUE & 1466 & 1.01 & 1.03 & 0.26 & 0.26 & 1.0 & TRUE \\ 
+  0.375 & FALSE & 962 & 1.00 & 0.92 & 0.30 & 0.32 & 0.8 & TRUE \\ 
+  0.500 & TRUE & 3401 & 0.98 & 0.98 & 0.40 & 0.41 & 0.8 & TRUE \\ 
+  1.000 & TRUE & 15 & 1.01 & 1.13 & 1.00 & 0.93 & 0.2 & TRUE \\ 
+   \hline
+\end{tabular}
+\caption{RImplicit2004 -- Older Version of Links}
+\end{center}
+\end{table}
+
+
+
+%rVersions <- c("R", "RPass1", "RImplicit", "RImplicitPass1", "RExplicit", "RExplicitPass1", "RImplicit2004")
+\section{Explanation of $R$ Variants}
+\begin{tabular}{l l}
+\textbf{Variant} & \textbf{Explanation} \\
+\hline
+$R$ & We recommend researchers typical use this version. \\
+$R_{Pass1}$ & Supposed to be fooled only by errors in the subject's/mother's knowledge \\
+\hline
+$RImplicit$ & Uses only implicit items \\
+$RImplicit_{Pass1}$ & Uses only implicit items \& supposed to be fooled only by knowledge errors \\
+$RImplicit_{Mother}$ & Uses only mother's implicit items (exists only for Gen2)\\
+$RImplicit_{Subject}$ & Uses only subject's implicit items\\
+$RImplicit_{2004}$ & The state of the links in 2004.  Rodgers \& Rowe for Gen1; Rodgers, Johnson \& Bard for Gen2 \\
+\hline
+$RExplicit$ & Uses only explicit items \\
+$RExplicit_{Pass1}$ & Uses only explicit items \& supposed to be fooled only by knowledge errors \\
+
+\hline
+\end{tabular}
+
+
+
+
+\end{document}
