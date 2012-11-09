@@ -133,6 +133,9 @@ pip-log.txt
 ## NlsyLinksDetermination
 #############
 PreviousSasFiles
+StableComparisonData
+TestResults
+
 README.html
 PatternReportDesign.html
 PatternReportRun.html
