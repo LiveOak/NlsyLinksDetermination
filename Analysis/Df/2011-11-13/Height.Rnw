@@ -1,0 +1,106 @@
+
+% -*- mode: noweb; noweb-default-code-mode: R-mode; -*-
+\documentclass[a4paper]{article}
+
+\title{Heritability by Subgroup}
+\author{Kelly Williams and Joe's BG Team}
+
+\SweaveOpts{echo=FALSE}
+\usepackage{a4wide}
+
+\begin{document}
+
+\maketitle
+%\usepackage{xtable}
+Gen2 Link Version: 2011V28.
+
+<<echo=F,print=F>>=
+require(e1071) #For Skewness function
+pathDoubleEntered <- "F:/Projects/Nls/Links2011/Analysis/Df/2011-11-13/DoubleEntered.csv"
+ageFloorInclusive <- 19
+ambiguousImplicitSiblingR <- .375
+ 
+ds <- read.csv(pathDoubleEntered)
+
+#Cut the youngins
+ds <- subset(ds, AgeHt1>=ageFloorInclusive & AgeHt2>=ageFloorInclusive)
+#Set the remaining ambiguous pairs to an fixed constant.
+ds[is.na(ds$R), "R"] <- ambiguousImplicitSiblingR
+ 
+ExtractHeightResults <- function( dsSubset, subsetTitle ) {
+  #Further cut the missing ones, to help count the R categories.
+  dsSubset <- subset(dsSubset, !is.na(HtSt1) & !is.na(HtSt2) & !is.na(R))
+  
+  brief <- summary(lm(HtSt1 ~ 1 + HtSt2 + R + HtSt2*R, data=dsSubset))
+  coeficients <- coef(brief)
+  count <- length(brief$residuals) 
+  hSquared <- coeficients["HtSt2:R", "Estimate"]
+  cSquared <- coeficients["HtSt2", "Estimate"]
+  eSquared <- 1 - hSquared - cSquared
+  
+  countHalf <- sum(dsSubset$R == .25)
+  countAmbiguousSib <- sum(dsSubset$R == .375)
+  countFull <- sum(dsSubset$R == .5)
+  countAmbiguousTwin <- sum(dsSubset$R == .75)
+  countMz <- sum(dsSubset$R == 1)
+  
+  dsResult <- data.frame(NDouble=count, HSq=hSquared, CSq=cSquared, ESq=eSquared,
+    M=mean(dsSubset$HtSt1, na.rm=T), SD=sd(dsSubset$HtSt1, na.rm=T), Skew=skewness(dsSubset$HtSt1, na.rm=T),
+    Half=countHalf, AS=countAmbiguousSib, Full=countFull, AT=countAmbiguousTwin, Mz=countMz
+  )
+  rownames(dsResult) <- subsetTitle
+  return( dsResult )
+}
+ 
+
+resultTotal <- ExtractHeightResults(dsSubset=ds, subsetTitle="Total")
+#By Gender
+resultFF <- ExtractHeightResults(dsSubset=subset(ds, CGender1==2 & CGender2==2), subsetTitle="FF")
+resultMF <- ExtractHeightResults(dsSubset=subset(ds, CGender1!=CGender2), subsetTitle="MF")
+resultMM <- ExtractHeightResults(dsSubset=subset(ds, CGender1==1 & CGender2==1), subsetTitle="MM")
+
+#By Race (1:Hispanic, 2:Black, 3:NBNH)
+resultHispanic <- ExtractHeightResults(dsSubset=subset(ds, CRace1==1), subsetTitle="Hispanic")
+resultBlack <- ExtractHeightResults(dsSubset=subset(ds, CRace1==2), subsetTitle="Black")
+resultNBNH <- ExtractHeightResults(dsSubset=subset(ds, CRace1==3), subsetTitle="NBNH")
+
+#By Gender for Hispanics
+resultHispanicFF <- ExtractHeightResults(dsSubset=subset(ds, CRace1==1 & CGender1==2 & CGender2==2), subsetTitle="Hisp FF")
+resultHispanicMF <- ExtractHeightResults(dsSubset=subset(ds, CRace1==1 & CGender1!=CGender2), subsetTitle="Hisp MF")
+resultHispanicMM <- ExtractHeightResults(dsSubset=subset(ds, CRace1==1 & CGender1==1 & CGender2==1), subsetTitle="Hisp MM")
+
+#By Gender for Blacks
+resultBlackFF <- ExtractHeightResults(dsSubset=subset(ds, CRace1==2 & CGender1==2 & CGender2==2), subsetTitle="Black FF")
+resultBlackMF <- ExtractHeightResults(dsSubset=subset(ds, CRace1==2 & CGender1!=CGender2), subsetTitle="Black MF")
+resultBlackMM <- ExtractHeightResults(dsSubset=subset(ds, CRace1==2 & CGender1==1 & CGender2==1), subsetTitle="Black MM")
+
+#By Gender for NBNHs
+resultNBNHFF <- ExtractHeightResults(dsSubset=subset(ds, CRace1==3 & CGender1==2 & CGender2==2), subsetTitle="NBNH FF")
+resultNBNHMF <- ExtractHeightResults(dsSubset=subset(ds, CRace1==3 & CGender1!=CGender2), subsetTitle="NBNH MF")
+resultNBNHMM <- ExtractHeightResults(dsSubset=subset(ds, CRace1==3 & CGender1==1 & CGender2==1), subsetTitle="NBNH MM")
+
+results <- rbind(
+  resultTotal,  resultFF, resultMF, resultMM,
+  resultHispanic, resultBlack, resultNBNH, 
+  resultHispanicFF, resultHispanicMF, resultHispanicMM,
+  resultBlackFF, resultBlackMF, resultBlackMM,
+  resultNBNHFF, resultNBNHMF, resultNBNHMM
+  )
+
+#colnames(results) <- c("N", "h^2", "c^2", "e^2", "Mean", "SD", "Skew", ".25", ".375", ".5", ".75", "1")
+#colnames(results) <- c("$N$", "$h^2$", "$c^2$", "$e^2$", "$\\bar{X}$", "SD", "Skew", "$N_{.25}$", "$N_{.375}$", "$N_{.5}$", "$N_{.75}$", "$N_{Mz}$")
+colnames(results) <- c("$N$", "$h^2$", "$c^2$", "$e^2$", "$\\bar{X}$", "$\\sigma$", "$\\sigma^3$", "$N_{.25}$", "$N_{.375}$", "$N_{.5}$", "$N_{.75}$", "$N_{Mz}$")
+#colnames(xMatrix) <- c(quote("$\\alpha$"), "h^2", "c^2", "e^2", "Mean", "SD", "Skew", " ", ".25", ".375", ".5", ".75", "1", "Total N")
+digitsFormat <- c(0, 0,3,3,3,2,2,2,0,0,0,0,0)
+@
+
+Subjects were \Sexpr{ageFloorInclusive}+ years old.  Implicit ambiguous sibs were assigned R=\Sexpr{ambiguousImplicitSiblingR}.
+
+Counts reflect the double entry.
+<<label=tab1,echo=FALSE,results=tex>>=
+library(xtable)
+textTable <-  xtable(results, caption="Height Heritability", label="tab:two", digits=digitsFormat)
+align(textTable) <- "lr|rrr|rrr|rrrrr" 
+print(textTable, hline.after=c(  1, 4, 7, 10, 13), sanitize.text.function = function(x) {x})
+@
+\end{document}

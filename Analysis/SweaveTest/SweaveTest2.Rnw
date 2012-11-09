@@ -1,0 +1,101 @@
+
+% -*- mode: noweb; noweb-default-code-mode: R-mode; -*-
+\documentclass[a4paper]{article}
+
+\title{Sweave Test Document for Heritability by Group}
+\author{Joe's BG Team}
+
+\SweaveOpts{echo=FALSE}
+\usepackage{a4wide}
+
+\begin{document}
+
+\maketitle
+%\usepackage{xtable}
+Version: 2011V28;
+
+
+19+ year-olds with amibiguous sibs and Null values recoded as .375.
+
+<<echo=TRUE,print=TRUE>>=
+
+x <-rnorm(10)
+@
+<<echo=F,print=F>>=
+xMatrix <- matrix(x, nrow=2)
+
+values <- c(
+7160, 0.71,	0.05,	0.24,	-0.03,	1.01,	-0.03, NA, 2206,	62,	4864,	0,  28,	7160,
+1782,	0.85,	0.04,	0.12,	-0.04,	1.02,	 0.04, NA,  574,	12,	1186,	0,	10,	1782,
+3558,	0.65,	0.06,	0.29,  0.01,	1.02,	-0.06, NA, 1110,	26,	2422,	0,	0,	3558,
+1820,	0.70,	0.02,	0.28,	-0.07,	0.99,	-0.03, NA, 522,	  24,	1256,	0,	18,	1820)
+xMatrix <- matrix(values, ncol=14, byrow=T)
+#colnames(xMatrix) <- letters[1:ncol(xMatrix)]
+#colnames(xMatrix) <- c("N", "h^2", "c^2", "e^2", "Mean", "SD", "Skew", " ", ".25", ".375", ".5", ".75", "1", "Total N")
+colnames(xMatrix) <- c(quote("$\\alpha$"), "h^2", "c^2", "e^2", "Mean", "SD", "Skew", " ", ".25", ".375", ".5", ".75", "1", "Total N")
+rownames(xMatrix) <- c("Total", "All FF", "All MF", "All MM")
+#displayFormat <- c("s","d","f3","f","f","f","f","f","d","d","d","d","d","d","d")
+digitsFormat <- c(0, 0,3,3,3,2,2,2,0,0,0,0,0,0,0)
+@
+
+
+<<label=tab1,echo=FALSE,results=tex>>=
+library(xtable)
+print(
+  xtable(xMatrix, caption="Height", label="tab:two", digits=digitsFormat)
+  )
+
+counts <- c(18,17,15,20,10,20,25,13,12)
+outcome <- gl(3,1,9)
+treatment <- gl(3,3)
+d.AD <- data.frame(treatment, outcome, counts)
+glm.D93 <- glm(counts ~ outcome + treatment, family=poisson())
+print(xtable(glm.D93,align="r|rlrc"))
+print(xtable(anova(glm.D93)),hline.after=c(1),size="small")
+@
+
+
+Now we look at Gaussian data:
+
+<<>>=
+library(stats)
+x <- rnorm(20)
+print(x)
+print(t1 <- t.test(x))
+@
+Note that we can easily integrate some numbers into standard text: The
+third element of vector \texttt{x} is \Sexpr{x[3]}, the
+$p$-value of the test is \Sexpr{format.pval(t1$p.value)}. % $
+
+Now we look at a summary of the famous \texttt{iris} data set, and we
+want to see the commands in the code chunks:
+
+\SweaveOpts{echo=true}
+
+<<>>=
+data(iris)
+summary(iris)
+@ %def
+
+
+\begin{figure}[htbp]
+  \begin{center}
+<<fig=TRUE>>=
+library(graphics)
+pairs(iris)
+@
+     \caption{Pairs plot of the iris data.}
+  \end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+  \begin{center}
+<<fig=true>>=
+boxplot(Sepal.Length~Species, data=iris)
+@
+    \caption{Boxplot of sepal length grouped by species.}
+  \end{center}
+\end{figure}
+@
+
+\end{document}

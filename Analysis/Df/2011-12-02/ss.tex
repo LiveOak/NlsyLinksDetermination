@@ -1,0 +1,9 @@
+x <- data.frame(var1 = sample(1:100, size = 250, replace = TRUE),
+   group = sample(c("A", "B"), size = 250, replace = TRUE))
+x <- upData(x,
+  labels = c(var1 = paste(strwrap(paste("This is an extremely long and descriptive",
+     "variable label that would normally run off the page.",
+      "Our goal is to break this variable label over multiple lines so we won't have to",
+      "truncate the variable label in any way."), width = 60), collapse = "\\\\")))
+latex(summary(group ~ var1, method = "reverse", data = x, overall = TRUE,
+   file = "", landscape = TRUE))

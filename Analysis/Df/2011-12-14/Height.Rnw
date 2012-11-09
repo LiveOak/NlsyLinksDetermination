@@ -1,0 +1,315 @@
+% -*- mode: noweb; noweb-default-code-mode: R-mode; -*-
+\documentclass[a4paper]{article}
+\SweaveOpts{echo=FALSE}
+\usepackage{a4wide}
+\usepackage{lscape}
+\usepackage[margin=.2in]{geometry}
+
+\title{Heritability by Subgroup}
+\author{Joe Rodger's BG Team}
+
+\begin{document}
+\maketitle
+Gen2 Link Version: 2011V28.
+
+<<echo=F,print=F>>=
+require(e1071) #For Skewness function
+require(xtable)
+require(hexbin)
+require(ggplot2)
+#################################################################################################
+# Exclude some observations, define some constants and desfine a helper function
+#################################################################################################
+pathDoubleEntered <- "F:/Projects/Nls/Links2011/Analysis/Df/2011-12-14/DoubleEntered.csv"
+ageFloorInclusive <- 19
+ambiguousImplicitSiblingR <- .375
+zScoreThreshold <- 10
+ 
+ds <- read.csv(pathDoubleEntered)
+
+#Cut the youngins
+ds <- subset(ds, AgeHt1>=ageFloorInclusive & AgeHt2>=ageFloorInclusive)
+#Set the remaining ambiguous pairs to an fixed constant.
+ds[is.na(ds$R), "R"] <- ambiguousImplicitSiblingR
+#Cut the ambiguous
+ds <- subset(ds, R!=.375)
+
+#Include people if their zScores aren't too high
+ds <- subset(ds, -zScoreThreshold<=HtSt1 & HtSt1<=zScoreThreshold)
+ds <- subset(ds, -zScoreThreshold<=HtSt2 & HtSt2<=zScoreThreshold)
+
+ExtractHeightResults <- function( dsSubset, subsetTitle ) {
+  #Further cut the missing ones, to help count the R categories.
+  dsSubset <- subset(dsSubset, !is.na(HtSt1) & !is.na(HtSt2) & !is.na(R))
+  
+  brief <- summary(lm(HtSt1 ~ 1 + HtSt2 + R + HtSt2*R, data=dsSubset))
+  coeficients <- coef(brief)
+  count <- length(brief$residuals) 
+  hSquared <- coeficients["HtSt2:R", "Estimate"]
+  cSquared <- coeficients["HtSt2", "Estimate"]
+  eSquared <- 1 - hSquared - cSquared
+  
+  countHalf <- sum(dsSubset$R == .25)
+  countAmbiguousSib <- sum(dsSubset$R == .375)
+  countFull <- sum(dsSubset$R == .5)
+  countAmbiguousTwin <- sum(dsSubset$R == .75)
+  countMz <- sum(dsSubset$R == 1)
+  
+  corHalf <- cor(dsSubset$HtSt1[dsSubset$R == .25], dsSubset$HtSt2[dsSubset$R == .25])
+  corAmbiguousSib <- cor(dsSubset$HtSt1[dsSubset$R == .375], dsSubset$HtSt2[dsSubset$R == .375])
+  corFull <- cor(dsSubset$HtSt1[dsSubset$R == .5], dsSubset$HtSt2[dsSubset$R == .5])
+  #corAmbiguousTwin <- cor(dsSubset$HtSt1[dsSubset$R == .75], dsSubset$HtSt2[dsSubset$R == .75])
+  corMz <- cor(dsSubset$HtSt1[dsSubset$R == 1], dsSubset$HtSt2[dsSubset$R == 1])
+  
+  dsResult <- data.frame(Subgroup=subsetTitle,NDouble=count, HSq=hSquared, CSq=cSquared, ESq=eSquared,
+    M=mean(dsSubset$HtSt1, na.rm=T), SD=sd(dsSubset$HtSt1, na.rm=T), Skew=skewness(dsSubset$HtSt1, na.rm=T),
+    Half=countHalf, AS=countAmbiguousSib, Full=countFull, AT=countAmbiguousTwin, Mz=countMz,
+    CorHalf=corHalf, CorAS=corAmbiguousSib, CorFull=corFull, CorMz=corMz #CorAT=corAmbiguousTwin,                         
+  )  
+  return( dsResult )
+}
+
+#################################################################################################
+# Define the subgroups
+#################################################################################################
+#By Gender
+dsFF <- subset(ds, CGender1==2 & CGender2==2)
+dsMF <- subset(ds, CGender1!=CGender2)
+dsMM <- subset(ds, CGender1==1 & CGender2==1)
+
+#By Race (1:Hispanic, 2:Black, 3:NBNH)
+dsHispanic <- subset(ds, CRace1==1)
+dsBlack <- subset(ds, CRace1==2)
+dsNBNH <- subset(ds, CRace1==3)
+
+#By Gender for Hispanics
+dsHispanicFF <- subset(ds, CRace1==1 & CGender1==2 & CGender2==2)
+dsHispanicMF <- subset(ds, CRace1==1 & CGender1!=CGender2)
+dsHispanicMM <- subset(ds, CRace1==1 & CGender1==1 & CGender2==1)
+
+#By Gender for Blacks
+dsBlackFF <- subset(ds, CRace1==2 & CGender1==2 & CGender2==2)
+dsBlackMF <- subset(ds, CRace1==2 & CGender1!=CGender2)
+dsBlackMM <- subset(ds, CRace1==2 & CGender1==1 & CGender2==1)
+
+#By Gender for NBNHs
+dsNBNHFF <- subset(ds, CRace1==3 & CGender1==2 & CGender2==2)
+dsNBNHMF <- subset(ds, CRace1==3 & CGender1!=CGender2)
+dsNBNHMM <- subset(ds, CRace1==3 & CGender1==1 & CGender2==1)
+ 
+#################################################################################################
+# Get the results for the table
+#################################################################################################
+resultTotal <- ExtractHeightResults(dsSubset=ds, subsetTitle="Total")
+#By Gender
+resultFF <- ExtractHeightResults(dsSubset=dsFF, subsetTitle="FF")
+resultMF <- ExtractHeightResults(dsSubset=dsMF, subsetTitle="MF")
+resultMM <- ExtractHeightResults(dsSubset=dsMM, subsetTitle="MM")
+
+#By Race (1:Hispanic, 2:Black, 3:NBNH)
+resultHispanic <- ExtractHeightResults(dsSubset=dsHispanic, subsetTitle="Hispanic")
+resultBlack <- ExtractHeightResults(dsSubset=dsBlack, subsetTitle="Black")
+resultNBNH <- ExtractHeightResults(dsSubset=dsNBNH, subsetTitle="NBNH")
+
+#By Gender for Hispanics
+resultHispanicFF <- ExtractHeightResults(dsSubset=dsHispanicFF, subsetTitle="Hisp FF")
+resultHispanicMF <- ExtractHeightResults(dsSubset=dsHispanicMF, subsetTitle="Hisp MF")
+resultHispanicMM <- ExtractHeightResults(dsSubset=dsHispanicMM, subsetTitle="Hisp MM")
+
+#By Gender for Blacks
+resultBlackFF <- ExtractHeightResults(dsSubset=dsBlackFF, subsetTitle="Black FF")
+resultBlackMF <- ExtractHeightResults(dsSubset=dsBlackMF, subsetTitle="Black MF")
+resultBlackMM <- ExtractHeightResults(dsSubset=dsBlackMM, subsetTitle="Black MM")
+
+#By Gender for NBNHs
+resultNBNHFF <- ExtractHeightResults(dsSubset=dsNBNHFF, subsetTitle="NBNH FF")
+resultNBNHMF <- ExtractHeightResults(dsSubset=dsNBNHMF, subsetTitle="NBNH MF")
+resultNBNHMM <- ExtractHeightResults(dsSubset=dsNBNHMM, subsetTitle="NBNH MM")
+
+results <- rbind(
+  resultTotal,  resultFF, resultMF, resultMM,
+  resultHispanic, resultBlack, resultNBNH, 
+  resultHispanicFF, resultHispanicMF, resultHispanicMM,
+  resultBlackFF, resultBlackMF, resultBlackMM,
+  resultNBNHFF, resultNBNHMF, resultNBNHMM
+  )
+
+colnames(results) <- c("Subgroup", "$N$", "$h^2$", "$c^2$", "$e^2$", 
+                       "$\\bar{X}$", "$\\sigma$", "$\\sigma^3$",
+                       "$N_{.25}$", "$N_{.375}$", "$N_{.5}$", "$N_{.75}$", "$N_{Mz}$",
+                       "$r_{.25}$", "$r_{.375}$", "$r_{.5}$",              "$r_{Mz}$") #, "$r_{.75}$"
+digitsFormat <- c(0,0,0, 2,2,2, 2,2,2, 0,0,0,0,0, 2,2,2,2)  #Include an initial dummy for the (suprressed) row names; drop r75.
+@
+%%%%%%%%
+% Here is some text that is rendered almost explictly
+%%%%%%%%
+
+Subjects were \Sexpr{ageFloorInclusive}+ years old.  Implicit ambiguous sibs were assigned R=\Sexpr{ambiguousImplicitSiblingR}. Z-Scores are restricted to  +/-\Sexpr{zScoreThreshold}.  All height measures are from 19-25 years of age, standardized by gender (Kelly restandardized early December 2011).
+
+Counts reflect the double entry.
+<<label=tab1,echo=FALSE,results=tex>>=
+textTable <-  xtable(results, caption="Height Heritability", label="tab:two", digits=digitsFormat)
+#align(textTable) <- "llr|rrr|rrr|rrrrr|rrrrr"  #Include an initial dummy for the (suprressed) row names.
+align(textTable) <- "llr|rrr|rrr|rrrrr|rrrr"  #Include an initial dummy for the (suprressed) row names.
+hLineLocations <- c(1, 4, 7, 10, 13)
+print(textTable, hline.after=hLineLocations, include.rownames=F, sanitize.text.function = function(x) {x})
+
+@
+%\end{landscape}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Get the results for the graphs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+<<echo=F,print=F>>=
+rCategoryCount <- length(unique(ds$R))
+PlotSubgroup <- function( dsSubgroup, title, showLoess=T, sectionTitle=""){
+  lmcoef <- coef(lm(HtSt2 ~ HtSt1, dsSubgroup))
+  dvRange <- c(-6.5, 4.5)
+  gridLineLocations <- pretty(dvRange)
+  p <- ggplot(dsSubgroup) #HtSt2 ~ HtSt1 | R, data=
+
+  if( showLoess ) {
+    p + stat_binhex(aes(x=HtSt1, y=HtSt2), binwidth = c(1, 1) ) +  
+      geom_smooth(aes(x=HtSt1, y=HtSt2), method="loess", size = 1.5, col="green") +
+      geom_abline(intercept=lmcoef[1], slope=lmcoef[2], col="tomato") +
+      geom_smooth(aes(x=HtSt1, y=HtSt2), method="lm", se=F, col="gold") +
+      facet_grid(.~ R) + opts(aspect.ratio=1) + 
+      scale_x_continuous(title, breaks=gridLineLocations)+ scale_y_continuous(sectionTitle, breaks=gridLineLocations) + # coord_equal(ratio = 1)
+      coord_cartesian(xlim=dvRange, ylim=dvRange) 
+      #coord_cartesian(xlim=dvRange), ylim=dvRange)
+    #+opts(aspect.ratio=1, title=title) +
+  }
+  else {
+    p + stat_binhex(aes(x=HtSt1, y=HtSt2), binwidth = c(1, 1) ) +  
+      geom_abline(intercept=lmcoef[1], slope=lmcoef[2], col="tomato") +
+      geom_smooth(aes(x=HtSt1, y=HtSt2), method="lm", se=F, col="gold") +
+      facet_grid(.~ R) + opts(aspect.ratio=1) + 
+      scale_x_continuous(title, breaks=gridLineLocations)+ scale_y_continuous(sectionTitle, breaks=gridLineLocations) + # coord_equal(ratio = 1)
+      coord_cartesian(xlim=dvRange, ylim=dvRange)   
+  }
+
+    #coord_cartesian(xlim=range(ds$HtSt1), ylim=range(ds$HtSt2))
+  #p + geom_density(aes(x=HtSt1, y=HtSt2), data)
+
+}
+PrintDescriptivesTable <- function( dsResults, title="" ) {
+  dsResults <- dsResults[, c(1, 3:5, 9:13, 14:17)]
+  colnames(dsResults) <- c("Subgroup",  "$h^2$", "$c^2$", "$e^2$", 
+                       "$N_{.25}$", "$N_{.375}$", "$N_{.5}$", "$N_{.75}$", "$N_{Mz}$",
+                       "$r_{.25}$", "$r_{.375}$", "$r_{.5}$", "$r_{Mz}$")
+  textTable <-  xtable(dsResults)#, , digits=digitsFormat)
+  align(textTable) <- "ll|rrr|rrrrr|rrrr"  #Include an initial dummy for the (suprressed) row names.
+  hLineLocations <- c(1)
+  #print(textTable,include.rownames=F, sanitize.text.function = function(x) {x})
+  print(textTable, hline.after=hLineLocations, include.rownames=F, sanitize.text.function = function(x) {x})
+}
+@
+%Total
+\SweaveOpts{width=7.5, height=2.35} %Default size for remaining graphs
+\section{Total Sample}
+\begin{figure}[htbp]
+<<fig=true>>=
+  PlotSubgroup(dsSubgroup=ds, title="Total Sample")
+@
+\end{figure}
+Plot Explanation: Each row of graphs isolates a subgroup.  
+
+Each cell in a row isolates a unique value of R; this is displayed in the gray header above each cell. 
+
+Axis and hexbin sizes are constants across all rows.
+
+The orange line is the LS regression for the row (repeated in each cell).
+
+The yellow line is the LS regression for the cell.
+
+The green line is the loess for each cell.  It's bandwidth is not constant across allrows.
+
+The hexbin density color is not constant across rows.
+
+Relevant portions of the table are repeated on each page.
+\newpage
+\section{By Gender}
+<<label=tab1,echo=FALSE,results=tex>>=
+PrintDescriptivesTable(rbind( resultTotal,  resultFF, resultMF, resultMM))
+@
+\begin{figure}[htbp]
+<<fig=true>>=
+  PlotSubgroup(dsSubgroup=dsFF, title="FF")
+@
+<<fig=true>>=
+  PlotSubgroup(dsSubgroup=dsMF, title="MF")
+@
+<<fig=true>>=
+  PlotSubgroup(dsSubgroup=dsMM, title="MM")
+@
+\end{figure}
+
+\newpage
+\section{By Race}
+<<label=tab1,echo=FALSE,results=tex>>=
+PrintDescriptivesTable(rbind( resultTotal, resultHispanic, resultBlack, resultNBNH))
+@
+\begin{figure}[htbp]
+<<fig=true>>=
+  PlotSubgroup(dsSubgroup=dsHispanic, title="Hispanics", showLoess=F)
+@
+<<fig=true>>=
+  PlotSubgroup(dsSubgroup=dsBlack, title="Blacks")
+@
+<<fig=true>>=
+  PlotSubgroup(dsSubgroup=dsNBNH, title="NBNH")
+@
+\end{figure}
+
+\newpage
+\section{By Gender for Hispanics}
+<<label=tab1,echo=FALSE,results=tex>>=
+PrintDescriptivesTable(rbind( resultTotal, resultHispanic, resultHispanicFF, resultHispanicMF, resultHispanicMM))
+@
+\begin{figure}[htbp]
+<<fig=true>>=
+  PlotSubgroup(dsSubgroup=dsHispanicFF, title="Hispanic FF")
+@
+<<fig=true>>=
+  PlotSubgroup(dsSubgroup=dsHispanicMF, title="Hispanic MF")
+@
+<<fig=true>>=
+  PlotSubgroup(dsSubgroup=dsHispanicMM, title="Hispanic MM", showLoess=F)
+@
+\end{figure}
+
+\newpage
+\section{By Gender for Blacks}
+<<label=tab1,echo=FALSE,results=tex>>=
+PrintDescriptivesTable(rbind( resultTotal, resultBlack, resultBlackFF, resultBlackMF, resultBlackMM))
+@
+\begin{figure}[htbp]
+<<fig=true>>=
+  PlotSubgroup(dsSubgroup=dsBlackFF, title="Black FF")
+@
+<<fig=true>>=
+  PlotSubgroup(dsSubgroup=dsBlackMF, title="Black MF")
+@
+<<fig=true>>=
+  PlotSubgroup(dsSubgroup=dsBlackMM, title="Black MM", showLoess=F)
+@
+\end{figure}
+
+\newpage
+\section{By Gender for NBNHs}
+<<label=tab1,echo=FALSE,results=tex>>=
+PrintDescriptivesTable(rbind( resultTotal, resultNBNH, resultNBNHFF, resultNBNHMF, resultNBNHMM))
+@
+\begin{figure}[htbp]
+<<fig=true>>=
+  PlotSubgroup(dsSubgroup=dsNBNHFF, title="NBNH FF", showLoess=T)
+@
+<<fig=true>>=
+  PlotSubgroup(dsSubgroup=dsNBNHMF, title="NBNH MF", showLoess=T)
+@
+<<fig=true>>=
+  PlotSubgroup(dsSubgroup=dsNBNHMM, title="NBNH MM", showLoess=T)
+@
+\end{figure}
+
+
+\end{document}

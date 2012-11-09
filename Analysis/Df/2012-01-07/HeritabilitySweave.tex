@@ -1,0 +1,117 @@
+% -*- mode: noweb; noweb-default-code-mode: R-mode; -*-
+\documentclass[a4paper]{article}
+
+\usepackage{a4wide}
+\usepackage{lscape}
+\usepackage[margin=.2in]{geometry}
+
+\title{Heritability by Subgroup}
+\author{Joe Rodger's BG Team}
+
+\usepackage{Sweave}
+\begin{document}
+\maketitle
+
+
+% Here is some text that is rendered almost explictly
+Gen2 Link Version: 2011V28.  DV Names: 'BMI_1' and 'BMI_2' in
+
+'F:/Projects/Nls/Links2011/Analysis/Df/2012-01-07/BMI_Sex_Intell_DoubleEntry_Linked.csv'.
+
+This uses DF method 3, where only two coefficients are estimated (Rodgers and Kohler, 2005, BG).
+%This uses OpenMX, based off the example that David emailed Dec 16, 2011.  The dataset was reduced to single entered.
+
+Implicit ambiguous sibs were assigned R=0.375. All height measures are from 19-25 years of age, standardized by gender (Kelly restandardized early December 2011).  Counts reflect the double entry.
+%Z-Scores are restricted to  +/-10.
+% latex table generated in R 2.14.0 by xtable 1.6-0 package
+% Thu Jan 12 14:06:02 2012
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{lr|rrr|rrr|rrrrr|rrrr}
+ Subgroup & $N$ & $h^2$ & $c^2$ & $e^2$ & $\bar{X}$ & $\sigma$ & $\sigma^3$ & $N_{.25}$ & $N_{.375}$ & $N_{.5}$ & $N_{.75}$ & $N_{Mz}$ & $r_{.25}$ & $r_{.375}$ & $r_{.5}$ & $r_{Mz}$ \\ 
+ Total & 13578 & -1.82 & 1.02 & 1.80 & 26.01 & 6.16 & 1.35 & 4442 & 0 & 9102 & 0 & 34 & 0.14 &  & 0.34 & 0.95 \\ 
+   \hline
+FF & 3260 & -3.02 & 1.52 & 2.50 & 26.44 & 6.78 & 1.25 & 1092 & 0 & 2158 & 0 & 10 & 0.11 &  & 0.42 & 0.97 \\ 
+  MF & 6822 & -1.84 & 1.00 & 1.84 & 25.87 & 6.11 & 1.37 & 2260 & 0 & 4562 & 0 & 0 & 0.16 &  & 0.30 &  \\ 
+  MM & 3496 & 0.01 & 0.26 & 0.73 & 25.90 & 5.60 & 1.38 & 1090 & 0 & 2382 & 0 & 24 & 0.11 &  & 0.33 & 0.92 \\ 
+   \hline
+Hispanic & 3508 & 0.55 & -0.01 & 0.46 & 26.20 & 5.98 & 1.27 & 932 & 0 & 2574 & 0 & 2 & 0.15 &  & 0.25 & -1.00 \\ 
+  Black & 4958 & -1.09 & 0.62 & 1.47 & 27.10 & 6.60 & 1.30 & 2486 & 0 & 2456 & 0 & 16 & 0.12 &  & 0.32 & 0.88 \\ 
+  NBNH & 5112 & -0.77 & 0.68 & 1.09 & 24.84 & 5.60 & 1.43 & 1024 & 0 & 4072 & 0 & 16 & 0.13 &  & 0.38 & 0.97 \\ 
+   \hline
+Hisp FF & 810 & -3.37 & 1.60 & 2.76 & 26.26 & 6.25 & 1.17 & 216 & 0 & 594 & 0 & 0 & 0.16 &  & 0.26 &  \\ 
+  Hisp MF & 1712 & 2.02 & -0.62 & -0.41 & 26.00 & 5.91 & 1.21 & 478 & 0 & 1234 & 0 & 0 & 0.17 &  & 0.28 &  \\ 
+  Hisp MM & 986 & 2.17 & -0.80 & -0.37 & 26.49 & 5.87 & 1.49 & 238 & 0 & 746 & 0 & 2 & 0.03 &  & 0.20 & -1.00 \\ 
+   \hline
+Black FF & 1296 & -1.52 & 0.81 & 1.70 & 28.13 & 7.44 & 1.07 & 648 & 0 & 644 & 0 & 4 & 0.08 &  & 0.41 & 0.96 \\ 
+  Black MF & 2462 & -0.77 & 0.44 & 1.33 & 26.95 & 6.45 & 1.34 & 1246 & 0 & 1216 & 0 & 0 & 0.12 &  & 0.21 &  \\ 
+  Black MM & 1200 & -1.08 & 0.66 & 1.42 & 26.29 & 5.76 & 1.40 & 592 & 0 & 596 & 0 & 12 & 0.12 &  & 0.38 & 0.32 \\ 
+   \hline
+NBNH FF & 1154 & 0.03 & 0.36 & 0.61 & 24.67 & 5.82 & 1.47 & 228 & 0 & 920 & 0 & 6 & -0.00 &  & 0.47 & 0.98 \\ 
+  NBNH MF & 2648 & -2.54 & 1.43 & 2.12 & 24.79 & 5.71 & 1.50 & 536 & 0 & 2112 & 0 & 0 & 0.19 &  & 0.34 &  \\ 
+  NBNH MM & 1310 & 1.97 & -0.57 & -0.41 & 25.09 & 5.14 & 1.18 & 260 & 0 & 1040 & 0 & 10 & 0.10 &  & 0.39 & 0.96 \\ 
+  \end{tabular}
+\caption{Height Heritability}
+\label{tab:two}
+\end{center}
+\end{table}%\end{landscape}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Get the results for the graphs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Total
+ %Default size for remaining graphs
+\section{Total Sample}
+%\begin{figure}[htbp]
+%<<fig=true>>=
+%  PlotSubgroup(dsSubgroup=ds, title="Total Sample")
+%@
+%\end{figure}
+Plot Explanation: Each row of graphs isolates a subgroup.  
+
+Each cell in a row isolates a unique value of R; this is displayed in the gray header above each cell. 
+
+Axis and hexbin sizes are constants across all rows.
+
+The orange line is the LS regression for the row (repeated in each cell).
+
+The yellow line is the LS regression for the cell.
+
+The green line is the loess for each cell.  It's bandwidth is not constant across allrows.
+
+The hexbin density color is not constant across rows.
+
+Relevant portions of the table are repeated on each page.
+%\newpage
+%\section{By Gender}
+%<<label=tab1,echo=FALSE,results=tex>>=
+%PrintDescriptivesTableFewerColumns(rbind( resultTotal,  resultFF, resultMF, resultMM))
+%@
+%\begin{figure}[htbp]
+%<<fig=true>>=
+%  PlotSubgroup(dsSubgroup=dsFF, title="FF")
+%@
+%<<fig=true>>=
+%  PlotSubgroup(dsSubgroup=dsMF, title="MF")
+%@
+%<<fig=true>>=
+%  PlotSubgroup(dsSubgroup=dsMM, title="MM")
+%@
+%\end{figure}
+
+%\newpage
+%\section{By Race}
+%<<label=tab1,echo=FALSE,results=tex>>=
+%PrintDescriptivesTableFewerColumns(rbind( resultTotal, resultHispanic, resultBlack, resultNBNH))
+%@
+%\begin{figure}[htbp]
+%<<fig=true>>=
+%  PlotSubgroup(dsSubgroup=dsHispanic, title="Hispanics", showLoess=F)
+%@
+%<<fig=true>>=
+%  PlotSubgroup(dsSubgroup=dsBlack, title="Blacks")
+%@
+%<<fig=true>>=
+%  PlotSubgroup(dsSubgroup=dsNBNH, title="NBNH")
+%@
+%\end{figure}
+\end{document}
