@@ -8,7 +8,8 @@ library(xtable)
 library(plyr)
 
 #Gen2:
-oName <- "HeightZAgeGender" #Will October 2012
+# oName <- "HeightZGender" #Will October 2012
+oName <- "HeightZGenderYob" #Will October 2012
 # oName <- "HeightStandarizedFor19to25" #Kelly 2011
 # oName <- "MathStandardized"
 # oName <- "WeightStandardizedForAge19To25"
@@ -28,9 +29,9 @@ oName <- "HeightZAgeGender" #Will October 2012
 
 oName_1 <- paste0(oName, "_1")
 oName_2 <- paste0(oName, "_2")
-relationshipPath <- 2
+relationshipPath <- 1
 
-rGroupsToDrop <- c( 0 , .375)#.125, .375, .75)
+rGroupsToDrop <- c( 0 , .375, .75)#.125, .375, .75)
 dropIfHousematesAreNotSameGeneration <- FALSE
 startNewPage <- c(F, T, F, T, F, T, F)
 
@@ -85,7 +86,7 @@ relationshipPathPretty <- "RelationshipPathPrettyNotSet"
 if( relationshipPath==1 ) {
   #rVersions <- c("R", "RPass1",  "RExplicit", "RExplicitPass1", "RImplicit2004")
   rVersions <- c("R", "RExplicit", "RImplicit2004")
-  pathInput <- "F:/Projects/Nls/Links2011/LinksForDistribution/Outcomes/Outcomes.csv"
+  pathInput <- "F:/Projects/Nls/NlsyLinksDetermination/LinksForDistribution/Outcomes/Outcomes.csv"
   dsOutcomes <- read.csv(file=pathInput, stringsAsFactors=F)
   dsOutcomes$AfqtRescaled2006Gaussified <- qnorm(dsOutcomes$AfqtRescaled2006) #convert from roughly uniform distribution [0, 100], to something Guassianish.
   dsOutcomes$AfqtRescaled2006Gaussified <- pmax(pmin(dsOutcomes$AfqtRescaled2006Gaussified, 3.3), -3.3) #The scale above had 0s and 100s, so clamp that in at +/-3.3.
@@ -102,7 +103,7 @@ if( relationshipPath==2 ) {
     dsOutcomes <- dsOutcomes[, c("SubjectTag", oName)]
   }
   else if ( oName == "HeightStandarizedFor19to25" ) {
-    dsOutcomes <- read.csv("F:/Projects/Nls/Links2011/CodingUtilities/Gen2Height/ExtraOutcomes79FromKelly2012March.csv")
+    dsOutcomes <- read.csv("F:/Projects/Nls/NlsyLinksDetermination/CodingUtilities/Gen2Height/ExtraOutcomes79FromKelly2012March.csv")
     dsOutcomes <- dsOutcomes[, c("SubjectTag", oName)]
   }
   else {

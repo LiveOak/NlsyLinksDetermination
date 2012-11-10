@@ -24,7 +24,7 @@ ds$Subject2ID[!secondGen1] <- ds$Subject2Tag[!secondGen1]
 # }
 
 #ds
-write.csv(ds, "F:/Projects/Nls/Links2011/Links2011V50.csv", row.names=FALSE)
+write.csv(ds, "F:/Projects/Nls/NlsyLinksDetermination/Links2011V51.csv", row.names=FALSE)
 summary(ds)
 
 

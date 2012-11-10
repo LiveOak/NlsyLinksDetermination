@@ -3,8 +3,8 @@ require(plyr)
 require(lubridate)
 rm(list=ls(all=TRUE))
 
-pathOutput <- "F:/Projects/Nls/Links2011/LinksForDistribution/Outcomes/Outcomes.csv"
-pathInputGen1Fertility <- "F:/Projects/Nls/Links2011/OutsideData/AfiAmen2012-09-20/AfiAfm.csv"
+pathOutput <- "F:/Projects/Nls/NlsyLinksDetermination/LinksForDistribution/Outcomes/Outcomes.csv"
+pathInputGen1Fertility <- "F:/Projects/Nls/NlsyLinksDetermination/OutsideData/AfiAmen2012-09-20/AfiAfm.csv"
 # pathPoliticalInput <- "F:/Projects/RDev/NlsyLinksStaging/Datasets/PoliticalData.csv"
 # pathAsqtInput <- "F:/Projects/RDev/NlsyLinksStaging/Datasets/Gen1Afqt.csv"
 

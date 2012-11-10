@@ -1,7 +1,7 @@
 \documentclass{article}%\documentclass{scrartcl}
 \usepackage[margin=.5in]{geometry}
 % \usepackage[float]
-\usepackage[section]{placeins} %This silently puts a \FloatBarrier com?mand before each sec?tion. http://robjhyndman.com/researchtips/latex-floats/
+\usepackage[section]{placeins} %This silently puts a \FloatBarrier command before each section. http://robjhyndman.com/researchtips/latex-floats/
 \usepackage{titling}
 \setlength{\droptitle}{-4em} %Reduce the space before the title
 \posttitle{\par\end{center}\vspace{-2em}} %Reduce the space between the title and Author
@@ -19,7 +19,7 @@
 
 <<echo=FALSE>>=
 library(stringr)
-pathDirectory <- "F:/Projects/Nls/Links2011/MicroscopicViews/VersionComparison/"
+pathDirectory <- getwd() #"F:/Projects/Nls/Links2011/MicroscopicViews/VersionComparison/"
 # setwd(dir=pathDirectory)
 read_chunk(file.path(pathDirectory, "ArchiveAce.R"))
 @

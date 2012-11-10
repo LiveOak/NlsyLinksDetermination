@@ -2,9 +2,8 @@
 #   but not when knitr calls individual chunks.
 rm(list=ls(all=TRUE)) #Clear the memory for any variables set from any previous runs.
 
-# pathOutputSubjectHeight <- "F:/Projects/Nls/Links2011/CodingUtilities/Gen2Height/Gen2Height.csv"
-# pathInputKellyOutcomes <- "F:/Projects/Nls/Links2011/CodingUtilities/Gen2Height/ExtraOutcomes79FromKelly2012March.csv"
-
+pathOutputSubjectHeight <- "F:/Projects/Nls/NlsyLinksDetermination/Outcomes/Gen2Height/Gen2Height.csv"
+pathInputKellyOutcomes <- "F:/Projects/Nls/NlsyLinksDetermination/OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv"
 ## @knitr LoadPackages
 require(RODBC)
 require(plyr)
@@ -108,7 +107,6 @@ qplot(ds$HeightZAgeGender, binwidth=.25) #Make sure ages are normalish with no e
 
 ## @knitr ComparingWithKelly 
 #   Compare against Kelly's previous versions of Gen2 Height
-# pathInputKellyOutcomes <- "F:/Projects/Nls/Links2011/CodingUtilities/Gen2Height/ExtraOutcomes79FromKelly2012March.csv"
 dsKelly <- read.csv(pathInputKellyOutcomes, stringsAsFactors=FALSE)
 dsKelly <- dsKelly[, c("SubjectTag", "HeightStandarizedFor19to25")]
 dsOldVsNew <- join(x=ds, y=dsKelly, by="SubjectTag", type="full")
