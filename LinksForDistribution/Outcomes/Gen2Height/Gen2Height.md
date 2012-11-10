@@ -6,6 +6,7 @@ This sequence picks a single height value per Gen2 subject.
 
 
 
+
 ### Define the age cutoffs to keep ages within the same Window as Gen1 Heights.  Define the height cutoffs to exclude values that are more likely to be entry errors or a developmental disorder, than a true reflection of additive genetics
 
 ```r
@@ -260,7 +261,6 @@ qplot(ds$HeightZAgeGender, binwidth=.25) #Make sure ages are normalish with no e
 
 ```r
 #   Compare against Kelly's previous versions of Gen2 Height
-# pathInputKellyOutcomes <- "F:/Projects/Nls/Links2011/CodingUtilities/Gen2Height/ExtraOutcomes79FromKelly2012March.csv"
 dsKelly <- read.csv(pathInputKellyOutcomes, stringsAsFactors=FALSE)
 dsKelly <- dsKelly[, c("SubjectTag", "HeightStandarizedFor19to25")]
 dsOldVsNew <- join(x=ds, y=dsKelly, by="SubjectTag", type="full")

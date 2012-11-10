@@ -1,9 +1,9 @@
 #This next line is run when the whole file is executed, 
 #   but not when knitr calls individual chunks.
 rm(list=ls(all=TRUE)) #Clear the memory for any variables set from any previous runs.
+pathInputKellyOutcomes <-  file.path(getwd(), "OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv")
+pathOutputSubjectHeight <- file.path(getwd(), "Outcomes/Gen2Height/Gen2Height.csv")
 
-pathOutputSubjectHeight <- "F:/Projects/Nls/NlsyLinksDetermination/Outcomes/Gen2Height/Gen2Height.csv"
-pathInputKellyOutcomes <- "F:/Projects/Nls/NlsyLinksDetermination/OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv"
 ## @knitr LoadPackages
 require(RODBC)
 require(plyr)
@@ -123,10 +123,10 @@ ggplot(dsOldVsNew, aes(x=HeightStandarizedFor19to25, y=HeightZAgeGender)) + geom
 write.csv(ds, pathOutputSubjectHeight, row.names=FALSE)
 
 ## @knitr Write to SQL Server database
-channel <- odbcConnect("BeeNlsLinks")
-keepExistingTable <- FALSE
-sqlSave(channel, dat=ds, tablename="Extract.tblGen2OutcomesHeight", safer=keepExistingTable, rownames=FALSE, append=FALSE)
-odbcClose(channel)
+# channel <- odbcConnect("BeeNlsLinks")
+# keepExistingTable <- FALSE
+# sqlSave(channel, dat=ds, tablename="Extract.tblGen2OutcomesHeight", safer=keepExistingTable, rownames=FALSE, append=FALSE)
+# odbcClose(channel)
 
 ## @knitr Alternate way to reduce to one record per SubjectYear
 # CombineHeightUnits <- function( df ) {

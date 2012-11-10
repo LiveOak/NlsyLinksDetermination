@@ -7,9 +7,19 @@ opts_chunk$set(comment="", warning=FALSE, echo=TRUE, tidy=FALSE, size="small")
 pathSourceCode <- file.path(getwd(), "Gen2Height.R")
 read_chunk(pathSourceCode) #This allows knitr to call chunks tagged in the underlying PrototypeCode.R file.
 pathOutputSubjectHeight <- file.path(getwd(), "Gen2Height.csv")
-pathInputKellyOutcomes <- file.path(getwd(), "ExtraOutcomes79FromKelly2012March.csv")
+pathInputKellyOutcomes <- file.path(dirname(dirname(dirname(getwd()))), "OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv")
+  #file.path(getwd(), "ExtraOutcomes79FromKelly2012March.csv")
 
+# pathOutputSubjectHeight
+# pathInputKellyOutcomes
+# 
+# getwd()
+# dirname(getwd())
+# dirname(dirname(getwd()))
+# dirname(dirname(dirname(getwd())))
+# file.path(dirname(dirname(dirname(getwd()))), "OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv")
 ```
+
 
 ```{r LoadPackages, echo=FALSE, message=FALSE}
 ```

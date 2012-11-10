@@ -1,13 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <!-- saved from url=(0014)about:internet -->
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 <title>Calculating Gen2 Height</title>
-
-<base target="_blank"/>
 
 <style type="text/css">
 body, td {
@@ -53,6 +50,7 @@ pre {
    margin-top: 0;
    max-width: 95%;
    border: 1px solid #ccc;
+   white-space: pre-wrap;
 }
 
 pre code {
@@ -398,7 +396,6 @@ nrow(ds)
 <h3>Compare with Kelly&#39;s height values.  Make sure they roughly agree. There are a few differences, including (1) the age range is a little shifted, (2) the 2010 survey wasn&#39;t available, (3) the cutoff scores were more generous, and (4) the order of standardization &amp; clipping <em>might</em> have been different.</h3>
 
 <pre><code class="r">#   Compare against Kelly&#39;s previous versions of Gen2 Height
-# pathInputKellyOutcomes &lt;- &quot;F:/Projects/Nls/Links2011/CodingUtilities/Gen2Height/ExtraOutcomes79FromKelly2012March.csv&quot;
 dsKelly &lt;- read.csv(pathInputKellyOutcomes, stringsAsFactors=FALSE)
 dsKelly &lt;- dsKelly[, c(&quot;SubjectTag&quot;, &quot;HeightStandarizedFor19to25&quot;)]
 dsOldVsNew &lt;- join(x=ds, y=dsKelly, by=&quot;SubjectTag&quot;, type=&quot;full&quot;)
