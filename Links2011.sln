@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinksGui", "LinksGui\LinksG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseFixture", "BaseFixture\BaseFixture.csproj", "{FCF01397-3551-49BE-9209-D5D43320D4E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlServerNlsLinks", "SqlServerNlsLinks\SqlServerNlsLinks.csproj", "{514D5962-1E5B-4FB8-9157-AEDBD2898405}"
-EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Links2011.vsmdi
@@ -77,22 +75,6 @@ Global
 		{FCF01397-3551-49BE-9209-D5D43320D4E6}.Release|x64.ActiveCfg = Debug|Any CPU
 		{FCF01397-3551-49BE-9209-D5D43320D4E6}.Release|x64.Build.0 = Debug|Any CPU
 		{FCF01397-3551-49BE-9209-D5D43320D4E6}.Release|x86.ActiveCfg = Debug|Any CPU
-		{514D5962-1E5B-4FB8-9157-AEDBD2898405}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{514D5962-1E5B-4FB8-9157-AEDBD2898405}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{514D5962-1E5B-4FB8-9157-AEDBD2898405}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{514D5962-1E5B-4FB8-9157-AEDBD2898405}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{514D5962-1E5B-4FB8-9157-AEDBD2898405}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{514D5962-1E5B-4FB8-9157-AEDBD2898405}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
-		{514D5962-1E5B-4FB8-9157-AEDBD2898405}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{514D5962-1E5B-4FB8-9157-AEDBD2898405}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{514D5962-1E5B-4FB8-9157-AEDBD2898405}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{514D5962-1E5B-4FB8-9157-AEDBD2898405}.Release|Any CPU.Build.0 = Release|Any CPU
-		{514D5962-1E5B-4FB8-9157-AEDBD2898405}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{514D5962-1E5B-4FB8-9157-AEDBD2898405}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{514D5962-1E5B-4FB8-9157-AEDBD2898405}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{514D5962-1E5B-4FB8-9157-AEDBD2898405}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
-		{514D5962-1E5B-4FB8-9157-AEDBD2898405}.Release|x64.ActiveCfg = Release|Any CPU
-		{514D5962-1E5B-4FB8-9157-AEDBD2898405}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

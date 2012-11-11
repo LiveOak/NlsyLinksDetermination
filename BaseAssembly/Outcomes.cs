@@ -58,8 +58,8 @@ namespace Nls.BaseAssembly {
 				}
 			});
 			_ds.tblOutcomes.EndLoadData();
-			//Trace.Assert(recordsAddedTotal == Constants.Gen1Count + Constants.Gen2Count, "The number of Gen1+Gen2 subjects should be correct.");
-			Trace.Assert(recordsAddedTotal == Constants.Gen1Count , "The number of Gen1+Gen2 subjects should be correct.");
+			Trace.Assert(recordsAddedTotal == Constants.Gen1Count + Constants.Gen2Count, "The number of Gen1+Gen2 subjects should be correct.");
+			//Trace.Assert(recordsAddedTotal == Constants.Gen1Count , "The number of Gen1+Gen2 subjects should be correct.");
 
 
 			sw.Stop();
@@ -78,6 +78,11 @@ namespace Nls.BaseAssembly {
 				weightPoundsLateTeens = DetermineWeightIn1982(drSubject, dtExtended);
 				afqt = DetermineAfqtIn1985(drSubject, dtExtended);
 				AddRow(subjectTag, heightInchesLateTeens, weightPoundsLateTeens, afqt);
+				return 1;
+			}
+			else if ( drSubject.Generation == (byte)Generation.Gen2 ) {
+				AddRow(subjectTag,	null, null, null);
+
 				return 1;
 			}
 			else {
