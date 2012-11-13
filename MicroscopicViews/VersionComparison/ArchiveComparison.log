@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.11.12)  9 NOV 2012 13:56
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.11.12)  13 NOV 2012 12:13
 entering extended mode
 **ArchiveComparison.tex
 
-(F:\Projects\Nls\Links2011\MicroscopicViews\VersionComparison\ArchiveComparison
-.tex
+(F:\Projects\Nls\NlsyLinksDetermination\MicroscopicViews\VersionComparison\Arch
+iveComparison.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -202,8 +202,8 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \everycr=\toks17
 \minrowclearance=\skip46
 )
-(F:\Projects\Nls\Links2011\MicroscopicViews\VersionComparison\ArchiveComparison
-.aux)
+(F:\Projects\Nls\NlsyLinksDetermination\MicroscopicViews\VersionComparison\Arch
+iveComparison.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 63.
 LaTeX Font Info:    ... okay on input line 63.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 63.
@@ -295,25 +295,27 @@ Package pdftex.def Info: figure/unnamed-chunk-32.pdf used on input line 93.
  [1
 
 {C:/Users/wibeasley/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <F:/Proj
-ects/Nls/Links2011/MicroscopicViews/VersionComparison/figure/unnamed-chunk-31.p
-df> <F:/Projects/Nls/Links2011/MicroscopicViews/VersionComparison/figure/unname
-d-chunk-32.pdf>] [2]
-(F:\Projects\Nls\Links2011\MicroscopicViews\VersionComparison\ArchiveComparison
-.aux) ) 
+ects/Nls/NlsyLinksDetermination/MicroscopicViews/VersionComparison/figure/unnam
+ed-chunk-31.pdf> <F:/Projects/Nls/NlsyLinksDetermination/MicroscopicViews/Versi
+onComparison/figure/unnamed-chunk-32.pdf>]
+[2]
+(F:\Projects\Nls\NlsyLinksDetermination\MicroscopicViews\VersionComparison\Arch
+iveComparison.aux) ) 
 Here is how much of TeX's memory you used:
  2335 strings out of 494049
- 33980 string characters out of 3146052
+ 34071 string characters out of 3146052
  97090 words of memory out of 3000000
  5606 multiletter control sequences out of 15000+200000
  7151 words of font info for 26 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  34i,9n,32p,242b,255s stack positions out of 5000i,500n,10000p,200000b,50000s
-<D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10
-.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pf
-b><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><
-D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><D:/
-Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on ArchiveComparison.pdf (2 pages, 78939 bytes).
+<D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmbx10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmr10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmr12.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+mr17.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt
+10.pfb>
+Output written on ArchiveComparison.pdf (2 pages, 79551 bytes).
 PDF statistics:
  41 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -47,12 +47,13 @@ dsPrevious <- dsRaw[dsRaw$AlgorithmVersion==olderVersionNumber, ]
 # head(dsPrevious, 30)
 
 
-dsCollapsedLatest <- ddply(dsLatest, .variables=columnsToConsider, .fun=nrow)
-colnames(dsCollapsedLatest)[ncol(dsCollapsedLatest)]<- "Count"
+# dsCollapsedLatest <- ddply(dsLatest, .variables=columnsToConsider, .fun=nrow)
+dsCollapsedLatest <- plyr::count(dsLatest, vars=columnsToConsider)
+dsCollapsedLatest <- plyr::rename(dsCollapsedLatest, replace=c("freq"="Count"))
 dsCollapsedLatest <- dsCollapsedLatest[order(-dsCollapsedLatest$Count),]
 
-dsCollapsedPrevious <- ddply(dsPrevious, .variables=columnsToConsider, .fun=nrow)
-colnames(dsCollapsedPrevious)[ncol(dsCollapsedPrevious)]<- "Count"
+dsCollapsedPrevious <- plyr::count(dsPrevious, vars=columnsToConsider)
+dsCollapsedPrevious <- plyr::rename(dsCollapsedPrevious, replace=c("freq"="Count"))
 dsCollapsedPrevious <- dsCollapsedPrevious[order(-dsCollapsedPrevious$Count), ]
 
 ds <- merge(x=dsCollapsedLatest, y=dsCollapsedPrevious, by=columnsToConsider, all=T)
@@ -164,7 +165,7 @@ CreateRoc <- function( relationshipPathID ) {
   dsRoc <- data.frame(Version=c(newerVersionNumber, olderVersionNumber), Agree=c(goodSumLatest, goodSumPrevious), Disagree=c(badSumLatest, badSumPrevious))
   
   rocLag1 <- ggplot(dsRoc, aes(y=Agree, x=Disagree, label=Version)) +
-     layer(geom="path") + layer(geom="text") 
+    layer(geom="path") +    layer(geom="text") 
     # coord_cartesian(xlim=c(0, 8000), ylim=c(0, 8000))#+ #xlim(0, 8000)
   return( rocLag1 )
 }

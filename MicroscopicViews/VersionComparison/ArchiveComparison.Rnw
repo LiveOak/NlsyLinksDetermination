@@ -23,7 +23,7 @@ options(width=68) #Doesn't seem to affect the 'newerDescription' below
 library(formatR)
 library(stringr)
 rm(list=ls(all=TRUE)) #Clear all the variables before starting a new run.
-pathCode <- "F:/Projects/Nls/Links2011/MicroscopicViews/VersionComparison/ArchiveComparison.R"
+pathCode <- "F:/Projects/Nls/NlsyLinksDetermination/MicroscopicViews/VersionComparison/ArchiveComparison.R"
 source(pathCode)
 @
 % \textbf{RelationshipPaths Considered}: \Sexpr{includedRelationshipPaths};\\
