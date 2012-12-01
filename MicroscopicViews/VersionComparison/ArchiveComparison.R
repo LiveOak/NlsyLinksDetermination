@@ -27,6 +27,7 @@ channel <- odbcConnect(dsn="BeeNlsLinks")
 odbcGetInfo(channel)
 
 dsRaw <- sqlQuery(channel, sql, stringsAsFactors=F)
+# dsRaw <- head(dsRaw)
 dsDescription <- sqlQuery(channel, sqlDescription, stringsAsFactors=F)
 odbcCloseAll()
 (elapsedTime <- Sys.time() - startTime)
