@@ -117,8 +117,8 @@ namespace Nls.BaseAssembly {
 				if ( drValues.IsRPass1Null() ) drNew.SetRPass1Null();
 				else drNew.RPass1 = drValues.RPass1;
 
-				if ( drValues.IsRNull() ) drNew.SetRNull();
-				else drNew.R = drValues.R;
+				if ( drValues.IsRFullNull() ) drNew.SetRFullNull();
+				else drNew.RFull = drValues.RFull;
 
 				if ( drValues.IsRPeekNull() ) drNew.SetRPeekNull();
 				else drNew.RPeek = drValues.RPeek;
@@ -275,7 +275,7 @@ namespace Nls.BaseAssembly {
 				drNew.SetRImplicitSubjectNull();
 				drNew.SetRImplicitMotherNull();
 				drNew.SetRExplicitNull();
-				drNew.SetRNull();
+				drNew.SetRFullNull();
 				drNew.SetRPeekNull();
 
 				_dsLinks.tblRelatedValues.AddtblRelatedValuesRow(drNew);
@@ -297,10 +297,10 @@ namespace Nls.BaseAssembly {
 				if ( assignPass2.RExplicit.HasValue ) drUpdated.RExplicit = assignPass2.RExplicit.Value;
 				else drUpdated.SetRExplicitNull();
 
-				if ( assignPass2.R.HasValue ) 
-					drUpdated.R = assignPass2.R.Value;
-				else 
-					drUpdated.SetRNull();
+				if ( assignPass2.R.HasValue )
+					drUpdated.RFull = assignPass2.R.Value;
+				else
+					drUpdated.SetRFullNull();
 
 				if ( assignPass2.RPeek.HasValue ) drUpdated.RPeek = assignPass2.RPeek.Value;
 				else drUpdated.SetRPeekNull();
