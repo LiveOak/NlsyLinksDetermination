@@ -3,8 +3,8 @@ require(RODBC)
 require(ggplot2)
 require(colorspace)
 includedRelationshipPaths <- c(2)
-#includedRelationshipPaths <- c(1)
-archivePath <- "F:/Projects/Nls/Links2011/MicroscopicViews/CrosstabHistoryArchive.csv"
+# includedRelationshipPaths <- c(1)
+archivePath <- "F:/Projects/Nls/NlsyLinksDetermination/MicroscopicViews/CrosstabHistoryArchive.csv"
 
 dsArchive <- read.csv(archivePath)
 dsArchive <- dsArchive[, -3] #Drop RImplicit2004 column
