@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.11.12)  9 DEC 2012 14:14
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.11.12)  9 DEC 2012 14:28
 entering extended mode
 **ArchiveAce.tex
 
@@ -267,64 +267,48 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 68.
 Package color Info: Redefining color shadecolor on input line 79.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 82.
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 82.
-
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 84.
+Package color Info: Redefining color shadecolor on input line 96.
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 102
+.
 ("D:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1cmtt.fd"
 File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-
-LaTeX Font Warning: Font shape `TS1/cmtt/bx/n' undefined
-(Font)              using `TS1/cmtt/m/n' instead
-(Font)              for symbol `textdollar' on input line 82.
-
-
-Overfull \hbox (56.46977pt too wide) in paragraph at lines 98--99
-[]\OT1/cmtt/m/n/10 ## Warning: cannot open file 'F:/Projects/Nls/NlsyLinksDeter
-mination/LinksForDistribution/Outcomes/Outcomes.csv':
- []
-
-Package color Info: Redefining color shadecolor on input line 124.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 143.
+(Font)              <14.4> on input line 113.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 143.
+(Font)              <7> on input line 113.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 144.
-[1
+(Font)              <5> on input line 114.
+ [1
 
 {C:/Users/wibeasley/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-[2]
 (F:\Projects\Nls\NlsyLinksDetermination\MicroscopicViews\VersionComparison\Arch
-iveAce.aux)
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
- ) 
+iveAce.aux) ) 
 Here is how much of TeX's memory you used:
- 2303 strings out of 494049
- 33696 string characters out of 3146052
- 90880 words of memory out of 3000000
- 5580 multiletter control sequences out of 15000+200000
+ 2302 strings out of 494049
+ 33686 string characters out of 3146052
+ 91880 words of memory out of 3000000
+ 5579 multiletter control sequences out of 15000+200000
  8668 words of font info for 31 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  27i,11n,32p,271b,267s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\wibeasley\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi
-600\tctt1000.pk><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/
-cm/cmbx10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmbx12.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mmi10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmm
-i12.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7
-.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pf
-b><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><
-D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/
-Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><D:/Pro
-gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/Program
- Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><D:/Program Fil
-es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on ArchiveAce.pdf (2 pages, 150336 bytes).
+ <C:\Users\wibeasley\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jkna
+ppen\ec\dpi600\tctt1000.pk><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmbx10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmbx12.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmmi10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmmi12.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmmi7.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmmi8.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmr10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
+12.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.
+pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb>
+<D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><D:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on ArchiveAce.pdf (1 page, 148979 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
+ 59 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

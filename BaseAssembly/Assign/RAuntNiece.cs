@@ -27,6 +27,7 @@ namespace Nls.BaseAssembly.Assign {
 		private float? _rImplicitSubject = float.NaN;
 		private float? _rImplicitMother = float.NaN;
 		private float? _rExplicit = float.NaN;
+		private float? _r= float.NaN;
 		private float? _rFull = float.NaN;
 		private float? _rPeek = float.NaN;
 		#endregion
@@ -46,6 +47,7 @@ namespace Nls.BaseAssembly.Assign {
 		public float? RImplicitSubject { get { return _rImplicitSubject; } }
 		public float? RImplicitMother { get { return _rImplicitMother; } }
 		public float? RExplicit { get { return _rExplicit; } }
+		public float? R{ get { return _r; } }
 		public float? RFull { get { return _rFull; } }
 		public float? RPeek { get { return _rPeek; } }
 		#endregion
@@ -100,6 +102,9 @@ namespace Nls.BaseAssembly.Assign {
 
 			if ( drValuesOfGen1Housemates.IsRExplicitNull() ) _rExplicit = null;
 			else _rExplicit = (float)(RCoefficients.ParentChild * drValuesOfGen1Housemates.RExplicit);
+
+			if ( drValuesOfGen1Housemates.IsRNull() ) _r= null;
+			else _r= (float)(RCoefficients.ParentChild * drValuesOfGen1Housemates.R);
 
 			if ( drValuesOfGen1Housemates.IsRFullNull() ) _rFull = null;
 			else _rFull = (float)(RCoefficients.ParentChild * drValuesOfGen1Housemates.RFull);

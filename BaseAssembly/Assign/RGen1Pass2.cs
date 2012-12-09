@@ -29,6 +29,7 @@ namespace Nls.BaseAssembly.Assign {
 		private float? _rImplicit = null;// float.NaN;
 		private float? _rImplicitSubject = null;//float.NaN;
 		private float? _rExplicit = float.NaN;//float.NaN;
+		private float? _r= float.NaN;
 		private float? _rFull = float.NaN;
 		private float? _rPeek = null;//float.NaN;
 		#endregion
@@ -39,6 +40,7 @@ namespace Nls.BaseAssembly.Assign {
 		public float? RImplicitMother{ get { return null; } }
 		public float? RImplicitSubject { get { return _rImplicitSubject; } }
 		public float? RExplicit { get { return _rExplicit; } }
+		public float? R{ get { return _r; } }
 		public float? RFull { get { return _rFull; } }
 		public float? RPeek { get { return _rPeek; } }
 		#endregion
@@ -92,6 +94,7 @@ namespace Nls.BaseAssembly.Assign {
 			//_rImplicit = CalculateRImplicit(_rImplicitMother, _rImplicitSubject);
 			_rExplicit = CalculateRExplicit();
 			_rFull = CalculateRFull();
+			_r= CalculateR();
 			//Trace.Write(_r);
 
 			//_rPeek = CalculateRPeek();
@@ -124,6 +127,32 @@ namespace Nls.BaseAssembly.Assign {
 				//   return null;
 				//}
 			}
+		}
+		private float? CalculateR( ) {
+			if ( _drValue.IsRFullNull() ) {
+				return null;
+			}
+			else if (Constants.Gen1RsToExcludeFromR.Contains( (float)_drValue.RFull)){
+				return null;
+			}
+			else{
+				return (float)_drValue.RFull;
+			}
+			
+
+	
+			//if ( !_drValue.IsRFullNull() ) return (float?)_drValue.RPass1;
+//DataColumn dcPass1 = _dsLinks.tblRelatedValues.RPass1Column;
+			//Pair[] pairs = Pair.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+
+			//InterpolateR interpolate = new InterpolateR(pairs);
+			//float? newR = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+			//if ( newR.HasValue )
+			//   return newR;
+			//else if ( _rImplicit.HasValue )
+			//   return _rImplicit;
+			//else
+			//   return null;
 		}
 		private float? CalculateRFull ( ) {
 			if ( !_drValue.IsRPass1Null() ) return (float?)_drValue.RPass1;

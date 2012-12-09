@@ -8,23 +8,12 @@ using Nls.BaseAssembly;
 namespace Nls.BaseAssembly.Assign {
 	public class RGen2Cousins : IAssignPass1, IAssignPass2 {
 		#region Fields
-		//private const RelationshipPath _path = RelationshipPath.AuntNiece;
-		//private readonly ImportDataSet _dsImport;
 		private readonly LinksDataSet _dsLinks;
-		//private readonly LinksDataSet.tblRelatedStructureRow _drLeft;
-		//private readonly LinksDataSet.tblRelatedStructureRow _drRight;
 		private readonly LinksDataSet.tblSubjectRow _drBare1;
 		private readonly LinksDataSet.tblSubjectRow _drBare2;
-		//private readonly LinksDataSet.tblSubjectDetailsRow _drSubjectDetails1;
-		//private readonly LinksDataSet.tblSubjectDetailsRow _drSubjectDetails2;
-		//private readonly LinksDataSet.tblMarkerGen1DataTable _dtMarkersGen1;
-
+		
 		private readonly Int32 _idRelatedLeft = Int32.MinValue;
-		//private readonly Int32 _idRelatedRight = Int32.MinValue;
-		//private readonly Int32 _idRelatedOlderAboutYounger = Int32.MinValue;//usually equal to _idRelatedLeft
-		//private readonly Int32 _idRelatedYoungerAboutOlder = Int32.MinValue;//usually equal to _idRelatedRight
 
-		//private readonly Int32 _extendedID;
 		private readonly MultipleBirth _multipleBirth;
 		private readonly Tristate _isMZ; private float? _rImplicitPass1 = null;// float.NaN;
 		private float? _rImplicit2004 = float.NaN;
@@ -38,6 +27,7 @@ namespace Nls.BaseAssembly.Assign {
 		private float? _rImplicitSubject = float.NaN;
 		private float? _rImplicitMother = float.NaN;
 		private float? _rExplicit = float.NaN;
+		private float? _r= float.NaN;
 		private float? _rFull = float.NaN;
 		private float? _rPeek = float.NaN;
 		#endregion
@@ -58,6 +48,7 @@ namespace Nls.BaseAssembly.Assign {
 		public float? RImplicitSubject { get { return _rImplicitSubject; } }
 		public float? RImplicitMother { get { return _rImplicitMother; } }
 		public float? RExplicit { get { return _rExplicit; } }
+		public float? R{ get { return _r; } }
 		public float? RFull { get { return _rFull; } }
 		public float? RPeek { get { return _rPeek; } }
 		#endregion
@@ -73,8 +64,7 @@ namespace Nls.BaseAssembly.Assign {
 			_drBare2 = _dsLinks.tblSubject.FindBySubjectTag(drLeft.Subject2Tag);
 			Trace.Assert(_drBare1.Generation == (byte)Generation.Gen2, "The generation should be Gen2.");
 			Trace.Assert(_drBare2.Generation == (byte)Generation.Gen2, "The generation should be Gen2.");
-
-
+			
 			_multipleBirth = MultipleBirth.No;
 			_isMZ = Tristate.No;
 
@@ -108,6 +98,9 @@ namespace Nls.BaseAssembly.Assign {
 			if ( drValuesOfGen1Housemates.IsRExplicitNull() ) _rExplicit = null;
 			else _rExplicit = (float)(RCoefficients.ParentChild * RCoefficients.ParentChild * drValuesOfGen1Housemates.RExplicit);
 
+			if ( drValuesOfGen1Housemates.IsRNull() ) _r= null;
+			else _r= (float)(RCoefficients.ParentChild * RCoefficients.ParentChild * drValuesOfGen1Housemates.R);
+
 			if ( drValuesOfGen1Housemates.IsRFullNull() ) _rFull = null;
 			else _rFull = (float)(RCoefficients.ParentChild * RCoefficients.ParentChild * drValuesOfGen1Housemates.RFull);
 
@@ -115,22 +108,12 @@ namespace Nls.BaseAssembly.Assign {
 			else _rPeek = (float)(RCoefficients.ParentChild * RCoefficients.ParentChild * drValuesOfGen1Housemates.RPeek);
 		}
 		#endregion
-		#region Public Methods
-		#endregion
 		#region Private Methods
 		private LinksDataSet.tblRelatedValuesRow Gen1HousematesValues ( Int32 subject1Tag, Int32 subject2Tag ) {
 			RelationshipPath path = RelationshipPath.Gen1Housemates;
 			Int32 motherSister1Tag = CommonCalculations.MotherTagOfGen2Subject(subject1Tag);
 			Int32 motherSister2Tag = CommonCalculations.MotherTagOfGen2Subject(subject2Tag);
 			return RelatedValues.Retrieve(_dsLinks, path, motherSister1Tag, motherSister2Tag);
-			//if ( _drSubjectDetails1.BirthOrderInNls <= _drSubjectDetails2.BirthOrderInNls ) {//This is the way it usually is.  Remember that twins were assigned tied birth orders
-			//   _idRelatedOlderAboutYounger = _idRelatedLeft;
-			//   _idRelatedYoungerAboutOlder = _idRelatedRight;
-			//}
-			//else if ( _drSubjectDetails1.BirthOrderInNls > _drSubjectDetails2.BirthOrderInNls ) {
-			//   _idRelatedOlderAboutYounger = _idRelatedRight;
-			//   _idRelatedYoungerAboutOlder = _idRelatedLeft;
-			//}
 		}
 		#endregion
 	}
