@@ -32,9 +32,9 @@ namespace Nls.BaseAssembly {
 			sw.Start();
 			Int32 gen1HousematesCount = Gen1Housemates();
 			Int32 gen2SiblingsCount = Gen2Siblings();
-			Int32 gen2CousinsCount =Gen2Cousins();
-			Int32 parentChildCount =ParentChild();
-			Int32 auntNieceCount =  AuntNiece();	
+			Int32 gen2CousinsCount = Gen2Cousins();
+			Int32 parentChildCount = ParentChild();
+			Int32 auntNieceCount = AuntNiece();
 			//Int32 gen2SiblingsCount = 0;// Gen2Siblings();
 			//Int32 gen2CousinsCount = 0;//Gen2Cousins();// 0;
 			//Int32 parentChildCount = 0;//ParentChild();
@@ -44,8 +44,8 @@ namespace Nls.BaseAssembly {
 			if ( gen2SiblingsCount > 0 ) Trace.Assert(gen2SiblingsCount == Constants.Gen2SiblingsPathCount, "The number of Gen2 Sibling paths should be correct.");
 			if ( gen2CousinsCount > 0 ) Trace.Assert(gen2CousinsCount == Constants.Gen2CousinsPathCount, "The number of Gen2 Cousins paths should be correct.");
 			if ( parentChildCount > 0 ) Trace.Assert(parentChildCount == Constants.ParentChildPathCount, "The number of ParentChild paths should be correct.");
-			if ( auntNieceCount > 0 ) Trace.Assert(auntNieceCount == Constants.AuntNiecePathCount,  "The number of AuntNiece paths should be correct.");
-			
+			if ( auntNieceCount > 0 ) Trace.Assert(auntNieceCount == Constants.AuntNiecePathCount, "The number of AuntNiece paths should be correct.");
+
 			Int32 recordsAdded = gen1HousematesCount + gen2SiblingsCount + gen2CousinsCount + parentChildCount + auntNieceCount;
 			sw.Stop();
 			return string.Format("{0:N0} RelatedValues records were processed.\n\nElapsed time: {1}", recordsAdded, sw.Elapsed.ToString());
@@ -116,6 +116,9 @@ namespace Nls.BaseAssembly {
 
 				if ( drValues.IsRPass1Null() ) drNew.SetRPass1Null();
 				else drNew.RPass1 = drValues.RPass1;
+
+				if ( drValues.IsRNull() ) drNew.SetRNull();
+				else drNew.R= drValues.R;
 
 				if ( drValues.IsRFullNull() ) drNew.SetRFullNull();
 				else drNew.RFull = drValues.RFull;
@@ -297,10 +300,11 @@ namespace Nls.BaseAssembly {
 				if ( assignPass2.RExplicit.HasValue ) drUpdated.RExplicit = assignPass2.RExplicit.Value;
 				else drUpdated.SetRExplicitNull();
 
-				if ( assignPass2.RFull.HasValue )
-					drUpdated.RFull = assignPass2.RFull.Value;
-				else
-					drUpdated.SetRFullNull();
+				if ( assignPass2.R.HasValue ) drUpdated.R= assignPass2.R.Value;
+				else drUpdated.SetRNull();
+
+				if ( assignPass2.RFull.HasValue ) drUpdated.RFull = assignPass2.RFull.Value;
+				else drUpdated.SetRFullNull();
 
 				if ( assignPass2.RPeek.HasValue ) drUpdated.RPeek = assignPass2.RPeek.Value;
 				else drUpdated.SetRPeekNull();
