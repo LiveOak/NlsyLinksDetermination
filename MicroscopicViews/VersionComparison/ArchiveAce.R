@@ -37,13 +37,13 @@ startNewPage <- c(F, T, F, T, F, T, F)
 
 suppressGroupTables <- TRUE
 
-sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.Subject1Tag, Process.tblRelatedValuesArchive.Subject2Tag,Process.tblRelatedValuesArchive.RImplicitPass1, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.R, SameGeneration
+sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.Subject1Tag, Process.tblRelatedValuesArchive.Subject2Tag,Process.tblRelatedValuesArchive.RImplicitPass1, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.RFull, SameGeneration
   FROM Process.tblRelatedValuesArchive INNER JOIN Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.Subject1Tag = Process.tblRelatedStructure.Subject1Tag AND Process.tblRelatedValuesArchive.Subject2Tag = Process.tblRelatedStructure.Subject2Tag 
     WHERE Process.tblRelatedStructure.RelationshipPath = ", relationshipPath, " 
       AND (Process.tblRelatedValuesArchive.AlgorithmVersion IN (SELECT TOP (2) AlgorithmVersion FROM Process.tblRelatedValuesArchive AS tblRelatedValuesArchive_1 
     GROUP BY AlgorithmVersion ORDER BY AlgorithmVersion DESC))")
 
-# sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.Subject1Tag, Process.tblRelatedValuesArchive.Subject2Tag,Process.tblRelatedValuesArchive.RImplicitPass1, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.R, SameGeneration
+# sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.Subject1Tag, Process.tblRelatedValuesArchive.Subject2Tag,Process.tblRelatedValuesArchive.RImplicitPass1, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.RFull, SameGeneration
 #   FROM Process.tblRelatedValuesArchive INNER JOIN Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.Subject1Tag = Process.tblRelatedStructure.Subject1Tag AND Process.tblRelatedValuesArchive.Subject2Tag = Process.tblRelatedStructure.Subject2Tag 
 #     WHERE Process.tblRelatedStructure.RelationshipPath = ", relationshipPath, " 
 #       AND (Process.tblRelatedValuesArchive.AlgorithmVersion IN (48, 49))")
@@ -86,7 +86,7 @@ relationshipPathPretty <- "RelationshipPathPrettyNotSet"
 if( relationshipPath==1 ) {
   #rVersions <- c("R", "RPass1",  "RExplicit", "RExplicitPass1", "RImplicit2004")
   rVersions <- c("R", "RExplicit", "RImplicit2004")
-  pathInput <- "F:/Projects/Nls/NlsyLinksDetermination/LinksForDistribution/Outcomes/Outcomes.csv"
+  pathInput <- "F:/Projects/Nls/NlsyLinksDetermination/LinksForDistribution/Outcomes/ExtraOutcomes79.csv"
   dsOutcomes <- read.csv(file=pathInput, stringsAsFactors=F)
   dsOutcomes$AfqtRescaled2006Gaussified <- qnorm(dsOutcomes$AfqtRescaled2006) #convert from roughly uniform distribution [0, 100], to something Guassianish.
   dsOutcomes$AfqtRescaled2006Gaussified <- pmax(pmin(dsOutcomes$AfqtRescaled2006Gaussified, 3.3), -3.3) #The scale above had 0s and 100s, so clamp that in at +/-3.3.

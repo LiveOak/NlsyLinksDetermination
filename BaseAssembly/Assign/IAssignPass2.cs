@@ -8,7 +8,7 @@ namespace Nls.BaseAssembly {
 		float? RImplicitSubject { get; }
 		float? RImplicitMother { get; }
 		float? RExplicit { get; }
-		float? R { get; }
+		float? RFull { get; }
 		float? RPeek { get; }
 	}
 }

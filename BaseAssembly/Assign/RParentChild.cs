@@ -37,7 +37,7 @@ namespace Nls.BaseAssembly.Assign {
 		private float? _rImplicitSubject = float.NaN;
 		private float? _rImplicitMother = float.NaN;
 		private float? _rExplicit = float.NaN;
-		private float? _r = float.NaN;
+		private float? _rFull = float.NaN;
 		private float? _rPeek = float.NaN;
 		#endregion
 		#region IAssign1 Properties
@@ -57,7 +57,7 @@ namespace Nls.BaseAssembly.Assign {
 		public float? RImplicitSubject { get { return _rImplicitSubject; } }
 		public float? RImplicitMother { get { return _rImplicitMother; } }
 		public float? RExplicit { get { return _rExplicit; } }
-		public float? R { get { return _r; } }
+		public float? RFull { get { return _rFull; } }
 		public float? RPeek { get { return _rPeek; } }
 		#endregion
 		#region Constructor
@@ -109,7 +109,7 @@ namespace Nls.BaseAssembly.Assign {
 			_rImplicitSubject = RCoefficients.ParentChild;
 			_rImplicitMother = RCoefficients.ParentChild;
 			_rExplicit = RCoefficients.ParentChild;
-			_r = RCoefficients.ParentChild;
+			_rFull = RCoefficients.ParentChild;
 			_rPeek = RCoefficients.ParentChild;
 		}
 		#endregion

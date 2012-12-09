@@ -297,8 +297,8 @@ namespace Nls.BaseAssembly {
 				if ( assignPass2.RExplicit.HasValue ) drUpdated.RExplicit = assignPass2.RExplicit.Value;
 				else drUpdated.SetRExplicitNull();
 
-				if ( assignPass2.R.HasValue )
-					drUpdated.RFull = assignPass2.R.Value;
+				if ( assignPass2.RFull.HasValue )
+					drUpdated.RFull = assignPass2.RFull.Value;
 				else
 					drUpdated.SetRFullNull();
 

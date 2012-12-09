@@ -58,7 +58,7 @@ namespace Nls.BaseAssembly.Assign {
 		public float? RImplicitSubject { get { return _rImplicitSubject; } }
 		public float? RImplicitMother { get { return _rImplicitMother; } }
 		public float? RExplicit { get { return _rExplicit; } }
-		public float? R { get { return _rFull; } }
+		public float? RFull { get { return _rFull; } }
 		public float? RPeek { get { return _rPeek; } }
 		#endregion
 		#region Constructor

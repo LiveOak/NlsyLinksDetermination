@@ -29,7 +29,7 @@ namespace Nls.BaseAssembly.Assign {
 		private float? _rImplicit = null;// float.NaN;
 		private float? _rImplicitSubject = null;//float.NaN;
 		private float? _rExplicit = float.NaN;//float.NaN;
-		private float? _r = float.NaN;
+		private float? _rFull = float.NaN;
 		private float? _rPeek = null;//float.NaN;
 		#endregion
 		#region IAssign Properties
@@ -39,7 +39,7 @@ namespace Nls.BaseAssembly.Assign {
 		public float? RImplicitMother{ get { return null; } }
 		public float? RImplicitSubject { get { return _rImplicitSubject; } }
 		public float? RExplicit { get { return _rExplicit; } }
-		public float? R { get { return _r; } }
+		public float? RFull { get { return _rFull; } }
 		public float? RPeek { get { return _rPeek; } }
 		#endregion
 		#region Constructor
@@ -91,7 +91,7 @@ namespace Nls.BaseAssembly.Assign {
 			//_rImplicitSubject = CalculateRImplicitSubject(fatherAlive, fatherInHH, fatherDistanceFromHH);
 			//_rImplicit = CalculateRImplicit(_rImplicitMother, _rImplicitSubject);
 			_rExplicit = CalculateRExplicit();
-			_r = CalculateR();
+			_rFull = CalculateRFull();
 			//Trace.Write(_r);
 
 			//_rPeek = CalculateRPeek();
@@ -125,7 +125,7 @@ namespace Nls.BaseAssembly.Assign {
 				//}
 			}
 		}
-		private float? CalculateR ( ) {
+		private float? CalculateRFull ( ) {
 			if ( !_drValue.IsRPass1Null() ) return (float?)_drValue.RPass1;
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.RPass1Column;
 			Pair[] pairs = Pair.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
