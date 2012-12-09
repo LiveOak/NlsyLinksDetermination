@@ -31,19 +31,19 @@ oName_1 <- paste0(oName, "_1")
 oName_2 <- paste0(oName, "_2")
 relationshipPath <- 1
 
-rGroupsToDrop <- c( 0, .375, .75)#.125, .375, .75)
+rGroupsToDrop <- c()# 0, .375, .75)#.125, .375, .75)
 dropIfHousematesAreNotSameGeneration <- FALSE
 startNewPage <- c(F, T, F, T, F, T, F)
 
 suppressGroupTables <- TRUE
 
-sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.Subject1Tag, Process.tblRelatedValuesArchive.Subject2Tag,Process.tblRelatedValuesArchive.RImplicitPass1, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.R, SameGeneration
+sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.Subject1Tag, Process.tblRelatedValuesArchive.Subject2Tag,Process.tblRelatedValuesArchive.RImplicitPass1, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.R, Process.tblRelatedValuesArchive.RFull, SameGeneration
   FROM Process.tblRelatedValuesArchive INNER JOIN Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.Subject1Tag = Process.tblRelatedStructure.Subject1Tag AND Process.tblRelatedValuesArchive.Subject2Tag = Process.tblRelatedStructure.Subject2Tag 
     WHERE Process.tblRelatedStructure.RelationshipPath = ", relationshipPath, " 
       AND (Process.tblRelatedValuesArchive.AlgorithmVersion IN (SELECT TOP (2) AlgorithmVersion FROM Process.tblRelatedValuesArchive AS tblRelatedValuesArchive_1 
     GROUP BY AlgorithmVersion ORDER BY AlgorithmVersion DESC))")
 
-# sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.Subject1Tag, Process.tblRelatedValuesArchive.Subject2Tag,Process.tblRelatedValuesArchive.RImplicitPass1, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.R, SameGeneration
+# sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.Subject1Tag, Process.tblRelatedValuesArchive.Subject2Tag,Process.tblRelatedValuesArchive.RImplicitPass1, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.R,  Process.tblRelatedValuesArchive.RFull,SameGeneration
 #   FROM Process.tblRelatedValuesArchive INNER JOIN Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.Subject1Tag = Process.tblRelatedStructure.Subject1Tag AND Process.tblRelatedValuesArchive.Subject2Tag = Process.tblRelatedStructure.Subject2Tag 
 #     WHERE Process.tblRelatedStructure.RelationshipPath = ", relationshipPath, " 
 #       AND (Process.tblRelatedValuesArchive.AlgorithmVersion IN (48, 49))")
@@ -85,7 +85,7 @@ rm(dsRaw)
 relationshipPathPretty <- "RelationshipPathPrettyNotSet"
 if( relationshipPath==1 ) {
   #rVersions <- c("R", "RPass1",  "RExplicit", "RExplicitPass1", "RImplicit2004")
-  rVersions <- c("R", "RExplicit", "RImplicit2004")
+  rVersions <- c("R", "RFull", "RExplicit", "RImplicit2004")
   pathInput <- "F:/Projects/Nls/NlsyLinksDetermination/LinksForDistribution/Outcomes/ExtraOutcomes79.csv"
   dsOutcomes <- read.csv(file=pathInput, stringsAsFactors=F)
   dsOutcomes$AfqtRescaled2006Gaussified <- qnorm(dsOutcomes$AfqtRescaled2006) #convert from roughly uniform distribution [0, 100], to something Guassianish.
@@ -95,7 +95,7 @@ if( relationshipPath==1 ) {
 #   dsOutcomes$HeightInchesLateTeens <- ifelse(dsOutcomes$HeightInchesLateTeens > 55, dsOutcomes$HeightInchesLateTeens, NA)
 }
 if( relationshipPath==2 ) {
-  rVersions <- c("R", "RPass1", "RImplicit", "RImplicitPass1", "RExplicit", "RExplicitPass1", "RImplicit2004")
+  rVersions <- c("R", "RFull", "RPass1", "RImplicit", "RImplicitPass1", "RExplicit", "RExplicitPass1", "RImplicit2004")
   relationshipPathPretty <- "Gen2Siblings"
   
   if ( oName == "HeightZAgeGender" ) {

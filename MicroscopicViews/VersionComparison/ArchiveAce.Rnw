@@ -54,6 +54,7 @@ cat("Drop pair if housemates are not confirmed in the same generation:", dropIfH
 \textbf{Variant} & \textbf{Explanation} \\
 \hline
 $R$ & We recommend researchers typical use this version. \\
+$R_{Full}$ & The most complete version we have; doesn't exclude groups like $R$=0. \\
 $R_{Pass1}$ & Supposed to be fooled only by errors in the subject's/mother's knowledge \\
 \hline
 $RImplicit$ & Uses only implicit items \\

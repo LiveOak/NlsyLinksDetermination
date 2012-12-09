@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.11.12)  9 DEC 2012 15:26
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.11.12)  9 DEC 2012 15:43
 entering extended mode
 **ArchiveAce.tex
 
@@ -280,7 +280,8 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 107.
  [1
 
-{C:/Users/wibeasley/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
+{C:/Users/wibeasley/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3]
+
 (F:\Projects\Nls\NlsyLinksDetermination\MicroscopicViews\VersionComparison\Arch
 iveAce.aux) ) 
 Here is how much of TeX's memory you used:
@@ -304,9 +305,9 @@ cmr10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
 pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb>
 <D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><D:/
 Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on ArchiveAce.pdf (2 pages, 155188 bytes).
+Output written on ArchiveAce.pdf (3 pages, 157733 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
+ 65 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
