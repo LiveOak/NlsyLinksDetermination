@@ -129,14 +129,14 @@ namespace Nls.BaseAssembly.Assign {
 			}
 		}
 		private float? CalculateR( ) {
-			if ( _drValue.IsRFullNull() ) {
+			if ( !RFull.HasValue ) {
 				return null;
 			}
-			else if (Constants.Gen1RsToExcludeFromR.Contains( (float)_drValue.RFull)){
+			else if ( Constants.Gen1RsToExcludeFromR.Contains(RFull.Value) ) {
 				return null;
 			}
 			else{
-				return (float)_drValue.RFull;
+				return (float)RFull.Value;
 			}
 			
 
