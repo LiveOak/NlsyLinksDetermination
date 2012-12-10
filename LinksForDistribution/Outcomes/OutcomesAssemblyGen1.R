@@ -15,8 +15,8 @@ odbcGetInfo(channel)
 keepExistingTable <- FALSE
 ds <- sqlQuery(channel, paste0("SELECT * FROM dbo.vewOutcomes WHERE Generation=", generation))
 odbcClose(channel)
-variablesToDropEventually <- c("ExtendedID", "Gender", "Mob", "Yob", "Age", "HeightInchesLateTeens", "WeightPoundsLateTeens", "AfqtRescaled2006", "BmiLateTeens")
-
+variablesToDropEventually <- c("ExtendedID", "Gender", "Mob", "Yob", "Age", "HeightInchesLateTeens", 
+                               "WeightPoundsLateTeens",  "BmiLateTeens") #"AfqtRescaled2006",
 
 ds$AfqtRescaled2006Gaussified <- qnorm(ds$AfqtRescaled2006) #convert from roughly uniform distribution [0, 100], to something Guassianish.
 ds$AfqtRescaled2006Gaussified <- pmax(pmin(ds$AfqtRescaled2006Gaussified, 3), -3) #The scale above had 0s and 100s, so clamp that in at +/-3.
@@ -75,6 +75,7 @@ HistogramWithCurve(ds$HeightZGenderAge, "HeightZGenderAge")
 HistogramWithCurve(ds$HeightZGender, "HeightZGender")
 HistogramWithCurve(ds$WeightZGenderAge, "WeightZGenderAge")
 HistogramWithCurve(ds$WeightZGender, "WeightZGender")
+HistogramWithCurve(ds$AfqtRescaled2006Bounded, "AfqtRescaled2006Bounded")
 HistogramWithCurve(ds$AfqtRescaled2006Gaussified, "AfqtRescaled2006Gaussified")
 HistogramWithCurve(ds$Afi, "Afi", breaks=20)
 HistogramWithCurve(ds$Afm, "Afm", breaks=20)
