@@ -1,5 +1,5 @@
 * Written by R;
-*  write.foreign(df = dsLinking, datafile = "F:/Projects/Nls/Links2011/LinksForDistribution/Gen1LinksForBrianToBeSasedV36.csv",  ;
+*  write.foreign(df = dsLinking, datafile = file.path(pathDirectory,  ;
 
 PROC FORMAT;
 value RltnshpP 
@@ -11,9 +11,9 @@ value RltnshpP
 ;
 
 DATA  rdata ;
-INFILE  "F:/Projects/Nls/Links2011/LinksForDistribution/Gen1LinksForBrianToBeSasedV36.csv" 
+INFILE  "F:/Projects/Nls/NlsyLinksDetermination/LinksForDistribution/LinksForSasV52.csv" 
      DSD 
-     LRECL= 33 ;
+     LRECL= 34 ;
 INPUT
  ExtendedID
  Subject1Tag
