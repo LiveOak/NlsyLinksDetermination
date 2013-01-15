@@ -1,3 +1,5 @@
+rm(list=ls(all=TRUE))
+
 #install.packages("NlsyLinks") #Currently, the default package location (on CRAN) has only Gen2Siblings
 #install.packages("NlsyLinks", repos="http://R-Forge.R-project.org") #Uncomment this line to get beyond Gen2Siblings.
 require(NlsyLinks)
@@ -18,8 +20,9 @@ desiredPaths <- c("Gen1Housemates")
 #Uncomment this line to get just the Cross-generational links (Comment out the other assignments to 'desiredPaths')
 # desiredPaths <- c("ParentChild", "AuntNiece")
 
-#"Subject1Tag", "Subject2Tag", "RelationshipPath", 
-variablesToKeep <- c("Subject1ID", "Subject2ID", "ExtendedID", "R", "RFull", "MathStandardized_1", "HeightZGenderAge_1", "MathStandardized_2", "HeightZGenderAge_2")
+ 
+variablesToKeep <- c("Subject1Tag", "Subject2Tag", "RelationshipPath", "Subject1ID", "Subject2ID", "ExtendedID", "R", "RFull", "MathStandardized_1", "HeightZGenderAge_1", "MathStandardized_2", "HeightZGenderAge_2")
+# variablesToKeep <- c("Subject1ID", "Subject2ID", "ExtendedID", "R", "RFull", "MathStandardized_1", "HeightZGenderAge_1", "MathStandardized_2", "HeightZGenderAge_2")
 dsLinking <- Links79PairExpanded[Links79PairExpanded$RelationshipPath %in% desiredPaths, variablesToKeep]
 # dsLinking <- Links79PairExpanded[Links79PairExpanded$RelationshipPath %in% desiredPaths, ]
 
@@ -45,5 +48,19 @@ write.foreign(df=dsLinking,
   package="SAS")
 
 
+colnames(dsLinking)
 
+#Produce ACE estimates that can be checked with SAS
+dsOutcomes <- ExtraOutcomes79
+summary(dsOutcomes)
+oName <- "HeightZGenderAge"
+oName_1 <- paste0(oName, "_1")
+oName_2 <- paste0(oName, "_2")
+dsDouble <- NlsyLinks::CreatePairLinksDoubleEntered(dsOutcomes, dsLinking, oName)
+(aceDF1 <- DeFriesFulkerMethod1(dsDouble, oName_1, oName_2))
+(aceDF3 <- DeFriesFulkerMethod3(dsDouble, oName_1, oName_2))
 
+dsSingle <- CreatePairLinksSingleEntered(outcomeDataset=dsOutcomes, linksPairDataset=dsLinking, outcomeNames=c('HeightZGenderAge'))
+dsGroupSummary <- RGroupSummary(dsLinking, oName_1, oName_2)
+dsClean <- CleanSemAceDataset(dsDirty=dsSingle, dsGroupSummary, oName_1, oName_2)
+(aceSem <- AceLavaanGroup(dsClean))

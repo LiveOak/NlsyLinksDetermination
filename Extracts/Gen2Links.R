@@ -1,7 +1,12 @@
 require(RODBC)
+require(ggplot2)
 rm(list=ls(all=TRUE))
-pathCsv <- "F:/Projects/Nls/Links2011/Extracts/Gen2Links.csv"
+pathCsv <- "F:/Projects/Nls/NlsyLinksDetermination/Extracts/Gen2Links.csv"
 ds <- read.csv(pathCsv, header=TRUE)
+
+
+# range(ds$C0005700)
+# ggplot(ds, aes(x=C0005700)) + geom_bar(binwidth=1, color="white") + coord_cartesian(xlim=c(1970, 2012))
 
 #A DSN must be defined for this to work.  In a 64-bit OS, it can be tricky: http://support.microsoft.com/kb/942976
 odbcCloseAll()
