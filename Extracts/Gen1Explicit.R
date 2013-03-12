@@ -1,6 +1,6 @@
 require(RODBC)
 rm(list=ls(all=TRUE))
-pathCsv <- "F:/Projects/Nls/NlsyLinksDetermination/Extracts/Gen1Links.csv"
+pathCsv <- "F:/Projects/Nls/NlsyLinksDetermination/Extracts/Gen1Explicit.csv"
 ds <- read.csv(pathCsv, header=TRUE)
 
 #A DSN must be defined for this to work.  In a 64-bit OS, it can be tricky: http://support.microsoft.com/kb/942976
