@@ -136,8 +136,8 @@ namespace Nls.BaseAssembly {
 				if ( weightPoundsLateTeens.HasValue ) drNew.WeightPoundsLateTeens = (Int16)weightPoundsLateTeens;
 				else drNew.SetWeightPoundsLateTeensNull();
 
-				if ( afqt.HasValue ) drNew.AfqtRescaled2006 = (float)afqt;
-				else drNew.SetAfqtRescaled2006Null();
+				if ( afqt.HasValue ) drNew.AfqtRescaled2006Bounded = (float)afqt;
+				else drNew.SetAfqtRescaled2006BoundedNull();
 
 				_ds.tblOutcomes.AddtblOutcomesRow(drNew);
 			}

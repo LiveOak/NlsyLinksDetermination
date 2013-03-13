@@ -429,7 +429,7 @@ namespace LinksGui {
 			btnRelatedValuesArchive_Click(sender, e);
 
 			sw.Stop();
-			string message = string.Format("Elapsed time for btnCombine1 operations: {0}", sw.Elapsed.ToString());
+			string message = string.Format("Elapsed time for btnCombine2 operations: {0}", sw.Elapsed.ToString());
 			btnUpdateAllTables_Click(sender, e);
 			Trace.WriteLine(message);
 			MessageBox.Show(message);

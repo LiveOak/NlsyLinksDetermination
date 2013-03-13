@@ -102,7 +102,7 @@
 		<Button Name="btnUpdateAllTables" Content="Update All Tables"  Grid.Row="2" Click="btnUpdateAllTables_Click" />
 		<TabControl Name="tabControlTop"  Grid.Row="0" Background="Transparent">
 			<TabItem Header="Gen1Links" Name="tabGen1Links" >
-				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True"  ItemsSource="{Binding Source={StaticResource tblGen1LinksViewSource}}" Name="tblGen1LinksDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
+				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tblGen1LinksViewSource}}" Name="tblGen1LinksDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
 					<DataGrid.Columns>
 						<DataGridTextColumn x:Name="h0001600Column" Binding="{Binding Path=H0001600}" Header="H 0001600" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="h0001700Column" Binding="{Binding Path=H0001700}" Header="H 0001700" Width="SizeToHeader" />
@@ -114,15 +114,16 @@
 						<DataGridTextColumn x:Name="h0002300Column" Binding="{Binding Path=H0002300}" Header="H 0002300" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="h0013600Column" Binding="{Binding Path=H0013600}" Header="H 0013600" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="h0013700Column" Binding="{Binding Path=H0013700}" Header="H 0013700" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="r0000100Column" Binding="{Binding Path=R0000100}" Header="R 0000100" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="r0000100Column4" Binding="{Binding Path=R0000100}" Header="R 0000100" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="r0000149Column" Binding="{Binding Path=R0000149}" Header="R 0000149" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r0000300Column" Binding="{Binding Path=R0000300}" Header="R 0000300" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r0000500Column" Binding="{Binding Path=R0000500}" Header="R 0000500" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r0009100Column" Binding="{Binding Path=R0009100}" Header="R 0009100" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r0009300Column" Binding="{Binding Path=R0009300}" Header="R 0009300" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r0172500Column" Binding="{Binding Path=R0172500}" Header="R 0172500" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r0172600Column" Binding="{Binding Path=R0172600}" Header="R 0172600" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="r0214700Column" Binding="{Binding Path=R0214700}" Header="R 0214700" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="r0214800Column" Binding="{Binding Path=R0214800}" Header="R 0214800" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="r0214700Column3" Binding="{Binding Path=R0214700}" Header="R 0214700" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="r0214800Column3" Binding="{Binding Path=R0214800}" Header="R 0214800" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r0216500Column" Binding="{Binding Path=R0216500}" Header="R 0216500" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r0329200Column" Binding="{Binding Path=R0329200}" Header="R 0329200" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r0329210Column" Binding="{Binding Path=R0329210}" Header="R 0329210" Width="SizeToHeader" />
@@ -212,10 +213,9 @@
 				</DataGrid>
 			</TabItem>
 			<TabItem Header="Gen1Explicit" Name="tabGen1Explicit" >
-				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tblGen1ExplicitViewSource}}" Name="tblGen1ExplicitDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
+				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True"  ItemsSource="{Binding Source={StaticResource tblGen1ExplicitViewSource}}" Name="tblGen1ExplicitDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
 					<DataGrid.Columns>
-						<DataGridTextColumn x:Name="r0000100Column4" Binding="{Binding Path=R0000100}" Header="R 0000100" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="r0000149Column" Binding="{Binding Path=R0000149}" Header="R 0000149" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="r0000100Column" Binding="{Binding Path=R0000100}" Header="R 0000100" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r0000150Column" Binding="{Binding Path=R0000150}" Header="R 0000150" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r0000151Column" Binding="{Binding Path=R0000151}" Header="R 0000151" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r0000152Column" Binding="{Binding Path=R0000152}" Header="R 0000152" Width="SizeToHeader" />
@@ -231,8 +231,8 @@
 						<DataGridTextColumn x:Name="r0000164Column" Binding="{Binding Path=R0000164}" Header="R 0000164" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r0000165Column" Binding="{Binding Path=R0000165}" Header="R 0000165" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r0000166Column" Binding="{Binding Path=R0000166}" Header="R 0000166" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="r0214700Column3" Binding="{Binding Path=R0214700}" Header="R 0214700" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="r0214800Column3" Binding="{Binding Path=R0214800}" Header="R 0214800" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="r0214700Column" Binding="{Binding Path=R0214700}" Header="R 0214700" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="r0214800Column" Binding="{Binding Path=R0214800}" Header="R 0214800" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r4125101Column" Binding="{Binding Path=R4125101}" Header="R 4125101" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r4125801Column" Binding="{Binding Path=R4125801}" Header="R 4125801" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="r4126501Column" Binding="{Binding Path=R4126501}" Header="R 4126501" Width="SizeToHeader" />
@@ -1592,12 +1592,12 @@
 				</DataGrid>
 			</TabItem>
 			<TabItem Header="Outcomes" Name="tabOutcomes" >
-				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tblOutcomesViewSource}}" Name="tblOutcomesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
+				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True"  ItemsSource="{Binding Source={StaticResource tblOutcomesViewSource}}" Name="tblOutcomesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
 					<DataGrid.Columns>
 						<DataGridTextColumn x:Name="subjectTagColumn6" Binding="{Binding Path=SubjectTag}" Header="Subject Tag" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="heightInchesLateTeensColumn" Binding="{Binding Path=HeightInchesLateTeens}" Header="Height Inches Late Teens" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="weightPoundsLateTeensColumn" Binding="{Binding Path=WeightPoundsLateTeens}" Header="Weight Pounds Late Teens" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="afqtRescaled2006Column" Binding="{Binding Path=AfqtRescaled2006}" Header="Afqt Rescaled 2006" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="afqtRescaled2006BoundedColumn" Binding="{Binding Path=AfqtRescaled2006Bounded}" Header="Afqt Rescaled 2006 Bounded" Width="SizeToHeader" />
 					</DataGrid.Columns>
 				</DataGrid>
 			</TabItem>
