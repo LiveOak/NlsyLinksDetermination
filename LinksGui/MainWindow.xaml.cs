@@ -27,8 +27,6 @@ namespace LinksGui {
 		private const string _cnnStringNameInAppConfig = "LinksGui.Properties.Settings.NlsLinksConnectionString";
 		private const string _combinedButtonTag = "CombinedButton";
 		#endregion
-		#region Fields-TableAdapaters
-		#endregion
 		public MainWindow ( ) {
 			InitializeComponent();
 		}
@@ -42,13 +40,14 @@ namespace LinksGui {
 			_dsImport = ((BA.ImportDataSet)(this.FindResource("importDataSet")));
 			_dsLinks = ((BA.LinksDataSet)(this.FindResource("linksDataSet")));
 
-			//LoadExtractGen1Links();
-			//LoadExtractGen2Links();
-			//LoadExtractGen2LinksFromGen1();
-			//LoadExtractGen2ImplicitFather();
-			//LoadExtractGen2FatherFromGen1();
-			//LoadExtractGen1Outcomes();
-			//LoadExtractGen2OutcomesHeight();
+			LoadExtractGen1Links();
+			LoadExtractGen1Explicit();
+			LoadExtractGen2Links();
+			LoadExtractGen2LinksFromGen1();
+			LoadExtractGen2ImplicitFather();
+			LoadExtractGen2FatherFromGen1();
+			LoadExtractGen1Outcomes();
+			LoadExtractGen2OutcomesHeight();
 
 			LoadLinks2004Gen1();//Needed for RelatedValues
 			LoadLinks2004Gen2();//Needed for RelatedValues
@@ -227,69 +226,73 @@ namespace LinksGui {
 		#endregion
 		#region Load DataTables
 		private void LoadExtractGen1Links ( ) {
-			BA.ImportDataSetTableAdapters.tblGen1LinksTableAdapter taGen1Links = new BA.ImportDataSetTableAdapters.tblGen1LinksTableAdapter();
-			taGen1Links.Fill(_dsImport.tblGen1Links);
+			BA.ImportDataSetTableAdapters.tblGen1LinksTableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen1LinksTableAdapter();
+			ta.Fill(_dsImport.tblGen1Links);
+		}
+		private void LoadExtractGen1Explicit ( ) {
+			BA.ImportDataSetTableAdapters.tblGen1ExplicitTableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen1ExplicitTableAdapter();
+			ta.Fill(_dsImport.tblGen1Explicit);
 		}
 		private void LoadExtractGen2Links ( ) {
-			BA.ImportDataSetTableAdapters.tblGen2LinksTableAdapter taGen2Links = new BA.ImportDataSetTableAdapters.tblGen2LinksTableAdapter();
-			taGen2Links.Fill(_dsImport.tblGen2Links);
+			BA.ImportDataSetTableAdapters.tblGen2LinksTableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen2LinksTableAdapter();
+			ta.Fill(_dsImport.tblGen2Links);
 		}
 		private void LoadExtractGen2LinksFromGen1 ( ) {
-			BA.ImportDataSetTableAdapters.tblGen2LinksFromGen1TableAdapter taGen2LinksFromGen1 = new BA.ImportDataSetTableAdapters.tblGen2LinksFromGen1TableAdapter();
-			taGen2LinksFromGen1.Fill(_dsImport.tblGen2LinksFromGen1);
+			BA.ImportDataSetTableAdapters.tblGen2LinksFromGen1TableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen2LinksFromGen1TableAdapter();
+			ta.Fill(_dsImport.tblGen2LinksFromGen1);
 		}
 		private void LoadExtractGen2ImplicitFather ( ) {
-			BA.ImportDataSetTableAdapters.tblGen2ImplicitFatherTableAdapter taGen2ImplicitFather = new BA.ImportDataSetTableAdapters.tblGen2ImplicitFatherTableAdapter();
-			taGen2ImplicitFather.Fill(_dsImport.tblGen2ImplicitFather);
+			BA.ImportDataSetTableAdapters.tblGen2ImplicitFatherTableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen2ImplicitFatherTableAdapter();
+			ta.Fill(_dsImport.tblGen2ImplicitFather);
 		}
 		private void LoadExtractGen2FatherFromGen1 ( ) {
-			BA.ImportDataSetTableAdapters.tblGen2FatherFromGen1TableAdapter taGen2FatherFromGen1 = new BA.ImportDataSetTableAdapters.tblGen2FatherFromGen1TableAdapter();
-			taGen2FatherFromGen1.Fill(_dsImport.tblGen2FatherFromGen1);
+			BA.ImportDataSetTableAdapters.tblGen2FatherFromGen1TableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen2FatherFromGen1TableAdapter();
+			ta.Fill(_dsImport.tblGen2FatherFromGen1);
 		}
 		private void LoadLinks2004Gen1 ( ) {
-			BA.ImportDataSetTableAdapters.tblLinks2004Gen1TableAdapter taLinks2004Gen1 = new BA.ImportDataSetTableAdapters.tblLinks2004Gen1TableAdapter();
-			taLinks2004Gen1.Fill(_dsImport.tblLinks2004Gen1);
+			BA.ImportDataSetTableAdapters.tblLinks2004Gen1TableAdapter ta = new BA.ImportDataSetTableAdapters.tblLinks2004Gen1TableAdapter();
+			ta.Fill(_dsImport.tblLinks2004Gen1);
 		}
 		private void LoadLinks2004Gen2 ( ) {
-			BA.ImportDataSetTableAdapters.tblLinks2004Gen2TableAdapter taLinks2004Gen2 = new BA.ImportDataSetTableAdapters.tblLinks2004Gen2TableAdapter();
-			taLinks2004Gen2.Fill(_dsImport.tblLinks2004Gen2);
+			BA.ImportDataSetTableAdapters.tblLinks2004Gen2TableAdapter ta = new BA.ImportDataSetTableAdapters.tblLinks2004Gen2TableAdapter();
+			ta.Fill(_dsImport.tblLinks2004Gen2);
 		}
 		private void LoadExtractGen1Outcomes ( ) {
-			BA.ImportDataSetTableAdapters.tblGen1OutcomesTableAdapter taGen1Outcomes = new BA.ImportDataSetTableAdapters.tblGen1OutcomesTableAdapter();
-			taGen1Outcomes.Fill(_dsImport.tblGen1Outcomes);
+			BA.ImportDataSetTableAdapters.tblGen1OutcomesTableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen1OutcomesTableAdapter();
+			ta.Fill(_dsImport.tblGen1Outcomes);
 		}
 		private void LoadExtractGen2OutcomesHeight ( ) {
-			BA.ImportDataSetTableAdapters.tblGen2OutcomesHeightTableAdapter taGen2OutcomesHeight = new BA.ImportDataSetTableAdapters.tblGen2OutcomesHeightTableAdapter();
-			taGen2OutcomesHeight.Fill(_dsImport.tblGen2OutcomesHeight);
+			BA.ImportDataSetTableAdapters.tblGen2OutcomesHeightTableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen2OutcomesHeightTableAdapter();
+			ta.Fill(_dsImport.tblGen2OutcomesHeight);
 		}
 		private void LoadItem ( ) {
-			BA.LinksDataSetTableAdapters.tblItemTableAdapter taItem = new BA.LinksDataSetTableAdapters.tblItemTableAdapter();
-			taItem.Fill(_dsLinks.tblItem);
+			BA.LinksDataSetTableAdapters.tblItemTableAdapter ta = new BA.LinksDataSetTableAdapters.tblItemTableAdapter();
+			ta.Fill(_dsLinks.tblItem);
 		}
 		private void LoadVariable ( ) {
-			BA.LinksDataSetTableAdapters.tblVariableTableAdapter taVariable = new BA.LinksDataSetTableAdapters.tblVariableTableAdapter();
-			taVariable.Fill(_dsLinks.tblVariable);
+			BA.LinksDataSetTableAdapters.tblVariableTableAdapter ta = new BA.LinksDataSetTableAdapters.tblVariableTableAdapter();
+			ta.Fill(_dsLinks.tblVariable);
 		}
 		private void LoadMzManual ( ) {
-			BA.LinksDataSetTableAdapters.tblMzManualTableAdapter taMzManual = new BA.LinksDataSetTableAdapters.tblMzManualTableAdapter();
-			taMzManual.Fill(_dsLinks.tblMzManual);
+			BA.LinksDataSetTableAdapters.tblMzManualTableAdapter ta = new BA.LinksDataSetTableAdapters.tblMzManualTableAdapter();
+			ta.Fill(_dsLinks.tblMzManual);
 		}
 		private void LoadRosterAssignment ( ) {
-			BA.LinksDataSetTableAdapters.tblLURosterGen1AssignmentTableAdapter taRosterAssignment = new BA.LinksDataSetTableAdapters.tblLURosterGen1AssignmentTableAdapter();
-			taRosterAssignment.Fill(_dsLinks.tblLURosterGen1Assignment);
+			BA.LinksDataSetTableAdapters.tblLURosterGen1AssignmentTableAdapter ta = new BA.LinksDataSetTableAdapters.tblLURosterGen1AssignmentTableAdapter();
+			ta.Fill(_dsLinks.tblLURosterGen1Assignment);
 		}
 
 		///////////////////////////
 
 		private void LoadSubject ( ) {
-			BA.LinksDataSetTableAdapters.tblSubjectTableAdapter taSubject = new BA.LinksDataSetTableAdapters.tblSubjectTableAdapter();
-			taSubject.Fill(_dsLinks.tblSubject);
+			BA.LinksDataSetTableAdapters.tblSubjectTableAdapter ta = new BA.LinksDataSetTableAdapters.tblSubjectTableAdapter();
+			ta.Fill(_dsLinks.tblSubject);
 			CollectionViewSource tblSubjectViewSource = ((CollectionViewSource)(this.FindResource("tblSubjectViewSource")));
 			tblSubjectViewSource.View.MoveCurrentToFirst();
 		}
 		private void LoadRelatedStructure ( ) {
-			BA.LinksDataSetTableAdapters.tblRelatedStructureTableAdapter taRelatedStructure = new BA.LinksDataSetTableAdapters.tblRelatedStructureTableAdapter();
-			taRelatedStructure.Fill(_dsLinks.tblRelatedStructure);
+			BA.LinksDataSetTableAdapters.tblRelatedStructureTableAdapter ta = new BA.LinksDataSetTableAdapters.tblRelatedStructureTableAdapter();
+			ta.Fill(_dsLinks.tblRelatedStructure);
 			CollectionViewSource tblRelatedStructureViewSource = ((CollectionViewSource)(this.FindResource("tblRelatedStructureViewSource")));
 			tblRelatedStructureViewSource.View.MoveCurrentToFirst();
 		}
@@ -312,60 +315,60 @@ namespace LinksGui {
 			_dsLinks.tblResponse.AcceptChanges();
 		}
 		private void LoadSurveyTime ( ) {
-			BA.LinksDataSetTableAdapters.tblSurveyTimeTableAdapter taSurveyTime = new BA.LinksDataSetTableAdapters.tblSurveyTimeTableAdapter();
-			taSurveyTime.Fill(_dsLinks.tblSurveyTime);
+			BA.LinksDataSetTableAdapters.tblSurveyTimeTableAdapter ta = new BA.LinksDataSetTableAdapters.tblSurveyTimeTableAdapter();
+			ta.Fill(_dsLinks.tblSurveyTime);
 			CollectionViewSource tblSurveyTimeViewSource = ((CollectionViewSource)(this.FindResource("tblSurveyTimeViewSource")));
 			tblSurveyTimeViewSource.View.MoveCurrentToFirst();
 		}
 		private void LoadSurveyTimeMostRecent ( ) {
-			BA.LinksDataSetTableAdapters.vewSurveyTimeMostRecentTableAdapter taSurveyTimeRecent = new BA.LinksDataSetTableAdapters.vewSurveyTimeMostRecentTableAdapter();
-			taSurveyTimeRecent.Fill(_dsLinks.vewSurveyTimeMostRecent);
+			BA.LinksDataSetTableAdapters.vewSurveyTimeMostRecentTableAdapter ta = new BA.LinksDataSetTableAdapters.vewSurveyTimeMostRecentTableAdapter();
+			ta.Fill(_dsLinks.vewSurveyTimeMostRecent);
 		}
 		private void LoadRosterGen1 ( ) {
-			BA.LinksDataSetTableAdapters.tblRosterGen1TableAdapter taRosterGen1 = new BA.LinksDataSetTableAdapters.tblRosterGen1TableAdapter();
-			taRosterGen1.Fill(_dsLinks.tblRosterGen1);
+			BA.LinksDataSetTableAdapters.tblRosterGen1TableAdapter ta = new BA.LinksDataSetTableAdapters.tblRosterGen1TableAdapter();
+			ta.Fill(_dsLinks.tblRosterGen1);
 			CollectionViewSource tblRosterGen1ViewSource = ((CollectionViewSource)(this.FindResource("tblRosterGen1ViewSource")));
 			tblRosterGen1ViewSource.View.MoveCurrentToFirst();
 		}
 		private void LoadBabyDaddy ( ) {
-			BA.LinksDataSetTableAdapters.tblBabyDaddyTableAdapter taBabyDaddy = new BA.LinksDataSetTableAdapters.tblBabyDaddyTableAdapter();
-			taBabyDaddy.Fill(_dsLinks.tblBabyDaddy);
+			BA.LinksDataSetTableAdapters.tblBabyDaddyTableAdapter ta = new BA.LinksDataSetTableAdapters.tblBabyDaddyTableAdapter();
+			ta.Fill(_dsLinks.tblBabyDaddy);
 			CollectionViewSource tblBabyDaddyViewSource = ((CollectionViewSource)(this.FindResource("tblBabyDaddyViewSource")));
 			tblBabyDaddyViewSource.View.MoveCurrentToFirst();
 		}
 		private void LoadFatherOfGen2 ( ) {
-			BA.LinksDataSetTableAdapters.tblFatherOfGen2TableAdapter taFatherOfGen2 = new BA.LinksDataSetTableAdapters.tblFatherOfGen2TableAdapter();
-			taFatherOfGen2.Fill(_dsLinks.tblFatherOfGen2);
+			BA.LinksDataSetTableAdapters.tblFatherOfGen2TableAdapter ta = new BA.LinksDataSetTableAdapters.tblFatherOfGen2TableAdapter();
+			ta.Fill(_dsLinks.tblFatherOfGen2);
 			CollectionViewSource tblFatherOfGen2ViewSource = ((CollectionViewSource)(this.FindResource("tblFatherOfGen2ViewSource")));
 			tblFatherOfGen2ViewSource.View.MoveCurrentToFirst();
 		}
 		private void LoadSubjectDetails ( ) {
-			BA.LinksDataSetTableAdapters.tblSubjectDetailsTableAdapter taSubjectDetails = new BA.LinksDataSetTableAdapters.tblSubjectDetailsTableAdapter();
-			taSubjectDetails.Fill(_dsLinks.tblSubjectDetails);
+			BA.LinksDataSetTableAdapters.tblSubjectDetailsTableAdapter ta = new BA.LinksDataSetTableAdapters.tblSubjectDetailsTableAdapter();
+			ta.Fill(_dsLinks.tblSubjectDetails);
 			CollectionViewSource tblSubjectDetailsViewSource = ((CollectionViewSource)(this.FindResource("tblSubjectDetailsViewSource")));
 			tblSubjectDetailsViewSource.View.MoveCurrentToFirst();
 		}
 		private void LoadMarkerGen1 ( ) {
-			BA.LinksDataSetTableAdapters.tblMarkerGen1TableAdapter taMarkerGen1 = new BA.LinksDataSetTableAdapters.tblMarkerGen1TableAdapter();
-			taMarkerGen1.Fill(_dsLinks.tblMarkerGen1);
+			BA.LinksDataSetTableAdapters.tblMarkerGen1TableAdapter ta = new BA.LinksDataSetTableAdapters.tblMarkerGen1TableAdapter();
+			ta.Fill(_dsLinks.tblMarkerGen1);
 			CollectionViewSource tblMarkerGen1ViewSource = ((CollectionViewSource)(this.FindResource("tblMarkerGen1ViewSource")));
 			tblMarkerGen1ViewSource.View.MoveCurrentToFirst();
 		}
 		private void LoadMarkerGen2 ( ) {
-			BA.LinksDataSetTableAdapters.tblMarkerGen2TableAdapter taMarkerGen2 = new BA.LinksDataSetTableAdapters.tblMarkerGen2TableAdapter();
-			taMarkerGen2.Fill(_dsLinks.tblMarkerGen2);
+			BA.LinksDataSetTableAdapters.tblMarkerGen2TableAdapter ta = new BA.LinksDataSetTableAdapters.tblMarkerGen2TableAdapter();
+			ta.Fill(_dsLinks.tblMarkerGen2);
 			CollectionViewSource tblMarkerGen2ViewSource = ((CollectionViewSource)(this.FindResource("tblMarkerGen2ViewSource")));
 			tblMarkerGen2ViewSource.View.MoveCurrentToFirst();
 		}
 		private void LoadRelatedValues ( ) {
-			BA.LinksDataSetTableAdapters.tblRelatedValuesTableAdapter taRelatedValues = new BA.LinksDataSetTableAdapters.tblRelatedValuesTableAdapter();
-			taRelatedValues.Fill(_dsLinks.tblRelatedValues);
+			BA.LinksDataSetTableAdapters.tblRelatedValuesTableAdapter ta = new BA.LinksDataSetTableAdapters.tblRelatedValuesTableAdapter();
+			ta.Fill(_dsLinks.tblRelatedValues);
 			CollectionViewSource tblRelatedValuesViewSource = ((CollectionViewSource)(this.FindResource("tblRelatedValuesViewSource")));
 			tblRelatedValuesViewSource.View.MoveCurrentToFirst();
 		}
 		private void LoadOutcomes ( ) {
-			BA.LinksDataSetTableAdapters.tblOutcomesTableAdapter taOutcomes = new BA.LinksDataSetTableAdapters.tblOutcomesTableAdapter();
-			taOutcomes.Fill(_dsLinks.tblOutcomes);
+			BA.LinksDataSetTableAdapters.tblOutcomesTableAdapter ta = new BA.LinksDataSetTableAdapters.tblOutcomesTableAdapter();
+			ta.Fill(_dsLinks.tblOutcomes);
 		}
 		private void LoadRelatedValuesNextVersionNumber ( ) {
 			//BA.LinksDataSetTableAdapters.tblRelatedValuesArchiveTableAdapter _taRelatedValuesArchive = new BA.LinksDataSetTableAdapters.tblRelatedValuesArchiveTableAdapter();

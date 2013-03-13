@@ -13,9 +13,9 @@ namespace Nls.BaseAssembly {
 		public const Int32 MonthsPerYear = 12;
 		public const double DaysPerYear = 365.25; //Account for leap year.
 		public const Int32 SurveyYearEternal = 2008;//For things that aren' associiated with a survey year, like birth date or gender.
-		public const string Gen1SubjectIDColumn = "R0000100";
-		public const string Gen1ExtendedFamilyIDColumn = "R0000149";		
-		public const string Gen1GenderColumn = "R0214800";
+		public const string Gen1SubjectIDColumn = "R0000100"; //In tblGen1Links
+		public const string Gen1ExtendedFamilyIDColumn = "R0000149";	 //In tblGen1Links	
+		public const string Gen1GenderColumn = "R0214800"; //In tblGen1Links
 		public const string Gen2SubjectIDColumn = "C0000100";
 		public const string Gen2GenderColumn = "C0005400";
 		public static float[] Gen1RsToExcludeFromR { get { return new float[] { 0f, .375f, .75f }; } }

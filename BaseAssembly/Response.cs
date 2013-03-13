@@ -36,6 +36,7 @@ namespace Nls.BaseAssembly {
 			CheckVariableExistInImportedDataTables();
 			Int32 reponseRecordsAddedCount = 0;
 			reponseRecordsAddedCount += TranslateExtractSource(ExtractSource.Gen1Links, Generation.Gen1, false, Constants.Gen1PassoverResponses, _dsImport.tblGen1Links);
+			reponseRecordsAddedCount += TranslateExtractSource(ExtractSource.Gen1Explicit, Generation.Gen1, false, Constants.Gen1PassoverResponses, _dsImport.tblGen1Explicit);
 			reponseRecordsAddedCount += TranslateExtractSource(ExtractSource.Gen2Links, Generation.Gen2, false, Constants.Gen2PassoverResponses, _dsImport.tblGen2Links);
 			reponseRecordsAddedCount += TranslateExtractSource(ExtractSource.Gen2LinksFromGen1, Generation.Gen1, false, Constants.Gen1PassoverResponses, _dsImport.tblGen2LinksFromGen1);
 			reponseRecordsAddedCount += TranslateExtractSource(ExtractSource.Gen2ImplicitFather, Generation.Gen2, false, Constants.Gen2PassoverResponses, _dsImport.tblGen2ImplicitFather);
@@ -123,6 +124,7 @@ namespace Nls.BaseAssembly {
 				case ExtractSource.Gen2FatherFromGen1: return _dsImport.tblGen2FatherFromGen1.TableName;
 				case ExtractSource.Gen1Outcomes: return _dsImport.tblGen1Outcomes.TableName;
 				case ExtractSource.Gen2OutcomesHeight: return _dsImport.tblGen2OutcomesHeight.TableName;
+				case ExtractSource.Gen1Explicit: return _dsImport.tblGen1Explicit.TableName;
 				default: throw new ArgumentOutOfRangeException("extractSource", extractSource, "The Extract Source is not recognized in this function.");
 			}
 		}
