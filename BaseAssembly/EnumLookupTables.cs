@@ -122,7 +122,8 @@ namespace Nls.BaseAssembly {
 		Gen2FatherFromGen1 = 7,
 		Gen1Outcomes = 8,
 		Gen2OutcomesHeight = 9,
-		Gen1Explicit = 10, 
+		Gen1Explicit = 10,
+		Gen1Implicit = 11, 
 	}
 	public enum SurveySource : byte {
 		NoInterview = 0,
