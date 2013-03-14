@@ -125,29 +125,27 @@ namespace Nls.BaseAssembly {
 				(byte)itemRelationship, dtSubject1.ItemColumn.ColumnName,
 				drsForLoopIndex[0].LoopIndex, dtSubject1.LoopIndexColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsForShareResponse = (LinksDataSet.tblResponseRow[])dtSubject1.Select(selectToShareResponse);
-			switch ( drsForShareResponse.Length ) {
-				case 0:
-					return 0;
-				case 1:
-					EnumResponsesGen1.ShareBioparentGen1 shareBioparent = (EnumResponsesGen1.ShareBioparentGen1)drsForShareResponse[0].Value;
+			Trace.Assert(drsForLoopIndex.Length <= surveyYearCount, string.Format("No more than {0} row(s) should be returned that matches Subject2 for item '{1}'.", surveyYearCount, Item.IDCodeOfOtherInterviewedBiodadGen2.ToString()));
+			Int32 recordsAdded = 0;
 
-					MarkerEvidence evidence = Assign.EvidenceGen1.ShareBioparentsForBioparents(shareBioparent);
-					MarkerEvidence mzEvidence;
-					if ( evidence == MarkerEvidence.StronglySupports ) mzEvidence = MarkerEvidence.Consistent;
-					else mzEvidence = MarkerEvidence.Disconfirms;
+			foreach ( LinksDataSet.tblResponseRow drResponse in drsForShareResponse ) {
+				EnumResponsesGen1.ShareBioparentGen1 shareBioparent = (EnumResponsesGen1.ShareBioparentGen1)drResponse.Value;
 
-					MarkerEvidence sameGeneration;
-					if ( evidence == MarkerEvidence.Supports || evidence == MarkerEvidence.StronglySupports )
-						sameGeneration = MarkerEvidence.StronglySupports;
-					else
-						sameGeneration = MarkerEvidence.Ambiguous;
+				MarkerEvidence evidence = Assign.EvidenceGen1.ShareBioparentsForBioparents(shareBioparent);
+				MarkerEvidence mzEvidence;
+				if ( evidence == MarkerEvidence.StronglySupports ) mzEvidence = MarkerEvidence.Consistent;
+				else mzEvidence = MarkerEvidence.Disconfirms;
 
-					AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, drsForShareResponse[0].SurveyYear, mzEvidence, sameGeneration, evidence, MarkerEvidence.Irrelevant, evidence);
-					const Int32 recordsAdded = 1;
-					return recordsAdded;
-				default:
-					throw new InvalidOperationException("Only zero or one rows should be returned for the Item.ShareBiomomGen1 item to Subject2");
+				MarkerEvidence sameGeneration;
+				if ( evidence == MarkerEvidence.Supports || evidence == MarkerEvidence.StronglySupports )
+					sameGeneration = MarkerEvidence.StronglySupports;
+				else
+					sameGeneration = MarkerEvidence.Ambiguous;
+
+				AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, drResponse.SurveyYear, mzEvidence, sameGeneration, evidence, MarkerEvidence.Irrelevant, evidence);
+				recordsAdded += 1;
 			}
+			return recordsAdded;
 		}
 		private Int32 FromShareBiodad ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblResponseDataTable dtSubject1 ) {
 			const Item itemID = Item.IDCodeOfOtherSiblingGen1;
@@ -169,37 +167,85 @@ namespace Nls.BaseAssembly {
 			if ( drsForLoopIndex.Length == 0 )
 				return 0;
 
-			//Use the loop index (that corresponds to the other subject) to find the ShareBiomom response.
+			//Use the loop index (that corresponds to the other subject) to find the ShareBiodad response.
 			//LinksDataSet.tblResponseRow drResponse = drsForLoopIndex[0];
 			string selectToShareResponse = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				drSubject1.SubjectTag, dtSubject1.SubjectTagColumn.ColumnName,
 				(byte)itemRelationship, dtSubject1.ItemColumn.ColumnName,
 				drsForLoopIndex[0].LoopIndex, dtSubject1.LoopIndexColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsForShareResponse = (LinksDataSet.tblResponseRow[])dtSubject1.Select(selectToShareResponse);
-			switch ( drsForShareResponse.Length ) {
-				case 0:
-					return 0;
-				case 1:
-					EnumResponsesGen1.ShareBioparentGen1 shareBioparent = (EnumResponsesGen1.ShareBioparentGen1)drsForShareResponse[0].Value;
+			Trace.Assert(drsForLoopIndex.Length <= surveyYearCount, string.Format("No more than {0} row(s) should be returned that matches Subject2 for item '{1}'.", surveyYearCount, Item.IDCodeOfOtherInterviewedBiodadGen2.ToString()));
+			Int32 recordsAdded = 0;
 
-					MarkerEvidence evidence = Assign.EvidenceGen1.ShareBioparentsForBioparents(shareBioparent);
-					MarkerEvidence mzEvidence;
-					if ( evidence == MarkerEvidence.StronglySupports ) mzEvidence = MarkerEvidence.Consistent;
-					else mzEvidence = MarkerEvidence.Disconfirms;
+			foreach ( LinksDataSet.tblResponseRow drResponse in drsForShareResponse ) {
+				EnumResponsesGen1.ShareBioparentGen1 shareBioparent = (EnumResponsesGen1.ShareBioparentGen1)drResponse.Value;
 
-					MarkerEvidence sameGeneration;
-					if ( evidence == MarkerEvidence.Supports || evidence == MarkerEvidence.StronglySupports )
-						sameGeneration = MarkerEvidence.StronglySupports;
-					else
-						sameGeneration = MarkerEvidence.Ambiguous;
+				MarkerEvidence evidence = Assign.EvidenceGen1.ShareBioparentsForBioparents(shareBioparent);
+				MarkerEvidence mzEvidence;
+				if ( evidence == MarkerEvidence.StronglySupports ) mzEvidence = MarkerEvidence.Consistent;
+				else mzEvidence = MarkerEvidence.Disconfirms;
 
-					AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, drsForShareResponse[0].SurveyYear, mzEvidence, sameGeneration, MarkerEvidence.Irrelevant, evidence, evidence);
-					const Int32 recordsAdded = 1;
-					return recordsAdded;
-				default:
-					throw new InvalidOperationException("Only zero or one rows should be returned for the Item.ShareBiodadGen1 item to Subject2");
+				MarkerEvidence sameGeneration;
+				if ( evidence == MarkerEvidence.Supports || evidence == MarkerEvidence.StronglySupports )
+					sameGeneration = MarkerEvidence.StronglySupports;
+				else
+					sameGeneration = MarkerEvidence.Ambiguous;
+
+				AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, drResponse.SurveyYear, mzEvidence, sameGeneration, MarkerEvidence.Irrelevant, evidence, evidence);
+				recordsAdded += 1;
 			}
+			return recordsAdded;
 		}
+
+		//   foreach ( LinksDataSet.tblResponseRow drResponse in drsForLoopIndex ) {
+		//      string selectToShareResponse = string.Format("{0}={1} AND {2}={3} AND {4}={5} AND {6}={7}",
+		//         drSubject1.SubjectTag, dtSubject1.SubjectTagColumn.ColumnName,
+		//         (byte)Item.ShareBiodadGen1, dtSubject1.ItemColumn.ColumnName,
+		//         drResponse.LoopIndex, dtSubject1.LoopIndexColumn.ColumnName,
+		//         drResponse.SurveyYear, dtSubject1.SurveyYearColumn.ColumnName);
+		//      LinksDataSet.tblResponseRow[] drsForShareResponse = (LinksDataSet.tblResponseRow[])dtSubject1.Select(selectToShareResponse);
+		//      Trace.Assert(drsForShareResponse.Length == 1, "Exactly one row should be returned for the ShareBiodad item to Subject2");
+		//      EnumResponsesGen1.ShareBioparentGen1 shareBiodad = (EnumResponsesGen1.ShareBioparentGen1)drsForShareResponse[0].Value;
+
+		//      //MarkerEvidence mzEvidence = Assign.EvidenceGen1.ShareBiodadForBioparents(shareBiodad);
+		//      //MarkerEvidence biodadEvidence = Assign.EvidenceGen2.ShareBiodadForBioparents(shareBiodad);
+		//      AddMarkerRow(drSubject1.ExtendedID, drRelated.ID, markerType, );
+		//      recordsAdded += 1;
+		//   }
+		//   return recordsAdded;
+		//}
+			////Use the loop index (that corresponds to the other subject) to find the ShareBiodad response.
+			////LinksDataSet.tblResponseRow drResponse = drsForLoopIndex[0];
+			//string selectToShareResponse = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
+			//   drSubject1.SubjectTag, dtSubject1.SubjectTagColumn.ColumnName,
+			//   (byte)itemRelationship, dtSubject1.ItemColumn.ColumnName,
+			//   drsForLoopIndex[0].LoopIndex, dtSubject1.LoopIndexColumn.ColumnName);
+			//LinksDataSet.tblResponseRow[] drsForShareResponse = (LinksDataSet.tblResponseRow[])dtSubject1.Select(selectToShareResponse);
+			//switch ( drsForShareResponse.Length ) {
+			//   case 0:
+			//      return 0;
+			//   case 1:
+			//      EnumResponsesGen1.ShareBioparentGen1 shareBioparent = (EnumResponsesGen1.ShareBioparentGen1)drsForShareResponse[0].Value;
+
+			//      MarkerEvidence evidence = Assign.EvidenceGen1.ShareBioparentsForBioparents(shareBioparent);
+			//      MarkerEvidence mzEvidence;
+			//      if ( evidence == MarkerEvidence.StronglySupports ) mzEvidence = MarkerEvidence.Consistent;
+			//      else mzEvidence = MarkerEvidence.Disconfirms;
+
+			//      MarkerEvidence sameGeneration;
+			//      if ( evidence == MarkerEvidence.Supports || evidence == MarkerEvidence.StronglySupports )
+			//         sameGeneration = MarkerEvidence.StronglySupports;
+			//      else
+			//         sameGeneration = MarkerEvidence.Ambiguous;
+
+			//      AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, drsForShareResponse[0].SurveyYear, mzEvidence, sameGeneration, MarkerEvidence.Irrelevant, evidence, evidence);
+			//      const Int32 recordsAdded = 1;
+			//      return recordsAdded;
+			//   default:
+			//      throw new InvalidOperationException("Only zero or one rows should be returned for the Item.ShareBiodadGen1 item to Subject2");
+			//}
+		
+
 		#endregion
 		#region Tier 2
 		private void AddMarkerRow ( Int32 extendedID, Int32 relatedID, MarkerType markerType, Int16 surveyYear, MarkerEvidence mzEvidence, MarkerEvidence sameGenerationEvidence, MarkerEvidence biomomEvidence, MarkerEvidence biodadEvidence, MarkerEvidence biograndparentEvidence ) {
