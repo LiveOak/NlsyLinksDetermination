@@ -50,7 +50,7 @@ namespace Nls.BaseAssembly {
 			IEnumerable<Int16> years = from dr in _ds.tblVariable
 												where (dr.Item == (byte)item) && (dr.Generation == (byte)generation)
 												select dr.SurveyYear;
-			Int32 count= years.Distinct().Count();
+			Int32 count = years.Distinct().Count();
 			Trace.Assert(count > 0, string.Format("More than one SurveyYear should be returned for Item '{0}' and Generation '{1}'.", item.ToString(), generation.ToString()));
 			return count;
 		}

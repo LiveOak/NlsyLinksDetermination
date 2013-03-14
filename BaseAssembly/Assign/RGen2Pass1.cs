@@ -135,13 +135,12 @@ namespace Nls.BaseAssembly.Assign {
 		}
 		#endregion
 		#region Private Methods
-		//private 
 		private float? ConvertSummariesToR ( MarkerType markerType, Int32 maxMarkerCount, Int32 idRelated ) {
 			MarkerGen2Summary[] summaries = MarkerGen2.RetrieveMarkers(idRelated, markerType, _dtMarkersGen2, maxMarkerCount);
 			if ( summaries.Length <= 0 )
 				return null;
 			IEnumerable<MarkerEvidence> evidences = from summary in summaries
-																 select summary.ShareBiodadEvidence;
+																 select summary.ShareBiodad;
 			if ( evidences.All(evidence => evidence == MarkerEvidence.Supports) ) {
 				return RCoefficients.SiblingFull;
 			}
@@ -201,13 +200,13 @@ namespace Nls.BaseAssembly.Assign {
 		}
 		private float? CalculateRExplicitOldestSibVersion ( ) {
 			const MarkerType markerType = MarkerType.ShareBiodad;
-			Int32 maxMarkerCount = ItemYears.ShareBiodad.Length;
+			Int32 maxMarkerCount = ItemYears.Gen2ShareBiodad.Length;
 			Int32 idRelated = _idRelatedOlderAboutYounger;
 			return ConvertSummariesToR(markerType, maxMarkerCount, idRelated);
 		}
 		private float? CalculateRExplicitYoungestSibVersion ( ) {
 			const MarkerType markerType = MarkerType.ShareBiodad;
-			Int32 maxMarkerCount = ItemYears.ShareBiodad.Length;
+			Int32 maxMarkerCount = ItemYears.Gen2ShareBiodad.Length;
 			Int32 idRelated = _idRelatedYoungerAboutOlder;
 			return ConvertSummariesToR(markerType, maxMarkerCount, idRelated);
 		}

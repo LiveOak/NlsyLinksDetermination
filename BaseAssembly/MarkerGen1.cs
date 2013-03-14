@@ -49,21 +49,23 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Public Static Methods
-		internal static MarkerGen1Summary RetrieveMarker ( Int64 relatedIDLeft, MarkerType markerType, LinksDataSet.tblMarkerGen1DataTable dtMarker ) {
+		internal static MarkerGen1Summary[] RetrieveMarkers ( Int64 relatedIDLeft, MarkerType markerType, LinksDataSet.tblMarkerGen1DataTable dtMarker, Int32 maxCount ) {
 			if ( dtMarker == null ) throw new ArgumentNullException("dtMarker");
 			string select = string.Format("{0}={1} AND {2}={3}",
 				relatedIDLeft, dtMarker.RelatedIDColumn.ColumnName,
 				(byte)markerType, dtMarker.MarkerTypeColumn.ColumnName);
 			LinksDataSet.tblMarkerGen1Row[] drs = (LinksDataSet.tblMarkerGen1Row[])dtMarker.Select(select);
-			//Trace.Assert(drs.Length <= 1, "The number of returns markers should not exceed 1.");
-			switch ( drs.Length ) {
-				case 0: return null;
-				//case 1: return new MarkerGen1Summary(					(MarkerEvidence)drs[0].SameGeneration, (MarkerEvidence)drs[0].ShareBiomomEvidence, (MarkerEvidence)drs[0].ShareBiodadEvidence, (MarkerEvidence)drs[0].ShareBioGrandparentEvidence);
-				case 1: return new MarkerGen1Summary((MarkerEvidence)drs[0].SameGeneration, (MarkerEvidence)drs[0].ShareBiomomEvidence, (MarkerEvidence)drs[0].ShareBiodadEvidence, (MarkerEvidence)drs[0].ShareBioGrandparentEvidence);
-
-				//(bool)drs[0].RosterResolved, (float)drs[0].RosterR, (float)drs[0].RosterRBoundLower, (float)drs[0].RosterRBoundUpper,
-				default: throw new InvalidOperationException("The number of returns markers should not exceed 1.");
+			Trace.Assert(drs.Length <= maxCount, "The number of returns markers should not exceed " + maxCount + ".");
+			MarkerGen1Summary[] evidences = new MarkerGen1Summary[drs.Length];
+			for ( Int32 i = 0; i < drs.Length; i++ ) {
+				evidences[i] = new MarkerGen1Summary((
+					MarkerEvidence)drs[i].SameGeneration,
+					(MarkerEvidence)drs[i].ShareBiomomEvidence,
+					(MarkerEvidence)drs[i].ShareBiodadEvidence,
+					(MarkerEvidence)drs[i].ShareBioGrandparentEvidence
+				);
 			}
+			return evidences;
 		}
 		internal static LinksDataSet.tblMarkerGen1DataTable PairRelevantMarkerRows ( Int64 relatedIDLeft, Int64 relatedIDRight, LinksDataSet dsLinks, Int32 extendedID ) {
 			string select = string.Format("{0}={1} AND {2} IN ({3},{4})",
@@ -117,11 +119,11 @@ namespace Nls.BaseAssembly {
 				return 0;
 
 			//Use the loop index (that corresponds to the other subject) to find the ShareBiomom response.
-			LinksDataSet.tblResponseRow drResponse = drsForLoopIndex[0];
+			//LinksDataSet.tblResponseRow drResponse = drsForLoopIndex[0];
 			string selectToShareResponse = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				drSubject1.SubjectTag, dtSubject1.SubjectTagColumn.ColumnName,
 				(byte)itemRelationship, dtSubject1.ItemColumn.ColumnName,
-				drResponse.LoopIndex, dtSubject1.LoopIndexColumn.ColumnName);
+				drsForLoopIndex[0].LoopIndex, dtSubject1.LoopIndexColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsForShareResponse = (LinksDataSet.tblResponseRow[])dtSubject1.Select(selectToShareResponse);
 			switch ( drsForShareResponse.Length ) {
 				case 0:
@@ -140,7 +142,7 @@ namespace Nls.BaseAssembly {
 					else
 						sameGeneration = MarkerEvidence.Ambiguous;
 
-					AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, drResponse.SurveyYear, mzEvidence, sameGeneration,evidence, MarkerEvidence.Irrelevant, evidence);
+					AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, drsForShareResponse[0].SurveyYear, mzEvidence, sameGeneration, evidence, MarkerEvidence.Irrelevant, evidence);
 					const Int32 recordsAdded = 1;
 					return recordsAdded;
 				default:
@@ -168,11 +170,11 @@ namespace Nls.BaseAssembly {
 				return 0;
 
 			//Use the loop index (that corresponds to the other subject) to find the ShareBiomom response.
-			LinksDataSet.tblResponseRow drResponse = drsForLoopIndex[0];
+			//LinksDataSet.tblResponseRow drResponse = drsForLoopIndex[0];
 			string selectToShareResponse = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				drSubject1.SubjectTag, dtSubject1.SubjectTagColumn.ColumnName,
 				(byte)itemRelationship, dtSubject1.ItemColumn.ColumnName,
-				drResponse.LoopIndex, dtSubject1.LoopIndexColumn.ColumnName);
+				drsForLoopIndex[0].LoopIndex, dtSubject1.LoopIndexColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsForShareResponse = (LinksDataSet.tblResponseRow[])dtSubject1.Select(selectToShareResponse);
 			switch ( drsForShareResponse.Length ) {
 				case 0:
@@ -191,7 +193,7 @@ namespace Nls.BaseAssembly {
 					else
 						sameGeneration = MarkerEvidence.Ambiguous;
 
-					AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, drResponse.SurveyYear, mzEvidence, sameGeneration, MarkerEvidence.Irrelevant, evidence, evidence);
+					AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, drsForShareResponse[0].SurveyYear, mzEvidence, sameGeneration, MarkerEvidence.Irrelevant, evidence, evidence);
 					const Int32 recordsAdded = 1;
 					return recordsAdded;
 				default:

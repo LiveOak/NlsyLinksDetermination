@@ -147,36 +147,39 @@ namespace Nls.BaseAssembly.Assign {
 		}
 		private float? CalculateRExplicitSingleSibVersion ( Int32 idRelated, Int32 subjectTag ) {
 			//MarkerGen1Summary roster = MarkerGen1.RetrieveMarker(idRelated, MarkerType.RosterGen1, _dtMarkersGen1);
-			MarkerGen1Summary biomom = MarkerGen1.RetrieveMarker(idRelated, MarkerType.ShareBiomom, _dtMarkersGen1);
-			MarkerGen1Summary biodad = MarkerGen1.RetrieveMarker(idRelated, MarkerType.ShareBiodad, _dtMarkersGen1);
-			if ( biomom == null || biodad == null ) {
-				return null;
-			}
-			else if ( biomom.ShareBiomom == MarkerEvidence.Supports && biodad.ShareBiodad == MarkerEvidence.Supports ) {
-				//if ( !OverridesGen1.RosterAndExplicit.Contains(subjectTag) ) {
-				//   Trace.Assert(roster.ShareBiomom != MarkerEvidence.Disconfirms);
-				//   Trace.Assert(roster.ShareBiodad != MarkerEvidence.Disconfirms);
-				//}
-				return RCoefficients.SiblingFull;
-			}
-			else if ( biomom.ShareBiomom == MarkerEvidence.Disconfirms && biodad.ShareBiodad == MarkerEvidence.Supports ) {
-				//Trace.Assert(roster.ShareBiomom != MarkerEvidence.Disconfirms);
-				//Trace.Assert(roster.ShareBiodad != MarkerEvidence.Disconfirms);
-				return RCoefficients.SiblingHalf;
-			}
-			else if ( biomom.ShareBiomom == MarkerEvidence.Supports && biodad.ShareBiodad == MarkerEvidence.Disconfirms ) {
-				//if ( !OverridesGen1.RosterAndExplicit.Contains(subjectTag) ) {
-				//   Trace.Assert(roster.ShareBiomom != MarkerEvidence.Disconfirms);
-				//   Trace.Assert(roster.ShareBiodad != MarkerEvidence.Disconfirms);
-				//}
-				return RCoefficients.SiblingHalf;
-			}
-			//else if ( biomom.ShareBiomom == MarkerEvidence.Disconfirms && biodad.ShareBiodad == MarkerEvidence.Disconfirms ) {
-			//   return RCoefficients.NotRelated;//The could still be cousins or something else
+			//MarkerGen1Summary[] biomomMarkers = MarkerGen1.RetrieveMarkers(idRelated, MarkerType.ShareBiomom, _dtMarkersGen1, ItemYears.Gen1ShareBiomom.Length);
+			//MarkerGen1Summary[] biodadMarkers = MarkerGen1.RetrieveMarkers(idRelated, MarkerType.ShareBiodad, _dtMarkersGen1, ItemYears.Gen1ShareBiodad.Length);
+			QuadState shareBiomom = ReduceShareBioparentToOne(MarkerType.ShareBiomom, ItemYears.Gen1ShareBiomom.Length, idRelated);
+			QuadState shareBiodad = ReduceShareBioparentToOne(MarkerType.ShareBiodad, ItemYears.Gen1ShareBiodad.Length, idRelated);
+			//if ( biomom == null || biodad == null ) {
+			//   return null;
 			//}
-			else {
-				return null;
-			}
+			//else if ( biomom.ShareBiomom == MarkerEvidence.Supports && biodad.ShareBiodad == MarkerEvidence.Supports ) {
+			//   //if ( !OverridesGen1.RosterAndExplicit.Contains(subjectTag) ) {
+			//   //   Trace.Assert(roster.ShareBiomom != MarkerEvidence.Disconfirms);
+			//   //   Trace.Assert(roster.ShareBiodad != MarkerEvidence.Disconfirms);
+			//   //}
+			//   return RCoefficients.SiblingFull;
+			//}
+			//else if ( biomom.ShareBiomom == MarkerEvidence.Disconfirms && biodad.ShareBiodad == MarkerEvidence.Supports ) {
+			//   //Trace.Assert(roster.ShareBiomom != MarkerEvidence.Disconfirms);
+			//   //Trace.Assert(roster.ShareBiodad != MarkerEvidence.Disconfirms);
+			//   return RCoefficients.SiblingHalf;
+			//}
+			//else if ( biomom.ShareBiomom == MarkerEvidence.Supports && biodad.ShareBiodad == MarkerEvidence.Disconfirms ) {
+			//   //if ( !OverridesGen1.RosterAndExplicit.Contains(subjectTag) ) {
+			//   //   Trace.Assert(roster.ShareBiomom != MarkerEvidence.Disconfirms);
+			//   //   Trace.Assert(roster.ShareBiodad != MarkerEvidence.Disconfirms);
+			//   //}
+			//   return RCoefficients.SiblingHalf;
+			//}
+			////else if ( biomom.ShareBiomom == MarkerEvidence.Disconfirms && biodad.ShareBiodad == MarkerEvidence.Disconfirms ) {
+			////   return RCoefficients.NotRelated;//The could still be cousins or something else
+			////}
+			//else {
+			//   return null;
+			//}
+			throw new NotImplementedException();
 		}
 		private float? CalculateRExplicitPass1 ( ) {
 			if ( !RExplicitOldestSibVersion.HasValue && !RExplicitYoungestSibVersion.HasValue )
@@ -228,6 +231,42 @@ namespace Nls.BaseAssembly.Assign {
 			//}
 			else {
 				return null;
+			}
+		}
+		private QuadState ReduceShareBioparentToOne ( MarkerType markerType, Int32 maxMarkerCount, Int32 idRelated ) {
+			MarkerGen1Summary[] summaries = MarkerGen1.RetrieveMarkers(idRelated, markerType, _dtMarkersGen1, maxMarkerCount);
+			if ( summaries.Length <= 0 )
+				return QuadState.Missing;
+
+			IEnumerable<MarkerEvidence> evidences;
+			if ( markerType == MarkerType.ShareBiodad )
+				evidences = from summary in summaries select summary.ShareBiodad;
+			else if ( markerType == MarkerType.ShareBiomom )
+				evidences = from summary in summaries select summary.ShareBiomom;
+			else
+				throw new ArgumentOutOfRangeException("markerType", markerType, "The 'ReduceShareBiodadToOne' function does not accommodoate this markerType.");
+
+
+			if ( evidences.All(evidence => evidence == MarkerEvidence.Supports) ) {
+				return QuadState.Yes;
+			}
+			else if ( evidences.All(evidence => evidence == MarkerEvidence.Disconfirms) ) {
+				return QuadState.No;
+			}
+			else if ( evidences.All(evidence => evidence == MarkerEvidence.Ambiguous) ) {
+				return QuadState.Conflicting;
+			}
+			else if ( evidences.Any(evidence => evidence == MarkerEvidence.Irrelevant) ) {
+				throw new NotImplementedException("This function was not designed to accept this evidence value.");
+			}
+			else if ( evidences.Any(evidence => evidence == MarkerEvidence.Consistent) ) {
+				throw new NotImplementedException("This function was not designed to accept this evidence value.");
+			}
+			else if ( evidences.Any(evidence => evidence == MarkerEvidence.Unlikely) ) {
+				throw new NotImplementedException("This function was not designed to accept this evidence value.");
+			}
+			else {
+				return QuadState.Conflicting;
 			}
 		}
 		#endregion

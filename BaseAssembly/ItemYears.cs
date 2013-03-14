@@ -6,7 +6,10 @@ namespace Nls.BaseAssembly {
 
 		public readonly static Int16[] Gen1AndGen2 = { 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010 };
 
-		public readonly static Int16[] ShareBiodad = { 2006, 2008, 2010 };
+		public readonly static Int16[] Gen1ShareBiomom = { 2006, 2010 };
+		public readonly static Int16[] Gen1ShareBiodad = { 2006, 2010 };
+		public readonly static Int16[] Gen2ShareBiodad = { 2006, 2008, 2010 };
+
 		public readonly static Int16[] FatherAsthmaGen2 = { 2004, 2006, 2008 };
 
 		public readonly static Int16[] BabyDaddyItems = { 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010 };

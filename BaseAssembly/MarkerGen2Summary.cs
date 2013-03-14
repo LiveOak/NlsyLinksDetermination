@@ -7,16 +7,16 @@ namespace Nls.BaseAssembly {
 	public struct MarkerGen2Summary {
 		private readonly Int16 _surveyYear;
 		private readonly MarkerEvidence _mzEvidence;
-		private readonly MarkerEvidence _shareBiodadEvidence;
+		private readonly MarkerEvidence _shareBiodad;
 
-		public Int16 SurveyYear { get { return _surveyYear; } }
-		public MarkerEvidence MzEvidence { get { return _mzEvidence; } }
-		public MarkerEvidence ShareBiodadEvidence { get { return _shareBiodadEvidence; } }
+		//public Int16 SurveyYear { get { return _surveyYear; } }
+		//public MarkerEvidence MzEvidence { get { return _mzEvidence; } }
+		public MarkerEvidence ShareBiodad { get { return _shareBiodad; } }
 
-		public MarkerGen2Summary ( Int16 surveyYear, MarkerEvidence mzEvidence, MarkerEvidence shareBiodadEvidence ) {
+		public MarkerGen2Summary ( Int16 surveyYear, MarkerEvidence mzEvidence, MarkerEvidence shareBiodad ) {
 			_surveyYear = surveyYear;
 			_mzEvidence = mzEvidence;
-			_shareBiodadEvidence = shareBiodadEvidence;
+			_shareBiodad = shareBiodad;
 		}
 	}
 }

@@ -6,7 +6,7 @@ using Nls.BaseAssembly.EnumResponsesGen1;
 namespace Nls.BaseAssembly {
 	namespace Assign {
 		public static class EvidenceGen1 {
-			public const float LowestRelatedR = (float)(1 / 64);
+			//public const float LowestRelatedR = (float)(1 / 64);
 
 			public static MarkerEvidence RosterSameGeneration ( Tristate tristate ) {
 				switch ( tristate ) {
