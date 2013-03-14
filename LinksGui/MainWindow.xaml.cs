@@ -42,6 +42,7 @@ namespace LinksGui {
 
 			LoadExtractGen1Links();
 			LoadExtractGen1Explicit();
+			LoadExtractGen1Implicit();
 			LoadExtractGen2Links();
 			LoadExtractGen2LinksFromGen1();
 			LoadExtractGen2ImplicitFather();
@@ -232,6 +233,10 @@ namespace LinksGui {
 		private void LoadExtractGen1Explicit ( ) {
 			BA.ImportDataSetTableAdapters.tblGen1ExplicitTableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen1ExplicitTableAdapter();
 			ta.Fill(_dsImport.tblGen1Explicit);
+		}
+		private void LoadExtractGen1Implicit ( ) {
+			BA.ImportDataSetTableAdapters.tblGen1ImplicitTableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen1ImplicitTableAdapter();
+			ta.Fill(_dsImport.tblGen1Implicit);
 		}
 		private void LoadExtractGen2Links ( ) {
 			BA.ImportDataSetTableAdapters.tblGen2LinksTableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen2LinksTableAdapter();
