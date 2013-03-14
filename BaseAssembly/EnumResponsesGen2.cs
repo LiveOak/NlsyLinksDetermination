@@ -44,8 +44,7 @@ namespace Nls.BaseAssembly {
 			Eight = 8,
 			Nine = 9,
 		}
-		//public enum DateOfBirthMonthNonResponses : int {//C00055.00
-		//}
 	}
-
 }
+//public enum DateOfBirthMonthNonResponses : int {//C00055.00
+//}

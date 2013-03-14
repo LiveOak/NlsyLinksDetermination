@@ -154,11 +154,6 @@ namespace Nls.BaseAssembly {
 		TwinOrTrip = 3,
 		DontKnow = 255,
 	}
-	//public enum IsMzImportGen1MzDistinction : byte {
-	//   No = 0,
-	//   Yes = 1,
-	//   DontKnow = 255,
-	//}
 	public enum Gender : byte {
 		Male = 1,
 		Female = 2,
@@ -181,11 +176,6 @@ namespace Nls.BaseAssembly {
 		ParentChild = 4,
 		AuntNiece = 5, //Acutally (Uncle|Aunt)-(Nephew|Niece)
 	}
-	public enum EverSharedHouse : byte {
-		No = 0,
-		Yes = 1,
-		//DontKnow = 255
-	}
 	public enum YesNo : short {
 		ValidSkipOrNoInterviewOrNotInSurvey = -6,
 		InvalidSkip = -3,
@@ -195,3 +185,8 @@ namespace Nls.BaseAssembly {
 		Yes = 1,
 	}
 }
+//public enum EverSharedHouse : byte {
+//   No = 0,
+//   Yes = 1,
+//   //DontKnow = 255
+//}

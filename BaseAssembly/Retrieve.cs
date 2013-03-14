@@ -183,11 +183,6 @@ namespace Nls.BaseAssembly {
 			LinksDataSet.tblSubjectRow drSubject1 = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1;
 			LinksDataSet.tblSubjectRow drSubject2 = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject2;
 
-			//IEnumerable<LinksDataSet.tblResponseRow> drsResponse
-			//   = from dr in _dsLinks.tblResponse
-			//     where (dr.SubjectTag == drSubject1.SubjectTag) && (dr.Item == (byte)Item.IDOfOther1979RosterGen1) && (dr.Value == drSubject2.SubjectID)
-			//     select dr;
-
 			string selectToGetLoopIndex = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				drSubject1.SubjectTag, dt.SubjectTagColumn.ColumnName,
 				(byte)Item.IDOfOther1979RosterGen1, dt.ItemColumn.ColumnName,
@@ -244,55 +239,6 @@ namespace Nls.BaseAssembly {
 					throw new InvalidOperationException();
 			}
 		}
-
-		//internal static LinksDataSet.tblMzManualRow MzGen1Hack ( LinksDataSet.tblSubjectRow dr1, LinksDataSet.tblSubjectRow dr2, LinksDataSet dsLinks, ImportDataSet dsImport ) {
-		//   LinksDataSet.tblMzManualRow dr = dsLinks.tblMzManual.NewtblMzManualRow();
-		//   dr.Subject1Tag = dr1.SubjectTag;
-		//   dr.Subject2Tag = dr2.SubjectTag;
-		//   dr.Generation = dr1.Generation;
-
-		//   DateTime? mob1 = Mob.Retrieve(dr1.SubjectTag, dsLinks.tblSubjectDetails);
-		//   DateTime? mob2 = Mob.Retrieve(dr2.SubjectTag, dsLinks.tblSubjectDetails);
-		//   //if ( mob1.HasValue && mob2.HasValue ) {
-		//   Int32 daysDifferenceAbsolute = (Int32)Math.Abs(mob2.Value.Subtract(mob1.Value).TotalDays);
-		//   if ( daysDifferenceAbsolute > Constants.MaxDaysBetweenTwinBirths ) {
-		//      dr.MultipleBirth = (byte)MultipleBirth.No;
-		//      dr.IsMz = (byte)Tristate.No;
-		//      dr.Undecided = false;
-		//   }
-		//   else if ( dr1.Gender != dr2.Gender ) {
-		//      dr.MultipleBirth = (byte)MultipleBirth.TwinOrTrip;
-		//      dr.IsMz = (byte)Tristate.No;
-		//      dr.Undecided = false;
-		//   }
-		//   else {
-		//      //They're double entered, so you don't need to check both combinations of (Subject1,Subject2) and (Subject2, Subject1)
-		//      ImportDataSet.tblGen1MzDzDistinction2010Row drImport = dsImport.tblGen1MzDzDistinction2010.FindBySubject1IDSubject2ID(dr1.SubjectID, dr2.SubjectID);
-		//      if ( drImport != null ) {
-		//         Trace.Assert(drImport != null, "The retrieved row shouldn't be null.");
-		//         MultipleBirthImportGen1MzDistinction importMultipleBirth = (MultipleBirthImportGen1MzDistinction)(drImport.MultipleBirth);
-		//         switch ( importMultipleBirth ) {
-		//            case MultipleBirthImportGen1MzDistinction.Twin: dr.MultipleBirth = (byte)MultipleBirth.Twin; break;
-		//            case MultipleBirthImportGen1MzDistinction.Trip: dr.MultipleBirth = (byte)MultipleBirth.Trip; break;
-		//            default: throw new InvalidOperationException("Only Twins and Trips should have gotten to this part of the routine.");
-		//         }
-
-		//         IsMzImportGen1MzDistinction importIsMz = (IsMzImportGen1MzDistinction)(drImport.IsMz);
-		//         switch ( importIsMz ) {
-		//            case IsMzImportGen1MzDistinction.Yes: dr.IsMz = (byte)Tristate.Yes; break;
-		//            case IsMzImportGen1MzDistinction.No: dr.IsMz = (byte)Tristate.No; break;
-		//            default: throw new InvalidOperationException("Only definite Yes/No MZs should have gotten to this part of the routine.");
-		//         }
-		//         dr.Undecided = false;
-		//      }
-		//      else {
-		//         dr.MultipleBirth = (byte)MultipleBirth.TwinOrTrip;
-		//         dr.IsMz = (byte)Tristate.DoNotKnow;
-		//         dr.Undecided = true;
-		//      }
-		//   }
-		//   return dr;		
-		//}
 		internal static byte? MotherLoopIndexForChildTag ( Int32 motherTag, LinksDataSet.tblSubjectRow drChild, LinksDataSet.tblResponseDataTable dtResponse ) {
 			byte childTwoDigitID = CommonFunctions.LastTwoDigitsOfGen2SubjectID(drChild);
 			const Item item = Item.Gen1ChildsIDByBirthOrder;

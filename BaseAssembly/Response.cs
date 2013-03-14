@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 using Nls.BaseAssembly.EnumResponses;
 
 namespace Nls.BaseAssembly {
@@ -44,7 +41,6 @@ namespace Nls.BaseAssembly {
 			reponseRecordsAddedCount += TranslateExtractSource(ExtractSource.Gen2FatherFromGen1, Generation.Gen1, true, Constants.Gen1PassoverResponses, _dsImport.tblGen2FatherFromGen1);
 			reponseRecordsAddedCount += TranslateExtractSource(ExtractSource.Gen1Outcomes, Generation.Gen1, false, Constants.Gen1PassoverResponsesNoNegatives, _dsImport.tblGen1Outcomes);
 			reponseRecordsAddedCount += TranslateExtractSource(ExtractSource.Gen2OutcomesHeight, Generation.Gen2, false, Constants.Gen2PassoverResponses, _dsImport.tblGen2OutcomesHeight);
-
 			sw.Stop();
 			return string.Format("{0:N0} response records were translated.\nElapsed time: {1}", reponseRecordsAddedCount, sw.Elapsed.ToString());
 		}
@@ -81,10 +77,7 @@ namespace Nls.BaseAssembly {
 						drResponse.ExtendedID = GetExtendedID(subjectTag);
 						drResponse.SurveySource = drVariable.SurveySource;
 						drResponse.SurveyYear = drVariable.SurveyYear;
-						drResponse.Item = drVariable.Item;
-						//if ( drResponse.Item == 13 ) {
-						//   Trace.Assert(true);
-						//}
+						drResponse.Item = drVariable.Item; //if ( drResponse.Item == 13 ) Trace.Assert(true);
 						drResponse.Value = Convert.ToInt32(drImport[columnName]);
 
 						LinksDataSet.tblItemRow drItem = drVariable.tblItemRow;

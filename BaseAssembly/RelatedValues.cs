@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using Nls.BaseAssembly.Assign;
 using System.Threading;
 using System.Threading.Tasks;
+using Nls.BaseAssembly.Assign;
 
 namespace Nls.BaseAssembly {
 	public sealed class RelatedValues {
@@ -118,7 +115,7 @@ namespace Nls.BaseAssembly {
 				else drNew.RPass1 = drValues.RPass1;
 
 				if ( drValues.IsRNull() ) drNew.SetRNull();
-				else drNew.R= drValues.R;
+				else drNew.R = drValues.R;
 
 				if ( drValues.IsRFullNull() ) drNew.SetRFullNull();
 				else drNew.RFull = drValues.RFull;
@@ -193,8 +190,7 @@ namespace Nls.BaseAssembly {
 			const RelationshipPath path = RelationshipPath.ParentChild;
 			Int32 recordsAdded = 0;
 			foreach ( LinksDataSet.tblRelatedStructureRow drLeft in SelectLefthand(path) ) {
-				//LinksDataSet.tblRelatedStructureRow drRight = SelectRighthand(drLeft);
-				RParentChild rParentChild = new RParentChild(_dsLinks, drLeft);//, drRight
+				RParentChild rParentChild = new RParentChild(_dsLinks, drLeft);
 				AddRow(rParentChild, rParentChild.IDLeft, drLeft.Subject1Tag, drLeft.Subject2Tag);
 				UpdateRow(rParentChild, rParentChild.IDLeft);
 				recordsAdded += 1;
@@ -300,7 +296,7 @@ namespace Nls.BaseAssembly {
 				if ( assignPass2.RExplicit.HasValue ) drUpdated.RExplicit = assignPass2.RExplicit.Value;
 				else drUpdated.SetRExplicitNull();
 
-				if ( assignPass2.R.HasValue ) drUpdated.R= assignPass2.R.Value;
+				if ( assignPass2.R.HasValue ) drUpdated.R = assignPass2.R.Value;
 				else drUpdated.SetRNull();
 
 				if ( assignPass2.RFull.HasValue ) drUpdated.RFull = assignPass2.RFull.Value;
@@ -311,7 +307,6 @@ namespace Nls.BaseAssembly {
 			}
 		}
 		private Int16? SurveyTimeMostRecent ( Int32 subjectTag ) {
-			//string select = string.Format("{0}={1}", subjectTag, _dsLinks.vewSurveyTimeMostRecent.SubjectTagColumn.ColumnName);
 			LinksDataSet.vewSurveyTimeMostRecentRow dr = _dsLinks.vewSurveyTimeMostRecent.FindBySubjectTag(subjectTag);
 			if ( dr == null )
 				return null;

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 
 namespace Nls.BaseAssembly {
 	public struct Pair {
@@ -122,8 +119,6 @@ namespace Nls.BaseAssembly {
 			_r = r;
 			_isInterpolated = true;
 		}
-		//public Int32 CountOfHalfSibs ( ) {
-		//}
 		public static Int32 CountHalfSibs ( Pair[] pairs ) {
 			Int32 tally = 0;
 			foreach ( Pair pair in pairs ) {
@@ -140,14 +135,11 @@ namespace Nls.BaseAssembly {
 			else
 				return SubjectTag1 ^ SubjectTag2 ^ RelatedID ^ Convert.ToInt32(IsInterpolated) ^ Int32.MinValue;
 		}
-
 		public override bool Equals ( object obj ) {
 			if ( !(obj is Pair) )
 				return false;
-
 			return Equals((Pair)obj);
 		}
-
 		public bool Equals ( Pair other ) {
 			if ( SubjectTag1 != other.SubjectTag1 )
 				return false;
@@ -162,23 +154,12 @@ namespace Nls.BaseAssembly {
 			else
 				return true;
 		}
-
 		public static bool operator == ( Pair pair1, Pair pair2 ) {
 			return pair1.Equals(pair2);
 		}
-
 		public static bool operator != ( Pair pair1, Pair pair2 ) {
 			return !pair1.Equals(pair2);
 		}  
 		#endregion
 	}
 }
-//         string select = string.Format("{0}={1} AND (({2}={3} AND {4}={5}))",// OR ({4}={3} AND {2}={5}))",
-//            extendedID, ds.tblRelatedStructure.ExtendedIDColumn.ColumnName,
-//            subjectTag1, ds.tblRelatedStructure.Subject1TagColumn.ColumnName,
-//            subjectTag2, ds.tblRelatedStructure.Subject2TagColumn.ColumnName);
-//         LinksDataSet.tblRelatedStructureRow[] drsStructure = (LinksDataSet.tblRelatedStructureRow[])ds.tblRelatedStructure.Select(select);
-//         Trace.Assert(drsStructure.Length == 1, "Exactly one record should be returned.");
-//         Trace.Assert(drsStructure[0].RelationshipPath == (byte)RelationshipPath.Gen2Siblings, "The retrieved relationship path should be Gen2Siblins.");
-//         Int32 relatedID = drsStructure[0].ID;
-//         LinksDataSet.tblRelatedValuesRow drValue = ds.tblRelatedValues.FindByID(relatedID);

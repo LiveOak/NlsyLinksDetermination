@@ -50,9 +50,9 @@ namespace Nls.BaseAssembly.Assign {
 			if ( dsLinks == null ) throw new ArgumentNullException("dsLinks");
 			if ( drLeft == null ) throw new ArgumentNullException("drLeft");
 			if ( drRight == null ) throw new ArgumentNullException("drRight");
-			//if ( dsLinks.tblRelatedValues.Count != 0 ) throw new InvalidOperationException("tblRelatedValues must be empty before creating rows for it.");
+			if ( dsLinks.tblRelatedValues.Count != 0 ) throw new InvalidOperationException("tblRelatedValues must be empty before creating rows for it.");
 			//if ( dsImport.tblLinks2004Gen2.Count == 0 ) throw new InvalidOperationException("tblLinks2004Gen2 must NOT be empty before assigning R values from it.");
-			//if ( dsLinks.tblMzManual.Count == 0 ) throw new InvalidOperationException("tblMzManual must NOT be empty before assigning R values from it.");
+			if ( dsLinks.tblMzManual.Count == 0 ) throw new InvalidOperationException("tblMzManual must NOT be empty before assigning R values from it.");
 			if ( dsLinks.tblSubject.Count == 0 ) throw new InvalidOperationException("tblSubject must NOT be empty before assigning R values from it.");
 			if ( dsLinks.tblSubjectDetails.Count == 0 ) throw new InvalidOperationException("tblSubjectDetails must NOT be empty before assigning R values from it.");
 			if ( dsLinks.tblMarkerGen1.Count == 0 ) throw new InvalidOperationException("tblMarkerGen1 must NOT be empty before assigning R values from it.");

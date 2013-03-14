@@ -1,12 +1,8 @@
 ﻿using System;
 
-
 namespace Nls.BaseAssembly {
 	public static class RCoefficients {
-		
-		
 		public const float ParentChild = 0.5f;
-
 		public const float MzTrue = 1.0f;
 		public const float MzAmbiguous = 0.75f;
 		public const float SiblingFull = 0.5f;
@@ -30,7 +26,5 @@ namespace Nls.BaseAssembly {
 		//public static bool IsNotRelated ( float value ) {
 		//   return Convert.ToBoolean(Math.Abs(value - NotRelated) < Single.Epsilon);
 		//}
-		
-
 	}
 }

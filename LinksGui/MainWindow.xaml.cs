@@ -376,7 +376,6 @@ namespace LinksGui {
 			ta.Fill(_dsLinks.tblOutcomes);
 		}
 		private void LoadRelatedValuesNextVersionNumber ( ) {
-			//BA.LinksDataSetTableAdapters.tblRelatedValuesArchiveTableAdapter _taRelatedValuesArchive = new BA.LinksDataSetTableAdapters.tblRelatedValuesArchiveTableAdapter();
 			Int16 currentMaxVersion = Int16.MinValue;
 			using ( SqlCommand cmd = new SqlCommand("Process.prcArchiveMaxVersion", _cnn) ) {
 				cmd.CommandType = CommandType.StoredProcedure;
@@ -390,7 +389,6 @@ namespace LinksGui {
 				}
 			}
 			txtAlogrithmNumber.Text = Convert.ToString(currentMaxVersion + 1);
-			//txtAlogrithmNumber.Text = 26.ToString();
 		}
 		#endregion
 		private void WriteXml ( DataTable dt ) {
@@ -412,10 +410,8 @@ namespace LinksGui {
 			string message = string.Format("Elapsed time for btnCombine1 operations: {0}", sw.Elapsed.ToString());
 			btnUpdateAllTables_Click(sender, e);
 				Trace.WriteLine(message);
-			MessageBox.Show(message);
-			
+			MessageBox.Show(message);			
 		}
-
 		private void btnCombine2_Click ( object sender, RoutedEventArgs e ) {
 			BA.LinksDataSetTableAdapters.vewSurveyTimeMostRecentTableAdapter taSurveyTimeRecent = new BA.LinksDataSetTableAdapters.vewSurveyTimeMostRecentTableAdapter();
 			Stopwatch sw = new Stopwatch();
@@ -438,10 +434,6 @@ namespace LinksGui {
 			btnUpdateAllTables_Click(sender, e);
 			Trace.WriteLine(message);
 			MessageBox.Show(message);
-
 		}
-
-
-
 	}
 }

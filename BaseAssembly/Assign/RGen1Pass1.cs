@@ -132,8 +132,7 @@ namespace Nls.BaseAssembly.Assign {
 			}
 		}
 		private float? CalculateRRoster ( Int32 idRelated ) {
-			//Check overrides first.
-			//throw new NotImplementedException();
+			//TODO: Check overrides first.
 
 			LinksDataSet.tblRosterGen1Row dr = _dsLinks.tblRosterGen1.FindByRelatedID(idRelated);
 			Trace.Assert(dr != null, "Exactly one row should be retrieved from tblRosterGen1.");
@@ -146,9 +145,6 @@ namespace Nls.BaseAssembly.Assign {
 			}
 		}
 		private float? CalculateRExplicitSingleSibVersion ( Int32 idRelated, Int32 subjectTag ) {
-			//MarkerGen1Summary roster = MarkerGen1.RetrieveMarker(idRelated, MarkerType.RosterGen1, _dtMarkersGen1);
-			//MarkerGen1Summary[] biomomMarkers = MarkerGen1.RetrieveMarkers(idRelated, MarkerType.ShareBiomom, _dtMarkersGen1, ItemYears.Gen1ShareBiomom.Length);
-			//MarkerGen1Summary[] biodadMarkers = MarkerGen1.RetrieveMarkers(idRelated, MarkerType.ShareBiodad, _dtMarkersGen1, ItemYears.Gen1ShareBiodad.Length);
 			MarkerEvidence biomom = ReduceShareBioparentToOne(MarkerType.ShareBiomom, ItemYears.Gen1ShareBiomom.Length, idRelated);
 			MarkerEvidence biodad = ReduceShareBioparentToOne(MarkerType.ShareBiodad, ItemYears.Gen1ShareBiodad.Length, idRelated);
 			if ( biomom == MarkerEvidence.Missing || biodad == MarkerEvidence.Missing ) {
@@ -181,7 +177,6 @@ namespace Nls.BaseAssembly.Assign {
 				//return RCoefficients.SiblingAmbiguous;
 
 			}
-			//throw new NotImplementedException();
 		}
 		private float? CalculateRExplicitPass1 ( ) {
 			if ( !RExplicitOldestSibVersion.HasValue && !RExplicitYoungestSibVersion.HasValue )
@@ -225,11 +220,11 @@ namespace Nls.BaseAssembly.Assign {
 			else if ( RExplicitPass1.HasValue ) {
 				return RExplicitPass1;
 			}
-			//else if ( RImplicit2004.HasValue ) {
-			//   return RImplicit2004;
-			//}
 			//else if ( RImplicitPass1.HasValue ) {
 			//   return RImplicitPass1;
+			//}
+			//else if ( RImplicit2004.HasValue ) {
+			//   return RImplicit2004;
 			//}
 			else {
 				return null;

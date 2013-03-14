@@ -14,7 +14,6 @@ namespace Nls.BaseAssembly {
 				SurveyYear = surveyYear;
 			}
 		}
-		//internal static IList<Int32> InverviewDateInvalidSkip { get { return new ReadOnlyCollection<Int32>(new Int32[] { 3617 }); } }//For the 1990 interview, the date is missing (but shouldn't be).
 		internal static IList<SubjectYear> InverviewDateInvalidSkip { get { return new ReadOnlyCollection<SubjectYear>(new SubjectYear[] { new SubjectYear(3617, 1990) }); } }//For the 1990 interview, the date is missing (but shouldn't be).
 
 		internal static Int32[] RosterAndExplicit = { 

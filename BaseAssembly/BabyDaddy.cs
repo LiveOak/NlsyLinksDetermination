@@ -86,9 +86,6 @@ namespace Nls.BaseAssembly {
 						biodadInHH = YesNo.No;
 						biodadAlive = YesNo.Yes;
 					}
-					//if ( source == SurveySource.NoInterview ) {
-					//   Debug.WriteLine("No interview for SubjectTag {0}", subjectTag);
-					//}
 					AddRow(subjectTag, childLoopIndex.Value, surveyYear, biodadInHH, biodadAlive, biodadEverLiveInHH, biodadLeftHHDate, biodadDeathDate, biodadDistanceFromHH, biodadAsthma);
 					recordsAdded += 1;
 				}

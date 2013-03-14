@@ -12,7 +12,7 @@ namespace Nls.BaseAssembly {
 		public const Int32 MaxDaysBetweenTwinBirths = 50; //We only have their month of birthday, so we have to be pretty forgiving here.
 		public const Int32 MonthsPerYear = 12;
 		public const double DaysPerYear = 365.25; //Account for leap year.
-		//public const Int32 SurveyYearEternal = 2008;//For things that aren' associiated with a survey year, like birth date or gender.
+		//public const Int32 SurveyYearEternal = 2008;//For things that aren' associated with a survey year, like birth date or gender.
 		public const string Gen1SubjectIDColumn = "R0000100"; //In tblGen1Links
 		public const string Gen1ExtendedFamilyIDColumn = "R0000149";	 //In tblGen1Links	
 		public const string Gen1GenderColumn = "R0214800"; //In tblGen1Links

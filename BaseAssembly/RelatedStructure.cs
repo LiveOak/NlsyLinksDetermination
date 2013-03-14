@@ -1,25 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 
 namespace Nls.BaseAssembly {
 	public sealed class RelatedStructure {
 		#region Fields
-		//private readonly ImportDataSet _dsImport;
 		private readonly LinksDataSet _dsLinks;
 		#endregion
-		//#region Properties
-		//#endregion
 		#region Constructor
-		public RelatedStructure ( LinksDataSet dsLinks ) {//ImportDataSet dsImport,
-			//if ( dsImport == null ) throw new ArgumentNullException("dsImport");
+		public RelatedStructure ( LinksDataSet dsLinks ) {
 			if ( dsLinks == null ) throw new ArgumentNullException("dsLinks");
-			//if ( dsImport.tblGen1Links.Count <= 0 ) throw new ArgumentException("There shouldn't be zero rows in tblGen1Links.");
 			if ( dsLinks.tblSubject.Count <= 0 ) throw new ArgumentException("There shouldn't be zero rows in tblSubject.");
 			if ( dsLinks.tblRelatedStructure.Count != 0 ) throw new ArgumentException("There should be zero rows in tblRelatedStructure.");
-			//_dsImport = dsImport;
 			_dsLinks = dsLinks;
 		}
 		#endregion
@@ -35,6 +26,16 @@ namespace Nls.BaseAssembly {
 			sw.Stop();
 			string message = string.Format("{0:N0} Related paths were processed.\n\nElapsed time: {1}", recordsAdded, sw.Elapsed.ToString());
 			return message;
+		}
+		public static LinksDataSet.tblRelatedStructureRow Retrieve ( LinksDataSet ds, RelationshipPath relationshipPath, Int32 subject1Tag, Int32 subject2Tag ) {
+			if ( ds.tblRelatedStructure.Count <= 0 ) throw new ArgumentException("tblRelatedStructure should have more than one row.", "ds");
+			string sql = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
+				(byte)relationshipPath, ds.tblRelatedStructure.RelationshipPathColumn.ColumnName,
+				subject1Tag, ds.tblRelatedStructure.Subject1TagColumn.ColumnName,
+				subject2Tag, ds.tblRelatedStructure.Subject2TagColumn.ColumnName);
+			LinksDataSet.tblRelatedStructureRow[] drs = (LinksDataSet.tblRelatedStructureRow[])ds.tblRelatedStructure.Select(sql);
+			Trace.Assert(drs.Length == 1, "There should be exactly one row retrieved.");
+			return drs[0];
 		}
 		#endregion
 		#region Private Methods
@@ -70,17 +71,6 @@ namespace Nls.BaseAssembly {
 			_dsLinks.tblRelatedStructure.AddtblRelatedStructureRow(drNew);
 			return 1;
 		}
-		public static LinksDataSet.tblRelatedStructureRow Retrieve( LinksDataSet ds, RelationshipPath relationshipPath, Int32 subject1Tag, Int32 subject2Tag ) {
-			if ( ds.tblRelatedStructure.Count <= 0 ) throw new ArgumentException("tblRelatedStructure should have more than one row.", "ds");
-			string sql = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
-				(byte)relationshipPath, ds.tblRelatedStructure.RelationshipPathColumn.ColumnName,
-				subject1Tag, ds.tblRelatedStructure.Subject1TagColumn.ColumnName,
-				subject2Tag, ds.tblRelatedStructure.Subject2TagColumn.ColumnName);
-			LinksDataSet.tblRelatedStructureRow[] drs = (LinksDataSet.tblRelatedStructureRow[])ds.tblRelatedStructure.Select(sql);
-			Trace.Assert(drs.Length == 1, "There should be exactly one row retrieved.");
-			return drs[0];
-		}
-
 		private static RelationshipPath GetRelationshipPath ( LinksDataSet.tblSubjectRow drSubject1, LinksDataSet.tblSubjectRow drSubject2 ) {
 			Trace.Assert(drSubject1.ExtendedID == drSubject2.ExtendedID, "The two subject should be in the same extended family.");
 			if ( drSubject1.Generation == (byte)Generation.Gen1 && drSubject2.Generation == (byte)Generation.Gen1 ) {

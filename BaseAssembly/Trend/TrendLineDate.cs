@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Nls.BaseAssembly.Trend {
 	public sealed  class TrendLineDate{
-
 		#region Fields
 		private readonly Int16[] _surveyYears;
 		private readonly DateTime?[] _dates;
@@ -13,9 +12,6 @@ namespace Nls.BaseAssembly.Trend {
 		//private readonly Int32 _countNonnull = 0;
 		private readonly DateTime? _firstNonnullValue = null;
 		private readonly DateTime? _lastNonnullValue = null;
-
-
-		//private readonly bool _isNullThe
 		#endregion
 		#region Properties
 		public Int32 CountAll { get { return _surveyYears.Length; } }
@@ -59,37 +55,7 @@ namespace Nls.BaseAssembly.Trend {
 			}
 		}
 		#endregion
-		#region Public Methods
-		#endregion
-		#region Private Methods
-		#endregion
 		#region Static Methods
-		//public static Int16[] FindJumps ( TrendLine<T> trend ) {
-		//   return FindJumps<T>(trend.SurveyYears, trend.Points);
-		//}
-		//public static Int16[] FindJumps<TStatic> ( Int16[] surveyYears, TStatic[] points ) {
-		//   Validate<TStatic>(surveyYears, points);
-		//   Int32 pointCount = surveyYears.Length;
-		//   if ( pointCount <= 1 ) return new Int16[] { };
-
-		//   List<Int16> jumps = new List<Int16>();
-		//   TStatic previous = points[0];
-		//   //TStatic firstNonnullValue=null;
-		//   //TStatic lastNonnullValue=null;
-
-		//   for ( Int32 i = 1; i < pointCount; i++ ) {//Notice it doesn't start at i=0;
-		//      if ( (points[i] != null) && (!points[i].Equals(previous)) ) {
-		//         if ( previous != null ) {
-		//            jumps.Add(surveyYears[i]);
-		//            //lastNonnullValue = points[i];
-		//         }
-
-		//         previous = points[i];
-		//      }
-		//   }
-		//   return jumps.ToArray();
-		//}
-
 		private static void Validate<TValidate> ( Int16[] surveyYears, TValidate[] points ) {
 			if ( surveyYears == null ) throw new ArgumentNullException("surveyYears");
 			if ( points == null ) throw new ArgumentNullException("points");
@@ -98,3 +64,28 @@ namespace Nls.BaseAssembly.Trend {
 		#endregion
 	}
 }
+//public static Int16[] FindJumps ( TrendLine<T> trend ) {
+//   return FindJumps<T>(trend.SurveyYears, trend.Points);
+//}
+//public static Int16[] FindJumps<TStatic> ( Int16[] surveyYears, TStatic[] points ) {
+//   Validate<TStatic>(surveyYears, points);
+//   Int32 pointCount = surveyYears.Length;
+//   if ( pointCount <= 1 ) return new Int16[] { };
+
+//   List<Int16> jumps = new List<Int16>();
+//   TStatic previous = points[0];
+//   //TStatic firstNonnullValue=null;
+//   //TStatic lastNonnullValue=null;
+
+//   for ( Int32 i = 1; i < pointCount; i++ ) {//Notice it doesn't start at i=0;
+//      if ( (points[i] != null) && (!points[i].Equals(previous)) ) {
+//         if ( previous != null ) {
+//            jumps.Add(surveyYears[i]);
+//            //lastNonnullValue = points[i];
+//         }
+
+//         previous = points[i];
+//      }
+//   }
+//   return jumps.ToArray();
+//}

@@ -35,28 +35,24 @@ namespace Nls.BaseAssembly {
 					Int32 subject1Tag = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1.SubjectTag;
 					Int32 subject2Tag = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject2.SubjectTag;
 					//if ( subject1Tag < subject2Tag ) {
-						Int32 subject1ID = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1.SubjectID;
-						Int32 subject2ID = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject2.SubjectID;
+					Int32 subject1ID = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1.SubjectID;
+					Int32 subject2ID = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject2.SubjectID;
 
-						LinksDataSet.tblResponseDataTable dtFamily = Retrieve.ExtendedFamilyRelevantResponseRows(drRelated.ExtendedID, _itemIDsString, 1, _dsLinks.tblResponse);
-						EnumResponsesGen1.Gen1Roster response1on2 = RetrieveResponse(subject1Tag, subject2ID, dtFamily);
-						EnumResponsesGen1.Gen1Roster response2on1 = RetrieveResponse(subject2Tag, subject1ID, dtFamily);
+					LinksDataSet.tblResponseDataTable dtFamily = Retrieve.ExtendedFamilyRelevantResponseRows(drRelated.ExtendedID, _itemIDsString, 1, _dsLinks.tblResponse);
+					EnumResponsesGen1.Gen1Roster response1on2 = RetrieveResponse(subject1Tag, subject2ID, dtFamily);
+					EnumResponsesGen1.Gen1Roster response2on1 = RetrieveResponse(subject2Tag, subject1ID, dtFamily);
 
-						Int16 responseLower = Math.Min((Int16)response1on2, (Int16)response2on1);
-						Int16 responseUpper = Math.Max((Int16)response1on2, (Int16)response2on1);
+					Int16 responseLower = Math.Min((Int16)response1on2, (Int16)response2on1);
+					Int16 responseUpper = Math.Max((Int16)response1on2, (Int16)response2on1);
 
-						LinksDataSet.tblLURosterGen1AssignmentRow drLU = RetrieveAssignmentRow(responseLower, responseUpper);
-						
-					//drLU.i
-						float r = float.MinValue;
-						if ( drLU.IsRNull() ) r = float.NaN;
-						else r = (float)drLU.R;
+					LinksDataSet.tblLURosterGen1AssignmentRow drLU = RetrieveAssignmentRow(responseLower, responseUpper);
+					float r = float.MinValue;
+					if ( drLU.IsRNull() ) r = float.NaN;
+					else r = (float)drLU.R;
 
-						AddRosterRow(drRelated.ID, drLU.ID, responseLower, responseUpper, drLU.Resolved, r, (float)drLU.RBoundLower, (float)drLU.RBoundUpper, 
-							(Tristate)drLU.SameGeneration, (Tristate)drLU.ShareBiodad, (Tristate)drLU.ShareBiomom,(Tristate)drLU.ShareBiograndparent, drLU.Inconsistent);
-						
-						recordsAdded += 1;
-					//}
+					AddRosterRow(drRelated.ID, drLU.ID, responseLower, responseUpper, drLU.Resolved, r, (float)drLU.RBoundLower, (float)drLU.RBoundUpper,
+						(Tristate)drLU.SameGeneration, (Tristate)drLU.ShareBiodad, (Tristate)drLU.ShareBiomom, (Tristate)drLU.ShareBiograndparent, drLU.Inconsistent);
+					recordsAdded += 1;
 				}
 			}
 			sw.Stop();
@@ -75,23 +71,6 @@ namespace Nls.BaseAssembly {
 			MarkerEvidence shareBiograndparent = Assign.EvidenceGen1.RosterShareBioParentOrGrandparent((Tristate)dr.ShareBiograndparent);
 
 			return new MarkerGen1Summary(sameGeneration, shareBiomom, shareBiodad, shareBiograndparent);
-
-
-			//string select = string.Format("{0}={1}",
-			//   relatedIDLeft, dtRoster.RelatedIDColumn.ColumnName);
-			//LinksDataSet.tblRosterGen1Row[] drs = (LinksDataSet.tblRosterGen1Row[])dtRoster.Select(select);
-			////Trace.Assert(drs.Length <= 1, "The number of returns markers should not exceed 1.");
-			//switch ( drs.Length ) {
-			//   case 0:
-			//      return null;
-			//   case 1:
-			//      float r = float.MinValue;
-			//      if ( drs[0].IsRNull() ) r = float.NaN;
-			//      else r = (float)drs[0].R;
-			//      return new RosterGen1Summary((EnumResponsesGen1.Gen1Roster)drs[0].Response, (bool)drs[0].Resolved, r, (float)drs[0].RBoundLower, (float)drs[0].RBoundUpper, (Tristate)drs[0].SameGeneration);
-			//   default: throw new InvalidOperationException("The number of returned roster responses should not exceed 1.");
-			//}
-			//throw new NotImplementedException();
 		}
 		#endregion
 		#region Private Methods -Tier 1
@@ -129,8 +108,8 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Tier 2
-		private void AddRosterRow ( Int32 relatedID, byte rosterAssignmentID,  Int16 responseLower, Int16 responseUpper, bool resolved, float r, float rBoundLower, float rBoundUpper, 
-			Tristate sameGeneration,Tristate shareBiodad,Tristate shareBiomom,Tristate shareBioGrandparent, bool inconsistent ) {
+		private void AddRosterRow ( Int32 relatedID, byte rosterAssignmentID, Int16 responseLower, Int16 responseUpper, bool resolved, float r, float rBoundLower, float rBoundUpper,
+			Tristate sameGeneration, Tristate shareBiodad, Tristate shareBiomom, Tristate shareBioGrandparent, bool inconsistent ) {
 			LinksDataSet.tblRosterGen1Row drNew = _dsLinks.tblRosterGen1.NewtblRosterGen1Row();
 			//drNew.ExtendedID = extendedID	;
 			drNew.RelatedID = relatedID;
@@ -138,70 +117,17 @@ namespace Nls.BaseAssembly {
 			drNew.ResponseLower = responseLower;
 			drNew.ResponseUpper = responseUpper;
 			drNew.Resolved = resolved;
-			if ( float.IsNaN(r) )
-				drNew.SetRNull();
-			else
-				drNew.R = r;
+			if ( float.IsNaN(r) ) drNew.SetRNull();
+			else drNew.R = r;
 			drNew.RBoundLower = rBoundLower;
 			drNew.RBoundUpper = rBoundUpper;
 			drNew.SameGeneration = (byte)sameGeneration;
 			drNew.ShareBiodad = (byte)shareBiodad;
 			drNew.ShareBiomom = (byte)shareBiomom;
 			drNew.ShareBiograndparent = (byte)shareBioGrandparent;
-
 			drNew.Inconsistent = inconsistent;
 			_dsLinks.tblRosterGen1.AddtblRosterGen1Row(drNew);
 		}
 		#endregion
 	}
 }
-
-
-
-//internal static LinksDataSet.tblMarkerGen1DataTable PairRelevantMarkerRows ( Int64 relatedIDLeft, Int64 relatedIDRight, LinksDataSet dsLinks, Int32 extendedID ) {
-//   string select = string.Format("{0}={1} AND {2} IN ({3},{4})",
-//      extendedID, dsLinks.tblMarkerGen1.ExtendedIDColumn.ColumnName,
-//      dsLinks.tblMarkerGen1.RelatedIDColumn.ColumnName, relatedIDLeft, relatedIDRight);
-//   LinksDataSet.tblMarkerGen1Row[] drs = (LinksDataSet.tblMarkerGen1Row[])dsLinks.tblMarkerGen1.Select(select);
-//   //if ( drs.Length <= 0 ) {
-//   //   return null;
-//   //}
-//   //else {
-//   LinksDataSet.tblMarkerGen1DataTable dt = new LinksDataSet.tblMarkerGen1DataTable();
-//   foreach ( LinksDataSet.tblMarkerGen1Row dr in drs ) {
-//      dt.ImportRow(dr);
-//   }
-//   return dt;
-//}
-//private Int32 FromRoster ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblResponseDataTable dtSubject1 ) {
-//   const Item itemID = Item.IDOfOther1979RosterGen1;
-//   const Item itemRelationship = Item.RosterGen11979;
-//   LinksDataSet.tblSubjectRow drSubject1 = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1;
-//   LinksDataSet.tblSubjectRow drSubject2 = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject2;
-
-//   Int32 surveyYearCount = _itemYearCount.ShareRosterGen1;
-
-//   //Use the other subject's ID to find the appropriate 'loop index';
-//   string selectToGetLoopIndex = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
-//      drSubject1.SubjectTag, dtSubject1.SubjectTagColumn.ColumnName,
-//      (byte)itemID, dtSubject1.ItemColumn.ColumnName,
-//      drSubject2.SubjectID, dtSubject1.ValueColumn.ColumnName);
-//   LinksDataSet.tblResponseRow[] drsForLoopIndex = (LinksDataSet.tblResponseRow[])dtSubject1.Select(selectToGetLoopIndex);
-//   Trace.Assert(drsForLoopIndex.Length <= surveyYearCount, string.Format("No more than {0} row(s) should be returned that matches Subject2 for item '{1}'.", surveyYearCount, itemID.ToString()));
-
-//   //Use the loop index (that corresponds to the other subject) to find the roster response.
-//   LinksDataSet.tblResponseRow drResponse = drsForLoopIndex[0];
-//   string selectToShareResponse = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
-//      drSubject1.SubjectTag, dtSubject1.SubjectTagColumn.ColumnName,
-//      (byte)itemRelationship, dtSubject1.ItemColumn.ColumnName,
-//      drResponse.LoopIndex, dtSubject1.LoopIndexColumn.ColumnName);
-//   LinksDataSet.tblResponseRow[] drsForShareResponse = (LinksDataSet.tblResponseRow[])dtSubject1.Select(selectToShareResponse);
-//   Trace.Assert(drsForShareResponse.Length == 1, "Exactly one row should be returned for the Item.RosterGen11979 item to Subject2");
-//   EnumResponsesGen1.Gen1Roster rosterRelationship = (EnumResponsesGen1.Gen1Roster)drsForShareResponse[0].Value;
-
-//   RosterGen1Summary rosterPackage = Assign.EvidenceGen1.RGuessRoster1979Marginal(rosterRelationship);
-
-//   AddRosterRow(drRelated.ID, drSubject1.SubjectTag, drSubject2.SubjectTag, rosterPackage.Response, rosterPackage.Resolved, rosterPackage.R, rosterPackage.RBoundLower, rosterPackage.RBoundUpper, rosterPackage.SameGeneration);
-//   const Int32 recordsAdded = 1;
-//   return recordsAdded;
-//}

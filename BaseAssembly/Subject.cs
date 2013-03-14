@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 
 namespace Nls.BaseAssembly {
 	public static class Subject {
 		#region Public Methods
-
 		public static string CreateSubject ( ImportDataSet dsImport, LinksDataSet dsLinks ) {
 			if ( dsImport == null ) throw new ArgumentNullException("dsImport");
 			if ( dsImport.tblGen1Links.Rows.Count != Constants.Gen1Count ) throw new ArgumentException("There should be exactly " + Constants.Gen1Count + " Gen1 subject rows, but instead there are " + dsImport.tblGen1Links.Rows.Count + ".");

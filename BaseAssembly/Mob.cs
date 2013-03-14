@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 
 namespace Nls.BaseAssembly {
 	public static class Mob {
@@ -76,7 +73,6 @@ namespace Nls.BaseAssembly {
 			else if ( reportedYob < Constants.Gen2BirthYearMin ) throw new ArgumentOutOfRangeException("reportedYob", reportedYob, "The reportedYob cannot be before 1970, according to the NLS cookbook.");
 			else if ( reportedYob > Constants.Gen2BirthYearMax ) throw new ArgumentOutOfRangeException("reportedYob", reportedYob, "The reportedYob cannot be after the data was collected.");
 
-			//if(reportedYob== DateTime.MinValue) Trace.Assert(OverridesGen2.MissingYob.Contains(
 			return new DateTime(reportedYob, reportedBirthMonth, Constants.DefaultDayOfMonth);
 		}
 	}

@@ -238,22 +238,6 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Tier 2
-		//public static EnumResponsesGen2.FatherAsthma DistillAsthma ( bool hasReportedAsthmaPreviously, Int16 surveyYear, SurveyTime.SubjectSurvey[] surveysSubject, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtSubject ) {
-		//   SurveySource source = SurveyTime.DetermineSurveySource(surveyYear, surveysSubject);
-		//   EnumResponsesGen2.FatherAsthma asthma;
-		//   if ( source == SurveySource.NoInterview ) {
-		//      if ( hasReportedAsthmaPreviously ) asthma = EnumResponsesGen2.FatherAsthma.Yes;
-		//      else asthma = EnumResponsesGen2.FatherAsthma.Missing;
-		//   }
-		//   else {
-		//      Int32? response = Retrieve.ResponseNullPossible(surveyYear, Item.FatherHasAsthmaGen2, source, subjectTag, 1, dtSubject);
-		//      if ( response.HasValue )
-		//         asthma = (EnumResponsesGen2.FatherAsthma)response;
-		//      else
-		//         asthma = EnumResponsesGen2.FatherAsthma.Missing;
-		//   }
-		//   return asthma;
-		//}
 		private Int32 AddMarkerRow ( Int32 extendedID, Int32 relatedID, MarkerType markerType, Int16? surveyYear, MarkerEvidence mzEvidence, MarkerEvidence biodadEvidence, bool fromMother ) {
 			lock ( _dsLinks.tblMarkerGen2 ) {
 				//if ( !surveyYear.HasValue ) return 0;

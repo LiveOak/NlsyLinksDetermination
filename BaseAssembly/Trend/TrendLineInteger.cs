@@ -54,10 +54,6 @@ namespace Nls.BaseAssembly.Trend {
 			}
 		}
 		#endregion
-		#region Public Methods
-		#endregion
-		#region Private Methods
-		#endregion
 		#region Static Methods
 		private static void Validate<TValidate> ( Int16[] surveyYears, TValidate[] points ) {
 			if ( surveyYears == null ) throw new ArgumentNullException("surveyYears");

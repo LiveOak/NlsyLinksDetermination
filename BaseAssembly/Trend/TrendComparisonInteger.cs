@@ -85,7 +85,6 @@ namespace Nls.BaseAssembly.Trend {
 			}
 
 			_jumpsAgreePerfectly = trend1.Jumps.SequenceEqual(trend2.Jumps);
-			//_trend1 = trend1;			//_trend2 = trend2;
 		}
 		#endregion
 	}
