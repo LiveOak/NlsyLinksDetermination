@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 namespace Nls.BaseAssembly {
 	public class SurveyTime {
 		public struct SubjectSurvey {
-			//internal readonly Int32 SubjectTag;
 			internal readonly Int16 SurveyYear;
 			internal readonly SurveySource SurveySource;
 			internal SubjectSurvey ( Int16 surveyYear, SurveySource source ) {
@@ -189,12 +188,6 @@ namespace Nls.BaseAssembly {
 				return ageInYears;
 			}
 		}
-		//private Int16[] SubjectWaves ( Int32 subjectTag ) {
-		//   string select = string.Format("{0}={1}", subjectTag, _ds.tblResponse.SubjectTagColumn.ColumnName);
-		//   LinksDataSet.tblResponseRow[] drs = (LinksDataSet.tblResponseRow[])_ds.tblResponse.Select(select);
-		//   Trace.Assert(drs.Length > 0, string.Format("There should be at least one row for SubjectTag {0}.", subjectTag));
-		//   return ((from dr in drs select dr.SurveyYear).Distinct().OrderBy(year => year)).ToArray<Int16>();
-		//}
 		private void AddRow ( Int32 subjectTag, SurveySource surveySource, Int16 surveyYear, DateTime? surveyDate, float? ageSelfReport, float? calculatedAge ) {
 			lock ( _ds.tblSurveyTime ) {
 				LinksDataSet.tblSurveyTimeRow drNew = _ds.tblSurveyTime.NewtblSurveyTimeRow();
@@ -212,7 +205,6 @@ namespace Nls.BaseAssembly {
 				else drNew.SetAgeCalculateYearsNull();
 
 				_ds.tblSurveyTime.AddtblSurveyTimeRow(drNew);
-				//_ds.tblSurveyTime.AddtblSurveyTimeRow(subjectTag, (byte)surveySource, surveyYear, new DateTime(), 1, 1);
 			}
 		}
 		#endregion
