@@ -162,7 +162,7 @@ namespace Nls.BaseAssembly {
 			//foreach ( LinksDataSet.tblRelatedStructureRow drLeft in SelectLefthand(path) ) {
 			Parallel.ForEach(SelectLefthand(path), ( drLeft ) => {
 				LinksDataSet.tblRelatedStructureRow drRight = SelectRighthand(drLeft);
-				RGen1Pass2 pass2 = new RGen1Pass2(_dsImport, _dsLinks, drLeft, drRight);
+				RGen1Pass2 pass2 = new RGen1Pass2(_dsLinks, drLeft, drRight);
 				UpdateRow(pass2, pass2.IDLeft);
 				Interlocked.Increment(ref recordsAdded);
 			});
@@ -180,7 +180,7 @@ namespace Nls.BaseAssembly {
 			//foreach ( LinksDataSet.tblRelatedStructureRow drLeft in SelectLefthand(path) ) {
 			Parallel.ForEach(SelectLefthand(path), ( drLeft ) => {
 				LinksDataSet.tblRelatedStructureRow drRight = SelectRighthand(drLeft);
-				RGen2Pass2 rGen2Pass2 = new RGen2Pass2(_dsImport, _dsLinks, drLeft, drRight);
+				RGen2Pass2 rGen2Pass2 = new RGen2Pass2(_dsLinks, drLeft, drRight);
 				UpdateRow(rGen2Pass2, rGen2Pass2.IDLeft);
 				Interlocked.Increment(ref recordsAdded);
 			});

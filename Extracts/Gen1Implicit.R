@@ -11,3 +11,5 @@ keepExistingTable <- FALSE
 sqlSave(channel, dat=ds, tablename="Extract.tblGen1Implicit", safer=keepExistingTable, rownames=FALSE, append=FALSE)
 odbcClose(channel)
 #Don't forget to make Gen1ID the primary key in the table.
+
+table(ds$T3036100, ds$H0002400)

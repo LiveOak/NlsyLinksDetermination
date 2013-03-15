@@ -39,16 +39,18 @@ namespace LinksGui {
 
 			_dsImport = ((BA.ImportDataSet)(this.FindResource("importDataSet")));
 			_dsLinks = ((BA.LinksDataSet)(this.FindResource("linksDataSet")));
-
-			//LoadExtractGen1Links();
-			//LoadExtractGen1Explicit();
-			//LoadExtractGen1Implicit();
-			//LoadExtractGen2Links();
-			//LoadExtractGen2LinksFromGen1();
-			//LoadExtractGen2ImplicitFather();
-			//LoadExtractGen2FatherFromGen1();
-			//LoadExtractGen1Outcomes();
-			//LoadExtractGen2OutcomesHeight();
+						
+			if ( Convert.ToBoolean("false") ) {
+				LoadExtractGen1Links();
+				LoadExtractGen1Explicit();
+				LoadExtractGen1Implicit();
+				LoadExtractGen2Links();
+				LoadExtractGen2LinksFromGen1();
+				LoadExtractGen2ImplicitFather();
+				LoadExtractGen2FatherFromGen1();
+				LoadExtractGen1Outcomes();
+				LoadExtractGen2OutcomesHeight();
+			}
 
 			LoadLinks2004Gen1();//Needed for RelatedValues
 			LoadLinks2004Gen2();//Needed for RelatedValues
