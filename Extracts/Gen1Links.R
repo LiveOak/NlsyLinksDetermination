@@ -11,3 +11,6 @@ keepExistingTable <- FALSE
 sqlSave(channel, dat=ds, tablename="Extract.tblGen1Links", safer=keepExistingTable, rownames=FALSE, append=FALSE)
 odbcClose(channel)
 #Don't forget to make Gen1ID the primary key in the table.
+
+table(ds$H0013700)
+table(ds$H0001700)
