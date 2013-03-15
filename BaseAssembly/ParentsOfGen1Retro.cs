@@ -51,7 +51,6 @@ namespace Nls.BaseAssembly {
 		#region Private Methods
 		private Int32 ProcessSubjectGen1 ( LinksDataSet.tblSubjectRow drSubject, LinksDataSet.tblResponseDataTable dtExtendedResponse ) {
 			byte[] loopIndicesAndAges = { 255, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 };
-			//Int16[] ages = { -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 };
 			Int32 subjectTag = drSubject.SubjectTag;
 			Int32 yob = Mob.Retrieve(drSubject, dtExtendedResponse).Value.Year;
 

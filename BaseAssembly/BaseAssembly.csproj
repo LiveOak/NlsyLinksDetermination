@@ -60,6 +60,7 @@
     <Compile Include="Assign\IAssignPass2.cs" />
     <Compile Include="Assign\EvidenceGen2.cs" />
     <Compile Include="Assign\RGen2Pass1.cs" />
+    <Compile Include="ParentsOfGen1Current.cs" />
     <Compile Include="ParentsOfGen1Retro.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Outcomes.cs" />

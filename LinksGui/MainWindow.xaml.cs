@@ -79,6 +79,7 @@ namespace LinksGui {
 			sw.Stop();
 			string message = string.Format("DataSets loaded (Elapsed time: {0})", sw.Elapsed.ToString());
 			Trace.WriteLine(message);
+			Console.Beep(1000, 900);
 		}
 		#region Fill & Update
 		private void btnSubject_Click ( object sender, RoutedEventArgs e ) {
@@ -123,12 +124,11 @@ namespace LinksGui {
 			//WriteXml(_dsLinks.tblParentsOfGen1Retro);
 		}
 		private void btnParentsOfGen1Current_Click ( object sender, RoutedEventArgs e ) {
-			Console.Beep(1000, 900);
-			//BA.ParentsOfGen2Current current = new BA.ParentsOfGen2Current(_dsLinks);
-			//string message = current.Go();
-			//Trace.WriteLine(message);
-			//if ( e.Source.ToString() != _combinedButtonTag ) MessageBox.Show(message);
-			////WriteXml(_dsLinks.tblParentsOfGen1Current);
+			BA.ParentsOfGen1Current current = new BA.ParentsOfGen1Current(_dsLinks);
+			string message = current.Go();
+			Trace.WriteLine(message);
+			if ( e.Source.ToString() != _combinedButtonTag ) MessageBox.Show(message);
+			//WriteXml(_dsLinks.tblParentsOfGen1Current);
 		}
 		private void btnBabyDaddy_Click ( object sender, RoutedEventArgs e ) {
 			BA.BabyDaddy babyDaddy = new BA.BabyDaddy(_dsLinks);

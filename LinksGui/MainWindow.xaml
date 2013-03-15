@@ -36,6 +36,7 @@
 		<CollectionViewSource x:Key="tblGen1ExplicitViewSource" Source="{Binding Path=tblGen1Explicit, Source={StaticResource importDataSet}}" />
 		<CollectionViewSource x:Key="tblGen1ImplicitViewSource" Source="{Binding Path=tblGen1Implicit, Source={StaticResource importDataSet}}" />
 		<CollectionViewSource x:Key="tblParentsOfGen1RetroViewSource" Source="{Binding Path=tblParentsOfGen1Retro, Source={StaticResource linksDataSet}}" />
+		<CollectionViewSource x:Key="tblParentsOfGen1CurrentViewSource" Source="{Binding Path=tblParentsOfGen1Current, Source={StaticResource linksDataSet}}" />
 	</Window.Resources>
 	<Grid Name="grid1" Background="AliceBlue" DataContext="{StaticResource tblGen2LinksViewSource}">
 		<Grid.RowDefinitions>
@@ -1484,7 +1485,7 @@
 					</DataGrid.Columns>
 				</DataGrid>
 			</TabItem>
-			<TabItem Header="RelatedStructure" Name="tabRelated" >
+			<TabItem Header="RStructure" Name="tabRelated" >
 				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True"  ItemsSource="{Binding Source={StaticResource tblRelatedStructureViewSource}}" Name="tblRelatedStructureDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected">
 					<DataGrid.Columns>
 						<DataGridTextColumn x:Name="iDColumn4" Binding="{Binding Path=ID}" Header="ID" IsReadOnly="True" Width="SizeToHeader" />
@@ -1529,7 +1530,7 @@
 					</DataGrid.Columns>
 				</DataGrid>
 			</TabItem>
-			<TabItem Header="RosterGen1" Name="tabRosterGen1" >
+			<TabItem Header="RosterG1" Name="tabRosterGen1" >
 				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tblRosterGen1ViewSource}}" Name="tblRosterGen1DataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
 					<DataGrid.Columns>
 						<DataGridTextColumn x:Name="relatedIDColumn2" Binding="{Binding Path=RelatedID}" Header="Related ID" Width="SizeToHeader" />
@@ -1558,6 +1559,21 @@
 				</DataGrid>
 			</TabItem>
 			<TabItem Header="G1RentsCurrent" Name="tabGen1ParentsCurrent" >
+				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tblParentsOfGen1CurrentViewSource}}" Name="tblParentsOfGen1CurrentDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
+					<DataGrid.Columns>
+						<DataGridTextColumn x:Name="iDColumn13" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="subjectTagColumn8" Binding="{Binding Path=SubjectTag}" Header="Subject Tag" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="surveyYearColumn8" Binding="{Binding Path=SurveyYear}" Header="Survey Year" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biodadInHHColumn3" Binding="{Binding Path=BiodadInHH}" Header="Biodad In HH" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biodadAliveColumn2" Binding="{Binding Path=BiodadAlive}" Header="Biodad Alive" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biodadDistanceFromHHColumn2" Binding="{Binding Path=BiodadDistanceFromHH}" Header="Biodad Distance From HH" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biodadAsthmaColumn2" Binding="{Binding Path=BiodadAsthma}" Header="Biodad Asthma" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biomomInHHColumn1" Binding="{Binding Path=BiomomInHH}" Header="Biomom In HH" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biomomAliveColumn" Binding="{Binding Path=BiomomAlive}" Header="Biomom Alive" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biomomDistanceFromHHColumn" Binding="{Binding Path=BiomomDistanceFromHH}" Header="Biomom Distance From HH" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biomomAsthmaColumn" Binding="{Binding Path=BiomomAsthma}" Header="Biomom Asthma" Width="SizeToHeader" />
+					</DataGrid.Columns>
+				</DataGrid>
 			</TabItem>
 
 			<TabItem Header="BabyDaddy" Name="tabBabyDaddy" >
@@ -1588,7 +1604,7 @@
 					</DataGrid.Columns>
 				</DataGrid>
 			</TabItem>
-			<TabItem Header="FatherOfGen2" Name="tabFatherOfGen2" >
+			<TabItem Header="FatherOfG2" Name="tabFatherOfGen2" >
 				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tblFatherOfGen2ViewSource}}" Name="tblFatherOfGen2DataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
 					<DataGrid.Columns>
 						<DataGridTextColumn x:Name="iDColumn10" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" />
@@ -1639,7 +1655,7 @@
 					</DataGrid.Columns>
 				</DataGrid>
 			</TabItem>
-			<TabItem Header="MarkerGen1" Name="tabMarkerGen1" >
+			<TabItem Header="MarkerG1" Name="tabMarkerGen1" >
 				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tblMarkerGen1ViewSource}}" Name="tblMarkerGen1DataGrid" RowDetailsVisibilityMode="VisibleWhenSelected">
 					<DataGrid.Columns>
 						<DataGridTextColumn x:Name="iDColumn6" Binding="{Binding Path=ID}" Header="ID" IsReadOnly="True" Width="SizeToHeader" />
@@ -1652,7 +1668,7 @@
 					</DataGrid.Columns>
 				</DataGrid>
 			</TabItem>
-			<TabItem Header="MarkerGen2" Name="tabMarkerGen2" >
+			<TabItem Header="MarkerG2" Name="tabMarkerGen2" >
 				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tblMarkerGen2ViewSource}}" Name="tblMarkerGen2DataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
 					<DataGrid.Columns>
 						<DataGridTextColumn x:Name="iDColumn3" Binding="{Binding Path=ID}" Header="ID" IsReadOnly="True" Width="SizeToHeader" />
@@ -1664,7 +1680,7 @@
 					</DataGrid.Columns>
 				</DataGrid>
 			</TabItem>
-			<TabItem Header="RelatedValues" Name="tabRelatedValues" >
+			<TabItem Header="RValues" Name="tabRelatedValues" >
 				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tblRelatedValuesViewSource}}" Name="tblRelatedValuesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
 					<DataGrid.Columns>
 						<DataGridTextColumn x:Name="iDColumn7" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" />
