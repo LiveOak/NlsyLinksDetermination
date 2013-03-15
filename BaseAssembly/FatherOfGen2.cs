@@ -46,7 +46,6 @@ namespace Nls.BaseAssembly {
 			_ds.tblFatherOfGen2.EndLoadData();
 			sw.Stop();
 			return string.Format("{0:N0} FatherOfGen2 records were created.\nElapsed time: {1}", recordsAddedTotal, sw.Elapsed.ToString());
-			throw new NotImplementedException();
 		}
 		#endregion
 		#region Private Methods
@@ -149,7 +148,7 @@ namespace Nls.BaseAssembly {
 			}
 		}
 		#endregion
-		#region Public Static
+		#region Public/Private Static
 		public static LinksDataSet.tblFatherOfGen2DataTable RetrieveRows ( Int32 subjectTag, LinksDataSet dsLinks ) {
 			if ( dsLinks == null ) throw new ArgumentNullException("dsLinks");
 			if ( dsLinks.tblFatherOfGen2.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblFatherOfGen2.");

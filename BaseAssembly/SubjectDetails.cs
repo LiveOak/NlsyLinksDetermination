@@ -109,8 +109,7 @@ namespace Nls.BaseAssembly {
 			LastSurvey lastSurvey = LastSurveyCouplet(subjectTag);//This call takes 12 minutes total.
 			Int16? lastSurveyYear = lastSurvey.LastSurveyYear;
 			float? lastAge = lastSurvey.AgeAtLastSurvey;
-			//Int16? lastSurveyYear = null;
-			//float? lastAge = null;
+
 			byte? kidCountBio = DetermineBioKidCount(drSubject, dtExtended, lastAge);
 			byte? kidCountInNls = DetermineNlsKidCount(drSubject, subjectsInExtendedFamily);
 

@@ -1,7 +1,7 @@
 ﻿<Window x:Class="LinksGui.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="546" Width="1085" xmlns:my="clr-namespace:Nls.BaseAssembly;assembly=BaseAssembly" Loaded="Window_Loaded" xmlns:my1="clr-namespace:LinksGui">
+        Title="MainWindow" Height="546" Width="1157" xmlns:my="clr-namespace:Nls.BaseAssembly;assembly=BaseAssembly" Loaded="Window_Loaded" xmlns:my1="clr-namespace:LinksGui">
 	<Window.Resources>
 		<my:ImportDataSet x:Key="importDataSet" />
 		<CollectionViewSource x:Key="tblGen1LinksViewSource" Source="{Binding Path=tblGen1Links, Source={StaticResource importDataSet}}" />
@@ -35,6 +35,7 @@
 		<CollectionViewSource x:Key="tblGen2OutcomesHeightViewSource" Source="{Binding Path=tblGen2OutcomesHeight, Source={StaticResource importDataSet}}" />
 		<CollectionViewSource x:Key="tblGen1ExplicitViewSource" Source="{Binding Path=tblGen1Explicit, Source={StaticResource importDataSet}}" />
 		<CollectionViewSource x:Key="tblGen1ImplicitViewSource" Source="{Binding Path=tblGen1Implicit, Source={StaticResource importDataSet}}" />
+		<CollectionViewSource x:Key="tblParentsOfGen1RetroViewSource" Source="{Binding Path=tblParentsOfGen1Retro, Source={StaticResource linksDataSet}}" />
 	</Window.Resources>
 	<Grid Name="grid1" Background="AliceBlue" DataContext="{StaticResource tblGen2LinksViewSource}">
 		<Grid.RowDefinitions>
@@ -45,6 +46,8 @@
 		</Grid.RowDefinitions>
 		<Grid Name="grdButton"  Grid.Row="1">
 			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="*"/>
@@ -74,33 +77,39 @@
 			<Button Name="btnRosterGen1" Grid.Column="5" Click="btnRosterGen1_Click">
 				<TextBlock>Roster<LineBreak/>Gen1</TextBlock>
 			</Button>
-			<Button Name="btnBabyDaddy" Grid.Column="6" Click="btnBabyDaddy_Click">
+			<Button Name="btnParentsOfGen1Retro" Grid.Column="6" Click="btnParentsOfGen1Retro_Click">
+				<TextBlock>G1Rents<LineBreak/>Retro</TextBlock>
+			</Button>
+			<Button Name="btnParentsOfGen1Current" Grid.Column="7" Click="btnParentsOfGen1Current_Click">
+				<TextBlock>G1Rents<LineBreak/>Current</TextBlock>
+			</Button>
+			<Button Name="btnBabyDaddy" Grid.Column="8" Click="btnBabyDaddy_Click">
 				<TextBlock>Baby<LineBreak/>Daddy</TextBlock>
 			</Button>
-			<Button Name="btnFatherOfGen2" Grid.Column="7" Click="btnFatherOfGen2_Click">
+			<Button Name="btnFatherOfGen2" Grid.Column="9" Click="btnFatherOfGen2_Click">
 				<TextBlock>Father<LineBreak/>Of Gen2</TextBlock>
 			</Button>
-			<Button Name="btnSubjectDetails" Grid.Column="8" Click="btnSubjectDetails_Click">
+			<Button Name="btnSubjectDetails" Grid.Column="10" Click="btnSubjectDetails_Click">
 				<TextBlock>Subject<LineBreak/>Details</TextBlock>
 			</Button>
-			<Button Name="btnMarkerGen1" Grid.Column="9" Click="btnMarkerGen1_Click">
+			<Button Name="btnMarkerGen1" Grid.Column="11" Click="btnMarkerGen1_Click">
 				<TextBlock>Marker<LineBreak/>Gen1</TextBlock>
 			</Button>
-			<Button Name="btnMarkerGen2" Grid.Column="10" Click="btnMarkerGen2_Click">
+			<Button Name="btnMarkerGen2" Grid.Column="12" Click="btnMarkerGen2_Click">
 				<TextBlock>Marker<LineBreak/>Gen2</TextBlock>
 			</Button>
-			<Button Name="btnRelatedValues" Grid.Column="11" Click="btnRelatedValues_Click">
+			<Button Name="btnRelatedValues" Grid.Column="13" Click="btnRelatedValues_Click">
 				<TextBlock>Related<LineBreak/>Values</TextBlock>
 			</Button>
-			<Button Name="btnOutcomes" Grid.Column="12" Click="btnOutcomes_Click">
+			<Button Name="btnOutcomes" Grid.Column="14" Click="btnOutcomes_Click">
 				<TextBlock>Outcomes</TextBlock>
 			</Button>
-			<Button Name="btnRelatedValuesArchive" Grid.Column="13" Click="btnRelatedValuesArchive_Click">
+			<Button Name="btnRelatedValuesArchive" Grid.Column="15" Click="btnRelatedValuesArchive_Click">
 				<TextBlock>Related<LineBreak/>Archive</TextBlock>
 			</Button>
-			<TextBox Name="txtAlogrithmNumber" Grid.Column="14"  />
+			<TextBox Name="txtAlogrithmNumber" Grid.Column="16"  />
 		</Grid>
-		<Button Name="btnUpdateAllTables" Content="Update All Tables"  Grid.Row="2" Click="btnUpdateAllTables_Click" />
+		<Button Name="btnUpdateAllTables" Content="Update All Tables"  Grid.Row="2" Click="btnUpdateAllTables_Click" Background="#FFF5D600" />
 		<TabControl Name="tabControlTop"  Grid.Row="0" Background="Transparent">
 			<TabItem Header="Gen1Links" Name="tabGen1Links" >
 				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tblGen1LinksViewSource}}" Name="tblGen1LinksDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
@@ -1535,6 +1544,22 @@
 					</DataGrid.Columns>
 				</DataGrid>
 			</TabItem>
+			<TabItem Header="G1RentsRetro" Name="tabGen1ParentsRetro" >
+				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tblParentsOfGen1RetroViewSource}}" Name="tblParentsOfGen1RetroDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
+					<DataGrid.Columns>
+						<DataGridTextColumn x:Name="iDColumn12" Binding="{Binding Path=ID}" Header="ID" IsReadOnly="True" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="subjectTagColumn7" Binding="{Binding Path=SubjectTag}" Header="Subject Tag" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="surveyYearColumn7" Binding="{Binding Path=SurveyYear}" Header="Survey Year" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biodadInHHColumn2" Binding="{Binding Path=BiodadInHH}" Header="Biodad In HH" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biomomInHHColumn" Binding="{Binding Path=BiomomInHH}" Header="Biomom In HH" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="ageColumn" Binding="{Binding Path=Age}" Header="Age" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="yearColumn" Binding="{Binding Path=Year}" Header="Year" Width="SizeToHeader" />
+					</DataGrid.Columns>
+				</DataGrid>
+			</TabItem>
+			<TabItem Header="G1RentsCurrent" Name="tabGen1ParentsCurrent" >
+			</TabItem>
+
 			<TabItem Header="BabyDaddy" Name="tabBabyDaddy" >
 				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tblBabyDaddyViewSource}}" Name="tblBabyDaddyDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
 					<DataGrid.Columns>

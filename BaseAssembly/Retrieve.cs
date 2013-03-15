@@ -11,7 +11,7 @@ namespace Nls.BaseAssembly {
 			if ( dt == null ) throw new ArgumentNullException("dt");
 			string select = string.Format("{0}={1} AND {2}={3}",
 				subjectTag, dt.SubjectTagColumn.ColumnName,
-				(byte)itemID, dt.ItemColumn.ColumnName);
+				(Int16)itemID, dt.ItemColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsRaw = (LinksDataSet.tblResponseRow[])dt.Select(select);
 			Trace.Assert(drsRaw.Length == 1, "Exactly one row should be returned.");
 			return drsRaw[0].Value;
@@ -20,7 +20,7 @@ namespace Nls.BaseAssembly {
 			if ( dt == null ) throw new ArgumentNullException("dt");
 			string select = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				subjectTag, dt.SubjectTagColumn.ColumnName,
-				(byte)itemID, dt.ItemColumn.ColumnName,
+				(Int16)itemID, dt.ItemColumn.ColumnName,
 				surveyYear, dt.SurveyYearColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsRaw = (LinksDataSet.tblResponseRow[])dt.Select(select);
 			Trace.Assert(drsRaw.Length <= maxRows, "At most, " + maxRows + " row(s) should be returned.");
@@ -30,7 +30,7 @@ namespace Nls.BaseAssembly {
 		//   if ( dt == null ) throw new ArgumentNullException("dt");
 		//   string select = string.Format("{0}={1} AND {2}={3} AND {4}={5} AND {6}={7}",
 		//      subjectTag, dt.SubjectTagColumn.ColumnName,
-		//      (byte)itemID, dt.ItemColumn.ColumnName,
+		//      (Int16)itemID, dt.ItemColumn.ColumnName,
 		//      surveyYear, dt.SurveyYearColumn.ColumnName,
 		//      (byte)surveySource, dt.SurveySourceColumn.ColumnName);
 		//   LinksDataSet.tblResponseRow[] drsRaw = (LinksDataSet.tblResponseRow[])dt.Select(select);
@@ -41,7 +41,7 @@ namespace Nls.BaseAssembly {
 		//   if ( dt == null ) throw new ArgumentNullException("dt");
 		//   string select = string.Format("{0}={1} AND {2}={3} AND {4}={5} AND {6}={7}",
 		//      subjectTag, dt.SubjectTagColumn.ColumnName,
-		//      (byte)itemID, dt.ItemColumn.ColumnName,
+		//      (Int16)itemID, dt.ItemColumn.ColumnName,
 		//      surveyYear, dt.SurveyYearColumn.ColumnName,
 		//      (byte)surveySource, dt.SurveySourceColumn.ColumnName);
 		//   LinksDataSet.tblResponseRow[] drsRaw = (LinksDataSet.tblResponseRow[])dt.Select(select);
@@ -54,7 +54,7 @@ namespace Nls.BaseAssembly {
 		//   string select = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 		//      subjectTag, dt.SubjectTagColumn.ColumnName,
 		//      loopIndex, dt.LoopIndexColumn.ColumnName,
-		//      (byte)itemID, dt.ItemColumn.ColumnName);
+		//      (Int16)itemID, dt.ItemColumn.ColumnName);
 		//   LinksDataSet.tblResponseRow[] drs = (LinksDataSet.tblResponseRow[])dt.Select(select);
 		//   IEnumerable<Int16> values = from dr in drs
 		//                               orderby dr.SurveyYear
@@ -67,7 +67,7 @@ namespace Nls.BaseAssembly {
 			if ( dt == null ) throw new ArgumentNullException("dt");
 			string select = string.Format("{0}={1} AND {2}={3}",
 				subjectTag, dt.SubjectTagColumn.ColumnName,
-				(byte)itemID, dt.ItemColumn.ColumnName);
+				(Int16)itemID, dt.ItemColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsRaw = (LinksDataSet.tblResponseRow[])dt.Select(select);
 			Trace.Assert(drsRaw.Length <= 1, "At most one row should be returned.");
 			if ( drsRaw.Length == 0 )
@@ -79,7 +79,7 @@ namespace Nls.BaseAssembly {
 			if ( dt == null ) throw new ArgumentNullException("dt");
 			string select = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				subjectTag, dt.SubjectTagColumn.ColumnName,
-				(byte)itemID, dt.ItemColumn.ColumnName,
+				(Int16)itemID, dt.ItemColumn.ColumnName,
 				surveyYear, dt.SurveyYearColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsRaw = (LinksDataSet.tblResponseRow[])dt.Select(select);
 			Trace.Assert(drsRaw.Length <= 1, "At most one row should be returned.");
@@ -92,7 +92,7 @@ namespace Nls.BaseAssembly {
 			if ( dt == null ) throw new ArgumentNullException("dt");
 			string select = string.Format("{0}={1} AND {2}={3} AND {4}={5} AND {6}={7}",
 				subjectTag, dt.SubjectTagColumn.ColumnName,
-				(byte)itemID, dt.ItemColumn.ColumnName,
+				(Int16)itemID, dt.ItemColumn.ColumnName,
 				surveyYear, dt.SurveyYearColumn.ColumnName,
 				loopIndex, dt.LoopIndexColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsRaw = (LinksDataSet.tblResponseRow[])dt.Select(select);
@@ -106,7 +106,7 @@ namespace Nls.BaseAssembly {
 			if ( dt == null ) throw new ArgumentNullException("dt");
 			string select = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				subjectTag, dt.SubjectTagColumn.ColumnName,
-				(byte)itemID, dt.ItemColumn.ColumnName,
+				(Int16)itemID, dt.ItemColumn.ColumnName,
 				(byte)surveySource, dt.SurveySourceColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsRaw = (LinksDataSet.tblResponseRow[])dt.Select(select);
 			Trace.Assert(drsRaw.Length <= maxRows, "At most, " + maxRows + " row(s) should be returned.");
@@ -119,7 +119,7 @@ namespace Nls.BaseAssembly {
 			if ( dt == null ) throw new ArgumentNullException("dt");
 			string select = string.Format("{0}={1} AND {2}={3} AND {4}={5} AND {6}={7}",
 				subjectTag, dt.SubjectTagColumn.ColumnName,
-				(byte)itemID, dt.ItemColumn.ColumnName,
+				(Int16)itemID, dt.ItemColumn.ColumnName,
 				surveyYear, dt.SurveyYearColumn.ColumnName,
 				(byte)surveySource, dt.SurveySourceColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsRaw = (LinksDataSet.tblResponseRow[])dt.Select(select);
@@ -136,7 +136,7 @@ namespace Nls.BaseAssembly {
 			if ( distinctCount != items.Length ) throw new ArgumentException("Not all items are unique.");
 
 			foreach ( Item item in items ) {
-				string select = string.Format("{0}={1}", (byte)item, dsLinks.tblResponse.ItemColumn.ColumnName);
+				string select = string.Format("{0}={1}", Convert.ToInt16(item), dsLinks.tblResponse.ItemColumn.ColumnName);
 				LinksDataSet.tblResponseRow[] drs = (LinksDataSet.tblResponseRow[])dsLinks.tblResponse.Select(select);
 				if ( !(drs.Length >= 1) ) throw new ArgumentOutOfRangeException("items", item, "The " + item.ToString() + " was not found in the local copy of dtResponse.");
 			}
@@ -185,7 +185,7 @@ namespace Nls.BaseAssembly {
 
 			string selectToGetLoopIndex = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				drSubject1.SubjectTag, dt.SubjectTagColumn.ColumnName,
-				(byte)Item.IDOfOther1979RosterGen1, dt.ItemColumn.ColumnName,
+				(Int16)Item.IDOfOther1979RosterGen1, dt.ItemColumn.ColumnName,
 				drSubject2.SubjectID, dt.ValueColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsForLoopIndex = (LinksDataSet.tblResponseRow[])dt.Select(selectToGetLoopIndex);
 			Trace.Assert(drsForLoopIndex.Length == 1, "Exactly one row should be returned matching Subject2");
@@ -194,7 +194,7 @@ namespace Nls.BaseAssembly {
 
 			string selectToRoster = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				drSubject1.SubjectTag, dt.SubjectTagColumn.ColumnName,
-				(byte)Item.RosterGen1979, dt.ItemColumn.ColumnName,
+				(Int16)Item.RosterGen1979, dt.ItemColumn.ColumnName,
 				loopIndex, dt.LoopIndexColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsForRoster = (LinksDataSet.tblResponseRow[])dt.Select(selectToRoster);
 			Trace.Assert(drsForRoster.Length == 1, "Exactly one row should be returned for the Roster relationship to Subject2");
@@ -244,14 +244,14 @@ namespace Nls.BaseAssembly {
 			const Item item = Item.Gen1ChildsIDByBirthOrder;
 			string select = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				motherTag, dtResponse.SubjectTagColumn.ColumnName,
-				(byte)item, dtResponse.ItemColumn.ColumnName,
+				(Int16)item, dtResponse.ItemColumn.ColumnName,
 				childTwoDigitID, dtResponse.ValueColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drs = (LinksDataSet.tblResponseRow[])dtResponse.Select(select);
 			Trace.Assert(drs.Length <= 1, "At most one row should be returned.");
 			if ( drs.Length == 0 )
 				return null;
 			else
-				return (byte)drs[0].Value;
+				return Convert.ToByte(drs[0].Value);
 		}
 		#endregion
 	}
@@ -261,7 +261,7 @@ namespace Nls.BaseAssembly {
 //   if ( ds == null ) throw new ArgumentNullException("ds");
 //   string select = string.Format("{0}={1} AND {2}={3}",
 //      subjectTag, ds.tblResponse.SubjectTagColumn.ColumnName,
-//      (byte)itemID, ds.tblResponse.ItemColumn.ColumnName);
+//      (Int16)itemID, ds.tblResponse.ItemColumn.ColumnName);
 //   LinksDataSet.tblResponseRow[] drsRaw = (LinksDataSet.tblResponseRow[])ds.tblResponse.Select(select);
 //   Trace.Assert(drsRaw.Length == 1, "Exactly one row should be returned.");
 //   return drsRaw[0].Value;
@@ -270,7 +270,7 @@ namespace Nls.BaseAssembly {
 //   if ( ds == null ) throw new ArgumentNullException("ds");
 //   string select = string.Format("{0}={1} AND {2}={3} AND {4}={5} AND {6}={7}",
 //      subjectTag, ds.tblResponse.SubjectTagColumn.ColumnName,
-//      (byte)itemID, ds.tblResponse.ItemColumn.ColumnName,
+//      (Int16)itemID, ds.tblResponse.ItemColumn.ColumnName,
 //      surveyYear, ds.tblResponse.SurveyYearColumn.ColumnName,
 //      (byte)surveySource, ds.tblResponse.SurveySourceColumn.ColumnName);
 //   LinksDataSet.tblResponseRow[] drsRaw = (LinksDataSet.tblResponseRow[])ds.tblResponse.Select(select);
@@ -281,7 +281,7 @@ namespace Nls.BaseAssembly {
 //   if ( ds == null ) throw new ArgumentNullException("ds");
 //   string select = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 //      subjectTag, ds.tblResponse.SubjectTagColumn.ColumnName,
-//      (byte)itemID, ds.tblResponse.ItemColumn.ColumnName,
+//      (Int16)itemID, ds.tblResponse.ItemColumn.ColumnName,
 //      surveyYear, ds.tblResponse.SurveyYearColumn.ColumnName);
 //   LinksDataSet.tblResponseRow[] drsRaw = (LinksDataSet.tblResponseRow[])ds.tblResponse.Select(select);
 //   Trace.Assert(drsRaw.Length <= maxRows, "At most, " + maxRows + " row(s) should be returned.");
@@ -291,7 +291,7 @@ namespace Nls.BaseAssembly {
 //   if ( ds == null ) throw new ArgumentNullException("ds");
 //   string select = string.Format("{0}={1} AND {2}={3}",
 //      subjectTag, ds.tblResponse.SubjectTagColumn.ColumnName,
-//      (byte)itemID, ds.tblResponse.ItemColumn.ColumnName);
+//      (Int16)itemID, ds.tblResponse.ItemColumn.ColumnName);
 //   LinksDataSet.tblResponseRow[] drsRaw = (LinksDataSet.tblResponseRow[])ds.tblResponse.Select(select);
 //   Trace.Assert(drsRaw.Length <= 1, "At most, one row should be returned.");
 //   if ( drsRaw.Length == 0 )
@@ -303,7 +303,7 @@ namespace Nls.BaseAssembly {
 //   if ( ds == null ) throw new ArgumentNullException("ds");
 //   string select = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 //      subjectTag, ds.tblResponse.SubjectTagColumn.ColumnName,
-//      (byte)itemID, ds.tblResponse.ItemColumn.ColumnName,
+//      (Int16)itemID, ds.tblResponse.ItemColumn.ColumnName,
 //      surveyYear, ds.tblResponse.SurveyYearColumn.ColumnName);
 //   LinksDataSet.tblResponseRow[] drsRaw = (LinksDataSet.tblResponseRow[])ds.tblResponse.Select(select);
 //   Trace.Assert(drsRaw.Length <= maxRows, "At most, " + maxRows + " row(s) should be returned.");
@@ -316,7 +316,7 @@ namespace Nls.BaseAssembly {
 //   if ( ds == null ) throw new ArgumentNullException("ds");
 //   string select = string.Format("{0}={1} AND {2}={3} AND {4}={5} AND {6}={7}",
 //      subjectTag, ds.tblResponse.SubjectTagColumn.ColumnName,
-//      (byte)itemID, ds.tblResponse.ItemColumn.ColumnName,
+//      (Int16)itemID, ds.tblResponse.ItemColumn.ColumnName,
 //      surveyYear, ds.tblResponse.SurveyYearColumn.ColumnName,
 //      (byte)surveySource, ds.tblResponse.SurveySourceColumn.ColumnName);
 //   LinksDataSet.tblResponseRow[] drsRaw = (LinksDataSet.tblResponseRow[])ds.tblResponse.Select(select);

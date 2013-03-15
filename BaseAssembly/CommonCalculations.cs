@@ -43,7 +43,7 @@ namespace Nls.BaseAssembly {
 			string itemIDsString = "";
 			for ( Int32 i = 0; i < items.Length; i++ ) {
 				if ( i > 0 ) itemIDsString += ",";
-				itemIDsString += (byte)items[i];
+				itemIDsString += Convert.ToInt16(items[i]);
 			}
 			Int32 distinctCount = (from item in items select item).Distinct().Count();
 			if ( distinctCount != items.Length ) throw new ArgumentException("The items should be unique, and not contain duplicates.", "items");

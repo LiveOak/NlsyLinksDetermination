@@ -39,7 +39,8 @@ namespace LinksGui {
 
 			_dsImport = ((BA.ImportDataSet)(this.FindResource("importDataSet")));
 			_dsLinks = ((BA.LinksDataSet)(this.FindResource("linksDataSet")));
-						
+
+			//			if ( Convert.ToBoolean("true") ) {
 			if ( Convert.ToBoolean("false") ) {
 				LoadExtractGen1Links();
 				LoadExtractGen1Explicit();
@@ -66,6 +67,8 @@ namespace LinksGui {
 			LoadSurveyTime();
 			LoadSurveyTimeMostRecent(); //Needed for tblRelated
 			LoadRosterGen1();
+			LoadParentsOfGen1Retro();
+			LoadParentsOfGen1Current();
 			LoadBabyDaddy();
 			LoadFatherOfGen2();
 			LoadSubjectDetails();
@@ -111,6 +114,21 @@ namespace LinksGui {
 			Trace.WriteLine(message);
 			if ( e.Source.ToString() != _combinedButtonTag ) MessageBox.Show(message);
 			//WriteXml(_dsLinks.tblRosterGen1);
+		}
+		private void btnParentsOfGen1Retro_Click ( object sender, RoutedEventArgs e ) {
+			BA.ParentsOfGen2Retro retro = new BA.ParentsOfGen2Retro(_dsLinks);
+			string message = retro.Go();
+			Trace.WriteLine(message);
+			if ( e.Source.ToString() != _combinedButtonTag ) MessageBox.Show(message);
+			//WriteXml(_dsLinks.tblParentsOfGen1Retro);
+		}
+		private void btnParentsOfGen1Current_Click ( object sender, RoutedEventArgs e ) {
+			Console.Beep(1000, 900);
+			//BA.ParentsOfGen2Current current = new BA.ParentsOfGen2Current(_dsLinks);
+			//string message = current.Go();
+			//Trace.WriteLine(message);
+			//if ( e.Source.ToString() != _combinedButtonTag ) MessageBox.Show(message);
+			////WriteXml(_dsLinks.tblParentsOfGen1Current);
 		}
 		private void btnBabyDaddy_Click ( object sender, RoutedEventArgs e ) {
 			BA.BabyDaddy babyDaddy = new BA.BabyDaddy(_dsLinks);
@@ -180,6 +198,8 @@ namespace LinksGui {
 			BulkUpdate(schemaName, _dsLinks.tblResponse, AcceptResponseChanges);
 			BulkUpdate(schemaName, _dsLinks.tblSurveyTime, LoadSurveyTime);
 			BulkUpdate(schemaName, _dsLinks.tblRosterGen1, LoadRosterGen1);
+			BulkUpdate(schemaName, _dsLinks.tblParentsOfGen1Retro, LoadRosterGen1);
+			BulkUpdate(schemaName, _dsLinks.tblParentsOfGen1Current, LoadRosterGen1);
 			BulkUpdate(schemaName, _dsLinks.tblBabyDaddy, LoadBabyDaddy);
 			BulkUpdate(schemaName, _dsLinks.tblFatherOfGen2, LoadFatherOfGen2);
 			BulkUpdate(schemaName, _dsLinks.tblSubjectDetails, LoadSubjectDetails);
@@ -324,8 +344,8 @@ namespace LinksGui {
 		private void LoadSurveyTime ( ) {
 			BA.LinksDataSetTableAdapters.tblSurveyTimeTableAdapter ta = new BA.LinksDataSetTableAdapters.tblSurveyTimeTableAdapter();
 			ta.Fill(_dsLinks.tblSurveyTime);
-			CollectionViewSource tblSurveyTimeViewSource = ((CollectionViewSource)(this.FindResource("tblSurveyTimeViewSource")));
-			tblSurveyTimeViewSource.View.MoveCurrentToFirst();
+			CollectionViewSource vs = ((CollectionViewSource)(this.FindResource("tblSurveyTimeViewSource")));
+			vs.View.MoveCurrentToFirst();
 		}
 		private void LoadSurveyTimeMostRecent ( ) {
 			BA.LinksDataSetTableAdapters.vewSurveyTimeMostRecentTableAdapter ta = new BA.LinksDataSetTableAdapters.vewSurveyTimeMostRecentTableAdapter();
@@ -334,8 +354,23 @@ namespace LinksGui {
 		private void LoadRosterGen1 ( ) {
 			BA.LinksDataSetTableAdapters.tblRosterGen1TableAdapter ta = new BA.LinksDataSetTableAdapters.tblRosterGen1TableAdapter();
 			ta.Fill(_dsLinks.tblRosterGen1);
-			CollectionViewSource tblRosterGen1ViewSource = ((CollectionViewSource)(this.FindResource("tblRosterGen1ViewSource")));
-			tblRosterGen1ViewSource.View.MoveCurrentToFirst();
+			CollectionViewSource vs = ((CollectionViewSource)(this.FindResource("tblRosterGen1ViewSource")));
+			vs.View.MoveCurrentToFirst();
+		}
+		private void LoadParentsOfGen1Retro ( ) {
+			BA.LinksDataSetTableAdapters.tblParentsOfGen1RetroTableAdapter ta = new BA.LinksDataSetTableAdapters.tblParentsOfGen1RetroTableAdapter();
+			ta.Fill(_dsLinks.tblParentsOfGen1Retro);
+			CollectionViewSource vs = ((CollectionViewSource)(this.FindResource("tblParentsOfGen1RetroViewSource")));
+			vs.View.MoveCurrentToFirst();
+		}
+		private void LoadParentsOfGen1Current ( ) {
+			Console.Beep(3000, 100);
+			Console.Beep(300, 100);
+			Console.Beep(3000, 100);
+			//BA.LinksDataSetTableAdapters.tblParentsOfGen1CurrentTableAdapter ta = new BA.LinksDataSetTableAdapters.tblParentsOfGen1CurrentTableAdapter();
+			//ta.Fill(_dsLinks.tblParentsOfGen1Current);
+			//CollectionViewSource vs = ((CollectionViewSource)(this.FindResource("tblParentsOfGen1CurrentViewSource")));
+			//vs.View.MoveCurrentToFirst();
 		}
 		private void LoadBabyDaddy ( ) {
 			BA.LinksDataSetTableAdapters.tblBabyDaddyTableAdapter ta = new BA.LinksDataSetTableAdapters.tblBabyDaddyTableAdapter();
@@ -346,32 +381,32 @@ namespace LinksGui {
 		private void LoadFatherOfGen2 ( ) {
 			BA.LinksDataSetTableAdapters.tblFatherOfGen2TableAdapter ta = new BA.LinksDataSetTableAdapters.tblFatherOfGen2TableAdapter();
 			ta.Fill(_dsLinks.tblFatherOfGen2);
-			CollectionViewSource tblFatherOfGen2ViewSource = ((CollectionViewSource)(this.FindResource("tblFatherOfGen2ViewSource")));
-			tblFatherOfGen2ViewSource.View.MoveCurrentToFirst();
+			CollectionViewSource vs = ((CollectionViewSource)(this.FindResource("tblFatherOfGen2ViewSource")));
+			vs.View.MoveCurrentToFirst();
 		}
 		private void LoadSubjectDetails ( ) {
 			BA.LinksDataSetTableAdapters.tblSubjectDetailsTableAdapter ta = new BA.LinksDataSetTableAdapters.tblSubjectDetailsTableAdapter();
 			ta.Fill(_dsLinks.tblSubjectDetails);
-			CollectionViewSource tblSubjectDetailsViewSource = ((CollectionViewSource)(this.FindResource("tblSubjectDetailsViewSource")));
-			tblSubjectDetailsViewSource.View.MoveCurrentToFirst();
+			CollectionViewSource vs = ((CollectionViewSource)(this.FindResource("tblSubjectDetailsViewSource")));
+			vs.View.MoveCurrentToFirst();
 		}
 		private void LoadMarkerGen1 ( ) {
 			BA.LinksDataSetTableAdapters.tblMarkerGen1TableAdapter ta = new BA.LinksDataSetTableAdapters.tblMarkerGen1TableAdapter();
 			ta.Fill(_dsLinks.tblMarkerGen1);
-			CollectionViewSource tblMarkerGen1ViewSource = ((CollectionViewSource)(this.FindResource("tblMarkerGen1ViewSource")));
-			tblMarkerGen1ViewSource.View.MoveCurrentToFirst();
+			CollectionViewSource vs = ((CollectionViewSource)(this.FindResource("tblMarkerGen1ViewSource")));
+			vs.View.MoveCurrentToFirst();
 		}
 		private void LoadMarkerGen2 ( ) {
 			BA.LinksDataSetTableAdapters.tblMarkerGen2TableAdapter ta = new BA.LinksDataSetTableAdapters.tblMarkerGen2TableAdapter();
 			ta.Fill(_dsLinks.tblMarkerGen2);
-			CollectionViewSource tblMarkerGen2ViewSource = ((CollectionViewSource)(this.FindResource("tblMarkerGen2ViewSource")));
-			tblMarkerGen2ViewSource.View.MoveCurrentToFirst();
+			CollectionViewSource vs = ((CollectionViewSource)(this.FindResource("tblMarkerGen2ViewSource")));
+			vs.View.MoveCurrentToFirst();
 		}
 		private void LoadRelatedValues ( ) {
 			BA.LinksDataSetTableAdapters.tblRelatedValuesTableAdapter ta = new BA.LinksDataSetTableAdapters.tblRelatedValuesTableAdapter();
 			ta.Fill(_dsLinks.tblRelatedValues);
-			CollectionViewSource tblRelatedValuesViewSource = ((CollectionViewSource)(this.FindResource("tblRelatedValuesViewSource")));
-			tblRelatedValuesViewSource.View.MoveCurrentToFirst();
+			CollectionViewSource vs = ((CollectionViewSource)(this.FindResource("tblRelatedValuesViewSource")));
+			vs.View.MoveCurrentToFirst();
 		}
 		private void LoadOutcomes ( ) {
 			BA.LinksDataSetTableAdapters.tblOutcomesTableAdapter ta = new BA.LinksDataSetTableAdapters.tblOutcomesTableAdapter();
@@ -411,8 +446,8 @@ namespace LinksGui {
 			sw.Stop();
 			string message = string.Format("Elapsed time for btnCombine1 operations: {0}", sw.Elapsed.ToString());
 			btnUpdateAllTables_Click(sender, e);
-				Trace.WriteLine(message);
-			MessageBox.Show(message);			
+			Trace.WriteLine(message);
+			MessageBox.Show(message);
 		}
 		private void btnCombine2_Click ( object sender, RoutedEventArgs e ) {
 			BA.LinksDataSetTableAdapters.vewSurveyTimeMostRecentTableAdapter taSurveyTimeRecent = new BA.LinksDataSetTableAdapters.vewSurveyTimeMostRecentTableAdapter();
@@ -422,9 +457,11 @@ namespace LinksGui {
 			taSurveyTimeRecent.Fill(_dsLinks.vewSurveyTimeMostRecent);
 
 			btnRosterGen1_Click(sender, e);
+			btnParentsOfGen1Retro_Click(sender, e);
+			btnParentsOfGen1Current_Click(sender, e);
 			btnBabyDaddy_Click(sender, e);
 			btnFatherOfGen2_Click(sender, e);
-			btnSubjectDetails_Click(sender, e);
+			//btnSubjectDetails_Click(sender, e);
 			btnMarkerGen1_Click(sender, e);
 			btnMarkerGen2_Click(sender, e);
 			btnRelatedValues_Click(sender, e);
@@ -437,5 +474,6 @@ namespace LinksGui {
 			Trace.WriteLine(message);
 			MessageBox.Show(message);
 		}
+
 	}
 }

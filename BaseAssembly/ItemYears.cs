@@ -8,6 +8,12 @@ namespace Nls.BaseAssembly {
 
 		public readonly static Int16[] Gen1ShareBiomom = { 2006, 2010 };
 		public readonly static Int16[] Gen1ShareBiodad = { 2006, 2010 };
+		public readonly static Int16[] Gen1BiomomInHH = { 1988 };
+		public readonly static Int16[] Gen1BiodadInHH = Gen1BiomomInHH;
+		
+		
+		
+		
 		public readonly static Int16[] Gen2ShareBiodad = { 2006, 2008, 2010 };
 
 		public readonly static Int16[] FatherAsthmaGen2 = { 2004, 2006, 2008 };
