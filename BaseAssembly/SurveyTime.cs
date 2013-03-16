@@ -230,10 +230,9 @@ namespace Nls.BaseAssembly {
 			if ( dsLinks == null ) throw new ArgumentNullException("dsLinks");
 			if ( dsLinks.tblSurveyTime.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblSurveyTime.");
 
-			string select = string.Format("{0}={1} AND {2}={3} AND {4}>0",
+			string select = string.Format("{0}={1} AND {2}={3}", // AND {4}>0",
 				subjectTag, dsLinks.tblSurveyTime.SubjectTagColumn.ColumnName,
-				surveyYear, dsLinks.tblSurveyTime.SurveyYearColumn.ColumnName,
-				dsLinks.tblSurveyTime.SurveySourceColumn.ColumnName);
+				surveyYear, dsLinks.tblSurveyTime.SurveyYearColumn.ColumnName); //dsLinks.tblSurveyTime.SurveySourceColumn.ColumnName
 			LinksDataSet.tblSurveyTimeRow[] drs = (LinksDataSet.tblSurveyTimeRow[])dsLinks.tblSurveyTime.Select(select);
 			Trace.Assert(drs.Length == 1, "There should be exactly one row returned.");
 			

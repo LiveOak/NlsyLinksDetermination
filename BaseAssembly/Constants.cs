@@ -52,6 +52,12 @@ namespace Nls.BaseAssembly {
 		//WRONG public const Int32 CousinCountMax = 16//ExtendedID 8693
 		public const Int32 SurveyTimeCount =580560;//429718 in 2008;
 		#endregion
+		#region Parents Of Gen1 
+		public const Int16 Gen1BioparentBirthYearReportedMin = 1900;
+		public const Int16 Gen1BioparentBirthYearReportedMax = 1966;
+		public const Int16 Gen1BioparentBirthYearEsimatedMin = 1891;
+		public const Int16 Gen1BioparentBirthYearEsimatedMax = 1966;
+		#endregion
 		#region Survey Details
 		public const Int16 Gen1MobSurveyYearPreferred = 1981;
 		public const Int16 Gen1MobSurveyYearBackup = 1979;//See http://www.nlsinfo.org/nlsy79/docs/79html/79text/age.htm

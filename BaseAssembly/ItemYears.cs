@@ -15,6 +15,10 @@ namespace Nls.BaseAssembly {
 		public const Int16 Gen1BioparentUSBorn = 1979; //And also the Gen1's biodad's dad.
 		public const Int16 Gen1BioparentAlive = 0; //It's an XRND.
 		public const Int16 Gen1BioparentDeathAge = 0; //It's an XRND.
+		public const Int16 Gen1BioparentDeathCause = 0; //It's an XRND.
+		public readonly static Int16[] Gen1BioparentBirthYear =  { 1987, 1988 };
+		//public readonly static Int16[] Gen1BioparentBirthMonth = ItemYears.Gen1BioparentBirthYear;
+		public readonly static Int16[] Gen1BioparentAge = ItemYears.Gen1BioparentBirthYear;
 		
 		
 		
