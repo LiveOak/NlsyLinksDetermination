@@ -1561,17 +1561,20 @@
 			<TabItem Header="G1RentsCurrent" Name="tabGen1ParentsCurrent" >
 				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tblParentsOfGen1CurrentViewSource}}" Name="tblParentsOfGen1CurrentDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
 					<DataGrid.Columns>
-						<DataGridTextColumn x:Name="iDColumn13" Binding="{Binding Path=ID}" Header="ID" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="iDColumn13" Binding="{Binding Path=ID}" Header="ID" IsReadOnly="True" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="subjectTagColumn8" Binding="{Binding Path=SubjectTag}" Header="Subject Tag" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="surveyYearColumn8" Binding="{Binding Path=SurveyYear}" Header="Survey Year" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="biodadInHHColumn3" Binding="{Binding Path=BiodadInHH}" Header="Biodad In HH" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="bioparentsYearLastAskedColumn" Binding="{Binding Path=BioparentsYearLastAsked}" Header="Bioparents Year Last Asked" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biodadAliveColumn2" Binding="{Binding Path=BiodadAlive}" Header="Biodad Alive" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="biodadDistanceFromHHColumn2" Binding="{Binding Path=BiodadDistanceFromHH}" Header="Biodad Distance From HH" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="biodadAsthmaColumn2" Binding="{Binding Path=BiodadAsthma}" Header="Biodad Asthma" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="biomomInHHColumn1" Binding="{Binding Path=BiomomInHH}" Header="Biomom In HH" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biodadDeathCauseColumn" Binding="{Binding Path=BiodadDeathCause}" Header="Biodad Death Cause" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biodadDeathAgeColumn" Binding="{Binding Path=BiodadDeathAge}" Header="Biodad Death Age" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biodadUSBornColumn" Binding="{Binding Path=BiodadUSBorn}" Header="Biodad USBorn" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biodadHighestGradeColumn" Binding="{Binding Path=BiodadHighestGrade}" Header="Biodad Highest Grade" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biograndfatherUSBornColumn" Binding="{Binding Path=BiograndfatherUSBorn}" Header="Biograndfather USBorn" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biomomAliveColumn" Binding="{Binding Path=BiomomAlive}" Header="Biomom Alive" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="biomomDistanceFromHHColumn" Binding="{Binding Path=BiomomDistanceFromHH}" Header="Biomom Distance From HH" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="biomomAsthmaColumn" Binding="{Binding Path=BiomomAsthma}" Header="Biomom Asthma" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biomomDeathCauseColumn" Binding="{Binding Path=BiomomDeathCause}" Header="Biomom Death Cause" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biomomDeathAgeColumn" Binding="{Binding Path=BiomomDeathAge}" Header="Biomom Death Age" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biomomUSBornColumn" Binding="{Binding Path=BiomomUSBorn}" Header="Biomom USBorn" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biomomHighestGradeColumn" Binding="{Binding Path=BiomomHighestGrade}" Header="Biomom Highest Grade" Width="SizeToHeader" />
 					</DataGrid.Columns>
 				</DataGrid>
 			</TabItem>

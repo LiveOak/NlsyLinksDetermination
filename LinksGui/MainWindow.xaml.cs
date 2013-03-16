@@ -79,7 +79,9 @@ namespace LinksGui {
 			sw.Stop();
 			string message = string.Format("DataSets loaded (Elapsed time: {0})", sw.Elapsed.ToString());
 			Trace.WriteLine(message);
-			Console.Beep(1000, 900);
+			Console.Beep(3000, 100);
+			Console.Beep(300, 100);
+			Console.Beep(3000, 100);
 		}
 		#region Fill & Update
 		private void btnSubject_Click ( object sender, RoutedEventArgs e ) {
@@ -364,13 +366,10 @@ namespace LinksGui {
 			vs.View.MoveCurrentToFirst();
 		}
 		private void LoadParentsOfGen1Current ( ) {
-			Console.Beep(3000, 100);
-			Console.Beep(300, 100);
-			Console.Beep(3000, 100);
-			//BA.LinksDataSetTableAdapters.tblParentsOfGen1CurrentTableAdapter ta = new BA.LinksDataSetTableAdapters.tblParentsOfGen1CurrentTableAdapter();
-			//ta.Fill(_dsLinks.tblParentsOfGen1Current);
-			//CollectionViewSource vs = ((CollectionViewSource)(this.FindResource("tblParentsOfGen1CurrentViewSource")));
-			//vs.View.MoveCurrentToFirst();
+			BA.LinksDataSetTableAdapters.tblParentsOfGen1CurrentTableAdapter ta = new BA.LinksDataSetTableAdapters.tblParentsOfGen1CurrentTableAdapter();
+			ta.Fill(_dsLinks.tblParentsOfGen1Current);
+			CollectionViewSource vs = ((CollectionViewSource)(this.FindResource("tblParentsOfGen1CurrentViewSource")));
+			vs.View.MoveCurrentToFirst();
 		}
 		private void LoadBabyDaddy ( ) {
 			BA.LinksDataSetTableAdapters.tblBabyDaddyTableAdapter ta = new BA.LinksDataSetTableAdapters.tblBabyDaddyTableAdapter();

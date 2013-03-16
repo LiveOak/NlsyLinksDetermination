@@ -19,6 +19,20 @@ namespace Nls.BaseAssembly {
 			Yes = 1,
 			NotSure = 2,
 		}
+		public enum BioparentOfGen1DeathCause : short { //eg, H00137.00
+			//NonInterview = -5,
+			//ValidSkip = -4,
+			//InvalidSkip = -3,
+			//DoNotKnow = -2,
+			//Refusal = -1,
+			NoValue=0,
+			MIOrStroke = 1,
+			Accident= 2,
+			Cancer= 3,
+			OldAge= 4,
+			Emphysema= 5,
+			Other= 6,
+		}
 		public enum BioparentOfGen1InHH : short { //eg, R28372.00
 			NonInterview = -5,
 			ValidSkip = -4,

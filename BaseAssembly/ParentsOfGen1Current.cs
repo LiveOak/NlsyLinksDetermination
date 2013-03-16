@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Nls.BaseAssembly.EnumResponsesGen1;
+
 namespace Nls.BaseAssembly {
 	public sealed class ParentsOfGen1Current {
 		#region Fields
@@ -15,12 +17,12 @@ namespace Nls.BaseAssembly {
 		#endregion
 		#region Constructor
 		public ParentsOfGen1Current ( LinksDataSet ds ) {
-		   if ( ds == null ) throw new ArgumentNullException("ds");
-		   if ( ds.tblResponse.Count <= 0 ) throw new InvalidOperationException("tblResponse must NOT be empty.");
+			if ( ds == null ) throw new ArgumentNullException("ds");
+			if ( ds.tblResponse.Count <= 0 ) throw new InvalidOperationException("tblResponse must NOT be empty.");
 			if ( ds.tblParentsOfGen1Current.Count != 0 ) throw new InvalidOperationException("tblParentsOfGen1Current must be empty before creating rows for it.");
-		   _ds = ds;
+			_ds = ds;
 
-		   _itemIDsString = CommonCalculations.ConvertItemsToString(_items);
+			_itemIDsString = CommonCalculations.ConvertItemsToString(_items);
 		}
 		#endregion
 		#region Public Methods
@@ -51,7 +53,7 @@ namespace Nls.BaseAssembly {
 		#endregion
 		#region Private Methods
 		private Int32 ProcessSubjectGen1 ( LinksDataSet.tblSubjectRow drSubject, LinksDataSet.tblResponseDataTable dtExtendedResponse ) {
-			throw new NotImplementedException();
+			//throw new NotImplementedException();
 			Int32 subjectTag = drSubject.SubjectTag;
 
 			//   foreach ( Int16 surveyYear in ItemYears.Gen1BiomomInHH ) {
@@ -61,28 +63,28 @@ namespace Nls.BaseAssembly {
 
 
 
-			Int16 biodadAliveLastAsked;
-			YesNo biodadAlive;
-			byte biodadDeathCause;
-			byte biodadDeathAge;
-			byte biodadBirthCountry;
-			byte biodadHighestGrade;
-			byte biograndfatherBirthCountry;
+			Int16 bioparentsYearLastAsked = Int16.MinValue;
+			YesNo biodadAlive = YesNo.Refusal;
+			BioparentOfGen1DeathCause biodadDeathCause = BioparentOfGen1DeathCause.NoValue;
+			byte? biodadDeathAge=null;
+			YesNo biodadUSBorn = YesNo.Refusal;
+			byte? biodadHighestGrade = null;
+			YesNo biograndfatherUSBorn = YesNo.Refusal;
 
-			Int16 biomomAliveLastAsked;
-			YesNo biomomAlive;
-			byte biomomDeathCause;
-			byte biomomDeathAge;
-			byte biomomBirthCountry;
-			byte biomomHighestGrade;
+			YesNo biomomAlive = YesNo.Refusal;
+			BioparentOfGen1DeathCause biomomDeathCause = BioparentOfGen1DeathCause.NoValue;
+			byte? biomomDeathAge = null;
+			YesNo biomomUSBorn = YesNo.Refusal;
+			byte? biomomHighestGrade = null;
 
-			AddRow(subjectTag, biodadAliveLastAsked, biodadAlive, biodadDeathCause, biodadDeathAge, biodadBirthCountry, biodadHighestGrade, biograndfatherBirthCountry,
-				biomomAliveLastAsked, biomomAlive, biomomDeathCause, biomomDeathAge, biomomBirthCountry, biomomHighestGrade);
-			
-			const Int32 recordsAdded = 0;
+			AddRow(subjectTag, bioparentsYearLastAsked,
+				biodadAlive, biodadDeathCause, biodadDeathAge, biodadUSBorn, biodadHighestGrade, biograndfatherUSBorn,
+				biomomAlive, biomomDeathCause, biomomDeathAge, biomomUSBorn, biomomHighestGrade);
+
+			const Int32 recordsAdded = 1;
 			return recordsAdded;
 		}
-		//private static YesNo DetermineBiodadInHH ( Item item, Int16 surveyYear, Int32 subjectTag, byte loopIndex, LinksDataSet.tblResponseDataTable dtExtended ) {
+		//private static YesNo DetermineHighest Graph( Item item, Int16 surveyYear, Int32 subjectTag, byte loopIndex, LinksDataSet.tblResponseDataTable dtExtended ) {
 		//   Int32? response = Retrieve.ResponseNullPossible(surveyYear, item, subjectTag, loopIndex, dtExtended);
 		//   if ( !response.HasValue )
 		//      return YesNo.ValidSkipOrNoInterviewOrNotInSurvey;
@@ -102,26 +104,56 @@ namespace Nls.BaseAssembly {
 		//      default: throw new InvalidOperationException("The response " + codedResponse + " was not recognized.");
 		//   }
 		//}
-		private void AddRow ( Int32 subjectTag, Int16 biodadAliveLastAsked, YesNo biodadAlive, byte biodadDeathCause, byte biodadDeathAge, byte biodadBirthCountry, byte biodadHighestGrade, byte biograndfatherBirthCountry,
-			Int16 biomomAliveLastAsked, YesNo biomomAlive, byte biomomDeathCause, byte biomomDeathAge, byte biomomBirthCountry, byte biomomHighestGrade ) {
+
+		//private static YesNo DetermineBiodadInHH ( Item item, Int16 surveyYear, Int32 subjectTag, byte loopIndex, LinksDataSet.tblResponseDataTable dtExtended ) {
+		//   Int32? response = Retrieve.ResponseNullPossible(surveyYear, item, subjectTag, loopIndex, dtExtended);
+		//   if ( !response.HasValue )
+		//      return YesNo.ValidSkipOrNoInterviewOrNotInSurvey;
+		//   EnumResponsesGen1.BioparentOfGen1InHH codedResponse = (EnumResponsesGen1.BioparentOfGen1InHH)response.Value;
+		//   switch ( codedResponse ) {
+		//      case EnumResponsesGen1.BioparentOfGen1InHH.NonInterview:
+		//      case EnumResponsesGen1.BioparentOfGen1InHH.ValidSkip:
+		//      case EnumResponsesGen1.BioparentOfGen1InHH.InvalidSkip:
+		//      case EnumResponsesGen1.BioparentOfGen1InHH.DoNotKnow:
+		//      case EnumResponsesGen1.BioparentOfGen1InHH.Refusal:
+		//         return YesNo.ValidSkipOrNoInterviewOrNotInSurvey;
+		//      case EnumResponsesGen1.BioparentOfGen1InHH.No:
+		//         return YesNo.No;
+		//      case EnumResponsesGen1.BioparentOfGen1InHH.Yes:
+		//         return YesNo.Yes;
+		//      default: throw new InvalidOperationException("The response " + codedResponse + " was not recognized.");
+		//   }
+		//}
+		private void AddRow ( Int32 subjectTag, Int16 bioparentsYearLastAsked,
+			YesNo biodadAlive, BioparentOfGen1DeathCause biodadDeathCause, byte? biodadDeathAge, YesNo biodadUSBorn, byte? biodadHighestGrade, YesNo biograndfatherUSBorn,
+			YesNo biomomAlive, BioparentOfGen1DeathCause biomomDeathCause, byte? biomomDeathAge, YesNo biomomUSBorn, byte? biomomHighestGrade ) {
 
 			//lock ( _ds.tblFatherOfGen2 ) {
 			LinksDataSet.tblParentsOfGen1CurrentRow drNew = _ds.tblParentsOfGen1Current.NewtblParentsOfGen1CurrentRow();
 			drNew.SubjectTag = subjectTag;
-			drNew.BiodadAliveLastAsked = Convert.ToInt16(biodadAliveLastAsked);
+			drNew.BioparentsYearLastAsked = Convert.ToInt16(bioparentsYearLastAsked);
 			drNew.BiodadAlive = Convert.ToInt16(biodadAlive);
-			drNew.BiodadDeathCause = biodadDeathCause;
-			drNew.BiodadDeathAge = biodadDeathAge;
-			drNew.BiodadBirthCountry = biodadBirthCountry;
-			drNew.BiodadHighestGrade = biodadHighestGrade;
-			drNew.BiograndfatherBirthCountry = biograndfatherBirthCountry;
+			drNew.BiodadDeathCause = Convert.ToByte(biodadDeathCause);
 
-			drNew.BiomomAliveLastAsked = Convert.ToInt16(biomomAliveLastAsked);
+			if ( biodadDeathAge.HasValue ) drNew.BiodadDeathAge = biodadDeathAge.Value;
+			else drNew.SetBiodadDeathAgeNull();
+
+			drNew.BiodadUSBorn = Convert.ToInt16(biodadUSBorn);
+
+			if(biodadHighestGrade.HasValue) drNew.BiodadHighestGrade = biodadHighestGrade.Value;
+			drNew.SetBiodadHighestGradeNull();
+
+			drNew.BiograndfatherUSBorn = Convert.ToInt16(biograndfatherUSBorn);
+
 			drNew.BiomomAlive = Convert.ToInt16(biomomAlive);
-			drNew.BiomomDeathCause = biomomDeathCause;
-			drNew.BiomomDeathAge = biomomDeathAge;
-			drNew.BiomomBirthCountry = biomomBirthCountry;
-			drNew.BiomomHighestGrade = biomomHighestGrade;
+			drNew.BiomomDeathCause = Convert.ToByte(biomomDeathCause);
+			
+			if(biomomDeathAge.HasValue) drNew.BiomomDeathAge = biomomDeathAge.Value;
+			drNew.SetBiomomDeathAgeNull();
+ 
+			drNew.BiomomUSBorn = Convert.ToInt16(biomomUSBorn);
+			if(biomomHighestGrade.HasValue) drNew.BiomomHighestGrade = biomomHighestGrade.Value;
+			drNew.SetBiomomHighestGradeNull();
 
 			_ds.tblParentsOfGen1Current.AddtblParentsOfGen1CurrentRow(drNew);
 			//}
