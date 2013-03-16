@@ -2,7 +2,8 @@ require(RODBC)
 rm(list=ls(all=TRUE))
 
 channel <- odbcConnect("BeeNlsLinks")
-ds <- sqlQuery(channel, paste("SELECT * FROM Process.tblItem", sep=""))
+#ds <- sqlQuery(channel, paste("SELECT * FROM Process.tblItem", sep=""))
+ds <- sqlQuery(channel, paste("SELECT * FROM Process.tblLUMarkerType", sep=""))
 odbcClose(channel)
 ds
 summary(ds)

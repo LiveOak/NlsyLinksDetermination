@@ -16,6 +16,12 @@ namespace Nls.BaseAssembly {
 		Gen2CFatherAlive = 17,
 		Gen2CFatherInHH = 18,
 		Gen2CFatherDistanceFromHH = 19,
+		Gen1BiodadInHH = 30,
+		Gen1BiodadDeathAge = 31,
+		Gen1BiodadBirthYear = 32,
+		Gen1BiomomInHH = 40,
+		Gen1BiomomDeathAge = 41,
+		Gen1BiomomBirthYear = 42,  
 	}
 	public enum Item : short {
 		IDOfOther1979RosterGen1 = 1,

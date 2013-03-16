@@ -29,3 +29,12 @@ table(ds$H0013600, ds$H0013800)
 table(ds$H0014700, ds$H0014800) 
 table(ds$H0014700, ds$H0014900)
 
+table(ds$H0001600, ds$H0002400) 
+
+table(ds[ds$R2303200>70, 'R2505400']) #Father's age
+table(ds[ds$R2303200>70, 'R2303200']) #Father's age
+
+#table(ds[ds$R2303600>70, 'R2505800']) #Mother's age
+table(ds[ds$R2303600>70, 'R2303600']) #Mother's age
+
+table(ds$R2302900, ds$R2303100)

@@ -109,15 +109,27 @@ namespace Nls.BaseAssembly {
 			return recordsAdded;
 		}
 
-		private static Gen1BioparentDeathCause DetermineBioparentDeathCause ( Item item, byte loopIndex, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
-			const Int16 surveyYear = ItemYears.Gen1BioparentDeathCause;
+		private static Int16? DetermineBioparentBirthYearReported ( Item itemBirthYear, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
+			Int16[] surveyYears = ItemYears.Gen1BioparentBirthYear;
+			Trace.Assert(surveyYears.Length == 2, "This function only works if the item exists in only two survey waves.");
 
-			Int32? response = Retrieve.ResponseNullPossible(surveyYear: surveyYear, itemID: item, subjectTag: subjectTag, loopIndex: loopIndex, dt: dtExtended);
+			Int32? birthYear2 = Retrieve.ResponseNullPossible(surveyYears[1], itemBirthYear, subjectTag, dtExtended);
+			Int32? birthYear1 = Retrieve.ResponseNullPossible(surveyYears[0], itemBirthYear, subjectTag, dtExtended);
 
-			if ( !response.HasValue || response.Value < 0 )
-				return Gen1BioparentDeathCause.ValidSkipOrNoInterviewOrNotInSurvey;
-			else
-				return (EnumResponsesGen1.Gen1BioparentDeathCause)response.Value;
+			Int32? result = null;
+			if ( birthYear2.HasValue && birthYear2.Value >= 0 )
+				result = 1900 + birthYear2.Value;
+			else if ( birthYear1.HasValue && birthYear1.Value >= 0 )
+				result = 1900 + birthYear1.Value;
+
+
+			if ( result.HasValue ) {
+				Trace.Assert(Constants.Gen1BioparentBirthYearReportedMin <= result.Value && result.Value <= Constants.Gen1BioparentBirthYearReportedMax, "The birth year of the Gen1Parent should be within the allowed bounds.");
+				return Convert.ToInt16(result.Value);
+			}
+			else {
+				return null;
+			}
 		}
 		private static Int16? DetermineBioparentBirthYearEstimated ( Item itemBirthYear, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended, LinksDataSet ds ) {
 			Int16[] surveyYears = ItemYears.Gen1BioparentAge;
@@ -147,56 +159,6 @@ namespace Nls.BaseAssembly {
 				return null;
 			}
 		}
-		private static Int16? DetermineBioparentBirthYearReported ( Item itemBirthYear, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
-			Int16[] surveyYears = ItemYears.Gen1BioparentBirthYear;
-			Trace.Assert(surveyYears.Length == 2, "This function only works if the item exists in only two survey waves.");
-
-			Int32? birthYear2 = Retrieve.ResponseNullPossible(surveyYears[1], itemBirthYear, subjectTag, dtExtended);
-			Int32? birthYear1 = Retrieve.ResponseNullPossible(surveyYears[0], itemBirthYear, subjectTag, dtExtended);
-
-			Int32? result = null;
-			if ( birthYear2.HasValue && birthYear2.Value >= 0 )
-				result = 1900 + birthYear2.Value;
-			else if ( birthYear1.HasValue && birthYear1.Value >= 0 )
-				result = 1900 + birthYear1.Value;
-
-
-			if ( result.HasValue ) {
-				Trace.Assert(Constants.Gen1BioparentBirthYearReportedMin <= result.Value && result.Value <= Constants.Gen1BioparentBirthYearReportedMax, "The birth year of the Gen1Parent should be within the allowed bounds.");
-				return Convert.ToInt16(result.Value);
-			}
-			else {
-				return null;
-			}
-		}
-		private static byte? DetermineBioparentDeathAge ( Item item, byte loopIndex, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
-			const Int16 surveyYear = ItemYears.Gen1BioparentDeathAge;
-			Int32? response = Retrieve.ResponseNullPossible(surveyYear: surveyYear, itemID: item, subjectTag: subjectTag, loopIndex: loopIndex, dt: dtExtended);
-			if ( !response.HasValue )
-				return null;
-			else if ( response.Value < 0 )
-				return null;
-			else
-				return Convert.ToByte(response);
-		}
-		private static YesNo DetermineBioparentAlive ( Item item, byte loopIndex, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
-			const Int16 surveyYear = ItemYears.Gen1BioparentAlive;
-			Int32? response = Retrieve.Response(surveyYear: surveyYear, itemID: item, subjectTag: subjectTag, maxRows: 1, loopIndex: loopIndex, dt: dtExtended);
-
-			EnumResponsesGen1.Gen1BioparentAlive codedResponse = (EnumResponsesGen1.Gen1BioparentAlive)response.Value;
-			switch ( codedResponse ) {
-				case EnumResponsesGen1.Gen1BioparentAlive.ValidSkip:
-				case EnumResponsesGen1.Gen1BioparentAlive.DoNotKnow:
-				case EnumResponsesGen1.Gen1BioparentAlive.Refusal:
-					return YesNo.ValidSkipOrNoInterviewOrNotInSurvey;
-				case EnumResponsesGen1.Gen1BioparentAlive.No:
-					return YesNo.No;
-				case EnumResponsesGen1.Gen1BioparentAlive.Yes:
-					return YesNo.Yes;
-				default: throw new InvalidOperationException("The response " + codedResponse + " was not recognized.");
-			}
-		}
-		//The questions about their parent's death are asked in the Health-40, (as in 40 years old) and Health-50 module.
 		private static byte? DetermineLastHealthModuleIndex ( Item item, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
 			const Int16 surveyYear = ItemYears.Gen1BioparentAlive;
 
@@ -215,6 +177,44 @@ namespace Nls.BaseAssembly {
 				return maxLoopIndex;
 			}
 		}
+		private static YesNo DetermineBioparentAlive ( Item item, byte loopIndex, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
+			const Int16 surveyYear = ItemYears.Gen1BioparentAlive;
+			Int32? response = Retrieve.Response(surveyYear: surveyYear, itemID: item, subjectTag: subjectTag, maxRows: 1, loopIndex: loopIndex, dt: dtExtended);
+
+			EnumResponsesGen1.Gen1BioparentAlive codedResponse = (EnumResponsesGen1.Gen1BioparentAlive)response.Value;
+			switch ( codedResponse ) {
+				case EnumResponsesGen1.Gen1BioparentAlive.ValidSkip:
+				case EnumResponsesGen1.Gen1BioparentAlive.DoNotKnow:
+				case EnumResponsesGen1.Gen1BioparentAlive.Refusal:
+					return YesNo.ValidSkipOrNoInterviewOrNotInSurvey;
+				case EnumResponsesGen1.Gen1BioparentAlive.No:
+					return YesNo.No;
+				case EnumResponsesGen1.Gen1BioparentAlive.Yes:
+					return YesNo.Yes;
+				default: throw new InvalidOperationException("The response " + codedResponse + " was not recognized.");
+			}
+		}
+		private static byte? DetermineBioparentDeathAge ( Item item, byte loopIndex, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
+			const Int16 surveyYear = ItemYears.Gen1BioparentDeathAge;
+			Int32? response = Retrieve.ResponseNullPossible(surveyYear: surveyYear, itemID: item, subjectTag: subjectTag, loopIndex: loopIndex, dt: dtExtended);
+			if ( !response.HasValue )
+				return null;
+			else if ( response.Value < 0 )
+				return null;
+			else
+				return Convert.ToByte(response);
+		}
+		private static Gen1BioparentDeathCause DetermineBioparentDeathCause ( Item item, byte loopIndex, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
+			const Int16 surveyYear = ItemYears.Gen1BioparentDeathCause;
+
+			Int32? response = Retrieve.ResponseNullPossible(surveyYear: surveyYear, itemID: item, subjectTag: subjectTag, loopIndex: loopIndex, dt: dtExtended);
+
+			if ( !response.HasValue || response.Value < 0 )
+				return Gen1BioparentDeathCause.ValidSkipOrNoInterviewOrNotInSurvey;
+			else
+				return (EnumResponsesGen1.Gen1BioparentDeathCause)response.Value;
+		}
+		//The questions about their parent's death are asked in the Health-40, (as in 40 years old) and Health-50 module.
 		private static YesNo DetermineUSBorn ( Item item, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
 			const Int16 surveyYear = ItemYears.Gen1BioparentUSBorn;
 
@@ -298,11 +298,6 @@ namespace Nls.BaseAssembly {
 
 			if ( biomomHighestGrade.HasValue ) drNew.BiomomHighestGrade = biomomHighestGrade.Value;
 			else drNew.SetBiomomHighestGradeNull();
-
-			//if ( drNew.BiomomAlive < 0 ) {
-			//   Console.Beep();
-			//}
-
 
 			_ds.tblParentsOfGen1Current.AddtblParentsOfGen1CurrentRow(drNew);
 			//}
