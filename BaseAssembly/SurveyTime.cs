@@ -42,7 +42,7 @@ namespace Nls.BaseAssembly {
 			_ds.tblSurveyTime.BeginLoadData();
 			ParallelOptions options = new ParallelOptions();
 			options.MaxDegreeOfParallelism = -1;
-			Parallel.ForEach(_ds.tblSubject,options, ( drSubject ) => {
+			Parallel.ForEach(_ds.tblSubject, options, ( drSubject ) => {
 				//foreach ( LinksDataSet.tblSubjectRow drSubject in _ds.tblSubject ) {//Elapsed time: 00:01:07.4203198
 				//if ( recordsAddedTotal < 100 ) {
 				Int32 recordsAddedForLoop = ProcessSubject(drSubject);
@@ -141,7 +141,7 @@ namespace Nls.BaseAssembly {
 			return ageSelfReportYears;
 		}
 		private static float? CalculateAge ( DateTime? interviewDate, DateTime? mob ) {
-			if ( !mob.HasValue)
+			if ( !mob.HasValue )
 				return null;
 
 			float ageInYears = (float)(interviewDate.Value.Subtract(mob.Value).TotalDays / Constants.DaysPerYear);
@@ -225,6 +225,26 @@ namespace Nls.BaseAssembly {
 				ss[i] = new SubjectSurvey(drs[i].SurveyYear, (SurveySource)drs[i].SurveySource);
 			}
 			return ss;
+		}
+		public static DateTime? RetrieveSubjectSurveyDate ( Int32 subjectTag, Int16 surveyYear, LinksDataSet dsLinks ) {
+			if ( dsLinks == null ) throw new ArgumentNullException("dsLinks");
+			if ( dsLinks.tblSurveyTime.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblSurveyTime.");
+
+			string select = string.Format("{0}={1} AND {2}={3} AND {4}>0",
+				subjectTag, dsLinks.tblSurveyTime.SubjectTagColumn.ColumnName,
+				surveyYear, dsLinks.tblSurveyTime.SurveyYearColumn.ColumnName,
+				dsLinks.tblSurveyTime.SurveySourceColumn.ColumnName);
+			LinksDataSet.tblSurveyTimeRow[] drs = (LinksDataSet.tblSurveyTimeRow[])dsLinks.tblSurveyTime.Select(select);
+			Trace.Assert(drs.Length == 1, "There should be exactly one row returned.");
+			
+			if( drs[0].IsSurveyDateNull() ) {
+				Trace.Assert(drs[0].SurveySource == 0, "If the Survey Date is null, the Survey Source should be zero.");
+				return null;
+			}
+			else {
+				Trace.Assert(drs[0].SurveySource > 0, "If the Survey Date is not null, the Survey Source should be nonzero.");
+				return drs[0].SurveyDate;
+			}
 		}
 		public static SurveySource DetermineSurveySource ( Int16 surveyYear, SubjectSurvey[] subjectSurveys ) {
 			IEnumerable<SurveySource> sources = from ss in subjectSurveys

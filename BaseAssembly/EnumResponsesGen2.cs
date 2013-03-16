@@ -2,6 +2,13 @@
 
 namespace Nls.BaseAssembly {
 	namespace EnumResponsesGen2 {
+		public enum TypicalItem : int {
+			Missing = -7,
+			ValidSkip = -4,
+			InvalidSkip = -3,
+			DoNotKnow = -2,
+			Refusal = -1,
+		}
 		public enum ShareBiodadGen2 : int {
 			Missing = -7,
 			DoNotKnow = -2,

@@ -1563,6 +1563,20 @@
 					<DataGrid.Columns>
 						<DataGridTextColumn x:Name="iDColumn13" Binding="{Binding Path=ID}" Header="ID" IsReadOnly="True" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="subjectTagColumn8" Binding="{Binding Path=SubjectTag}" Header="Subject Tag" Width="SizeToHeader" />
+						<DataGridTemplateColumn x:Name="biodadMobReportedColumn" Header="Biodad Mob Reported" Width="SizeToHeader">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<DatePicker SelectedDate="{Binding Path=BiodadMobReported, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn x:Name="biodadMobCalculatedColumn" Header="Biodad Mob Calculated" Width="SizeToHeader">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<DatePicker SelectedDate="{Binding Path=BiodadMobCalculated, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
 						<DataGridTextColumn x:Name="biodadYearLastAskedColumn" Binding="{Binding Path=BiodadYearLastAsked}" Header="Biodad Year Last Asked" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biodadAliveColumn2" Binding="{Binding Path=BiodadAlive}" Header="Biodad Alive" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biodadDeathCauseColumn" Binding="{Binding Path=BiodadDeathCause}" Header="Biodad Death Cause" Width="SizeToHeader" />
@@ -1570,6 +1584,20 @@
 						<DataGridTextColumn x:Name="biodadUSBornColumn" Binding="{Binding Path=BiodadUSBorn}" Header="Biodad USBorn" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biodadHighestGradeColumn" Binding="{Binding Path=BiodadHighestGrade}" Header="Biodad Highest Grade" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biograndfatherUSBornColumn" Binding="{Binding Path=BiograndfatherUSBorn}" Header="Biograndfather USBorn" Width="SizeToHeader" />
+						<DataGridTemplateColumn x:Name="biomomMobReportedColumn" Header="Biomom Mob Reported" Width="SizeToHeader">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<DatePicker SelectedDate="{Binding Path=BiomomMobReported, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn x:Name="biomomMobCalculatedColumn" Header="Biomom Mob Calculated" Width="SizeToHeader">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<DatePicker SelectedDate="{Binding Path=BiomomMobCalculated, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
 						<DataGridTextColumn x:Name="biomomYearLastAskedColumn" Binding="{Binding Path=BiomomYearLastAsked}" Header="Biomom Year Last Asked" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biomomAliveColumn" Binding="{Binding Path=BiomomAlive}" Header="Biomom Alive" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biomomDeathCauseColumn" Binding="{Binding Path=BiomomDeathCause}" Header="Biomom Death Cause" Width="SizeToHeader" />

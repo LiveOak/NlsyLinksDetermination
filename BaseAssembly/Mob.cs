@@ -50,26 +50,26 @@ namespace Nls.BaseAssembly {
 				return dr.Mob;
 		}
 		private static DateTime? CalculateMobForGen1 ( Int32 reportedBirthMonth, Int32 reportedYob ) {
-			if ( reportedBirthMonth == -1 ) return null;//Represents refusal
-			else if ( reportedBirthMonth == -3 ) return null; //Represents invalid skip
+			if ( reportedBirthMonth == (Int32)EnumResponsesGen1.TypicalItem.Refusal ) return null;//Value of -1
+			else if ( reportedBirthMonth == (Int32)EnumResponsesGen1.TypicalItem.InvalidSkip ) return null; //Value of -3
 			else if ( reportedBirthMonth < 1 ) throw new ArgumentOutOfRangeException("reportedBirthMonth", reportedBirthMonth, "The reportedBirthMonth cannot be before 1 (January).");
 			else if ( reportedBirthMonth > 12 ) throw new ArgumentOutOfRangeException("reportedBirthMonth", reportedBirthMonth, "The reportedBirthMonth cannot be after 12 (December).");
 
-			if ( reportedYob == -1 ) return null;//Represents refusal
-			else if ( reportedYob == -3 ) return null; //Represents invalid skip
+			if ( reportedYob == (Int32)EnumResponsesGen1.TypicalItem.Refusal ) return null;//Value of -1
+			else if ( reportedYob == (Int32)EnumResponsesGen1.TypicalItem.InvalidSkip ) return null; //Value of -3
 			else if ( reportedYob < Constants.Gen1BirthYearMin ) throw new ArgumentOutOfRangeException("reportedYob", reportedYob, "The reportedYob cannot be before (19)55, according to the NLS cookbook (asked in 1981).");
 			else if ( reportedYob > Constants.Gen1BirthYearMax ) throw new ArgumentOutOfRangeException("reportedYob", reportedYob, "The reportedYob cannot be after (19)65, according to the NLS cookbook (asked in 1981).");
 
 			return new DateTime(1900 + reportedYob, reportedBirthMonth, Constants.DefaultDayOfMonth);
 		}
 		private static DateTime? CalculateMobForGen2 ( Int32 reportedBirthMonth, Int32 reportedYob ) {
-			if ( reportedBirthMonth == -1 ) return null;//Represents refusal
-			else if ( reportedBirthMonth == -3 ) return null;//Represents invalid skip
+			if ( reportedBirthMonth == (Int32)EnumResponsesGen1.TypicalItem.Refusal ) return null;//Value of -1
+			else if ( reportedBirthMonth == (Int32)EnumResponsesGen1.TypicalItem.InvalidSkip ) return null;//Value of -3
 			else if ( reportedBirthMonth < 1 ) throw new ArgumentOutOfRangeException("reportedBirthMonth", reportedBirthMonth, "The reportedBirthMonth cannot be before 1 (January).");
 			else if ( reportedBirthMonth > 12 ) throw new ArgumentOutOfRangeException("reportedBirthMonth", reportedBirthMonth, "The reportedBirthMonth cannot be after 12 (December).");
 
-			if ( reportedYob == -1 ) return null; //Represents refusal
-			else if ( reportedYob == -3 ) return null; //Represents invalid skip
+			if ( reportedYob == (Int32)EnumResponsesGen1.TypicalItem.Refusal ) return null; //Value of -1
+			else if ( reportedYob == (Int32)EnumResponsesGen1.TypicalItem.InvalidSkip ) return null; //Value of -3
 			else if ( reportedYob < Constants.Gen2BirthYearMin ) throw new ArgumentOutOfRangeException("reportedYob", reportedYob, "The reportedYob cannot be before 1970, according to the NLS cookbook.");
 			else if ( reportedYob > Constants.Gen2BirthYearMax ) throw new ArgumentOutOfRangeException("reportedYob", reportedYob, "The reportedYob cannot be after the data was collected.");
 

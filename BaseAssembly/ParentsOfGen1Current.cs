@@ -56,6 +56,8 @@ namespace Nls.BaseAssembly {
 			Int32 subjectTag = drSubject.SubjectTag;
 
 			//For Biodad
+			DateTime? biodadMobReported = null;
+			DateTime? biodadMobCalculated = null;
 			Int16? biodadYearLastAsked = null;
 			YesNo biodadAlive = YesNo.ValidSkipOrNoInterviewOrNotInSurvey;
 			Gen1BioparentDeathCause biodadDeathCause = Gen1BioparentDeathCause.InvalidSkip;
@@ -73,6 +75,8 @@ namespace Nls.BaseAssembly {
 			YesNo biograndfatherUSBorn = DetermineUSBorn(Item.Gen1GrandfatherBirthCountry, subjectTag, dtExtendedResponse);
 
 			//For Biomom
+			DateTime? biomomMobReported = null;
+			DateTime? biomomMobCalculated = null;
 			Int16? biomomYearLastAsked = null;
 			YesNo biomomAlive = YesNo.ValidSkipOrNoInterviewOrNotInSurvey;
 			Gen1BioparentDeathCause biomomDeathCause = Gen1BioparentDeathCause.InvalidSkip;
@@ -90,11 +94,22 @@ namespace Nls.BaseAssembly {
 
 			//Add row to in-memory database.
 			AddRow(subjectTag,
-				biodadYearLastAsked, biodadAlive, biodadDeathCause, biodadDeathAge, biodadUSBorn, biodadHighestGrade, biograndfatherUSBorn,
-				biomomYearLastAsked, biomomAlive, biomomDeathCause, biomomDeathAge, biomomUSBorn, biomomHighestGrade);
+				biodadMobReported, biodadMobCalculated, biodadYearLastAsked, biodadAlive, biodadDeathCause, biodadDeathAge, biodadUSBorn, biodadHighestGrade, biograndfatherUSBorn,
+				biomomMobReported, biomomMobCalculated, biomomYearLastAsked, biomomAlive, biomomDeathCause, biomomDeathAge, biomomUSBorn, biomomHighestGrade);
 
 			const Int32 recordsAdded = 1;
 			return recordsAdded;
+		}
+
+		private static byte? DetermineBioparentMob ( Item item, byte loopIndex, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
+			const Int16 surveyYear = ItemYears.Gen1BioparentDeathAge;
+			Int32? response = Retrieve.ResponseNullPossible(surveyYear: surveyYear, itemID: item, subjectTag: subjectTag, loopIndex: loopIndex, dt: dtExtended);
+			if ( !response.HasValue )
+				return null;
+			else if ( response.Value < 0 )
+				return null;
+			else
+				return Convert.ToByte(response);
 		}
 
 		private static byte? DetermineBioparentDeathAge ( Item item, byte loopIndex, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
@@ -176,14 +191,20 @@ namespace Nls.BaseAssembly {
 				return Convert.ToByte(response.Value);
 		}
 		private void AddRow ( Int32 subjectTag, 
-			Int16? biodadYearLastAsked, YesNo biodadAlive, Gen1BioparentDeathCause biodadDeathCause, byte? biodadDeathAge, YesNo biodadUSBorn, byte? biodadHighestGrade, YesNo biograndfatherUSBorn,
-			Int16? biomomYearLastAsked, YesNo biomomAlive, Gen1BioparentDeathCause biomomDeathCause, byte? biomomDeathAge, YesNo biomomUSBorn, byte? biomomHighestGrade ) {
+			DateTime? biodadMobReported, DateTime? biodadMobCalculated, Int16? biodadYearLastAsked, YesNo biodadAlive, Gen1BioparentDeathCause biodadDeathCause, byte? biodadDeathAge, YesNo biodadUSBorn, byte? biodadHighestGrade, YesNo biograndfatherUSBorn,
+			DateTime? biomomMobReported, DateTime? biomomMobCalculated, Int16? biomomYearLastAsked, YesNo biomomAlive, Gen1BioparentDeathCause biomomDeathCause, byte? biomomDeathAge, YesNo biomomUSBorn, byte? biomomHighestGrade ) {
 
 			//lock ( _ds.tblFatherOfGen2 ) {
 			LinksDataSet.tblParentsOfGen1CurrentRow drNew = _ds.tblParentsOfGen1Current.NewtblParentsOfGen1CurrentRow();
 			drNew.SubjectTag = subjectTag;
-			
+
 			//Items about biodad (and one about biograndfather)
+			if ( biodadMobReported.HasValue ) drNew.BiodadMobReported = Convert.ToDateTime(biodadMobReported);
+			else drNew.SetBiodadMobReportedNull();
+
+			if ( biodadMobCalculated.HasValue ) drNew.BiodadMobCalculated= Convert.ToDateTime(biodadMobCalculated);
+			else drNew.SetBiodadMobCalculatedNull();
+
 			if ( biodadYearLastAsked.HasValue ) drNew.BiodadYearLastAsked = Convert.ToInt16(biodadYearLastAsked);
 			else drNew.SetBiodadYearLastAskedNull();
 			
@@ -201,6 +222,12 @@ namespace Nls.BaseAssembly {
 			drNew.BiograndfatherUSBorn = Convert.ToInt16(biograndfatherUSBorn);
 
 			//Items about biomom
+			if ( biomomMobReported.HasValue ) drNew.BiomomMobReported = Convert.ToDateTime(biomomMobReported);
+			else drNew.SetBiomomMobReportedNull();
+
+			if ( biomomMobCalculated.HasValue ) drNew.BiomomMobCalculated = Convert.ToDateTime(biomomMobCalculated);
+			else drNew.SetBiomomMobCalculatedNull();
+
 			if ( biomomYearLastAsked.HasValue ) drNew.BiomomYearLastAsked = Convert.ToInt16(biomomYearLastAsked);
 			else drNew.SetBiomomYearLastAskedNull();
  
