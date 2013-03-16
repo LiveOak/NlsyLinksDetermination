@@ -10,7 +10,11 @@ namespace Nls.BaseAssembly {
 		public readonly static Int16[] Gen1ShareBiodad = { 2006, 2010 };
 		public readonly static Int16[] Gen1BiomomInHH = { 1988 };
 		public readonly static Int16[] Gen1BiodadInHH = Gen1BiomomInHH;
-		
+
+		public const Int16 Gen1BioparentHighestGrade = 1979;
+		public const Int16 Gen1BioparentUSBorn = 1979; //And also the Gen1's biodad's dad.
+		public const Int16 Gen1BioparentAlive = 0; //It's an XRND.
+		public const Int16 Gen1BioparentDeathAge = 0; //It's an XRND.
 		
 		
 		

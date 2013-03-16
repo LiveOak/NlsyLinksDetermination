@@ -110,7 +110,7 @@ namespace Nls.BaseAssembly {
 			//Use the other subject's ID to find the appropriate 'loop index';
 			string selectToGetLoopIndex = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				drSubject1.SubjectTag, dtSubject1.SubjectTagColumn.ColumnName,
-				(byte)itemID, dtSubject1.ItemColumn.ColumnName,
+				Convert.ToInt16(itemID), dtSubject1.ItemColumn.ColumnName,
 				drSubject2.SubjectID, dtSubject1.ValueColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsForLoopIndex = (LinksDataSet.tblResponseRow[])dtSubject1.Select(selectToGetLoopIndex);
 			Trace.Assert(drsForLoopIndex.Length <= surveyYearCount, string.Format("No more than {0} row(s) should be returned that matches Subject2 for item '{1}'.", surveyYearCount, itemID.ToString()));
@@ -122,7 +122,7 @@ namespace Nls.BaseAssembly {
 			//LinksDataSet.tblResponseRow drResponse = drsForLoopIndex[0];
 			string selectToShareResponse = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				drSubject1.SubjectTag, dtSubject1.SubjectTagColumn.ColumnName,
-				(byte)itemRelationship, dtSubject1.ItemColumn.ColumnName,
+				Convert.ToInt16(itemRelationship), dtSubject1.ItemColumn.ColumnName,
 				drsForLoopIndex[0].LoopIndex, dtSubject1.LoopIndexColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsForShareResponse = (LinksDataSet.tblResponseRow[])dtSubject1.Select(selectToShareResponse);
 			Trace.Assert(drsForLoopIndex.Length <= surveyYearCount, string.Format("No more than {0} row(s) should be returned that matches Subject2 for item '{1}'.", surveyYearCount, Item.IDCodeOfOtherInterviewedBiodadGen2.ToString()));
@@ -159,7 +159,7 @@ namespace Nls.BaseAssembly {
 			//Use the other subject's ID to find the appropriate 'loop index';
 			string selectToGetLoopIndex = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				drSubject1.SubjectTag, dtSubject1.SubjectTagColumn.ColumnName,
-				(byte)itemID, dtSubject1.ItemColumn.ColumnName,
+				Convert.ToInt16(itemID), dtSubject1.ItemColumn.ColumnName,
 				drSubject2.SubjectID, dtSubject1.ValueColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsForLoopIndex = (LinksDataSet.tblResponseRow[])dtSubject1.Select(selectToGetLoopIndex);
 			Trace.Assert(drsForLoopIndex.Length <= surveyYearCount, string.Format("No more than {0} row(s) should be returned that matches Subject2 for item '{1}'.", surveyYearCount, itemID.ToString()));
@@ -171,7 +171,7 @@ namespace Nls.BaseAssembly {
 			//LinksDataSet.tblResponseRow drResponse = drsForLoopIndex[0];
 			string selectToShareResponse = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				drSubject1.SubjectTag, dtSubject1.SubjectTagColumn.ColumnName,
-				(byte)itemRelationship, dtSubject1.ItemColumn.ColumnName,
+				Convert.ToInt16(itemRelationship), dtSubject1.ItemColumn.ColumnName,
 				drsForLoopIndex[0].LoopIndex, dtSubject1.LoopIndexColumn.ColumnName);
 			LinksDataSet.tblResponseRow[] drsForShareResponse = (LinksDataSet.tblResponseRow[])dtSubject1.Select(selectToShareResponse);
 			Trace.Assert(drsForLoopIndex.Length <= surveyYearCount, string.Format("No more than {0} row(s) should be returned that matches Subject2 for item '{1}'.", surveyYearCount, Item.IDCodeOfOtherInterviewedBiodadGen2.ToString()));
@@ -202,13 +202,13 @@ namespace Nls.BaseAssembly {
 			LinksDataSet.tblMarkerGen1Row drNew = _dsLinks.tblMarkerGen1.NewtblMarkerGen1Row();
 			drNew.ExtendedID = extendedID	;
 			drNew.RelatedID = relatedID;
-			drNew.MarkerType = (byte)markerType;
+			drNew.MarkerType = Convert.ToByte(markerType);
 			drNew.SurveyYear = surveyYear;
-			drNew.MzEvidence = (byte)mzEvidence;
-			drNew.SameGeneration = (byte)sameGenerationEvidence;
-			drNew.ShareBiomomEvidence = (byte)biomomEvidence;
-			drNew.ShareBiodadEvidence = (byte)biodadEvidence;
-			drNew.ShareBioGrandparentEvidence = (byte)biograndparentEvidence;
+			drNew.MzEvidence = Convert.ToByte(mzEvidence);
+			drNew.SameGeneration = Convert.ToByte(sameGenerationEvidence);
+			drNew.ShareBiomomEvidence = Convert.ToByte(biomomEvidence);
+			drNew.ShareBiodadEvidence = Convert.ToByte(biodadEvidence);
+			drNew.ShareBioGrandparentEvidence = Convert.ToByte(biograndparentEvidence);
 
 			_dsLinks.tblMarkerGen1.AddtblMarkerGen1Row(drNew);
 		}

@@ -26,6 +26,17 @@ namespace Nls.BaseAssembly {
 			Trace.Assert(drsRaw.Length <= maxRows, "At most, " + maxRows + " row(s) should be returned.");
 			return drsRaw[0].Value;
 		}
+		internal static Int32 Response ( Int16 surveyYear, Item itemID, Int32 subjectTag, Int32 maxRows, byte loopIndex, LinksDataSet.tblResponseDataTable dt ) {
+			if ( dt == null ) throw new ArgumentNullException("dt");
+			string select = string.Format("{0}={1} AND {2}={3} AND {4}={5} AND {6}={7}",
+				subjectTag, dt.SubjectTagColumn.ColumnName,
+				(Int16)itemID, dt.ItemColumn.ColumnName,
+				surveyYear, dt.SurveyYearColumn.ColumnName,
+				loopIndex, dt.LoopIndexColumn.ColumnName);
+			LinksDataSet.tblResponseRow[] drsRaw = (LinksDataSet.tblResponseRow[])dt.Select(select);
+			Trace.Assert(drsRaw.Length <= maxRows, "At most, " + maxRows + " row(s) should be returned.");
+			return drsRaw[0].Value;
+		}
 		//internal static Int32 Response ( Int16 surveyYear, Item itemID, SurveySource surveySource, Int32 subjectTag, LinksDataSet.tblResponseDataTable dt ) {
 		//   if ( dt == null ) throw new ArgumentNullException("dt");
 		//   string select = string.Format("{0}={1} AND {2}={3} AND {4}={5} AND {6}={7}",

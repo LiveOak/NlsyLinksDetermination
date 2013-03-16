@@ -8526,7 +8526,7 @@ namespace Nls.BaseAssembly {
             
             private global::System.Data.DataColumn columnSubjectTag;
             
-            private global::System.Data.DataColumn columnBioparentsYearLastAsked;
+            private global::System.Data.DataColumn columnBiodadYearLastAsked;
             
             private global::System.Data.DataColumn columnBiodadAlive;
             
@@ -8539,6 +8539,8 @@ namespace Nls.BaseAssembly {
             private global::System.Data.DataColumn columnBiodadHighestGrade;
             
             private global::System.Data.DataColumn columnBiograndfatherUSBorn;
+            
+            private global::System.Data.DataColumn columnBiomomYearLastAsked;
             
             private global::System.Data.DataColumn columnBiomomAlive;
             
@@ -8601,9 +8603,9 @@ namespace Nls.BaseAssembly {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn BioparentsYearLastAskedColumn {
+            public global::System.Data.DataColumn BiodadYearLastAskedColumn {
                 get {
-                    return this.columnBioparentsYearLastAsked;
+                    return this.columnBiodadYearLastAsked;
                 }
             }
             
@@ -8652,6 +8654,14 @@ namespace Nls.BaseAssembly {
             public global::System.Data.DataColumn BiograndfatherUSBornColumn {
                 get {
                     return this.columnBiograndfatherUSBorn;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BiomomYearLastAskedColumn {
+                get {
+                    return this.columnBiomomYearLastAsked;
                 }
             }
             
@@ -8732,18 +8742,19 @@ namespace Nls.BaseAssembly {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public tblParentsOfGen1CurrentRow AddtblParentsOfGen1CurrentRow(tblSubjectRow parenttblSubjectRowByFK_tblParentsOfGen1Current_tblSubject, short BioparentsYearLastAsked, short BiodadAlive, byte BiodadDeathCause, byte BiodadDeathAge, short BiodadUSBorn, byte BiodadHighestGrade, short BiograndfatherUSBorn, short BiomomAlive, byte BiomomDeathCause, byte BiomomDeathAge, short BiomomUSBorn, byte BiomomHighestGrade) {
+            public tblParentsOfGen1CurrentRow AddtblParentsOfGen1CurrentRow(tblSubjectRow parenttblSubjectRowByFK_tblParentsOfGen1Current_tblSubject, short BiodadYearLastAsked, short BiodadAlive, short BiodadDeathCause, byte BiodadDeathAge, short BiodadUSBorn, byte BiodadHighestGrade, short BiograndfatherUSBorn, short BiomomYearLastAsked, short BiomomAlive, short BiomomDeathCause, byte BiomomDeathAge, short BiomomUSBorn, byte BiomomHighestGrade) {
                 tblParentsOfGen1CurrentRow rowtblParentsOfGen1CurrentRow = ((tblParentsOfGen1CurrentRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
-                        BioparentsYearLastAsked,
+                        BiodadYearLastAsked,
                         BiodadAlive,
                         BiodadDeathCause,
                         BiodadDeathAge,
                         BiodadUSBorn,
                         BiodadHighestGrade,
                         BiograndfatherUSBorn,
+                        BiomomYearLastAsked,
                         BiomomAlive,
                         BiomomDeathCause,
                         BiomomDeathAge,
@@ -8783,13 +8794,14 @@ namespace Nls.BaseAssembly {
             internal void InitVars() {
                 this.columnID = base.Columns["ID"];
                 this.columnSubjectTag = base.Columns["SubjectTag"];
-                this.columnBioparentsYearLastAsked = base.Columns["BioparentsYearLastAsked"];
+                this.columnBiodadYearLastAsked = base.Columns["BiodadYearLastAsked"];
                 this.columnBiodadAlive = base.Columns["BiodadAlive"];
                 this.columnBiodadDeathCause = base.Columns["BiodadDeathCause"];
                 this.columnBiodadDeathAge = base.Columns["BiodadDeathAge"];
                 this.columnBiodadUSBorn = base.Columns["BiodadUSBorn"];
                 this.columnBiodadHighestGrade = base.Columns["BiodadHighestGrade"];
                 this.columnBiograndfatherUSBorn = base.Columns["BiograndfatherUSBorn"];
+                this.columnBiomomYearLastAsked = base.Columns["BiomomYearLastAsked"];
                 this.columnBiomomAlive = base.Columns["BiomomAlive"];
                 this.columnBiomomDeathCause = base.Columns["BiomomDeathCause"];
                 this.columnBiomomDeathAge = base.Columns["BiomomDeathAge"];
@@ -8804,11 +8816,11 @@ namespace Nls.BaseAssembly {
                 base.Columns.Add(this.columnID);
                 this.columnSubjectTag = new global::System.Data.DataColumn("SubjectTag", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSubjectTag);
-                this.columnBioparentsYearLastAsked = new global::System.Data.DataColumn("BioparentsYearLastAsked", typeof(short), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnBioparentsYearLastAsked);
+                this.columnBiodadYearLastAsked = new global::System.Data.DataColumn("BiodadYearLastAsked", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBiodadYearLastAsked);
                 this.columnBiodadAlive = new global::System.Data.DataColumn("BiodadAlive", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnBiodadAlive);
-                this.columnBiodadDeathCause = new global::System.Data.DataColumn("BiodadDeathCause", typeof(byte), null, global::System.Data.MappingType.Element);
+                this.columnBiodadDeathCause = new global::System.Data.DataColumn("BiodadDeathCause", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnBiodadDeathCause);
                 this.columnBiodadDeathAge = new global::System.Data.DataColumn("BiodadDeathAge", typeof(byte), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnBiodadDeathAge);
@@ -8818,9 +8830,11 @@ namespace Nls.BaseAssembly {
                 base.Columns.Add(this.columnBiodadHighestGrade);
                 this.columnBiograndfatherUSBorn = new global::System.Data.DataColumn("BiograndfatherUSBorn", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnBiograndfatherUSBorn);
+                this.columnBiomomYearLastAsked = new global::System.Data.DataColumn("BiomomYearLastAsked", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBiomomYearLastAsked);
                 this.columnBiomomAlive = new global::System.Data.DataColumn("BiomomAlive", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnBiomomAlive);
-                this.columnBiomomDeathCause = new global::System.Data.DataColumn("BiomomDeathCause", typeof(byte), null, global::System.Data.MappingType.Element);
+                this.columnBiomomDeathCause = new global::System.Data.DataColumn("BiomomDeathCause", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnBiomomDeathCause);
                 this.columnBiomomDeathAge = new global::System.Data.DataColumn("BiomomDeathAge", typeof(byte), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnBiomomDeathAge);
@@ -12727,18 +12741,18 @@ namespace Nls.BaseAssembly {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public short BioparentsYearLastAsked {
+            public short BiodadYearLastAsked {
                 get {
                     try {
-                        return ((short)(this[this.tabletblParentsOfGen1Current.BioparentsYearLastAskedColumn]));
+                        return ((short)(this[this.tabletblParentsOfGen1Current.BiodadYearLastAskedColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'BioparentsYearLastAsked\' in table \'tblParentsOfGen1Current\'" +
-                                " is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'BiodadYearLastAsked\' in table \'tblParentsOfGen1Current\' is " +
+                                "DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabletblParentsOfGen1Current.BioparentsYearLastAskedColumn] = value;
+                    this[this.tabletblParentsOfGen1Current.BiodadYearLastAskedColumn] = value;
                 }
             }
             
@@ -12755,9 +12769,9 @@ namespace Nls.BaseAssembly {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public byte BiodadDeathCause {
+            public short BiodadDeathCause {
                 get {
-                    return ((byte)(this[this.tabletblParentsOfGen1Current.BiodadDeathCauseColumn]));
+                    return ((short)(this[this.tabletblParentsOfGen1Current.BiodadDeathCauseColumn]));
                 }
                 set {
                     this[this.tabletblParentsOfGen1Current.BiodadDeathCauseColumn] = value;
@@ -12822,6 +12836,23 @@ namespace Nls.BaseAssembly {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public short BiomomYearLastAsked {
+                get {
+                    try {
+                        return ((short)(this[this.tabletblParentsOfGen1Current.BiomomYearLastAskedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BiomomYearLastAsked\' in table \'tblParentsOfGen1Current\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblParentsOfGen1Current.BiomomYearLastAskedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public short BiomomAlive {
                 get {
                     return ((short)(this[this.tabletblParentsOfGen1Current.BiomomAliveColumn]));
@@ -12833,9 +12864,9 @@ namespace Nls.BaseAssembly {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public byte BiomomDeathCause {
+            public short BiomomDeathCause {
                 get {
-                    return ((byte)(this[this.tabletblParentsOfGen1Current.BiomomDeathCauseColumn]));
+                    return ((short)(this[this.tabletblParentsOfGen1Current.BiomomDeathCauseColumn]));
                 }
                 set {
                     this[this.tabletblParentsOfGen1Current.BiomomDeathCauseColumn] = value;
@@ -12900,14 +12931,14 @@ namespace Nls.BaseAssembly {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsBioparentsYearLastAskedNull() {
-                return this.IsNull(this.tabletblParentsOfGen1Current.BioparentsYearLastAskedColumn);
+            public bool IsBiodadYearLastAskedNull() {
+                return this.IsNull(this.tabletblParentsOfGen1Current.BiodadYearLastAskedColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetBioparentsYearLastAskedNull() {
-                this[this.tabletblParentsOfGen1Current.BioparentsYearLastAskedColumn] = global::System.Convert.DBNull;
+            public void SetBiodadYearLastAskedNull() {
+                this[this.tabletblParentsOfGen1Current.BiodadYearLastAskedColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12932,6 +12963,18 @@ namespace Nls.BaseAssembly {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetBiodadHighestGradeNull() {
                 this[this.tabletblParentsOfGen1Current.BiodadHighestGradeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsBiomomYearLastAskedNull() {
+                return this.IsNull(this.tabletblParentsOfGen1Current.BiomomYearLastAskedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetBiomomYearLastAskedNull() {
+                this[this.tabletblParentsOfGen1Current.BiomomYearLastAskedColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -22876,13 +22919,14 @@ SELECT ID, SubjectTag, SurveyYear, BiodadInHH, BiomomInHH, Age, Year FROM Proces
             tableMapping.DataSetTable = "tblParentsOfGen1Current";
             tableMapping.ColumnMappings.Add("ID", "ID");
             tableMapping.ColumnMappings.Add("SubjectTag", "SubjectTag");
-            tableMapping.ColumnMappings.Add("BioparentsYearLastAsked", "BioparentsYearLastAsked");
+            tableMapping.ColumnMappings.Add("BiodadYearLastAsked", "BiodadYearLastAsked");
             tableMapping.ColumnMappings.Add("BiodadAlive", "BiodadAlive");
             tableMapping.ColumnMappings.Add("BiodadDeathCause", "BiodadDeathCause");
             tableMapping.ColumnMappings.Add("BiodadDeathAge", "BiodadDeathAge");
             tableMapping.ColumnMappings.Add("BiodadUSBorn", "BiodadUSBorn");
             tableMapping.ColumnMappings.Add("BiodadHighestGrade", "BiodadHighestGrade");
             tableMapping.ColumnMappings.Add("BiograndfatherUSBorn", "BiograndfatherUSBorn");
+            tableMapping.ColumnMappings.Add("BiomomYearLastAsked", "BiomomYearLastAsked");
             tableMapping.ColumnMappings.Add("BiomomAlive", "BiomomAlive");
             tableMapping.ColumnMappings.Add("BiomomDeathCause", "BiomomDeathCause");
             tableMapping.ColumnMappings.Add("BiomomDeathAge", "BiomomDeathAge");
@@ -22891,22 +22935,24 @@ SELECT ID, SubjectTag, SurveyYear, BiodadInHH, BiomomInHH, Age, Year FROM Proces
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Process].[tblParentsOfGen1Current] WHERE (([ID] = @Original_ID) AND ([SubjectTag] = @Original_SubjectTag) AND ((@IsNull_BioparentsYearLastAsked = 1 AND [BioparentsYearLastAsked] IS NULL) OR ([BioparentsYearLastAsked] = @Original_BioparentsYearLastAsked)) AND ([BiodadAlive] = @Original_BiodadAlive) AND ([BiodadDeathCause] = @Original_BiodadDeathCause) AND ((@IsNull_BiodadDeathAge = 1 AND [BiodadDeathAge] IS NULL) OR ([BiodadDeathAge] = @Original_BiodadDeathAge)) AND ([BiodadUSBorn] = @Original_BiodadUSBorn) AND ((@IsNull_BiodadHighestGrade = 1 AND [BiodadHighestGrade] IS NULL) OR ([BiodadHighestGrade] = @Original_BiodadHighestGrade)) AND ([BiograndfatherUSBorn] = @Original_BiograndfatherUSBorn) AND ([BiomomAlive] = @Original_BiomomAlive) AND ([BiomomDeathCause] = @Original_BiomomDeathCause) AND ((@IsNull_BiomomDeathAge = 1 AND [BiomomDeathAge] IS NULL) OR ([BiomomDeathAge] = @Original_BiomomDeathAge)) AND ([BiomomUSBorn] = @Original_BiomomUSBorn) AND ((@IsNull_BiomomHighestGrade = 1 AND [BiomomHighestGrade] IS NULL) OR ([BiomomHighestGrade] = @Original_BiomomHighestGrade)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Process].[tblParentsOfGen1Current] WHERE (([ID] = @Original_ID) AND ([SubjectTag] = @Original_SubjectTag) AND ((@IsNull_BiodadYearLastAsked = 1 AND [BiodadYearLastAsked] IS NULL) OR ([BiodadYearLastAsked] = @Original_BiodadYearLastAsked)) AND ([BiodadAlive] = @Original_BiodadAlive) AND ([BiodadDeathCause] = @Original_BiodadDeathCause) AND ((@IsNull_BiodadDeathAge = 1 AND [BiodadDeathAge] IS NULL) OR ([BiodadDeathAge] = @Original_BiodadDeathAge)) AND ([BiodadUSBorn] = @Original_BiodadUSBorn) AND ((@IsNull_BiodadHighestGrade = 1 AND [BiodadHighestGrade] IS NULL) OR ([BiodadHighestGrade] = @Original_BiodadHighestGrade)) AND ([BiograndfatherUSBorn] = @Original_BiograndfatherUSBorn) AND ((@IsNull_BiomomYearLastAsked = 1 AND [BiomomYearLastAsked] IS NULL) OR ([BiomomYearLastAsked] = @Original_BiomomYearLastAsked)) AND ([BiomomAlive] = @Original_BiomomAlive) AND ([BiomomDeathCause] = @Original_BiomomDeathCause) AND ((@IsNull_BiomomDeathAge = 1 AND [BiomomDeathAge] IS NULL) OR ([BiomomDeathAge] = @Original_BiomomDeathAge)) AND ([BiomomUSBorn] = @Original_BiomomUSBorn) AND ((@IsNull_BiomomHighestGrade = 1 AND [BiomomHighestGrade] IS NULL) OR ([BiomomHighestGrade] = @Original_BiomomHighestGrade)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SubjectTag", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjectTag", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BioparentsYearLastAsked", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BioparentsYearLastAsked", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BioparentsYearLastAsked", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BioparentsYearLastAsked", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BiodadYearLastAsked", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadYearLastAsked", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiodadYearLastAsked", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadYearLastAsked", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiodadAlive", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadAlive", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiodadDeathCause", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadDeathCause", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiodadDeathCause", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadDeathCause", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BiodadDeathAge", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadDeathAge", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiodadDeathAge", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadDeathAge", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiodadUSBorn", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadUSBorn", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BiodadHighestGrade", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadHighestGrade", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiodadHighestGrade", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadHighestGrade", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiograndfatherUSBorn", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiograndfatherUSBorn", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BiomomYearLastAsked", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomYearLastAsked", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiomomYearLastAsked", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomYearLastAsked", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiomomAlive", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomAlive", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiomomDeathCause", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomDeathCause", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiomomDeathCause", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomDeathCause", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BiomomDeathAge", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomDeathAge", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiomomDeathAge", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomDeathAge", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiomomUSBorn", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomUSBorn", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -22914,76 +22960,82 @@ SELECT ID, SubjectTag, SurveyYear, BiodadInHH, BiomomInHH, Age, Year FROM Proces
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiomomHighestGrade", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomHighestGrade", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Process].[tblParentsOfGen1Current] ([SubjectTag], [BioparentsYearLastAsked], [BiodadAlive], [BiodadDeathCause], [BiodadDeathAge], [BiodadUSBorn], [BiodadHighestGrade], [BiograndfatherUSBorn], [BiomomAlive], [BiomomDeathCause], [BiomomDeathAge], [BiomomUSBorn], [BiomomHighestGrade]) VALUES (@SubjectTag, @BioparentsYearLastAsked, @BiodadAlive, @BiodadDeathCause, @BiodadDeathAge, @BiodadUSBorn, @BiodadHighestGrade, @BiograndfatherUSBorn, @BiomomAlive, @BiomomDeathCause, @BiomomDeathAge, @BiomomUSBorn, @BiomomHighestGrade);
-SELECT ID, SubjectTag, BioparentsYearLastAsked, BiodadAlive, BiodadDeathCause, BiodadDeathAge, BiodadUSBorn, BiodadHighestGrade, BiograndfatherUSBorn, BiomomAlive, BiomomDeathCause, BiomomDeathAge, BiomomUSBorn, BiomomHighestGrade FROM Process.tblParentsOfGen1Current WHERE (ID = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Process].[tblParentsOfGen1Current] ([SubjectTag], [BiodadYearLastAsked], [BiodadAlive], [BiodadDeathCause], [BiodadDeathAge], [BiodadUSBorn], [BiodadHighestGrade], [BiograndfatherUSBorn], [BiomomYearLastAsked], [BiomomAlive], [BiomomDeathCause], [BiomomDeathAge], [BiomomUSBorn], [BiomomHighestGrade]) VALUES (@SubjectTag, @BiodadYearLastAsked, @BiodadAlive, @BiodadDeathCause, @BiodadDeathAge, @BiodadUSBorn, @BiodadHighestGrade, @BiograndfatherUSBorn, @BiomomYearLastAsked, @BiomomAlive, @BiomomDeathCause, @BiomomDeathAge, @BiomomUSBorn, @BiomomHighestGrade);
+SELECT ID, SubjectTag, BiodadYearLastAsked, BiodadAlive, BiodadDeathCause, BiodadDeathAge, BiodadUSBorn, BiodadHighestGrade, BiograndfatherUSBorn, BiomomYearLastAsked, BiomomAlive, BiomomDeathCause, BiomomDeathAge, BiomomUSBorn, BiomomHighestGrade FROM Process.tblParentsOfGen1Current WHERE (ID = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SubjectTag", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjectTag", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BioparentsYearLastAsked", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BioparentsYearLastAsked", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiodadYearLastAsked", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadYearLastAsked", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiodadAlive", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadAlive", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiodadDeathCause", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadDeathCause", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiodadDeathCause", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadDeathCause", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiodadDeathAge", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadDeathAge", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiodadUSBorn", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadUSBorn", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiodadHighestGrade", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadHighestGrade", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiograndfatherUSBorn", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiograndfatherUSBorn", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiomomYearLastAsked", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomYearLastAsked", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiomomAlive", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomAlive", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiomomDeathCause", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomDeathCause", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiomomDeathCause", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomDeathCause", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiomomDeathAge", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomDeathAge", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiomomUSBorn", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomUSBorn", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiomomHighestGrade", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomHighestGrade", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [Process].[tblParentsOfGen1Current] SET [SubjectTag] = @SubjectTag, [Biopa" +
-                "rentsYearLastAsked] = @BioparentsYearLastAsked, [BiodadAlive] = @BiodadAlive, [B" +
-                "iodadDeathCause] = @BiodadDeathCause, [BiodadDeathAge] = @BiodadDeathAge, [Bioda" +
-                "dUSBorn] = @BiodadUSBorn, [BiodadHighestGrade] = @BiodadHighestGrade, [Biograndf" +
-                "atherUSBorn] = @BiograndfatherUSBorn, [BiomomAlive] = @BiomomAlive, [BiomomDeath" +
-                "Cause] = @BiomomDeathCause, [BiomomDeathAge] = @BiomomDeathAge, [BiomomUSBorn] =" +
-                " @BiomomUSBorn, [BiomomHighestGrade] = @BiomomHighestGrade WHERE (([ID] = @Origi" +
-                "nal_ID) AND ([SubjectTag] = @Original_SubjectTag) AND ((@IsNull_BioparentsYearLa" +
-                "stAsked = 1 AND [BioparentsYearLastAsked] IS NULL) OR ([BioparentsYearLastAsked]" +
-                " = @Original_BioparentsYearLastAsked)) AND ([BiodadAlive] = @Original_BiodadAliv" +
-                "e) AND ([BiodadDeathCause] = @Original_BiodadDeathCause) AND ((@IsNull_BiodadDea" +
-                "thAge = 1 AND [BiodadDeathAge] IS NULL) OR ([BiodadDeathAge] = @Original_BiodadD" +
-                "eathAge)) AND ([BiodadUSBorn] = @Original_BiodadUSBorn) AND ((@IsNull_BiodadHigh" +
-                "estGrade = 1 AND [BiodadHighestGrade] IS NULL) OR ([BiodadHighestGrade] = @Origi" +
-                "nal_BiodadHighestGrade)) AND ([BiograndfatherUSBorn] = @Original_BiograndfatherU" +
-                "SBorn) AND ([BiomomAlive] = @Original_BiomomAlive) AND ([BiomomDeathCause] = @Or" +
-                "iginal_BiomomDeathCause) AND ((@IsNull_BiomomDeathAge = 1 AND [BiomomDeathAge] I" +
-                "S NULL) OR ([BiomomDeathAge] = @Original_BiomomDeathAge)) AND ([BiomomUSBorn] = " +
-                "@Original_BiomomUSBorn) AND ((@IsNull_BiomomHighestGrade = 1 AND [BiomomHighestG" +
-                "rade] IS NULL) OR ([BiomomHighestGrade] = @Original_BiomomHighestGrade)));\r\nSELE" +
-                "CT ID, SubjectTag, BioparentsYearLastAsked, BiodadAlive, BiodadDeathCause, Bioda" +
-                "dDeathAge, BiodadUSBorn, BiodadHighestGrade, BiograndfatherUSBorn, BiomomAlive, " +
-                "BiomomDeathCause, BiomomDeathAge, BiomomUSBorn, BiomomHighestGrade FROM Process." +
-                "tblParentsOfGen1Current WHERE (ID = @ID)";
+            this._adapter.UpdateCommand.CommandText = "UPDATE [Process].[tblParentsOfGen1Current] SET [SubjectTag] = @SubjectTag, [Bioda" +
+                "dYearLastAsked] = @BiodadYearLastAsked, [BiodadAlive] = @BiodadAlive, [BiodadDea" +
+                "thCause] = @BiodadDeathCause, [BiodadDeathAge] = @BiodadDeathAge, [BiodadUSBorn]" +
+                " = @BiodadUSBorn, [BiodadHighestGrade] = @BiodadHighestGrade, [BiograndfatherUSB" +
+                "orn] = @BiograndfatherUSBorn, [BiomomYearLastAsked] = @BiomomYearLastAsked, [Bio" +
+                "momAlive] = @BiomomAlive, [BiomomDeathCause] = @BiomomDeathCause, [BiomomDeathAg" +
+                "e] = @BiomomDeathAge, [BiomomUSBorn] = @BiomomUSBorn, [BiomomHighestGrade] = @Bi" +
+                "omomHighestGrade WHERE (([ID] = @Original_ID) AND ([SubjectTag] = @Original_Subj" +
+                "ectTag) AND ((@IsNull_BiodadYearLastAsked = 1 AND [BiodadYearLastAsked] IS NULL)" +
+                " OR ([BiodadYearLastAsked] = @Original_BiodadYearLastAsked)) AND ([BiodadAlive] " +
+                "= @Original_BiodadAlive) AND ([BiodadDeathCause] = @Original_BiodadDeathCause) A" +
+                "ND ((@IsNull_BiodadDeathAge = 1 AND [BiodadDeathAge] IS NULL) OR ([BiodadDeathAg" +
+                "e] = @Original_BiodadDeathAge)) AND ([BiodadUSBorn] = @Original_BiodadUSBorn) AN" +
+                "D ((@IsNull_BiodadHighestGrade = 1 AND [BiodadHighestGrade] IS NULL) OR ([Biodad" +
+                "HighestGrade] = @Original_BiodadHighestGrade)) AND ([BiograndfatherUSBorn] = @Or" +
+                "iginal_BiograndfatherUSBorn) AND ((@IsNull_BiomomYearLastAsked = 1 AND [BiomomYe" +
+                "arLastAsked] IS NULL) OR ([BiomomYearLastAsked] = @Original_BiomomYearLastAsked)" +
+                ") AND ([BiomomAlive] = @Original_BiomomAlive) AND ([BiomomDeathCause] = @Origina" +
+                "l_BiomomDeathCause) AND ((@IsNull_BiomomDeathAge = 1 AND [BiomomDeathAge] IS NUL" +
+                "L) OR ([BiomomDeathAge] = @Original_BiomomDeathAge)) AND ([BiomomUSBorn] = @Orig" +
+                "inal_BiomomUSBorn) AND ((@IsNull_BiomomHighestGrade = 1 AND [BiomomHighestGrade]" +
+                " IS NULL) OR ([BiomomHighestGrade] = @Original_BiomomHighestGrade)));\r\nSELECT ID" +
+                ", SubjectTag, BiodadYearLastAsked, BiodadAlive, BiodadDeathCause, BiodadDeathAge" +
+                ", BiodadUSBorn, BiodadHighestGrade, BiograndfatherUSBorn, BiomomYearLastAsked, B" +
+                "iomomAlive, BiomomDeathCause, BiomomDeathAge, BiomomUSBorn, BiomomHighestGrade F" +
+                "ROM Process.tblParentsOfGen1Current WHERE (ID = @ID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SubjectTag", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjectTag", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BioparentsYearLastAsked", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BioparentsYearLastAsked", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiodadYearLastAsked", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadYearLastAsked", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiodadAlive", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadAlive", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiodadDeathCause", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadDeathCause", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiodadDeathCause", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadDeathCause", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiodadDeathAge", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadDeathAge", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiodadUSBorn", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadUSBorn", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiodadHighestGrade", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadHighestGrade", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiograndfatherUSBorn", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiograndfatherUSBorn", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiomomYearLastAsked", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomYearLastAsked", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiomomAlive", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomAlive", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiomomDeathCause", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomDeathCause", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiomomDeathCause", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomDeathCause", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiomomDeathAge", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomDeathAge", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiomomUSBorn", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomUSBorn", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BiomomHighestGrade", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomHighestGrade", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SubjectTag", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjectTag", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BioparentsYearLastAsked", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BioparentsYearLastAsked", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BioparentsYearLastAsked", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BioparentsYearLastAsked", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BiodadYearLastAsked", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadYearLastAsked", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiodadYearLastAsked", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadYearLastAsked", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiodadAlive", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadAlive", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiodadDeathCause", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadDeathCause", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiodadDeathCause", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadDeathCause", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BiodadDeathAge", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadDeathAge", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiodadDeathAge", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadDeathAge", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiodadUSBorn", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadUSBorn", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BiodadHighestGrade", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadHighestGrade", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiodadHighestGrade", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiodadHighestGrade", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiograndfatherUSBorn", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiograndfatherUSBorn", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BiomomYearLastAsked", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomYearLastAsked", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiomomYearLastAsked", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomYearLastAsked", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiomomAlive", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomAlive", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiomomDeathCause", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomDeathCause", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiomomDeathCause", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomDeathCause", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BiomomDeathAge", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomDeathAge", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiomomDeathAge", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomDeathAge", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BiomomUSBorn", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BiomomUSBorn", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -23005,7 +23057,7 @@ SELECT ID, SubjectTag, BioparentsYearLastAsked, BiodadAlive, BiodadDeathCause, B
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT ID, SubjectTag, BioparentsYearLastAsked, BiodadAlive, BiodadDeathCause, BiodadDeathAge, BiodadUSBorn, BiodadHighestGrade, BiograndfatherUSBorn, BiomomAlive, BiomomDeathCause, BiomomDeathAge, BiomomUSBorn, BiomomHighestGrade FROM Process.tblParentsOfGen1Current";
+            this._commandCollection[0].CommandText = @"SELECT ID, SubjectTag, BiodadYearLastAsked, BiodadAlive, BiodadDeathCause, BiodadDeathAge, BiodadUSBorn, BiodadHighestGrade, BiograndfatherUSBorn, BiomomYearLastAsked, BiomomAlive, BiomomDeathCause, BiomomDeathAge, BiomomUSBorn, BiomomHighestGrade FROM Process.tblParentsOfGen1Current";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -23066,19 +23118,19 @@ SELECT ID, SubjectTag, BioparentsYearLastAsked, BiodadAlive, BiodadDeathCause, B
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(long Original_ID, int Original_SubjectTag, global::System.Nullable<short> Original_BioparentsYearLastAsked, short Original_BiodadAlive, byte Original_BiodadDeathCause, global::System.Nullable<byte> Original_BiodadDeathAge, short Original_BiodadUSBorn, global::System.Nullable<byte> Original_BiodadHighestGrade, short Original_BiograndfatherUSBorn, short Original_BiomomAlive, byte Original_BiomomDeathCause, global::System.Nullable<byte> Original_BiomomDeathAge, short Original_BiomomUSBorn, global::System.Nullable<byte> Original_BiomomHighestGrade) {
+        public virtual int Delete(long Original_ID, int Original_SubjectTag, global::System.Nullable<short> Original_BiodadYearLastAsked, short Original_BiodadAlive, short Original_BiodadDeathCause, global::System.Nullable<byte> Original_BiodadDeathAge, short Original_BiodadUSBorn, global::System.Nullable<byte> Original_BiodadHighestGrade, short Original_BiograndfatherUSBorn, global::System.Nullable<short> Original_BiomomYearLastAsked, short Original_BiomomAlive, short Original_BiomomDeathCause, global::System.Nullable<byte> Original_BiomomDeathAge, short Original_BiomomUSBorn, global::System.Nullable<byte> Original_BiomomHighestGrade) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((long)(Original_ID));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_SubjectTag));
-            if ((Original_BioparentsYearLastAsked.HasValue == true)) {
+            if ((Original_BiodadYearLastAsked.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((short)(Original_BioparentsYearLastAsked.Value));
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((short)(Original_BiodadYearLastAsked.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             this.Adapter.DeleteCommand.Parameters[4].Value = ((short)(Original_BiodadAlive));
-            this.Adapter.DeleteCommand.Parameters[5].Value = ((byte)(Original_BiodadDeathCause));
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((short)(Original_BiodadDeathCause));
             if ((Original_BiodadDeathAge.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[7].Value = ((byte)(Original_BiodadDeathAge.Value));
@@ -23097,24 +23149,32 @@ SELECT ID, SubjectTag, BioparentsYearLastAsked, BiodadAlive, BiodadDeathCause, B
                 this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
             this.Adapter.DeleteCommand.Parameters[11].Value = ((short)(Original_BiograndfatherUSBorn));
-            this.Adapter.DeleteCommand.Parameters[12].Value = ((short)(Original_BiomomAlive));
-            this.Adapter.DeleteCommand.Parameters[13].Value = ((byte)(Original_BiomomDeathCause));
+            if ((Original_BiomomYearLastAsked.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((short)(Original_BiomomYearLastAsked.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.DeleteCommand.Parameters[14].Value = ((short)(Original_BiomomAlive));
+            this.Adapter.DeleteCommand.Parameters[15].Value = ((short)(Original_BiomomDeathCause));
             if ((Original_BiomomDeathAge.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((byte)(Original_BiomomDeathAge.Value));
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((byte)(Original_BiomomDeathAge.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[15].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[17].Value = global::System.DBNull.Value;
             }
-            this.Adapter.DeleteCommand.Parameters[16].Value = ((short)(Original_BiomomUSBorn));
+            this.Adapter.DeleteCommand.Parameters[18].Value = ((short)(Original_BiomomUSBorn));
             if ((Original_BiomomHighestGrade.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[18].Value = ((byte)(Original_BiomomHighestGrade.Value));
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((byte)(Original_BiomomHighestGrade.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -23136,16 +23196,16 @@ SELECT ID, SubjectTag, BioparentsYearLastAsked, BiodadAlive, BiodadDeathCause, B
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int SubjectTag, global::System.Nullable<short> BioparentsYearLastAsked, short BiodadAlive, byte BiodadDeathCause, global::System.Nullable<byte> BiodadDeathAge, short BiodadUSBorn, global::System.Nullable<byte> BiodadHighestGrade, short BiograndfatherUSBorn, short BiomomAlive, byte BiomomDeathCause, global::System.Nullable<byte> BiomomDeathAge, short BiomomUSBorn, global::System.Nullable<byte> BiomomHighestGrade) {
+        public virtual int Insert(int SubjectTag, global::System.Nullable<short> BiodadYearLastAsked, short BiodadAlive, short BiodadDeathCause, global::System.Nullable<byte> BiodadDeathAge, short BiodadUSBorn, global::System.Nullable<byte> BiodadHighestGrade, short BiograndfatherUSBorn, global::System.Nullable<short> BiomomYearLastAsked, short BiomomAlive, short BiomomDeathCause, global::System.Nullable<byte> BiomomDeathAge, short BiomomUSBorn, global::System.Nullable<byte> BiomomHighestGrade) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(SubjectTag));
-            if ((BioparentsYearLastAsked.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((short)(BioparentsYearLastAsked.Value));
+            if ((BiodadYearLastAsked.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((short)(BiodadYearLastAsked.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             this.Adapter.InsertCommand.Parameters[2].Value = ((short)(BiodadAlive));
-            this.Adapter.InsertCommand.Parameters[3].Value = ((byte)(BiodadDeathCause));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((short)(BiodadDeathCause));
             if ((BiodadDeathAge.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[4].Value = ((byte)(BiodadDeathAge.Value));
             }
@@ -23160,20 +23220,26 @@ SELECT ID, SubjectTag, BioparentsYearLastAsked, BiodadAlive, BiodadDeathCause, B
                 this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             this.Adapter.InsertCommand.Parameters[7].Value = ((short)(BiograndfatherUSBorn));
-            this.Adapter.InsertCommand.Parameters[8].Value = ((short)(BiomomAlive));
-            this.Adapter.InsertCommand.Parameters[9].Value = ((byte)(BiomomDeathCause));
+            if ((BiomomYearLastAsked.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((short)(BiomomYearLastAsked.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.InsertCommand.Parameters[9].Value = ((short)(BiomomAlive));
+            this.Adapter.InsertCommand.Parameters[10].Value = ((short)(BiomomDeathCause));
             if ((BiomomDeathAge.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((byte)(BiomomDeathAge.Value));
+                this.Adapter.InsertCommand.Parameters[11].Value = ((byte)(BiomomDeathAge.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
-            this.Adapter.InsertCommand.Parameters[11].Value = ((short)(BiomomUSBorn));
+            this.Adapter.InsertCommand.Parameters[12].Value = ((short)(BiomomUSBorn));
             if ((BiomomHighestGrade.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[12].Value = ((byte)(BiomomHighestGrade.Value));
+                this.Adapter.InsertCommand.Parameters[13].Value = ((byte)(BiomomHighestGrade.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -23197,42 +23263,44 @@ SELECT ID, SubjectTag, BioparentsYearLastAsked, BiodadAlive, BiodadDeathCause, B
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(
                     int SubjectTag, 
-                    global::System.Nullable<short> BioparentsYearLastAsked, 
+                    global::System.Nullable<short> BiodadYearLastAsked, 
                     short BiodadAlive, 
-                    byte BiodadDeathCause, 
+                    short BiodadDeathCause, 
                     global::System.Nullable<byte> BiodadDeathAge, 
                     short BiodadUSBorn, 
                     global::System.Nullable<byte> BiodadHighestGrade, 
                     short BiograndfatherUSBorn, 
+                    global::System.Nullable<short> BiomomYearLastAsked, 
                     short BiomomAlive, 
-                    byte BiomomDeathCause, 
+                    short BiomomDeathCause, 
                     global::System.Nullable<byte> BiomomDeathAge, 
                     short BiomomUSBorn, 
                     global::System.Nullable<byte> BiomomHighestGrade, 
                     long Original_ID, 
                     int Original_SubjectTag, 
-                    global::System.Nullable<short> Original_BioparentsYearLastAsked, 
+                    global::System.Nullable<short> Original_BiodadYearLastAsked, 
                     short Original_BiodadAlive, 
-                    byte Original_BiodadDeathCause, 
+                    short Original_BiodadDeathCause, 
                     global::System.Nullable<byte> Original_BiodadDeathAge, 
                     short Original_BiodadUSBorn, 
                     global::System.Nullable<byte> Original_BiodadHighestGrade, 
                     short Original_BiograndfatherUSBorn, 
+                    global::System.Nullable<short> Original_BiomomYearLastAsked, 
                     short Original_BiomomAlive, 
-                    byte Original_BiomomDeathCause, 
+                    short Original_BiomomDeathCause, 
                     global::System.Nullable<byte> Original_BiomomDeathAge, 
                     short Original_BiomomUSBorn, 
                     global::System.Nullable<byte> Original_BiomomHighestGrade, 
                     long ID) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(SubjectTag));
-            if ((BioparentsYearLastAsked.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((short)(BioparentsYearLastAsked.Value));
+            if ((BiodadYearLastAsked.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((short)(BiodadYearLastAsked.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             this.Adapter.UpdateCommand.Parameters[2].Value = ((short)(BiodadAlive));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((byte)(BiodadDeathCause));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((short)(BiodadDeathCause));
             if ((BiodadDeathAge.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[4].Value = ((byte)(BiodadDeathAge.Value));
             }
@@ -23247,71 +23315,85 @@ SELECT ID, SubjectTag, BioparentsYearLastAsked, BiodadAlive, BiodadDeathCause, B
                 this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             this.Adapter.UpdateCommand.Parameters[7].Value = ((short)(BiograndfatherUSBorn));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((short)(BiomomAlive));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((byte)(BiomomDeathCause));
+            if ((BiomomYearLastAsked.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((short)(BiomomYearLastAsked.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((short)(BiomomAlive));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((short)(BiomomDeathCause));
             if ((BiomomDeathAge.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((byte)(BiomomDeathAge.Value));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((byte)(BiomomDeathAge.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((short)(BiomomUSBorn));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((short)(BiomomUSBorn));
             if ((BiomomHighestGrade.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((byte)(BiomomHighestGrade.Value));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((byte)(BiomomHighestGrade.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((long)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_SubjectTag));
-            if ((Original_BioparentsYearLastAsked.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((short)(Original_BioparentsYearLastAsked.Value));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((long)(Original_ID));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_SubjectTag));
+            if ((Original_BiodadYearLastAsked.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((short)(Original_BiodadYearLastAsked.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[17].Value = ((short)(Original_BiodadAlive));
-            this.Adapter.UpdateCommand.Parameters[18].Value = ((byte)(Original_BiodadDeathCause));
+            this.Adapter.UpdateCommand.Parameters[18].Value = ((short)(Original_BiodadAlive));
+            this.Adapter.UpdateCommand.Parameters[19].Value = ((short)(Original_BiodadDeathCause));
             if ((Original_BiodadDeathAge.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((byte)(Original_BiodadDeathAge.Value));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((byte)(Original_BiodadDeathAge.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[21].Value = ((short)(Original_BiodadUSBorn));
+            this.Adapter.UpdateCommand.Parameters[22].Value = ((short)(Original_BiodadUSBorn));
             if ((Original_BiodadHighestGrade.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((byte)(Original_BiodadHighestGrade.Value));
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((byte)(Original_BiodadHighestGrade.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[24].Value = ((short)(Original_BiograndfatherUSBorn));
-            this.Adapter.UpdateCommand.Parameters[25].Value = ((short)(Original_BiomomAlive));
-            this.Adapter.UpdateCommand.Parameters[26].Value = ((byte)(Original_BiomomDeathCause));
+            this.Adapter.UpdateCommand.Parameters[25].Value = ((short)(Original_BiograndfatherUSBorn));
+            if ((Original_BiomomYearLastAsked.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((short)(Original_BiomomYearLastAsked.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[28].Value = ((short)(Original_BiomomAlive));
+            this.Adapter.UpdateCommand.Parameters[29].Value = ((short)(Original_BiomomDeathCause));
             if ((Original_BiomomDeathAge.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((byte)(Original_BiomomDeathAge.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[29].Value = ((short)(Original_BiomomUSBorn));
-            if ((Original_BiomomHighestGrade.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((byte)(Original_BiomomHighestGrade.Value));
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((byte)(Original_BiomomDeathAge.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[31].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[32].Value = ((long)(ID));
+            this.Adapter.UpdateCommand.Parameters[32].Value = ((short)(Original_BiomomUSBorn));
+            if ((Original_BiomomHighestGrade.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((byte)(Original_BiomomHighestGrade.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[35].Value = ((long)(ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -23334,33 +23416,35 @@ SELECT ID, SubjectTag, BioparentsYearLastAsked, BiodadAlive, BiodadDeathCause, B
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(
                     int SubjectTag, 
-                    global::System.Nullable<short> BioparentsYearLastAsked, 
+                    global::System.Nullable<short> BiodadYearLastAsked, 
                     short BiodadAlive, 
-                    byte BiodadDeathCause, 
+                    short BiodadDeathCause, 
                     global::System.Nullable<byte> BiodadDeathAge, 
                     short BiodadUSBorn, 
                     global::System.Nullable<byte> BiodadHighestGrade, 
                     short BiograndfatherUSBorn, 
+                    global::System.Nullable<short> BiomomYearLastAsked, 
                     short BiomomAlive, 
-                    byte BiomomDeathCause, 
+                    short BiomomDeathCause, 
                     global::System.Nullable<byte> BiomomDeathAge, 
                     short BiomomUSBorn, 
                     global::System.Nullable<byte> BiomomHighestGrade, 
                     long Original_ID, 
                     int Original_SubjectTag, 
-                    global::System.Nullable<short> Original_BioparentsYearLastAsked, 
+                    global::System.Nullable<short> Original_BiodadYearLastAsked, 
                     short Original_BiodadAlive, 
-                    byte Original_BiodadDeathCause, 
+                    short Original_BiodadDeathCause, 
                     global::System.Nullable<byte> Original_BiodadDeathAge, 
                     short Original_BiodadUSBorn, 
                     global::System.Nullable<byte> Original_BiodadHighestGrade, 
                     short Original_BiograndfatherUSBorn, 
+                    global::System.Nullable<short> Original_BiomomYearLastAsked, 
                     short Original_BiomomAlive, 
-                    byte Original_BiomomDeathCause, 
+                    short Original_BiomomDeathCause, 
                     global::System.Nullable<byte> Original_BiomomDeathAge, 
                     short Original_BiomomUSBorn, 
                     global::System.Nullable<byte> Original_BiomomHighestGrade) {
-            return this.Update(SubjectTag, BioparentsYearLastAsked, BiodadAlive, BiodadDeathCause, BiodadDeathAge, BiodadUSBorn, BiodadHighestGrade, BiograndfatherUSBorn, BiomomAlive, BiomomDeathCause, BiomomDeathAge, BiomomUSBorn, BiomomHighestGrade, Original_ID, Original_SubjectTag, Original_BioparentsYearLastAsked, Original_BiodadAlive, Original_BiodadDeathCause, Original_BiodadDeathAge, Original_BiodadUSBorn, Original_BiodadHighestGrade, Original_BiograndfatherUSBorn, Original_BiomomAlive, Original_BiomomDeathCause, Original_BiomomDeathAge, Original_BiomomUSBorn, Original_BiomomHighestGrade, Original_ID);
+            return this.Update(SubjectTag, BiodadYearLastAsked, BiodadAlive, BiodadDeathCause, BiodadDeathAge, BiodadUSBorn, BiodadHighestGrade, BiograndfatherUSBorn, BiomomYearLastAsked, BiomomAlive, BiomomDeathCause, BiomomDeathAge, BiomomUSBorn, BiomomHighestGrade, Original_ID, Original_SubjectTag, Original_BiodadYearLastAsked, Original_BiodadAlive, Original_BiodadDeathCause, Original_BiodadDeathAge, Original_BiodadUSBorn, Original_BiodadHighestGrade, Original_BiograndfatherUSBorn, Original_BiomomYearLastAsked, Original_BiomomAlive, Original_BiomomDeathCause, Original_BiomomDeathAge, Original_BiomomUSBorn, Original_BiomomHighestGrade, Original_ID);
         }
     }
     

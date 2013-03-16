@@ -1563,13 +1563,14 @@
 					<DataGrid.Columns>
 						<DataGridTextColumn x:Name="iDColumn13" Binding="{Binding Path=ID}" Header="ID" IsReadOnly="True" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="subjectTagColumn8" Binding="{Binding Path=SubjectTag}" Header="Subject Tag" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="bioparentsYearLastAskedColumn" Binding="{Binding Path=BioparentsYearLastAsked}" Header="Bioparents Year Last Asked" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biodadYearLastAskedColumn" Binding="{Binding Path=BiodadYearLastAsked}" Header="Biodad Year Last Asked" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biodadAliveColumn2" Binding="{Binding Path=BiodadAlive}" Header="Biodad Alive" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biodadDeathCauseColumn" Binding="{Binding Path=BiodadDeathCause}" Header="Biodad Death Cause" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biodadDeathAgeColumn" Binding="{Binding Path=BiodadDeathAge}" Header="Biodad Death Age" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biodadUSBornColumn" Binding="{Binding Path=BiodadUSBorn}" Header="Biodad USBorn" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biodadHighestGradeColumn" Binding="{Binding Path=BiodadHighestGrade}" Header="Biodad Highest Grade" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biograndfatherUSBornColumn" Binding="{Binding Path=BiograndfatherUSBorn}" Header="Biograndfather USBorn" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="biomomYearLastAskedColumn" Binding="{Binding Path=BiomomYearLastAsked}" Header="Biomom Year Last Asked" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biomomAliveColumn" Binding="{Binding Path=BiomomAlive}" Header="Biomom Alive" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biomomDeathCauseColumn" Binding="{Binding Path=BiomomDeathCause}" Header="Biomom Death Cause" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biomomDeathAgeColumn" Binding="{Binding Path=BiomomDeathAge}" Header="Biomom Death Age" Width="SizeToHeader" />

@@ -10,7 +10,7 @@ namespace Nls.BaseAssembly {
 			Refusal = -1,
 		}
 		public enum ShareBioparentGen1 : int {
-			DoesNotExistInNls = -99,
+			//DoesNotExistInNls = -99,
 			NonInterview = -5,
 			ValidSkip = -4,
 			DoNotKnow = -2,
@@ -19,19 +19,34 @@ namespace Nls.BaseAssembly {
 			Yes = 1,
 			NotSure = 2,
 		}
-		public enum BioparentOfGen1DeathCause : short { //eg, H00137.00
-			//NonInterview = -5,
-			//ValidSkip = -4,
+		public enum Gen1BioparentBirthCountry : short { //eg, R00061.00
+			InvalidSkip = -3,
+			DoNotKnow = -2,
+			Refusal = -1,
+			US = 1,
+			NotUS = 2,
+			DidNotKnowParent = 3,
+		}
+		public enum Gen1BioparentAlive : short { //eg, H00024.00
+			ValidSkip = -4,
 			//InvalidSkip = -3,
-			//DoNotKnow = -2,
-			//Refusal = -1,
-			NoValue=0,
+			DoNotKnow = -2,
+			Refusal = -1,
+			No = 0,
+			Yes = 1,
+		}
+		public enum Gen1BioparentDeathCause : short { //eg, H00137.00
+			NonInterview = -5,
+			ValidSkip = -4,
+			InvalidSkip = -3,
+			DoNotKnow = -2,
+			Refusal = -1,
 			MIOrStroke = 1,
-			Accident= 2,
-			Cancer= 3,
-			OldAge= 4,
-			Emphysema= 5,
-			Other= 6,
+			Accident = 2,
+			Cancer = 3,
+			OldAge = 4,
+			Emphysema = 5,
+			Other = 6,
 		}
 		public enum BioparentOfGen1InHH : short { //eg, R28372.00
 			NonInterview = -5,

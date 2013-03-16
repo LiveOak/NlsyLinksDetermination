@@ -11,3 +11,21 @@ keepExistingTable <- FALSE
 sqlSave(channel, dat=ds, tablename="Extract.tblGen1Implicit", safer=keepExistingTable, rownames=FALSE, append=FALSE)
 odbcClose(channel)
 #Don't forget to make Gen1ID the primary key in the table.
+
+
+#Verify that you need to check only H0001600 to ignore H0001700 and H0001800
+table(ds$H0001600, ds$H0001700) 
+table(ds$H0001600, ds$H0001800)
+
+#Verify that you need to check only H0002400 to ignore H0002500 and H0002600
+table(ds$H0002400, ds$H0002500) 
+table(ds$H0002400, ds$H0002600)
+
+#Verify that you need to check only H0013600 to ignore H0013700 and H0013800
+table(ds$H0013600, ds$H0013700) 
+table(ds$H0013600, ds$H0013800)
+
+#Verify that you need to check only H0014700 to ignore H0014700 and H0014800
+table(ds$H0014700, ds$H0014800) 
+table(ds$H0014700, ds$H0014900)
+
