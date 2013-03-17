@@ -200,8 +200,8 @@ namespace LinksGui {
 			BulkUpdate(schemaName, _dsLinks.tblResponse, AcceptResponseChanges);
 			BulkUpdate(schemaName, _dsLinks.tblSurveyTime, LoadSurveyTime);
 			BulkUpdate(schemaName, _dsLinks.tblRosterGen1, LoadRosterGen1);
-			BulkUpdate(schemaName, _dsLinks.tblParentsOfGen1Retro, LoadRosterGen1);
-			BulkUpdate(schemaName, _dsLinks.tblParentsOfGen1Current, LoadRosterGen1);
+			BulkUpdate(schemaName, _dsLinks.tblParentsOfGen1Retro, LoadParentsOfGen1Retro);
+			BulkUpdate(schemaName, _dsLinks.tblParentsOfGen1Current, LoadParentsOfGen1Current);
 			BulkUpdate(schemaName, _dsLinks.tblBabyDaddy, LoadBabyDaddy);
 			BulkUpdate(schemaName, _dsLinks.tblFatherOfGen2, LoadFatherOfGen2);
 			BulkUpdate(schemaName, _dsLinks.tblSubjectDetails, LoadSubjectDetails);

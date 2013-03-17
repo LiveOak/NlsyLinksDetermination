@@ -9,7 +9,7 @@ namespace Nls.BaseAssembly {
 	public sealed class MarkerGen2 {
 		#region Fields
 		private readonly LinksDataSet _dsLinks;
-		private readonly ItemYearCount _itemYearCount;
+		//private readonly ItemYearCount _itemYearCount;
 		private readonly Item[] _items = { Item.ShareBiodadGen2, Item.IDCodeOfOtherInterviewedBiodadGen2 };
 		private readonly string _itemIDsString = "";
 		#endregion
@@ -20,7 +20,7 @@ namespace Nls.BaseAssembly {
 			if ( dsLinks.tblRelatedStructure.Count <= 0 ) throw new ArgumentException("There shouldn't be zero rows in tblRelatedStructure.");
 			if ( dsLinks.tblMarkerGen2.Count != 0 ) throw new ArgumentException("There should be zero rows in tblMarkerGen2.");
 			_dsLinks = dsLinks;
-			_itemYearCount = new ItemYearCount(_dsLinks);
+			//_itemYearCount = new ItemYearCount(_dsLinks);
 			_itemIDsString = CommonCalculations.ConvertItemsToString(_items);
 		}
 		#endregion
@@ -167,7 +167,7 @@ namespace Nls.BaseAssembly {
 			LinksDataSet.tblSubjectRow drSubject1 = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1;
 			LinksDataSet.tblSubjectRow drSubject2 = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject2;
 			Int32 lastTwoDigitsSubject2 = CommonFunctions.LastTwoDigitsOfGen2SubjectID(drSubject2);
-			Int32 surveyYearCount = _itemYearCount.ShareBiodadGen2;
+			Int32 surveyYearCount = ItemYears.Gen2ShareBiodad.Length;
 
 			string selectToGetLoopIndex = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				drSubject1.SubjectTag, dtSubject1.SubjectTagColumn.ColumnName,

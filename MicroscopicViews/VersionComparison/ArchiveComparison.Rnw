@@ -58,12 +58,12 @@ if( 2 %in% includedRelationshipPaths ) {
   PrintMarginalTable(dsJoint=dsPrevious, relationshipPathID=2, title="Counts for Gen2Siblings (Previous version of links)")
 }
 @
-% 
-% <<echo=FALSE, results='asis'>>=
-% if( sum(ds$RelationshipPath==1) > 0 ) 
-%   PrintConditionalTable(relationshipPathID=1, tabelCaption="Counts for Gen1Housemates")
-% if( sum(ds$RelationshipPath==2) > 0 )
-%   PrintConditionalTable(relationshipPathID=2, tabelCaption="Counts for Gen2Siblings")
-% @
+
+<<echo=FALSE, results='asis'>>=
+if( sum(ds$RelationshipPath==1) > 0 ) 
+  PrintConditionalTable(relationshipPathID=1, tabelCaption="Counts for Gen1Housemates")
+if( sum(ds$RelationshipPath==2) > 0 )
+  PrintConditionalTable(relationshipPathID=2, tabelCaption="Counts for Gen2Siblings")
+@
 
 \end{document}

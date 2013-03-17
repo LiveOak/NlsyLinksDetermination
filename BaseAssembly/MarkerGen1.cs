@@ -7,7 +7,6 @@ namespace Nls.BaseAssembly {
 	public sealed class MarkerGen1 {
 		#region Fields
 		private readonly LinksDataSet _dsLinks;
-		private readonly ItemYearCount _itemYearCount;
 		private readonly Item[] _items = { Item.IDOfOther1979RosterGen1, Item.RosterGen1979, Item.IDCodeOfOtherSiblingGen1, Item.ShareBiomomGen1, Item.ShareBiodadGen1 };
 		private readonly string _itemIDsString = "";
 		#endregion
@@ -19,7 +18,6 @@ namespace Nls.BaseAssembly {
 			if ( dsLinks.tblRosterGen1.Count <= 0 ) throw new ArgumentException("There shouldn't be zero rows in tblRosterGen1.");
 			if ( dsLinks.tblMarkerGen1.Count != 0 ) throw new ArgumentException("There should be zero rows in tblMarkerGen1.");
 			_dsLinks = dsLinks;
-			_itemYearCount = new ItemYearCount(_dsLinks);
 			_itemIDsString = CommonCalculations.ConvertItemsToString(_items);
 		}
 		#endregion
@@ -39,8 +37,8 @@ namespace Nls.BaseAssembly {
 					//SurveyTime.SubjectSurvey[] surveysSubject2 = SurveyTime.RetrieveSubjectSurveys(subject2Tag, _dsLinks);
 
 					recordsAdded += FromRoster(drRelated, dtSubject1);
-					recordsAdded += FromShareBiomom(drRelated, dtSubject1);
-					recordsAdded += FromShareBiodad(drRelated, dtSubject1);
+					recordsAdded += FromShareBioparent(Item.ShareBiomomGen1, MarkerType.ShareBiomom, drRelated, dtSubject1);
+					recordsAdded += FromShareBioparent(Item.ShareBiodadGen1, MarkerType.ShareBiodad, drRelated, dtSubject1);
 				}
 			}
 			sw.Stop();
@@ -98,11 +96,9 @@ namespace Nls.BaseAssembly {
 			const Int32 recordsAdded = 1;
 			return recordsAdded;
 		}
-		private Int32 FromShareBiomom ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblResponseDataTable dtSubject1 ) {
+		private Int32 FromShareBioparent ( Item itemRelationship,MarkerType markerType,  LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblResponseDataTable dtSubject1 ) {
 			const Item itemID = Item.IDCodeOfOtherSiblingGen1;
-			const Item itemRelationship = Item.ShareBiomomGen1;
-			const MarkerType markerType = MarkerType.ShareBiomom;
-			Int32 surveyYearCount = _itemYearCount.ShareBiomomGen1;
+			Int32 surveyYearCount = ItemYears.Gen1ShareBioparent.Length;
 
 			LinksDataSet.tblSubjectRow drSubject1 = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1;
 			LinksDataSet.tblSubjectRow drSubject2 = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject2;
@@ -142,56 +138,18 @@ namespace Nls.BaseAssembly {
 				else
 					sameGeneration = MarkerEvidence.Ambiguous;
 
-				AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, drResponse.SurveyYear, mzEvidence, sameGeneration, evidence, MarkerEvidence.Irrelevant, evidence);
-				recordsAdded += 1;
-			}
-			return recordsAdded;
-		}
-		private Int32 FromShareBiodad ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblResponseDataTable dtSubject1 ) {
-			const Item itemID = Item.IDCodeOfOtherSiblingGen1;
-			const Item itemRelationship = Item.ShareBiodadGen1;
-			const MarkerType markerType = MarkerType.ShareBiodad;
-			Int32 surveyYearCount = _itemYearCount.ShareBiodadGen1;
-
-			LinksDataSet.tblSubjectRow drSubject1 = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1;
-			LinksDataSet.tblSubjectRow drSubject2 = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject2;
-
-			//Use the other subject's ID to find the appropriate 'loop index';
-			string selectToGetLoopIndex = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
-				drSubject1.SubjectTag, dtSubject1.SubjectTagColumn.ColumnName,
-				Convert.ToInt16(itemID), dtSubject1.ItemColumn.ColumnName,
-				drSubject2.SubjectID, dtSubject1.ValueColumn.ColumnName);
-			LinksDataSet.tblResponseRow[] drsForLoopIndex = (LinksDataSet.tblResponseRow[])dtSubject1.Select(selectToGetLoopIndex);
-			Trace.Assert(drsForLoopIndex.Length <= surveyYearCount, string.Format("No more than {0} row(s) should be returned that matches Subject2 for item '{1}'.", surveyYearCount, itemID.ToString()));
-
-			if ( drsForLoopIndex.Length == 0 )
-				return 0;
-
-			//Use the loop index (that corresponds to the other subject) to find the ShareBiodad response.
-			//LinksDataSet.tblResponseRow drResponse = drsForLoopIndex[0];
-			string selectToShareResponse = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
-				drSubject1.SubjectTag, dtSubject1.SubjectTagColumn.ColumnName,
-				Convert.ToInt16(itemRelationship), dtSubject1.ItemColumn.ColumnName,
-				drsForLoopIndex[0].LoopIndex, dtSubject1.LoopIndexColumn.ColumnName);
-			LinksDataSet.tblResponseRow[] drsForShareResponse = (LinksDataSet.tblResponseRow[])dtSubject1.Select(selectToShareResponse);
-			Trace.Assert(drsForLoopIndex.Length <= surveyYearCount, string.Format("No more than {0} row(s) should be returned that matches Subject2 for item '{1}'.", surveyYearCount, Item.IDCodeOfOtherInterviewedBiodadGen2.ToString()));
-			Int32 recordsAdded = 0;
-
-			foreach ( LinksDataSet.tblResponseRow drResponse in drsForShareResponse ) {
-				EnumResponsesGen1.ShareBioparentGen1 shareBioparent = (EnumResponsesGen1.ShareBioparentGen1)drResponse.Value;
-
-				MarkerEvidence evidence = Assign.EvidenceGen1.ShareBioparentsForBioparents(shareBioparent);
-				MarkerEvidence mzEvidence;
-				if ( evidence == MarkerEvidence.StronglySupports ) mzEvidence = MarkerEvidence.Consistent;
-				else mzEvidence = MarkerEvidence.Disconfirms;
-
-				MarkerEvidence sameGeneration;
-				if ( evidence == MarkerEvidence.Supports || evidence == MarkerEvidence.StronglySupports )
-					sameGeneration = MarkerEvidence.StronglySupports;
-				else
-					sameGeneration = MarkerEvidence.Ambiguous;
-
-				AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, drResponse.SurveyYear, mzEvidence, sameGeneration, MarkerEvidence.Irrelevant, evidence, evidence);
+				switch( markerType){
+					case MarkerType.ShareBiodad:
+						AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, drResponse.SurveyYear, mzEvidence: mzEvidence, sameGenerationEvidence: sameGeneration,
+							biomomEvidence: MarkerEvidence.Irrelevant, biodadEvidence: evidence, biograndparentEvidence: evidence);
+						break;
+					case MarkerType.ShareBiomom:
+						AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, drResponse.SurveyYear, mzEvidence: mzEvidence, sameGenerationEvidence: sameGeneration,
+							biomomEvidence: evidence, biodadEvidence: MarkerEvidence.Irrelevant, biograndparentEvidence: evidence);
+						break;
+					default:
+						throw new ArgumentOutOfRangeException("markerType", markerType, "The 'FromShareBioparent' function does not accommodate this markerType.");
+				}
 				recordsAdded += 1;
 			}
 			return recordsAdded;

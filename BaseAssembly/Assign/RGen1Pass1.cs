@@ -145,8 +145,8 @@ namespace Nls.BaseAssembly.Assign {
 			}
 		}
 		private float? CalculateRExplicitSingleSibVersion ( Int32 idRelated, Int32 subjectTag ) {
-			MarkerEvidence biomom = ReduceShareBioparentToOne(MarkerType.ShareBiomom, ItemYears.Gen1ShareBiomom.Length, idRelated);
-			MarkerEvidence biodad = ReduceShareBioparentToOne(MarkerType.ShareBiodad, ItemYears.Gen1ShareBiodad.Length, idRelated);
+			MarkerEvidence biomom = ReduceShareBioparentToOne(MarkerType.ShareBiomom, ItemYears.Gen1ShareBioparent.Length, idRelated);
+			MarkerEvidence biodad = ReduceShareBioparentToOne(MarkerType.ShareBiodad, ItemYears.Gen1ShareBioparent.Length, idRelated);
 			if ( biomom == MarkerEvidence.Missing || biodad == MarkerEvidence.Missing ) {
 				return null;
 			}

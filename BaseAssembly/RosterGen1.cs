@@ -7,7 +7,7 @@ namespace Nls.BaseAssembly {
 	public sealed class RosterGen1 {
 		#region Fields
 		private readonly LinksDataSet _dsLinks;
-		private readonly ItemYearCount _itemYearCount;
+		//private readonly ItemYearCount _itemYearCount;
 		private readonly Item[] _items = { Item.IDOfOther1979RosterGen1, Item.RosterGen1979 }; //, Item.IDCodeOfOtherSiblingGen1
 		private readonly string _itemIDsString = "";
 		#endregion
@@ -19,7 +19,7 @@ namespace Nls.BaseAssembly {
 			if ( dsLinks.tblRelatedStructure.Count <= 0 ) throw new ArgumentException("There shouldn't be zero rows in tblRelatedStructure.");
 			if ( dsLinks.tblRosterGen1.Count != 0 ) throw new ArgumentException("There should be zero rows in tblMarkerGen1.");
 			_dsLinks = dsLinks;
-			_itemYearCount = new ItemYearCount(_dsLinks);
+			//_itemYearCount = new ItemYearCount(_dsLinks);
 			_itemIDsString = CommonCalculations.ConvertItemsToString(_items);
 		}
 		#endregion
@@ -56,7 +56,7 @@ namespace Nls.BaseAssembly {
 				}
 			}
 			sw.Stop();
-			string message = string.Format("{0:N0} Roster Records were processed.\n\nElapsed time: {1}", recordsAdded, sw.Elapsed.ToString());
+			string message = string.Format("{0:N0} Roster Records were processed.\nElapsed time: {1}", recordsAdded, sw.Elapsed.ToString());
 			return message;
 		}
 		#endregion
@@ -77,7 +77,7 @@ namespace Nls.BaseAssembly {
 		private EnumResponsesGen1.Gen1Roster RetrieveResponse ( Int32 subject1Tag, Int32 subject2ID, LinksDataSet.tblResponseDataTable dtFamily ) {
 			const Item itemID = Item.IDOfOther1979RosterGen1;
 			const Item itemRelationship = Item.RosterGen1979;
-			Int32 surveyYearCount = _itemYearCount.ShareRosterGen1;
+			Int32 surveyYearCount = 1;  //The roster was asked only in 1979.
 
 			//Use the other subject's ID to find the appropriate 'loop index';
 			string selectToGetLoopIndex = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
