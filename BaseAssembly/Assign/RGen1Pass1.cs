@@ -31,6 +31,9 @@ namespace Nls.BaseAssembly.Assign {
 		//private float? _rRoster = float.NaN;
 		private float? _rImplicitPass1 = null;// float.NaN;
 		private float? _rImplicit2004 = float.NaN;
+		
+		private readonly Tristate _ImplicitShareBiomom;
+		private readonly Tristate _ImplicitShareBiodad;
 
 		private float? _rExplicitOldestSibVersion = float.NaN;
 		private float? _rExplicitYoungestSibVersion = float.NaN;
@@ -101,9 +104,12 @@ namespace Nls.BaseAssembly.Assign {
 				else if(drMz.Related) _isRelatedInMZManual = Tristate.Yes;
 				else _isRelatedInMZManual = Tristate.No;
 			}
+			
+			//MarkerEvidence biomomDeathAge = MarkerGen2.RetrieveBiodadMarkerFromGen1(_idRelatedOlderAboutYounger, MarkerType.BabyDaddyDeathDate, _dtMarkersGen2);
+
 
 			//_rosterAssignment = _dsLinks.tblRosterGen1.FindByRelatedID(idRelated).id
-			//_rImplicitPass1 = CalculateRImplicitPass1(babyDaddyDeathDate, babyDaddyAlive, babyDaddyInHH, babyDaddyLeftHHDate, babyDaddyDistanceFromHH, babyDaddyAsthma);
+			//_rImplicitPass1 = CalculateRImplicitPass1();
 			_rImplicit2004 = RetrieveRImplicit2004();
 			_rExplicitOldestSibVersion = CalculateRExplicitSingleSibVersion(_idRelatedOlderAboutYounger, _drLeft.Subject1Tag);
 			_rExplicitYoungestSibVersion = CalculateRExplicitSingleSibVersion(_idRelatedYoungerAboutOlder, _drLeft.Subject2Tag);
@@ -130,6 +136,9 @@ namespace Nls.BaseAssembly.Assign {
 			else {
 				return null;//The record wasn't contained in the links created in 2004.
 			}
+		}
+		private float? CalculateRImplicitPass1 ( MarkerEvidence biomomDeathAge ) {
+			throw new NotImplementedException();
 		}
 		private float? CalculateRRoster ( Int32 idRelated ) {
 			//TODO: Check overrides first.
@@ -175,7 +184,6 @@ namespace Nls.BaseAssembly.Assign {
 			else {
 				return null;
 				//return RCoefficients.SiblingAmbiguous;
-
 			}
 		}
 		private float? CalculateRExplicitPass1 ( ) {

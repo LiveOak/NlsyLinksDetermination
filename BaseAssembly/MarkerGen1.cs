@@ -191,6 +191,24 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Public Static Methods
+		internal static MarkerEvidence RetrieveParentCurrentMarker( Int64 relatedIDLeft, MarkerType markerType, LinksDataSet.tblMarkerGen1DataTable dtMarker ) {
+			if ( dtMarker == null ) throw new ArgumentNullException("dtMarker");
+			string select = string.Format("{0}={1} AND {2}={3}",
+				relatedIDLeft, dtMarker.RelatedIDColumn.ColumnName,
+				(byte)markerType, dtMarker.MarkerTypeColumn.ColumnName);
+			string sort = dtMarker.SurveyYearColumn.ColumnName;
+			LinksDataSet.tblMarkerGen1Row[] drs = (LinksDataSet.tblMarkerGen1Row[])dtMarker.Select(select, sort);
+			Trace.Assert(drs.Length <= 1, "The number of returns markers should not exceed 1.");
+			if ( drs.Length == 0 )
+				return MarkerEvidence.Missing;
+			else
+				return (MarkerEvidence)drs[0].ShareBiodadEvidence;
+		}
+
+
+
+
+
 		internal static MarkerGen1Summary[] RetrieveMarkers ( Int64 relatedIDLeft, MarkerType markerType, LinksDataSet.tblMarkerGen1DataTable dtMarker, Int32 maxCount ) {
 			if ( dtMarker == null ) throw new ArgumentNullException("dtMarker");
 			string select = string.Format("{0}={1} AND {2}={3}",

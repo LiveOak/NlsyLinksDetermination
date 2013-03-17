@@ -16,7 +16,7 @@ namespace Nls.BaseAssembly.Assign {
 		//private readonly LinksDataSet.tblSubjectRow _drBare2;
 		private readonly LinksDataSet.tblSubjectDetailsRow _drSubjectDetails1;
 		private readonly LinksDataSet.tblSubjectDetailsRow _drSubjectDetails2;
-		private readonly LinksDataSet.tblMarkerGen1DataTable _dtMarkersGen1;
+		//private readonly LinksDataSet.tblMarkerGen1DataTable _dtMarkersGen1;
 		private readonly LinksDataSet.tblRelatedValuesRow _drValue;
 
 		private readonly Int32 _idRelatedLeft = Int32.MinValue;
@@ -74,7 +74,7 @@ namespace Nls.BaseAssembly.Assign {
 			}
 
 			_drValue = _dsLinks.tblRelatedValues.FindByID(_idRelatedLeft);
-			_dtMarkersGen1 = MarkerGen1.PairRelevantMarkerRows(_idRelatedLeft, _idRelatedRight, _dsLinks, _extendedID);
+			//_dtMarkersGen1 = MarkerGen1.PairRelevantMarkerRows(_idRelatedLeft, _idRelatedRight, _dsLinks, _extendedID);
 
 			//MarkerEvidence babyDaddyDeathDate = MarkerGen2.RetrieveBiodadMarkerFromGen1(_idRelatedOlderAboutYounger, MarkerType.BabyDaddyDeathDate, _dtMarkersGen2);
 			//MarkerEvidence babyDaddyAlive = MarkerGen2.RetrieveBiodadMarkerFromGen1(_idRelatedOlderAboutYounger, MarkerType.BabyDaddyAlive, _dtMarkersGen2);
