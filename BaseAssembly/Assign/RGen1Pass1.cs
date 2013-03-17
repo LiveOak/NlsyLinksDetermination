@@ -31,9 +31,12 @@ namespace Nls.BaseAssembly.Assign {
 		//private float? _rRoster = float.NaN;
 		private float? _rImplicitPass1 = null;// float.NaN;
 		private float? _rImplicit2004 = float.NaN;
-		
-		private readonly Tristate _ImplicitShareBiomom;
-		private readonly Tristate _ImplicitShareBiodad;
+
+		private readonly Tristate _implicitShareBiomom;
+		private readonly Tristate _implicitShareBiodad;
+
+		private readonly Tristate _explicitShareBiomom;
+		private readonly Tristate _explicitShareBiodad;
 
 		private float? _rExplicitOldestSibVersion = float.NaN;
 		private float? _rExplicitYoungestSibVersion = float.NaN;
@@ -91,7 +94,7 @@ namespace Nls.BaseAssembly.Assign {
 			_dtMarkersGen1 = MarkerGen1.PairRelevantMarkerRows(_idRelatedLeft, _idRelatedRight, _dsLinks, _extendedID);
 
 			LinksDataSet.tblMzManualRow drMz = Retrieve.MzManualRecord(_drBare1, _drBare2, _dsLinks);
-			
+
 			if ( drMz == null ) {
 				_multipleBirth = MultipleBirth.No;
 				_isMZ = Tristate.No;
@@ -101,26 +104,29 @@ namespace Nls.BaseAssembly.Assign {
 				_multipleBirth = (MultipleBirth)drMz.MultipleBirthIfSameSex;
 				_isMZ = (Tristate)drMz.IsMz;
 				if ( drMz.IsRelatedNull() ) _isRelatedInMZManual = Tristate.DoNotKnow;
-				else if(drMz.Related) _isRelatedInMZManual = Tristate.Yes;
+				else if ( drMz.Related ) _isRelatedInMZManual = Tristate.Yes;
 				else _isRelatedInMZManual = Tristate.No;
 			}
-			
-			//MarkerEvidence biomomDeathAge = MarkerGen2.RetrieveBiodadMarkerFromGen1(_idRelatedOlderAboutYounger, MarkerType.BabyDaddyDeathDate, _dtMarkersGen2);
+
+			MarkerEvidence explicitBiomomFromOlder = ReduceShareBioparentToOne(MarkerType.ShareBiomom, ItemYears.Gen1ShareBioparent.Length, _idRelatedOlderAboutYounger);
+			MarkerEvidence explicitBiodadFromOlder = ReduceShareBioparentToOne(MarkerType.ShareBiodad, ItemYears.Gen1ShareBioparent.Length, _idRelatedOlderAboutYounger);
+			MarkerEvidence explicitBiomomFromYounger = ReduceShareBioparentToOne(MarkerType.ShareBiomom, ItemYears.Gen1ShareBioparent.Length, _idRelatedYoungerAboutOlder);
+			MarkerEvidence explicitBiodadFromYounger = ReduceShareBioparentToOne(MarkerType.ShareBiodad, ItemYears.Gen1ShareBioparent.Length, _idRelatedYoungerAboutOlder);
 
 
-			//_rosterAssignment = _dsLinks.tblRosterGen1.FindByRelatedID(idRelated).id
+			//MarkerEvidence biomomDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.BabyDaddyDeathDate, _dtMarkersGen1);
+
+			_explicitShareBiomom = CommonFunctions.TranslateEvidenceToTristate(explicitBiomomFromOlder, explicitBiomomFromYounger);
+			_explicitShareBiodad = CommonFunctions.TranslateEvidenceToTristate(explicitBiodadFromOlder, explicitBiodadFromYounger);
+
 			//_rImplicitPass1 = CalculateRImplicitPass1();
 			_rImplicit2004 = RetrieveRImplicit2004();
-			_rExplicitOldestSibVersion = CalculateRExplicitSingleSibVersion(_idRelatedOlderAboutYounger, _drLeft.Subject1Tag);
-			_rExplicitYoungestSibVersion = CalculateRExplicitSingleSibVersion(_idRelatedYoungerAboutOlder, _drLeft.Subject2Tag);
-			_rExplicitPass1 = CalculateRExplicitPass1();
+			_rExplicitOldestSibVersion = CalculateRExplicitSingleSibVersion(explicitBiomomFromOlder, explicitBiodadFromOlder);
+			_rExplicitYoungestSibVersion = CalculateRExplicitSingleSibVersion(explicitBiomomFromYounger, explicitBiodadFromYounger);
+			_rExplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _explicitShareBiomom, shareBiodad: _explicitShareBiodad);
 			_rPass1 = CalculateRPass1();
 		}
-		#endregion
-		#region Public Methods
-		#endregion
-		#region Private Methods
-		#endregion
+		#endregion //#region Public Methods #endregion #region Private Methods #endregion
 		#region Private Methods - Estimate R
 		private float? RetrieveRImplicit2004 ( ) {
 			ImportDataSet.tblLinks2004Gen1Row drV1 = _dsImport.tblLinks2004Gen1.FindBySubject1TagSubject2Tag(_drBare1.SubjectTag, _drBare2.SubjectTag);
@@ -153,9 +159,23 @@ namespace Nls.BaseAssembly.Assign {
 				return null;
 			}
 		}
-		private float? CalculateRExplicitSingleSibVersion ( Int32 idRelated, Int32 subjectTag ) {
-			MarkerEvidence biomom = ReduceShareBioparentToOne(MarkerType.ShareBiomom, ItemYears.Gen1ShareBioparent.Length, idRelated);
-			MarkerEvidence biodad = ReduceShareBioparentToOne(MarkerType.ShareBiodad, ItemYears.Gen1ShareBioparent.Length, idRelated);
+		//private MarkerEvidence  CalculateRExplicitSingleSibVersionOnParent ( Bioparent bioparent, Int32 idRelated, Int32 subjectTag ) {
+		//   switch ( bioparent ) {
+		//      case Bioparent.Dad:
+		//         break;
+		//      case Bioparent.Mom:
+		//         MarkerEvidence biomom = ReduceShareBioparentToOne(MarkerType.ShareBiomom, ItemYears.Gen1ShareBioparent.Length, idRelated);
+		//         if ( biomom == MarkerEvidence.Missing )
+		//            return MarkerEvidence.;
+		//         else if(biomom == MarkerEvidence.Supports)
+		//            return 
+
+		//         break;
+		//      default:
+		//         throw new ArgumentOutOfRangeException("bioparent");
+		//   }
+		//}
+		private float? CalculateRExplicitSingleSibVersion ( MarkerEvidence biomom, MarkerEvidence biodad ) {
 			if ( biomom == MarkerEvidence.Missing || biodad == MarkerEvidence.Missing ) {
 				return null;
 			}
@@ -186,33 +206,33 @@ namespace Nls.BaseAssembly.Assign {
 				//return RCoefficients.SiblingAmbiguous;
 			}
 		}
-		private float? CalculateRExplicitPass1 ( ) {
-			if ( !RExplicitOldestSibVersion.HasValue && !RExplicitYoungestSibVersion.HasValue )
-				return null;
-			else if ( !RExplicitOldestSibVersion.HasValue )
-				return RExplicitYoungestSibVersion.Value;
-			else if ( !RExplicitYoungestSibVersion.HasValue )
-				return RExplicitOldestSibVersion.Value;
-			else if ( RExplicitOldestSibVersion.Value == RExplicitYoungestSibVersion.Value )
-				return RExplicitOldestSibVersion.Value;
-			else if ( RExplicitOldestSibVersion.Value == RCoefficients.SiblingAmbiguous )
-				return RExplicitYoungestSibVersion.Value;
-			else if ( RExplicitYoungestSibVersion.Value == RCoefficients.SiblingAmbiguous )
-				return RExplicitOldestSibVersion.Value;
-			else if ( RExplicitOldestSibVersion.Value == RCoefficients.SiblingFull && RExplicitYoungestSibVersion.Value == RCoefficients.SiblingHalf )
-				return RCoefficients.SiblingAmbiguous;
-			else if ( RExplicitYoungestSibVersion.Value == RCoefficients.SiblingFull && RExplicitOldestSibVersion.Value == RCoefficients.SiblingHalf )
-				return RCoefficients.SiblingAmbiguous;
-			else
-				throw new InvalidOperationException("All condition should have been caught.");
-		}
+		//private float? CalculateRExplicitPass1 ( ) {
+		//   if ( !RExplicitOldestSibVersion.HasValue && !RExplicitYoungestSibVersion.HasValue )
+		//      return null;
+		//   else if ( !RExplicitOldestSibVersion.HasValue )
+		//      return RExplicitYoungestSibVersion.Value;
+		//   else if ( !RExplicitYoungestSibVersion.HasValue )
+		//      return RExplicitOldestSibVersion.Value;
+		//   else if ( RExplicitOldestSibVersion.Value == RExplicitYoungestSibVersion.Value )
+		//      return RExplicitOldestSibVersion.Value;
+		//   else if ( RExplicitOldestSibVersion.Value == RCoefficients.SiblingAmbiguous )
+		//      return RExplicitYoungestSibVersion.Value;
+		//   else if ( RExplicitYoungestSibVersion.Value == RCoefficients.SiblingAmbiguous )
+		//      return RExplicitOldestSibVersion.Value;
+		//   else if ( RExplicitOldestSibVersion.Value == RCoefficients.SiblingFull && RExplicitYoungestSibVersion.Value == RCoefficients.SiblingHalf )
+		//      return RCoefficients.SiblingAmbiguous;
+		//   else if ( RExplicitYoungestSibVersion.Value == RCoefficients.SiblingFull && RExplicitOldestSibVersion.Value == RCoefficients.SiblingHalf )
+		//      return RCoefficients.SiblingAmbiguous;
+		//   else
+		//      throw new InvalidOperationException("All condition should have been caught.");
+		//}
 		private float? CalculateRPass1 ( ) {
 			float? rRoster = CalculateRRoster(_idRelatedOlderAboutYounger);
 
 			if ( this.IsMZ == BaseAssembly.Tristate.Yes ) {
 				return RCoefficients.MzTrue;
 			}
-			else if (  _isRelatedInMZManual == Tristate.No ) {
+			else if ( _isRelatedInMZManual == Tristate.No ) {
 				return RCoefficients.NotRelated; //Of the 21 Gen1 subjects in tblMZManual with Related=0, 17 ended up with R=0 (as of 11/9/2012).  1 was assigned R=.5; 3 were assigned R=NULL (which I want to override now here, looking at the DOB differences).
 			}
 			else if ( IsMZ == BaseAssembly.Tristate.DoNotKnow && _isRelatedInMZManual == Tristate.Yes ) {

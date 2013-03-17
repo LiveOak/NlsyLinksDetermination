@@ -31,7 +31,7 @@ oName_1 <- paste0(oName, "_1")
 oName_2 <- paste0(oName, "_2")
 relationshipPath <- 1
 
-rGroupsToDrop <- c()# 0, .375, .75)#.125, .375, .75)
+rGroupsToDrop <- c(0)# 0, .375, .75)#.125, .375, .75)
 dropIfHousematesAreNotSameGeneration <- FALSE
 startNewPage <- c(F, T, F, T, F, T, F)
 

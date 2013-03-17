@@ -14,3 +14,9 @@
 17,"Gen2CFatherAlive              ",0
 18,"Gen2CFatherInHH               ",0
 19,"Gen2CFatherDistanceFromHH     ",0
+30,"Gen1BiodadInHH                ",0
+31,"Gen1BiodadDeathAge            ",0
+32,"Gen1BiodadBirthYear           ",0
+40,"Gen1BiomomInHH                ",0
+41,"Gen1BiomomDeathAge            ",0
+42,"Gen1BiomomBirthYear           ",0
