@@ -1559,9 +1559,8 @@
 				</DataGrid>
 			</TabItem>
 			<TabItem Header="G1RentsCurrent" Name="tabGen1ParentsCurrent" >
-				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True"  ItemsSource="{Binding Source={StaticResource tblParentsOfGen1CurrentViewSource}}" Name="tblParentsOfGen1CurrentDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
+				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tblParentsOfGen1CurrentViewSource}}" Name="tblParentsOfGen1CurrentDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
 					<DataGrid.Columns>
-						<DataGridTextColumn x:Name="iDColumn13" Binding="{Binding Path=ID}" Header="ID" IsReadOnly="True" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="subjectTagColumn8" Binding="{Binding Path=SubjectTag}" Header="Subject Tag" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biodadBirthYearReportedColumn" Binding="{Binding Path=BiodadBirthYearReported}" Header="Biodad Birth Year Reported" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="biodadBirthYearEstimatedColumn" Binding="{Binding Path=BiodadBirthYearEstimated}" Header="Biodad Birth Year Estimated" Width="SizeToHeader" />

@@ -45,7 +45,7 @@ namespace Nls.BaseAssembly {
 
 			Int32 recordsAdded = gen1HousematesCount + gen2SiblingsCount + gen2CousinsCount + parentChildCount + auntNieceCount;
 			sw.Stop();
-			return string.Format("{0:N0} RelatedValues records were processed.\n\nElapsed time: {1}", recordsAdded, sw.Elapsed.ToString());
+			return string.Format("{0:N0} RelatedValues records were processed.\nElapsed time: {1}", recordsAdded, sw.Elapsed.ToString());
 		}
 		public static string Archive ( Int16 algorithmVersion, LinksDataSet ds ) {
 			Stopwatch sw = new Stopwatch();

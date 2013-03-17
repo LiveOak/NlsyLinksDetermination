@@ -304,10 +304,55 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Public/Private Static
+		public static LinksDataSet.tblParentsOfGen1CurrentDataTable RetrieveRows ( Int32 subject1Tag, Int32 subject2Tag, LinksDataSet dsLinks ) {
+			if ( dsLinks == null ) throw new ArgumentNullException("dsLinks");
+			if ( dsLinks.tblParentsOfGen1Current.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblFatherOfGen2.");
+
+			string select = string.Format("{0}={1} OR {2}={3}",
+				subject1Tag, dsLinks.tblParentsOfGen1Current.SubjectTagColumn.ColumnName, 
+				subject2Tag, dsLinks.tblParentsOfGen1Current.SubjectTagColumn.ColumnName);
+			LinksDataSet.tblParentsOfGen1CurrentRow[] drs = (LinksDataSet.tblParentsOfGen1CurrentRow[])dsLinks.tblParentsOfGen1Current.Select(select);
+			//Trace.Assert(drs.Length >= 1, "There should be at least one row.");
+
+			LinksDataSet.tblParentsOfGen1CurrentDataTable dt = new LinksDataSet.tblParentsOfGen1CurrentDataTable();
+			foreach ( LinksDataSet.tblParentsOfGen1CurrentRow dr in drs ) {
+				dt.ImportRow(dr);
+			}
+			return dt;
+		}
+		public static byte? RetrieveDeathAge ( Int32 subjectTag, Item item, LinksDataSet.tblParentsOfGen1CurrentDataTable dtInput ) {
+			if ( dtInput == null ) throw new ArgumentNullException("dtInput");
+			if ( dtInput.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Current.");
+
+			LinksDataSet.tblParentsOfGen1CurrentRow dr = dtInput.FindBySubjectTag(subjectTag);
+			switch(item){
+				case Item.Gen1FatherDeathAge:
+					if ( dr.IsBiodadDeathAgeNull() ) return null;
+					else return dr.BiodadDeathAge;
+				case Item.Gen1MotherDeathAge:
+					if ( dr.IsBiomomDeathAgeNull() ) return null;
+					else return dr.BiomomDeathAge;
+				default:
+					throw new ArgumentOutOfRangeException("item", item,"The function does not accommodate that item.");
+			}
+		}
 		#endregion
 	}
 }
 
+//private static LinksDataSet.tblParentsOfGen1CurrentRow RetrieveRow ( Int32 subjectTag, LinksDataSet.tblParentsOfGen1CurrentDataTable dtInput ) {
+//   string select = string.Format("{0}={1} AND {2}={3}",
+//      subjectTag, dtInput.SubjectTagColumn.ColumnName;
+//   LinksDataSet.tblFatherOfGen2Row[] drs = (LinksDataSet.tblFatherOfGen2Row[])dtInput.Select(select);
+//   //if ( drs == null ) {
+//   if ( drs.Length <= 0 ) {
+//      return null;
+//   }
+//   else {
+//      Trace.Assert(drs.Length <= 1, "There should be no more than one row.");
+//      return drs[0];
+//   }
+//}
 //private static Int16 DetermineLastHealthModuleYear ( Item item,byte loopIndex, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
 //   const Int16 surveyYear = ItemYears.Gen1BioparentAlive;
 

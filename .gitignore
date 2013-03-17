@@ -132,8 +132,8 @@ pip-log.txt
 #############
 ## NlsyLinksDetermination
 #############
-PreviousSasFiles
-StableComparisonData
-TestResults
+PreviousSasFiles/
+StableComparisonData/
+TestResults/
 
 README.html
