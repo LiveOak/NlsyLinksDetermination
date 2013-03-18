@@ -33,7 +33,7 @@ namespace Nls.BaseAssembly {
 			Int32 parentChildCount = ParentChild();
 			Int32 auntNieceCount = AuntNiece();
 			//Int32 gen2SiblingsCount = 0;// Gen2Siblings();
-			//Int32 gen2CousinsCount = 0;//Gen2Cousins();// 0;
+			//Int32 gen2CousinsCount = 0;//Gen2Cousins();
 			//Int32 parentChildCount = 0;//ParentChild();
 			//Int32 auntNieceCount = 0;// AuntNiece();			
 
@@ -131,7 +131,7 @@ namespace Nls.BaseAssembly {
 			return message;
 		}
 
-		public static LinksDataSet.tblRelatedValuesRow Retrieve ( LinksDataSet ds, RelationshipPath relationshipPath, Int32 subject1Tag, Int32 subject2Tag ) {
+		public static LinksDataSet.tblRelatedValuesRow RetrieveRRow ( LinksDataSet ds, RelationshipPath relationshipPath, Int32 subject1Tag, Int32 subject2Tag ) {
 			if ( ds.tblRelatedValues.Count <= 0 ) throw new ArgumentException("tblRelatedValues should have more than one row.", "ds");
 
 			Int32 subjectTagSmaller = Int32.MinValue;
@@ -154,34 +154,41 @@ namespace Nls.BaseAssembly {
 		private Int32 Gen1Housemates ( ) {
 			const RelationshipPath path = RelationshipPath.Gen1Housemates;
 			Int32 recordsAdded = 0;
-			foreach ( LinksDataSet.tblRelatedStructureRow drLeft in SelectLefthand(path) ) {
+			LinksDataSet.tblRelatedStructureRow[] drLefts = SelectLefthand(path);
+
+			//foreach ( LinksDataSet.tblRelatedStructureRow drLeft in drLefts ) {
+			//   LinksDataSet.tblMzManualRow drMz = Retrieve.MzManualRecord(drLeft.Subject1Tag, drLeft.Subject2Tag, _dsLinks);
+			//   if ( drMz == null ) AddRowPass0(drLeft.ID, MultipleBirth.No, Tristate.No);
+			//   else AddRowPass0(drLeft.ID, (MultipleBirth)drMz.MultipleBirthIfSameSex, (Tristate)drMz.IsMz);
+			//}
+			foreach ( LinksDataSet.tblRelatedStructureRow drLeft in drLefts ) {
 				LinksDataSet.tblRelatedStructureRow drRight = SelectRighthand(drLeft);
 				RGen1Pass1 pass1 = new RGen1Pass1(_dsImport, _dsLinks, drLeft, drRight);
-				AddRow(pass1, pass1.IDLeft, drLeft.Subject1Tag, drLeft.Subject2Tag);
+				AddRowPass1(pass1, pass1.IDLeft, drLeft.Subject1Tag, drLeft.Subject2Tag);
 			}
-			//foreach ( LinksDataSet.tblRelatedStructureRow drLeft in SelectLefthand(path) ) {
-			Parallel.ForEach(SelectLefthand(path), ( drLeft ) => {
-				LinksDataSet.tblRelatedStructureRow drRight = SelectRighthand(drLeft);
-				RGen1Pass2 pass2 = new RGen1Pass2(_dsLinks, drLeft, drRight);
-				UpdateRow(pass2, pass2.IDLeft);
-				Interlocked.Increment(ref recordsAdded);
+			Parallel.ForEach(drLefts, ( drLeft ) => {
+			   LinksDataSet.tblRelatedStructureRow drRight = SelectRighthand(drLeft);
+			   RGen1Pass2 pass2 = new RGen1Pass2(_dsLinks, drLeft, drRight);
+			   UpdateRowPass2(pass2, pass2.IDLeft);
+			   Interlocked.Increment(ref recordsAdded);
 			});
 			return recordsAdded;
 		}
 		private Int32 Gen2Siblings ( ) {
 			const RelationshipPath path = RelationshipPath.Gen2Siblings;
 			Int32 recordsAdded = 0;
-			foreach ( LinksDataSet.tblRelatedStructureRow drLeft in SelectLefthand(path) ) {
-				//Parallel.ForEach(SelectLefthand(path), ( drLeft ) => {
+			LinksDataSet.tblRelatedStructureRow[] drLefts = SelectLefthand(path);
+
+			foreach ( LinksDataSet.tblRelatedStructureRow drLeft in drLefts ) {
 				LinksDataSet.tblRelatedStructureRow drRight = SelectRighthand(drLeft);
 				RGen2Pass1 rGen2Pass1 = new RGen2Pass1(_dsImport, _dsLinks, drLeft, drRight);
-				AddRow(rGen2Pass1, rGen2Pass1.IDLeft, drLeft.Subject1Tag, drLeft.Subject2Tag);
+				AddRowPass1(rGen2Pass1, rGen2Pass1.IDLeft, drLeft.Subject1Tag, drLeft.Subject2Tag);
 			}
 			//foreach ( LinksDataSet.tblRelatedStructureRow drLeft in SelectLefthand(path) ) {
-			Parallel.ForEach(SelectLefthand(path), ( drLeft ) => {
+			Parallel.ForEach(drLefts, ( drLeft ) => {
 				LinksDataSet.tblRelatedStructureRow drRight = SelectRighthand(drLeft);
 				RGen2Pass2 rGen2Pass2 = new RGen2Pass2(_dsLinks, drLeft, drRight);
-				UpdateRow(rGen2Pass2, rGen2Pass2.IDLeft);
+				UpdateRowPass2(rGen2Pass2, rGen2Pass2.IDLeft);
 				Interlocked.Increment(ref recordsAdded);
 			});
 			return recordsAdded;
@@ -191,8 +198,8 @@ namespace Nls.BaseAssembly {
 			Int32 recordsAdded = 0;
 			foreach ( LinksDataSet.tblRelatedStructureRow drLeft in SelectLefthand(path) ) {
 				RParentChild rParentChild = new RParentChild(_dsLinks, drLeft);
-				AddRow(rParentChild, rParentChild.IDLeft, drLeft.Subject1Tag, drLeft.Subject2Tag);
-				UpdateRow(rParentChild, rParentChild.IDLeft);
+				AddRowPass1(rParentChild, rParentChild.IDLeft, drLeft.Subject1Tag, drLeft.Subject2Tag);
+				UpdateRowPass2(rParentChild, rParentChild.IDLeft);
 				recordsAdded += 1;
 			}
 			return recordsAdded;
@@ -202,8 +209,8 @@ namespace Nls.BaseAssembly {
 			Int32 recordsAdded = 0;
 			foreach ( LinksDataSet.tblRelatedStructureRow drLeft in SelectLefthand(path) ) {
 				RAuntNiece rAuntNiece = new RAuntNiece(_dsLinks, drLeft); //drRight
-				AddRow(rAuntNiece, rAuntNiece.IDLeft, drLeft.Subject1Tag, drLeft.Subject2Tag);
-				UpdateRow(rAuntNiece, rAuntNiece.IDLeft);
+				AddRowPass1(rAuntNiece, rAuntNiece.IDLeft, drLeft.Subject1Tag, drLeft.Subject2Tag);
+				UpdateRowPass2(rAuntNiece, rAuntNiece.IDLeft);
 				recordsAdded += 1;
 			}
 			return recordsAdded;
@@ -213,8 +220,8 @@ namespace Nls.BaseAssembly {
 			Int32 recordsAdded = 0;
 			foreach ( LinksDataSet.tblRelatedStructureRow drLeft in SelectLefthand(path) ) {
 				RGen2Cousins rGen2Cousins = new RGen2Cousins(_dsLinks, drLeft); //drRight
-				AddRow(rGen2Cousins, rGen2Cousins.IDLeft, drLeft.Subject1Tag, drLeft.Subject2Tag);
-				UpdateRow(rGen2Cousins, rGen2Cousins.IDLeft);
+				AddRowPass1(rGen2Cousins, rGen2Cousins.IDLeft, drLeft.Subject1Tag, drLeft.Subject2Tag);
+				UpdateRowPass2(rGen2Cousins, rGen2Cousins.IDLeft);
 				recordsAdded += 1;
 			}
 			return recordsAdded;
@@ -235,14 +242,23 @@ namespace Nls.BaseAssembly {
 			Trace.Assert(drs.Length == 1, "Exactly 1 row should be selected.");
 			return drs[0];
 		}
-
-		private void AddRow ( IAssignPass1 assignPass1, Int32 relatedID, Int32 subject1Tag, Int32 subject2Tag ) {
+		//private void AddRowPass0 ( Int32 relatedID, MultipleBirth multipleBirth, Tristate isMz ) {
+		//   lock ( _dsLinks.tblRelatedValues ) {
+		//      LinksDataSet.tblRelatedValuesRow drNew = _dsLinks.tblRelatedValues.NewtblRelatedValuesRow();
+		//      drNew.ID = relatedID;
+		//      drNew.MultipleBirthIfSameSex = (byte)multipleBirth;
+		//      drNew.IsMz = (byte)isMz;
+		//      _dsLinks.tblRelatedValues.AddtblRelatedValuesRow(drNew);
+		//   }
+		//}
+		private void AddRowPass1 ( IAssignPass1 assignPass1, Int32 relatedID, Int32 subject1Tag, Int32 subject2Tag ) {
 			lock ( _dsLinks.tblRelatedValues ) {
 				LinksDataSet.tblRelatedValuesRow drNew = _dsLinks.tblRelatedValues.NewtblRelatedValuesRow();
 				drNew.ID = relatedID;
 				drNew.MultipleBirthIfSameSex = (byte)assignPass1.MultipleBirthIfSameSex;
 				drNew.IsMz = (byte)assignPass1.IsMZ;
-
+				//LinksDataSet.tblRelatedValuesRow drUpdated = _dsLinks.tblRelatedValues.FindByID(relatedID);
+		
 				Int16? subject1MostRecent = SurveyTimeMostRecent(subject1Tag);
 				if ( subject1MostRecent.HasValue ) drNew.Subject1LastSurvey = subject1MostRecent.Value;
 				else drNew.SetSubject1LastSurveyNull();
@@ -280,7 +296,7 @@ namespace Nls.BaseAssembly {
 				_dsLinks.tblRelatedValues.AddtblRelatedValuesRow(drNew);
 			}
 		}
-		private void UpdateRow ( IAssignPass2 assignPass2, Int32 relatedID ) {
+		private void UpdateRowPass2 ( IAssignPass2 assignPass2, Int32 relatedID ) {
 			lock ( _dsLinks.tblRelatedValues ) {
 				LinksDataSet.tblRelatedValuesRow drUpdated = _dsLinks.tblRelatedValues.FindByID(relatedID);
 				//lock ( drUpdated ) {

@@ -119,7 +119,7 @@ namespace Nls.BaseAssembly.Assign {
 		private LinksDataSet.tblRelatedValuesRow Gen1HousematesValues ( Int32 auntTag, Int32 nieceTag ) {
 			RelationshipPath path = RelationshipPath.Gen1Housemates;
 			Int32 motherSisterTag = CommonCalculations.MotherTagOfGen2Subject(nieceTag);
-			return RelatedValues.Retrieve(_dsLinks, path, auntTag, motherSisterTag);
+			return RelatedValues.RetrieveRRow(_dsLinks, path, auntTag, motherSisterTag);
 		}
 		#endregion
 	}

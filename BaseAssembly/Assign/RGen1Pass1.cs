@@ -12,8 +12,8 @@ namespace Nls.BaseAssembly.Assign {
 		private readonly LinksDataSet _dsLinks;
 		private readonly LinksDataSet.tblRelatedStructureRow _drLeft;
 		private readonly LinksDataSet.tblRelatedStructureRow _drRight;
-		private readonly LinksDataSet.tblSubjectRow _drBare1;
-		private readonly LinksDataSet.tblSubjectRow _drBare2;
+		//private readonly LinksDataSet.tblSubjectRow _drBare1;
+		//private readonly LinksDataSet.tblSubjectRow _drBare2;
 		private readonly LinksDataSet.tblSubjectDetailsRow _drSubjectDetails1;
 		private readonly LinksDataSet.tblSubjectDetailsRow _drSubjectDetails2;
 		private readonly LinksDataSet.tblMarkerGen1DataTable _dtMarkersGen1;
@@ -76,8 +76,6 @@ namespace Nls.BaseAssembly.Assign {
 			_drRight = drRight;
 			_idRelatedLeft = _drLeft.ID;
 			_idRelatedRight = _drRight.ID;
-			_drBare1 = _dsLinks.tblSubject.FindBySubjectTag(drLeft.Subject1Tag);
-			_drBare2 = _dsLinks.tblSubject.FindBySubjectTag(drLeft.Subject2Tag);
 			_drSubjectDetails1 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.Subject1Tag);
 			_drSubjectDetails2 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.Subject2Tag);
 			_extendedID = _drLeft.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1.ExtendedID;
@@ -93,7 +91,7 @@ namespace Nls.BaseAssembly.Assign {
 
 			_dtMarkersGen1 = MarkerGen1.PairRelevantMarkerRows(_idRelatedLeft, _idRelatedRight, _dsLinks, _extendedID);
 
-			LinksDataSet.tblMzManualRow drMz = Retrieve.MzManualRecord(_drBare1, _drBare2, _dsLinks);
+			LinksDataSet.tblMzManualRow drMz = Retrieve.MzManualRecord(_drLeft.Subject1Tag, _drLeft.Subject2Tag, _dsLinks);
 
 			if ( drMz == null ) {
 				_multipleBirth = MultipleBirth.No;
@@ -114,8 +112,8 @@ namespace Nls.BaseAssembly.Assign {
 			MarkerEvidence explicitBiodadFromYounger = ReduceShareBioparentToOne(MarkerType.ShareBiodad, ItemYears.Gen1ShareBioparent.Length, _idRelatedYoungerAboutOlder);
 
 
-			MarkerEvidence biomomDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.BabyDaddyDeathDate, _dtMarkersGen1);
-			MarkerEvidence biodadDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.BabyDaddyDeathDate, _dtMarkersGen1);
+			MarkerEvidence biomomDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomDeathAge, _dtMarkersGen1);
+			MarkerEvidence biodadDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadDeathAge, _dtMarkersGen1);
 
 			_explicitShareBiomom = CommonFunctions.TranslateEvidenceToTristate(explicitBiomomFromOlder, explicitBiomomFromYounger);
 			_explicitShareBiodad = CommonFunctions.TranslateEvidenceToTristate(explicitBiodadFromOlder, explicitBiodadFromYounger);
@@ -124,11 +122,11 @@ namespace Nls.BaseAssembly.Assign {
 			_implicitShareBiodad = ImplicitShareBioparent(biodadDeathAge);
 
 
-			_rImplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _implicitShareBiomom, shareBiodad: _implicitShareBiodad);
+			_rImplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _implicitShareBiomom, shareBiodad: _implicitShareBiodad, mustDecide: false);
 			_rImplicit2004 = RetrieveRImplicit2004();
 			_rExplicitOldestSibVersion = CalculateRExplicitSingleSibVersion(explicitBiomomFromOlder, explicitBiodadFromOlder);
 			_rExplicitYoungestSibVersion = CalculateRExplicitSingleSibVersion(explicitBiomomFromYounger, explicitBiodadFromYounger);
-			_rExplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _explicitShareBiomom, shareBiodad: _explicitShareBiodad);
+			_rExplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _explicitShareBiomom, shareBiodad: _explicitShareBiodad, mustDecide: true);
 			_rPass1 = CalculateRPass1();
 		}
 		#endregion //#region Public Methods #endregion #region Private Methods #endregion
@@ -142,8 +140,8 @@ namespace Nls.BaseAssembly.Assign {
 				return Tristate.DoNotKnow;
 		}
 		private float? RetrieveRImplicit2004 ( ) {
-			ImportDataSet.tblLinks2004Gen1Row drV1 = _dsImport.tblLinks2004Gen1.FindBySubject1TagSubject2Tag(_drBare1.SubjectTag, _drBare2.SubjectTag);
-			ImportDataSet.tblLinks2004Gen1Row drV2 = _dsImport.tblLinks2004Gen1.FindBySubject1TagSubject2Tag(_drBare2.SubjectTag, _drBare1.SubjectTag);
+			ImportDataSet.tblLinks2004Gen1Row drV1 = _dsImport.tblLinks2004Gen1.FindBySubject1TagSubject2Tag(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+			ImportDataSet.tblLinks2004Gen1Row drV2 = _dsImport.tblLinks2004Gen1.FindBySubject1TagSubject2Tag(_drLeft.Subject2Tag, _drLeft.Subject1Tag);
 			if ( drV1 != null ) {
 				if ( drV1.IsRecommendedRelatednessNull() ) return null;
 				else return drV1.RecommendedRelatedness;
@@ -169,22 +167,6 @@ namespace Nls.BaseAssembly.Assign {
 				return null;
 			}
 		}
-		//private MarkerEvidence  CalculateRExplicitSingleSibVersionOnParent ( Bioparent bioparent, Int32 idRelated, Int32 subjectTag ) {
-		//   switch ( bioparent ) {
-		//      case Bioparent.Dad:
-		//         break;
-		//      case Bioparent.Mom:
-		//         MarkerEvidence biomom = ReduceShareBioparentToOne(MarkerType.ShareBiomom, ItemYears.Gen1ShareBioparent.Length, idRelated);
-		//         if ( biomom == MarkerEvidence.Missing )
-		//            return MarkerEvidence.;
-		//         else if(biomom == MarkerEvidence.Supports)
-		//            return 
-
-		//         break;
-		//      default:
-		//         throw new ArgumentOutOfRangeException("bioparent");
-		//   }
-		//}
 		private float? CalculateRExplicitSingleSibVersion ( MarkerEvidence biomom, MarkerEvidence biodad ) {
 			if ( biomom == MarkerEvidence.Missing || biodad == MarkerEvidence.Missing ) {
 				return null;

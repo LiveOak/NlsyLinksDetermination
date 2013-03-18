@@ -224,6 +224,11 @@ namespace Nls.BaseAssembly {
 			Trace.Assert(drs.Length == 1, "The should be exactly one SubjectRow retreived.");
 			return drs[0].SubjectTag;
 		}
+		internal static LinksDataSet.tblMzManualRow MzManualRecord ( Int32 subject1Tag, Int32 subject2Tag, LinksDataSet dsLinks ) {
+			LinksDataSet.tblSubjectRow dr1 = dsLinks.tblSubject.FindBySubjectTag(subject1Tag);
+			LinksDataSet.tblSubjectRow dr2 = dsLinks.tblSubject.FindBySubjectTag(subject2Tag);
+			return MzManualRecord(dr1, dr2, dsLinks);
+		}
 		internal static LinksDataSet.tblMzManualRow MzManualRecord ( LinksDataSet.tblSubjectRow dr1, LinksDataSet.tblSubjectRow dr2, LinksDataSet dsLinks ) {
 			string select = string.Format("{0}={1} AND {2}={3}",
 				dr1.SubjectTag, dsLinks.tblMzManual.Subject1TagColumn.ColumnName,

@@ -12,8 +12,6 @@ namespace Nls.BaseAssembly.Assign {
 		private readonly LinksDataSet _dsLinks;
 		private readonly LinksDataSet.tblRelatedStructureRow _drLeft;
 		private readonly LinksDataSet.tblRelatedStructureRow _drRight;
-		//private readonly LinksDataSet.tblSubjectRow _drBare1;
-		//private readonly LinksDataSet.tblSubjectRow _drBare2;
 		private readonly LinksDataSet.tblSubjectDetailsRow _drSubjectDetails1;
 		private readonly LinksDataSet.tblSubjectDetailsRow _drSubjectDetails2;
 		//private readonly LinksDataSet.tblMarkerGen1DataTable _dtMarkersGen1;
@@ -22,7 +20,6 @@ namespace Nls.BaseAssembly.Assign {
 		private readonly Int32 _idRelatedLeft = Int32.MinValue;
 		private readonly Int32 _idRelatedRight = Int32.MinValue;
 		private readonly Int32 _idRelatedOlderAboutYounger = Int32.MinValue;//usually equal to _idRelatedLeft
-		//private readonly Int32 _idRelatedYoungerAboutOlder = Int32.MinValue;//usually equal to _idRelatedRight
 
 		private readonly Int32 _extendedID;
 		private float? _rImplicit = null;// float.NaN;
@@ -58,36 +55,21 @@ namespace Nls.BaseAssembly.Assign {
 			_drRight = drRight;
 			_idRelatedLeft = _drLeft.ID;
 			_idRelatedRight = _drRight.ID;
-			//_drBare1 = _dsLinks.tblSubject.FindBySubjectTag(drLeft.Subject1Tag);
-			//_drBare2 = _dsLinks.tblSubject.FindBySubjectTag(drLeft.Subject2Tag);
 			_drSubjectDetails1 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.Subject1Tag);
 			_drSubjectDetails2 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.Subject2Tag);
 			_extendedID = _drLeft.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1.ExtendedID;
 
 			if ( _drSubjectDetails1.BirthOrderInNls <= _drSubjectDetails2.BirthOrderInNls ) {//This is the way it usually is.  Recall twins were assigned tied birth orders
-				_idRelatedOlderAboutYounger = _idRelatedLeft;
-				//_idRelatedYoungerAboutOlder = _idRelatedRight;
+				_idRelatedOlderAboutYounger = _idRelatedLeft; //_idRelatedYoungerAboutOlder = _idRelatedRight;
 			}
 			else if ( _drSubjectDetails1.BirthOrderInNls > _drSubjectDetails2.BirthOrderInNls ) {
 				_idRelatedOlderAboutYounger = _idRelatedRight;
-				//_idRelatedYoungerAboutOlder = _idRelatedLeft;
 			}
 
 			_drValue = _dsLinks.tblRelatedValues.FindByID(_idRelatedLeft);
 			//_dtMarkersGen1 = MarkerGen1.PairRelevantMarkerRows(_idRelatedLeft, _idRelatedRight, _dsLinks, _extendedID);
 
-			//MarkerEvidence babyDaddyDeathDate = MarkerGen2.RetrieveBiodadMarkerFromGen1(_idRelatedOlderAboutYounger, MarkerType.BabyDaddyDeathDate, _dtMarkersGen2);
-			//MarkerEvidence babyDaddyAlive = MarkerGen2.RetrieveBiodadMarkerFromGen1(_idRelatedOlderAboutYounger, MarkerType.BabyDaddyAlive, _dtMarkersGen2);
-			//MarkerEvidence babyDaddyInHH = MarkerGen2.RetrieveBiodadMarkerFromGen1(_idRelatedOlderAboutYounger, MarkerType.BabyDaddyInHH, _dtMarkersGen2);
-			//MarkerEvidence babyDaddyLeftHHDate = MarkerGen2.RetrieveBiodadMarkerFromGen1(_idRelatedOlderAboutYounger, MarkerType.BabyDaddyLeftHHDate, _dtMarkersGen2);
-			//MarkerEvidence babyDaddyDistanceFromHH = MarkerGen2.RetrieveBiodadMarkerFromGen1(_idRelatedOlderAboutYounger, MarkerType.BabyDaddyDistanceFromHH, _dtMarkersGen2);
-
-			//MarkerEvidence fatherAlive = MarkerGen2.RetrieveBiodadMarkerFromGen1(_idRelatedOlderAboutYounger, MarkerType.Gen2CFatherAlive, _dtMarkersGen2);
-			//MarkerEvidence fatherInHH = MarkerGen2.RetrieveBiodadMarkerFromGen1(_idRelatedOlderAboutYounger, MarkerType.Gen2CFatherInHH, _dtMarkersGen2);
-			//MarkerEvidence fatherDistanceFromHH = MarkerGen2.RetrieveBiodadMarkerFromGen1(_idRelatedOlderAboutYounger, MarkerType.Gen2CFatherDistanceFromHH, _dtMarkersGen2);
-
-			//_rImplicitSubject = CalculateRImplicitSubject(fatherAlive, fatherInHH, fatherDistanceFromHH);
-			//_rImplicit = CalculateRImplicit(_rImplicitMother, _rImplicitSubject);
+			_rImplicit = CalculateRImplicit();
 			_rExplicit = CalculateRExplicit();
 			_rFull = CalculateRFull();
 			_r = CalculateR();
@@ -99,6 +81,23 @@ namespace Nls.BaseAssembly.Assign {
 		#region Public Methods
 		#endregion
 		#region Private Methods - Estimate R
+		private float? CalculateRImplicit ( ) {
+			if ( !_drValue.IsRImplicitPass1Null() )
+				return (float?)_drValue.RImplicitPass1;
+			else
+				return null;
+			//DataColumn dcPass1 = _dsLinks.tblRelatedValues.RImplicitPass1Column;
+			//Pair[] pairs = Pair.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+
+			//InterpolateR interpolate = new InterpolateR(pairs);
+			//float? newRExplicit = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+			//if ( newRExplicit.HasValue ) {
+			//   return newRExplicit;
+			//}
+			//else {
+			//   return null;
+			//}
+		}
 		private float? CalculateRExplicit ( ) {//Int32 idRelated
 			if ( !_drValue.IsRExplicitPass1Null() ) return (float?)_drValue.RExplicitPass1;
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.RExplicitPass1Column;
@@ -111,17 +110,6 @@ namespace Nls.BaseAssembly.Assign {
 			}
 			else {
 				return null;
-				//MarkerGen1Summary biomom = MarkerGen1.RetrieveMarker(idRelated, MarkerType.ShareBiomom, _dtMarkersGen1);
-				//MarkerGen1Summary biodad = MarkerGen1.RetrieveMarker(idRelated, MarkerType.ShareBiodad, _dtMarkersGen1);
-				//if ( biomom == null || biodad == null ) {
-				//   return null;
-				//}
-				//else if ( biomom.ShareBiomom == MarkerEvidence.Disconfirms && biodad.ShareBiodad == MarkerEvidence.Disconfirms ) {
-				//   return RCoefficients.NotRelated;//The could still be cousins or something else
-				//}
-				//else {
-				//   return null;
-				//}
 			}
 		}
 		private float? CalculateR ( ) {

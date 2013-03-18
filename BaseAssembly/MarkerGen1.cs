@@ -38,6 +38,7 @@ namespace Nls.BaseAssembly {
 					recordsAdded += FromShareExplicit(Item.ShareBiomomGen1, MarkerType.ShareBiomom, drRelated, dtSubject1);
 					recordsAdded += FromShareExplicit(Item.ShareBiodadGen1, MarkerType.ShareBiodad, drRelated, dtSubject1);
 					recordsAdded += FromBioparentDeathAge(MarkerType.Gen1BiodadDeathAge, drRelated, dtParentsCurrent);
+					recordsAdded += FromBioparentDeathAge(MarkerType.Gen1BiomomDeathAge, drRelated, dtParentsCurrent);
 				}
 			}
 			sw.Stop();
@@ -70,8 +71,8 @@ namespace Nls.BaseAssembly {
 			MarkerEvidence shareBioparent = MarkerEvidence.Missing;
 			if ( (gap == 0) && (deathAge1.Value < 55) ) shareBioparent = MarkerEvidence.StronglySupports;
 			else if ( gap == 0 ) shareBioparent = MarkerEvidence.Supports;
-			else if ( gap <= 3 ) shareBioparent = MarkerEvidence.Consistent;
-			else if ( gap <= 5 ) shareBioparent = MarkerEvidence.Unlikely;
+			else if ( gap <= 5 ) shareBioparent = MarkerEvidence.Consistent;
+			else if ( gap <= 25 ) shareBioparent = MarkerEvidence.Unlikely;
 			else shareBioparent = MarkerEvidence.Disconfirms;
 
 			MarkerEvidence mzEvidence = MarkerEvidence.Missing;
@@ -90,7 +91,7 @@ namespace Nls.BaseAssembly {
 				case MarkerEvidence.Disconfirms:
 					mzEvidence = MarkerEvidence.Disconfirms;
 					break;
-				default:					
+				default:
 					throw new InvalidOperationException("The switch should not have gotten here.");
 			}
 

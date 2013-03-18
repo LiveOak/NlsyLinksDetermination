@@ -133,7 +133,7 @@ namespace Nls.Tests.BaseFixture {
 				};
 
 			for ( Int32 i = 0; i < s.Length; i++ ) {
-				float? actual = CommonFunctions.TranslateToR(s[i].State1, s[i].State2);
+				float? actual = CommonFunctions.TranslateToR(s[i].State1, s[i].State2,	mustDecide: true);
 				Assert.AreEqual(s[i].R, actual);
 			}
 		}

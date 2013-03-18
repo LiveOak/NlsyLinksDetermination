@@ -12,6 +12,7 @@ dsLUMarkerType <- sqlQuery(channel, paste("SELECT * FROM Process.tblLUMarkerType
 dsLURelationshipPath <- sqlQuery(channel, paste("SELECT * FROM Process.tblLURelationshipPath", sep=""))
 dsLUSurveySource <- sqlQuery(channel, paste("SELECT * FROM Process.tblLUSurveySource", sep=""))
 dsVariable <- sqlQuery(channel, paste("SELECT * FROM Process.tblVariable", sep=""))
+dsMz <- sqlQuery(channel, paste("SELECT * FROM Process.tblMzManual", sep=""))
 dsRArchive <- sqlQuery(channel, paste("SELECT * FROM Process.tblRelatedValuesArchive", sep=""))
 
 odbcClose(channel)
@@ -29,4 +30,5 @@ write.csv(dsLUMarkerType, file=file.path(path, "LUMarkerType.csv"), row.names=F)
 write.csv(dsLURelationshipPath, file=file.path(path, "LURelationshipPath.csv"), row.names=F)
 write.csv(dsLUSurveySource, file=file.path(path, "LUSurveySource.csv"), row.names=F)
 write.csv(dsVariable, file=file.path(path, "Variable.csv"), row.names=F)
+write.csv(dsMz, file=file.path(path, "MzManual.csv"), row.names=F)
 write.csv(dsRArchive, file=file.path(path, "RArchive.csv"), row.names=F)

@@ -55,7 +55,6 @@ namespace Nls.BaseAssembly.Assign {
 			if ( dsLinks == null ) throw new ArgumentNullException("dsLinks");
 			if ( drLeft == null ) throw new ArgumentNullException("drLeft");
 			if ( drRight == null ) throw new ArgumentNullException("drRight");
-			//if ( dsLinks.tblRelatedValues.Count != 0 ) throw new InvalidOperationException("tblRelatedValues must be empty before creating rows for it.");
 			if ( dsImport.tblLinks2004Gen2.Count == 0 ) throw new InvalidOperationException("tblLinks2004Gen2 must NOT be empty before assigning R values from it.");
 			if ( dsLinks.tblMzManual.Count == 0 ) throw new InvalidOperationException("tblMzManual must NOT be empty before assigning R values from it.");
 			if ( dsLinks.tblSubject.Count == 0 ) throw new InvalidOperationException("tblSubject must NOT be empty before assigning R values from it.");
@@ -121,7 +120,6 @@ namespace Nls.BaseAssembly.Assign {
 				return RCoefficients.MzTrue;
 			}
 			else if ( isMz == Tristate.DoNotKnow ) {
-				//Trace.Assert(newRExplicit >= RCoefficientsSibling.SiblingFull, "If the pair has been identified as an ambiguous MZ, their RExplicit should be >= .5.");
 				Trace.Assert(newRExplicit >= RCoefficients.SiblingAmbiguous, "If the pair has been identified as an ambiguous MZ, their RExplicit should be >= .5.");
 				return RCoefficients.MzAmbiguous;
 			}

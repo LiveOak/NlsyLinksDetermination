@@ -113,7 +113,7 @@ namespace Nls.BaseAssembly.Assign {
 			RelationshipPath path = RelationshipPath.Gen1Housemates;
 			Int32 motherSister1Tag = CommonCalculations.MotherTagOfGen2Subject(subject1Tag);
 			Int32 motherSister2Tag = CommonCalculations.MotherTagOfGen2Subject(subject2Tag);
-			return RelatedValues.Retrieve(_dsLinks, path, motherSister1Tag, motherSister2Tag);
+			return RelatedValues.RetrieveRRow(_dsLinks, path, motherSister1Tag, motherSister2Tag);
 		}
 		#endregion
 	}
