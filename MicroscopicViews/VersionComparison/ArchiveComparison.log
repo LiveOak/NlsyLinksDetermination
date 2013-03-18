@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.11.12)  17 MAR 2013 18:21
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.11.12)  17 MAR 2013 19:12
 entering extended mode
 **ArchiveComparison.tex
 
@@ -220,9 +220,9 @@ File: figure/unnamed-chunk-32.pdf Graphic file (type pdf)
 Package pdftex.def Info: figure/unnamed-chunk-32.pdf used on input line 97.
 (pdftex.def)             Requested size: 230.86192pt x 108.40472pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 196.
+(Font)              <7> on input line 197.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 196.
+(Font)              <5> on input line 197.
  [1
 
 {C:/Users/wibeasley/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <F:/Proj
@@ -235,7 +235,7 @@ iveComparison.aux) )
 Here is how much of TeX's memory you used:
  1897 strings out of 494049
  27192 string characters out of 3146052
- 150927 words of memory out of 3000000
+ 150918 words of memory out of 3000000
  5177 multiletter control sequences out of 15000+200000
  7151 words of font info for 26 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
@@ -246,7 +246,7 @@ s/cm/cmr10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/c
 m/cmr12.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
 mr17.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt
 10.pfb>
-Output written on ArchiveComparison.pdf (4 pages, 89744 bytes).
+Output written on ArchiveComparison.pdf (4 pages, 89328 bytes).
 PDF statistics:
  47 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -1706,6 +1706,7 @@
 						<DataGridTextColumn x:Name="rExplicitColumn" Binding="{Binding Path=RExplicit}" Header="RExplicit" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="rPass1Column" Binding="{Binding Path=RPass1}" Header="RPass 1" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="rColumn" Binding="{Binding Path=R}" Header="R" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="rFullColumn" Binding="{Binding Path=RFull}" Header="RFull" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="rPeekColumn" Binding="{Binding Path=RPeek}" Header="RPeek" Width="SizeToHeader" />
 					</DataGrid.Columns>
 				</DataGrid>

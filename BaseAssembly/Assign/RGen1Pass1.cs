@@ -114,12 +114,17 @@ namespace Nls.BaseAssembly.Assign {
 			MarkerEvidence explicitBiodadFromYounger = ReduceShareBioparentToOne(MarkerType.ShareBiodad, ItemYears.Gen1ShareBioparent.Length, _idRelatedYoungerAboutOlder);
 
 
-			//MarkerEvidence biomomDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.BabyDaddyDeathDate, _dtMarkersGen1);
+			MarkerEvidence biomomDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.BabyDaddyDeathDate, _dtMarkersGen1);
+			MarkerEvidence biodadDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.BabyDaddyDeathDate, _dtMarkersGen1);
 
 			_explicitShareBiomom = CommonFunctions.TranslateEvidenceToTristate(explicitBiomomFromOlder, explicitBiomomFromYounger);
 			_explicitShareBiodad = CommonFunctions.TranslateEvidenceToTristate(explicitBiodadFromOlder, explicitBiodadFromYounger);
 
-			//_rImplicitPass1 = CalculateRImplicitPass1();
+			_implicitShareBiomom = ImplicitShareBioparent(biomomDeathAge);
+			_implicitShareBiodad = ImplicitShareBioparent(biodadDeathAge);
+
+
+			_rImplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _implicitShareBiomom, shareBiodad: _implicitShareBiodad);
 			_rImplicit2004 = RetrieveRImplicit2004();
 			_rExplicitOldestSibVersion = CalculateRExplicitSingleSibVersion(explicitBiomomFromOlder, explicitBiodadFromOlder);
 			_rExplicitYoungestSibVersion = CalculateRExplicitSingleSibVersion(explicitBiomomFromYounger, explicitBiodadFromYounger);
@@ -128,6 +133,14 @@ namespace Nls.BaseAssembly.Assign {
 		}
 		#endregion //#region Public Methods #endregion #region Private Methods #endregion
 		#region Private Methods - Estimate R
+		private Tristate ImplicitShareBioparent ( MarkerEvidence deathAge ) {
+			if ( deathAge == MarkerEvidence.StronglySupports )
+				return Tristate.Yes;
+			else if ( deathAge == MarkerEvidence.Disconfirms )
+				return Tristate.No;
+			else 
+				return Tristate.DoNotKnow;
+		}
 		private float? RetrieveRImplicit2004 ( ) {
 			ImportDataSet.tblLinks2004Gen1Row drV1 = _dsImport.tblLinks2004Gen1.FindBySubject1TagSubject2Tag(_drBare1.SubjectTag, _drBare2.SubjectTag);
 			ImportDataSet.tblLinks2004Gen1Row drV2 = _dsImport.tblLinks2004Gen1.FindBySubject1TagSubject2Tag(_drBare2.SubjectTag, _drBare1.SubjectTag);
@@ -142,9 +155,6 @@ namespace Nls.BaseAssembly.Assign {
 			else {
 				return null;//The record wasn't contained in the links created in 2004.
 			}
-		}
-		private float? CalculateRImplicitPass1 ( MarkerEvidence biomomDeathAge ) {
-			throw new NotImplementedException();
 		}
 		private float? CalculateRRoster ( Int32 idRelated ) {
 			//TODO: Check overrides first.
@@ -179,53 +189,22 @@ namespace Nls.BaseAssembly.Assign {
 			if ( biomom == MarkerEvidence.Missing || biodad == MarkerEvidence.Missing ) {
 				return null;
 			}
-			else if ( biomom == MarkerEvidence.Supports && biodad == MarkerEvidence.Supports ) {
-				//if ( !OverridesGen1.RosterAndExplicit.Contains(subjectTag) ) {
-				//   Trace.Assert(roster.ShareBiomom != MarkerEvidence.Disconfirms);
-				//   Trace.Assert(roster.ShareBiodad != MarkerEvidence.Disconfirms);
-				//}
+			else if ( biomom == MarkerEvidence.Supports && biodad == MarkerEvidence.Supports ) { //if ( !OverridesGen1.RosterAndExplicit.Contains(subjectTag) ) { //   Trace.Assert(roster.ShareBiomom != MarkerEvidence.Disconfirms); //   Trace.Assert(roster.ShareBiodad != MarkerEvidence.Disconfirms);//}
 				return RCoefficients.SiblingFull;
 			}
-			else if ( biomom == MarkerEvidence.Disconfirms && biodad == MarkerEvidence.Supports ) {
-				//Trace.Assert(roster.ShareBiomom != MarkerEvidence.Disconfirms);
-				//Trace.Assert(roster.ShareBiodad != MarkerEvidence.Disconfirms);
+			else if ( biomom == MarkerEvidence.Disconfirms && biodad == MarkerEvidence.Supports ) {//Trace.Assert(roster.ShareBiomom != MarkerEvidence.Disconfirms); //Trace.Assert(roster.ShareBiodad != MarkerEvidence.Disconfirms);
 				return RCoefficients.SiblingHalf;
 			}
-			else if ( biomom == MarkerEvidence.Supports && biodad == MarkerEvidence.Disconfirms ) {
-				//if ( !OverridesGen1.RosterAndExplicit.Contains(subjectTag) ) {
-				//   Trace.Assert(roster.ShareBiomom != MarkerEvidence.Disconfirms);
-				//   Trace.Assert(roster.ShareBiodad != MarkerEvidence.Disconfirms);
-				//}
+			else if ( biomom == MarkerEvidence.Supports && biodad == MarkerEvidence.Disconfirms ) { //if ( !OverridesGen1.RosterAndExplicit.Contains(subjectTag) ) { //   Trace.Assert(roster.ShareBiomom != MarkerEvidence.Disconfirms);//   Trace.Assert(roster.ShareBiodad != MarkerEvidence.Disconfirms); //}
 				return RCoefficients.SiblingHalf;
 			}
 			//else if ( biomom.ShareBiomom == MarkerEvidence.Disconfirms && biodad.ShareBiodad == MarkerEvidence.Disconfirms ) {
 			//   return RCoefficients.NotRelated;//The could still be cousins or something else
 			//}
 			else {
-				return null;
-				//return RCoefficients.SiblingAmbiguous;
+				return null; //The could still be cousins or something else
 			}
 		}
-		//private float? CalculateRExplicitPass1 ( ) {
-		//   if ( !RExplicitOldestSibVersion.HasValue && !RExplicitYoungestSibVersion.HasValue )
-		//      return null;
-		//   else if ( !RExplicitOldestSibVersion.HasValue )
-		//      return RExplicitYoungestSibVersion.Value;
-		//   else if ( !RExplicitYoungestSibVersion.HasValue )
-		//      return RExplicitOldestSibVersion.Value;
-		//   else if ( RExplicitOldestSibVersion.Value == RExplicitYoungestSibVersion.Value )
-		//      return RExplicitOldestSibVersion.Value;
-		//   else if ( RExplicitOldestSibVersion.Value == RCoefficients.SiblingAmbiguous )
-		//      return RExplicitYoungestSibVersion.Value;
-		//   else if ( RExplicitYoungestSibVersion.Value == RCoefficients.SiblingAmbiguous )
-		//      return RExplicitOldestSibVersion.Value;
-		//   else if ( RExplicitOldestSibVersion.Value == RCoefficients.SiblingFull && RExplicitYoungestSibVersion.Value == RCoefficients.SiblingHalf )
-		//      return RCoefficients.SiblingAmbiguous;
-		//   else if ( RExplicitYoungestSibVersion.Value == RCoefficients.SiblingFull && RExplicitOldestSibVersion.Value == RCoefficients.SiblingHalf )
-		//      return RCoefficients.SiblingAmbiguous;
-		//   else
-		//      throw new InvalidOperationException("All condition should have been caught.");
-		//}
 		private float? CalculateRPass1 ( ) {
 			float? rRoster = CalculateRRoster(_idRelatedOlderAboutYounger);
 
@@ -248,12 +227,9 @@ namespace Nls.BaseAssembly.Assign {
 			else if ( RExplicitPass1.HasValue ) {
 				return RExplicitPass1;
 			}
-			//else if ( RImplicitPass1.HasValue ) {
-			//   return RImplicitPass1;
-			//}
-			//else if ( RImplicit2004.HasValue ) {
-			//   return RImplicit2004;
-			//}
+			else if ( RImplicitPass1.HasValue ) {
+				return RImplicitPass1;
+			}
 			else {
 				return null;
 			}
@@ -297,3 +273,26 @@ namespace Nls.BaseAssembly.Assign {
 		#endregion
 	}
 }
+//private float? CalculateRImplicitPass1 ( MarkerEvidence biomomDeathAge ) {
+//   throw new NotImplementedException();
+//}
+//private float? CalculateRExplicitPass1 ( ) {
+//   if ( !RExplicitOldestSibVersion.HasValue && !RExplicitYoungestSibVersion.HasValue )
+//      return null;
+//   else if ( !RExplicitOldestSibVersion.HasValue )
+//      return RExplicitYoungestSibVersion.Value;
+//   else if ( !RExplicitYoungestSibVersion.HasValue )
+//      return RExplicitOldestSibVersion.Value;
+//   else if ( RExplicitOldestSibVersion.Value == RExplicitYoungestSibVersion.Value )
+//      return RExplicitOldestSibVersion.Value;
+//   else if ( RExplicitOldestSibVersion.Value == RCoefficients.SiblingAmbiguous )
+//      return RExplicitYoungestSibVersion.Value;
+//   else if ( RExplicitYoungestSibVersion.Value == RCoefficients.SiblingAmbiguous )
+//      return RExplicitOldestSibVersion.Value;
+//   else if ( RExplicitOldestSibVersion.Value == RCoefficients.SiblingFull && RExplicitYoungestSibVersion.Value == RCoefficients.SiblingHalf )
+//      return RCoefficients.SiblingAmbiguous;
+//   else if ( RExplicitYoungestSibVersion.Value == RCoefficients.SiblingFull && RExplicitOldestSibVersion.Value == RCoefficients.SiblingHalf )
+//      return RCoefficients.SiblingAmbiguous;
+//   else
+//      throw new InvalidOperationException("All condition should have been caught.");
+//}

@@ -68,7 +68,8 @@ namespace Nls.BaseAssembly {
 			Int32 gap = Convert.ToInt32(Math.Abs(deathAge2.Value - deathAge1.Value));
 
 			MarkerEvidence shareBioparent = MarkerEvidence.Missing;
-			if ( gap == 0 ) shareBioparent = MarkerEvidence.Supports;
+			if ( (gap == 0) && (deathAge1.Value < 55) ) shareBioparent = MarkerEvidence.StronglySupports;
+			else if ( gap == 0 ) shareBioparent = MarkerEvidence.Supports;
 			else if ( gap <= 3 ) shareBioparent = MarkerEvidence.Consistent;
 			else if ( gap <= 5 ) shareBioparent = MarkerEvidence.Unlikely;
 			else shareBioparent = MarkerEvidence.Disconfirms;
@@ -78,6 +79,7 @@ namespace Nls.BaseAssembly {
 			MarkerEvidence shareBiodad = MarkerEvidence.Irrelevant;
 
 			switch ( shareBioparent ) {
+				case MarkerEvidence.StronglySupports:
 				case MarkerEvidence.Supports:
 				case MarkerEvidence.Consistent:
 					mzEvidence = MarkerEvidence.Consistent;

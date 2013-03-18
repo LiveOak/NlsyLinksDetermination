@@ -28,7 +28,7 @@ namespace Nls.BaseAssembly.Assign {
 		private float? _rImplicit = null;// float.NaN;
 		private float? _rImplicitSubject = null;//float.NaN;
 		private float? _rExplicit = float.NaN;//float.NaN;
-		private float? _r= float.NaN;
+		private float? _r = float.NaN;
 		private float? _rFull = float.NaN;
 		private float? _rPeek = null;//float.NaN;
 		#endregion
@@ -36,10 +36,10 @@ namespace Nls.BaseAssembly.Assign {
 		public Int32 IDLeft { get { return _idRelatedLeft; } }
 		public Int32 IDRight { get { return _idRelatedRight; } }
 		public float? RImplicit { get { return _rImplicit; } }
-		public float? RImplicitMother{ get { return null; } }
+		public float? RImplicitMother { get { return null; } }
 		public float? RImplicitSubject { get { return _rImplicitSubject; } }
 		public float? RExplicit { get { return _rExplicit; } }
-		public float? R{ get { return _r; } }
+		public float? R { get { return _r; } }
 		public float? RFull { get { return _rFull; } }
 		public float? RPeek { get { return _rPeek; } }
 		#endregion
@@ -90,7 +90,7 @@ namespace Nls.BaseAssembly.Assign {
 			//_rImplicit = CalculateRImplicit(_rImplicitMother, _rImplicitSubject);
 			_rExplicit = CalculateRExplicit();
 			_rFull = CalculateRFull();
-			_r= CalculateR();
+			_r = CalculateR();
 			//Trace.Write(_r);
 
 			//_rPeek = CalculateRPeek();
@@ -124,21 +124,21 @@ namespace Nls.BaseAssembly.Assign {
 				//}
 			}
 		}
-		private float? CalculateR( ) {
+		private float? CalculateR ( ) {
 			if ( !RFull.HasValue ) {
 				return null;
 			}
 			else if ( Constants.Gen1RsToExcludeFromR.Contains(RFull.Value) ) {
 				return null;
 			}
-			else{
+			else {
 				return (float)RFull.Value;
 			}
-			
 
-	
+
+
 			//if ( !_drValue.IsRFullNull() ) return (float?)_drValue.RPass1;
-//DataColumn dcPass1 = _dsLinks.tblRelatedValues.RPass1Column;
+			//DataColumn dcPass1 = _dsLinks.tblRelatedValues.RPass1Column;
 			//Pair[] pairs = Pair.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
 
 			//InterpolateR interpolate = new InterpolateR(pairs);

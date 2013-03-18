@@ -127,7 +127,7 @@ namespace Nls.BaseAssembly {
 				recordsAdded += 1;
 			}
 			sw.Stop();
-			string message = string.Format("{0:N0} RelatedValues records were archived.\n\nElapsed time: {1}", recordsAdded, sw.Elapsed.ToString());
+			string message = string.Format("{0:N0} RelatedValues records were archived.\nElapsed time: {1}", recordsAdded, sw.Elapsed.ToString());
 			return message;
 		}
 

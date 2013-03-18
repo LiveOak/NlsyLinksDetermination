@@ -77,18 +77,16 @@ colorSoso <- "sosoColor"
 colorBad <- "badColor"
 colorNull <- "nullColor"
 
-DetermineGoodRowIDs <- function( dsTable ) {
+DetermineGoodRowIDs <- function( dsTable ) { # DetermineGoodRowIDs(ds)
   return( which(dsTable$RImplicit==dsTable$RExplicit) )
 }
-# DetermineGoodRowIDs(ds)
 
-DetermineBadRowIDs <- function( dsTable ) {
+DetermineBadRowIDs <- function( dsTable ) { # DetermineBadRowIDs(ds)
   return( which(abs(dsTable$RImplicit - dsTable$RExplicit) >= .25) )
 }
-# DetermineBadRowIDs(ds)
 
 PrintConditionalTable <- function( relationshipPathID, tabelCaption=paste("Joint Frequencies for RelationshipPath", relationshipPathID, "(single-entered)")) {
-#   dsT <- ds
+#  relationshipPathID <- 1
   dsT <- ds[ds$RelationshipPath==relationshipPathID, ]
   dsT <- dsT[, colnames(dsT)!="RelationshipPath"]
   dsT <- dsT[order(-dsT$Count, dsT$Delta), c(5,1,2,3,4,6)]
@@ -109,7 +107,7 @@ PrintConditionalTable <- function( relationshipPathID, tabelCaption=paste("Joint
   textTable <- xtable(dsT, digits=digitsFormat, caption=tabelCaption)
   print(textTable, include.rownames=F, add.to.row=list(idRowsList, colorRows), NA.string="-")#, size="small")
 }
-# PrintConditionalTable(2)
+# PrintConditionalTable(1)
 #  PrintConditionalTable(relationshipPathID=1,tabelCaption="Counts for Gen1Housemates")
 
 CreateMarginalTable  <- function(dsJoint,  relationshipPathID ) {
