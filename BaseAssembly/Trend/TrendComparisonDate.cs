@@ -59,7 +59,7 @@ namespace Nls.BaseAssembly.Trend {
 					_disagreementCountIncludingNulls += 1;
 					_lastNonMutualNullPointsYear = surveyYears1[i];
 				}
-				else if ( DateDifferenceWithinThreshold(points1[i].Value,points2[i].Value) ) {
+				else if ( DateDifferenceWithinThreshold(points1[i].Value, points2[i].Value) ) {
 					_countOfNullZeros += 1;
 					_agreementCountExcludingNulls += 1;
 					_lastMutualNonNullPointsAgree = true;

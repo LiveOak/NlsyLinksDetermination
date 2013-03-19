@@ -167,10 +167,10 @@ namespace Nls.BaseAssembly {
 				AddRowPass1(pass1, pass1.IDLeft, drLeft.Subject1Tag, drLeft.Subject2Tag);
 			}
 			Parallel.ForEach(drLefts, ( drLeft ) => {
-			   LinksDataSet.tblRelatedStructureRow drRight = SelectRighthand(drLeft);
-			   RGen1Pass2 pass2 = new RGen1Pass2(_dsLinks, drLeft, drRight);
-			   UpdateRowPass2(pass2, pass2.IDLeft);
-			   Interlocked.Increment(ref recordsAdded);
+				LinksDataSet.tblRelatedStructureRow drRight = SelectRighthand(drLeft);
+				RGen1Pass2 pass2 = new RGen1Pass2(_dsLinks, drLeft, drRight);
+				UpdateRowPass2(pass2, pass2.IDLeft);
+				Interlocked.Increment(ref recordsAdded);
 			});
 			return recordsAdded;
 		}
@@ -258,7 +258,7 @@ namespace Nls.BaseAssembly {
 				drNew.MultipleBirthIfSameSex = (byte)assignPass1.MultipleBirthIfSameSex;
 				drNew.IsMz = (byte)assignPass1.IsMZ;
 				//LinksDataSet.tblRelatedValuesRow drUpdated = _dsLinks.tblRelatedValues.FindByID(relatedID);
-		
+
 				Int16? subject1MostRecent = SurveyTimeMostRecent(subject1Tag);
 				if ( subject1MostRecent.HasValue ) drNew.Subject1LastSurvey = subject1MostRecent.Value;
 				else drNew.SetSubject1LastSurveyNull();

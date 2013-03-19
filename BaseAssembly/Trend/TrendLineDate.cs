@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace Nls.BaseAssembly.Trend {
-	public sealed  class TrendLineDate{
+	public sealed class TrendLineDate {
 		#region Fields
 		private readonly Int16[] _surveyYears;
 		private readonly DateTime?[] _dates;

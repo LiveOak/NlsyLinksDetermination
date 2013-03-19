@@ -21,7 +21,7 @@ namespace Nls.BaseAssembly {
 		Gen1BiodadBirthYear = 32,
 		Gen1BiomomInHH = 40,
 		Gen1BiomomDeathAge = 41,
-		Gen1BiomomBirthYear = 42,  
+		Gen1BiomomBirthYear = 42,
 	}
 	public enum Item : short {
 		IDOfOther1979RosterGen1 = 1,
@@ -124,7 +124,7 @@ namespace Nls.BaseAssembly {
 		Gen1FirstIncorrectTwinTripAgeDifference_NOTUSED = 9996,
 		Gen1SecondIncorrectTwinTripYoungerOrOlder_NOTUSED = 9997,
 		Gen1SecondIncorrectTwinTripAgeDifference_NOTUSED = 9998,
-		NotTranslated = 9999,  
+		NotTranslated = 9999,
 		//Gen2YInHHGen1 = 81,
 		//Gen2YAliveGen1 = 82,
 		//Gen2YEverLiveInHH = 83,
@@ -147,7 +147,7 @@ namespace Nls.BaseAssembly {
 		Gen1Outcomes = 8,
 		Gen2OutcomesHeight = 9,
 		Gen1Explicit = 10,
-		Gen1Implicit = 11, 
+		Gen1Implicit = 11,
 	}
 	public enum SurveySource : byte {
 		NoInterview = 0,

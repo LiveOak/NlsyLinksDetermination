@@ -194,7 +194,7 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Public Static Methods
-		internal static MarkerEvidence RetrieveParentCurrentMarker( Int64 relatedIDLeft, MarkerType markerType, LinksDataSet.tblMarkerGen1DataTable dtMarker ) {
+		internal static MarkerEvidence RetrieveParentCurrentMarker ( Int64 relatedIDLeft, MarkerType markerType, LinksDataSet.tblMarkerGen1DataTable dtMarker ) {
 			if ( dtMarker == null ) throw new ArgumentNullException("dtMarker");
 			string select = string.Format("{0}={1} AND {2}={3}",
 				relatedIDLeft, dtMarker.RelatedIDColumn.ColumnName,
