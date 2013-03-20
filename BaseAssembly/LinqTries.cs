@@ -15,3 +15,5 @@
 		//private static Int64 RetrieveSubjectTagV3 ( Int32 subjectID, Generation generation, LinksDataSet dsLinks ) {
 		//   return dsLinks.tblSubject.Single(dr => dr.SubjectID == subjectID && dr.Generation == (byte)generation).SubjectTag;
 		//}
+
+				//byte maxLoopIndex = (from dr in drsForLoopIndex select dr.LoopIndex).Max();

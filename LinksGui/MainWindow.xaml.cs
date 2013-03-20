@@ -119,7 +119,7 @@ namespace LinksGui {
 			//WriteXml(_dsLinks.tblRosterGen1);
 		}
 		private void btnParentsOfGen1Retro_Click ( object sender, RoutedEventArgs e ) {
-			BA.ParentsOfGen2Retro retro = new BA.ParentsOfGen2Retro(_dsLinks);
+			BA.ParentsOfGen1Retro retro = new BA.ParentsOfGen1Retro(_dsLinks);
 			string message = retro.Go();
 			Trace.WriteLine(message);
 			if ( e.Source.ToString() != _combinedButtonTag ) MessageBox.Show(message);

@@ -56,6 +56,13 @@ namespace Nls.BaseAssembly {
 				default: return yn;  //Don't modify the other values.
 			}
 		}
+		public static bool? TranslateYesNo ( YesNo yn ) {
+			switch ( yn ) {
+				case YesNo.Yes: return true;
+				case YesNo.No: return false;
+				default: return null;
+			}
+		}
 		public static byte LastTwoDigitsOfGen2SubjectID ( LinksDataSet.tblSubjectRow drSubject ) {
 			if ( drSubject == null ) throw new ArgumentNullException("drSubject");
 			if ( drSubject.Generation != (byte)Generation.Gen2 ) throw new ArgumentOutOfRangeException("drSubject", drSubject.Generation, "This function is valid for only Gen2 subjects.");

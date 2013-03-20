@@ -35,7 +35,7 @@ namespace Nls.BaseAssembly {
 					Int32 subject2Tag = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject2.SubjectTag;
 					LinksDataSet.tblResponseDataTable dtSubject1 = Retrieve.SubjectsRelevantResponseRows(subject1Tag, _itemIDsString, 1, _dsLinks.tblResponse);
 					LinksDataSet.tblParentsOfGen1CurrentDataTable dtParentsCurrent = ParentsOfGen1Current.RetrieveRows(subject1Tag, subject2Tag, _dsLinks);
-					LinksDataSet.tblParentsOfGen1RetroDataTable dtParentsRetro = ParentsOfGen2Retro.RetrieveRows(subject1Tag, subject2Tag, _dsLinks);
+					LinksDataSet.tblParentsOfGen1RetroDataTable dtParentsRetro = ParentsOfGen1Retro.RetrieveRows(subject1Tag, subject2Tag, _dsLinks);
 
 					recordsAdded += FromRoster(drRelated, dtSubject1);
 					recordsAdded += FromShareExplicit(Item.ShareBiomomGen1, MarkerType.ShareBiomom, drRelated, dtSubject1);
@@ -53,8 +53,8 @@ namespace Nls.BaseAssembly {
 		#endregion
 		#region Private Methods -Tier 1
 		private Int32 FromGen0InHH ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
-			TrendLineGen0InHH subject1 = ParentsOfGen2Retro.RetrieveTrend(bioparent, drRelated.Subject1Tag, dtRetro);
-			TrendLineGen0InHH subject2 = ParentsOfGen2Retro.RetrieveTrend(bioparent, drRelated.Subject1Tag, dtRetro);
+			TrendLineGen0InHH subject1 = ParentsOfGen1Retro.RetrieveTrend(bioparent, drRelated.Subject1Tag, dtRetro);
+			TrendLineGen0InHH subject2 = ParentsOfGen1Retro.RetrieveTrend(bioparent, drRelated.Subject1Tag, dtRetro);
 			//Int16?[] values2 = BabyDaddy.RetrieveInHH(drRelated.Subject2Tag, surveyYears, dtSubject2);
 
 			//TrendLineInteger trend1 = new TrendLineInteger(surveyYears, values1);

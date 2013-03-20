@@ -1603,8 +1603,8 @@
 						<DataGridTextColumn x:Name="iDColumn12" Binding="{Binding Path=ID}" Header="ID" IsReadOnly="True" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="subjectTagColumn7" Binding="{Binding Path=SubjectTag}" Header="Subject Tag" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="surveyYearColumn7" Binding="{Binding Path=SurveyYear}" Header="Survey Year" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="biodadInHHColumn2" Binding="{Binding Path=BiodadInHH}" Header="Biodad In HH" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="biomomInHHColumn" Binding="{Binding Path=BiomomInHH}" Header="Biomom In HH" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="bioparentColumn" Binding="{Binding Path=Bioparent}" Header="Bioparent" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="inHHColumn" Binding="{Binding Path=InHH}" Header="In HH" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="ageColumn" Binding="{Binding Path=Age}" Header="Age" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="yearColumn" Binding="{Binding Path=Year}" Header="Year" Width="SizeToHeader" />
 					</DataGrid.Columns>
