@@ -55,11 +55,9 @@ namespace Nls.BaseAssembly {
 		private Int32 ProcessSubjectGen1 ( LinksDataSet.tblSubjectRow drSubject, LinksDataSet.tblResponseDataTable dtExtendedResponse ) {
 			Int32 subjectTag = drSubject.SubjectTag;
 			Int16 yob = Convert.ToInt16(Mob.Retrieve(drSubject, dtExtendedResponse).Value.Year);
-			Int32 recordsAdded = 0;
-
 			bool? bothParentsAlways = DetermineBothParentsAlwaysInHH(_surveyYear, subjectTag, yob, dtExtendedResponse);
-			//YesNo responseDadEver = DetermineOneParentEverInHH(Item.Gen1LivedWithFatherAtAgeX, _surveyYear, subjectTag, loopIndexForNever, dtExtendedResponse);
-			//YesNo responseMomEver = DetermineOneParentEverInHH(Item.Gen1LivedWithMotherAtAgeX, _surveyYear, subjectTag, loopIndexForNever, dtExtendedResponse);
+
+			Int32 recordsAdded = 0;
 			recordsAdded += ProcessForOneParent(bothParentsAlways, Bioparent.Dad, yob, drSubject, dtExtendedResponse);
 			recordsAdded += ProcessForOneParent(bothParentsAlways, Bioparent.Mom, yob, drSubject, dtExtendedResponse);
 			return recordsAdded;
@@ -214,22 +212,20 @@ namespace Nls.BaseAssembly {
 			}
 			return dt;
 		}
-		//public static LinksDataSet.tblParentsOfGen1RetroDataTable RetrieveRows ( Int32 extendedID, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
-		//   if ( dtRetro == null ) throw new ArgumentNullException("dsLinks");
-		//   if ( dtRetro.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Retro.");
+		public static LinksDataSet.tblParentsOfGen1RetroDataTable RetrieveRows ( Int32 extendedID, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
+		   if ( dtRetro == null ) throw new ArgumentNullException("dsLinks");
+		   if ( dtRetro.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Retro.");
 
-		//   dtRetro.
-
-		//   string select = string.Format("{0}={1}", extendedID, dtRetro.Ext.ColumnName);
-		//   LinksDataSet.tblParentsOfGen1RetroRow[] drs = (LinksDataSet.tblParentsOfGen1RetroRow[])dtRetro.Select(select);
-		//   //Trace.Assert(drs.Length >= 1, "There should be at least one row.");
-
-		//   LinksDataSet.tblParentsOfGen1RetroDataTable dt = new LinksDataSet.tblParentsOfGen1RetroDataTable();
-		//   foreach ( LinksDataSet.tblParentsOfGen1RetroRow dr in drs ) {
-		//      dt.ImportRow(dr);
-		//   }
-		//   return dt;
-		//}
+		   string select = string.Format("{0}={1}", extendedID, dtRetro.ExtendedIDColumn.ColumnName);
+		   LinksDataSet.tblParentsOfGen1RetroRow[] drs = (LinksDataSet.tblParentsOfGen1RetroRow[])dtRetro.Select(select);
+		   Trace.Assert(drs.Length >= 1, "There should be at least one row.");
+			
+		   LinksDataSet.tblParentsOfGen1RetroDataTable dt = new LinksDataSet.tblParentsOfGen1RetroDataTable();
+		   foreach ( LinksDataSet.tblParentsOfGen1RetroRow dr in drs ) {
+		      dt.ImportRow(dr);
+		   }
+		   return dt;
+		}
 		//public static LinksDataSet.tblParentsOfGen1RetroDataTable RetrieveRows ( Int32 subjectTag, LinksDataSet dsLinks ) {
 		//   if ( dsLinks == null ) throw new ArgumentNullException("dsLinks");
 		//   if ( dsLinks.tblParentsOfGen1Retro.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Retro.");

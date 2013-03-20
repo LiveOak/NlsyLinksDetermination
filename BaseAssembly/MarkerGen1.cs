@@ -32,16 +32,14 @@ namespace Nls.BaseAssembly {
 			Int16[] extendedIDs = CommonFunctions.CreateExtendedFamilyIDs(_dsLinks);
 			foreach ( Int16 extendedID in extendedIDs ) {
 				LinksDataSet.tblRelatedStructureRow[] drsRelated = Retrieve.RelatedStructureInExtendedFamily(extendedID, RelationshipPath.Gen1Housemates, _dsLinks.tblRelatedStructure);
-				//LinksDataSet.tblParentsOfGen1RetroDataTable dtRetroForExtended = _dsLinks.tblParentsOfGen1RetroDataTable.Where(
-
-
-
-				foreach ( LinksDataSet.tblRelatedStructureRow drRelated in _dsLinks.tblRelatedStructure ) {
+				LinksDataSet.tblParentsOfGen1RetroDataTable dtRetroForExtended = ParentsOfGen1Retro.RetrieveRows(extendedID, _dsLinks.tblParentsOfGen1Retro);
+				
+				foreach ( LinksDataSet.tblRelatedStructureRow drRelated in drsRelated ) {
 					Int32 subject1Tag = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1.SubjectTag;
 					Int32 subject2Tag = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject2.SubjectTag;
 					LinksDataSet.tblResponseDataTable dtSubject1 = Retrieve.SubjectsRelevantResponseRows(subject1Tag, _itemIDsString, 1, _dsLinks.tblResponse);
 					LinksDataSet.tblParentsOfGen1CurrentDataTable dtParentsCurrent = ParentsOfGen1Current.RetrieveRows(subject1Tag, subject2Tag, _dsLinks);
-					LinksDataSet.tblParentsOfGen1RetroDataTable dtParentsRetro = ParentsOfGen1Retro.RetrieveRows(subject1Tag, subject2Tag, _dsLinks.tblParentsOfGen1Retro);
+					LinksDataSet.tblParentsOfGen1RetroDataTable dtParentsRetro = ParentsOfGen1Retro.RetrieveRows(subject1Tag, subject2Tag, dtRetroForExtended);
 
 					recordsAdded += FromRoster(drRelated, dtSubject1);
 					recordsAdded += FromShareExplicit(Item.ShareBiodadGen1, MarkerType.ShareBiodad, drRelated, dtSubject1);
