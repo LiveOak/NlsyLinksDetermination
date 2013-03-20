@@ -37,7 +37,7 @@ namespace Nls.BaseAssembly {
 					if ( drRelated.ExtendedID >= extendedFamilyBegin ) {
 						LinksDataSet.tblSubjectRow drBare1 = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1;
 						LinksDataSet.tblSubjectRow drBare2 = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject2;
-						Int32 extendedID = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1.ExtendedID;
+						Int16 extendedID = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1.ExtendedID;
 						Int32 subject1Tag = drBare1.SubjectTag;
 						Int32 subject2Tag = drBare2.SubjectTag;
 
@@ -75,7 +75,7 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Private Methods -Tier 1 - Baby Daddy
-		private Int32 FromBabyDaddyDeathDate ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject1, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject2, Int32 extendedID ) {
+		private Int32 FromBabyDaddyDeathDate ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject1, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject2, Int16 extendedID ) {
 			const MarkerType markerType = MarkerType.BabyDaddyDeathDate;
 			const bool fromMother = true;
 			Int16[] surveyYears = ItemYears.BabyDaddyDeathDate;
@@ -89,7 +89,7 @@ namespace Nls.BaseAssembly {
 			MarkerEvidence biodadEvidence = mzEvidence;
 			return AddMarkerRow(extendedID, drRelated.ID, markerType, comparison.LastNonMutualNullPointsYear, mzEvidence, biodadEvidence, fromMother);
 		}
-		private Int32 FromBabyDaddyIsAlive ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject1, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject2, Int32 extendedID ) {
+		private Int32 FromBabyDaddyIsAlive ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject1, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject2, Int16 extendedID ) {
 			const MarkerType markerType = MarkerType.BabyDaddyAlive;
 			const bool fromMother = true;
 			Int16[] surveyYears = ItemYears.BabyDaddyIsAlive;
@@ -103,7 +103,7 @@ namespace Nls.BaseAssembly {
 			MarkerEvidence biodadEvidence = mzEvidence;
 			return AddMarkerRow(extendedID, drRelated.ID, markerType, comparison.LastNonMutualNullPointsYear, mzEvidence, biodadEvidence, fromMother);
 		}
-		private Int32 FromBabyDaddyInHH ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject1, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject2, Int32 extendedID ) {
+		private Int32 FromBabyDaddyInHH ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject1, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject2, Int16 extendedID ) {
 			const MarkerType markerType = MarkerType.BabyDaddyInHH;
 			const bool fromMother = true;
 			Int16[] surveyYears = ItemYears.BabyDaddyInHH;
@@ -117,7 +117,7 @@ namespace Nls.BaseAssembly {
 			MarkerEvidence biodadEvidence = mzEvidence;
 			return AddMarkerRow(extendedID, drRelated.ID, markerType, comparison.LastNonMutualNullPointsYear, mzEvidence, biodadEvidence, fromMother);
 		}
-		private Int32 FromBabyDaddyLeftHHDate ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject1, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject2, Int32 extendedID ) {
+		private Int32 FromBabyDaddyLeftHHDate ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject1, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject2, Int16 extendedID ) {
 			const MarkerType markerType = MarkerType.BabyDaddyLeftHHDate;
 			const bool fromMother = true;
 			Int16[] surveyYears = ItemYears.BabyDaddyLeftHHDate;
@@ -131,7 +131,7 @@ namespace Nls.BaseAssembly {
 			MarkerEvidence biodadEvidence = mzEvidence;
 			return AddMarkerRow(extendedID, drRelated.ID, markerType, comparison.LastNonMutualNullPointsYear, mzEvidence, biodadEvidence, fromMother);
 		}
-		private Int32 FromBabyDaddyDistanceFromHH ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject1, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject2, Int32 extendedID ) {
+		private Int32 FromBabyDaddyDistanceFromHH ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject1, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject2, Int16 extendedID ) {
 			const MarkerType markerType = MarkerType.BabyDaddyDistanceFromHH;
 			const bool fromMother = true;
 			Int16[] surveyYears = ItemYears.BabyDaddyDistanceFromHHFuzzyCeiling;
@@ -145,7 +145,7 @@ namespace Nls.BaseAssembly {
 			MarkerEvidence biodadEvidence = mzEvidence;
 			return AddMarkerRow(extendedID, drRelated.ID, markerType, comparison.LastNonMutualNullPointsYear, mzEvidence, biodadEvidence, fromMother);
 		}
-		private Int32 FromBabyDaddyAsthma ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject1, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject2, Int32 extendedID ) {
+		private Int32 FromBabyDaddyAsthma ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject1, LinksDataSet.tblBabyDaddyDataTable dtBabyDaddySubject2, Int16 extendedID ) {
 			const MarkerType markerType = MarkerType.BabyDaddyAsthma;
 			const bool fromMother = true;
 			Int16[] surveyYears = ItemYears.BabyDaddyAsthma;
@@ -161,7 +161,7 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Private Methods -Tier 1 - Father of Gen2
-		private Int32 FromShareBiodad ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblResponseDataTable dtSubject1, Int32 extendedID ) {
+		private Int32 FromShareBiodad ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblResponseDataTable dtSubject1, Int16 extendedID ) {
 			const MarkerType markerType = MarkerType.ShareBiodad;
 			const bool fromMother = true;
 			LinksDataSet.tblSubjectRow drSubject1 = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1;
@@ -194,7 +194,7 @@ namespace Nls.BaseAssembly {
 			}
 			return recordsAdded;
 		}
-		private Int32 FromFatherIsAlive ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblFatherOfGen2DataTable dtFatherSubject1, LinksDataSet.tblFatherOfGen2DataTable dtFatherSubject2, Int32 extendedID ) {
+		private Int32 FromFatherIsAlive ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblFatherOfGen2DataTable dtFatherSubject1, LinksDataSet.tblFatherOfGen2DataTable dtFatherSubject2, Int16 extendedID ) {
 			const MarkerType markerType = MarkerType.Gen2CFatherAlive;
 			const bool fromMother = false;
 			Int16[] surveyYears = ItemYears.Gen2CFatherAlive;
@@ -208,7 +208,7 @@ namespace Nls.BaseAssembly {
 			MarkerEvidence biodadEvidence = mzEvidence;
 			return AddMarkerRow(extendedID, drRelated.ID, markerType, comparison.LastNonMutualNullPointsYear, mzEvidence, biodadEvidence, fromMother);
 		}
-		private Int32 FromFatherInHH ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblFatherOfGen2DataTable dtFatherSubject1, LinksDataSet.tblFatherOfGen2DataTable dtFatherSubject2, Int32 extendedID ) {
+		private Int32 FromFatherInHH ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblFatherOfGen2DataTable dtFatherSubject1, LinksDataSet.tblFatherOfGen2DataTable dtFatherSubject2, Int16 extendedID ) {
 			const MarkerType markerType = MarkerType.Gen2CFatherInHH;
 			const bool fromMother = false;
 			Int16[] surveyYears = ItemYears.Gen2CFatherInHH;
@@ -222,7 +222,7 @@ namespace Nls.BaseAssembly {
 			MarkerEvidence biodadEvidence = mzEvidence;
 			return AddMarkerRow(extendedID, drRelated.ID, markerType, comparison.LastNonMutualNullPointsYear, mzEvidence, biodadEvidence, fromMother);
 		}
-		private Int32 FromFatherDistanceFromHH ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblFatherOfGen2DataTable dtFatherSubject1, LinksDataSet.tblFatherOfGen2DataTable dtFatherSubject2, Int32 extendedID ) {
+		private Int32 FromFatherDistanceFromHH ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblFatherOfGen2DataTable dtFatherSubject1, LinksDataSet.tblFatherOfGen2DataTable dtFatherSubject2, Int16 extendedID ) {
 			const MarkerType markerType = MarkerType.Gen2CFatherDistanceFromHH;
 			const bool fromMother = false;
 			Int16[] surveyYears = ItemYears.Gen2CFatherDistanceFromMotherFuzzyCeiling;
@@ -238,7 +238,7 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Tier 2
-		private Int32 AddMarkerRow ( Int32 extendedID, Int32 relatedID, MarkerType markerType, Int16? surveyYear, MarkerEvidence mzEvidence, MarkerEvidence biodadEvidence, bool fromMother ) {
+		private Int32 AddMarkerRow ( Int16 extendedID, Int32 relatedID, MarkerType markerType, Int16? surveyYear, MarkerEvidence mzEvidence, MarkerEvidence biodadEvidence, bool fromMother ) {
 			lock ( _dsLinks.tblMarkerGen2 ) {
 				//if ( !surveyYear.HasValue ) return 0;
 

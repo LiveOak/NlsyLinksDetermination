@@ -19,7 +19,7 @@ namespace Nls.BaseAssembly {
 			Stopwatch sw = new Stopwatch();
 			sw.Start();
 			Int32 recordsAdded = 0;
-			foreach ( Int32 extendedID in CommonFunctions.CreateExtendedFamilyIDs(_dsLinks) ) {
+			foreach ( Int16 extendedID in CommonFunctions.CreateExtendedFamilyIDs(_dsLinks) ) {
 				recordsAdded += UnpackExtendedFamily(extendedID);
 			}
 
@@ -39,7 +39,7 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Private Methods
-		private Int32 UnpackExtendedFamily ( Int32 extendedID ) {
+		private Int32 UnpackExtendedFamily ( Int16 extendedID ) {
 			string sql = string.Format("{0}={1}",// AND {2}={3}",
 				extendedID, _dsLinks.tblSubject.ExtendedIDColumn.ColumnName);//,				(byte)Generation.Gen1, _dsLinks.tblSubject.GenerationColumn.ColumnName
 			LinksDataSet.tblSubjectRow[] drAllExtendedFamilyMembers = (LinksDataSet.tblSubjectRow[])this._dsLinks.tblSubject.Select(sql);
@@ -59,7 +59,7 @@ namespace Nls.BaseAssembly {
 			Trace.Assert(totalUpackedRowsInFamily == CommonCalculations.PermutationOf2(drAllExtendedFamilyMembers.Length), "The number of unpacked rows for this extended family should be correct.");
 			return totalUpackedRowsInFamily;
 		}
-		private Int32 ProcessPair ( LinksDataSet.tblSubjectRow drSubject1, Int32 extendedID, LinksDataSet.tblSubjectRow drSubject2 ) {
+		private Int32 ProcessPair ( LinksDataSet.tblSubjectRow drSubject1, Int16 extendedID, LinksDataSet.tblSubjectRow drSubject2 ) {
 			Trace.Assert(drSubject1.ExtendedID == drSubject2.ExtendedID, "The ExtendedFamilyID should match.");
 
 			LinksDataSet.tblRelatedStructureRow drNew = this._dsLinks.tblRelatedStructure.NewtblRelatedStructureRow();

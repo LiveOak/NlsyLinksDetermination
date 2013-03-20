@@ -40,7 +40,7 @@ namespace Nls.BaseAssembly {
 
 			Int16[] extendedIDs = CommonFunctions.CreateExtendedFamilyIDs(_ds);
 			//Parallel.ForEach(extendedIDs, ( extendedID ) => {//
-			foreach ( Int32 extendedID in extendedIDs ) {
+			foreach ( Int16 extendedID in extendedIDs ) {
 				LinksDataSet.tblResponseDataTable dtExtendedResponse = Retrieve.ExtendedFamilyRelevantResponseRows(extendedID, _itemIDsString, minRowCount, _ds.tblResponse);
 				LinksDataSet.tblSubjectRow[] subjectsInExtendedFamily = Retrieve.SubjectsInExtendFamily(extendedID, _ds.tblSubject);
 				foreach ( LinksDataSet.tblSubjectRow drSubject in subjectsInExtendedFamily ) {

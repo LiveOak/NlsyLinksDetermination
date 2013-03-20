@@ -36,7 +36,7 @@ namespace Nls.BaseAssembly {
 
 			Int16[] extendedIDs = CommonFunctions.CreateExtendedFamilyIDs(_ds);
 			//Parallel.ForEach(extendedIDs, ( extendedID ) => {//
-			foreach ( Int32 extendedID in extendedIDs ) {
+			foreach ( Int16 extendedID in extendedIDs ) {
 				LinksDataSet.tblResponseDataTable dtExtendedResponse = Retrieve.ExtendedFamilyRelevantResponseRows(extendedID, _itemIDsString, minRowCount, _ds.tblResponse);
 				LinksDataSet.tblSubjectRow[] subjectsInExtendedFamily = Retrieve.SubjectsInExtendFamily(extendedID, _ds.tblSubject);
 				foreach ( LinksDataSet.tblSubjectRow drSubject in subjectsInExtendedFamily ) {
@@ -95,7 +95,7 @@ namespace Nls.BaseAssembly {
 				}
 
 				Int16 yearInHH = Convert.ToInt16(yob + loopIndexAndAge);
-				AddRow(drSubject.SubjectTag, _surveyYear,  parent, inHH: inHH, age: loopIndexAndAge, yearInHH: yearInHH);
+				AddRow(drSubject.SubjectTag, drSubject.ExtendedID, parent, inHH: inHH, age: loopIndexAndAge, yearInHH: yearInHH);
 				recordsAdded += 1; ;
 			}
 			return recordsAdded;
@@ -140,11 +140,11 @@ namespace Nls.BaseAssembly {
 			}
 			return CommonFunctions.TranslateYesNo(yn);
 		}
-		private void AddRow ( Int32 subjectTag, Int16 surveyYear, Bioparent parent, bool? inHH,  byte age, Int16 yearInHH ) {
+		private void AddRow ( Int32 subjectTag, Int16 extendedID, Bioparent parent, bool? inHH,  byte age, Int16 yearInHH ) {
 			//lock ( _ds.tblFatherOfGen2 ) {
 			LinksDataSet.tblParentsOfGen1RetroRow drNew = _ds.tblParentsOfGen1Retro.NewtblParentsOfGen1RetroRow();
 			drNew.SubjectTag = subjectTag;
-			drNew.SurveyYear = surveyYear;
+			drNew.ExtendedID = extendedID;
 			drNew.Bioparent = (byte)parent;
 
 			if ( inHH.HasValue ) drNew.InHH = inHH.Value;
@@ -198,14 +198,14 @@ namespace Nls.BaseAssembly {
 			//}
 			return new TrendLineGen0InHH(yob: yob, hasAnyRecords: true, everAtHome: everInHH, years: years, values: inHHs, ages: ages);
 		}
-		public static LinksDataSet.tblParentsOfGen1RetroDataTable RetrieveRows ( Int32 subject1Tag, Int32 subject2Tag, LinksDataSet dsLinks ) {
-			if ( dsLinks == null ) throw new ArgumentNullException("dsLinks");
-			if ( dsLinks.tblParentsOfGen1Retro.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Retro.");
+		public static LinksDataSet.tblParentsOfGen1RetroDataTable RetrieveRows ( Int32 subject1Tag, Int32 subject2Tag, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
+			if ( dtRetro == null ) throw new ArgumentNullException("dsLinks");
+			if ( dtRetro.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Retro.");
 
 			string select = string.Format("{0}={1} OR {2}={3}",
-				subject1Tag, dsLinks.tblParentsOfGen1Retro.SubjectTagColumn.ColumnName,
-				subject2Tag, dsLinks.tblParentsOfGen1Retro.SubjectTagColumn.ColumnName);
-			LinksDataSet.tblParentsOfGen1RetroRow[] drs = (LinksDataSet.tblParentsOfGen1RetroRow[])dsLinks.tblParentsOfGen1Retro.Select(select);
+				subject1Tag, dtRetro.SubjectTagColumn.ColumnName,
+				subject2Tag, dtRetro.SubjectTagColumn.ColumnName);
+			LinksDataSet.tblParentsOfGen1RetroRow[] drs = (LinksDataSet.tblParentsOfGen1RetroRow[])dtRetro.Select(select);
 			//Trace.Assert(drs.Length >= 1, "There should be at least one row.");
 
 			LinksDataSet.tblParentsOfGen1RetroDataTable dt = new LinksDataSet.tblParentsOfGen1RetroDataTable();
@@ -214,6 +214,22 @@ namespace Nls.BaseAssembly {
 			}
 			return dt;
 		}
+		//public static LinksDataSet.tblParentsOfGen1RetroDataTable RetrieveRows ( Int32 extendedID, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
+		//   if ( dtRetro == null ) throw new ArgumentNullException("dsLinks");
+		//   if ( dtRetro.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Retro.");
+
+		//   dtRetro.
+
+		//   string select = string.Format("{0}={1}", extendedID, dtRetro.Ext.ColumnName);
+		//   LinksDataSet.tblParentsOfGen1RetroRow[] drs = (LinksDataSet.tblParentsOfGen1RetroRow[])dtRetro.Select(select);
+		//   //Trace.Assert(drs.Length >= 1, "There should be at least one row.");
+
+		//   LinksDataSet.tblParentsOfGen1RetroDataTable dt = new LinksDataSet.tblParentsOfGen1RetroDataTable();
+		//   foreach ( LinksDataSet.tblParentsOfGen1RetroRow dr in drs ) {
+		//      dt.ImportRow(dr);
+		//   }
+		//   return dt;
+		//}
 		//public static LinksDataSet.tblParentsOfGen1RetroDataTable RetrieveRows ( Int32 subjectTag, LinksDataSet dsLinks ) {
 		//   if ( dsLinks == null ) throw new ArgumentNullException("dsLinks");
 		//   if ( dsLinks.tblParentsOfGen1Retro.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Retro.");

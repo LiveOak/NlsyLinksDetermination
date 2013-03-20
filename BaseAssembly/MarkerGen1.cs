@@ -29,17 +29,23 @@ namespace Nls.BaseAssembly {
 			sw.Start();
 			Retrieve.VerifyResponsesExistForItem(_items, _dsLinks);
 			Int32 recordsAdded = 0;
-			foreach ( LinksDataSet.tblRelatedStructureRow drRelated in _dsLinks.tblRelatedStructure ) {
-				if ( (RelationshipPath)drRelated.RelationshipPath == RelationshipPath.Gen1Housemates ) {
+			Int16[] extendedIDs = CommonFunctions.CreateExtendedFamilyIDs(_dsLinks);
+			foreach ( Int16 extendedID in extendedIDs ) {
+				LinksDataSet.tblRelatedStructureRow[] drsRelated = Retrieve.RelatedStructureInExtendedFamily(extendedID, RelationshipPath.Gen1Housemates, _dsLinks.tblRelatedStructure);
+				//LinksDataSet.tblParentsOfGen1RetroDataTable dtRetroForExtended = _dsLinks.tblParentsOfGen1RetroDataTable.Where(
+
+
+
+				foreach ( LinksDataSet.tblRelatedStructureRow drRelated in _dsLinks.tblRelatedStructure ) {
 					Int32 subject1Tag = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1.SubjectTag;
 					Int32 subject2Tag = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject2.SubjectTag;
 					LinksDataSet.tblResponseDataTable dtSubject1 = Retrieve.SubjectsRelevantResponseRows(subject1Tag, _itemIDsString, 1, _dsLinks.tblResponse);
 					LinksDataSet.tblParentsOfGen1CurrentDataTable dtParentsCurrent = ParentsOfGen1Current.RetrieveRows(subject1Tag, subject2Tag, _dsLinks);
-					LinksDataSet.tblParentsOfGen1RetroDataTable dtParentsRetro = ParentsOfGen1Retro.RetrieveRows(subject1Tag, subject2Tag, _dsLinks);
+					LinksDataSet.tblParentsOfGen1RetroDataTable dtParentsRetro = ParentsOfGen1Retro.RetrieveRows(subject1Tag, subject2Tag, _dsLinks.tblParentsOfGen1Retro);
 
 					recordsAdded += FromRoster(drRelated, dtSubject1);
-					recordsAdded += FromShareExplicit(Item.ShareBiomomGen1, MarkerType.ShareBiomom, drRelated, dtSubject1);
 					recordsAdded += FromShareExplicit(Item.ShareBiodadGen1, MarkerType.ShareBiodad, drRelated, dtSubject1);
+					recordsAdded += FromShareExplicit(Item.ShareBiomomGen1, MarkerType.ShareBiomom, drRelated, dtSubject1);
 					recordsAdded += FromBioparentDeathAge(MarkerType.Gen1BiodadDeathAge, drRelated, dtParentsCurrent);
 					recordsAdded += FromBioparentDeathAge(MarkerType.Gen1BiomomDeathAge, drRelated, dtParentsCurrent);
 					recordsAdded += FromGen0InHH(Bioparent.Dad, drRelated, dtParentsRetro);
@@ -197,7 +203,7 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Tier 2
-		private void AddMarkerRow ( Int32 extendedID, Int32 relatedID, MarkerType markerType, Int16 surveyYear, MarkerEvidence mzEvidence, MarkerEvidence sameGenerationEvidence, MarkerEvidence biomomEvidence, MarkerEvidence biodadEvidence, MarkerEvidence biograndparentEvidence ) {
+		private void AddMarkerRow ( Int16 extendedID, Int32 relatedID, MarkerType markerType, Int16 surveyYear, MarkerEvidence mzEvidence, MarkerEvidence sameGenerationEvidence, MarkerEvidence biomomEvidence, MarkerEvidence biodadEvidence, MarkerEvidence biograndparentEvidence ) {
 			LinksDataSet.tblMarkerGen1Row drNew = _dsLinks.tblMarkerGen1.NewtblMarkerGen1Row();
 			drNew.ExtendedID = extendedID;
 			drNew.RelatedID = relatedID;

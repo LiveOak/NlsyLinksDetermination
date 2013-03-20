@@ -181,12 +181,19 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Other
-		internal static LinksDataSet.tblSubjectRow[] SubjectsInExtendFamily ( Int32 extendedID, LinksDataSet.tblSubjectDataTable dtSubject ) {
+		internal static LinksDataSet.tblSubjectRow[] SubjectsInExtendFamily ( Int16 extendedID, LinksDataSet.tblSubjectDataTable dtSubject ) {
 			string select = string.Format("{0}={1}", extendedID, dtSubject.ExtendedIDColumn.ColumnName);
 			LinksDataSet.tblSubjectRow[] drs = (LinksDataSet.tblSubjectRow[])dtSubject.Select(select);
 			Trace.Assert(drs.Length > 0, "At least one member of the extended family should be returned.");
 			return drs;
 		}
+		internal static LinksDataSet.tblRelatedStructureRow[] RelatedStructureInExtendedFamily ( Int16 extendedID, RelationshipPath path, LinksDataSet.tblRelatedStructureDataTable dtStructure ) {
+			string select = string.Format("{0}={1} AND {2}={3}",
+				extendedID, dtStructure.ExtendedIDColumn.ColumnName,
+				(byte)path, dtStructure.RelationshipPathColumn.ColumnName);
+			return (LinksDataSet.tblRelatedStructureRow[])dtStructure.Select(select);
+		}
+
 		internal static EnumResponsesGen1.Gen1Roster Gen1Roster1979 ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblResponseDataTable dt ) {//LinksDataSet.tblSubjectRow drSubject1, LinksDataSet.tblSubjectRow drSubject2 ) {
 			if ( dt == null ) throw new ArgumentNullException("dt");
 			if ( drRelated == null ) throw new ArgumentNullException("drRelated");
