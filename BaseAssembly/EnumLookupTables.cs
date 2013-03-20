@@ -114,6 +114,7 @@ namespace Nls.BaseAssembly {
 		Gen1MotherBirthMonth = 329,
 		Gen1MotherBirthYear = 330,
 		Gen1MotherAge = 331,
+		Gen1AlwaysLivedWithBothParents = 340,
 		Gen2HeightInchesTotal = 500,
 		Gen2HeightFeetOnly = 501,
 		Gen2HeightInchesRemainder = 502,

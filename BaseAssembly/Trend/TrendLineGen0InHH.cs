@@ -5,7 +5,7 @@ namespace Nls.BaseAssembly.Trend {
 	public sealed class TrendLineGen0InHH {
 		#region Fields
 		private readonly bool _hasAnyRecords;
-		private readonly bool _neverAtHome;
+		private readonly bool _everAtHome;
 		private readonly Int32 _yob;
 		private readonly Int16[] _years;
 		private readonly YesNo[] _values;
@@ -18,7 +18,7 @@ namespace Nls.BaseAssembly.Trend {
 		#region Properties
 		public Int32 CountAll { get { return _years.Length; } }
 		//public Int32 CountNonnull { get { return _countNonnull; } }
-		public bool NeverAtHome { get { return _neverAtHome; } }
+		public bool EverAtHome { get { return _everAtHome; } }
 		public bool HasAnyRecords { get { return _hasAnyRecords; } }
 		public Int16[] Jumps { get { return _jumps; } }
 		public Int32 JumpCount { get { return _jumps.Length; } }
@@ -27,10 +27,10 @@ namespace Nls.BaseAssembly.Trend {
 		public Int32 Yob { get { return _yob; } }
 		#endregion
 		#region Constructor
-		public TrendLineGen0InHH ( Int32 yob, bool hasAnyRecords, bool neverAtHome, Int16[] years, YesNo[] values, byte[] ages ) {
+		public TrendLineGen0InHH ( Int32 yob, bool hasAnyRecords, bool everAtHome, Int16[] years, YesNo[] values, byte[] ages ) {
 			_yob = yob;
 			_hasAnyRecords = hasAnyRecords;
-			_neverAtHome = neverAtHome;
+			_everAtHome = everAtHome;
 
 			if ( !_hasAnyRecords ) {
 				_years = new Int16[] { };

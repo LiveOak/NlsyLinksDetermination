@@ -49,7 +49,13 @@ namespace Nls.BaseAssembly {
 			else if ( shareBiomom == Tristate.Yes && shareBiodad == Tristate.DoNotKnow ) return RCoefficients.SiblingAmbiguous;
 			else throw new InvalidOperationException("All conditions should have been caught.");
 		}
-
+		public static YesNo ReverseYesNo ( YesNo yn ) {
+			switch ( yn ) {
+				case YesNo.Yes: return YesNo.No;
+				case YesNo.No: return YesNo.Yes;
+				default: return yn;  //Don't modify the other values.
+			}
+		}
 		public static byte LastTwoDigitsOfGen2SubjectID ( LinksDataSet.tblSubjectRow drSubject ) {
 			if ( drSubject == null ) throw new ArgumentNullException("drSubject");
 			if ( drSubject.Generation != (byte)Generation.Gen2 ) throw new ArgumentOutOfRangeException("drSubject", drSubject.Generation, "This function is valid for only Gen2 subjects.");
