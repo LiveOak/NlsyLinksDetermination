@@ -68,6 +68,7 @@
     <Compile Include="FatherOfGen2.cs" />
     <Compile Include="MarkerGen1Summary.cs" />
     <Compile Include="Pair.cs" />
+    <Compile Include="Trend\TrendLineGen0InHH.cs" />
     <Compile Include="Trend\DetermineShareGen2Father.cs" />
     <Compile Include="Trend\DetermineShareBabyDaddy.cs" />
     <Compile Include="CommonCalculations.cs" />

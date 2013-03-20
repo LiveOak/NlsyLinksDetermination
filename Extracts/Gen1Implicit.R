@@ -38,3 +38,5 @@ table(ds[ds$R2303200>70, 'R2303200']) #Father's age
 table(ds[ds$R2303600>70, 'R2303600']) #Mother's age
 
 table(ds$R2302900, ds$R2303100)
+
+ds[1: 100, c("R0000100", "R2839200")]

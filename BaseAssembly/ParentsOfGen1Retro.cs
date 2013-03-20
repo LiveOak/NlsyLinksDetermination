@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Nls.BaseAssembly.Trend;
 
 namespace Nls.BaseAssembly {
 	public sealed class ParentsOfGen2Retro {
@@ -52,18 +53,17 @@ namespace Nls.BaseAssembly {
 		private Int32 ProcessSubjectGen1 ( LinksDataSet.tblSubjectRow drSubject, LinksDataSet.tblResponseDataTable dtExtendedResponse ) {
 			byte[] loopIndicesAndAges = { 255, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 };
 			Int32 subjectTag = drSubject.SubjectTag;
-			Int32 yob = Mob.Retrieve(drSubject, dtExtendedResponse).Value.Year;
+			Int16 yob = Convert.ToInt16(Mob.Retrieve(drSubject, dtExtendedResponse).Value.Year);
 
 			Int32 recordsAdded = 0;
-			foreach ( Int16 surveyYear in ItemYears.Gen1BiomomInHH ) {
+			foreach ( Int16 surveyYear in ItemYears.Gen1BioparentInHH ) {
 				foreach ( byte loopIndexAndAge in loopIndicesAndAges ) {
 					YesNo biodadInHH = DetermineBiodadInHH(Item.Gen1LivedWithFatherAtAgeX, surveyYear, subjectTag, loopIndexAndAge, dtExtendedResponse);
 					YesNo biomomInHH = DetermineBiodadInHH(Item.Gen1LivedWithMotherAtAgeX, surveyYear, subjectTag, loopIndexAndAge, dtExtendedResponse);
 
 					if ( biodadInHH != YesNo.ValidSkipOrNoInterviewOrNotInSurvey && biomomInHH != YesNo.ValidSkipOrNoInterviewOrNotInSurvey ) {
 						Int16 yearInHH = Convert.ToInt16(yob + loopIndexAndAge);
-						if ( loopIndexAndAge == byte.MaxValue ) yearInHH = 0;
-
+						if ( loopIndexAndAge == byte.MaxValue ) yearInHH = yob;
 
 						AddRow(subjectTag, surveyYear, biodadInHH, biomomInHH, loopIndexAndAge, yearInHH);
 						recordsAdded += 1;
@@ -106,32 +106,103 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Public/Private Static
-		//public static LinksDataSet.tblFatherOfGen2DataTable RetrieveRows ( Int32 subjectTag, LinksDataSet dsLinks ) {
-		//   if ( dsLinks == null ) throw new ArgumentNullException("dsLinks");
-		//   if ( dsLinks.tblFatherOfGen2.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblFatherOfGen2.");
+		public static TrendLineGen0InHH RetrieveTrend ( Bioparent bioparent, Int32 subjectTag, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro){ //, LinksDataSet.tblSubjectDetailsDataTable dtDetail ) {
+			if ( dtRetro == null ) 
+				return new TrendLineGen0InHH(yob: 0, hasAnyRecords: false, neverAtHome: false, years: null, values: null, ages: null); 
+			else if ( dtRetro.Count <= 0 ) 
+				throw new ArgumentException("There should be at least one row in tblParentsOfGen1Retro.");
 
-		//   string select = string.Format("{0}={1}", subjectTag, dsLinks.tblFatherOfGen2.SubjectTagColumn.ColumnName);
-		//   LinksDataSet.tblFatherOfGen2Row[] drs = (LinksDataSet.tblFatherOfGen2Row[])dsLinks.tblFatherOfGen2.Select(select);
+			string selectNever = string.Format("{0}={1} AND {2}={3}",
+				subjectTag, dtRetro.SubjectTagColumn.ColumnName,
+				byte.MaxValue, dtRetro.AgeColumn.ColumnName);
+			LinksDataSet.tblParentsOfGen1RetroRow[] drNever = (LinksDataSet.tblParentsOfGen1RetroRow[])dtRetro.Select(selectNever);
+			Trace.Assert(drNever.Length == 1, "Exactly one record should be retrieved from tblParentsOfGen1Retro for 'Never Lived in HH'.");
+			Int32 yob = drNever[0].Year;
+
+			string selectYears = string.Format("{0}!={1} AND {2}={3}",
+				subjectTag, dtRetro.SubjectTagColumn.ColumnName,
+				byte.MaxValue, dtRetro.AgeColumn.ColumnName);
+			LinksDataSet.tblParentsOfGen1RetroRow[] drsYes = (LinksDataSet.tblParentsOfGen1RetroRow[])dtRetro.Select(selectNever);
+			Trace.Assert(drsYes.Length >= 0, "At least zero records should be retrieved from tblParentsOfGen1Retro.");
+
+			YesNo neverInHH = YesNo.ValidSkipOrNoInterviewOrNotInSurvey;
+			Int16[] years = new Int16[drsYes.Length];
+			YesNo[] values = new YesNo[drsYes.Length];
+			byte[] ages = new byte[drsYes.Length];
+
+			switch ( bioparent ) {
+				case Bioparent.Dad:
+					neverInHH = (YesNo)drNever[0].BiodadInHH;
+					//values = (from dr in drsYes select (YesNo)dr.BiodadInHH).ToArray();
+					for ( Int32 i = 0; i < drsYes.Length; i++ ) {
+						values[i] = (YesNo)drsYes[i].BiodadInHH;
+					}
+					break;
+				case Bioparent.Mom:
+					neverInHH = (YesNo)drNever[0].BiomomInHH;
+					for ( Int32 i = 0; i < drsYes.Length; i++ ) {
+						values[i] = (YesNo)drsYes[i].BiomomInHH;
+					}
+					break;
+				default:
+					throw new ArgumentOutOfRangeException("bioparent");
+			}
+
+
+			switch ( neverInHH ) {
+				case YesNo.Yes:
+					Trace.Assert(drsYes.Length == 0, "If the subject says the bioparent has never lived in the HH, then there shouldn't be any more records.");
+					break;
+				case YesNo.No:
+					//This is ok.  Execute the statements following the switch statement.
+					break;
+				default:
+					throw new ArgumentOutOfRangeException("bioparent");
+			}
+
+			for ( Int32 i = 0; i < drsYes.Length; i++ ) {
+				years[i] = drsYes[i].Year;
+				ages[i] = drsYes[i].Age;
+			}
+
+			return new TrendLineGen0InHH(yob: yob, hasAnyRecords: true, neverAtHome: (neverInHH == YesNo.Yes), years: years, values: values, ages: ages);
+			//string select = string.Format("{0}={1}", subjectTag, dsLinks.tblParentsOfGen1Retro.SubjectTagColumn.ColumnName);
+			//LinksDataSet.tblParentsOfGen1RetroRow[] drs = (LinksDataSet.tblParentsOfGen1RetroRow[])dsLinks.tblParentsOfGen1Retro.Select(select);
+			////Trace.Assert(drs.Length >= 1, "There should be at least one row.");
+			//LinksDataSet.tblParentsOfGen1RetroDataTable dt = new LinksDataSet.tblParentsOfGen1RetroDataTable();
+			//foreach ( LinksDataSet.tblParentsOfGen1RetroRow dr in drs ) {
+			//   dt.ImportRow(dr);
+			//}
+			//return dt;
+		}
+		public static LinksDataSet.tblParentsOfGen1RetroDataTable RetrieveRows ( Int32 subject1Tag, Int32 subject2Tag, LinksDataSet dsLinks ) {
+			if ( dsLinks == null ) throw new ArgumentNullException("dsLinks");
+			if ( dsLinks.tblParentsOfGen1Retro.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Retro.");
+
+			string select = string.Format("{0}={1} OR {2}={3}",
+				subject1Tag, dsLinks.tblParentsOfGen1Retro.SubjectTagColumn.ColumnName,
+				subject2Tag, dsLinks.tblParentsOfGen1Retro.SubjectTagColumn.ColumnName);
+			LinksDataSet.tblParentsOfGen1RetroRow[] drs = (LinksDataSet.tblParentsOfGen1RetroRow[])dsLinks.tblParentsOfGen1Retro.Select(select);
+			//Trace.Assert(drs.Length >= 1, "There should be at least one row.");
+
+			LinksDataSet.tblParentsOfGen1RetroDataTable dt = new LinksDataSet.tblParentsOfGen1RetroDataTable();
+			foreach ( LinksDataSet.tblParentsOfGen1RetroRow dr in drs ) {
+				dt.ImportRow(dr);
+			}
+			return dt;
+		}
+		//public static LinksDataSet.tblParentsOfGen1RetroDataTable RetrieveRows ( Int32 subjectTag, LinksDataSet dsLinks ) {
+		//   if ( dsLinks == null ) throw new ArgumentNullException("dsLinks");
+		//   if ( dsLinks.tblParentsOfGen1Retro.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Retro.");
+
+		//   string select = string.Format("{0}={1}", subjectTag, dsLinks.tblParentsOfGen1Retro.SubjectTagColumn.ColumnName);
+		//   LinksDataSet.tblParentsOfGen1RetroRow[] drs = (LinksDataSet.tblParentsOfGen1RetroRow[])dsLinks.tblParentsOfGen1Retro.Select(select);
 		//   //Trace.Assert(drs.Length >= 1, "There should be at least one row.");
-		//   LinksDataSet.tblFatherOfGen2DataTable dt = new LinksDataSet.tblFatherOfGen2DataTable();
-		//   foreach ( LinksDataSet.tblFatherOfGen2Row dr in drs ) {
+		//   LinksDataSet.tblParentsOfGen1RetroDataTable dt = new LinksDataSet.tblParentsOfGen1RetroDataTable();
+		//   foreach ( LinksDataSet.tblParentsOfGen1RetroRow dr in drs ) {
 		//      dt.ImportRow(dr);
 		//   }
 		//   return dt;
-		//}
-		//private static LinksDataSet.tblFatherOfGen2Row RetrieveRow ( Int32 subjectTag, Int16 surveyYear, LinksDataSet.tblFatherOfGen2DataTable dtInput ) {
-		//   string select = string.Format("{0}={1} AND {2}={3}",
-		//      subjectTag, dtInput.SubjectTagColumn.ColumnName,
-		//      surveyYear, dtInput.SurveyYearColumn.ColumnName);
-		//   LinksDataSet.tblFatherOfGen2Row[] drs = (LinksDataSet.tblFatherOfGen2Row[])dtInput.Select(select);
-		//   //if ( drs == null ) {
-		//   if ( drs.Length <=0 ) {
-		//      return null;
-		//   }
-		//   else {
-		//      Trace.Assert(drs.Length <= 1, "There should be no more than one row.");
-		//      return drs[0];
-		//   }
 		//}
 		//public static Int16?[] RetrieveInHH ( Int32 subjectTag, Int16[] surveyYears, LinksDataSet.tblFatherOfGen2DataTable dtInput ) {
 		//   if ( dtInput == null ) throw new ArgumentNullException("dtInput");

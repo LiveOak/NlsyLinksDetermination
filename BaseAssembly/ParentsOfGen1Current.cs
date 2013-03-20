@@ -306,7 +306,7 @@ namespace Nls.BaseAssembly {
 		#region Public/Private Static
 		public static LinksDataSet.tblParentsOfGen1CurrentDataTable RetrieveRows ( Int32 subject1Tag, Int32 subject2Tag, LinksDataSet dsLinks ) {
 			if ( dsLinks == null ) throw new ArgumentNullException("dsLinks");
-			if ( dsLinks.tblParentsOfGen1Current.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblFatherOfGen2.");
+			if ( dsLinks.tblParentsOfGen1Current.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Retro.");
 
 			string select = string.Format("{0}={1} OR {2}={3}",
 				subject1Tag, dsLinks.tblParentsOfGen1Current.SubjectTagColumn.ColumnName, 

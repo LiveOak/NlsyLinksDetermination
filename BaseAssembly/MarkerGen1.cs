@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
+using Nls.BaseAssembly.Trend;
+
 namespace Nls.BaseAssembly {
 	public sealed class MarkerGen1 {
 		#region Fields
@@ -33,12 +35,15 @@ namespace Nls.BaseAssembly {
 					Int32 subject2Tag = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject2.SubjectTag;
 					LinksDataSet.tblResponseDataTable dtSubject1 = Retrieve.SubjectsRelevantResponseRows(subject1Tag, _itemIDsString, 1, _dsLinks.tblResponse);
 					LinksDataSet.tblParentsOfGen1CurrentDataTable dtParentsCurrent = ParentsOfGen1Current.RetrieveRows(subject1Tag, subject2Tag, _dsLinks);
+					LinksDataSet.tblParentsOfGen1RetroDataTable dtParentsRetro = ParentsOfGen2Retro.RetrieveRows(subject1Tag, subject2Tag, _dsLinks);
 
 					recordsAdded += FromRoster(drRelated, dtSubject1);
 					recordsAdded += FromShareExplicit(Item.ShareBiomomGen1, MarkerType.ShareBiomom, drRelated, dtSubject1);
 					recordsAdded += FromShareExplicit(Item.ShareBiodadGen1, MarkerType.ShareBiodad, drRelated, dtSubject1);
 					recordsAdded += FromBioparentDeathAge(MarkerType.Gen1BiodadDeathAge, drRelated, dtParentsCurrent);
 					recordsAdded += FromBioparentDeathAge(MarkerType.Gen1BiomomDeathAge, drRelated, dtParentsCurrent);
+					recordsAdded += FromGen0InHH(Bioparent.Dad, drRelated, dtParentsRetro);
+					recordsAdded += FromGen0InHH(Bioparent.Mom, drRelated, dtParentsRetro);
 				}
 			}
 			sw.Stop();
@@ -47,6 +52,20 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Private Methods -Tier 1
+		private Int32 FromGen0InHH ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
+			TrendLineGen0InHH subject1 = ParentsOfGen2Retro.RetrieveTrend(bioparent, drRelated.Subject1Tag, dtRetro);
+			TrendLineGen0InHH subject2 = ParentsOfGen2Retro.RetrieveTrend(bioparent, drRelated.Subject1Tag, dtRetro);
+			//Int16?[] values2 = BabyDaddy.RetrieveInHH(drRelated.Subject2Tag, surveyYears, dtSubject2);
+
+			//TrendLineInteger trend1 = new TrendLineInteger(surveyYears, values1);
+			//TrendLineInteger trend2 = new TrendLineInteger(surveyYears, values2);
+			//TrendComparisonInteger comparison = new TrendComparisonInteger(trend1, trend2);
+			//MarkerEvidence mzEvidence = DetermineShareBabyDaddy.InHH(comparison);
+			//MarkerEvidence biodadEvidence = mzEvidence;
+			//return AddMarkerRow(extendedID, drRelated.ID, markerType, comparison.LastNonMutualNullPointsYear, mzEvidence, biodadEvidence, fromMother);
+			//throw new NotImplementedException();
+			return 0;
+		}
 		private Int32 FromBioparentDeathAge ( MarkerType markerType, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1CurrentDataTable dtParentsOfGen1Current ) {
 			byte? deathAge1 = null;
 			byte? deathAge2 = null;

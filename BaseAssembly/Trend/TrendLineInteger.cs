@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Nls.BaseAssembly.Trend {
-	public sealed class TrendLineInteger{
+	public sealed class TrendLineInteger {
 		#region Fields
 		private readonly Int16[] _surveyYears;
 		private readonly Int16?[] _values;
