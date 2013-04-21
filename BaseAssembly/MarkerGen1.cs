@@ -58,7 +58,7 @@ namespace Nls.BaseAssembly {
 		#region Private Methods -Tier 1
 		private Int32 FromGen0InHH ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
 			TrendLineGen0InHH subject1 = ParentsOfGen1Retro.RetrieveTrend(bioparent, drRelated.Subject1Tag, dtRetro);
-			TrendLineGen0InHH subject2 = ParentsOfGen1Retro.RetrieveTrend(bioparent, drRelated.Subject1Tag, dtRetro);
+			TrendLineGen0InHH subject2 = ParentsOfGen1Retro.RetrieveTrend(bioparent, drRelated.Subject2Tag, dtRetro);
 			//Int16?[] values2 = BabyDaddy.RetrieveInHH(drRelated.Subject2Tag, surveyYears, dtSubject2);
 
 			//TrendLineInteger trend1 = new TrendLineInteger(surveyYears, values1);
