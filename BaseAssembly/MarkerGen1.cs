@@ -33,7 +33,7 @@ namespace Nls.BaseAssembly {
 			foreach ( Int16 extendedID in extendedIDs ) {
 				LinksDataSet.tblRelatedStructureRow[] drsRelated = Retrieve.RelatedStructureInExtendedFamily(extendedID, RelationshipPath.Gen1Housemates, _dsLinks.tblRelatedStructure);
 				LinksDataSet.tblParentsOfGen1RetroDataTable dtRetroForExtended = ParentsOfGen1Retro.RetrieveRows(extendedID, _dsLinks.tblParentsOfGen1Retro);
-				
+
 				foreach ( LinksDataSet.tblRelatedStructureRow drRelated in drsRelated ) {
 					Int32 subject1Tag = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1.SubjectTag;
 					Int32 subject2Tag = drRelated.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject2.SubjectTag;
@@ -44,6 +44,8 @@ namespace Nls.BaseAssembly {
 					recordsAdded += FromRoster(drRelated, dtSubject1);
 					recordsAdded += FromShareExplicit(Item.ShareBiodadGen1, MarkerType.ShareBiodad, drRelated, dtSubject1);
 					recordsAdded += FromShareExplicit(Item.ShareBiomomGen1, MarkerType.ShareBiomom, drRelated, dtSubject1);
+					recordsAdded += FromLiveWithBioparentIn1979(Bioparent.Dad, drRelated, dtParentsRetro);
+					recordsAdded += FromLiveWithBioparentIn1979(Bioparent.Mom, drRelated, dtParentsRetro);
 					recordsAdded += FromBioparentDeathAge(MarkerType.Gen1BiodadDeathAge, drRelated, dtParentsCurrent);
 					recordsAdded += FromBioparentDeathAge(MarkerType.Gen1BiomomDeathAge, drRelated, dtParentsCurrent);
 					recordsAdded += FromGen0InHH(Bioparent.Dad, drRelated, dtParentsRetro);
@@ -56,6 +58,69 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Private Methods -Tier 1
+		private Int32 FromLiveWithBioparentIn1979 ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
+			const Int16 year = 1979;
+
+			Tristate subject1 = ParentsOfGen1Retro.RetrieveInHHByYear(drRelated.Subject1Tag, bioparent, year, dtRetro);
+			Tristate subject2 = ParentsOfGen1Retro.RetrieveInHHByYear(drRelated.Subject2Tag, bioparent, year, dtRetro);
+			MarkerEvidence shareBioparent = MarkerEvidence.Missing;
+
+
+			if ( (subject1 == Tristate.DoNotKnow) || (subject2 == Tristate.DoNotKnow) )
+				shareBioparent = MarkerEvidence.Missing;
+			else if ( subject1 != subject2 )
+				shareBioparent = MarkerEvidence.Unlikely;
+			else if ( (subject1 == Tristate.Yes) || (subject2 == Tristate.Yes) )
+				shareBioparent = MarkerEvidence.StronglySupports;
+			else if ( (subject1 == Tristate.No) || (subject2 == Tristate.No) )
+				shareBioparent = MarkerEvidence.Consistent;
+			else
+				throw new InvalidOperationException("All the conditions should have been caught.");
+
+
+
+			MarkerEvidence mzEvidence = MarkerEvidence.Missing;
+			MarkerEvidence shareBiomom = MarkerEvidence.Irrelevant;
+			MarkerEvidence shareBiodad = MarkerEvidence.Irrelevant;
+
+			switch ( shareBioparent ) {
+				case MarkerEvidence.StronglySupports:
+				//case MarkerEvidence.Supports:
+				case MarkerEvidence.Consistent:
+					mzEvidence = MarkerEvidence.Consistent;
+					break;
+				case MarkerEvidence.Unlikely:
+					mzEvidence = MarkerEvidence.Unlikely;
+					break;
+				//case MarkerEvidence.Disconfirms:
+				//   mzEvidence = MarkerEvidence.Disconfirms;
+				//   break;
+				case MarkerEvidence.Missing:
+					mzEvidence = MarkerEvidence.Missing;
+					break;
+				default:
+					throw new InvalidOperationException("The switch should not have gotten here.");
+			}
+
+			MarkerType markerType;
+			switch ( bioparent ) {
+				case Bioparent.Dad:
+					markerType = MarkerType.Gen1BiodadLiveWith1979;
+					shareBiodad = shareBioparent;
+					break;
+				case Bioparent.Mom:
+					markerType = MarkerType.Gen1BiomomLiveWith1979;
+					shareBiomom = shareBioparent;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException("bioparent", bioparent, "The 'bioparent' value wasn't recognized.");
+			}
+			//TODO: have the related values consider this marker;
+			AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, ItemYears.Gen1Roster, mzEvidence: mzEvidence, sameGenerationEvidence: MarkerEvidence.Irrelevant,
+				biomomEvidence: shareBiomom, biodadEvidence: shareBiodad, biograndparentEvidence: MarkerEvidence.Ambiguous);
+			const Int32 recordsAdded = 1;
+			return recordsAdded;
+		}
 		private Int32 FromGen0InHH ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
 			TrendLineGen0InHH subject1 = ParentsOfGen1Retro.RetrieveTrend(bioparent, drRelated.Subject1Tag, dtRetro);
 			TrendLineGen0InHH subject2 = ParentsOfGen1Retro.RetrieveTrend(bioparent, drRelated.Subject2Tag, dtRetro);
@@ -124,7 +189,7 @@ namespace Nls.BaseAssembly {
 				default: throw new ArgumentOutOfRangeException("markerType", markerType, "The 'FromShareBioparent' function does not accommodate this markerType.");
 			}
 			AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, ItemYears.Gen1Roster, mzEvidence: mzEvidence, sameGenerationEvidence: MarkerEvidence.Irrelevant,
-				biomomEvidence: shareBiomom, biodadEvidence: shareBioparent, biograndparentEvidence: MarkerEvidence.Ambiguous);
+				biomomEvidence: shareBiomom, biodadEvidence: shareBiodad, biograndparentEvidence: MarkerEvidence.Ambiguous);
 			return 1;
 		}
 		private Int32 FromRoster ( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblResponseDataTable dtSubject1 ) {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -195,6 +196,29 @@ namespace Nls.BaseAssembly {
 			//      throw new ArgumentOutOfRangeException("bioparent");
 			//}
 			return new TrendLineGen0InHH(yob: yob, hasAnyRecords: true, everAtHome: everInHH, years: years, values: inHHs, ages: ages);
+		}
+		public static Tristate RetrieveInHHByYear ( Int32 subjectTag, Bioparent bioparent, Int16 year, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
+			if ( dtRetro == null ) throw new ArgumentNullException("dsLinks");
+			if ( dtRetro.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Retro.");
+
+			string select = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
+				subjectTag, dtRetro.SubjectTagColumn.ColumnName,
+				Convert.ToByte(bioparent), dtRetro.BioparentColumn.ColumnName,
+				year, dtRetro.YearColumn.ColumnName);
+
+			DataRow[] drs = dtRetro.Select(select);
+			Trace.Assert(drs.Length <= 1, "There should be at most one row."); //The item asked only until they were 18.  The function could be requesting a year when they were older.
+			if ( drs.Length == 0 ) return Tristate.DoNotKnow;
+
+			LinksDataSet.tblParentsOfGen1RetroRow dr = (LinksDataSet.tblParentsOfGen1RetroRow)drs[0];
+			if ( dr.IsInHHNull() )
+				return Tristate.DoNotKnow;
+			else if ( dr.InHH )
+				return Tristate.Yes;
+			else if ( !dr.InHH )
+				return Tristate.No;
+			else
+				throw new InvalidOperationException();
 		}
 		public static LinksDataSet.tblParentsOfGen1RetroDataTable RetrieveRows ( Int32 subject1Tag, Int32 subject2Tag, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
 			if ( dtRetro == null ) throw new ArgumentNullException("dsLinks");
