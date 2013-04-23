@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.11.12)  20 MAR 2013 01:46
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.11.12)  21 APR 2013 20:26
 entering extended mode
 **ArchiveComparison.tex
 
@@ -72,10 +72,6 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
-(C:\Users\wibeasley\AppData\Roaming\MiKTeX\2.9\tex\latex\upquote\upquote.sty
-Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
-tim
-)
 (C:\Users\wibeasley\AppData\Roaming\MiKTeX\2.9\tex\latex\framed\framed.sty
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \OuterFrameSep=\skip43
@@ -134,6 +130,10 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 )
 \everycr=\toks17
 \minrowclearance=\skip46
+)
+(C:\Users\wibeasley\AppData\Roaming\MiKTeX\2.9\tex\latex\upquote\upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
 )
 (F:\Projects\Nls\NlsyLinksDetermination\MicroscopicViews\VersionComparison\Arch
 iveComparison.aux)
@@ -220,22 +220,25 @@ File: figure/unnamed-chunk-32.pdf Graphic file (type pdf)
 Package pdftex.def Info: figure/unnamed-chunk-32.pdf used on input line 97.
 (pdftex.def)             Requested size: 230.86192pt x 108.40472pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 197.
+(Font)              <7> on input line 192.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 197.
- [1
+(Font)              <5> on input line 192.
+
+
+LaTeX Warning: Float too large for page by 69.73pt on input line 263.
+
+[1
 
 {C:/Users/wibeasley/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <F:/Proj
 ects/Nls/NlsyLinksDetermination/MicroscopicViews/VersionComparison/figure/unnam
 ed-chunk-31.pdf> <F:/Projects/Nls/NlsyLinksDetermination/MicroscopicViews/Versi
-onComparison/figure/unnamed-chunk-32.pdf>]
-[2] [3] [4]
+onComparison/figure/unnamed-chunk-32.pdf>] [2] [3] [4]
 (F:\Projects\Nls\NlsyLinksDetermination\MicroscopicViews\VersionComparison\Arch
 iveComparison.aux) ) 
 Here is how much of TeX's memory you used:
  1897 strings out of 494049
  27192 string characters out of 3146052
- 152222 words of memory out of 3000000
+ 159538 words of memory out of 3000000
  5177 multiletter control sequences out of 15000+200000
  7151 words of font info for 26 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
@@ -246,7 +249,7 @@ s/cm/cmr10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/c
 m/cmr12.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
 mr17.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt
 10.pfb>
-Output written on ArchiveComparison.pdf (4 pages, 88168 bytes).
+Output written on ArchiveComparison.pdf (4 pages, 88499 bytes).
 PDF statistics:
  47 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

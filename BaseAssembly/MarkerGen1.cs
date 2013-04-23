@@ -105,11 +105,11 @@ namespace Nls.BaseAssembly {
 			MarkerType markerType;
 			switch ( bioparent ) {
 				case Bioparent.Dad:
-					markerType = MarkerType.Gen1BiodadLiveWith1979;
+					markerType = MarkerType.Gen1BiodadInHH1979;
 					shareBiodad = shareBioparent;
 					break;
 				case Bioparent.Mom:
-					markerType = MarkerType.Gen1BiomomLiveWith1979;
+					markerType = MarkerType.Gen1BiomomInHH1979;
 					shareBiomom = shareBioparent;
 					break;
 				default:
@@ -282,7 +282,7 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Public Static Methods
-		internal static MarkerEvidence RetrieveParentCurrentMarker ( Int64 relatedIDLeft, MarkerType markerType, LinksDataSet.tblMarkerGen1DataTable dtMarker ) {
+		internal static MarkerEvidence RetrieveParentCurrentMarker ( Int64 relatedIDLeft, MarkerType markerType, Bioparent bioparent, LinksDataSet.tblMarkerGen1DataTable dtMarker ) {
 			if ( dtMarker == null ) throw new ArgumentNullException("dtMarker");
 			string select = string.Format("{0}={1} AND {2}={3}",
 				relatedIDLeft, dtMarker.RelatedIDColumn.ColumnName,
@@ -292,8 +292,12 @@ namespace Nls.BaseAssembly {
 			Trace.Assert(drs.Length <= 1, "The number of returns markers should not exceed 1.");
 			if ( drs.Length == 0 )
 				return MarkerEvidence.Missing;
-			else
+			else if ( bioparent == Bioparent.Dad )
 				return (MarkerEvidence)drs[0].ShareBiodadEvidence;
+			else if ( bioparent == Bioparent.Mom )
+				return (MarkerEvidence)drs[0].ShareBiomomEvidence;
+			else
+				throw new ArgumentOutOfRangeException("markerType", markerType, "The 'bioparent' value is not accepted by this function.");
 		}
 
 

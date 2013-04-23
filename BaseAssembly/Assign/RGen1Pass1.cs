@@ -112,14 +112,17 @@ namespace Nls.BaseAssembly.Assign {
 			MarkerEvidence explicitBiodadFromYounger = ReduceShareBioparentToOne(MarkerType.ShareBiodad, ItemYears.Gen1ShareBioparent.Length, _idRelatedYoungerAboutOlder);
 
 
-			MarkerEvidence biomomDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomDeathAge, _dtMarkersGen1);
-			MarkerEvidence biodadDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadDeathAge, _dtMarkersGen1);
+			MarkerEvidence biomomInHH1979 = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH1979, Bioparent.Mom, _dtMarkersGen1);
+			MarkerEvidence biodadInHH1979 = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH1979, Bioparent.Dad, _dtMarkersGen1);
+
+			MarkerEvidence biomomDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomDeathAge, Bioparent.Mom, _dtMarkersGen1);
+			MarkerEvidence biodadDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadDeathAge, Bioparent.Dad, _dtMarkersGen1);
 
 			_explicitShareBiomom = CommonFunctions.TranslateEvidenceToTristate(explicitBiomomFromOlder, explicitBiomomFromYounger);
 			_explicitShareBiodad = CommonFunctions.TranslateEvidenceToTristate(explicitBiodadFromOlder, explicitBiodadFromYounger);
 
-			_implicitShareBiomom = ImplicitShareBioparent(biomomDeathAge);
-			_implicitShareBiodad = ImplicitShareBioparent(biodadDeathAge);
+			_implicitShareBiomom = ImplicitShareBioparent(inHH1979: biomomInHH1979, deathAge: biomomDeathAge);
+			_implicitShareBiodad = ImplicitShareBioparent(inHH1979: biodadInHH1979, deathAge: biodadDeathAge);
 
 
 			_rImplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _implicitShareBiomom, shareBiodad: _implicitShareBiodad, mustDecide: false);
@@ -131,10 +134,14 @@ namespace Nls.BaseAssembly.Assign {
 		}
 		#endregion //#region Public Methods #endregion #region Private Methods #endregion
 		#region Private Methods - Estimate R
-		private Tristate ImplicitShareBioparent ( MarkerEvidence deathAge ) {
+		private Tristate ImplicitShareBioparent ( MarkerEvidence inHH1979, MarkerEvidence deathAge ) {
 			if ( deathAge == MarkerEvidence.StronglySupports )
 				return Tristate.Yes;
+			else if ( inHH1979 == MarkerEvidence.StronglySupports )
+				return Tristate.Yes;
 			else if ( deathAge == MarkerEvidence.Disconfirms )
+				return Tristate.No;
+			else if ( inHH1979 == MarkerEvidence.Disconfirms )
 				return Tristate.No;
 			else 
 				return Tristate.DoNotKnow;
