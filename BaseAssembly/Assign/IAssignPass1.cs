@@ -9,6 +9,10 @@ namespace Nls.BaseAssembly {
 		//Int16 RosterAssignmentID { get; }
 		//float? RRoster { get; }
 
+		Tristate ImplicitShareBiomomPass1 { get; }
+		Tristate ImplicitShareBiodadPass1 { get; }
+		Tristate ExplicitShareBiomomPass1 { get; }
+		Tristate ExplicitShareBiodadPass1 { get; }
 		float? RImplicitPass1 { get; }
 		float? RImplicit2004 { get; }
 		float? RExplicitOldestSibVersion { get; }

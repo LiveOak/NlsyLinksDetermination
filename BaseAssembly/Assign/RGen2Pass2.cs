@@ -92,7 +92,7 @@ namespace Nls.BaseAssembly.Assign {
 		private float? CalculateRImplicitMother ( MarkerEvidence babyDaddyDeathDate, MarkerEvidence babyDaddyAlive, MarkerEvidence babyDaddyInHH, MarkerEvidence babyDaddyLeftHHDate, MarkerEvidence babyDaddyDistanceFromHH ) {
 			if ( !_drValue.IsRImplicitPass1Null() ) return (float?)_drValue.RImplicitPass1;
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.RImplicitPass1Column;
-			Pair[] pairs = Pair.BuildRelatedPairsOfGen2Sibs(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+			PairR[] pairs = PairR.BuildRelatedPairsOfGen2Sibs(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
 
 			InterpolateR interpolate = new InterpolateR(pairs);
 			float? newRImplicit = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
@@ -141,13 +141,13 @@ namespace Nls.BaseAssembly.Assign {
 			else
 				return rImplicitSubject;//This could still be null;
 		}
-		private bool HasLargeMetaphoricalDistance ( Pair[] pairs ) {
+		private bool HasLargeMetaphoricalDistance ( PairR[] pairs ) {
 			if ( _drSubjectDetails1.IsMobNull() || _drSubjectDetails2.IsMobNull() )
 				return false;
 			double mobDifferenceInYears = Math.Abs(_drSubjectDetails1.Mob.Subtract(_drSubjectDetails2.Mob).TotalDays / Constants.DaysPerYear);
-			if ( mobDifferenceInYears > 8 && Pair.CountHalfSibs(pairs) >= 2 )
+			if ( mobDifferenceInYears > 8 && PairR.CountHalfSibs(pairs) >= 2 )
 				return true;
-			else if ( mobDifferenceInYears > 5 && Pair.CountHalfSibs(pairs) >= 3 )
+			else if ( mobDifferenceInYears > 5 && PairR.CountHalfSibs(pairs) >= 3 )
 				return true;
 			else
 				return false;
@@ -155,7 +155,7 @@ namespace Nls.BaseAssembly.Assign {
 		private float? CalculateRExplicit ( ) {
 			if ( !_drValue.IsRExplicitPass1Null() ) return (float?)_drValue.RExplicitPass1;
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.RExplicitPass1Column;
-			Pair[] pairs = Pair.BuildRelatedPairsOfGen2Sibs(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+			PairR[] pairs = PairR.BuildRelatedPairsOfGen2Sibs(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
 
 			InterpolateR interpolate = new InterpolateR(pairs);
 			float? newRExplicit = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
@@ -164,7 +164,7 @@ namespace Nls.BaseAssembly.Assign {
 		private float? CalculateRFull ( ) {
 			if ( !_drValue.IsRPass1Null() ) return (float?)_drValue.RPass1;
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.RPass1Column;
-			Pair[] pairs = Pair.BuildRelatedPairsOfGen2Sibs(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+			PairR[] pairs = PairR.BuildRelatedPairsOfGen2Sibs(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
 
 			InterpolateR interpolate = new InterpolateR(pairs);
 			float? newR = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);

@@ -14,12 +14,15 @@ namespace Nls.BaseAssembly.Assign {
 		private readonly LinksDataSet.tblRelatedStructureRow _drRight;
 		private readonly LinksDataSet.tblSubjectDetailsRow _drSubjectDetails1;
 		private readonly LinksDataSet.tblSubjectDetailsRow _drSubjectDetails2;
-		//private readonly LinksDataSet.tblMarkerGen1DataTable _dtMarkersGen1;
+		private readonly LinksDataSet.tblMarkerGen1DataTable _dtMarkersGen1;
 		private readonly LinksDataSet.tblRelatedValuesRow _drValue;
 
 		private readonly Int32 _idRelatedLeft = Int32.MinValue;
 		private readonly Int32 _idRelatedRight = Int32.MinValue;
 		private readonly Int32 _idRelatedOlderAboutYounger = Int32.MinValue;//usually equal to _idRelatedLeft
+
+		private readonly Tristate _implicitShareBiomom;
+		private readonly Tristate _implicitShareBiodad;
 
 		private readonly Int32 _extendedID;
 		private float? _rImplicit = null;// float.NaN;
@@ -67,9 +70,24 @@ namespace Nls.BaseAssembly.Assign {
 			}
 
 			_drValue = _dsLinks.tblRelatedValues.FindByID(_idRelatedLeft);
-			//_dtMarkersGen1 = MarkerGen1.PairRelevantMarkerRows(_idRelatedLeft, _idRelatedRight, _dsLinks, _extendedID);
+			_dtMarkersGen1 = MarkerGen1.PairRelevantMarkerRows(_idRelatedLeft, _idRelatedRight, _dsLinks, _extendedID);
 
-			_rImplicit = CalculateRImplicit();
+			MarkerEvidence biomomInHH1980 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1980, Bioparent.Mom, _dtMarkersGen1);
+			MarkerEvidence biodadInHH1980 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1980, Bioparent.Dad, _dtMarkersGen1);
+			MarkerEvidence biomomInHH1978 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1978, Bioparent.Mom, _dtMarkersGen1);
+			MarkerEvidence biodadInHH1978 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1978, Bioparent.Dad, _dtMarkersGen1);
+			MarkerEvidence biomomInHH1977 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1977, Bioparent.Mom, _dtMarkersGen1);
+			MarkerEvidence biodadInHH1977 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1977, Bioparent.Dad, _dtMarkersGen1);
+			MarkerEvidence biomomInHH1976 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1976, Bioparent.Mom, _dtMarkersGen1);
+			MarkerEvidence biodadInHH1976 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1976, Bioparent.Dad, _dtMarkersGen1);
+
+			//_rImplicit = CalculateRImplicit(biomomInHH1980, biodadInHH1980, biomomInHH1978, biodadInHH1978, biomomInHH1977, biodadInHH1977, biomomInHH1976, biodadInHH1976);
+
+			_implicitShareBiomom = ImplicitShareBioparent(biomomInHH1980,  biomomInHH1978,  biomomInHH1977,  biomomInHH1976);
+			_implicitShareBiodad = ImplicitShareBioparent( biodadInHH1980,  biodadInHH1978,  biodadInHH1977,  biodadInHH1976);
+
+			_rImplicit= CommonFunctions.TranslateToR(shareBiomom: _implicitShareBiomom, shareBiodad: _implicitShareBiodad, mustDecide: false);
+
 			_rExplicit = CalculateRExplicit();
 			_rFull = CalculateRFull();
 			_r = CalculateR();
@@ -81,36 +99,48 @@ namespace Nls.BaseAssembly.Assign {
 		#region Public Methods
 		#endregion
 		#region Private Methods - Estimate R
-		private float? CalculateRImplicit ( ) {
-			if ( !_drValue.IsRImplicitPass1Null() )
-				return (float?)_drValue.RImplicitPass1;
-			else
-				return null;
+		private Tristate ImplicitShareBioparent ( MarkerEvidence inHH1980, MarkerEvidence inHH1978, MarkerEvidence inHH1977, MarkerEvidence inHH1976 ) {//{ 1980, 1979, 1978, 1977, 1976 }
+			//MarkerEvidence biomomInHH1980,MarkerEvidence  biodadInHH1980, MarkerEvidence biomomInHH1978,MarkerEvidence  biodadInHH1978, MarkerEvidence biomomInHH1977, MarkerEvidence biodadInHH1977,MarkerEvidence  biomomInHH1976, MarkerEvidence biodadInHH1976 
+			//if ( !_drValue.IsRImplicitPass1Null() )	return (float?)_drValue.RImplicitPass1;
+
 			//DataColumn dcPass1 = _dsLinks.tblRelatedValues.RImplicitPass1Column;
 			//Pair[] pairs = Pair.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
 
 			//InterpolateR interpolate = new InterpolateR(pairs);
-			//float? newRExplicit = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
-			//if ( newRExplicit.HasValue ) {
-			//   return newRExplicit;
-			//}
-			//else {
-			//   return null;
-			//}
+			//float? newRImplicit = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+			//if ( newRImplicit.HasValue ) 
+			//   return newRImplicit;
+			//else 
+			if ( inHH1980 == MarkerEvidence.StronglySupports )
+				return Tristate.Yes;
+			else if ( inHH1980 == MarkerEvidence.Disconfirms )
+				return Tristate.No;
+			else if ( inHH1978 == MarkerEvidence.StronglySupports )
+				return Tristate.Yes;
+			else if ( inHH1978 == MarkerEvidence.Disconfirms )
+				return Tristate.No;
+			else if ( inHH1977 == MarkerEvidence.StronglySupports )
+				return Tristate.Yes;
+			else if ( inHH1977 == MarkerEvidence.Disconfirms )
+				return Tristate.No;
+			else if ( inHH1976 == MarkerEvidence.StronglySupports )
+				return Tristate.Yes;
+			else if ( inHH1976 == MarkerEvidence.Disconfirms )
+				return Tristate.No;
+			else
+				return Tristate.DoNotKnow;
 		}
 		private float? CalculateRExplicit ( ) {//Int32 idRelated
 			if ( !_drValue.IsRExplicitPass1Null() ) return (float?)_drValue.RExplicitPass1;
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.RExplicitPass1Column;
-			Pair[] pairs = Pair.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+			PairR[] pairs = PairR.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
 
 			InterpolateR interpolate = new InterpolateR(pairs);
 			float? newRExplicit = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
-			if ( newRExplicit.HasValue ) {
+			if ( newRExplicit.HasValue ) 
 				return newRExplicit;
-			}
-			else {
+			else 
 				return null;
-			}
 		}
 		private float? CalculateR ( ) {
 			if ( !RFull.HasValue ) {
@@ -141,7 +171,7 @@ namespace Nls.BaseAssembly.Assign {
 		private float? CalculateRFull ( ) {
 			if ( !_drValue.IsRPass1Null() ) return (float?)_drValue.RPass1;
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.RPass1Column;
-			Pair[] pairs = Pair.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+			PairR[] pairs = PairR.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
 
 			InterpolateR interpolate = new InterpolateR(pairs);
 			float? newR = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);

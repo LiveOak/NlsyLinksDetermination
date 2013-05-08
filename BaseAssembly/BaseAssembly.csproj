@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assign\InterpolateBioparent.cs" />
     <Compile Include="Assign\RGen2Cousins.cs" />
     <Compile Include="Assign\RAuntNiece.cs" />
     <Compile Include="Assign\RParentChild.cs" />
@@ -67,7 +68,7 @@
     <Compile Include="RosterGen1.cs" />
     <Compile Include="FatherOfGen2.cs" />
     <Compile Include="MarkerGen1Summary.cs" />
-    <Compile Include="Pair.cs" />
+    <Compile Include="PairR.cs" />
     <Compile Include="Trend\TrendLineGen0InHH.cs" />
     <Compile Include="Trend\DetermineShareGen2Father.cs" />
     <Compile Include="Trend\DetermineShareBabyDaddy.cs" />

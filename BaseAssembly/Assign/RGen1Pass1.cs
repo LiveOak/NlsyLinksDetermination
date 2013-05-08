@@ -50,6 +50,10 @@ namespace Nls.BaseAssembly.Assign {
 		public Tristate IsMZ { get { return _isMZ; } }
 		//public Int16 RosterAssignmentID { get { return _rosterAssignment; } }
 		//public float? RRoster { get { return _rRoster; } }
+		public Tristate ImplicitShareBiomomPass1 { get { return _implicitShareBiomom; } }
+		public Tristate ImplicitShareBiodadPass1 { get { return _implicitShareBiodad; } }
+		public Tristate ExplicitShareBiomomPass1 { get { return _explicitShareBiomom; } }
+		public Tristate ExplicitShareBiodadPass1 { get { return _explicitShareBiodad; } }
 		public float? RImplicitPass1 { get { return _rImplicitPass1; } }
 		public float? RImplicit2004 { get { return _rImplicit2004; } }
 		public float? RExplicitOldestSibVersion { get { return _rExplicitOldestSibVersion; } }
@@ -111,9 +115,8 @@ namespace Nls.BaseAssembly.Assign {
 			MarkerEvidence explicitBiomomFromYounger = ReduceShareBioparentToOne(MarkerType.ShareBiomom, ItemYears.Gen1ShareBioparent.Length, _idRelatedYoungerAboutOlder);
 			MarkerEvidence explicitBiodadFromYounger = ReduceShareBioparentToOne(MarkerType.ShareBiodad, ItemYears.Gen1ShareBioparent.Length, _idRelatedYoungerAboutOlder);
 
-
-			MarkerEvidence biomomInHH1979 = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH1979, Bioparent.Mom, _dtMarkersGen1);
-			MarkerEvidence biodadInHH1979 = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH1979, Bioparent.Dad, _dtMarkersGen1);
+			MarkerEvidence biomomInHH1979 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1979, Bioparent.Mom, _dtMarkersGen1);
+			MarkerEvidence biodadInHH1979 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1979, Bioparent.Dad, _dtMarkersGen1);
 
 			MarkerEvidence biomomDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomDeathAge, Bioparent.Mom, _dtMarkersGen1);
 			MarkerEvidence biodadDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadDeathAge, Bioparent.Dad, _dtMarkersGen1);

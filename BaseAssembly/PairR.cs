@@ -3,7 +3,7 @@ using System.Data;
 using System.Diagnostics;
 
 namespace Nls.BaseAssembly {
-	public struct Pair {
+	public struct PairR {
 		#region Fields
 		private readonly Int32 _subjectTag1;
 		private readonly Int32 _subjectTag2;
@@ -24,7 +24,7 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Constructors
-		public Pair ( Int32 subjectTag1, Int32 subjectTag2, float? r ) {
+		public PairR ( Int32 subjectTag1, Int32 subjectTag2, float? r ) {
 			if ( !(subjectTag1 < subjectTag2) ) throw new ArgumentException("subjectTag1 must be less than SubjectTag2.");
 			_subjectTag1 = subjectTag1;
 			_subjectTag2 = subjectTag2;
@@ -32,7 +32,7 @@ namespace Nls.BaseAssembly {
 			_r = r;
 			_isInterpolated = false;
 		}
-		public Pair ( Int32 subjectTag1, Int32 subjectTag2, Int32 relatedID, float? r ) {
+		public PairR ( Int32 subjectTag1, Int32 subjectTag2, Int32 relatedID, float? r ) {
 			if ( !(subjectTag1 < subjectTag2) ) throw new ArgumentException("subjectTag1 must be less than SubjectTag2.");
 			_subjectTag1 = subjectTag1;
 			_subjectTag2 = subjectTag2;
@@ -40,7 +40,7 @@ namespace Nls.BaseAssembly {
 			_r = r;
 			_isInterpolated = false;
 		}
-		public static Pair[] BuildRelatedPairsOfGen1Housemates ( DataColumn dcPass1, Int32 subjectTag1, Int32 subjectTag2, Int32 extendedID, LinksDataSet ds ) {
+		public static PairR[] BuildRelatedPairsOfGen1Housemates ( DataColumn dcPass1, Int32 subjectTag1, Int32 subjectTag2, Int32 extendedID, LinksDataSet ds ) {
 			if ( CommonCalculations.GenerationOfSubjectTag(subjectTag1) != Generation.Gen1 ) throw new ArgumentOutOfRangeException("The generation implied by subjectTag1 isn't Gen1.");
 			if ( CommonCalculations.GenerationOfSubjectTag(subjectTag2) != Generation.Gen1 ) throw new ArgumentOutOfRangeException("The generation implied by subjectTag2 isn't Gen1.");
 			if ( dcPass1 == null ) throw new ArgumentNullException("dcPass1");
@@ -62,7 +62,7 @@ namespace Nls.BaseAssembly {
 			LinksDataSet.tblRelatedStructureRow[] drsStructure = (LinksDataSet.tblRelatedStructureRow[])ds.tblRelatedStructure.Select(select);
 			Trace.Assert(drsStructure.Length >= 1, "At least one record should be returned.");
 
-			Pair[] pairs = new Pair[drsStructure.Length];
+			PairR[] pairs = new PairR[drsStructure.Length];
 			for ( Int32 i = 0; i < drsStructure.Length; i++ ) {
 				LinksDataSet.tblRelatedStructureRow dr = drsStructure[i];
 				Int32 relatedID = dr.ID;
@@ -72,11 +72,11 @@ namespace Nls.BaseAssembly {
 					pass1 = null;
 				else
 					pass1 = Convert.ToSingle(drValue[dcPass1]);//pass1 = (float)drValue.RImplicitPass1;				
-				pairs[i] = new Pair(dr.Subject1Tag, dr.Subject2Tag, relatedID, pass1);
+				pairs[i] = new PairR(dr.Subject1Tag, dr.Subject2Tag, relatedID, pass1);
 			}
 			return pairs;
 		}
-		public static Pair[] BuildRelatedPairsOfGen2Sibs ( DataColumn dcPass1, Int32 subjectTag1, Int32 subjectTag2, Int32 extendedID, LinksDataSet ds ) {
+		public static PairR[] BuildRelatedPairsOfGen2Sibs ( DataColumn dcPass1, Int32 subjectTag1, Int32 subjectTag2, Int32 extendedID, LinksDataSet ds ) {
 			if ( CommonCalculations.GenerationOfSubjectTag(subjectTag1) != Generation.Gen2 ) throw new ArgumentOutOfRangeException("The generation implied by subjectTag1 isn't Gen2.");
 			if ( CommonCalculations.GenerationOfSubjectTag(subjectTag2) != Generation.Gen2 ) throw new ArgumentOutOfRangeException("The generation implied by subjectTag2 isn't Gen2.");
 			if ( dcPass1 == null ) throw new ArgumentNullException("dcPass1");
@@ -98,7 +98,7 @@ namespace Nls.BaseAssembly {
 			LinksDataSet.tblRelatedStructureRow[] drsStructure = (LinksDataSet.tblRelatedStructureRow[])ds.tblRelatedStructure.Select(select);
 			Trace.Assert(drsStructure.Length >= 1, "At least one record should be returned.");
 
-			Pair[] pairs = new Pair[drsStructure.Length];
+			PairR[] pairs = new PairR[drsStructure.Length];
 			for ( Int32 i = 0; i < drsStructure.Length; i++ ) {
 				LinksDataSet.tblRelatedStructureRow dr = drsStructure[i];
 				Int32 relatedID = dr.ID;
@@ -108,7 +108,7 @@ namespace Nls.BaseAssembly {
 					pass1 = null;
 				else
 					pass1 = Convert.ToSingle(drValue[dcPass1]);//pass1 = (float)drValue.RImplicitPass1;				
-				pairs[i] = new Pair(dr.Subject1Tag, dr.Subject2Tag, relatedID, pass1);
+				pairs[i] = new PairR(dr.Subject1Tag, dr.Subject2Tag, relatedID, pass1);
 			}
 			return pairs;
 		}
@@ -119,9 +119,9 @@ namespace Nls.BaseAssembly {
 			_r = r;
 			_isInterpolated = true;
 		}
-		public static Int32 CountHalfSibs ( Pair[] pairs ) {
+		public static Int32 CountHalfSibs ( PairR[] pairs ) {
 			Int32 tally = 0;
-			foreach ( Pair pair in pairs ) {
+			foreach ( PairR pair in pairs ) {
 				if (pair.R.HasValue &&  Math.Abs(pair.R.Value - RCoefficients.SiblingHalf) < 1e-5 ) 
 					tally += 1;
 			}
@@ -136,11 +136,11 @@ namespace Nls.BaseAssembly {
 				return SubjectTag1 ^ SubjectTag2 ^ RelatedID ^ Convert.ToInt32(IsInterpolated) ^ Int32.MinValue;
 		}
 		public override bool Equals ( object obj ) {
-			if ( !(obj is Pair) )
+			if ( !(obj is PairR) )
 				return false;
-			return Equals((Pair)obj);
+			return Equals((PairR)obj);
 		}
-		public bool Equals ( Pair other ) {
+		public bool Equals ( PairR other ) {
 			if ( SubjectTag1 != other.SubjectTag1 )
 				return false;
 			else if ( SubjectTag2 != other.SubjectTag2 )
@@ -154,10 +154,10 @@ namespace Nls.BaseAssembly {
 			else
 				return true;
 		}
-		public static bool operator == ( Pair pair1, Pair pair2 ) {
+		public static bool operator == ( PairR pair1, PairR pair2 ) {
 			return pair1.Equals(pair2);
 		}
-		public static bool operator != ( Pair pair1, Pair pair2 ) {
+		public static bool operator != ( PairR pair1, PairR pair2 ) {
 			return !pair1.Equals(pair2);
 		}  
 		#endregion

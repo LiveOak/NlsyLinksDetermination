@@ -130,7 +130,6 @@ namespace Nls.BaseAssembly {
 			string message = string.Format("{0:N0} RelatedValues records were archived.\nElapsed time: {1}", recordsAdded, sw.Elapsed.ToString());
 			return message;
 		}
-
 		public static LinksDataSet.tblRelatedValuesRow RetrieveRRow ( LinksDataSet ds, RelationshipPath relationshipPath, Int32 subject1Tag, Int32 subject2Tag ) {
 			if ( ds.tblRelatedValues.Count <= 0 ) throw new ArgumentException("tblRelatedValues should have more than one row.", "ds");
 
@@ -266,6 +265,11 @@ namespace Nls.BaseAssembly {
 				Int16? subject2MostRecent = SurveyTimeMostRecent(subject2Tag);
 				if ( subject2MostRecent.HasValue ) drNew.Subject2LastSurvey = subject2MostRecent.Value;
 				else drNew.SetSubject2LastSurveyNull();
+
+				drNew.ImplicitShareBiomomPass1 = (byte)assignPass1.ImplicitShareBiomomPass1;
+				drNew.ImplicitShareBiodadPass1 = (byte)assignPass1.ImplicitShareBiodadPass1;
+				drNew.ExplicitShareBiomomPass1 = (byte)assignPass1.ExplicitShareBiomomPass1;
+				drNew.ExplicitShareBiodadPass1 = (byte)assignPass1.ExplicitShareBiodadPass1;
 
 				if ( assignPass1.RImplicitPass1.HasValue ) drNew.RImplicitPass1 = assignPass1.RImplicitPass1.Value;
 				else drNew.SetRImplicitPass1Null();

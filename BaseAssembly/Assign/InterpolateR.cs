@@ -6,21 +6,21 @@ using System.Text;
 namespace Nls.BaseAssembly.Assign {
 	public sealed class InterpolateR {
 		#region Fields
-		private readonly Pair[] _pairs;
+		private readonly PairR[] _pairs;
 		private readonly Int32[] _subjectTags;
 		#endregion
 		#region Properties
 		#endregion
 		#region Constructor
-		public InterpolateR ( Pair[] pairs ) {
+		public InterpolateR ( PairR[] pairs ) {
 			if ( pairs == null ) throw new ArgumentNullException("pairs");
 			_pairs = pairs;
 			_subjectTags = BuildTagList(pairs);
 		}
 		#endregion
 		#region Public Instance Methods
-		public float? Interpolate ( Int32 subjectTag1, Int32 subjectTag2){//, Func<Int32, Int32, float?> retrieve ) {
-					Int32 pairIndex = Validate(subjectTag1, subjectTag2, true);
+		public float? Interpolate ( Int32 subjectTag1, Int32 subjectTag2 ) {//, Func<Int32, Int32, float?> retrieve ) {
+			Int32 pairIndex = Validate(subjectTag1, subjectTag2, true);
 
 			float? oldR = RetrieveR(subjectTag1, subjectTag2);
 			if ( oldR.HasValue ) throw new InvalidOperationException(string.Format("The relationship for {0} and {1} already has an R of {2}.", subjectTag1, subjectTag2, oldR));
@@ -130,7 +130,7 @@ namespace Nls.BaseAssembly.Assign {
 			}
 			return -1;
 		}
-		public static Int32[] BuildTagList ( Pair[] pairs ) {
+		public static Int32[] BuildTagList ( PairR[] pairs ) {
 			if ( pairs == null ) throw new ArgumentNullException("pairs");
 			List<Int32> list = new List<Int32>();
 			for ( Int32 i = 0; i < pairs.Length; i++ ) {

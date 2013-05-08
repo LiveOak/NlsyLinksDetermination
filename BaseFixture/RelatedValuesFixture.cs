@@ -57,7 +57,7 @@ namespace Nls.Tests.BaseFixture {
 		}
 		[TestMethod]
 		public void FullSibWhiteBread ( ) {
-			CompareRImplicit( BuildFullSibWhiteBread());
+			CompareRImplicit(BuildFullSibWhiteBread());
 		}
 		#endregion
 		#region HalfSib Tests
@@ -70,7 +70,7 @@ namespace Nls.Tests.BaseFixture {
 			CompareRImplicit(BuildHalfSibDadLeft());
 		}
 		[TestMethod]
-		public void HalfSibDadDistance( ) {
+		public void HalfSibDadDistance ( ) {
 			CompareRImplicit(BuildHalfSibDadDistance());
 		}
 		//[TestMethod]
@@ -79,8 +79,8 @@ namespace Nls.Tests.BaseFixture {
 		//}
 		#endregion
 		#region Helpers
-		private static void CompareRImplicit ( Pair[] pairs ) {
-			foreach ( Pair pair in pairs ) {
+		private static void CompareRImplicit ( PairR[] pairs ) {
+			foreach ( PairR pair in pairs ) {
 				double? actualRImplicit = RetrieveRImplicit(pair.SubjectTag1, pair.SubjectTag2);
 				if ( !actualRImplicit.HasValue )
 					Assert.Fail(string.Format("Subjects {0} and {1} had a null RImplicit.  It should be {2}.", pair.SubjectTag1, pair.SubjectTag2, pair.R));
@@ -103,93 +103,93 @@ namespace Nls.Tests.BaseFixture {
 		}
 		#endregion
 		#region BuildFullSibs
-		private static Pair[] BuildFullSibDadDied ( ) {
-			List<Pair> pairs = new List<Pair>();
+		private static PairR[] BuildFullSibDadDied ( ) {
+			List<PairR> pairs = new List<PairR>();
 			const float expectedRImplicit = .5f;
-			pairs.Add(new Pair(103002, 103003, expectedRImplicit));
+			pairs.Add(new PairR(103002, 103003, expectedRImplicit));
 			return pairs.ToArray();
 		}
-		private static Pair[] BuildFullSibDadLeft ( ) {
-			List<Pair> pairs = new List<Pair>();
+		private static PairR[] BuildFullSibDadLeft ( ) {
+			List<PairR> pairs = new List<PairR>();
 			const float expectedRImplicit = .5f;
-			pairs.Add(new Pair(801, 802, expectedRImplicit));
-			pairs.Add(new Pair(801, 803, expectedRImplicit));
-			pairs.Add(new Pair(802, 803, expectedRImplicit));
-			pairs.Add(new Pair(4303, 4304, expectedRImplicit));
-			pairs.Add(new Pair(66802, 66803, expectedRImplicit));
-			pairs.Add(new Pair(66802, 66804, expectedRImplicit));
-			pairs.Add(new Pair(66803, 66804, expectedRImplicit));
-			pairs.Add(new Pair(533801, 533802, expectedRImplicit));
-			pairs.Add(new Pair(533801, 533803, expectedRImplicit));
-			pairs.Add(new Pair(533802, 533803, expectedRImplicit));
+			pairs.Add(new PairR(801, 802, expectedRImplicit));
+			pairs.Add(new PairR(801, 803, expectedRImplicit));
+			pairs.Add(new PairR(802, 803, expectedRImplicit));
+			pairs.Add(new PairR(4303, 4304, expectedRImplicit));
+			pairs.Add(new PairR(66802, 66803, expectedRImplicit));
+			pairs.Add(new PairR(66802, 66804, expectedRImplicit));
+			pairs.Add(new PairR(66803, 66804, expectedRImplicit));
+			pairs.Add(new PairR(533801, 533802, expectedRImplicit));
+			pairs.Add(new PairR(533801, 533803, expectedRImplicit));
+			pairs.Add(new PairR(533802, 533803, expectedRImplicit));
 			return pairs.ToArray();
 		}
-		private static Pair[] BuildFullSibDadDistance ( ) {
-			List<Pair> pairs = new List<Pair>();
+		private static PairR[] BuildFullSibDadDistance ( ) {
+			List<PairR> pairs = new List<PairR>();
 			const float expectedRImplicit = .5f;
-			pairs.Add(new Pair(1217202, 1217203, expectedRImplicit));
-			pairs.Add(new Pair(1217202, 1217204, expectedRImplicit));
+			pairs.Add(new PairR(1217202, 1217203, expectedRImplicit));
+			pairs.Add(new PairR(1217202, 1217204, expectedRImplicit));
 			return pairs.ToArray();
 		}
-		private static Pair[] BuildFullSibWhiteBread ( ) {
-			List<Pair> pairs = new List<Pair>();
+		private static PairR[] BuildFullSibWhiteBread ( ) {
+			List<PairR> pairs = new List<PairR>();
 			const float expectedRImplicit = .5f;
-			pairs.Add(new Pair(17401, 17402, expectedRImplicit));
-			pairs.Add(new Pair(495301, 495302, expectedRImplicit));
-			pairs.Add(new Pair(495301, 495303, expectedRImplicit));
-			pairs.Add(new Pair(495301, 495304, expectedRImplicit));
-			pairs.Add(new Pair(495302, 495303, expectedRImplicit));
-			pairs.Add(new Pair(495302, 495304, expectedRImplicit));
-			pairs.Add(new Pair(495303, 495304, expectedRImplicit));
-			pairs.Add(new Pair(914501, 914502, expectedRImplicit));
-			pairs.Add(new Pair(914501, 914503, expectedRImplicit));
-			pairs.Add(new Pair(914501, 914504, expectedRImplicit));
-			pairs.Add(new Pair(914502, 914503, expectedRImplicit));
-			pairs.Add(new Pair(914502, 914504, expectedRImplicit));
-			pairs.Add(new Pair(914503, 914504, expectedRImplicit));
+			pairs.Add(new PairR(17401, 17402, expectedRImplicit));
+			pairs.Add(new PairR(495301, 495302, expectedRImplicit));
+			pairs.Add(new PairR(495301, 495303, expectedRImplicit));
+			pairs.Add(new PairR(495301, 495304, expectedRImplicit));
+			pairs.Add(new PairR(495302, 495303, expectedRImplicit));
+			pairs.Add(new PairR(495302, 495304, expectedRImplicit));
+			pairs.Add(new PairR(495303, 495304, expectedRImplicit));
+			pairs.Add(new PairR(914501, 914502, expectedRImplicit));
+			pairs.Add(new PairR(914501, 914503, expectedRImplicit));
+			pairs.Add(new PairR(914501, 914504, expectedRImplicit));
+			pairs.Add(new PairR(914502, 914503, expectedRImplicit));
+			pairs.Add(new PairR(914502, 914504, expectedRImplicit));
+			pairs.Add(new PairR(914503, 914504, expectedRImplicit));
 			return pairs.ToArray();
 		}
 		#endregion
 		#region BuildHalfSibs
-		private static Pair[] BuildHalfSibDadDied ( ) {
-			List<Pair> pairs = new List<Pair>();
+		private static PairR[] BuildHalfSibDadDied ( ) {
+			List<PairR> pairs = new List<PairR>();
 			const float expectedRImplicit = .25f;
-			pairs.Add(new Pair(103001, 103002, expectedRImplicit));
-			pairs.Add(new Pair(103001, 103003, expectedRImplicit));
-			pairs.Add(new Pair(103001, 103004, expectedRImplicit));
-			pairs.Add(new Pair(103002, 103004, expectedRImplicit));//103002, 103003 are full sibs, confirmed by DeathDate & Explicit
-			pairs.Add(new Pair(103003, 103004, expectedRImplicit));
+			pairs.Add(new PairR(103001, 103002, expectedRImplicit));
+			pairs.Add(new PairR(103001, 103003, expectedRImplicit));
+			pairs.Add(new PairR(103001, 103004, expectedRImplicit));
+			pairs.Add(new PairR(103002, 103004, expectedRImplicit));//103002, 103003 are full sibs, confirmed by DeathDate & Explicit
+			pairs.Add(new PairR(103003, 103004, expectedRImplicit));
 			return pairs.ToArray();
 		}
-		private static Pair[] BuildHalfSibDadLeft ( ) {
-			List<Pair> pairs = new List<Pair>();
+		private static PairR[] BuildHalfSibDadLeft ( ) {
+			List<PairR> pairs = new List<PairR>();
 			const float expectedRImplicit = .25f;
-			pairs.Add(new Pair(4301, 4302, expectedRImplicit));
-			pairs.Add(new Pair(4301, 4303, expectedRImplicit));
-			pairs.Add(new Pair(4301, 4304, expectedRImplicit));//Years don't match up
-			pairs.Add(new Pair(4302, 4303, expectedRImplicit));
-			pairs.Add(new Pair(4302, 4304, expectedRImplicit));
-			pairs.Add(new Pair(66801, 66802, expectedRImplicit));
-			pairs.Add(new Pair(66801, 66803, expectedRImplicit));
-			pairs.Add(new Pair(66801, 66804, expectedRImplicit));
+			pairs.Add(new PairR(4301, 4302, expectedRImplicit));
+			pairs.Add(new PairR(4301, 4303, expectedRImplicit));
+			pairs.Add(new PairR(4301, 4304, expectedRImplicit));//Years don't match up
+			pairs.Add(new PairR(4302, 4303, expectedRImplicit));
+			pairs.Add(new PairR(4302, 4304, expectedRImplicit));
+			pairs.Add(new PairR(66801, 66802, expectedRImplicit));
+			pairs.Add(new PairR(66801, 66803, expectedRImplicit));
+			pairs.Add(new PairR(66801, 66804, expectedRImplicit));
 			//pairs.Add(new Pair(66801, 66805, expectedRImplicit));//Years don't match up
-			pairs.Add(new Pair(66802, 66805, expectedRImplicit));
-			pairs.Add(new Pair(66803, 66805, expectedRImplicit));
-			pairs.Add(new Pair(66804, 66805, expectedRImplicit));
-			pairs.Add(new Pair(1217202, 1217205, expectedRImplicit));//The explicits don't agree; I could see it either way.
-			pairs.Add(new Pair(1217203, 1217205, expectedRImplicit));//The explicits don't agree; I could see it either way.
-			pairs.Add(new Pair(1217204, 1217205, expectedRImplicit));//The explicits don't agree; I could see it either way.
-			pairs.Add(new Pair(1254201, 1254202, expectedRImplicit));
-			pairs.Add(new Pair(1254201, 1254203, expectedRImplicit));
+			pairs.Add(new PairR(66802, 66805, expectedRImplicit));
+			pairs.Add(new PairR(66803, 66805, expectedRImplicit));
+			pairs.Add(new PairR(66804, 66805, expectedRImplicit));
+			pairs.Add(new PairR(1217202, 1217205, expectedRImplicit));//The explicits don't agree; I could see it either way.
+			pairs.Add(new PairR(1217203, 1217205, expectedRImplicit));//The explicits don't agree; I could see it either way.
+			pairs.Add(new PairR(1217204, 1217205, expectedRImplicit));//The explicits don't agree; I could see it either way.
+			pairs.Add(new PairR(1254201, 1254202, expectedRImplicit));
+			pairs.Add(new PairR(1254201, 1254203, expectedRImplicit));
 			return pairs.ToArray();
 		}
-		private static Pair[] BuildHalfSibDadDistance ( ) {
-			List<Pair> pairs = new List<Pair>();
+		private static PairR[] BuildHalfSibDadDistance ( ) {
+			List<PairR> pairs = new List<PairR>();
 			const float expectedRImplicit = .25f;
-			pairs.Add(new Pair(1217201, 1217202, expectedRImplicit));
-			pairs.Add(new Pair(1217201, 1217203, expectedRImplicit));
-			pairs.Add(new Pair(1217201, 1217204, expectedRImplicit));
-			pairs.Add(new Pair(1217201, 1217205, expectedRImplicit));
+			pairs.Add(new PairR(1217201, 1217202, expectedRImplicit));
+			pairs.Add(new PairR(1217201, 1217203, expectedRImplicit));
+			pairs.Add(new PairR(1217201, 1217204, expectedRImplicit));
+			pairs.Add(new PairR(1217201, 1217205, expectedRImplicit));
 			return pairs.ToArray();
 		}
 		//private static Pair[] BuildHalfSibWhiteBread ( ) {

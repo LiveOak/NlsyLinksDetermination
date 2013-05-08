@@ -50,8 +50,6 @@ namespace Nls.BaseAssembly {
         
         private tblRelatedValuesArchiveDataTable tabletblRelatedValuesArchive;
         
-        private tblRelatedValuesDataTable tabletblRelatedValues;
-        
         private tblOutcomesDataTable tabletblOutcomes;
         
         private tblParentsOfGen1CurrentDataTable tabletblParentsOfGen1Current;
@@ -63,6 +61,8 @@ namespace Nls.BaseAssembly {
         private tblMarkerGen2DataTable tabletblMarkerGen2;
         
         private tblParentsOfGen1RetroDataTable tabletblParentsOfGen1Retro;
+        
+        private tblRelatedValuesDataTable tabletblRelatedValues;
         
         private global::System.Data.DataRelation relationFK_tblSurveyTime_tblSubject;
         
@@ -88,8 +88,6 @@ namespace Nls.BaseAssembly {
         
         private global::System.Data.DataRelation relationFK_tblRosterGen1_tblRelatedStructure;
         
-        private global::System.Data.DataRelation relationFK_tblRelatedValues_tblRelatedStructure;
-        
         private global::System.Data.DataRelation relationFK_tblRelatedStructure_tblSubject_Subject1;
         
         private global::System.Data.DataRelation relationFK_tblRelatedStructure_tblSubject_Subject2;
@@ -99,6 +97,8 @@ namespace Nls.BaseAssembly {
         private global::System.Data.DataRelation relationFK_tblMarkerGen2_tblRelatedStructure;
         
         private global::System.Data.DataRelation relationFK_tblParentsOfGen1Retro_tblSubject;
+        
+        private global::System.Data.DataRelation relationFK_tblRelatedValues_tblRelatedStructure;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -167,9 +167,6 @@ namespace Nls.BaseAssembly {
                 if ((ds.Tables["tblRelatedValuesArchive"] != null)) {
                     base.Tables.Add(new tblRelatedValuesArchiveDataTable(ds.Tables["tblRelatedValuesArchive"]));
                 }
-                if ((ds.Tables["tblRelatedValues"] != null)) {
-                    base.Tables.Add(new tblRelatedValuesDataTable(ds.Tables["tblRelatedValues"]));
-                }
                 if ((ds.Tables["tblOutcomes"] != null)) {
                     base.Tables.Add(new tblOutcomesDataTable(ds.Tables["tblOutcomes"]));
                 }
@@ -187,6 +184,9 @@ namespace Nls.BaseAssembly {
                 }
                 if ((ds.Tables["tblParentsOfGen1Retro"] != null)) {
                     base.Tables.Add(new tblParentsOfGen1RetroDataTable(ds.Tables["tblParentsOfGen1Retro"]));
+                }
+                if ((ds.Tables["tblRelatedValues"] != null)) {
+                    base.Tables.Add(new tblRelatedValuesDataTable(ds.Tables["tblRelatedValues"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -340,16 +340,6 @@ namespace Nls.BaseAssembly {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public tblRelatedValuesDataTable tblRelatedValues {
-            get {
-                return this.tabletblRelatedValues;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public tblOutcomesDataTable tblOutcomes {
             get {
                 return this.tabletblOutcomes;
@@ -403,6 +393,16 @@ namespace Nls.BaseAssembly {
         public tblParentsOfGen1RetroDataTable tblParentsOfGen1Retro {
             get {
                 return this.tabletblParentsOfGen1Retro;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public tblRelatedValuesDataTable tblRelatedValues {
+            get {
+                return this.tabletblRelatedValues;
             }
         }
         
@@ -512,9 +512,6 @@ namespace Nls.BaseAssembly {
                 if ((ds.Tables["tblRelatedValuesArchive"] != null)) {
                     base.Tables.Add(new tblRelatedValuesArchiveDataTable(ds.Tables["tblRelatedValuesArchive"]));
                 }
-                if ((ds.Tables["tblRelatedValues"] != null)) {
-                    base.Tables.Add(new tblRelatedValuesDataTable(ds.Tables["tblRelatedValues"]));
-                }
                 if ((ds.Tables["tblOutcomes"] != null)) {
                     base.Tables.Add(new tblOutcomesDataTable(ds.Tables["tblOutcomes"]));
                 }
@@ -532,6 +529,9 @@ namespace Nls.BaseAssembly {
                 }
                 if ((ds.Tables["tblParentsOfGen1Retro"] != null)) {
                     base.Tables.Add(new tblParentsOfGen1RetroDataTable(ds.Tables["tblParentsOfGen1Retro"]));
+                }
+                if ((ds.Tables["tblRelatedValues"] != null)) {
+                    base.Tables.Add(new tblRelatedValuesDataTable(ds.Tables["tblRelatedValues"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -644,12 +644,6 @@ namespace Nls.BaseAssembly {
                     this.tabletblRelatedValuesArchive.InitVars();
                 }
             }
-            this.tabletblRelatedValues = ((tblRelatedValuesDataTable)(base.Tables["tblRelatedValues"]));
-            if ((initTable == true)) {
-                if ((this.tabletblRelatedValues != null)) {
-                    this.tabletblRelatedValues.InitVars();
-                }
-            }
             this.tabletblOutcomes = ((tblOutcomesDataTable)(base.Tables["tblOutcomes"]));
             if ((initTable == true)) {
                 if ((this.tabletblOutcomes != null)) {
@@ -686,6 +680,12 @@ namespace Nls.BaseAssembly {
                     this.tabletblParentsOfGen1Retro.InitVars();
                 }
             }
+            this.tabletblRelatedValues = ((tblRelatedValuesDataTable)(base.Tables["tblRelatedValues"]));
+            if ((initTable == true)) {
+                if ((this.tabletblRelatedValues != null)) {
+                    this.tabletblRelatedValues.InitVars();
+                }
+            }
             this.relationFK_tblSurveyTime_tblSubject = this.Relations["FK_tblSurveyTime_tblSubject"];
             this.relationFK_tblSubjectDetails_tblSubject = this.Relations["FK_tblSubjectDetails_tblSubject"];
             this.relationFK_tblBabyDaddy_tblSubject = this.Relations["FK_tblBabyDaddy_tblSubject"];
@@ -698,12 +698,12 @@ namespace Nls.BaseAssembly {
             this.relationFK_tblOutcomes_tblSubject = this.Relations["FK_tblOutcomes_tblSubject"];
             this.relationFK_tblParentsOfGen1Current_tblSubject = this.Relations["FK_tblParentsOfGen1Current_tblSubject"];
             this.relationFK_tblRosterGen1_tblRelatedStructure = this.Relations["FK_tblRosterGen1_tblRelatedStructure"];
-            this.relationFK_tblRelatedValues_tblRelatedStructure = this.Relations["FK_tblRelatedValues_tblRelatedStructure"];
             this.relationFK_tblRelatedStructure_tblSubject_Subject1 = this.Relations["FK_tblRelatedStructure_tblSubject_Subject1"];
             this.relationFK_tblRelatedStructure_tblSubject_Subject2 = this.Relations["FK_tblRelatedStructure_tblSubject_Subject2"];
             this.relationFK_tblMarkerGen1_tblRelatedStructure = this.Relations["FK_tblMarkerGen1_tblRelatedStructure"];
             this.relationFK_tblMarkerGen2_tblRelatedStructure = this.Relations["FK_tblMarkerGen2_tblRelatedStructure"];
             this.relationFK_tblParentsOfGen1Retro_tblSubject = this.Relations["FK_tblParentsOfGen1Retro_tblSubject"];
+            this.relationFK_tblRelatedValues_tblRelatedStructure = this.Relations["FK_tblRelatedValues_tblRelatedStructure"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -740,8 +740,6 @@ namespace Nls.BaseAssembly {
             base.Tables.Add(this.tabletblResponse);
             this.tabletblRelatedValuesArchive = new tblRelatedValuesArchiveDataTable();
             base.Tables.Add(this.tabletblRelatedValuesArchive);
-            this.tabletblRelatedValues = new tblRelatedValuesDataTable();
-            base.Tables.Add(this.tabletblRelatedValues);
             this.tabletblOutcomes = new tblOutcomesDataTable();
             base.Tables.Add(this.tabletblOutcomes);
             this.tabletblParentsOfGen1Current = new tblParentsOfGen1CurrentDataTable();
@@ -754,6 +752,8 @@ namespace Nls.BaseAssembly {
             base.Tables.Add(this.tabletblMarkerGen2);
             this.tabletblParentsOfGen1Retro = new tblParentsOfGen1RetroDataTable();
             base.Tables.Add(this.tabletblParentsOfGen1Retro);
+            this.tabletblRelatedValues = new tblRelatedValuesDataTable();
+            base.Tables.Add(this.tabletblRelatedValues);
             this.relationFK_tblSurveyTime_tblSubject = new global::System.Data.DataRelation("FK_tblSurveyTime_tblSubject", new global::System.Data.DataColumn[] {
                         this.tabletblSubject.SubjectTagColumn}, new global::System.Data.DataColumn[] {
                         this.tabletblSurveyTime.SubjectTagColumn}, false);
@@ -802,10 +802,6 @@ namespace Nls.BaseAssembly {
                         this.tabletblRelatedStructure.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tabletblRosterGen1.RelatedIDColumn}, false);
             this.Relations.Add(this.relationFK_tblRosterGen1_tblRelatedStructure);
-            this.relationFK_tblRelatedValues_tblRelatedStructure = new global::System.Data.DataRelation("FK_tblRelatedValues_tblRelatedStructure", new global::System.Data.DataColumn[] {
-                        this.tabletblRelatedStructure.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tabletblRelatedValues.IDColumn}, false);
-            this.Relations.Add(this.relationFK_tblRelatedValues_tblRelatedStructure);
             this.relationFK_tblRelatedStructure_tblSubject_Subject1 = new global::System.Data.DataRelation("FK_tblRelatedStructure_tblSubject_Subject1", new global::System.Data.DataColumn[] {
                         this.tabletblSubject.SubjectTagColumn}, new global::System.Data.DataColumn[] {
                         this.tabletblRelatedStructure.Subject1TagColumn}, false);
@@ -826,6 +822,10 @@ namespace Nls.BaseAssembly {
                         this.tabletblSubject.SubjectTagColumn}, new global::System.Data.DataColumn[] {
                         this.tabletblParentsOfGen1Retro.SubjectTagColumn}, false);
             this.Relations.Add(this.relationFK_tblParentsOfGen1Retro_tblSubject);
+            this.relationFK_tblRelatedValues_tblRelatedStructure = new global::System.Data.DataRelation("FK_tblRelatedValues_tblRelatedStructure", new global::System.Data.DataColumn[] {
+                        this.tabletblRelatedStructure.IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tabletblRelatedValues.IDColumn}, false);
+            this.Relations.Add(this.relationFK_tblRelatedValues_tblRelatedStructure);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -908,12 +908,6 @@ namespace Nls.BaseAssembly {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializetblRelatedValues() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializetblOutcomes() {
             return false;
         }
@@ -945,6 +939,12 @@ namespace Nls.BaseAssembly {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializetblParentsOfGen1Retro() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializetblRelatedValues() {
             return false;
         }
         
@@ -1043,9 +1043,6 @@ namespace Nls.BaseAssembly {
         public delegate void tblRelatedValuesArchiveRowChangeEventHandler(object sender, tblRelatedValuesArchiveRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void tblRelatedValuesRowChangeEventHandler(object sender, tblRelatedValuesRowChangeEvent e);
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void tblOutcomesRowChangeEventHandler(object sender, tblOutcomesRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -1062,6 +1059,9 @@ namespace Nls.BaseAssembly {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void tblParentsOfGen1RetroRowChangeEventHandler(object sender, tblParentsOfGen1RetroRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void tblRelatedValuesRowChangeEventHandler(object sender, tblRelatedValuesRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -6231,525 +6231,6 @@ namespace Nls.BaseAssembly {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class tblRelatedValuesDataTable : global::System.Data.TypedTableBase<tblRelatedValuesRow> {
-            
-            private global::System.Data.DataColumn columnID;
-            
-            private global::System.Data.DataColumn columnMultipleBirthIfSameSex;
-            
-            private global::System.Data.DataColumn columnIsMz;
-            
-            private global::System.Data.DataColumn columnSubject1LastSurvey;
-            
-            private global::System.Data.DataColumn columnSubject2LastSurvey;
-            
-            private global::System.Data.DataColumn columnRImplicitPass1;
-            
-            private global::System.Data.DataColumn columnRImplicit;
-            
-            private global::System.Data.DataColumn columnRImplicitSubject;
-            
-            private global::System.Data.DataColumn columnRImplicitMother;
-            
-            private global::System.Data.DataColumn columnRImplicit2004;
-            
-            private global::System.Data.DataColumn columnRExplicitOlderSibVersion;
-            
-            private global::System.Data.DataColumn columnRExplicitYoungerSibVersion;
-            
-            private global::System.Data.DataColumn columnRExplicitPass1;
-            
-            private global::System.Data.DataColumn columnRExplicit;
-            
-            private global::System.Data.DataColumn columnRPass1;
-            
-            private global::System.Data.DataColumn columnR;
-            
-            private global::System.Data.DataColumn columnRFull;
-            
-            private global::System.Data.DataColumn columnRPeek;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public tblRelatedValuesDataTable() {
-                this.TableName = "tblRelatedValues";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal tblRelatedValuesDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected tblRelatedValuesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn IDColumn {
-                get {
-                    return this.columnID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn MultipleBirthIfSameSexColumn {
-                get {
-                    return this.columnMultipleBirthIfSameSex;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn IsMzColumn {
-                get {
-                    return this.columnIsMz;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Subject1LastSurveyColumn {
-                get {
-                    return this.columnSubject1LastSurvey;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Subject2LastSurveyColumn {
-                get {
-                    return this.columnSubject2LastSurvey;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RImplicitPass1Column {
-                get {
-                    return this.columnRImplicitPass1;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RImplicitColumn {
-                get {
-                    return this.columnRImplicit;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RImplicitSubjectColumn {
-                get {
-                    return this.columnRImplicitSubject;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RImplicitMotherColumn {
-                get {
-                    return this.columnRImplicitMother;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RImplicit2004Column {
-                get {
-                    return this.columnRImplicit2004;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RExplicitOlderSibVersionColumn {
-                get {
-                    return this.columnRExplicitOlderSibVersion;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RExplicitYoungerSibVersionColumn {
-                get {
-                    return this.columnRExplicitYoungerSibVersion;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RExplicitPass1Column {
-                get {
-                    return this.columnRExplicitPass1;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RExplicitColumn {
-                get {
-                    return this.columnRExplicit;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RPass1Column {
-                get {
-                    return this.columnRPass1;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RColumn {
-                get {
-                    return this.columnR;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RFullColumn {
-                get {
-                    return this.columnRFull;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RPeekColumn {
-                get {
-                    return this.columnRPeek;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public tblRelatedValuesRow this[int index] {
-                get {
-                    return ((tblRelatedValuesRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event tblRelatedValuesRowChangeEventHandler tblRelatedValuesRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event tblRelatedValuesRowChangeEventHandler tblRelatedValuesRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event tblRelatedValuesRowChangeEventHandler tblRelatedValuesRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event tblRelatedValuesRowChangeEventHandler tblRelatedValuesRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddtblRelatedValuesRow(tblRelatedValuesRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public tblRelatedValuesRow AddtblRelatedValuesRow(
-                        tblRelatedStructureRow parenttblRelatedStructureRowByFK_tblRelatedValues_tblRelatedStructure, 
-                        byte MultipleBirthIfSameSex, 
-                        byte IsMz, 
-                        short Subject1LastSurvey, 
-                        short Subject2LastSurvey, 
-                        double RImplicitPass1, 
-                        double RImplicit, 
-                        double RImplicitSubject, 
-                        double RImplicitMother, 
-                        double RImplicit2004, 
-                        double RExplicitOlderSibVersion, 
-                        double RExplicitYoungerSibVersion, 
-                        double RExplicitPass1, 
-                        double RExplicit, 
-                        double RPass1, 
-                        double R, 
-                        double RFull, 
-                        double RPeek) {
-                tblRelatedValuesRow rowtblRelatedValuesRow = ((tblRelatedValuesRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        MultipleBirthIfSameSex,
-                        IsMz,
-                        Subject1LastSurvey,
-                        Subject2LastSurvey,
-                        RImplicitPass1,
-                        RImplicit,
-                        RImplicitSubject,
-                        RImplicitMother,
-                        RImplicit2004,
-                        RExplicitOlderSibVersion,
-                        RExplicitYoungerSibVersion,
-                        RExplicitPass1,
-                        RExplicit,
-                        RPass1,
-                        R,
-                        RFull,
-                        RPeek};
-                if ((parenttblRelatedStructureRowByFK_tblRelatedValues_tblRelatedStructure != null)) {
-                    columnValuesArray[0] = parenttblRelatedStructureRowByFK_tblRelatedValues_tblRelatedStructure[0];
-                }
-                rowtblRelatedValuesRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowtblRelatedValuesRow);
-                return rowtblRelatedValuesRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public tblRelatedValuesRow FindByID(int ID) {
-                return ((tblRelatedValuesRow)(this.Rows.Find(new object[] {
-                            ID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                tblRelatedValuesDataTable cln = ((tblRelatedValuesDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new tblRelatedValuesDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars() {
-                this.columnID = base.Columns["ID"];
-                this.columnMultipleBirthIfSameSex = base.Columns["MultipleBirthIfSameSex"];
-                this.columnIsMz = base.Columns["IsMz"];
-                this.columnSubject1LastSurvey = base.Columns["Subject1LastSurvey"];
-                this.columnSubject2LastSurvey = base.Columns["Subject2LastSurvey"];
-                this.columnRImplicitPass1 = base.Columns["RImplicitPass1"];
-                this.columnRImplicit = base.Columns["RImplicit"];
-                this.columnRImplicitSubject = base.Columns["RImplicitSubject"];
-                this.columnRImplicitMother = base.Columns["RImplicitMother"];
-                this.columnRImplicit2004 = base.Columns["RImplicit2004"];
-                this.columnRExplicitOlderSibVersion = base.Columns["RExplicitOlderSibVersion"];
-                this.columnRExplicitYoungerSibVersion = base.Columns["RExplicitYoungerSibVersion"];
-                this.columnRExplicitPass1 = base.Columns["RExplicitPass1"];
-                this.columnRExplicit = base.Columns["RExplicit"];
-                this.columnRPass1 = base.Columns["RPass1"];
-                this.columnR = base.Columns["R"];
-                this.columnRFull = base.Columns["RFull"];
-                this.columnRPeek = base.Columns["RPeek"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass() {
-                this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnID);
-                this.columnMultipleBirthIfSameSex = new global::System.Data.DataColumn("MultipleBirthIfSameSex", typeof(byte), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMultipleBirthIfSameSex);
-                this.columnIsMz = new global::System.Data.DataColumn("IsMz", typeof(byte), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIsMz);
-                this.columnSubject1LastSurvey = new global::System.Data.DataColumn("Subject1LastSurvey", typeof(short), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSubject1LastSurvey);
-                this.columnSubject2LastSurvey = new global::System.Data.DataColumn("Subject2LastSurvey", typeof(short), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSubject2LastSurvey);
-                this.columnRImplicitPass1 = new global::System.Data.DataColumn("RImplicitPass1", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRImplicitPass1);
-                this.columnRImplicit = new global::System.Data.DataColumn("RImplicit", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRImplicit);
-                this.columnRImplicitSubject = new global::System.Data.DataColumn("RImplicitSubject", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRImplicitSubject);
-                this.columnRImplicitMother = new global::System.Data.DataColumn("RImplicitMother", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRImplicitMother);
-                this.columnRImplicit2004 = new global::System.Data.DataColumn("RImplicit2004", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRImplicit2004);
-                this.columnRExplicitOlderSibVersion = new global::System.Data.DataColumn("RExplicitOlderSibVersion", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRExplicitOlderSibVersion);
-                this.columnRExplicitYoungerSibVersion = new global::System.Data.DataColumn("RExplicitYoungerSibVersion", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRExplicitYoungerSibVersion);
-                this.columnRExplicitPass1 = new global::System.Data.DataColumn("RExplicitPass1", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRExplicitPass1);
-                this.columnRExplicit = new global::System.Data.DataColumn("RExplicit", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRExplicit);
-                this.columnRPass1 = new global::System.Data.DataColumn("RPass1", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRPass1);
-                this.columnR = new global::System.Data.DataColumn("R", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnR);
-                this.columnRFull = new global::System.Data.DataColumn("RFull", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRFull);
-                this.columnRPeek = new global::System.Data.DataColumn("RPeek", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRPeek);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnID}, true));
-                this.columnID.AllowDBNull = false;
-                this.columnID.Unique = true;
-                this.columnMultipleBirthIfSameSex.AllowDBNull = false;
-                this.columnIsMz.AllowDBNull = false;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public tblRelatedValuesRow NewtblRelatedValuesRow() {
-                return ((tblRelatedValuesRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new tblRelatedValuesRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(tblRelatedValuesRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.tblRelatedValuesRowChanged != null)) {
-                    this.tblRelatedValuesRowChanged(this, new tblRelatedValuesRowChangeEvent(((tblRelatedValuesRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.tblRelatedValuesRowChanging != null)) {
-                    this.tblRelatedValuesRowChanging(this, new tblRelatedValuesRowChangeEvent(((tblRelatedValuesRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.tblRelatedValuesRowDeleted != null)) {
-                    this.tblRelatedValuesRowDeleted(this, new tblRelatedValuesRowChangeEvent(((tblRelatedValuesRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.tblRelatedValuesRowDeleting != null)) {
-                    this.tblRelatedValuesRowDeleting(this, new tblRelatedValuesRowChangeEvent(((tblRelatedValuesRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemovetblRelatedValuesRow(tblRelatedValuesRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                LinksDataSet ds = new LinksDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "tblRelatedValuesDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class tblOutcomesDataTable : global::System.Data.TypedTableBase<tblOutcomesRow> {
             
             private global::System.Data.DataColumn columnSubjectTag;
@@ -8998,6 +8479,585 @@ namespace Nls.BaseAssembly {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "tblParentsOfGen1RetroDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class tblRelatedValuesDataTable : global::System.Data.TypedTableBase<tblRelatedValuesRow> {
+            
+            private global::System.Data.DataColumn columnID;
+            
+            private global::System.Data.DataColumn columnMultipleBirthIfSameSex;
+            
+            private global::System.Data.DataColumn columnIsMz;
+            
+            private global::System.Data.DataColumn columnSubject1LastSurvey;
+            
+            private global::System.Data.DataColumn columnSubject2LastSurvey;
+            
+            private global::System.Data.DataColumn columnImplicitShareBiomomPass1;
+            
+            private global::System.Data.DataColumn columnImplicitShareBiodadPass1;
+            
+            private global::System.Data.DataColumn columnExplicitShareBiomomPass1;
+            
+            private global::System.Data.DataColumn columnExplicitShareBiodadPass1;
+            
+            private global::System.Data.DataColumn columnRImplicitPass1;
+            
+            private global::System.Data.DataColumn columnRImplicit;
+            
+            private global::System.Data.DataColumn columnRImplicitSubject;
+            
+            private global::System.Data.DataColumn columnRImplicitMother;
+            
+            private global::System.Data.DataColumn columnRImplicit2004;
+            
+            private global::System.Data.DataColumn columnRExplicitOlderSibVersion;
+            
+            private global::System.Data.DataColumn columnRExplicitYoungerSibVersion;
+            
+            private global::System.Data.DataColumn columnRExplicitPass1;
+            
+            private global::System.Data.DataColumn columnRExplicit;
+            
+            private global::System.Data.DataColumn columnRPass1;
+            
+            private global::System.Data.DataColumn columnR;
+            
+            private global::System.Data.DataColumn columnRFull;
+            
+            private global::System.Data.DataColumn columnRPeek;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public tblRelatedValuesDataTable() {
+                this.TableName = "tblRelatedValues";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal tblRelatedValuesDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected tblRelatedValuesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IDColumn {
+                get {
+                    return this.columnID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MultipleBirthIfSameSexColumn {
+                get {
+                    return this.columnMultipleBirthIfSameSex;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IsMzColumn {
+                get {
+                    return this.columnIsMz;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Subject1LastSurveyColumn {
+                get {
+                    return this.columnSubject1LastSurvey;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Subject2LastSurveyColumn {
+                get {
+                    return this.columnSubject2LastSurvey;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ImplicitShareBiomomPass1Column {
+                get {
+                    return this.columnImplicitShareBiomomPass1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ImplicitShareBiodadPass1Column {
+                get {
+                    return this.columnImplicitShareBiodadPass1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ExplicitShareBiomomPass1Column {
+                get {
+                    return this.columnExplicitShareBiomomPass1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ExplicitShareBiodadPass1Column {
+                get {
+                    return this.columnExplicitShareBiodadPass1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RImplicitPass1Column {
+                get {
+                    return this.columnRImplicitPass1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RImplicitColumn {
+                get {
+                    return this.columnRImplicit;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RImplicitSubjectColumn {
+                get {
+                    return this.columnRImplicitSubject;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RImplicitMotherColumn {
+                get {
+                    return this.columnRImplicitMother;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RImplicit2004Column {
+                get {
+                    return this.columnRImplicit2004;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RExplicitOlderSibVersionColumn {
+                get {
+                    return this.columnRExplicitOlderSibVersion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RExplicitYoungerSibVersionColumn {
+                get {
+                    return this.columnRExplicitYoungerSibVersion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RExplicitPass1Column {
+                get {
+                    return this.columnRExplicitPass1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RExplicitColumn {
+                get {
+                    return this.columnRExplicit;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RPass1Column {
+                get {
+                    return this.columnRPass1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RColumn {
+                get {
+                    return this.columnR;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RFullColumn {
+                get {
+                    return this.columnRFull;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RPeekColumn {
+                get {
+                    return this.columnRPeek;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public tblRelatedValuesRow this[int index] {
+                get {
+                    return ((tblRelatedValuesRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event tblRelatedValuesRowChangeEventHandler tblRelatedValuesRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event tblRelatedValuesRowChangeEventHandler tblRelatedValuesRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event tblRelatedValuesRowChangeEventHandler tblRelatedValuesRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event tblRelatedValuesRowChangeEventHandler tblRelatedValuesRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddtblRelatedValuesRow(tblRelatedValuesRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public tblRelatedValuesRow AddtblRelatedValuesRow(
+                        tblRelatedStructureRow parenttblRelatedStructureRowByFK_tblRelatedValues_tblRelatedStructure, 
+                        byte MultipleBirthIfSameSex, 
+                        byte IsMz, 
+                        short Subject1LastSurvey, 
+                        short Subject2LastSurvey, 
+                        byte ImplicitShareBiomomPass1, 
+                        byte ImplicitShareBiodadPass1, 
+                        byte ExplicitShareBiomomPass1, 
+                        byte ExplicitShareBiodadPass1, 
+                        double RImplicitPass1, 
+                        double RImplicit, 
+                        double RImplicitSubject, 
+                        double RImplicitMother, 
+                        double RImplicit2004, 
+                        double RExplicitOlderSibVersion, 
+                        double RExplicitYoungerSibVersion, 
+                        double RExplicitPass1, 
+                        double RExplicit, 
+                        double RPass1, 
+                        double R, 
+                        double RFull, 
+                        double RPeek) {
+                tblRelatedValuesRow rowtblRelatedValuesRow = ((tblRelatedValuesRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        MultipleBirthIfSameSex,
+                        IsMz,
+                        Subject1LastSurvey,
+                        Subject2LastSurvey,
+                        ImplicitShareBiomomPass1,
+                        ImplicitShareBiodadPass1,
+                        ExplicitShareBiomomPass1,
+                        ExplicitShareBiodadPass1,
+                        RImplicitPass1,
+                        RImplicit,
+                        RImplicitSubject,
+                        RImplicitMother,
+                        RImplicit2004,
+                        RExplicitOlderSibVersion,
+                        RExplicitYoungerSibVersion,
+                        RExplicitPass1,
+                        RExplicit,
+                        RPass1,
+                        R,
+                        RFull,
+                        RPeek};
+                if ((parenttblRelatedStructureRowByFK_tblRelatedValues_tblRelatedStructure != null)) {
+                    columnValuesArray[0] = parenttblRelatedStructureRowByFK_tblRelatedValues_tblRelatedStructure[0];
+                }
+                rowtblRelatedValuesRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowtblRelatedValuesRow);
+                return rowtblRelatedValuesRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public tblRelatedValuesRow FindByID(int ID) {
+                return ((tblRelatedValuesRow)(this.Rows.Find(new object[] {
+                            ID})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                tblRelatedValuesDataTable cln = ((tblRelatedValuesDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new tblRelatedValuesDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnID = base.Columns["ID"];
+                this.columnMultipleBirthIfSameSex = base.Columns["MultipleBirthIfSameSex"];
+                this.columnIsMz = base.Columns["IsMz"];
+                this.columnSubject1LastSurvey = base.Columns["Subject1LastSurvey"];
+                this.columnSubject2LastSurvey = base.Columns["Subject2LastSurvey"];
+                this.columnImplicitShareBiomomPass1 = base.Columns["ImplicitShareBiomomPass1"];
+                this.columnImplicitShareBiodadPass1 = base.Columns["ImplicitShareBiodadPass1"];
+                this.columnExplicitShareBiomomPass1 = base.Columns["ExplicitShareBiomomPass1"];
+                this.columnExplicitShareBiodadPass1 = base.Columns["ExplicitShareBiodadPass1"];
+                this.columnRImplicitPass1 = base.Columns["RImplicitPass1"];
+                this.columnRImplicit = base.Columns["RImplicit"];
+                this.columnRImplicitSubject = base.Columns["RImplicitSubject"];
+                this.columnRImplicitMother = base.Columns["RImplicitMother"];
+                this.columnRImplicit2004 = base.Columns["RImplicit2004"];
+                this.columnRExplicitOlderSibVersion = base.Columns["RExplicitOlderSibVersion"];
+                this.columnRExplicitYoungerSibVersion = base.Columns["RExplicitYoungerSibVersion"];
+                this.columnRExplicitPass1 = base.Columns["RExplicitPass1"];
+                this.columnRExplicit = base.Columns["RExplicit"];
+                this.columnRPass1 = base.Columns["RPass1"];
+                this.columnR = base.Columns["R"];
+                this.columnRFull = base.Columns["RFull"];
+                this.columnRPeek = base.Columns["RPeek"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnID);
+                this.columnMultipleBirthIfSameSex = new global::System.Data.DataColumn("MultipleBirthIfSameSex", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMultipleBirthIfSameSex);
+                this.columnIsMz = new global::System.Data.DataColumn("IsMz", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIsMz);
+                this.columnSubject1LastSurvey = new global::System.Data.DataColumn("Subject1LastSurvey", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubject1LastSurvey);
+                this.columnSubject2LastSurvey = new global::System.Data.DataColumn("Subject2LastSurvey", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubject2LastSurvey);
+                this.columnImplicitShareBiomomPass1 = new global::System.Data.DataColumn("ImplicitShareBiomomPass1", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImplicitShareBiomomPass1);
+                this.columnImplicitShareBiodadPass1 = new global::System.Data.DataColumn("ImplicitShareBiodadPass1", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImplicitShareBiodadPass1);
+                this.columnExplicitShareBiomomPass1 = new global::System.Data.DataColumn("ExplicitShareBiomomPass1", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnExplicitShareBiomomPass1);
+                this.columnExplicitShareBiodadPass1 = new global::System.Data.DataColumn("ExplicitShareBiodadPass1", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnExplicitShareBiodadPass1);
+                this.columnRImplicitPass1 = new global::System.Data.DataColumn("RImplicitPass1", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRImplicitPass1);
+                this.columnRImplicit = new global::System.Data.DataColumn("RImplicit", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRImplicit);
+                this.columnRImplicitSubject = new global::System.Data.DataColumn("RImplicitSubject", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRImplicitSubject);
+                this.columnRImplicitMother = new global::System.Data.DataColumn("RImplicitMother", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRImplicitMother);
+                this.columnRImplicit2004 = new global::System.Data.DataColumn("RImplicit2004", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRImplicit2004);
+                this.columnRExplicitOlderSibVersion = new global::System.Data.DataColumn("RExplicitOlderSibVersion", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRExplicitOlderSibVersion);
+                this.columnRExplicitYoungerSibVersion = new global::System.Data.DataColumn("RExplicitYoungerSibVersion", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRExplicitYoungerSibVersion);
+                this.columnRExplicitPass1 = new global::System.Data.DataColumn("RExplicitPass1", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRExplicitPass1);
+                this.columnRExplicit = new global::System.Data.DataColumn("RExplicit", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRExplicit);
+                this.columnRPass1 = new global::System.Data.DataColumn("RPass1", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRPass1);
+                this.columnR = new global::System.Data.DataColumn("R", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnR);
+                this.columnRFull = new global::System.Data.DataColumn("RFull", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRFull);
+                this.columnRPeek = new global::System.Data.DataColumn("RPeek", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRPeek);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnID}, true));
+                this.columnID.AllowDBNull = false;
+                this.columnID.Unique = true;
+                this.columnMultipleBirthIfSameSex.AllowDBNull = false;
+                this.columnIsMz.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public tblRelatedValuesRow NewtblRelatedValuesRow() {
+                return ((tblRelatedValuesRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new tblRelatedValuesRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(tblRelatedValuesRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.tblRelatedValuesRowChanged != null)) {
+                    this.tblRelatedValuesRowChanged(this, new tblRelatedValuesRowChangeEvent(((tblRelatedValuesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.tblRelatedValuesRowChanging != null)) {
+                    this.tblRelatedValuesRowChanging(this, new tblRelatedValuesRowChangeEvent(((tblRelatedValuesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.tblRelatedValuesRowDeleted != null)) {
+                    this.tblRelatedValuesRowDeleted(this, new tblRelatedValuesRowChangeEvent(((tblRelatedValuesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.tblRelatedValuesRowDeleting != null)) {
+                    this.tblRelatedValuesRowDeleting(this, new tblRelatedValuesRowChangeEvent(((tblRelatedValuesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemovetblRelatedValuesRow(tblRelatedValuesRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                LinksDataSet ds = new LinksDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "tblRelatedValuesDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -11641,487 +11701,6 @@ namespace Nls.BaseAssembly {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class tblRelatedValuesRow : global::System.Data.DataRow {
-            
-            private tblRelatedValuesDataTable tabletblRelatedValues;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal tblRelatedValuesRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tabletblRelatedValues = ((tblRelatedValuesDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int ID {
-                get {
-                    return ((int)(this[this.tabletblRelatedValues.IDColumn]));
-                }
-                set {
-                    this[this.tabletblRelatedValues.IDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public byte MultipleBirthIfSameSex {
-                get {
-                    return ((byte)(this[this.tabletblRelatedValues.MultipleBirthIfSameSexColumn]));
-                }
-                set {
-                    this[this.tabletblRelatedValues.MultipleBirthIfSameSexColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public byte IsMz {
-                get {
-                    return ((byte)(this[this.tabletblRelatedValues.IsMzColumn]));
-                }
-                set {
-                    this[this.tabletblRelatedValues.IsMzColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public short Subject1LastSurvey {
-                get {
-                    try {
-                        return ((short)(this[this.tabletblRelatedValues.Subject1LastSurveyColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Subject1LastSurvey\' in table \'tblRelatedValues\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabletblRelatedValues.Subject1LastSurveyColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public short Subject2LastSurvey {
-                get {
-                    try {
-                        return ((short)(this[this.tabletblRelatedValues.Subject2LastSurveyColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Subject2LastSurvey\' in table \'tblRelatedValues\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabletblRelatedValues.Subject2LastSurveyColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double RImplicitPass1 {
-                get {
-                    try {
-                        return ((double)(this[this.tabletblRelatedValues.RImplicitPass1Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RImplicitPass1\' in table \'tblRelatedValues\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabletblRelatedValues.RImplicitPass1Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double RImplicit {
-                get {
-                    try {
-                        return ((double)(this[this.tabletblRelatedValues.RImplicitColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RImplicit\' in table \'tblRelatedValues\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabletblRelatedValues.RImplicitColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double RImplicitSubject {
-                get {
-                    try {
-                        return ((double)(this[this.tabletblRelatedValues.RImplicitSubjectColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RImplicitSubject\' in table \'tblRelatedValues\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabletblRelatedValues.RImplicitSubjectColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double RImplicitMother {
-                get {
-                    try {
-                        return ((double)(this[this.tabletblRelatedValues.RImplicitMotherColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RImplicitMother\' in table \'tblRelatedValues\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabletblRelatedValues.RImplicitMotherColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double RImplicit2004 {
-                get {
-                    try {
-                        return ((double)(this[this.tabletblRelatedValues.RImplicit2004Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RImplicit2004\' in table \'tblRelatedValues\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabletblRelatedValues.RImplicit2004Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double RExplicitOlderSibVersion {
-                get {
-                    try {
-                        return ((double)(this[this.tabletblRelatedValues.RExplicitOlderSibVersionColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RExplicitOlderSibVersion\' in table \'tblRelatedValues\' is DB" +
-                                "Null.", e);
-                    }
-                }
-                set {
-                    this[this.tabletblRelatedValues.RExplicitOlderSibVersionColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double RExplicitYoungerSibVersion {
-                get {
-                    try {
-                        return ((double)(this[this.tabletblRelatedValues.RExplicitYoungerSibVersionColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RExplicitYoungerSibVersion\' in table \'tblRelatedValues\' is " +
-                                "DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabletblRelatedValues.RExplicitYoungerSibVersionColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double RExplicitPass1 {
-                get {
-                    try {
-                        return ((double)(this[this.tabletblRelatedValues.RExplicitPass1Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RExplicitPass1\' in table \'tblRelatedValues\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabletblRelatedValues.RExplicitPass1Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double RExplicit {
-                get {
-                    try {
-                        return ((double)(this[this.tabletblRelatedValues.RExplicitColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RExplicit\' in table \'tblRelatedValues\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabletblRelatedValues.RExplicitColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double RPass1 {
-                get {
-                    try {
-                        return ((double)(this[this.tabletblRelatedValues.RPass1Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RPass1\' in table \'tblRelatedValues\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabletblRelatedValues.RPass1Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double R {
-                get {
-                    try {
-                        return ((double)(this[this.tabletblRelatedValues.RColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'R\' in table \'tblRelatedValues\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabletblRelatedValues.RColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double RFull {
-                get {
-                    try {
-                        return ((double)(this[this.tabletblRelatedValues.RFullColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RFull\' in table \'tblRelatedValues\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabletblRelatedValues.RFullColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double RPeek {
-                get {
-                    try {
-                        return ((double)(this[this.tabletblRelatedValues.RPeekColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RPeek\' in table \'tblRelatedValues\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabletblRelatedValues.RPeekColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public tblRelatedStructureRow tblRelatedStructureRow {
-                get {
-                    return ((tblRelatedStructureRow)(this.GetParentRow(this.Table.ParentRelations["FK_tblRelatedValues_tblRelatedStructure"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_tblRelatedValues_tblRelatedStructure"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsSubject1LastSurveyNull() {
-                return this.IsNull(this.tabletblRelatedValues.Subject1LastSurveyColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetSubject1LastSurveyNull() {
-                this[this.tabletblRelatedValues.Subject1LastSurveyColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsSubject2LastSurveyNull() {
-                return this.IsNull(this.tabletblRelatedValues.Subject2LastSurveyColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetSubject2LastSurveyNull() {
-                this[this.tabletblRelatedValues.Subject2LastSurveyColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRImplicitPass1Null() {
-                return this.IsNull(this.tabletblRelatedValues.RImplicitPass1Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRImplicitPass1Null() {
-                this[this.tabletblRelatedValues.RImplicitPass1Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRImplicitNull() {
-                return this.IsNull(this.tabletblRelatedValues.RImplicitColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRImplicitNull() {
-                this[this.tabletblRelatedValues.RImplicitColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRImplicitSubjectNull() {
-                return this.IsNull(this.tabletblRelatedValues.RImplicitSubjectColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRImplicitSubjectNull() {
-                this[this.tabletblRelatedValues.RImplicitSubjectColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRImplicitMotherNull() {
-                return this.IsNull(this.tabletblRelatedValues.RImplicitMotherColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRImplicitMotherNull() {
-                this[this.tabletblRelatedValues.RImplicitMotherColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRImplicit2004Null() {
-                return this.IsNull(this.tabletblRelatedValues.RImplicit2004Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRImplicit2004Null() {
-                this[this.tabletblRelatedValues.RImplicit2004Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRExplicitOlderSibVersionNull() {
-                return this.IsNull(this.tabletblRelatedValues.RExplicitOlderSibVersionColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRExplicitOlderSibVersionNull() {
-                this[this.tabletblRelatedValues.RExplicitOlderSibVersionColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRExplicitYoungerSibVersionNull() {
-                return this.IsNull(this.tabletblRelatedValues.RExplicitYoungerSibVersionColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRExplicitYoungerSibVersionNull() {
-                this[this.tabletblRelatedValues.RExplicitYoungerSibVersionColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRExplicitPass1Null() {
-                return this.IsNull(this.tabletblRelatedValues.RExplicitPass1Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRExplicitPass1Null() {
-                this[this.tabletblRelatedValues.RExplicitPass1Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRExplicitNull() {
-                return this.IsNull(this.tabletblRelatedValues.RExplicitColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRExplicitNull() {
-                this[this.tabletblRelatedValues.RExplicitColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRPass1Null() {
-                return this.IsNull(this.tabletblRelatedValues.RPass1Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRPass1Null() {
-                this[this.tabletblRelatedValues.RPass1Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRNull() {
-                return this.IsNull(this.tabletblRelatedValues.RColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRNull() {
-                this[this.tabletblRelatedValues.RColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRFullNull() {
-                return this.IsNull(this.tabletblRelatedValues.RFullColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRFullNull() {
-                this[this.tabletblRelatedValues.RFullColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRPeekNull() {
-                return this.IsNull(this.tabletblRelatedValues.RPeekColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRPeekNull() {
-                this[this.tabletblRelatedValues.RPeekColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
         public partial class tblOutcomesRow : global::System.Data.DataRow {
             
             private tblOutcomesDataTable tabletblOutcomes;
@@ -12759,17 +12338,6 @@ namespace Nls.BaseAssembly {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public tblRelatedValuesRow[] GettblRelatedValuesRows() {
-                if ((this.Table.ChildRelations["FK_tblRelatedValues_tblRelatedStructure"] == null)) {
-                    return new tblRelatedValuesRow[0];
-                }
-                else {
-                    return ((tblRelatedValuesRow[])(base.GetChildRows(this.Table.ChildRelations["FK_tblRelatedValues_tblRelatedStructure"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public tblMarkerGen1Row[] GettblMarkerGen1Rows() {
                 if ((this.Table.ChildRelations["FK_tblMarkerGen1_tblRelatedStructure"] == null)) {
                     return new tblMarkerGen1Row[0];
@@ -12787,6 +12355,17 @@ namespace Nls.BaseAssembly {
                 }
                 else {
                     return ((tblMarkerGen2Row[])(base.GetChildRows(this.Table.ChildRelations["FK_tblMarkerGen2_tblRelatedStructure"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public tblRelatedValuesRow[] GettblRelatedValuesRows() {
+                if ((this.Table.ChildRelations["FK_tblRelatedValues_tblRelatedStructure"] == null)) {
+                    return new tblRelatedValuesRow[0];
+                }
+                else {
+                    return ((tblRelatedValuesRow[])(base.GetChildRows(this.Table.ChildRelations["FK_tblRelatedValues_tblRelatedStructure"])));
                 }
             }
         }
@@ -13175,6 +12754,603 @@ namespace Nls.BaseAssembly {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetInHHNull() {
                 this[this.tabletblParentsOfGen1Retro.InHHColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class tblRelatedValuesRow : global::System.Data.DataRow {
+            
+            private tblRelatedValuesDataTable tabletblRelatedValues;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal tblRelatedValuesRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tabletblRelatedValues = ((tblRelatedValuesDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int ID {
+                get {
+                    return ((int)(this[this.tabletblRelatedValues.IDColumn]));
+                }
+                set {
+                    this[this.tabletblRelatedValues.IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public byte MultipleBirthIfSameSex {
+                get {
+                    return ((byte)(this[this.tabletblRelatedValues.MultipleBirthIfSameSexColumn]));
+                }
+                set {
+                    this[this.tabletblRelatedValues.MultipleBirthIfSameSexColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public byte IsMz {
+                get {
+                    return ((byte)(this[this.tabletblRelatedValues.IsMzColumn]));
+                }
+                set {
+                    this[this.tabletblRelatedValues.IsMzColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public short Subject1LastSurvey {
+                get {
+                    try {
+                        return ((short)(this[this.tabletblRelatedValues.Subject1LastSurveyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Subject1LastSurvey\' in table \'tblRelatedValues\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.Subject1LastSurveyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public short Subject2LastSurvey {
+                get {
+                    try {
+                        return ((short)(this[this.tabletblRelatedValues.Subject2LastSurveyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Subject2LastSurvey\' in table \'tblRelatedValues\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.Subject2LastSurveyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public byte ImplicitShareBiomomPass1 {
+                get {
+                    try {
+                        return ((byte)(this[this.tabletblRelatedValues.ImplicitShareBiomomPass1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ImplicitShareBiomomPass1\' in table \'tblRelatedValues\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.ImplicitShareBiomomPass1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public byte ImplicitShareBiodadPass1 {
+                get {
+                    try {
+                        return ((byte)(this[this.tabletblRelatedValues.ImplicitShareBiodadPass1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ImplicitShareBiodadPass1\' in table \'tblRelatedValues\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.ImplicitShareBiodadPass1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public byte ExplicitShareBiomomPass1 {
+                get {
+                    try {
+                        return ((byte)(this[this.tabletblRelatedValues.ExplicitShareBiomomPass1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ExplicitShareBiomomPass1\' in table \'tblRelatedValues\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.ExplicitShareBiomomPass1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public byte ExplicitShareBiodadPass1 {
+                get {
+                    try {
+                        return ((byte)(this[this.tabletblRelatedValues.ExplicitShareBiodadPass1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ExplicitShareBiodadPass1\' in table \'tblRelatedValues\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.ExplicitShareBiodadPass1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double RImplicitPass1 {
+                get {
+                    try {
+                        return ((double)(this[this.tabletblRelatedValues.RImplicitPass1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RImplicitPass1\' in table \'tblRelatedValues\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.RImplicitPass1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double RImplicit {
+                get {
+                    try {
+                        return ((double)(this[this.tabletblRelatedValues.RImplicitColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RImplicit\' in table \'tblRelatedValues\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.RImplicitColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double RImplicitSubject {
+                get {
+                    try {
+                        return ((double)(this[this.tabletblRelatedValues.RImplicitSubjectColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RImplicitSubject\' in table \'tblRelatedValues\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.RImplicitSubjectColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double RImplicitMother {
+                get {
+                    try {
+                        return ((double)(this[this.tabletblRelatedValues.RImplicitMotherColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RImplicitMother\' in table \'tblRelatedValues\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.RImplicitMotherColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double RImplicit2004 {
+                get {
+                    try {
+                        return ((double)(this[this.tabletblRelatedValues.RImplicit2004Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RImplicit2004\' in table \'tblRelatedValues\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.RImplicit2004Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double RExplicitOlderSibVersion {
+                get {
+                    try {
+                        return ((double)(this[this.tabletblRelatedValues.RExplicitOlderSibVersionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RExplicitOlderSibVersion\' in table \'tblRelatedValues\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.RExplicitOlderSibVersionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double RExplicitYoungerSibVersion {
+                get {
+                    try {
+                        return ((double)(this[this.tabletblRelatedValues.RExplicitYoungerSibVersionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RExplicitYoungerSibVersion\' in table \'tblRelatedValues\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.RExplicitYoungerSibVersionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double RExplicitPass1 {
+                get {
+                    try {
+                        return ((double)(this[this.tabletblRelatedValues.RExplicitPass1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RExplicitPass1\' in table \'tblRelatedValues\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.RExplicitPass1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double RExplicit {
+                get {
+                    try {
+                        return ((double)(this[this.tabletblRelatedValues.RExplicitColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RExplicit\' in table \'tblRelatedValues\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.RExplicitColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double RPass1 {
+                get {
+                    try {
+                        return ((double)(this[this.tabletblRelatedValues.RPass1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RPass1\' in table \'tblRelatedValues\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.RPass1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double R {
+                get {
+                    try {
+                        return ((double)(this[this.tabletblRelatedValues.RColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'R\' in table \'tblRelatedValues\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.RColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double RFull {
+                get {
+                    try {
+                        return ((double)(this[this.tabletblRelatedValues.RFullColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RFull\' in table \'tblRelatedValues\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.RFullColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double RPeek {
+                get {
+                    try {
+                        return ((double)(this[this.tabletblRelatedValues.RPeekColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RPeek\' in table \'tblRelatedValues\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblRelatedValues.RPeekColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public tblRelatedStructureRow tblRelatedStructureRow {
+                get {
+                    return ((tblRelatedStructureRow)(this.GetParentRow(this.Table.ParentRelations["FK_tblRelatedValues_tblRelatedStructure"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_tblRelatedValues_tblRelatedStructure"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSubject1LastSurveyNull() {
+                return this.IsNull(this.tabletblRelatedValues.Subject1LastSurveyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSubject1LastSurveyNull() {
+                this[this.tabletblRelatedValues.Subject1LastSurveyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSubject2LastSurveyNull() {
+                return this.IsNull(this.tabletblRelatedValues.Subject2LastSurveyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSubject2LastSurveyNull() {
+                this[this.tabletblRelatedValues.Subject2LastSurveyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsImplicitShareBiomomPass1Null() {
+                return this.IsNull(this.tabletblRelatedValues.ImplicitShareBiomomPass1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetImplicitShareBiomomPass1Null() {
+                this[this.tabletblRelatedValues.ImplicitShareBiomomPass1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsImplicitShareBiodadPass1Null() {
+                return this.IsNull(this.tabletblRelatedValues.ImplicitShareBiodadPass1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetImplicitShareBiodadPass1Null() {
+                this[this.tabletblRelatedValues.ImplicitShareBiodadPass1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsExplicitShareBiomomPass1Null() {
+                return this.IsNull(this.tabletblRelatedValues.ExplicitShareBiomomPass1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetExplicitShareBiomomPass1Null() {
+                this[this.tabletblRelatedValues.ExplicitShareBiomomPass1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsExplicitShareBiodadPass1Null() {
+                return this.IsNull(this.tabletblRelatedValues.ExplicitShareBiodadPass1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetExplicitShareBiodadPass1Null() {
+                this[this.tabletblRelatedValues.ExplicitShareBiodadPass1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRImplicitPass1Null() {
+                return this.IsNull(this.tabletblRelatedValues.RImplicitPass1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRImplicitPass1Null() {
+                this[this.tabletblRelatedValues.RImplicitPass1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRImplicitNull() {
+                return this.IsNull(this.tabletblRelatedValues.RImplicitColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRImplicitNull() {
+                this[this.tabletblRelatedValues.RImplicitColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRImplicitSubjectNull() {
+                return this.IsNull(this.tabletblRelatedValues.RImplicitSubjectColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRImplicitSubjectNull() {
+                this[this.tabletblRelatedValues.RImplicitSubjectColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRImplicitMotherNull() {
+                return this.IsNull(this.tabletblRelatedValues.RImplicitMotherColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRImplicitMotherNull() {
+                this[this.tabletblRelatedValues.RImplicitMotherColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRImplicit2004Null() {
+                return this.IsNull(this.tabletblRelatedValues.RImplicit2004Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRImplicit2004Null() {
+                this[this.tabletblRelatedValues.RImplicit2004Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRExplicitOlderSibVersionNull() {
+                return this.IsNull(this.tabletblRelatedValues.RExplicitOlderSibVersionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRExplicitOlderSibVersionNull() {
+                this[this.tabletblRelatedValues.RExplicitOlderSibVersionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRExplicitYoungerSibVersionNull() {
+                return this.IsNull(this.tabletblRelatedValues.RExplicitYoungerSibVersionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRExplicitYoungerSibVersionNull() {
+                this[this.tabletblRelatedValues.RExplicitYoungerSibVersionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRExplicitPass1Null() {
+                return this.IsNull(this.tabletblRelatedValues.RExplicitPass1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRExplicitPass1Null() {
+                this[this.tabletblRelatedValues.RExplicitPass1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRExplicitNull() {
+                return this.IsNull(this.tabletblRelatedValues.RExplicitColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRExplicitNull() {
+                this[this.tabletblRelatedValues.RExplicitColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRPass1Null() {
+                return this.IsNull(this.tabletblRelatedValues.RPass1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRPass1Null() {
+                this[this.tabletblRelatedValues.RPass1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRNull() {
+                return this.IsNull(this.tabletblRelatedValues.RColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRNull() {
+                this[this.tabletblRelatedValues.RColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRFullNull() {
+                return this.IsNull(this.tabletblRelatedValues.RFullColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRFullNull() {
+                this[this.tabletblRelatedValues.RFullColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRPeekNull() {
+                return this.IsNull(this.tabletblRelatedValues.RPeekColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRPeekNull() {
+                this[this.tabletblRelatedValues.RPeekColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -13624,40 +13800,6 @@ namespace Nls.BaseAssembly {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class tblRelatedValuesRowChangeEvent : global::System.EventArgs {
-            
-            private tblRelatedValuesRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public tblRelatedValuesRowChangeEvent(tblRelatedValuesRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public tblRelatedValuesRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public class tblOutcomesRowChangeEvent : global::System.EventArgs {
             
             private tblOutcomesRow eventRow;
@@ -13844,6 +13986,40 @@ namespace Nls.BaseAssembly {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public tblParentsOfGen1RetroRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class tblRelatedValuesRowChangeEvent : global::System.EventArgs {
+            
+            private tblRelatedValuesRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public tblRelatedValuesRowChangeEvent(tblRelatedValuesRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public tblRelatedValuesRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -20116,999 +20292,6 @@ SELECT ID, AlgorithmVersion, Subject1Tag, Subject2Tag, MultipleBirthIfSameSex, I
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class tblRelatedValuesTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public tblRelatedValuesTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "tblRelatedValues";
-            tableMapping.ColumnMappings.Add("ID", "ID");
-            tableMapping.ColumnMappings.Add("MultipleBirthIfSameSex", "MultipleBirthIfSameSex");
-            tableMapping.ColumnMappings.Add("IsMz", "IsMz");
-            tableMapping.ColumnMappings.Add("Subject1LastSurvey", "Subject1LastSurvey");
-            tableMapping.ColumnMappings.Add("Subject2LastSurvey", "Subject2LastSurvey");
-            tableMapping.ColumnMappings.Add("RImplicitPass1", "RImplicitPass1");
-            tableMapping.ColumnMappings.Add("RImplicit", "RImplicit");
-            tableMapping.ColumnMappings.Add("RImplicitSubject", "RImplicitSubject");
-            tableMapping.ColumnMappings.Add("RImplicitMother", "RImplicitMother");
-            tableMapping.ColumnMappings.Add("RImplicit2004", "RImplicit2004");
-            tableMapping.ColumnMappings.Add("RExplicitOlderSibVersion", "RExplicitOlderSibVersion");
-            tableMapping.ColumnMappings.Add("RExplicitYoungerSibVersion", "RExplicitYoungerSibVersion");
-            tableMapping.ColumnMappings.Add("RExplicitPass1", "RExplicitPass1");
-            tableMapping.ColumnMappings.Add("RExplicit", "RExplicit");
-            tableMapping.ColumnMappings.Add("RPass1", "RPass1");
-            tableMapping.ColumnMappings.Add("R", "R");
-            tableMapping.ColumnMappings.Add("RFull", "RFull");
-            tableMapping.ColumnMappings.Add("RPeek", "RPeek");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [Process].[tblRelatedValues] WHERE (([ID] = @Original_ID) AND ([Multi" +
-                "pleBirthIfSameSex] = @Original_MultipleBirthIfSameSex) AND ([IsMz] = @Original_I" +
-                "sMz) AND ((@IsNull_Subject1LastSurvey = 1 AND [Subject1LastSurvey] IS NULL) OR (" +
-                "[Subject1LastSurvey] = @Original_Subject1LastSurvey)) AND ((@IsNull_Subject2Last" +
-                "Survey = 1 AND [Subject2LastSurvey] IS NULL) OR ([Subject2LastSurvey] = @Origina" +
-                "l_Subject2LastSurvey)) AND ((@IsNull_RImplicitPass1 = 1 AND [RImplicitPass1] IS " +
-                "NULL) OR ([RImplicitPass1] = @Original_RImplicitPass1)) AND ((@IsNull_RImplicit " +
-                "= 1 AND [RImplicit] IS NULL) OR ([RImplicit] = @Original_RImplicit)) AND ((@IsNu" +
-                "ll_RImplicitSubject = 1 AND [RImplicitSubject] IS NULL) OR ([RImplicitSubject] =" +
-                " @Original_RImplicitSubject)) AND ((@IsNull_RImplicitMother = 1 AND [RImplicitMo" +
-                "ther] IS NULL) OR ([RImplicitMother] = @Original_RImplicitMother)) AND ((@IsNull" +
-                "_RImplicit2004 = 1 AND [RImplicit2004] IS NULL) OR ([RImplicit2004] = @Original_" +
-                "RImplicit2004)) AND ((@IsNull_RExplicitOlderSibVersion = 1 AND [RExplicitOlderSi" +
-                "bVersion] IS NULL) OR ([RExplicitOlderSibVersion] = @Original_RExplicitOlderSibV" +
-                "ersion)) AND ((@IsNull_RExplicitYoungerSibVersion = 1 AND [RExplicitYoungerSibVe" +
-                "rsion] IS NULL) OR ([RExplicitYoungerSibVersion] = @Original_RExplicitYoungerSib" +
-                "Version)) AND ((@IsNull_RExplicitPass1 = 1 AND [RExplicitPass1] IS NULL) OR ([RE" +
-                "xplicitPass1] = @Original_RExplicitPass1)) AND ((@IsNull_RExplicit = 1 AND [RExp" +
-                "licit] IS NULL) OR ([RExplicit] = @Original_RExplicit)) AND ((@IsNull_RPass1 = 1" +
-                " AND [RPass1] IS NULL) OR ([RPass1] = @Original_RPass1)) AND ((@IsNull_R = 1 AND" +
-                " [R] IS NULL) OR ([R] = @Original_R)) AND ((@IsNull_RFull = 1 AND [RFull] IS NUL" +
-                "L) OR ([RFull] = @Original_RFull)) AND ((@IsNull_RPeek = 1 AND [RPeek] IS NULL) " +
-                "OR ([RPeek] = @Original_RPeek)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MultipleBirthIfSameSex", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MultipleBirthIfSameSex", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IsMz", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsMz", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Subject1LastSurvey", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Subject1LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Subject2LastSurvey", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject2LastSurvey", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Subject2LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject2LastSurvey", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicitPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicitPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicit", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicit", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicitSubject", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitSubject", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicitSubject", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitSubject", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicitMother", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitMother", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicitMother", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitMother", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicit2004", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit2004", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicit2004", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit2004", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RExplicitOlderSibVersion", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitOlderSibVersion", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RExplicitOlderSibVersion", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitOlderSibVersion", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RExplicitYoungerSibVersion", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitYoungerSibVersion", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RExplicitYoungerSibVersion", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitYoungerSibVersion", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RExplicitPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RExplicitPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RExplicit", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicit", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RExplicit", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicit", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_R", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "R", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_R", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "R", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RFull", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RFull", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RFull", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RFull", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RPeek", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPeek", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RPeek", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPeek", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Process].[tblRelatedValues] ([ID], [MultipleBirthIfSameSex], [IsMz], [Subject1LastSurvey], [Subject2LastSurvey], [RImplicitPass1], [RImplicit], [RImplicitSubject], [RImplicitMother], [RImplicit2004], [RExplicitOlderSibVersion], [RExplicitYoungerSibVersion], [RExplicitPass1], [RExplicit], [RPass1], [R], [RFull], [RPeek]) VALUES (@ID, @MultipleBirthIfSameSex, @IsMz, @Subject1LastSurvey, @Subject2LastSurvey, @RImplicitPass1, @RImplicit, @RImplicitSubject, @RImplicitMother, @RImplicit2004, @RExplicitOlderSibVersion, @RExplicitYoungerSibVersion, @RExplicitPass1, @RExplicit, @RPass1, @R, @RFull, @RPeek);
-SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey, RImplicitPass1, RImplicit, RImplicitSubject, RImplicitMother, RImplicit2004, RExplicitOlderSibVersion, RExplicitYoungerSibVersion, RExplicitPass1, RExplicit, RPass1, R, RFull, RPeek FROM Process.tblRelatedValues WHERE (ID = @ID)";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MultipleBirthIfSameSex", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MultipleBirthIfSameSex", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsMz", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsMz", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Subject1LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Subject2LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject2LastSurvey", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicitPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicit", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicitSubject", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitSubject", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicitMother", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitMother", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicit2004", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit2004", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RExplicitOlderSibVersion", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitOlderSibVersion", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RExplicitYoungerSibVersion", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitYoungerSibVersion", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RExplicitPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RExplicit", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicit", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@R", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "R", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RFull", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RFull", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RPeek", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPeek", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [Process].[tblRelatedValues] SET [ID] = @ID, [MultipleBirthIfSameSex] = @M" +
-                "ultipleBirthIfSameSex, [IsMz] = @IsMz, [Subject1LastSurvey] = @Subject1LastSurve" +
-                "y, [Subject2LastSurvey] = @Subject2LastSurvey, [RImplicitPass1] = @RImplicitPass" +
-                "1, [RImplicit] = @RImplicit, [RImplicitSubject] = @RImplicitSubject, [RImplicitM" +
-                "other] = @RImplicitMother, [RImplicit2004] = @RImplicit2004, [RExplicitOlderSibV" +
-                "ersion] = @RExplicitOlderSibVersion, [RExplicitYoungerSibVersion] = @RExplicitYo" +
-                "ungerSibVersion, [RExplicitPass1] = @RExplicitPass1, [RExplicit] = @RExplicit, [" +
-                "RPass1] = @RPass1, [R] = @R, [RFull] = @RFull, [RPeek] = @RPeek WHERE (([ID] = @" +
-                "Original_ID) AND ([MultipleBirthIfSameSex] = @Original_MultipleBirthIfSameSex) A" +
-                "ND ([IsMz] = @Original_IsMz) AND ((@IsNull_Subject1LastSurvey = 1 AND [Subject1L" +
-                "astSurvey] IS NULL) OR ([Subject1LastSurvey] = @Original_Subject1LastSurvey)) AN" +
-                "D ((@IsNull_Subject2LastSurvey = 1 AND [Subject2LastSurvey] IS NULL) OR ([Subjec" +
-                "t2LastSurvey] = @Original_Subject2LastSurvey)) AND ((@IsNull_RImplicitPass1 = 1 " +
-                "AND [RImplicitPass1] IS NULL) OR ([RImplicitPass1] = @Original_RImplicitPass1)) " +
-                "AND ((@IsNull_RImplicit = 1 AND [RImplicit] IS NULL) OR ([RImplicit] = @Original" +
-                "_RImplicit)) AND ((@IsNull_RImplicitSubject = 1 AND [RImplicitSubject] IS NULL) " +
-                "OR ([RImplicitSubject] = @Original_RImplicitSubject)) AND ((@IsNull_RImplicitMot" +
-                "her = 1 AND [RImplicitMother] IS NULL) OR ([RImplicitMother] = @Original_RImplic" +
-                "itMother)) AND ((@IsNull_RImplicit2004 = 1 AND [RImplicit2004] IS NULL) OR ([RIm" +
-                "plicit2004] = @Original_RImplicit2004)) AND ((@IsNull_RExplicitOlderSibVersion =" +
-                " 1 AND [RExplicitOlderSibVersion] IS NULL) OR ([RExplicitOlderSibVersion] = @Ori" +
-                "ginal_RExplicitOlderSibVersion)) AND ((@IsNull_RExplicitYoungerSibVersion = 1 AN" +
-                "D [RExplicitYoungerSibVersion] IS NULL) OR ([RExplicitYoungerSibVersion] = @Orig" +
-                "inal_RExplicitYoungerSibVersion)) AND ((@IsNull_RExplicitPass1 = 1 AND [RExplici" +
-                "tPass1] IS NULL) OR ([RExplicitPass1] = @Original_RExplicitPass1)) AND ((@IsNull" +
-                "_RExplicit = 1 AND [RExplicit] IS NULL) OR ([RExplicit] = @Original_RExplicit)) " +
-                "AND ((@IsNull_RPass1 = 1 AND [RPass1] IS NULL) OR ([RPass1] = @Original_RPass1))" +
-                " AND ((@IsNull_R = 1 AND [R] IS NULL) OR ([R] = @Original_R)) AND ((@IsNull_RFul" +
-                "l = 1 AND [RFull] IS NULL) OR ([RFull] = @Original_RFull)) AND ((@IsNull_RPeek =" +
-                " 1 AND [RPeek] IS NULL) OR ([RPeek] = @Original_RPeek)));\r\nSELECT ID, MultipleBi" +
-                "rthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey, RImplicitPass1, RImp" +
-                "licit, RImplicitSubject, RImplicitMother, RImplicit2004, RExplicitOlderSibVersio" +
-                "n, RExplicitYoungerSibVersion, RExplicitPass1, RExplicit, RPass1, R, RFull, RPee" +
-                "k FROM Process.tblRelatedValues WHERE (ID = @ID)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MultipleBirthIfSameSex", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MultipleBirthIfSameSex", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsMz", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsMz", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Subject1LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Subject2LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject2LastSurvey", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicitPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicit", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicitSubject", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitSubject", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicitMother", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitMother", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicit2004", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit2004", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RExplicitOlderSibVersion", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitOlderSibVersion", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RExplicitYoungerSibVersion", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitYoungerSibVersion", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RExplicitPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RExplicit", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicit", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@R", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "R", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RFull", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RFull", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RPeek", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPeek", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MultipleBirthIfSameSex", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MultipleBirthIfSameSex", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IsMz", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsMz", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Subject1LastSurvey", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Subject1LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Subject2LastSurvey", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject2LastSurvey", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Subject2LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject2LastSurvey", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicitPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicitPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicit", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicit", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicitSubject", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitSubject", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicitSubject", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitSubject", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicitMother", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitMother", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicitMother", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitMother", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicit2004", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit2004", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicit2004", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit2004", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RExplicitOlderSibVersion", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitOlderSibVersion", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RExplicitOlderSibVersion", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitOlderSibVersion", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RExplicitYoungerSibVersion", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitYoungerSibVersion", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RExplicitYoungerSibVersion", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitYoungerSibVersion", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RExplicitPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RExplicitPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RExplicit", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicit", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RExplicit", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicit", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_R", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "R", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_R", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "R", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RFull", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RFull", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RFull", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RFull", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RPeek", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPeek", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RPeek", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPeek", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Nls.BaseAssembly.Properties.Settings.Default.NlsLinksConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey, RImplicitPass1, RImplicit, RImplicitSubject, RImplicitMother, RImplicit2004, RExplicitOlderSibVersion, RExplicitYoungerSibVersion, RExplicitPass1, RExplicit, RPass1, R, RFull, RPeek FROM Process.tblRelatedValues";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(LinksDataSet.tblRelatedValuesDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual LinksDataSet.tblRelatedValuesDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            LinksDataSet.tblRelatedValuesDataTable dataTable = new LinksDataSet.tblRelatedValuesDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(LinksDataSet.tblRelatedValuesDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(LinksDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "tblRelatedValues");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(
-                    int Original_ID, 
-                    byte Original_MultipleBirthIfSameSex, 
-                    byte Original_IsMz, 
-                    global::System.Nullable<short> Original_Subject1LastSurvey, 
-                    global::System.Nullable<short> Original_Subject2LastSurvey, 
-                    global::System.Nullable<double> Original_RImplicitPass1, 
-                    global::System.Nullable<double> Original_RImplicit, 
-                    global::System.Nullable<double> Original_RImplicitSubject, 
-                    global::System.Nullable<double> Original_RImplicitMother, 
-                    global::System.Nullable<double> Original_RImplicit2004, 
-                    global::System.Nullable<double> Original_RExplicitOlderSibVersion, 
-                    global::System.Nullable<double> Original_RExplicitYoungerSibVersion, 
-                    global::System.Nullable<double> Original_RExplicitPass1, 
-                    global::System.Nullable<double> Original_RExplicit, 
-                    global::System.Nullable<double> Original_RPass1, 
-                    global::System.Nullable<double> Original_R, 
-                    global::System.Nullable<double> Original_RFull, 
-                    global::System.Nullable<double> Original_RPeek) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((byte)(Original_MultipleBirthIfSameSex));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((byte)(Original_IsMz));
-            if ((Original_Subject1LastSurvey.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((short)(Original_Subject1LastSurvey.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((Original_Subject2LastSurvey.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((short)(Original_Subject2LastSurvey.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RImplicitPass1.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((double)(Original_RImplicitPass1.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RImplicit.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((double)(Original_RImplicit.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RImplicitSubject.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((double)(Original_RImplicitSubject.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RImplicitMother.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((double)(Original_RImplicitMother.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RImplicit2004.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[16].Value = ((double)(Original_RImplicit2004.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RExplicitOlderSibVersion.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[18].Value = ((double)(Original_RExplicitOlderSibVersion.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RExplicitYoungerSibVersion.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[20].Value = ((double)(Original_RExplicitYoungerSibVersion.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RExplicitPass1.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[22].Value = ((double)(Original_RExplicitPass1.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[22].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RExplicit.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[24].Value = ((double)(Original_RExplicit.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[24].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RPass1.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[26].Value = ((double)(Original_RPass1.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[26].Value = global::System.DBNull.Value;
-            }
-            if ((Original_R.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[28].Value = ((double)(Original_R.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[28].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RFull.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[29].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[30].Value = ((double)(Original_RFull.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[29].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[30].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RPeek.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[31].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[32].Value = ((double)(Original_RPeek.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[31].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[32].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(
-                    int ID, 
-                    byte MultipleBirthIfSameSex, 
-                    byte IsMz, 
-                    global::System.Nullable<short> Subject1LastSurvey, 
-                    global::System.Nullable<short> Subject2LastSurvey, 
-                    global::System.Nullable<double> RImplicitPass1, 
-                    global::System.Nullable<double> RImplicit, 
-                    global::System.Nullable<double> RImplicitSubject, 
-                    global::System.Nullable<double> RImplicitMother, 
-                    global::System.Nullable<double> RImplicit2004, 
-                    global::System.Nullable<double> RExplicitOlderSibVersion, 
-                    global::System.Nullable<double> RExplicitYoungerSibVersion, 
-                    global::System.Nullable<double> RExplicitPass1, 
-                    global::System.Nullable<double> RExplicit, 
-                    global::System.Nullable<double> RPass1, 
-                    global::System.Nullable<double> R, 
-                    global::System.Nullable<double> RFull, 
-                    global::System.Nullable<double> RPeek) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ID));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((byte)(MultipleBirthIfSameSex));
-            this.Adapter.InsertCommand.Parameters[2].Value = ((byte)(IsMz));
-            if ((Subject1LastSurvey.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((short)(Subject1LastSurvey.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((Subject2LastSurvey.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((short)(Subject2LastSurvey.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((RImplicitPass1.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((double)(RImplicitPass1.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((RImplicit.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((double)(RImplicit.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((RImplicitSubject.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((double)(RImplicitSubject.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((RImplicitMother.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((double)(RImplicitMother.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((RImplicit2004.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[9].Value = ((double)(RImplicit2004.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((RExplicitOlderSibVersion.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((double)(RExplicitOlderSibVersion.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((RExplicitYoungerSibVersion.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[11].Value = ((double)(RExplicitYoungerSibVersion.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            if ((RExplicitPass1.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[12].Value = ((double)(RExplicitPass1.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            if ((RExplicit.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[13].Value = ((double)(RExplicit.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            if ((RPass1.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[14].Value = ((double)(RPass1.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            if ((R.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[15].Value = ((double)(R.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            if ((RFull.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[16].Value = ((double)(RFull.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[16].Value = global::System.DBNull.Value;
-            }
-            if ((RPeek.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[17].Value = ((double)(RPeek.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    int ID, 
-                    byte MultipleBirthIfSameSex, 
-                    byte IsMz, 
-                    global::System.Nullable<short> Subject1LastSurvey, 
-                    global::System.Nullable<short> Subject2LastSurvey, 
-                    global::System.Nullable<double> RImplicitPass1, 
-                    global::System.Nullable<double> RImplicit, 
-                    global::System.Nullable<double> RImplicitSubject, 
-                    global::System.Nullable<double> RImplicitMother, 
-                    global::System.Nullable<double> RImplicit2004, 
-                    global::System.Nullable<double> RExplicitOlderSibVersion, 
-                    global::System.Nullable<double> RExplicitYoungerSibVersion, 
-                    global::System.Nullable<double> RExplicitPass1, 
-                    global::System.Nullable<double> RExplicit, 
-                    global::System.Nullable<double> RPass1, 
-                    global::System.Nullable<double> R, 
-                    global::System.Nullable<double> RFull, 
-                    global::System.Nullable<double> RPeek, 
-                    int Original_ID, 
-                    byte Original_MultipleBirthIfSameSex, 
-                    byte Original_IsMz, 
-                    global::System.Nullable<short> Original_Subject1LastSurvey, 
-                    global::System.Nullable<short> Original_Subject2LastSurvey, 
-                    global::System.Nullable<double> Original_RImplicitPass1, 
-                    global::System.Nullable<double> Original_RImplicit, 
-                    global::System.Nullable<double> Original_RImplicitSubject, 
-                    global::System.Nullable<double> Original_RImplicitMother, 
-                    global::System.Nullable<double> Original_RImplicit2004, 
-                    global::System.Nullable<double> Original_RExplicitOlderSibVersion, 
-                    global::System.Nullable<double> Original_RExplicitYoungerSibVersion, 
-                    global::System.Nullable<double> Original_RExplicitPass1, 
-                    global::System.Nullable<double> Original_RExplicit, 
-                    global::System.Nullable<double> Original_RPass1, 
-                    global::System.Nullable<double> Original_R, 
-                    global::System.Nullable<double> Original_RFull, 
-                    global::System.Nullable<double> Original_RPeek) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((byte)(MultipleBirthIfSameSex));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((byte)(IsMz));
-            if ((Subject1LastSurvey.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((short)(Subject1LastSurvey.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((Subject2LastSurvey.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((short)(Subject2LastSurvey.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((RImplicitPass1.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((double)(RImplicitPass1.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((RImplicit.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((double)(RImplicit.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((RImplicitSubject.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((double)(RImplicitSubject.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((RImplicitMother.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((double)(RImplicitMother.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((RImplicit2004.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((double)(RImplicit2004.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((RExplicitOlderSibVersion.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((double)(RExplicitOlderSibVersion.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((RExplicitYoungerSibVersion.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((double)(RExplicitYoungerSibVersion.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            if ((RExplicitPass1.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((double)(RExplicitPass1.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            if ((RExplicit.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((double)(RExplicit.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            if ((RPass1.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((double)(RPass1.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            if ((R.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((double)(R.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            if ((RFull.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((double)(RFull.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
-            }
-            if ((RPeek.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((double)(RPeek.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[19].Value = ((byte)(Original_MultipleBirthIfSameSex));
-            this.Adapter.UpdateCommand.Parameters[20].Value = ((byte)(Original_IsMz));
-            if ((Original_Subject1LastSurvey.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((short)(Original_Subject1LastSurvey.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
-            }
-            if ((Original_Subject2LastSurvey.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((short)(Original_Subject2LastSurvey.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RImplicitPass1.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((double)(Original_RImplicitPass1.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RImplicit.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((double)(Original_RImplicit.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RImplicitSubject.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((double)(Original_RImplicitSubject.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RImplicitMother.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((double)(Original_RImplicitMother.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[32].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RImplicit2004.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((double)(Original_RImplicit2004.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RExplicitOlderSibVersion.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((double)(Original_RExplicitOlderSibVersion.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[36].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RExplicitYoungerSibVersion.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[38].Value = ((double)(Original_RExplicitYoungerSibVersion.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[38].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RExplicitPass1.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[40].Value = ((double)(Original_RExplicitPass1.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[40].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RExplicit.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[42].Value = ((double)(Original_RExplicit.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[42].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RPass1.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[43].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[44].Value = ((double)(Original_RPass1.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[43].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[44].Value = global::System.DBNull.Value;
-            }
-            if ((Original_R.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[45].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[46].Value = ((double)(Original_R.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[45].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[46].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RFull.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[47].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[48].Value = ((double)(Original_RFull.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[47].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[48].Value = global::System.DBNull.Value;
-            }
-            if ((Original_RPeek.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[49].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[50].Value = ((double)(Original_RPeek.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[49].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[50].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    byte MultipleBirthIfSameSex, 
-                    byte IsMz, 
-                    global::System.Nullable<short> Subject1LastSurvey, 
-                    global::System.Nullable<short> Subject2LastSurvey, 
-                    global::System.Nullable<double> RImplicitPass1, 
-                    global::System.Nullable<double> RImplicit, 
-                    global::System.Nullable<double> RImplicitSubject, 
-                    global::System.Nullable<double> RImplicitMother, 
-                    global::System.Nullable<double> RImplicit2004, 
-                    global::System.Nullable<double> RExplicitOlderSibVersion, 
-                    global::System.Nullable<double> RExplicitYoungerSibVersion, 
-                    global::System.Nullable<double> RExplicitPass1, 
-                    global::System.Nullable<double> RExplicit, 
-                    global::System.Nullable<double> RPass1, 
-                    global::System.Nullable<double> R, 
-                    global::System.Nullable<double> RFull, 
-                    global::System.Nullable<double> RPeek, 
-                    int Original_ID, 
-                    byte Original_MultipleBirthIfSameSex, 
-                    byte Original_IsMz, 
-                    global::System.Nullable<short> Original_Subject1LastSurvey, 
-                    global::System.Nullable<short> Original_Subject2LastSurvey, 
-                    global::System.Nullable<double> Original_RImplicitPass1, 
-                    global::System.Nullable<double> Original_RImplicit, 
-                    global::System.Nullable<double> Original_RImplicitSubject, 
-                    global::System.Nullable<double> Original_RImplicitMother, 
-                    global::System.Nullable<double> Original_RImplicit2004, 
-                    global::System.Nullable<double> Original_RExplicitOlderSibVersion, 
-                    global::System.Nullable<double> Original_RExplicitYoungerSibVersion, 
-                    global::System.Nullable<double> Original_RExplicitPass1, 
-                    global::System.Nullable<double> Original_RExplicit, 
-                    global::System.Nullable<double> Original_RPass1, 
-                    global::System.Nullable<double> Original_R, 
-                    global::System.Nullable<double> Original_RFull, 
-                    global::System.Nullable<double> Original_RPeek) {
-            return this.Update(Original_ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey, RImplicitPass1, RImplicit, RImplicitSubject, RImplicitMother, RImplicit2004, RExplicitOlderSibVersion, RExplicitYoungerSibVersion, RExplicitPass1, RExplicit, RPass1, R, RFull, RPeek, Original_ID, Original_MultipleBirthIfSameSex, Original_IsMz, Original_Subject1LastSurvey, Original_Subject2LastSurvey, Original_RImplicitPass1, Original_RImplicit, Original_RImplicitSubject, Original_RImplicitMother, Original_RImplicit2004, Original_RExplicitOlderSibVersion, Original_RExplicitYoungerSibVersion, Original_RExplicitPass1, Original_RExplicit, Original_RPass1, Original_R, Original_RFull, Original_RPeek);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class tblOutcomesTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
@@ -23866,6 +23049,1183 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class tblRelatedValuesTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public tblRelatedValuesTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "tblRelatedValues";
+            tableMapping.ColumnMappings.Add("ID", "ID");
+            tableMapping.ColumnMappings.Add("MultipleBirthIfSameSex", "MultipleBirthIfSameSex");
+            tableMapping.ColumnMappings.Add("IsMz", "IsMz");
+            tableMapping.ColumnMappings.Add("Subject1LastSurvey", "Subject1LastSurvey");
+            tableMapping.ColumnMappings.Add("Subject2LastSurvey", "Subject2LastSurvey");
+            tableMapping.ColumnMappings.Add("ImplicitShareBiomomPass1", "ImplicitShareBiomomPass1");
+            tableMapping.ColumnMappings.Add("ImplicitShareBiodadPass1", "ImplicitShareBiodadPass1");
+            tableMapping.ColumnMappings.Add("ExplicitShareBiomomPass1", "ExplicitShareBiomomPass1");
+            tableMapping.ColumnMappings.Add("ExplicitShareBiodadPass1", "ExplicitShareBiodadPass1");
+            tableMapping.ColumnMappings.Add("RImplicitPass1", "RImplicitPass1");
+            tableMapping.ColumnMappings.Add("RImplicit", "RImplicit");
+            tableMapping.ColumnMappings.Add("RImplicitSubject", "RImplicitSubject");
+            tableMapping.ColumnMappings.Add("RImplicitMother", "RImplicitMother");
+            tableMapping.ColumnMappings.Add("RImplicit2004", "RImplicit2004");
+            tableMapping.ColumnMappings.Add("RExplicitOlderSibVersion", "RExplicitOlderSibVersion");
+            tableMapping.ColumnMappings.Add("RExplicitYoungerSibVersion", "RExplicitYoungerSibVersion");
+            tableMapping.ColumnMappings.Add("RExplicitPass1", "RExplicitPass1");
+            tableMapping.ColumnMappings.Add("RExplicit", "RExplicit");
+            tableMapping.ColumnMappings.Add("RPass1", "RPass1");
+            tableMapping.ColumnMappings.Add("R", "R");
+            tableMapping.ColumnMappings.Add("RFull", "RFull");
+            tableMapping.ColumnMappings.Add("RPeek", "RPeek");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [Process].[tblRelatedValues] WHERE (([ID] = @Original_ID) AND ([Multi" +
+                "pleBirthIfSameSex] = @Original_MultipleBirthIfSameSex) AND ([IsMz] = @Original_I" +
+                "sMz) AND ((@IsNull_Subject1LastSurvey = 1 AND [Subject1LastSurvey] IS NULL) OR (" +
+                "[Subject1LastSurvey] = @Original_Subject1LastSurvey)) AND ((@IsNull_Subject2Last" +
+                "Survey = 1 AND [Subject2LastSurvey] IS NULL) OR ([Subject2LastSurvey] = @Origina" +
+                "l_Subject2LastSurvey)) AND ((@IsNull_ImplicitShareBiomomPass1 = 1 AND [ImplicitS" +
+                "hareBiomomPass1] IS NULL) OR ([ImplicitShareBiomomPass1] = @Original_ImplicitSha" +
+                "reBiomomPass1)) AND ((@IsNull_ImplicitShareBiodadPass1 = 1 AND [ImplicitShareBio" +
+                "dadPass1] IS NULL) OR ([ImplicitShareBiodadPass1] = @Original_ImplicitShareBioda" +
+                "dPass1)) AND ((@IsNull_ExplicitShareBiomomPass1 = 1 AND [ExplicitShareBiomomPass" +
+                "1] IS NULL) OR ([ExplicitShareBiomomPass1] = @Original_ExplicitShareBiomomPass1)" +
+                ") AND ((@IsNull_ExplicitShareBiodadPass1 = 1 AND [ExplicitShareBiodadPass1] IS N" +
+                "ULL) OR ([ExplicitShareBiodadPass1] = @Original_ExplicitShareBiodadPass1)) AND (" +
+                "(@IsNull_RImplicitPass1 = 1 AND [RImplicitPass1] IS NULL) OR ([RImplicitPass1] =" +
+                " @Original_RImplicitPass1)) AND ((@IsNull_RImplicit = 1 AND [RImplicit] IS NULL)" +
+                " OR ([RImplicit] = @Original_RImplicit)) AND ((@IsNull_RImplicitSubject = 1 AND " +
+                "[RImplicitSubject] IS NULL) OR ([RImplicitSubject] = @Original_RImplicitSubject)" +
+                ") AND ((@IsNull_RImplicitMother = 1 AND [RImplicitMother] IS NULL) OR ([RImplici" +
+                "tMother] = @Original_RImplicitMother)) AND ((@IsNull_RImplicit2004 = 1 AND [RImp" +
+                "licit2004] IS NULL) OR ([RImplicit2004] = @Original_RImplicit2004)) AND ((@IsNul" +
+                "l_RExplicitOlderSibVersion = 1 AND [RExplicitOlderSibVersion] IS NULL) OR ([RExp" +
+                "licitOlderSibVersion] = @Original_RExplicitOlderSibVersion)) AND ((@IsNull_RExpl" +
+                "icitYoungerSibVersion = 1 AND [RExplicitYoungerSibVersion] IS NULL) OR ([RExplic" +
+                "itYoungerSibVersion] = @Original_RExplicitYoungerSibVersion)) AND ((@IsNull_RExp" +
+                "licitPass1 = 1 AND [RExplicitPass1] IS NULL) OR ([RExplicitPass1] = @Original_RE" +
+                "xplicitPass1)) AND ((@IsNull_RExplicit = 1 AND [RExplicit] IS NULL) OR ([RExplic" +
+                "it] = @Original_RExplicit)) AND ((@IsNull_RPass1 = 1 AND [RPass1] IS NULL) OR ([" +
+                "RPass1] = @Original_RPass1)) AND ((@IsNull_R = 1 AND [R] IS NULL) OR ([R] = @Ori" +
+                "ginal_R)) AND ((@IsNull_RFull = 1 AND [RFull] IS NULL) OR ([RFull] = @Original_R" +
+                "Full)) AND ((@IsNull_RPeek = 1 AND [RPeek] IS NULL) OR ([RPeek] = @Original_RPee" +
+                "k)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MultipleBirthIfSameSex", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MultipleBirthIfSameSex", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IsMz", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsMz", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Subject1LastSurvey", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Subject1LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Subject2LastSurvey", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject2LastSurvey", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Subject2LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject2LastSurvey", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ImplicitShareBiomomPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ImplicitShareBiomomPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ImplicitShareBiomomPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ImplicitShareBiomomPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ImplicitShareBiodadPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ImplicitShareBiodadPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ImplicitShareBiodadPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ImplicitShareBiodadPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ExplicitShareBiomomPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExplicitShareBiomomPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExplicitShareBiomomPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExplicitShareBiomomPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ExplicitShareBiodadPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExplicitShareBiodadPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExplicitShareBiodadPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExplicitShareBiodadPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicitPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicitPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicit", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicit", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicitSubject", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitSubject", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicitSubject", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitSubject", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicitMother", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitMother", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicitMother", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitMother", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicit2004", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit2004", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicit2004", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit2004", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RExplicitOlderSibVersion", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitOlderSibVersion", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RExplicitOlderSibVersion", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitOlderSibVersion", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RExplicitYoungerSibVersion", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitYoungerSibVersion", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RExplicitYoungerSibVersion", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitYoungerSibVersion", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RExplicitPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RExplicitPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RExplicit", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicit", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RExplicit", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicit", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_R", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "R", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_R", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "R", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RFull", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RFull", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RFull", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RFull", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RPeek", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPeek", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RPeek", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPeek", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Process].[tblRelatedValues] ([ID], [MultipleBirthIfSameSex], [IsMz], [Subject1LastSurvey], [Subject2LastSurvey], [ImplicitShareBiomomPass1], [ImplicitShareBiodadPass1], [ExplicitShareBiomomPass1], [ExplicitShareBiodadPass1], [RImplicitPass1], [RImplicit], [RImplicitSubject], [RImplicitMother], [RImplicit2004], [RExplicitOlderSibVersion], [RExplicitYoungerSibVersion], [RExplicitPass1], [RExplicit], [RPass1], [R], [RFull], [RPeek]) VALUES (@ID, @MultipleBirthIfSameSex, @IsMz, @Subject1LastSurvey, @Subject2LastSurvey, @ImplicitShareBiomomPass1, @ImplicitShareBiodadPass1, @ExplicitShareBiomomPass1, @ExplicitShareBiodadPass1, @RImplicitPass1, @RImplicit, @RImplicitSubject, @RImplicitMother, @RImplicit2004, @RExplicitOlderSibVersion, @RExplicitYoungerSibVersion, @RExplicitPass1, @RExplicit, @RPass1, @R, @RFull, @RPeek);
+SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey, ImplicitShareBiomomPass1, ImplicitShareBiodadPass1, ExplicitShareBiomomPass1, ExplicitShareBiodadPass1, RImplicitPass1, RImplicit, RImplicitSubject, RImplicitMother, RImplicit2004, RExplicitOlderSibVersion, RExplicitYoungerSibVersion, RExplicitPass1, RExplicit, RPass1, R, RFull, RPeek FROM Process.tblRelatedValues WHERE (ID = @ID)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MultipleBirthIfSameSex", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MultipleBirthIfSameSex", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsMz", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsMz", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Subject1LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Subject2LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject2LastSurvey", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ImplicitShareBiomomPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ImplicitShareBiomomPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ImplicitShareBiodadPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ImplicitShareBiodadPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ExplicitShareBiomomPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExplicitShareBiomomPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ExplicitShareBiodadPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExplicitShareBiodadPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicitPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicit", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicitSubject", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitSubject", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicitMother", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitMother", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicit2004", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit2004", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RExplicitOlderSibVersion", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitOlderSibVersion", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RExplicitYoungerSibVersion", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitYoungerSibVersion", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RExplicitPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RExplicit", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicit", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@R", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "R", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RFull", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RFull", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RPeek", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPeek", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "UPDATE [Process].[tblRelatedValues] SET [ID] = @ID, [MultipleBirthIfSameSex] = @M" +
+                "ultipleBirthIfSameSex, [IsMz] = @IsMz, [Subject1LastSurvey] = @Subject1LastSurve" +
+                "y, [Subject2LastSurvey] = @Subject2LastSurvey, [ImplicitShareBiomomPass1] = @Imp" +
+                "licitShareBiomomPass1, [ImplicitShareBiodadPass1] = @ImplicitShareBiodadPass1, [" +
+                "ExplicitShareBiomomPass1] = @ExplicitShareBiomomPass1, [ExplicitShareBiodadPass1" +
+                "] = @ExplicitShareBiodadPass1, [RImplicitPass1] = @RImplicitPass1, [RImplicit] =" +
+                " @RImplicit, [RImplicitSubject] = @RImplicitSubject, [RImplicitMother] = @RImpli" +
+                "citMother, [RImplicit2004] = @RImplicit2004, [RExplicitOlderSibVersion] = @RExpl" +
+                "icitOlderSibVersion, [RExplicitYoungerSibVersion] = @RExplicitYoungerSibVersion," +
+                " [RExplicitPass1] = @RExplicitPass1, [RExplicit] = @RExplicit, [RPass1] = @RPass" +
+                "1, [R] = @R, [RFull] = @RFull, [RPeek] = @RPeek WHERE (([ID] = @Original_ID) AND" +
+                " ([MultipleBirthIfSameSex] = @Original_MultipleBirthIfSameSex) AND ([IsMz] = @Or" +
+                "iginal_IsMz) AND ((@IsNull_Subject1LastSurvey = 1 AND [Subject1LastSurvey] IS NU" +
+                "LL) OR ([Subject1LastSurvey] = @Original_Subject1LastSurvey)) AND ((@IsNull_Subj" +
+                "ect2LastSurvey = 1 AND [Subject2LastSurvey] IS NULL) OR ([Subject2LastSurvey] = " +
+                "@Original_Subject2LastSurvey)) AND ((@IsNull_ImplicitShareBiomomPass1 = 1 AND [I" +
+                "mplicitShareBiomomPass1] IS NULL) OR ([ImplicitShareBiomomPass1] = @Original_Imp" +
+                "licitShareBiomomPass1)) AND ((@IsNull_ImplicitShareBiodadPass1 = 1 AND [Implicit" +
+                "ShareBiodadPass1] IS NULL) OR ([ImplicitShareBiodadPass1] = @Original_ImplicitSh" +
+                "areBiodadPass1)) AND ((@IsNull_ExplicitShareBiomomPass1 = 1 AND [ExplicitShareBi" +
+                "omomPass1] IS NULL) OR ([ExplicitShareBiomomPass1] = @Original_ExplicitShareBiom" +
+                "omPass1)) AND ((@IsNull_ExplicitShareBiodadPass1 = 1 AND [ExplicitShareBiodadPas" +
+                "s1] IS NULL) OR ([ExplicitShareBiodadPass1] = @Original_ExplicitShareBiodadPass1" +
+                ")) AND ((@IsNull_RImplicitPass1 = 1 AND [RImplicitPass1] IS NULL) OR ([RImplicit" +
+                "Pass1] = @Original_RImplicitPass1)) AND ((@IsNull_RImplicit = 1 AND [RImplicit] " +
+                "IS NULL) OR ([RImplicit] = @Original_RImplicit)) AND ((@IsNull_RImplicitSubject " +
+                "= 1 AND [RImplicitSubject] IS NULL) OR ([RImplicitSubject] = @Original_RImplicit" +
+                "Subject)) AND ((@IsNull_RImplicitMother = 1 AND [RImplicitMother] IS NULL) OR ([" +
+                "RImplicitMother] = @Original_RImplicitMother)) AND ((@IsNull_RImplicit2004 = 1 A" +
+                "ND [RImplicit2004] IS NULL) OR ([RImplicit2004] = @Original_RImplicit2004)) AND " +
+                "((@IsNull_RExplicitOlderSibVersion = 1 AND [RExplicitOlderSibVersion] IS NULL) O" +
+                "R ([RExplicitOlderSibVersion] = @Original_RExplicitOlderSibVersion)) AND ((@IsNu" +
+                "ll_RExplicitYoungerSibVersion = 1 AND [RExplicitYoungerSibVersion] IS NULL) OR (" +
+                "[RExplicitYoungerSibVersion] = @Original_RExplicitYoungerSibVersion)) AND ((@IsN" +
+                "ull_RExplicitPass1 = 1 AND [RExplicitPass1] IS NULL) OR ([RExplicitPass1] = @Ori" +
+                "ginal_RExplicitPass1)) AND ((@IsNull_RExplicit = 1 AND [RExplicit] IS NULL) OR (" +
+                "[RExplicit] = @Original_RExplicit)) AND ((@IsNull_RPass1 = 1 AND [RPass1] IS NUL" +
+                "L) OR ([RPass1] = @Original_RPass1)) AND ((@IsNull_R = 1 AND [R] IS NULL) OR ([R" +
+                "] = @Original_R)) AND ((@IsNull_RFull = 1 AND [RFull] IS NULL) OR ([RFull] = @Or" +
+                "iginal_RFull)) AND ((@IsNull_RPeek = 1 AND [RPeek] IS NULL) OR ([RPeek] = @Origi" +
+                "nal_RPeek)));\r\nSELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subj" +
+                "ect2LastSurvey, ImplicitShareBiomomPass1, ImplicitShareBiodadPass1, ExplicitShar" +
+                "eBiomomPass1, ExplicitShareBiodadPass1, RImplicitPass1, RImplicit, RImplicitSubj" +
+                "ect, RImplicitMother, RImplicit2004, RExplicitOlderSibVersion, RExplicitYoungerS" +
+                "ibVersion, RExplicitPass1, RExplicit, RPass1, R, RFull, RPeek FROM Process.tblRe" +
+                "latedValues WHERE (ID = @ID)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MultipleBirthIfSameSex", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MultipleBirthIfSameSex", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsMz", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsMz", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Subject1LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Subject2LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject2LastSurvey", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ImplicitShareBiomomPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ImplicitShareBiomomPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ImplicitShareBiodadPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ImplicitShareBiodadPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ExplicitShareBiomomPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExplicitShareBiomomPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ExplicitShareBiodadPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExplicitShareBiodadPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicitPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicit", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicitSubject", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitSubject", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicitMother", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitMother", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RImplicit2004", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit2004", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RExplicitOlderSibVersion", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitOlderSibVersion", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RExplicitYoungerSibVersion", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitYoungerSibVersion", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RExplicitPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RExplicit", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicit", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@R", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "R", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RFull", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RFull", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RPeek", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPeek", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MultipleBirthIfSameSex", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MultipleBirthIfSameSex", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IsMz", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsMz", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Subject1LastSurvey", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Subject1LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Subject2LastSurvey", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject2LastSurvey", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Subject2LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject2LastSurvey", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ImplicitShareBiomomPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ImplicitShareBiomomPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ImplicitShareBiomomPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ImplicitShareBiomomPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ImplicitShareBiodadPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ImplicitShareBiodadPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ImplicitShareBiodadPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ImplicitShareBiodadPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ExplicitShareBiomomPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExplicitShareBiomomPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExplicitShareBiomomPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExplicitShareBiomomPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ExplicitShareBiodadPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExplicitShareBiodadPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExplicitShareBiodadPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExplicitShareBiodadPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicitPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicitPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicit", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicit", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicitSubject", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitSubject", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicitSubject", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitSubject", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicitMother", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitMother", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicitMother", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicitMother", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RImplicit2004", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit2004", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RImplicit2004", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RImplicit2004", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RExplicitOlderSibVersion", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitOlderSibVersion", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RExplicitOlderSibVersion", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitOlderSibVersion", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RExplicitYoungerSibVersion", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitYoungerSibVersion", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RExplicitYoungerSibVersion", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitYoungerSibVersion", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RExplicitPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RExplicitPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicitPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RExplicit", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicit", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RExplicit", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RExplicit", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RPass1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPass1", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RPass1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPass1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_R", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "R", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_R", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "R", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RFull", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RFull", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RFull", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RFull", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RPeek", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPeek", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RPeek", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPeek", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::Nls.BaseAssembly.Properties.Settings.Default.NlsLinksConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = @"SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey, ImplicitShareBiomomPass1, ImplicitShareBiodadPass1, ExplicitShareBiomomPass1, ExplicitShareBiodadPass1, RImplicitPass1, RImplicit, RImplicitSubject, RImplicitMother, RImplicit2004, RExplicitOlderSibVersion, RExplicitYoungerSibVersion, RExplicitPass1, RExplicit, RPass1, R, RFull, RPeek FROM Process.tblRelatedValues";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(LinksDataSet.tblRelatedValuesDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual LinksDataSet.tblRelatedValuesDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            LinksDataSet.tblRelatedValuesDataTable dataTable = new LinksDataSet.tblRelatedValuesDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(LinksDataSet.tblRelatedValuesDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(LinksDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "tblRelatedValues");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(
+                    int Original_ID, 
+                    byte Original_MultipleBirthIfSameSex, 
+                    byte Original_IsMz, 
+                    global::System.Nullable<short> Original_Subject1LastSurvey, 
+                    global::System.Nullable<short> Original_Subject2LastSurvey, 
+                    global::System.Nullable<byte> Original_ImplicitShareBiomomPass1, 
+                    global::System.Nullable<byte> Original_ImplicitShareBiodadPass1, 
+                    global::System.Nullable<byte> Original_ExplicitShareBiomomPass1, 
+                    global::System.Nullable<byte> Original_ExplicitShareBiodadPass1, 
+                    global::System.Nullable<double> Original_RImplicitPass1, 
+                    global::System.Nullable<double> Original_RImplicit, 
+                    global::System.Nullable<double> Original_RImplicitSubject, 
+                    global::System.Nullable<double> Original_RImplicitMother, 
+                    global::System.Nullable<double> Original_RImplicit2004, 
+                    global::System.Nullable<double> Original_RExplicitOlderSibVersion, 
+                    global::System.Nullable<double> Original_RExplicitYoungerSibVersion, 
+                    global::System.Nullable<double> Original_RExplicitPass1, 
+                    global::System.Nullable<double> Original_RExplicit, 
+                    global::System.Nullable<double> Original_RPass1, 
+                    global::System.Nullable<double> Original_R, 
+                    global::System.Nullable<double> Original_RFull, 
+                    global::System.Nullable<double> Original_RPeek) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((byte)(Original_MultipleBirthIfSameSex));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((byte)(Original_IsMz));
+            if ((Original_Subject1LastSurvey.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((short)(Original_Subject1LastSurvey.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Subject2LastSurvey.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((short)(Original_Subject2LastSurvey.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ImplicitShareBiomomPass1.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((byte)(Original_ImplicitShareBiomomPass1.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ImplicitShareBiodadPass1.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((byte)(Original_ImplicitShareBiodadPass1.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ExplicitShareBiomomPass1.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((byte)(Original_ExplicitShareBiomomPass1.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ExplicitShareBiodadPass1.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((byte)(Original_ExplicitShareBiodadPass1.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RImplicitPass1.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((double)(Original_RImplicitPass1.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RImplicit.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((double)(Original_RImplicit.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RImplicitSubject.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((double)(Original_RImplicitSubject.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RImplicitMother.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[22].Value = ((double)(Original_RImplicitMother.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[22].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RImplicit2004.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[24].Value = ((double)(Original_RImplicit2004.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[24].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RExplicitOlderSibVersion.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[26].Value = ((double)(Original_RExplicitOlderSibVersion.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[26].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RExplicitYoungerSibVersion.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[28].Value = ((double)(Original_RExplicitYoungerSibVersion.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[28].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RExplicitPass1.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[29].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[30].Value = ((double)(Original_RExplicitPass1.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[29].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[30].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RExplicit.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[31].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[32].Value = ((double)(Original_RExplicit.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[31].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[32].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RPass1.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[33].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[34].Value = ((double)(Original_RPass1.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[33].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[34].Value = global::System.DBNull.Value;
+            }
+            if ((Original_R.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[35].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[36].Value = ((double)(Original_R.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[35].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[36].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RFull.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[37].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[38].Value = ((double)(Original_RFull.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[37].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[38].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RPeek.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[39].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[40].Value = ((double)(Original_RPeek.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[39].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[40].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(
+                    int ID, 
+                    byte MultipleBirthIfSameSex, 
+                    byte IsMz, 
+                    global::System.Nullable<short> Subject1LastSurvey, 
+                    global::System.Nullable<short> Subject2LastSurvey, 
+                    global::System.Nullable<byte> ImplicitShareBiomomPass1, 
+                    global::System.Nullable<byte> ImplicitShareBiodadPass1, 
+                    global::System.Nullable<byte> ExplicitShareBiomomPass1, 
+                    global::System.Nullable<byte> ExplicitShareBiodadPass1, 
+                    global::System.Nullable<double> RImplicitPass1, 
+                    global::System.Nullable<double> RImplicit, 
+                    global::System.Nullable<double> RImplicitSubject, 
+                    global::System.Nullable<double> RImplicitMother, 
+                    global::System.Nullable<double> RImplicit2004, 
+                    global::System.Nullable<double> RExplicitOlderSibVersion, 
+                    global::System.Nullable<double> RExplicitYoungerSibVersion, 
+                    global::System.Nullable<double> RExplicitPass1, 
+                    global::System.Nullable<double> RExplicit, 
+                    global::System.Nullable<double> RPass1, 
+                    global::System.Nullable<double> R, 
+                    global::System.Nullable<double> RFull, 
+                    global::System.Nullable<double> RPeek) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ID));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((byte)(MultipleBirthIfSameSex));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((byte)(IsMz));
+            if ((Subject1LastSurvey.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((short)(Subject1LastSurvey.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((Subject2LastSurvey.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((short)(Subject2LastSurvey.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((ImplicitShareBiomomPass1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((byte)(ImplicitShareBiomomPass1.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((ImplicitShareBiodadPass1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((byte)(ImplicitShareBiodadPass1.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((ExplicitShareBiomomPass1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((byte)(ExplicitShareBiomomPass1.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((ExplicitShareBiodadPass1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((byte)(ExplicitShareBiodadPass1.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((RImplicitPass1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((double)(RImplicitPass1.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((RImplicit.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((double)(RImplicit.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((RImplicitSubject.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[11].Value = ((double)(RImplicitSubject.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((RImplicitMother.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[12].Value = ((double)(RImplicitMother.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((RImplicit2004.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[13].Value = ((double)(RImplicit2004.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            if ((RExplicitOlderSibVersion.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[14].Value = ((double)(RExplicitOlderSibVersion.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            if ((RExplicitYoungerSibVersion.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[15].Value = ((double)(RExplicitYoungerSibVersion.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            if ((RExplicitPass1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[16].Value = ((double)(RExplicitPass1.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            if ((RExplicit.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[17].Value = ((double)(RExplicit.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[17].Value = global::System.DBNull.Value;
+            }
+            if ((RPass1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[18].Value = ((double)(RPass1.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            if ((R.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[19].Value = ((double)(R.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[19].Value = global::System.DBNull.Value;
+            }
+            if ((RFull.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[20].Value = ((double)(RFull.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            if ((RPeek.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[21].Value = ((double)(RPeek.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[21].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    int ID, 
+                    byte MultipleBirthIfSameSex, 
+                    byte IsMz, 
+                    global::System.Nullable<short> Subject1LastSurvey, 
+                    global::System.Nullable<short> Subject2LastSurvey, 
+                    global::System.Nullable<byte> ImplicitShareBiomomPass1, 
+                    global::System.Nullable<byte> ImplicitShareBiodadPass1, 
+                    global::System.Nullable<byte> ExplicitShareBiomomPass1, 
+                    global::System.Nullable<byte> ExplicitShareBiodadPass1, 
+                    global::System.Nullable<double> RImplicitPass1, 
+                    global::System.Nullable<double> RImplicit, 
+                    global::System.Nullable<double> RImplicitSubject, 
+                    global::System.Nullable<double> RImplicitMother, 
+                    global::System.Nullable<double> RImplicit2004, 
+                    global::System.Nullable<double> RExplicitOlderSibVersion, 
+                    global::System.Nullable<double> RExplicitYoungerSibVersion, 
+                    global::System.Nullable<double> RExplicitPass1, 
+                    global::System.Nullable<double> RExplicit, 
+                    global::System.Nullable<double> RPass1, 
+                    global::System.Nullable<double> R, 
+                    global::System.Nullable<double> RFull, 
+                    global::System.Nullable<double> RPeek, 
+                    int Original_ID, 
+                    byte Original_MultipleBirthIfSameSex, 
+                    byte Original_IsMz, 
+                    global::System.Nullable<short> Original_Subject1LastSurvey, 
+                    global::System.Nullable<short> Original_Subject2LastSurvey, 
+                    global::System.Nullable<byte> Original_ImplicitShareBiomomPass1, 
+                    global::System.Nullable<byte> Original_ImplicitShareBiodadPass1, 
+                    global::System.Nullable<byte> Original_ExplicitShareBiomomPass1, 
+                    global::System.Nullable<byte> Original_ExplicitShareBiodadPass1, 
+                    global::System.Nullable<double> Original_RImplicitPass1, 
+                    global::System.Nullable<double> Original_RImplicit, 
+                    global::System.Nullable<double> Original_RImplicitSubject, 
+                    global::System.Nullable<double> Original_RImplicitMother, 
+                    global::System.Nullable<double> Original_RImplicit2004, 
+                    global::System.Nullable<double> Original_RExplicitOlderSibVersion, 
+                    global::System.Nullable<double> Original_RExplicitYoungerSibVersion, 
+                    global::System.Nullable<double> Original_RExplicitPass1, 
+                    global::System.Nullable<double> Original_RExplicit, 
+                    global::System.Nullable<double> Original_RPass1, 
+                    global::System.Nullable<double> Original_R, 
+                    global::System.Nullable<double> Original_RFull, 
+                    global::System.Nullable<double> Original_RPeek) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((byte)(MultipleBirthIfSameSex));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((byte)(IsMz));
+            if ((Subject1LastSurvey.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((short)(Subject1LastSurvey.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((Subject2LastSurvey.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((short)(Subject2LastSurvey.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((ImplicitShareBiomomPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((byte)(ImplicitShareBiomomPass1.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((ImplicitShareBiodadPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((byte)(ImplicitShareBiodadPass1.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((ExplicitShareBiomomPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((byte)(ExplicitShareBiomomPass1.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((ExplicitShareBiodadPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((byte)(ExplicitShareBiodadPass1.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((RImplicitPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((double)(RImplicitPass1.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((RImplicit.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((double)(RImplicit.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((RImplicitSubject.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((double)(RImplicitSubject.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((RImplicitMother.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((double)(RImplicitMother.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((RImplicit2004.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((double)(RImplicit2004.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            if ((RExplicitOlderSibVersion.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((double)(RExplicitOlderSibVersion.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            if ((RExplicitYoungerSibVersion.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((double)(RExplicitYoungerSibVersion.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            if ((RExplicitPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((double)(RExplicitPass1.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            if ((RExplicit.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((double)(RExplicit.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+            }
+            if ((RPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((double)(RPass1.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            if ((R.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((double)(R.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+            }
+            if ((RFull.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((double)(RFull.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            if ((RPeek.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((double)(RPeek.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[22].Value = ((int)(Original_ID));
+            this.Adapter.UpdateCommand.Parameters[23].Value = ((byte)(Original_MultipleBirthIfSameSex));
+            this.Adapter.UpdateCommand.Parameters[24].Value = ((byte)(Original_IsMz));
+            if ((Original_Subject1LastSurvey.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((short)(Original_Subject1LastSurvey.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Subject2LastSurvey.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((short)(Original_Subject2LastSurvey.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ImplicitShareBiomomPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((byte)(Original_ImplicitShareBiomomPass1.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ImplicitShareBiodadPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((byte)(Original_ImplicitShareBiodadPass1.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[32].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ExplicitShareBiomomPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((byte)(Original_ExplicitShareBiomomPass1.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ExplicitShareBiodadPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((byte)(Original_ExplicitShareBiodadPass1.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[36].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RImplicitPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((double)(Original_RImplicitPass1.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[38].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RImplicit.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[40].Value = ((double)(Original_RImplicit.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[40].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RImplicitSubject.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[42].Value = ((double)(Original_RImplicitSubject.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[42].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RImplicitMother.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[43].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[44].Value = ((double)(Original_RImplicitMother.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[43].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[44].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RImplicit2004.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[45].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[46].Value = ((double)(Original_RImplicit2004.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[45].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[46].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RExplicitOlderSibVersion.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[47].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[48].Value = ((double)(Original_RExplicitOlderSibVersion.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[47].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[48].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RExplicitYoungerSibVersion.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[49].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[50].Value = ((double)(Original_RExplicitYoungerSibVersion.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[49].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[50].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RExplicitPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[51].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[52].Value = ((double)(Original_RExplicitPass1.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[51].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[52].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RExplicit.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[53].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[54].Value = ((double)(Original_RExplicit.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[53].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[54].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[55].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[56].Value = ((double)(Original_RPass1.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[55].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[56].Value = global::System.DBNull.Value;
+            }
+            if ((Original_R.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[57].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[58].Value = ((double)(Original_R.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[57].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[58].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RFull.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[59].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[60].Value = ((double)(Original_RFull.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[59].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[60].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RPeek.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[61].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[62].Value = ((double)(Original_RPeek.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[61].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[62].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    byte MultipleBirthIfSameSex, 
+                    byte IsMz, 
+                    global::System.Nullable<short> Subject1LastSurvey, 
+                    global::System.Nullable<short> Subject2LastSurvey, 
+                    global::System.Nullable<byte> ImplicitShareBiomomPass1, 
+                    global::System.Nullable<byte> ImplicitShareBiodadPass1, 
+                    global::System.Nullable<byte> ExplicitShareBiomomPass1, 
+                    global::System.Nullable<byte> ExplicitShareBiodadPass1, 
+                    global::System.Nullable<double> RImplicitPass1, 
+                    global::System.Nullable<double> RImplicit, 
+                    global::System.Nullable<double> RImplicitSubject, 
+                    global::System.Nullable<double> RImplicitMother, 
+                    global::System.Nullable<double> RImplicit2004, 
+                    global::System.Nullable<double> RExplicitOlderSibVersion, 
+                    global::System.Nullable<double> RExplicitYoungerSibVersion, 
+                    global::System.Nullable<double> RExplicitPass1, 
+                    global::System.Nullable<double> RExplicit, 
+                    global::System.Nullable<double> RPass1, 
+                    global::System.Nullable<double> R, 
+                    global::System.Nullable<double> RFull, 
+                    global::System.Nullable<double> RPeek, 
+                    int Original_ID, 
+                    byte Original_MultipleBirthIfSameSex, 
+                    byte Original_IsMz, 
+                    global::System.Nullable<short> Original_Subject1LastSurvey, 
+                    global::System.Nullable<short> Original_Subject2LastSurvey, 
+                    global::System.Nullable<byte> Original_ImplicitShareBiomomPass1, 
+                    global::System.Nullable<byte> Original_ImplicitShareBiodadPass1, 
+                    global::System.Nullable<byte> Original_ExplicitShareBiomomPass1, 
+                    global::System.Nullable<byte> Original_ExplicitShareBiodadPass1, 
+                    global::System.Nullable<double> Original_RImplicitPass1, 
+                    global::System.Nullable<double> Original_RImplicit, 
+                    global::System.Nullable<double> Original_RImplicitSubject, 
+                    global::System.Nullable<double> Original_RImplicitMother, 
+                    global::System.Nullable<double> Original_RImplicit2004, 
+                    global::System.Nullable<double> Original_RExplicitOlderSibVersion, 
+                    global::System.Nullable<double> Original_RExplicitYoungerSibVersion, 
+                    global::System.Nullable<double> Original_RExplicitPass1, 
+                    global::System.Nullable<double> Original_RExplicit, 
+                    global::System.Nullable<double> Original_RPass1, 
+                    global::System.Nullable<double> Original_R, 
+                    global::System.Nullable<double> Original_RFull, 
+                    global::System.Nullable<double> Original_RPeek) {
+            return this.Update(Original_ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey, ImplicitShareBiomomPass1, ImplicitShareBiodadPass1, ExplicitShareBiomomPass1, ExplicitShareBiodadPass1, RImplicitPass1, RImplicit, RImplicitSubject, RImplicitMother, RImplicit2004, RExplicitOlderSibVersion, RExplicitYoungerSibVersion, RExplicitPass1, RExplicit, RPass1, R, RFull, RPeek, Original_ID, Original_MultipleBirthIfSameSex, Original_IsMz, Original_Subject1LastSurvey, Original_Subject2LastSurvey, Original_ImplicitShareBiomomPass1, Original_ImplicitShareBiodadPass1, Original_ExplicitShareBiomomPass1, Original_ExplicitShareBiodadPass1, Original_RImplicitPass1, Original_RImplicit, Original_RImplicitSubject, Original_RImplicitMother, Original_RImplicit2004, Original_RExplicitOlderSibVersion, Original_RExplicitYoungerSibVersion, Original_RExplicitPass1, Original_RExplicit, Original_RPass1, Original_R, Original_RFull, Original_RPeek);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -23901,8 +24261,6 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
         
         private tblRelatedValuesArchiveTableAdapter _tblRelatedValuesArchiveTableAdapter;
         
-        private tblRelatedValuesTableAdapter _tblRelatedValuesTableAdapter;
-        
         private tblOutcomesTableAdapter _tblOutcomesTableAdapter;
         
         private tblParentsOfGen1CurrentTableAdapter _tblParentsOfGen1CurrentTableAdapter;
@@ -23914,6 +24272,8 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
         private tblMarkerGen2TableAdapter _tblMarkerGen2TableAdapter;
         
         private tblParentsOfGen1RetroTableAdapter _tblParentsOfGen1RetroTableAdapter;
+        
+        private tblRelatedValuesTableAdapter _tblRelatedValuesTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -24103,20 +24463,6 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public tblRelatedValuesTableAdapter tblRelatedValuesTableAdapter {
-            get {
-                return this._tblRelatedValuesTableAdapter;
-            }
-            set {
-                this._tblRelatedValuesTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
-            "a", "System.Drawing.Design.UITypeEditor")]
         public tblOutcomesTableAdapter tblOutcomesTableAdapter {
             get {
                 return this._tblOutcomesTableAdapter;
@@ -24198,6 +24544,20 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public tblRelatedValuesTableAdapter tblRelatedValuesTableAdapter {
+            get {
+                return this._tblRelatedValuesTableAdapter;
+            }
+            set {
+                this._tblRelatedValuesTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -24263,10 +24623,6 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                             && (this._tblRelatedValuesArchiveTableAdapter.Connection != null))) {
                     return this._tblRelatedValuesArchiveTableAdapter.Connection;
                 }
-                if (((this._tblRelatedValuesTableAdapter != null) 
-                            && (this._tblRelatedValuesTableAdapter.Connection != null))) {
-                    return this._tblRelatedValuesTableAdapter.Connection;
-                }
                 if (((this._tblOutcomesTableAdapter != null) 
                             && (this._tblOutcomesTableAdapter.Connection != null))) {
                     return this._tblOutcomesTableAdapter.Connection;
@@ -24290,6 +24646,10 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                 if (((this._tblParentsOfGen1RetroTableAdapter != null) 
                             && (this._tblParentsOfGen1RetroTableAdapter.Connection != null))) {
                     return this._tblParentsOfGen1RetroTableAdapter.Connection;
+                }
+                if (((this._tblRelatedValuesTableAdapter != null) 
+                            && (this._tblRelatedValuesTableAdapter.Connection != null))) {
+                    return this._tblRelatedValuesTableAdapter.Connection;
                 }
                 return null;
             }
@@ -24340,9 +24700,6 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                 if ((this._tblRelatedValuesArchiveTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._tblRelatedValuesTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._tblOutcomesTableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -24359,6 +24716,9 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                     count = (count + 1);
                 }
                 if ((this._tblParentsOfGen1RetroTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._tblRelatedValuesTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -24381,6 +24741,15 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._tblItemTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.tblItem.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._tblItemTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._tblLURosterGen1AssignmentTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.tblLURosterGen1Assignment.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -24399,24 +24768,6 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._tblItemTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.tblItem.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._tblItemTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._tblRelatedValuesArchiveTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.tblRelatedValuesArchive.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._tblRelatedValuesArchiveTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._tblRelatedValuesTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.tblRelatedValues.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -24426,12 +24777,21 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._tblParentsOfGen1RetroTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.tblParentsOfGen1Retro.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._tblOutcomesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.tblOutcomes.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._tblParentsOfGen1RetroTableAdapter.Update(updatedRows));
+                    result = (result + this._tblOutcomesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._tblRelatedValuesArchiveTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.tblRelatedValuesArchive.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._tblRelatedValuesArchiveTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -24453,21 +24813,21 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._tblOutcomesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.tblOutcomes.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._tblOutcomesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._tblParentsOfGen1CurrentTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.tblParentsOfGen1Current.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._tblParentsOfGen1CurrentTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._tblParentsOfGen1RetroTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.tblParentsOfGen1Retro.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._tblParentsOfGen1RetroTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -24561,6 +24921,14 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._tblItemTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.tblItem.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._tblItemTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._tblLURosterGen1AssignmentTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.tblLURosterGen1Assignment.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -24577,22 +24945,6 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._tblItemTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.tblItem.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._tblItemTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._tblRelatedValuesArchiveTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.tblRelatedValuesArchive.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._tblRelatedValuesArchiveTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._tblRelatedValuesTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.tblRelatedValues.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -24601,11 +24953,19 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._tblParentsOfGen1RetroTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.tblParentsOfGen1Retro.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._tblOutcomesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.tblOutcomes.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._tblParentsOfGen1RetroTableAdapter.Update(addedRows));
+                    result = (result + this._tblOutcomesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._tblRelatedValuesArchiveTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.tblRelatedValuesArchive.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._tblRelatedValuesArchiveTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -24625,19 +24985,19 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._tblOutcomesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.tblOutcomes.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._tblOutcomesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._tblParentsOfGen1CurrentTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.tblParentsOfGen1Current.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._tblParentsOfGen1CurrentTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._tblParentsOfGen1RetroTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.tblParentsOfGen1Retro.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._tblParentsOfGen1RetroTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -24779,19 +25139,19 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._tblParentsOfGen1RetroTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.tblParentsOfGen1Retro.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tblParentsOfGen1RetroTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._tblParentsOfGen1CurrentTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.tblParentsOfGen1Current.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._tblParentsOfGen1CurrentTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._tblOutcomesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.tblOutcomes.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._tblOutcomesTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -24811,22 +25171,6 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._tblParentsOfGen1RetroTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.tblParentsOfGen1Retro.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._tblParentsOfGen1RetroTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._tblRelatedValuesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.tblRelatedValues.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._tblRelatedValuesTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._tblRelatedValuesArchiveTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.tblRelatedValuesArchive.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -24835,11 +25179,19 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._tblItemTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.tblItem.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._tblOutcomesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.tblOutcomes.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._tblItemTableAdapter.Update(deletedRows));
+                    result = (result + this._tblOutcomesTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._tblRelatedValuesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.tblRelatedValues.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tblRelatedValuesTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -24856,6 +25208,14 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._tblLURosterGen1AssignmentTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._tblItemTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.tblItem.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tblItemTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -24966,11 +25326,6 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._tblRelatedValuesTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._tblRelatedValuesTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._tblOutcomesTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._tblOutcomesTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -24998,6 +25353,11 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
             }
             if (((this._tblParentsOfGen1RetroTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._tblParentsOfGen1RetroTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._tblRelatedValuesTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._tblRelatedValuesTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -25141,15 +25501,6 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                         adaptersWithAcceptChangesDuringUpdate.Add(this._tblRelatedValuesArchiveTableAdapter.Adapter);
                     }
                 }
-                if ((this._tblRelatedValuesTableAdapter != null)) {
-                    revertConnections.Add(this._tblRelatedValuesTableAdapter, this._tblRelatedValuesTableAdapter.Connection);
-                    this._tblRelatedValuesTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._tblRelatedValuesTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._tblRelatedValuesTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._tblRelatedValuesTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._tblRelatedValuesTableAdapter.Adapter);
-                    }
-                }
                 if ((this._tblOutcomesTableAdapter != null)) {
                     revertConnections.Add(this._tblOutcomesTableAdapter, this._tblOutcomesTableAdapter.Connection);
                     this._tblOutcomesTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -25202,6 +25553,15 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                     if (this._tblParentsOfGen1RetroTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._tblParentsOfGen1RetroTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._tblParentsOfGen1RetroTableAdapter.Adapter);
+                    }
+                }
+                if ((this._tblRelatedValuesTableAdapter != null)) {
+                    revertConnections.Add(this._tblRelatedValuesTableAdapter, this._tblRelatedValuesTableAdapter.Connection);
+                    this._tblRelatedValuesTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._tblRelatedValuesTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._tblRelatedValuesTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._tblRelatedValuesTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._tblRelatedValuesTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -25310,10 +25670,6 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                     this._tblRelatedValuesArchiveTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._tblRelatedValuesArchiveTableAdapter]));
                     this._tblRelatedValuesArchiveTableAdapter.Transaction = null;
                 }
-                if ((this._tblRelatedValuesTableAdapter != null)) {
-                    this._tblRelatedValuesTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._tblRelatedValuesTableAdapter]));
-                    this._tblRelatedValuesTableAdapter.Transaction = null;
-                }
                 if ((this._tblOutcomesTableAdapter != null)) {
                     this._tblOutcomesTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._tblOutcomesTableAdapter]));
                     this._tblOutcomesTableAdapter.Transaction = null;
@@ -25337,6 +25693,10 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
                 if ((this._tblParentsOfGen1RetroTableAdapter != null)) {
                     this._tblParentsOfGen1RetroTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._tblParentsOfGen1RetroTableAdapter]));
                     this._tblParentsOfGen1RetroTableAdapter.Transaction = null;
+                }
+                if ((this._tblRelatedValuesTableAdapter != null)) {
+                    this._tblRelatedValuesTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._tblRelatedValuesTableAdapter]));
+                    this._tblRelatedValuesTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
