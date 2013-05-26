@@ -28,7 +28,7 @@ namespace Nls.BaseAssembly.Assign {
 		private readonly Tristate _isMZ;
 		private readonly Tristate _isRelatedInMZManual;
 		//private Int16 _rosterAssignment=Int16.MinValue;
-		private float? _rRoster = float.NaN;
+		//private float? _rRoster = float.NaN;
 		private float? _rImplicitPass1 = null;// float.NaN;
 		private float? _rImplicit2004 = float.NaN;
 
