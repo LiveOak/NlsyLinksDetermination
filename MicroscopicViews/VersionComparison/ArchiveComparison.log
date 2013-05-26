@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.11.12)  21 APR 2013 20:26
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2011.11.12)  25 MAY 2013 21:08
 entering extended mode
 **ArchiveComparison.tex
 
@@ -220,25 +220,25 @@ File: figure/unnamed-chunk-32.pdf Graphic file (type pdf)
 Package pdftex.def Info: figure/unnamed-chunk-32.pdf used on input line 97.
 (pdftex.def)             Requested size: 230.86192pt x 108.40472pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 192.
+(Font)              <7> on input line 186.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 192.
+(Font)              <5> on input line 186.
 
 
-LaTeX Warning: Float too large for page by 69.73pt on input line 263.
+LaTeX Warning: Float too large for page by 45.73pt on input line 255.
 
 [1
 
 {C:/Users/wibeasley/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <F:/Proj
 ects/Nls/NlsyLinksDetermination/MicroscopicViews/VersionComparison/figure/unnam
 ed-chunk-31.pdf> <F:/Projects/Nls/NlsyLinksDetermination/MicroscopicViews/Versi
-onComparison/figure/unnamed-chunk-32.pdf>] [2] [3] [4]
+onComparison/figure/unnamed-chunk-32.pdf>] [2] [3]
 (F:\Projects\Nls\NlsyLinksDetermination\MicroscopicViews\VersionComparison\Arch
 iveComparison.aux) ) 
 Here is how much of TeX's memory you used:
  1897 strings out of 494049
  27192 string characters out of 3146052
- 159538 words of memory out of 3000000
+ 123899 words of memory out of 3000000
  5177 multiletter control sequences out of 15000+200000
  7151 words of font info for 26 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
@@ -249,9 +249,9 @@ s/cm/cmr10.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/c
 m/cmr12.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
 mr17.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt
 10.pfb>
-Output written on ArchiveComparison.pdf (4 pages, 88499 bytes).
+Output written on ArchiveComparison.pdf (3 pages, 85301 bytes).
 PDF statistics:
- 47 PDF objects out of 1000 (max. 8388607)
+ 44 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

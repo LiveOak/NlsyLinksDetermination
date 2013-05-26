@@ -45,9 +45,10 @@ namespace Nls.BaseAssembly {
 			if ( CommonCalculations.GenerationOfSubjectTag(subjectTag2) != Generation.Gen1 ) throw new ArgumentOutOfRangeException("The generation implied by subjectTag2 isn't Gen1.");
 			if ( dcPass1 == null ) throw new ArgumentNullException("dcPass1");
 			switch ( dcPass1.ColumnName ) {
-				case "RImplicitPass1":
-				case "RExplicitPass1":
-				case "RPass1":
+				case "ImplicitShareBiomomPass1":
+				case "ImplicitShareBiodadPass1":
+				case "ExplicitShareBiomomPass1":
+				case "ExplicitShareBiodadPass1":
 					break;
 				default:
 					throw new ArgumentOutOfRangeException("dcPass1", dcPass1, "The column wasn't recognized as a valid 'Pass1' column.");

@@ -25,7 +25,7 @@
     <Shape ID="DesignTable:tblMarkerGen1" ZOrder="6" X="448" Y="475" Height="267" Width="232" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="216" />
     <Shape ID="DesignTable:tblMarkerGen2" ZOrder="5" X="616" Y="475" Height="229" Width="232" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="178" />
     <Shape ID="DesignTable:tblParentsOfGen1Retro" ZOrder="4" X="283" Y="589" Height="210" Width="280" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />
-    <Shape ID="DesignTable:tblRelatedValues" ZOrder="2" X="327" Y="7" Height="305" Width="242" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:tblRelatedValues" ZOrder="2" X="313" Y="18" Height="305" Width="242" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
   </Shapes>
   <Connectors>
     <Connector ID="DesignRelation:FK_tblSurveyTime_tblSubject" ZOrder="38" LineWidth="11">
@@ -260,11 +260,11 @@
       <RoutePoints>
         <Point>
           <X>583</X>
-          <Y>47</Y>
+          <Y>67</Y>
         </Point>
         <Point>
-          <X>569</X>
-          <Y>47</Y>
+          <X>555</X>
+          <Y>67</Y>
         </Point>
       </RoutePoints>
     </Connector>

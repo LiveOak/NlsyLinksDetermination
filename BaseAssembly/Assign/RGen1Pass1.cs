@@ -32,11 +32,14 @@ namespace Nls.BaseAssembly.Assign {
 		private float? _rImplicitPass1 = null;// float.NaN;
 		private float? _rImplicit2004 = float.NaN;
 
-		private readonly Tristate _implicitShareBiomom;
-		private readonly Tristate _implicitShareBiodad;
+		private readonly Tristate _implicitShareBiomomPass1;
+		private readonly Tristate _implicitShareBiodadPass1;
 
-		private readonly Tristate _explicitShareBiomom;
-		private readonly Tristate _explicitShareBiodad;
+		private readonly Tristate _explicitShareBiomomPass1;
+		private readonly Tristate _explicitShareBiodadPass1;
+
+		private readonly Tristate _shareBiomomPass1;
+		private readonly Tristate _shareBiodadPass1;
 
 		private float? _rExplicitOldestSibVersion = float.NaN;
 		private float? _rExplicitYoungestSibVersion = float.NaN;
@@ -50,10 +53,12 @@ namespace Nls.BaseAssembly.Assign {
 		public Tristate IsMZ { get { return _isMZ; } }
 		//public Int16 RosterAssignmentID { get { return _rosterAssignment; } }
 		//public float? RRoster { get { return _rRoster; } }
-		public Tristate ImplicitShareBiomomPass1 { get { return _implicitShareBiomom; } }
-		public Tristate ImplicitShareBiodadPass1 { get { return _implicitShareBiodad; } }
-		public Tristate ExplicitShareBiomomPass1 { get { return _explicitShareBiomom; } }
-		public Tristate ExplicitShareBiodadPass1 { get { return _explicitShareBiodad; } }
+		public Tristate ImplicitShareBiomomPass1 { get { return _implicitShareBiomomPass1; } }
+		public Tristate ImplicitShareBiodadPass1 { get { return _implicitShareBiodadPass1; } }
+		public Tristate ExplicitShareBiomomPass1 { get { return _explicitShareBiomomPass1; } }
+		public Tristate ExplicitShareBiodadPass1 { get { return _explicitShareBiodadPass1; } }
+		public Tristate ShareBiomomPass1 { get { return _shareBiomomPass1; } }
+		public Tristate ShareBiodadPass1 { get { return _shareBiodadPass1; } }
 		public float? RImplicitPass1 { get { return _rImplicitPass1; } }
 		public float? RImplicit2004 { get { return _rImplicit2004; } }
 		public float? RExplicitOldestSibVersion { get { return _rExplicitOldestSibVersion; } }
@@ -121,19 +126,21 @@ namespace Nls.BaseAssembly.Assign {
 			MarkerEvidence biomomDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomDeathAge, Bioparent.Mom, _dtMarkersGen1);
 			MarkerEvidence biodadDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadDeathAge, Bioparent.Dad, _dtMarkersGen1);
 
-			_explicitShareBiomom = CommonFunctions.TranslateEvidenceToTristate(explicitBiomomFromOlder, explicitBiomomFromYounger);
-			_explicitShareBiodad = CommonFunctions.TranslateEvidenceToTristate(explicitBiodadFromOlder, explicitBiodadFromYounger);
+			_explicitShareBiomomPass1 = CommonFunctions.TranslateEvidenceToTristate(explicitBiomomFromOlder, explicitBiomomFromYounger);
+			_explicitShareBiodadPass1 = CommonFunctions.TranslateEvidenceToTristate(explicitBiodadFromOlder, explicitBiodadFromYounger);
 
-			_implicitShareBiomom = ImplicitShareBioparent(inHH1979: biomomInHH1979, deathAge: biomomDeathAge);
-			_implicitShareBiodad = ImplicitShareBioparent(inHH1979: biodadInHH1979, deathAge: biodadDeathAge);
+			_implicitShareBiomomPass1 = ImplicitShareBioparent(inHH1979: biomomInHH1979, deathAge: biomomDeathAge);
+			_implicitShareBiodadPass1 = ImplicitShareBioparent(inHH1979: biodadInHH1979, deathAge: biodadDeathAge);
 
+			_shareBiomomPass1 = CommonFunctions.TakePriority(_explicitShareBiomomPass1, _implicitShareBiomomPass1);
+			_shareBiodadPass1 = CommonFunctions.TakePriority(_explicitShareBiodadPass1, _implicitShareBiodadPass1);
 
-			_rImplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _implicitShareBiomom, shareBiodad: _implicitShareBiodad, mustDecide: false);
+			_rImplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _implicitShareBiomomPass1, shareBiodad: _implicitShareBiodadPass1, mustDecide: false);
 			_rImplicit2004 = RetrieveRImplicit2004();
 			_rExplicitOldestSibVersion = CalculateRExplicitSingleSibVersion(explicitBiomomFromOlder, explicitBiodadFromOlder);
 			_rExplicitYoungestSibVersion = CalculateRExplicitSingleSibVersion(explicitBiomomFromYounger, explicitBiodadFromYounger);
-			_rExplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _explicitShareBiomom, shareBiodad: _explicitShareBiodad, mustDecide: true);
-			_rPass1 = CalculateRPass1();
+			_rExplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _explicitShareBiomomPass1, shareBiodad: _explicitShareBiodadPass1, mustDecide: true);
+			_rPass1 = CommonFunctions.TranslateToR(shareBiomom: _shareBiomomPass1, shareBiodad: _shareBiodadPass1, mustDecide: false);
 		}
 		#endregion //#region Public Methods #endregion #region Private Methods #endregion
 		#region Private Methods - Estimate R

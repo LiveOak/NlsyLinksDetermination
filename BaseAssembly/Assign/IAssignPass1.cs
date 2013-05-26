@@ -13,6 +13,9 @@ namespace Nls.BaseAssembly {
 		Tristate ImplicitShareBiodadPass1 { get; }
 		Tristate ExplicitShareBiomomPass1 { get; }
 		Tristate ExplicitShareBiodadPass1 { get; }
+		Tristate ShareBiomomPass1 { get; }
+		Tristate ShareBiodadPass1 { get; }
+
 		float? RImplicitPass1 { get; }
 		float? RImplicit2004 { get; }
 		float? RExplicitOldestSibVersion { get; }

@@ -39,6 +39,8 @@ namespace Nls.BaseAssembly.Assign {
 		public Tristate ImplicitShareBiodadPass1 { get { return Tristate.No; } }
 		public Tristate ExplicitShareBiomomPass1 { get { return Tristate.No; } }
 		public Tristate ExplicitShareBiodadPass1 { get { return Tristate.No; } }
+		public Tristate ShareBiomomPass1 { get { return Tristate.No; } }
+		public Tristate ShareBiodadPass1 { get { return Tristate.No; } }
 		public float? RImplicitPass1 { get { return _rImplicitPass1; } }
 		public float? RImplicit2004 { get { return _rImplicit2004; } }
 		public float? RExplicitOldestSibVersion { get { return _rExplicitOldestSibVersion; } }

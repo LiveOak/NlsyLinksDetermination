@@ -23,6 +23,10 @@ namespace Nls.BaseAssembly.Assign {
 
 		private readonly Tristate _implicitShareBiomom;
 		private readonly Tristate _implicitShareBiodad;
+		private readonly Tristate _explicitShareBiomom;
+		private readonly Tristate _explicitShareBiodad;
+		private readonly Tristate _shareBiomom;
+		private readonly Tristate _shareBiodad;
 
 		private readonly Int32 _extendedID;
 		private float? _rImplicit = null;// float.NaN;
@@ -72,28 +76,74 @@ namespace Nls.BaseAssembly.Assign {
 			_drValue = _dsLinks.tblRelatedValues.FindByID(_idRelatedLeft);
 			_dtMarkersGen1 = MarkerGen1.PairRelevantMarkerRows(_idRelatedLeft, _idRelatedRight, _dsLinks, _extendedID);
 
-			MarkerEvidence biomomInHH1980 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1980, Bioparent.Mom, _dtMarkersGen1);
-			MarkerEvidence biodadInHH1980 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1980, Bioparent.Dad, _dtMarkersGen1);
-			MarkerEvidence biomomInHH1978 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1978, Bioparent.Mom, _dtMarkersGen1);
-			MarkerEvidence biodadInHH1978 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1978, Bioparent.Dad, _dtMarkersGen1);
-			MarkerEvidence biomomInHH1977 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1977, Bioparent.Mom, _dtMarkersGen1);
-			MarkerEvidence biodadInHH1977 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1977, Bioparent.Dad, _dtMarkersGen1);
-			MarkerEvidence biomomInHH1976 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1976, Bioparent.Mom, _dtMarkersGen1);
-			MarkerEvidence biodadInHH1976 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1976, Bioparent.Dad, _dtMarkersGen1);
+			_implicitShareBiomom = AddressImplicitBiomom();
+			_implicitShareBiodad = AddressImplicitBiodad();
+			_rImplicit = CommonFunctions.TranslateToR(shareBiomom: _implicitShareBiomom, shareBiodad: _implicitShareBiodad, mustDecide: false);
 
-			//_rImplicit = CalculateRImplicit(biomomInHH1980, biodadInHH1980, biomomInHH1978, biodadInHH1978, biomomInHH1977, biodadInHH1977, biomomInHH1976, biodadInHH1976);
-
-			_implicitShareBiomom = ImplicitShareBioparent(biomomInHH1980,  biomomInHH1978,  biomomInHH1977,  biomomInHH1976);
-			_implicitShareBiodad = ImplicitShareBioparent( biodadInHH1980,  biodadInHH1978,  biodadInHH1977,  biodadInHH1976);
-
-			_rImplicit= CommonFunctions.TranslateToR(shareBiomom: _implicitShareBiomom, shareBiodad: _implicitShareBiodad, mustDecide: false);
-
-			_rExplicit = CalculateRExplicit();
-			_rFull = CalculateRFull();
-			_r = CalculateR();
+			AddressExplicit();
+			AddressOverall();
 			//Trace.Write(_r);
 
 			//_rPeek = CalculateRPeek();
+		}
+
+
+		private Tristate AddressImplicitBiomom ( ) {
+			Tristate implicitBiomomPass1 = (Tristate)_drValue.ImplicitShareBiomomPass1;
+			if ( implicitBiomomPass1 != Tristate.DoNotKnow ) return implicitBiomomPass1;
+
+			DataColumn dcPass1 = _dsLinks.tblRelatedValues.ImplicitShareBiomomPass1Column;
+			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+
+			InterpolateShare interpolate = new InterpolateShare(pairs);
+			Tristate newShare = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+			return newShare;
+
+			//if ( newShare != Tristate.DoNotKnow ) {
+			//   return newShare;
+			//}
+			//else {
+			//   MarkerEvidence biomomInHH1980 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1980, Bioparent.Mom, _dtMarkersGen1);
+			//   MarkerEvidence biomomInHH1978 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1978, Bioparent.Mom, _dtMarkersGen1);
+			//   MarkerEvidence biomomInHH1977 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1977, Bioparent.Mom, _dtMarkersGen1);
+			//   MarkerEvidence biomomInHH1976 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1976, Bioparent.Mom, _dtMarkersGen1);
+			//   return ImplicitShareBioparent(biomomInHH1980, biomomInHH1978, biomomInHH1977, biomomInHH1976);
+			//}
+		}
+		private Tristate AddressImplicitBiodad ( ) {
+			Tristate implicitBiodadPass1 = (Tristate)_drValue.ImplicitShareBiodadPass1;
+			if ( implicitBiodadPass1 != Tristate.DoNotKnow ) return implicitBiodadPass1;
+
+			DataColumn dcPass1 = _dsLinks.tblRelatedValues.ImplicitShareBiodadPass1Column;
+			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+
+			InterpolateShare interpolate = new InterpolateShare(pairs);
+			Tristate newShare = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+			return newShare;
+
+			//if ( newShare != Tristate.DoNotKnow ) {
+			//   return newShare;
+			//}
+			//else {
+			//   MarkerEvidence biodadInHH1980 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1980, Bioparent.Dad, _dtMarkersGen1);
+			//   MarkerEvidence biodadInHH1978 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1978, Bioparent.Dad, _dtMarkersGen1);
+			//   MarkerEvidence biodadInHH1977 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1977, Bioparent.Dad, _dtMarkersGen1);
+			//   MarkerEvidence biodadInHH1976 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1976, Bioparent.Dad, _dtMarkersGen1);
+			//   return ImplicitShareBioparent(biodadInHH1980, biodadInHH1978, biodadInHH1977, biodadInHH1976);
+			//}
+		}
+		private void AddressExplicit ( ) {
+			Tristate explicitBiomomPass1 = (Tristate)_drValue.ExplicitShareBiomomPass1;
+			Tristate explicitBiodadPass1 = (Tristate)_drValue.ExplicitShareBiodadPass1;
+
+			//_explicitShareBiomom = ImplicitShareBioparent();
+			//_explicitShareBiodad = ImplicitShareBioparent();
+			//_rExplicit = CommonFunctions.TranslateToR(shareBiomom: _explicitShareBiomom, shareBiodad: _explicitShareBiodad, mustDecide: false);
+			_rExplicit = CalculateRExplicit();
+		}
+		private void AddressOverall ( ) {
+			_rFull = CalculateRFull();
+			_r = CalculateR();
 		}
 		#endregion
 		#region Public Methods
@@ -135,11 +185,11 @@ namespace Nls.BaseAssembly.Assign {
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.RExplicitPass1Column;
 			PairR[] pairs = PairR.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
 
-			InterpolateR interpolate = new InterpolateR(pairs);
-			float? newRExplicit = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
-			if ( newRExplicit.HasValue ) 
-				return newRExplicit;
-			else 
+			//InterpolateBioparent interpolate = new InterpolateBioparent(pairs);
+			//float? newRExplicit = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+			//if ( newRExplicit.HasValue ) 
+			//   return newRExplicit;
+			//else 
 				return null;
 		}
 		private float? CalculateR ( ) {

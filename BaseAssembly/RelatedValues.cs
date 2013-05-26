@@ -270,6 +270,8 @@ namespace Nls.BaseAssembly {
 				drNew.ImplicitShareBiodadPass1 = (byte)assignPass1.ImplicitShareBiodadPass1;
 				drNew.ExplicitShareBiomomPass1 = (byte)assignPass1.ExplicitShareBiomomPass1;
 				drNew.ExplicitShareBiodadPass1 = (byte)assignPass1.ExplicitShareBiodadPass1;
+				drNew.ShareBiomomPass1 = (byte)assignPass1.ShareBiomomPass1;
+				drNew.ShareBiodadPass1 = (byte)assignPass1.ShareBiodadPass1;
 
 				if ( assignPass1.RImplicitPass1.HasValue ) drNew.RImplicitPass1 = assignPass1.RImplicitPass1.Value;
 				else drNew.SetRImplicitPass1Null();

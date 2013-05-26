@@ -35,7 +35,12 @@ namespace Nls.BaseAssembly {
 					throw new ArgumentOutOfRangeException("evidence", evidence, "This function does not support this value of MarkerEvidence.");
 			}
 		}
-
+		public static Tristate TakePriority ( Tristate priority1, Tristate priority2 ) {
+			if ( priority1 != Tristate.DoNotKnow )
+				return priority1;
+			else
+				return priority2;//Which still may be 'DoNotKnow'
+		}
 		public static float? TranslateToR ( Tristate shareBiomom, Tristate shareBiodad, bool mustDecide ) {
 			if ( shareBiomom == Tristate.DoNotKnow && shareBiodad == Tristate.DoNotKnow ) return null;
 			else if ( shareBiomom == Tristate.No && shareBiodad == Tristate.No ) return RCoefficients.NotRelated;

@@ -2,8 +2,8 @@ rm(list=ls(all=TRUE))
 require(RODBC)
 require(ggplot2)
 require(colorspace)
-includedRelationshipPaths <- c(2)
-# includedRelationshipPaths <- c(1)
+# includedRelationshipPaths <- c(2)
+includedRelationshipPaths <- c(1)
 archivePath <- "F:/Projects/Nls/NlsyLinksDetermination/MicroscopicViews/CrosstabHistoryArchive.csv"
 
 dsArchive <- read.csv(archivePath)
