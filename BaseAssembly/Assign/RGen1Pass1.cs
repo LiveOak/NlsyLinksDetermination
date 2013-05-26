@@ -141,12 +141,13 @@ namespace Nls.BaseAssembly.Assign {
 			_shareBiomomPass1 = CommonFunctions.TakePriority(_explicitShareBiomomPass1, _implicitShareBiomomPass1);
 			_shareBiodadPass1 = CommonFunctions.TakePriority(_explicitShareBiodadPass1, _implicitShareBiodadPass1);
 
-			_rImplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _implicitShareBiomomPass1, shareBiodad: _implicitShareBiodadPass1, mustDecide: false);
-			_rImplicit2004 = RetrieveRImplicit2004();
 			_rExplicitOldestSibVersion = CalculateRExplicitSingleSibVersion(explicitBiomomFromOlder, explicitBiodadFromOlder);
 			_rExplicitYoungestSibVersion = CalculateRExplicitSingleSibVersion(explicitBiomomFromYounger, explicitBiodadFromYounger);
-			_rExplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _explicitShareBiomomPass1, shareBiodad: _explicitShareBiodadPass1, mustDecide: true);
-
+			_rExplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _explicitShareBiomomPass1, shareBiodad: _explicitShareBiodadPass1, mustDecide: false);
+		
+			_rImplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _implicitShareBiomomPass1, shareBiodad: _implicitShareBiodadPass1, mustDecide: false);
+			_rImplicit2004 = RetrieveRImplicit2004();
+		
 			_rPass1 = CalculateRPass1(shareBiomom: _shareBiomomPass1, shareBiodad: _shareBiodadPass1); 
 		}
 		#endregion //#region Public Methods #endregion #region Private Methods #endregion

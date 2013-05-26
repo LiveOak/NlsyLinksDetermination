@@ -82,7 +82,7 @@ namespace Nls.BaseAssembly.Assign {
 
 			Tristate explicitShareBiomom = AddressExplicitBiomom();
 			Tristate explicitShareBiodad = AddressExplicitBiodad();
-			_rExplicit = CommonFunctions.TranslateToR(shareBiomom: explicitShareBiomom, shareBiodad: explicitShareBiodad, mustDecide: false);
+			_rExplicit = CommonFunctions.TranslateToR(shareBiomom: explicitShareBiomom, shareBiodad: explicitShareBiodad, mustDecide: true);
 
 			AddressOverall();
 			//Trace.Write(_r);
@@ -190,18 +190,6 @@ namespace Nls.BaseAssembly.Assign {
 			else
 				return Tristate.DoNotKnow;
 		}
-		private float? CalculateRExplicit ( ) {//Int32 idRelated
-			if ( !_drValue.IsRExplicitPass1Null() ) return (float?)_drValue.RExplicitPass1;
-			DataColumn dcPass1 = _dsLinks.tblRelatedValues.RExplicitPass1Column;
-			PairR[] pairs = PairR.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
-
-			//InterpolateBioparent interpolate = new InterpolateBioparent(pairs);
-			//float? newRExplicit = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
-			//if ( newRExplicit.HasValue ) 
-			//   return newRExplicit;
-			//else 
-				return null;
-		}
 		private float? CalculateR ( ) {
 			if ( !RFull.HasValue ) {
 				return null;
@@ -248,3 +236,15 @@ namespace Nls.BaseAssembly.Assign {
 		#endregion
 	}
 }
+//private float? CalculateRExplicit ( ) {//Int32 idRelated
+//   if ( !_drValue.IsRExplicitPass1Null() ) return (float?)_drValue.RExplicitPass1;
+//   DataColumn dcPass1 = _dsLinks.tblRelatedValues.RExplicitPass1Column;
+//   PairR[] pairs = PairR.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+
+//   //InterpolateBioparent interpolate = new InterpolateBioparent(pairs);
+//   //float? newRExplicit = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+//   //if ( newRExplicit.HasValue ) 
+//   //   return newRExplicit;
+//   //else 
+//      return null;
+//}
