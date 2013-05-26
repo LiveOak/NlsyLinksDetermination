@@ -49,6 +49,8 @@ namespace Nls.BaseAssembly {
 				case "ImplicitShareBiodadPass1":
 				case "ExplicitShareBiomomPass1":
 				case "ExplicitShareBiodadPass1":
+				case "ShareBiomomPass1":
+				case "ShareBiodadPass1":
 					break;
 				default:
 					throw new ArgumentOutOfRangeException("dcPass1", dcPass1, "The column wasn't recognized as a valid 'Pass1' column.");

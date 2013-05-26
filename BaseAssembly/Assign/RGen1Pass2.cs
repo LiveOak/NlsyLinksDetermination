@@ -82,16 +82,13 @@ namespace Nls.BaseAssembly.Assign {
 			Tristate implicitShareBiomom = AddressImplicitBiomom();
 			Tristate implicitShareBiodad = AddressImplicitBiodad();
 
-			Tristate shareBiomom = CommonFunctions.TakePriority(explicitShareBiomom, implicitShareBiomom);
-			Tristate shareBiodad = CommonFunctions.TakePriority(explicitShareBiodad, implicitShareBiodad);
+			Tristate shareBiomom = AddressBiomom(explicitShareBiomom, implicitShareBiomom);
+			Tristate shareBiodad = AddressBiodad(explicitShareBiodad, implicitShareBiodad);
 
 			_rExplicit = CommonFunctions.TranslateToR(shareBiomom: explicitShareBiomom, shareBiodad: explicitShareBiodad, mustDecide: true);
 			_rImplicit = CommonFunctions.TranslateToR(shareBiomom: implicitShareBiomom, shareBiodad: implicitShareBiodad, mustDecide: false);
 			_rFull = CommonFunctions.TranslateToR(shareBiomom: shareBiomom, shareBiodad: shareBiodad, mustDecide: true);
 			_r = CalculateR(_rFull);
-			//Trace.Write(_r);
-
-			//_rPeek = CalculateRPeek();
 		}
 		#endregion
 		#region Public Methods

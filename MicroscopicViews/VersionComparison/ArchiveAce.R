@@ -85,7 +85,7 @@ rm(dsRaw)
 relationshipPathPretty <- "RelationshipPathPrettyNotSet"
 if( relationshipPath==1 ) {
   #rVersions <- c("R", "RPass1",  "RExplicit", "RExplicitPass1", "RImplicit2004")
-  rVersions <- c("R", "RFull", "RExplicit", "RImplicit2004")
+  rVersions <- c("R", "RFull", "RExplicit", "RImplicit", "RImplicitPass1", "RImplicit2004")
   pathInput <- "F:/Projects/Nls/NlsyLinksDetermination/LinksForDistribution/Outcomes/ExtraOutcomes79.csv"
   dsOutcomes <- read.csv(file=pathInput, stringsAsFactors=F)
 #   dsOutcomes$AfqtRescaled2006Gaussified <- qnorm(dsOutcomes[, "AfqtRescaled2006"]) #convert from roughly uniform distribution [0, 100], to something Guassianish.
