@@ -6,6 +6,7 @@ namespace Nls.BaseAssembly {
 		//Int32 IDRight { get; }
 		MultipleBirth MultipleBirthIfSameSex { get; }
 		Tristate IsMZ { get; }
+		Tristate IsRelatedInMzManual { get; }
 		//Int16 RosterAssignmentID { get; }
 		//float? RRoster { get; }
 

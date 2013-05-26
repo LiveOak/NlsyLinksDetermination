@@ -26,7 +26,7 @@ namespace Nls.BaseAssembly.Assign {
 		private readonly Int32 _extendedID;
 		private readonly MultipleBirth _multipleBirth;
 		private readonly Tristate _isMZ;
-		private readonly Tristate _isRelatedInMZManual;
+		private readonly Tristate _isRelatedInMzManual;
 		//private Int16 _rosterAssignment=Int16.MinValue;
 		//private float? _rRoster = float.NaN;
 		private float? _rImplicitPass1 = null;// float.NaN;
@@ -51,6 +51,7 @@ namespace Nls.BaseAssembly.Assign {
 		public Int32 IDRight { get { return _idRelatedRight; } }
 		public MultipleBirth MultipleBirthIfSameSex { get { return _multipleBirth; } }
 		public Tristate IsMZ { get { return _isMZ; } }
+		public Tristate IsRelatedInMzManual { get { return _isRelatedInMzManual; } }
 		//public Int16 RosterAssignmentID { get { return _rosterAssignment; } }
 		//public float? RRoster { get { return _rRoster; } }
 		public Tristate ImplicitShareBiomomPass1 { get { return _implicitShareBiomomPass1; } }
@@ -111,14 +112,14 @@ namespace Nls.BaseAssembly.Assign {
 			if ( drMz == null ) {
 				_multipleBirth = MultipleBirth.No;
 				_isMZ = Tristate.No;
-				_isRelatedInMZManual = Tristate.DoNotKnow;
+				_isRelatedInMzManual = Tristate.DoNotKnow;
 			}
 			else {
 				_multipleBirth = (MultipleBirth)drMz.MultipleBirthIfSameSex;
 				_isMZ = (Tristate)drMz.IsMz;
-				if ( drMz.IsRelatedNull() ) _isRelatedInMZManual = Tristate.DoNotKnow;
-				else if ( drMz.Related ) _isRelatedInMZManual = Tristate.Yes;
-				else _isRelatedInMZManual = Tristate.No;
+				if ( drMz.IsRelatedNull() ) _isRelatedInMzManual = Tristate.DoNotKnow;
+				else if ( drMz.Related ) _isRelatedInMzManual = Tristate.Yes;
+				else _isRelatedInMzManual = Tristate.No;
 			}
 
 			MarkerEvidence explicitBiomomFromOlder = ReduceShareBioparentToOne(MarkerType.ShareBiomom, ItemYears.Gen1ShareBioparent.Length, _idRelatedOlderAboutYounger);
@@ -144,11 +145,12 @@ namespace Nls.BaseAssembly.Assign {
 			_rExplicitOldestSibVersion = CalculateRExplicitSingleSibVersion(explicitBiomomFromOlder, explicitBiodadFromOlder);
 			_rExplicitYoungestSibVersion = CalculateRExplicitSingleSibVersion(explicitBiomomFromYounger, explicitBiodadFromYounger);
 			_rExplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _explicitShareBiomomPass1, shareBiodad: _explicitShareBiodadPass1, mustDecide: false);
-		
+
 			_rImplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _implicitShareBiomomPass1, shareBiodad: _implicitShareBiodadPass1, mustDecide: false);
 			_rImplicit2004 = RetrieveRImplicit2004();
-		
-			_rPass1 = CalculateRPass1(shareBiomom: _shareBiomomPass1, shareBiodad: _shareBiodadPass1); 
+
+			_rPass1 = CalculateRFull(shareBiomom: _shareBiomomPass1, shareBiodad: _shareBiodadPass1,
+				multiple: _multipleBirth, isMZ: _isMZ, isRelatedInMZManual: _isRelatedInMzManual, idRelated: _idRelatedLeft, dtRoster: _dsLinks.tblRosterGen1);
 		}
 		#endregion //#region Public Methods #endregion #region Private Methods #endregion
 		#region Private Methods - Estimate R
@@ -179,10 +181,10 @@ namespace Nls.BaseAssembly.Assign {
 				return null;//The record wasn't contained in the links created in 2004.
 			}
 		}
-		private float? CalculateRRoster ( Int32 idRelated ) {
+		public static float? CalculateRRoster ( Int32 idRelated, LinksDataSet.tblRosterGen1DataTable dtRoster ) {
 			//TODO: Check overrides first.
 
-			LinksDataSet.tblRosterGen1Row dr = _dsLinks.tblRosterGen1.FindByRelatedID(idRelated);
+			LinksDataSet.tblRosterGen1Row dr = dtRoster.FindByRelatedID(idRelated);
 			Trace.Assert(dr != null, "Exactly one row should be retrieved from tblRosterGen1.");
 			if ( dr.Resolved ) {
 				Trace.Assert(!dr.IsRNull(), "If R is resolved by the roster, then R shouldn't be NaN.");
@@ -212,20 +214,20 @@ namespace Nls.BaseAssembly.Assign {
 				return null; //The could still be cousins or something else
 			}
 		}
-		private float? CalculateRPass1 ( Tristate shareBiomom, Tristate shareBiodad ) {
-			float? rRoster = CalculateRRoster(_idRelatedOlderAboutYounger);
+		public static float? CalculateRFull ( Tristate shareBiomom, Tristate shareBiodad, MultipleBirth multiple, Tristate isMZ, Tristate isRelatedInMZManual, Int32 idRelated, LinksDataSet.tblRosterGen1DataTable dtRoster ) {
+			float? rRoster = CalculateRRoster(idRelated, dtRoster);
 
-			if ( this.IsMZ == BaseAssembly.Tristate.Yes ) {
+			if ( isMZ == BaseAssembly.Tristate.Yes ) {
 				return RCoefficients.MzTrue;
 			}
-			else if ( _isRelatedInMZManual == Tristate.No ) {
+			else if ( isRelatedInMZManual == Tristate.No ) {
 				return RCoefficients.NotRelated; //Of the 21 Gen1 subjects in tblMZManual with Related=0, 17 ended up with R=0 (as of 11/9/2012).  1 was assigned R=.5; 3 were assigned R=NULL (which I want to override now here, looking at the DOB differences).
 			}
-			else if ( IsMZ == BaseAssembly.Tristate.DoNotKnow && _isRelatedInMZManual == Tristate.Yes ) {
-				Trace.Assert(this.MultipleBirthIfSameSex == MultipleBirth.Twin || this.MultipleBirthIfSameSex == MultipleBirth.Trip || this.MultipleBirthIfSameSex == MultipleBirth.TwinOrTrip, "To be assigned full sib, they've got to be assigned to be a twin/trip.");
+			else if ( isMZ == BaseAssembly.Tristate.DoNotKnow && isRelatedInMZManual == Tristate.Yes ) {
+				Trace.Assert(multiple == MultipleBirth.Twin || multiple == MultipleBirth.Trip || multiple == MultipleBirth.TwinOrTrip, "To be assigned full sib, they've got to be assigned to be a twin/trip.");
 				return RCoefficients.MzAmbiguous;
 			}
-			else if ( this.MultipleBirthIfSameSex == MultipleBirth.Twin || this.MultipleBirthIfSameSex == MultipleBirth.Trip || this.MultipleBirthIfSameSex == MultipleBirth.TwinOrTrip ) {
+			else if ( multiple == MultipleBirth.Twin || multiple == MultipleBirth.Trip || multiple == MultipleBirth.TwinOrTrip ) {
 				return RCoefficients.SiblingFull;
 			}
 			else if ( rRoster.HasValue ) {

@@ -42,6 +42,7 @@ namespace Nls.BaseAssembly.Assign {
 		public Int32 IDRight { get { return _idRelatedRight; } }
 		public MultipleBirth MultipleBirthIfSameSex { get { return _multipleBirth; } }
 		public Tristate IsMZ { get { return _isMZ; } }
+		public Tristate IsRelatedInMzManual { get { return Tristate.DoNotKnow; } }
 		public Tristate ImplicitShareBiomomPass1 { get { return Tristate.DoNotKnow; } }
 		public Tristate ImplicitShareBiodadPass1 { get { return Tristate.DoNotKnow; } }
 		public Tristate ExplicitShareBiomomPass1 { get { return Tristate.DoNotKnow; } }

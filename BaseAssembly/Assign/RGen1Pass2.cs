@@ -87,7 +87,16 @@ namespace Nls.BaseAssembly.Assign {
 
 			_rExplicit = CommonFunctions.TranslateToR(shareBiomom: explicitShareBiomom, shareBiodad: explicitShareBiodad, mustDecide: true);
 			_rImplicit = CommonFunctions.TranslateToR(shareBiomom: implicitShareBiomom, shareBiodad: implicitShareBiodad, mustDecide: false);
-			_rFull = CommonFunctions.TranslateToR(shareBiomom: shareBiomom, shareBiodad: shareBiodad, mustDecide: true);
+
+			//_rFull = RGen1Pass1.CalculateRFull(shareBiomom: shareBiomom, shareBiodad: shareBiodad,
+			//   multiple: (MultipleBirth)_drValue.MultipleBirthIfSameSex, isMZ: (Tristate)_drValue.IsMz, isRelatedInMZManual: (Tristate)_drValue.IsRelatedInMzManual,
+			//   idRelated: _idRelatedLeft, dtRoster: _dsLinks.tblRosterGen1);
+
+			if ( !_drValue.IsRPass1Null() )
+				_rFull = (float)_drValue.RPass1;
+			else
+				_rFull = CommonFunctions.TranslateToR(shareBiomom: shareBiomom, shareBiodad: shareBiodad, mustDecide: true);
+
 			_r = CalculateR(_rFull);
 		}
 		#endregion

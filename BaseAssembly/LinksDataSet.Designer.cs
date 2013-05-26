@@ -8532,6 +8532,8 @@ namespace Nls.BaseAssembly {
             
             private global::System.Data.DataColumn columnIsMz;
             
+            private global::System.Data.DataColumn columnIsRelatedInMzManual;
+            
             private global::System.Data.DataColumn columnSubject1LastSurvey;
             
             private global::System.Data.DataColumn columnSubject2LastSurvey;
@@ -8628,6 +8630,14 @@ namespace Nls.BaseAssembly {
             public global::System.Data.DataColumn IsMzColumn {
                 get {
                     return this.columnIsMz;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IsRelatedInMzManualColumn {
+                get {
+                    return this.columnIsRelatedInMzManual;
                 }
             }
             
@@ -8840,6 +8850,7 @@ namespace Nls.BaseAssembly {
                         tblRelatedStructureRow parenttblRelatedStructureRowByFK_tblRelatedValues_tblRelatedStructure, 
                         byte MultipleBirthIfSameSex, 
                         byte IsMz, 
+                        byte IsRelatedInMzManual, 
                         short Subject1LastSurvey, 
                         short Subject2LastSurvey, 
                         byte ImplicitShareBiomomPass1, 
@@ -8866,6 +8877,7 @@ namespace Nls.BaseAssembly {
                         null,
                         MultipleBirthIfSameSex,
                         IsMz,
+                        IsRelatedInMzManual,
                         Subject1LastSurvey,
                         Subject2LastSurvey,
                         ImplicitShareBiomomPass1,
@@ -8922,6 +8934,7 @@ namespace Nls.BaseAssembly {
                 this.columnID = base.Columns["ID"];
                 this.columnMultipleBirthIfSameSex = base.Columns["MultipleBirthIfSameSex"];
                 this.columnIsMz = base.Columns["IsMz"];
+                this.columnIsRelatedInMzManual = base.Columns["IsRelatedInMzManual"];
                 this.columnSubject1LastSurvey = base.Columns["Subject1LastSurvey"];
                 this.columnSubject2LastSurvey = base.Columns["Subject2LastSurvey"];
                 this.columnImplicitShareBiomomPass1 = base.Columns["ImplicitShareBiomomPass1"];
@@ -8954,6 +8967,8 @@ namespace Nls.BaseAssembly {
                 base.Columns.Add(this.columnMultipleBirthIfSameSex);
                 this.columnIsMz = new global::System.Data.DataColumn("IsMz", typeof(byte), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIsMz);
+                this.columnIsRelatedInMzManual = new global::System.Data.DataColumn("IsRelatedInMzManual", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIsRelatedInMzManual);
                 this.columnSubject1LastSurvey = new global::System.Data.DataColumn("Subject1LastSurvey", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSubject1LastSurvey);
                 this.columnSubject2LastSurvey = new global::System.Data.DataColumn("Subject2LastSurvey", typeof(short), null, global::System.Data.MappingType.Element);
@@ -9002,6 +9017,7 @@ namespace Nls.BaseAssembly {
                 this.columnID.Unique = true;
                 this.columnMultipleBirthIfSameSex.AllowDBNull = false;
                 this.columnIsMz.AllowDBNull = false;
+                this.columnIsRelatedInMzManual.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12831,6 +12847,17 @@ namespace Nls.BaseAssembly {
                 }
                 set {
                     this[this.tabletblRelatedValues.IsMzColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public byte IsRelatedInMzManual {
+                get {
+                    return ((byte)(this[this.tabletblRelatedValues.IsRelatedInMzManualColumn]));
+                }
+                set {
+                    this[this.tabletblRelatedValues.IsRelatedInMzManualColumn] = value;
                 }
             }
             
@@ -23258,6 +23285,7 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
             tableMapping.ColumnMappings.Add("ID", "ID");
             tableMapping.ColumnMappings.Add("MultipleBirthIfSameSex", "MultipleBirthIfSameSex");
             tableMapping.ColumnMappings.Add("IsMz", "IsMz");
+            tableMapping.ColumnMappings.Add("IsRelatedInMzManual", "IsRelatedInMzManual");
             tableMapping.ColumnMappings.Add("Subject1LastSurvey", "Subject1LastSurvey");
             tableMapping.ColumnMappings.Add("Subject2LastSurvey", "Subject2LastSurvey");
             tableMapping.ColumnMappings.Add("ImplicitShareBiomomPass1", "ImplicitShareBiomomPass1");
@@ -23284,42 +23312,43 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
             this._adapter.DeleteCommand.Connection = this.Connection;
             this._adapter.DeleteCommand.CommandText = "DELETE FROM [Process].[tblRelatedValues] WHERE (([ID] = @Original_ID) AND ([Multi" +
                 "pleBirthIfSameSex] = @Original_MultipleBirthIfSameSex) AND ([IsMz] = @Original_I" +
-                "sMz) AND ((@IsNull_Subject1LastSurvey = 1 AND [Subject1LastSurvey] IS NULL) OR (" +
-                "[Subject1LastSurvey] = @Original_Subject1LastSurvey)) AND ((@IsNull_Subject2Last" +
-                "Survey = 1 AND [Subject2LastSurvey] IS NULL) OR ([Subject2LastSurvey] = @Origina" +
-                "l_Subject2LastSurvey)) AND ((@IsNull_ImplicitShareBiomomPass1 = 1 AND [ImplicitS" +
-                "hareBiomomPass1] IS NULL) OR ([ImplicitShareBiomomPass1] = @Original_ImplicitSha" +
-                "reBiomomPass1)) AND ((@IsNull_ImplicitShareBiodadPass1 = 1 AND [ImplicitShareBio" +
-                "dadPass1] IS NULL) OR ([ImplicitShareBiodadPass1] = @Original_ImplicitShareBioda" +
-                "dPass1)) AND ((@IsNull_ExplicitShareBiomomPass1 = 1 AND [ExplicitShareBiomomPass" +
-                "1] IS NULL) OR ([ExplicitShareBiomomPass1] = @Original_ExplicitShareBiomomPass1)" +
-                ") AND ((@IsNull_ExplicitShareBiodadPass1 = 1 AND [ExplicitShareBiodadPass1] IS N" +
-                "ULL) OR ([ExplicitShareBiodadPass1] = @Original_ExplicitShareBiodadPass1)) AND (" +
-                "(@IsNull_ShareBiomomPass1 = 1 AND [ShareBiomomPass1] IS NULL) OR ([ShareBiomomPa" +
-                "ss1] = @Original_ShareBiomomPass1)) AND ((@IsNull_ShareBiodadPass1 = 1 AND [Shar" +
-                "eBiodadPass1] IS NULL) OR ([ShareBiodadPass1] = @Original_ShareBiodadPass1)) AND" +
-                " ((@IsNull_RImplicitPass1 = 1 AND [RImplicitPass1] IS NULL) OR ([RImplicitPass1]" +
-                " = @Original_RImplicitPass1)) AND ((@IsNull_RImplicit = 1 AND [RImplicit] IS NUL" +
-                "L) OR ([RImplicit] = @Original_RImplicit)) AND ((@IsNull_RImplicitSubject = 1 AN" +
-                "D [RImplicitSubject] IS NULL) OR ([RImplicitSubject] = @Original_RImplicitSubjec" +
-                "t)) AND ((@IsNull_RImplicitMother = 1 AND [RImplicitMother] IS NULL) OR ([RImpli" +
-                "citMother] = @Original_RImplicitMother)) AND ((@IsNull_RImplicit2004 = 1 AND [RI" +
-                "mplicit2004] IS NULL) OR ([RImplicit2004] = @Original_RImplicit2004)) AND ((@IsN" +
-                "ull_RExplicitOlderSibVersion = 1 AND [RExplicitOlderSibVersion] IS NULL) OR ([RE" +
-                "xplicitOlderSibVersion] = @Original_RExplicitOlderSibVersion)) AND ((@IsNull_REx" +
-                "plicitYoungerSibVersion = 1 AND [RExplicitYoungerSibVersion] IS NULL) OR ([RExpl" +
-                "icitYoungerSibVersion] = @Original_RExplicitYoungerSibVersion)) AND ((@IsNull_RE" +
-                "xplicitPass1 = 1 AND [RExplicitPass1] IS NULL) OR ([RExplicitPass1] = @Original_" +
-                "RExplicitPass1)) AND ((@IsNull_RExplicit = 1 AND [RExplicit] IS NULL) OR ([RExpl" +
-                "icit] = @Original_RExplicit)) AND ((@IsNull_RPass1 = 1 AND [RPass1] IS NULL) OR " +
-                "([RPass1] = @Original_RPass1)) AND ((@IsNull_R = 1 AND [R] IS NULL) OR ([R] = @O" +
-                "riginal_R)) AND ((@IsNull_RFull = 1 AND [RFull] IS NULL) OR ([RFull] = @Original" +
-                "_RFull)) AND ((@IsNull_RPeek = 1 AND [RPeek] IS NULL) OR ([RPeek] = @Original_RP" +
-                "eek)))";
+                "sMz) AND ([IsRelatedInMzManual] = @Original_IsRelatedInMzManual) AND ((@IsNull_S" +
+                "ubject1LastSurvey = 1 AND [Subject1LastSurvey] IS NULL) OR ([Subject1LastSurvey]" +
+                " = @Original_Subject1LastSurvey)) AND ((@IsNull_Subject2LastSurvey = 1 AND [Subj" +
+                "ect2LastSurvey] IS NULL) OR ([Subject2LastSurvey] = @Original_Subject2LastSurvey" +
+                ")) AND ((@IsNull_ImplicitShareBiomomPass1 = 1 AND [ImplicitShareBiomomPass1] IS " +
+                "NULL) OR ([ImplicitShareBiomomPass1] = @Original_ImplicitShareBiomomPass1)) AND " +
+                "((@IsNull_ImplicitShareBiodadPass1 = 1 AND [ImplicitShareBiodadPass1] IS NULL) O" +
+                "R ([ImplicitShareBiodadPass1] = @Original_ImplicitShareBiodadPass1)) AND ((@IsNu" +
+                "ll_ExplicitShareBiomomPass1 = 1 AND [ExplicitShareBiomomPass1] IS NULL) OR ([Exp" +
+                "licitShareBiomomPass1] = @Original_ExplicitShareBiomomPass1)) AND ((@IsNull_Expl" +
+                "icitShareBiodadPass1 = 1 AND [ExplicitShareBiodadPass1] IS NULL) OR ([ExplicitSh" +
+                "areBiodadPass1] = @Original_ExplicitShareBiodadPass1)) AND ((@IsNull_ShareBiomom" +
+                "Pass1 = 1 AND [ShareBiomomPass1] IS NULL) OR ([ShareBiomomPass1] = @Original_Sha" +
+                "reBiomomPass1)) AND ((@IsNull_ShareBiodadPass1 = 1 AND [ShareBiodadPass1] IS NUL" +
+                "L) OR ([ShareBiodadPass1] = @Original_ShareBiodadPass1)) AND ((@IsNull_RImplicit" +
+                "Pass1 = 1 AND [RImplicitPass1] IS NULL) OR ([RImplicitPass1] = @Original_RImplic" +
+                "itPass1)) AND ((@IsNull_RImplicit = 1 AND [RImplicit] IS NULL) OR ([RImplicit] =" +
+                " @Original_RImplicit)) AND ((@IsNull_RImplicitSubject = 1 AND [RImplicitSubject]" +
+                " IS NULL) OR ([RImplicitSubject] = @Original_RImplicitSubject)) AND ((@IsNull_RI" +
+                "mplicitMother = 1 AND [RImplicitMother] IS NULL) OR ([RImplicitMother] = @Origin" +
+                "al_RImplicitMother)) AND ((@IsNull_RImplicit2004 = 1 AND [RImplicit2004] IS NULL" +
+                ") OR ([RImplicit2004] = @Original_RImplicit2004)) AND ((@IsNull_RExplicitOlderSi" +
+                "bVersion = 1 AND [RExplicitOlderSibVersion] IS NULL) OR ([RExplicitOlderSibVersi" +
+                "on] = @Original_RExplicitOlderSibVersion)) AND ((@IsNull_RExplicitYoungerSibVers" +
+                "ion = 1 AND [RExplicitYoungerSibVersion] IS NULL) OR ([RExplicitYoungerSibVersio" +
+                "n] = @Original_RExplicitYoungerSibVersion)) AND ((@IsNull_RExplicitPass1 = 1 AND" +
+                " [RExplicitPass1] IS NULL) OR ([RExplicitPass1] = @Original_RExplicitPass1)) AND" +
+                " ((@IsNull_RExplicit = 1 AND [RExplicit] IS NULL) OR ([RExplicit] = @Original_RE" +
+                "xplicit)) AND ((@IsNull_RPass1 = 1 AND [RPass1] IS NULL) OR ([RPass1] = @Origina" +
+                "l_RPass1)) AND ((@IsNull_R = 1 AND [R] IS NULL) OR ([R] = @Original_R)) AND ((@I" +
+                "sNull_RFull = 1 AND [RFull] IS NULL) OR ([RFull] = @Original_RFull)) AND ((@IsNu" +
+                "ll_RPeek = 1 AND [RPeek] IS NULL) OR ([RPeek] = @Original_RPeek)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MultipleBirthIfSameSex", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MultipleBirthIfSameSex", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IsMz", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsMz", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IsRelatedInMzManual", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsRelatedInMzManual", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Subject1LastSurvey", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Subject1LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Subject2LastSurvey", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject2LastSurvey", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -23364,12 +23393,13 @@ SELECT ID, SubjectTag, ExtendedID, Bioparent, InHH, Age, Year FROM Process.tblPa
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RPeek", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RPeek", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Process].[tblRelatedValues] ([ID], [MultipleBirthIfSameSex], [IsMz], [Subject1LastSurvey], [Subject2LastSurvey], [ImplicitShareBiomomPass1], [ImplicitShareBiodadPass1], [ExplicitShareBiomomPass1], [ExplicitShareBiodadPass1], [ShareBiomomPass1], [ShareBiodadPass1], [RImplicitPass1], [RImplicit], [RImplicitSubject], [RImplicitMother], [RImplicit2004], [RExplicitOlderSibVersion], [RExplicitYoungerSibVersion], [RExplicitPass1], [RExplicit], [RPass1], [R], [RFull], [RPeek]) VALUES (@ID, @MultipleBirthIfSameSex, @IsMz, @Subject1LastSurvey, @Subject2LastSurvey, @ImplicitShareBiomomPass1, @ImplicitShareBiodadPass1, @ExplicitShareBiomomPass1, @ExplicitShareBiodadPass1, @ShareBiomomPass1, @ShareBiodadPass1, @RImplicitPass1, @RImplicit, @RImplicitSubject, @RImplicitMother, @RImplicit2004, @RExplicitOlderSibVersion, @RExplicitYoungerSibVersion, @RExplicitPass1, @RExplicit, @RPass1, @R, @RFull, @RPeek);
-SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey, ImplicitShareBiomomPass1, ImplicitShareBiodadPass1, ExplicitShareBiomomPass1, ExplicitShareBiodadPass1, ShareBiomomPass1, ShareBiodadPass1, RImplicitPass1, RImplicit, RImplicitSubject, RImplicitMother, RImplicit2004, RExplicitOlderSibVersion, RExplicitYoungerSibVersion, RExplicitPass1, RExplicit, RPass1, R, RFull, RPeek FROM Process.tblRelatedValues WHERE (ID = @ID)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Process].[tblRelatedValues] ([ID], [MultipleBirthIfSameSex], [IsMz], [IsRelatedInMzManual], [Subject1LastSurvey], [Subject2LastSurvey], [ImplicitShareBiomomPass1], [ImplicitShareBiodadPass1], [ExplicitShareBiomomPass1], [ExplicitShareBiodadPass1], [ShareBiomomPass1], [ShareBiodadPass1], [RImplicitPass1], [RImplicit], [RImplicitSubject], [RImplicitMother], [RImplicit2004], [RExplicitOlderSibVersion], [RExplicitYoungerSibVersion], [RExplicitPass1], [RExplicit], [RPass1], [R], [RFull], [RPeek]) VALUES (@ID, @MultipleBirthIfSameSex, @IsMz, @IsRelatedInMzManual, @Subject1LastSurvey, @Subject2LastSurvey, @ImplicitShareBiomomPass1, @ImplicitShareBiodadPass1, @ExplicitShareBiomomPass1, @ExplicitShareBiodadPass1, @ShareBiomomPass1, @ShareBiodadPass1, @RImplicitPass1, @RImplicit, @RImplicitSubject, @RImplicitMother, @RImplicit2004, @RExplicitOlderSibVersion, @RExplicitYoungerSibVersion, @RExplicitPass1, @RExplicit, @RPass1, @R, @RFull, @RPeek);
+SELECT ID, MultipleBirthIfSameSex, IsMz, IsRelatedInMzManual, Subject1LastSurvey, Subject2LastSurvey, ImplicitShareBiomomPass1, ImplicitShareBiodadPass1, ExplicitShareBiomomPass1, ExplicitShareBiodadPass1, ShareBiomomPass1, ShareBiodadPass1, RImplicitPass1, RImplicit, RImplicitSubject, RImplicitMother, RImplicit2004, RExplicitOlderSibVersion, RExplicitYoungerSibVersion, RExplicitPass1, RExplicit, RPass1, R, RFull, RPeek FROM Process.tblRelatedValues WHERE (ID = @ID)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MultipleBirthIfSameSex", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MultipleBirthIfSameSex", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsMz", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsMz", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsRelatedInMzManual", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsRelatedInMzManual", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Subject1LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Subject2LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject2LastSurvey", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ImplicitShareBiomomPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ImplicitShareBiomomPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -23394,59 +23424,62 @@ SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey,
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = "UPDATE [Process].[tblRelatedValues] SET [ID] = @ID, [MultipleBirthIfSameSex] = @M" +
-                "ultipleBirthIfSameSex, [IsMz] = @IsMz, [Subject1LastSurvey] = @Subject1LastSurve" +
-                "y, [Subject2LastSurvey] = @Subject2LastSurvey, [ImplicitShareBiomomPass1] = @Imp" +
-                "licitShareBiomomPass1, [ImplicitShareBiodadPass1] = @ImplicitShareBiodadPass1, [" +
-                "ExplicitShareBiomomPass1] = @ExplicitShareBiomomPass1, [ExplicitShareBiodadPass1" +
-                "] = @ExplicitShareBiodadPass1, [ShareBiomomPass1] = @ShareBiomomPass1, [ShareBio" +
-                "dadPass1] = @ShareBiodadPass1, [RImplicitPass1] = @RImplicitPass1, [RImplicit] =" +
-                " @RImplicit, [RImplicitSubject] = @RImplicitSubject, [RImplicitMother] = @RImpli" +
-                "citMother, [RImplicit2004] = @RImplicit2004, [RExplicitOlderSibVersion] = @RExpl" +
-                "icitOlderSibVersion, [RExplicitYoungerSibVersion] = @RExplicitYoungerSibVersion," +
-                " [RExplicitPass1] = @RExplicitPass1, [RExplicit] = @RExplicit, [RPass1] = @RPass" +
-                "1, [R] = @R, [RFull] = @RFull, [RPeek] = @RPeek WHERE (([ID] = @Original_ID) AND" +
-                " ([MultipleBirthIfSameSex] = @Original_MultipleBirthIfSameSex) AND ([IsMz] = @Or" +
-                "iginal_IsMz) AND ((@IsNull_Subject1LastSurvey = 1 AND [Subject1LastSurvey] IS NU" +
-                "LL) OR ([Subject1LastSurvey] = @Original_Subject1LastSurvey)) AND ((@IsNull_Subj" +
-                "ect2LastSurvey = 1 AND [Subject2LastSurvey] IS NULL) OR ([Subject2LastSurvey] = " +
-                "@Original_Subject2LastSurvey)) AND ((@IsNull_ImplicitShareBiomomPass1 = 1 AND [I" +
-                "mplicitShareBiomomPass1] IS NULL) OR ([ImplicitShareBiomomPass1] = @Original_Imp" +
-                "licitShareBiomomPass1)) AND ((@IsNull_ImplicitShareBiodadPass1 = 1 AND [Implicit" +
-                "ShareBiodadPass1] IS NULL) OR ([ImplicitShareBiodadPass1] = @Original_ImplicitSh" +
-                "areBiodadPass1)) AND ((@IsNull_ExplicitShareBiomomPass1 = 1 AND [ExplicitShareBi" +
-                "omomPass1] IS NULL) OR ([ExplicitShareBiomomPass1] = @Original_ExplicitShareBiom" +
-                "omPass1)) AND ((@IsNull_ExplicitShareBiodadPass1 = 1 AND [ExplicitShareBiodadPas" +
-                "s1] IS NULL) OR ([ExplicitShareBiodadPass1] = @Original_ExplicitShareBiodadPass1" +
-                ")) AND ((@IsNull_ShareBiomomPass1 = 1 AND [ShareBiomomPass1] IS NULL) OR ([Share" +
-                "BiomomPass1] = @Original_ShareBiomomPass1)) AND ((@IsNull_ShareBiodadPass1 = 1 A" +
-                "ND [ShareBiodadPass1] IS NULL) OR ([ShareBiodadPass1] = @Original_ShareBiodadPas" +
-                "s1)) AND ((@IsNull_RImplicitPass1 = 1 AND [RImplicitPass1] IS NULL) OR ([RImplic" +
-                "itPass1] = @Original_RImplicitPass1)) AND ((@IsNull_RImplicit = 1 AND [RImplicit" +
-                "] IS NULL) OR ([RImplicit] = @Original_RImplicit)) AND ((@IsNull_RImplicitSubjec" +
-                "t = 1 AND [RImplicitSubject] IS NULL) OR ([RImplicitSubject] = @Original_RImplic" +
-                "itSubject)) AND ((@IsNull_RImplicitMother = 1 AND [RImplicitMother] IS NULL) OR " +
-                "([RImplicitMother] = @Original_RImplicitMother)) AND ((@IsNull_RImplicit2004 = 1" +
-                " AND [RImplicit2004] IS NULL) OR ([RImplicit2004] = @Original_RImplicit2004)) AN" +
-                "D ((@IsNull_RExplicitOlderSibVersion = 1 AND [RExplicitOlderSibVersion] IS NULL)" +
-                " OR ([RExplicitOlderSibVersion] = @Original_RExplicitOlderSibVersion)) AND ((@Is" +
-                "Null_RExplicitYoungerSibVersion = 1 AND [RExplicitYoungerSibVersion] IS NULL) OR" +
-                " ([RExplicitYoungerSibVersion] = @Original_RExplicitYoungerSibVersion)) AND ((@I" +
-                "sNull_RExplicitPass1 = 1 AND [RExplicitPass1] IS NULL) OR ([RExplicitPass1] = @O" +
-                "riginal_RExplicitPass1)) AND ((@IsNull_RExplicit = 1 AND [RExplicit] IS NULL) OR" +
-                " ([RExplicit] = @Original_RExplicit)) AND ((@IsNull_RPass1 = 1 AND [RPass1] IS N" +
-                "ULL) OR ([RPass1] = @Original_RPass1)) AND ((@IsNull_R = 1 AND [R] IS NULL) OR (" +
-                "[R] = @Original_R)) AND ((@IsNull_RFull = 1 AND [RFull] IS NULL) OR ([RFull] = @" +
-                "Original_RFull)) AND ((@IsNull_RPeek = 1 AND [RPeek] IS NULL) OR ([RPeek] = @Ori" +
-                "ginal_RPeek)));\r\nSELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Su" +
-                "bject2LastSurvey, ImplicitShareBiomomPass1, ImplicitShareBiodadPass1, ExplicitSh" +
-                "areBiomomPass1, ExplicitShareBiodadPass1, ShareBiomomPass1, ShareBiodadPass1, RI" +
-                "mplicitPass1, RImplicit, RImplicitSubject, RImplicitMother, RImplicit2004, RExpl" +
-                "icitOlderSibVersion, RExplicitYoungerSibVersion, RExplicitPass1, RExplicit, RPas" +
-                "s1, R, RFull, RPeek FROM Process.tblRelatedValues WHERE (ID = @ID)";
+                "ultipleBirthIfSameSex, [IsMz] = @IsMz, [IsRelatedInMzManual] = @IsRelatedInMzMan" +
+                "ual, [Subject1LastSurvey] = @Subject1LastSurvey, [Subject2LastSurvey] = @Subject" +
+                "2LastSurvey, [ImplicitShareBiomomPass1] = @ImplicitShareBiomomPass1, [ImplicitSh" +
+                "areBiodadPass1] = @ImplicitShareBiodadPass1, [ExplicitShareBiomomPass1] = @Expli" +
+                "citShareBiomomPass1, [ExplicitShareBiodadPass1] = @ExplicitShareBiodadPass1, [Sh" +
+                "areBiomomPass1] = @ShareBiomomPass1, [ShareBiodadPass1] = @ShareBiodadPass1, [RI" +
+                "mplicitPass1] = @RImplicitPass1, [RImplicit] = @RImplicit, [RImplicitSubject] = " +
+                "@RImplicitSubject, [RImplicitMother] = @RImplicitMother, [RImplicit2004] = @RImp" +
+                "licit2004, [RExplicitOlderSibVersion] = @RExplicitOlderSibVersion, [RExplicitYou" +
+                "ngerSibVersion] = @RExplicitYoungerSibVersion, [RExplicitPass1] = @RExplicitPass" +
+                "1, [RExplicit] = @RExplicit, [RPass1] = @RPass1, [R] = @R, [RFull] = @RFull, [RP" +
+                "eek] = @RPeek WHERE (([ID] = @Original_ID) AND ([MultipleBirthIfSameSex] = @Orig" +
+                "inal_MultipleBirthIfSameSex) AND ([IsMz] = @Original_IsMz) AND ([IsRelatedInMzMa" +
+                "nual] = @Original_IsRelatedInMzManual) AND ((@IsNull_Subject1LastSurvey = 1 AND " +
+                "[Subject1LastSurvey] IS NULL) OR ([Subject1LastSurvey] = @Original_Subject1LastS" +
+                "urvey)) AND ((@IsNull_Subject2LastSurvey = 1 AND [Subject2LastSurvey] IS NULL) O" +
+                "R ([Subject2LastSurvey] = @Original_Subject2LastSurvey)) AND ((@IsNull_ImplicitS" +
+                "hareBiomomPass1 = 1 AND [ImplicitShareBiomomPass1] IS NULL) OR ([ImplicitShareBi" +
+                "omomPass1] = @Original_ImplicitShareBiomomPass1)) AND ((@IsNull_ImplicitShareBio" +
+                "dadPass1 = 1 AND [ImplicitShareBiodadPass1] IS NULL) OR ([ImplicitShareBiodadPas" +
+                "s1] = @Original_ImplicitShareBiodadPass1)) AND ((@IsNull_ExplicitShareBiomomPass" +
+                "1 = 1 AND [ExplicitShareBiomomPass1] IS NULL) OR ([ExplicitShareBiomomPass1] = @" +
+                "Original_ExplicitShareBiomomPass1)) AND ((@IsNull_ExplicitShareBiodadPass1 = 1 A" +
+                "ND [ExplicitShareBiodadPass1] IS NULL) OR ([ExplicitShareBiodadPass1] = @Origina" +
+                "l_ExplicitShareBiodadPass1)) AND ((@IsNull_ShareBiomomPass1 = 1 AND [ShareBiomom" +
+                "Pass1] IS NULL) OR ([ShareBiomomPass1] = @Original_ShareBiomomPass1)) AND ((@IsN" +
+                "ull_ShareBiodadPass1 = 1 AND [ShareBiodadPass1] IS NULL) OR ([ShareBiodadPass1] " +
+                "= @Original_ShareBiodadPass1)) AND ((@IsNull_RImplicitPass1 = 1 AND [RImplicitPa" +
+                "ss1] IS NULL) OR ([RImplicitPass1] = @Original_RImplicitPass1)) AND ((@IsNull_RI" +
+                "mplicit = 1 AND [RImplicit] IS NULL) OR ([RImplicit] = @Original_RImplicit)) AND" +
+                " ((@IsNull_RImplicitSubject = 1 AND [RImplicitSubject] IS NULL) OR ([RImplicitSu" +
+                "bject] = @Original_RImplicitSubject)) AND ((@IsNull_RImplicitMother = 1 AND [RIm" +
+                "plicitMother] IS NULL) OR ([RImplicitMother] = @Original_RImplicitMother)) AND (" +
+                "(@IsNull_RImplicit2004 = 1 AND [RImplicit2004] IS NULL) OR ([RImplicit2004] = @O" +
+                "riginal_RImplicit2004)) AND ((@IsNull_RExplicitOlderSibVersion = 1 AND [RExplici" +
+                "tOlderSibVersion] IS NULL) OR ([RExplicitOlderSibVersion] = @Original_RExplicitO" +
+                "lderSibVersion)) AND ((@IsNull_RExplicitYoungerSibVersion = 1 AND [RExplicitYoun" +
+                "gerSibVersion] IS NULL) OR ([RExplicitYoungerSibVersion] = @Original_RExplicitYo" +
+                "ungerSibVersion)) AND ((@IsNull_RExplicitPass1 = 1 AND [RExplicitPass1] IS NULL)" +
+                " OR ([RExplicitPass1] = @Original_RExplicitPass1)) AND ((@IsNull_RExplicit = 1 A" +
+                "ND [RExplicit] IS NULL) OR ([RExplicit] = @Original_RExplicit)) AND ((@IsNull_RP" +
+                "ass1 = 1 AND [RPass1] IS NULL) OR ([RPass1] = @Original_RPass1)) AND ((@IsNull_R" +
+                " = 1 AND [R] IS NULL) OR ([R] = @Original_R)) AND ((@IsNull_RFull = 1 AND [RFull" +
+                "] IS NULL) OR ([RFull] = @Original_RFull)) AND ((@IsNull_RPeek = 1 AND [RPeek] I" +
+                "S NULL) OR ([RPeek] = @Original_RPeek)));\r\nSELECT ID, MultipleBirthIfSameSex, Is" +
+                "Mz, IsRelatedInMzManual, Subject1LastSurvey, Subject2LastSurvey, ImplicitShareBi" +
+                "omomPass1, ImplicitShareBiodadPass1, ExplicitShareBiomomPass1, ExplicitShareBiod" +
+                "adPass1, ShareBiomomPass1, ShareBiodadPass1, RImplicitPass1, RImplicit, RImplici" +
+                "tSubject, RImplicitMother, RImplicit2004, RExplicitOlderSibVersion, RExplicitYou" +
+                "ngerSibVersion, RExplicitPass1, RExplicit, RPass1, R, RFull, RPeek FROM Process." +
+                "tblRelatedValues WHERE (ID = @ID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MultipleBirthIfSameSex", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MultipleBirthIfSameSex", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsMz", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsMz", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsRelatedInMzManual", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsRelatedInMzManual", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Subject1LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Subject2LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject2LastSurvey", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ImplicitShareBiomomPass1", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ImplicitShareBiomomPass1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -23471,6 +23504,7 @@ SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey,
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MultipleBirthIfSameSex", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MultipleBirthIfSameSex", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IsMz", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsMz", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IsRelatedInMzManual", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IsRelatedInMzManual", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Subject1LastSurvey", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Subject1LastSurvey", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject1LastSurvey", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Subject2LastSurvey", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subject2LastSurvey", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -23528,7 +23562,7 @@ SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey,
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey, ImplicitShareBiomomPass1, ImplicitShareBiodadPass1, ExplicitShareBiomomPass1, ExplicitShareBiodadPass1, ShareBiomomPass1, ShareBiodadPass1, RImplicitPass1, RImplicit, RImplicitSubject, RImplicitMother, RImplicit2004, RExplicitOlderSibVersion, RExplicitYoungerSibVersion, RExplicitPass1, RExplicit, RPass1, R, RFull, RPeek FROM Process.tblRelatedValues";
+            this._commandCollection[0].CommandText = @"SELECT ID, MultipleBirthIfSameSex, IsMz, IsRelatedInMzManual, Subject1LastSurvey, Subject2LastSurvey, ImplicitShareBiomomPass1, ImplicitShareBiodadPass1, ExplicitShareBiomomPass1, ExplicitShareBiodadPass1, ShareBiomomPass1, ShareBiodadPass1, RImplicitPass1, RImplicit, RImplicitSubject, RImplicitMother, RImplicit2004, RExplicitOlderSibVersion, RExplicitYoungerSibVersion, RExplicitPass1, RExplicit, RPass1, R, RFull, RPeek FROM Process.tblRelatedValues";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -23593,6 +23627,7 @@ SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey,
                     int Original_ID, 
                     byte Original_MultipleBirthIfSameSex, 
                     byte Original_IsMz, 
+                    byte Original_IsRelatedInMzManual, 
                     global::System.Nullable<short> Original_Subject1LastSurvey, 
                     global::System.Nullable<short> Original_Subject2LastSurvey, 
                     global::System.Nullable<byte> Original_ImplicitShareBiomomPass1, 
@@ -23617,173 +23652,174 @@ SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey,
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((byte)(Original_MultipleBirthIfSameSex));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((byte)(Original_IsMz));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((byte)(Original_IsRelatedInMzManual));
             if ((Original_Subject1LastSurvey.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((short)(Original_Subject1LastSurvey.Value));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((short)(Original_Subject1LastSurvey.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             if ((Original_Subject2LastSurvey.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((short)(Original_Subject2LastSurvey.Value));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((short)(Original_Subject2LastSurvey.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
             if ((Original_ImplicitShareBiomomPass1.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((byte)(Original_ImplicitShareBiomomPass1.Value));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((byte)(Original_ImplicitShareBiomomPass1.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
             if ((Original_ImplicitShareBiodadPass1.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((byte)(Original_ImplicitShareBiodadPass1.Value));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((byte)(Original_ImplicitShareBiodadPass1.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
             if ((Original_ExplicitShareBiomomPass1.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((byte)(Original_ExplicitShareBiomomPass1.Value));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((byte)(Original_ExplicitShareBiomomPass1.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
             if ((Original_ExplicitShareBiodadPass1.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((byte)(Original_ExplicitShareBiodadPass1.Value));
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((byte)(Original_ExplicitShareBiodadPass1.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
             if ((Original_ShareBiomomPass1.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[16].Value = ((byte)(Original_ShareBiomomPass1.Value));
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((byte)(Original_ShareBiomomPass1.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[17].Value = global::System.DBNull.Value;
             }
             if ((Original_ShareBiodadPass1.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[18].Value = ((byte)(Original_ShareBiodadPass1.Value));
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((byte)(Original_ShareBiodadPass1.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[19].Value = global::System.DBNull.Value;
             }
             if ((Original_RImplicitPass1.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[20].Value = ((double)(Original_RImplicitPass1.Value));
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[21].Value = ((double)(Original_RImplicitPass1.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[21].Value = global::System.DBNull.Value;
             }
             if ((Original_RImplicit.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[22].Value = ((double)(Original_RImplicit.Value));
+                this.Adapter.DeleteCommand.Parameters[22].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((double)(Original_RImplicit.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[22].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[22].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[23].Value = global::System.DBNull.Value;
             }
             if ((Original_RImplicitSubject.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[24].Value = ((double)(Original_RImplicitSubject.Value));
+                this.Adapter.DeleteCommand.Parameters[24].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[25].Value = ((double)(Original_RImplicitSubject.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[24].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[24].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[25].Value = global::System.DBNull.Value;
             }
             if ((Original_RImplicitMother.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[26].Value = ((double)(Original_RImplicitMother.Value));
+                this.Adapter.DeleteCommand.Parameters[26].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((double)(Original_RImplicitMother.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[26].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[26].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[27].Value = global::System.DBNull.Value;
             }
             if ((Original_RImplicit2004.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[28].Value = ((double)(Original_RImplicit2004.Value));
+                this.Adapter.DeleteCommand.Parameters[28].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[29].Value = ((double)(Original_RImplicit2004.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[28].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[28].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[29].Value = global::System.DBNull.Value;
             }
             if ((Original_RExplicitOlderSibVersion.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[29].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[30].Value = ((double)(Original_RExplicitOlderSibVersion.Value));
+                this.Adapter.DeleteCommand.Parameters[30].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[31].Value = ((double)(Original_RExplicitOlderSibVersion.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[29].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[30].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[30].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[31].Value = global::System.DBNull.Value;
             }
             if ((Original_RExplicitYoungerSibVersion.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[31].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[32].Value = ((double)(Original_RExplicitYoungerSibVersion.Value));
+                this.Adapter.DeleteCommand.Parameters[32].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[33].Value = ((double)(Original_RExplicitYoungerSibVersion.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[31].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[32].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[32].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[33].Value = global::System.DBNull.Value;
             }
             if ((Original_RExplicitPass1.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[33].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[34].Value = ((double)(Original_RExplicitPass1.Value));
+                this.Adapter.DeleteCommand.Parameters[34].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[35].Value = ((double)(Original_RExplicitPass1.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[33].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[34].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[34].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[35].Value = global::System.DBNull.Value;
             }
             if ((Original_RExplicit.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[35].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[36].Value = ((double)(Original_RExplicit.Value));
+                this.Adapter.DeleteCommand.Parameters[36].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[37].Value = ((double)(Original_RExplicit.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[35].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[36].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[36].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[37].Value = global::System.DBNull.Value;
             }
             if ((Original_RPass1.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[37].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[38].Value = ((double)(Original_RPass1.Value));
+                this.Adapter.DeleteCommand.Parameters[38].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[39].Value = ((double)(Original_RPass1.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[37].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[38].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[38].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[39].Value = global::System.DBNull.Value;
             }
             if ((Original_R.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[39].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[40].Value = ((double)(Original_R.Value));
+                this.Adapter.DeleteCommand.Parameters[40].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[41].Value = ((double)(Original_R.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[39].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[40].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[40].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[41].Value = global::System.DBNull.Value;
             }
             if ((Original_RFull.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[41].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[42].Value = ((double)(Original_RFull.Value));
+                this.Adapter.DeleteCommand.Parameters[42].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[43].Value = ((double)(Original_RFull.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[41].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[42].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[42].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[43].Value = global::System.DBNull.Value;
             }
             if ((Original_RPeek.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[43].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[44].Value = ((double)(Original_RPeek.Value));
+                this.Adapter.DeleteCommand.Parameters[44].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[45].Value = ((double)(Original_RPeek.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[43].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[44].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[44].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[45].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -23809,6 +23845,7 @@ SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey,
                     int ID, 
                     byte MultipleBirthIfSameSex, 
                     byte IsMz, 
+                    byte IsRelatedInMzManual, 
                     global::System.Nullable<short> Subject1LastSurvey, 
                     global::System.Nullable<short> Subject2LastSurvey, 
                     global::System.Nullable<byte> ImplicitShareBiomomPass1, 
@@ -23833,131 +23870,132 @@ SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey,
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ID));
             this.Adapter.InsertCommand.Parameters[1].Value = ((byte)(MultipleBirthIfSameSex));
             this.Adapter.InsertCommand.Parameters[2].Value = ((byte)(IsMz));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((byte)(IsRelatedInMzManual));
             if ((Subject1LastSurvey.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((short)(Subject1LastSurvey.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((Subject2LastSurvey.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((short)(Subject2LastSurvey.Value));
+                this.Adapter.InsertCommand.Parameters[4].Value = ((short)(Subject1LastSurvey.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            if ((ImplicitShareBiomomPass1.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((byte)(ImplicitShareBiomomPass1.Value));
+            if ((Subject2LastSurvey.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((short)(Subject2LastSurvey.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
-            if ((ImplicitShareBiodadPass1.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((byte)(ImplicitShareBiodadPass1.Value));
+            if ((ImplicitShareBiomomPass1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((byte)(ImplicitShareBiomomPass1.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            if ((ExplicitShareBiomomPass1.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((byte)(ExplicitShareBiomomPass1.Value));
+            if ((ImplicitShareBiodadPass1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((byte)(ImplicitShareBiodadPass1.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            if ((ExplicitShareBiodadPass1.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((byte)(ExplicitShareBiodadPass1.Value));
+            if ((ExplicitShareBiomomPass1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((byte)(ExplicitShareBiomomPass1.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
-            if ((ShareBiomomPass1.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[9].Value = ((byte)(ShareBiomomPass1.Value));
+            if ((ExplicitShareBiodadPass1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((byte)(ExplicitShareBiodadPass1.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
-            if ((ShareBiodadPass1.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((byte)(ShareBiodadPass1.Value));
+            if ((ShareBiomomPass1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((byte)(ShareBiomomPass1.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
-            if ((RImplicitPass1.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[11].Value = ((double)(RImplicitPass1.Value));
+            if ((ShareBiodadPass1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[11].Value = ((byte)(ShareBiodadPass1.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
-            if ((RImplicit.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[12].Value = ((double)(RImplicit.Value));
+            if ((RImplicitPass1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[12].Value = ((double)(RImplicitPass1.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
-            if ((RImplicitSubject.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[13].Value = ((double)(RImplicitSubject.Value));
+            if ((RImplicit.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[13].Value = ((double)(RImplicit.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
-            if ((RImplicitMother.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[14].Value = ((double)(RImplicitMother.Value));
+            if ((RImplicitSubject.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[14].Value = ((double)(RImplicitSubject.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[14].Value = global::System.DBNull.Value;
             }
-            if ((RImplicit2004.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[15].Value = ((double)(RImplicit2004.Value));
+            if ((RImplicitMother.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[15].Value = ((double)(RImplicitMother.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
-            if ((RExplicitOlderSibVersion.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[16].Value = ((double)(RExplicitOlderSibVersion.Value));
+            if ((RImplicit2004.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[16].Value = ((double)(RImplicit2004.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
-            if ((RExplicitYoungerSibVersion.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[17].Value = ((double)(RExplicitYoungerSibVersion.Value));
+            if ((RExplicitOlderSibVersion.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[17].Value = ((double)(RExplicitOlderSibVersion.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[17].Value = global::System.DBNull.Value;
             }
-            if ((RExplicitPass1.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[18].Value = ((double)(RExplicitPass1.Value));
+            if ((RExplicitYoungerSibVersion.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[18].Value = ((double)(RExplicitYoungerSibVersion.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
-            if ((RExplicit.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[19].Value = ((double)(RExplicit.Value));
+            if ((RExplicitPass1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[19].Value = ((double)(RExplicitPass1.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[19].Value = global::System.DBNull.Value;
             }
-            if ((RPass1.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[20].Value = ((double)(RPass1.Value));
+            if ((RExplicit.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[20].Value = ((double)(RExplicit.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
-            if ((R.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[21].Value = ((double)(R.Value));
+            if ((RPass1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[21].Value = ((double)(RPass1.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[21].Value = global::System.DBNull.Value;
             }
-            if ((RFull.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[22].Value = ((double)(RFull.Value));
+            if ((R.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[22].Value = ((double)(R.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[22].Value = global::System.DBNull.Value;
             }
-            if ((RPeek.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[23].Value = ((double)(RPeek.Value));
+            if ((RFull.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[23].Value = ((double)(RFull.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[23].Value = global::System.DBNull.Value;
+            }
+            if ((RPeek.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[24].Value = ((double)(RPeek.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[24].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -23983,6 +24021,7 @@ SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey,
                     int ID, 
                     byte MultipleBirthIfSameSex, 
                     byte IsMz, 
+                    byte IsRelatedInMzManual, 
                     global::System.Nullable<short> Subject1LastSurvey, 
                     global::System.Nullable<short> Subject2LastSurvey, 
                     global::System.Nullable<byte> ImplicitShareBiomomPass1, 
@@ -24007,6 +24046,7 @@ SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey,
                     int Original_ID, 
                     byte Original_MultipleBirthIfSameSex, 
                     byte Original_IsMz, 
+                    byte Original_IsRelatedInMzManual, 
                     global::System.Nullable<short> Original_Subject1LastSurvey, 
                     global::System.Nullable<short> Original_Subject2LastSurvey, 
                     global::System.Nullable<byte> Original_ImplicitShareBiomomPass1, 
@@ -24031,302 +24071,304 @@ SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey,
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((byte)(MultipleBirthIfSameSex));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((byte)(IsMz));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((byte)(IsRelatedInMzManual));
             if ((Subject1LastSurvey.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((short)(Subject1LastSurvey.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((Subject2LastSurvey.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((short)(Subject2LastSurvey.Value));
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((short)(Subject1LastSurvey.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            if ((ImplicitShareBiomomPass1.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((byte)(ImplicitShareBiomomPass1.Value));
+            if ((Subject2LastSurvey.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((short)(Subject2LastSurvey.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
-            if ((ImplicitShareBiodadPass1.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((byte)(ImplicitShareBiodadPass1.Value));
+            if ((ImplicitShareBiomomPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((byte)(ImplicitShareBiomomPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            if ((ExplicitShareBiomomPass1.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((byte)(ExplicitShareBiomomPass1.Value));
+            if ((ImplicitShareBiodadPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((byte)(ImplicitShareBiodadPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            if ((ExplicitShareBiodadPass1.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((byte)(ExplicitShareBiodadPass1.Value));
+            if ((ExplicitShareBiomomPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((byte)(ExplicitShareBiomomPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
-            if ((ShareBiomomPass1.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((byte)(ShareBiomomPass1.Value));
+            if ((ExplicitShareBiodadPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((byte)(ExplicitShareBiodadPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
-            if ((ShareBiodadPass1.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((byte)(ShareBiodadPass1.Value));
+            if ((ShareBiomomPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((byte)(ShareBiomomPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
-            if ((RImplicitPass1.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((double)(RImplicitPass1.Value));
+            if ((ShareBiodadPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((byte)(ShareBiodadPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
-            if ((RImplicit.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((double)(RImplicit.Value));
+            if ((RImplicitPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((double)(RImplicitPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
-            if ((RImplicitSubject.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((double)(RImplicitSubject.Value));
+            if ((RImplicit.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((double)(RImplicit.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
-            if ((RImplicitMother.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((double)(RImplicitMother.Value));
+            if ((RImplicitSubject.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((double)(RImplicitSubject.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
             }
-            if ((RImplicit2004.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((double)(RImplicit2004.Value));
+            if ((RImplicitMother.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((double)(RImplicitMother.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
-            if ((RExplicitOlderSibVersion.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((double)(RExplicitOlderSibVersion.Value));
+            if ((RImplicit2004.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((double)(RImplicit2004.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
-            if ((RExplicitYoungerSibVersion.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((double)(RExplicitYoungerSibVersion.Value));
+            if ((RExplicitOlderSibVersion.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((double)(RExplicitOlderSibVersion.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
             }
-            if ((RExplicitPass1.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((double)(RExplicitPass1.Value));
+            if ((RExplicitYoungerSibVersion.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((double)(RExplicitYoungerSibVersion.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
-            if ((RExplicit.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((double)(RExplicit.Value));
+            if ((RExplicitPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((double)(RExplicitPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
             }
-            if ((RPass1.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((double)(RPass1.Value));
+            if ((RExplicit.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((double)(RExplicit.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
-            if ((R.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((double)(R.Value));
+            if ((RPass1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((double)(RPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
             }
-            if ((RFull.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((double)(RFull.Value));
+            if ((R.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((double)(R.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
             }
-            if ((RPeek.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((double)(RPeek.Value));
+            if ((RFull.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((double)(RFull.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[24].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[25].Value = ((byte)(Original_MultipleBirthIfSameSex));
-            this.Adapter.UpdateCommand.Parameters[26].Value = ((byte)(Original_IsMz));
-            if ((Original_Subject1LastSurvey.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((short)(Original_Subject1LastSurvey.Value));
+            if ((RPeek.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((double)(RPeek.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
             }
-            if ((Original_Subject2LastSurvey.HasValue == true)) {
+            this.Adapter.UpdateCommand.Parameters[25].Value = ((int)(Original_ID));
+            this.Adapter.UpdateCommand.Parameters[26].Value = ((byte)(Original_MultipleBirthIfSameSex));
+            this.Adapter.UpdateCommand.Parameters[27].Value = ((byte)(Original_IsMz));
+            this.Adapter.UpdateCommand.Parameters[28].Value = ((byte)(Original_IsRelatedInMzManual));
+            if ((Original_Subject1LastSurvey.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((short)(Original_Subject2LastSurvey.Value));
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((short)(Original_Subject1LastSurvey.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
             }
-            if ((Original_ImplicitShareBiomomPass1.HasValue == true)) {
+            if ((Original_Subject2LastSurvey.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((byte)(Original_ImplicitShareBiomomPass1.Value));
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((short)(Original_Subject2LastSurvey.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[32].Value = global::System.DBNull.Value;
             }
-            if ((Original_ImplicitShareBiodadPass1.HasValue == true)) {
+            if ((Original_ImplicitShareBiomomPass1.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((byte)(Original_ImplicitShareBiodadPass1.Value));
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((byte)(Original_ImplicitShareBiomomPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
             }
-            if ((Original_ExplicitShareBiomomPass1.HasValue == true)) {
+            if ((Original_ImplicitShareBiodadPass1.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((byte)(Original_ExplicitShareBiomomPass1.Value));
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((byte)(Original_ImplicitShareBiodadPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[36].Value = global::System.DBNull.Value;
             }
-            if ((Original_ExplicitShareBiodadPass1.HasValue == true)) {
+            if ((Original_ExplicitShareBiomomPass1.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[38].Value = ((byte)(Original_ExplicitShareBiodadPass1.Value));
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((byte)(Original_ExplicitShareBiomomPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[38].Value = global::System.DBNull.Value;
             }
-            if ((Original_ShareBiomomPass1.HasValue == true)) {
+            if ((Original_ExplicitShareBiodadPass1.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[40].Value = ((byte)(Original_ShareBiomomPass1.Value));
+                this.Adapter.UpdateCommand.Parameters[40].Value = ((byte)(Original_ExplicitShareBiodadPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[39].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[40].Value = global::System.DBNull.Value;
             }
-            if ((Original_ShareBiodadPass1.HasValue == true)) {
+            if ((Original_ShareBiomomPass1.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[42].Value = ((byte)(Original_ShareBiodadPass1.Value));
+                this.Adapter.UpdateCommand.Parameters[42].Value = ((byte)(Original_ShareBiomomPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[41].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[42].Value = global::System.DBNull.Value;
             }
-            if ((Original_RImplicitPass1.HasValue == true)) {
+            if ((Original_ShareBiodadPass1.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[43].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[44].Value = ((double)(Original_RImplicitPass1.Value));
+                this.Adapter.UpdateCommand.Parameters[44].Value = ((byte)(Original_ShareBiodadPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[43].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[44].Value = global::System.DBNull.Value;
             }
-            if ((Original_RImplicit.HasValue == true)) {
+            if ((Original_RImplicitPass1.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[45].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[46].Value = ((double)(Original_RImplicit.Value));
+                this.Adapter.UpdateCommand.Parameters[46].Value = ((double)(Original_RImplicitPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[45].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[46].Value = global::System.DBNull.Value;
             }
-            if ((Original_RImplicitSubject.HasValue == true)) {
+            if ((Original_RImplicit.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[47].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[48].Value = ((double)(Original_RImplicitSubject.Value));
+                this.Adapter.UpdateCommand.Parameters[48].Value = ((double)(Original_RImplicit.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[47].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[48].Value = global::System.DBNull.Value;
             }
-            if ((Original_RImplicitMother.HasValue == true)) {
+            if ((Original_RImplicitSubject.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[49].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[50].Value = ((double)(Original_RImplicitMother.Value));
+                this.Adapter.UpdateCommand.Parameters[50].Value = ((double)(Original_RImplicitSubject.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[49].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[50].Value = global::System.DBNull.Value;
             }
-            if ((Original_RImplicit2004.HasValue == true)) {
+            if ((Original_RImplicitMother.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[51].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[52].Value = ((double)(Original_RImplicit2004.Value));
+                this.Adapter.UpdateCommand.Parameters[52].Value = ((double)(Original_RImplicitMother.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[51].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[52].Value = global::System.DBNull.Value;
             }
-            if ((Original_RExplicitOlderSibVersion.HasValue == true)) {
+            if ((Original_RImplicit2004.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[53].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[54].Value = ((double)(Original_RExplicitOlderSibVersion.Value));
+                this.Adapter.UpdateCommand.Parameters[54].Value = ((double)(Original_RImplicit2004.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[53].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[54].Value = global::System.DBNull.Value;
             }
-            if ((Original_RExplicitYoungerSibVersion.HasValue == true)) {
+            if ((Original_RExplicitOlderSibVersion.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[55].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[56].Value = ((double)(Original_RExplicitYoungerSibVersion.Value));
+                this.Adapter.UpdateCommand.Parameters[56].Value = ((double)(Original_RExplicitOlderSibVersion.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[55].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[56].Value = global::System.DBNull.Value;
             }
-            if ((Original_RExplicitPass1.HasValue == true)) {
+            if ((Original_RExplicitYoungerSibVersion.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[57].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[58].Value = ((double)(Original_RExplicitPass1.Value));
+                this.Adapter.UpdateCommand.Parameters[58].Value = ((double)(Original_RExplicitYoungerSibVersion.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[57].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[58].Value = global::System.DBNull.Value;
             }
-            if ((Original_RExplicit.HasValue == true)) {
+            if ((Original_RExplicitPass1.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[59].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[60].Value = ((double)(Original_RExplicit.Value));
+                this.Adapter.UpdateCommand.Parameters[60].Value = ((double)(Original_RExplicitPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[59].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[60].Value = global::System.DBNull.Value;
             }
-            if ((Original_RPass1.HasValue == true)) {
+            if ((Original_RExplicit.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[61].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[62].Value = ((double)(Original_RPass1.Value));
+                this.Adapter.UpdateCommand.Parameters[62].Value = ((double)(Original_RExplicit.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[61].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[62].Value = global::System.DBNull.Value;
             }
-            if ((Original_R.HasValue == true)) {
+            if ((Original_RPass1.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[63].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[64].Value = ((double)(Original_R.Value));
+                this.Adapter.UpdateCommand.Parameters[64].Value = ((double)(Original_RPass1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[63].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[64].Value = global::System.DBNull.Value;
             }
-            if ((Original_RFull.HasValue == true)) {
+            if ((Original_R.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[65].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[66].Value = ((double)(Original_RFull.Value));
+                this.Adapter.UpdateCommand.Parameters[66].Value = ((double)(Original_R.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[65].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[66].Value = global::System.DBNull.Value;
             }
-            if ((Original_RPeek.HasValue == true)) {
+            if ((Original_RFull.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[67].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[68].Value = ((double)(Original_RPeek.Value));
+                this.Adapter.UpdateCommand.Parameters[68].Value = ((double)(Original_RFull.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[67].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[68].Value = global::System.DBNull.Value;
+            }
+            if ((Original_RPeek.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[69].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[70].Value = ((double)(Original_RPeek.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[69].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[70].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -24351,6 +24393,7 @@ SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey,
         public virtual int Update(
                     byte MultipleBirthIfSameSex, 
                     byte IsMz, 
+                    byte IsRelatedInMzManual, 
                     global::System.Nullable<short> Subject1LastSurvey, 
                     global::System.Nullable<short> Subject2LastSurvey, 
                     global::System.Nullable<byte> ImplicitShareBiomomPass1, 
@@ -24375,6 +24418,7 @@ SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey,
                     int Original_ID, 
                     byte Original_MultipleBirthIfSameSex, 
                     byte Original_IsMz, 
+                    byte Original_IsRelatedInMzManual, 
                     global::System.Nullable<short> Original_Subject1LastSurvey, 
                     global::System.Nullable<short> Original_Subject2LastSurvey, 
                     global::System.Nullable<byte> Original_ImplicitShareBiomomPass1, 
@@ -24396,7 +24440,7 @@ SELECT ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey,
                     global::System.Nullable<double> Original_R, 
                     global::System.Nullable<double> Original_RFull, 
                     global::System.Nullable<double> Original_RPeek) {
-            return this.Update(Original_ID, MultipleBirthIfSameSex, IsMz, Subject1LastSurvey, Subject2LastSurvey, ImplicitShareBiomomPass1, ImplicitShareBiodadPass1, ExplicitShareBiomomPass1, ExplicitShareBiodadPass1, ShareBiomomPass1, ShareBiodadPass1, RImplicitPass1, RImplicit, RImplicitSubject, RImplicitMother, RImplicit2004, RExplicitOlderSibVersion, RExplicitYoungerSibVersion, RExplicitPass1, RExplicit, RPass1, R, RFull, RPeek, Original_ID, Original_MultipleBirthIfSameSex, Original_IsMz, Original_Subject1LastSurvey, Original_Subject2LastSurvey, Original_ImplicitShareBiomomPass1, Original_ImplicitShareBiodadPass1, Original_ExplicitShareBiomomPass1, Original_ExplicitShareBiodadPass1, Original_ShareBiomomPass1, Original_ShareBiodadPass1, Original_RImplicitPass1, Original_RImplicit, Original_RImplicitSubject, Original_RImplicitMother, Original_RImplicit2004, Original_RExplicitOlderSibVersion, Original_RExplicitYoungerSibVersion, Original_RExplicitPass1, Original_RExplicit, Original_RPass1, Original_R, Original_RFull, Original_RPeek);
+            return this.Update(Original_ID, MultipleBirthIfSameSex, IsMz, IsRelatedInMzManual, Subject1LastSurvey, Subject2LastSurvey, ImplicitShareBiomomPass1, ImplicitShareBiodadPass1, ExplicitShareBiomomPass1, ExplicitShareBiodadPass1, ShareBiomomPass1, ShareBiodadPass1, RImplicitPass1, RImplicit, RImplicitSubject, RImplicitMother, RImplicit2004, RExplicitOlderSibVersion, RExplicitYoungerSibVersion, RExplicitPass1, RExplicit, RPass1, R, RFull, RPeek, Original_ID, Original_MultipleBirthIfSameSex, Original_IsMz, Original_IsRelatedInMzManual, Original_Subject1LastSurvey, Original_Subject2LastSurvey, Original_ImplicitShareBiomomPass1, Original_ImplicitShareBiodadPass1, Original_ExplicitShareBiomomPass1, Original_ExplicitShareBiodadPass1, Original_ShareBiomomPass1, Original_ShareBiodadPass1, Original_RImplicitPass1, Original_RImplicit, Original_RImplicitSubject, Original_RImplicitMother, Original_RImplicit2004, Original_RExplicitOlderSibVersion, Original_RExplicitYoungerSibVersion, Original_RExplicitPass1, Original_RExplicit, Original_RPass1, Original_R, Original_RFull, Original_RPeek);
         }
     }
     
