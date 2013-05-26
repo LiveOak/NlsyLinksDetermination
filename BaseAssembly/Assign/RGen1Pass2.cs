@@ -76,15 +76,20 @@ namespace Nls.BaseAssembly.Assign {
 			_drValue = _dsLinks.tblRelatedValues.FindByID(_idRelatedLeft);
 			_dtMarkersGen1 = MarkerGen1.PairRelevantMarkerRows(_idRelatedLeft, _idRelatedRight, _dsLinks, _extendedID);
 
-			Tristate implicitShareBiomom = AddressImplicitBiomom();
-			Tristate implicitShareBiodad = AddressImplicitBiodad();
-			_rImplicit = CommonFunctions.TranslateToR(shareBiomom: implicitShareBiomom, shareBiodad: implicitShareBiodad, mustDecide: false);
-
 			Tristate explicitShareBiomom = AddressExplicitBiomom();
 			Tristate explicitShareBiodad = AddressExplicitBiodad();
-			_rExplicit = CommonFunctions.TranslateToR(shareBiomom: explicitShareBiomom, shareBiodad: explicitShareBiodad, mustDecide: true);
 
-			AddressOverall();
+			Tristate implicitShareBiomom = AddressImplicitBiomom();
+			Tristate implicitShareBiodad = AddressImplicitBiodad();
+
+			Tristate shareBiomom = CommonFunctions.TakePriority(explicitShareBiomom, implicitShareBiomom);
+			Tristate shareBiodad = CommonFunctions.TakePriority(explicitShareBiodad, implicitShareBiodad);
+
+			_rExplicit = CommonFunctions.TranslateToR(shareBiomom: explicitShareBiomom, shareBiodad: explicitShareBiodad, mustDecide: true);
+			_rImplicit = CommonFunctions.TranslateToR(shareBiomom: implicitShareBiomom, shareBiodad: implicitShareBiodad, mustDecide: false);
+
+			_rFull = CalculateRFull();
+			_r = CalculateR();
 			//Trace.Write(_r);
 
 			//_rPeek = CalculateRPeek();
@@ -154,10 +159,6 @@ namespace Nls.BaseAssembly.Assign {
 
 			InterpolateShare interpolate = new InterpolateShare(pairs);
 			return interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
-		}
-		private void AddressOverall ( ) {
-			_rFull = CalculateRFull();
-			_r = CalculateR();
 		}
 		private Tristate ImplicitShareBioparent ( MarkerEvidence inHH1980, MarkerEvidence inHH1978, MarkerEvidence inHH1977, MarkerEvidence inHH1976 ) {//{ 1980, 1979, 1978, 1977, 1976 }
 			//MarkerEvidence biomomInHH1980,MarkerEvidence  biodadInHH1980, MarkerEvidence biomomInHH1978,MarkerEvidence  biodadInHH1978, MarkerEvidence biomomInHH1977, MarkerEvidence biodadInHH1977,MarkerEvidence  biomomInHH1976, MarkerEvidence biodadInHH1976 
