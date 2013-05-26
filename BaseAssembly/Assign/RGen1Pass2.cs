@@ -82,20 +82,21 @@ namespace Nls.BaseAssembly.Assign {
 			Tristate implicitShareBiomom = AddressImplicitBiomom();
 			Tristate implicitShareBiodad = AddressImplicitBiodad();
 
-			Tristate shareBiomom = AddressBiomom(explicitShareBiomom, implicitShareBiomom);
-			Tristate shareBiodad = AddressBiodad(explicitShareBiodad, implicitShareBiodad);
-
 			_rExplicit = CommonFunctions.TranslateToR(shareBiomom: explicitShareBiomom, shareBiodad: explicitShareBiodad, mustDecide: true);
-			_rImplicit = CommonFunctions.TranslateToR(shareBiomom: implicitShareBiomom, shareBiodad: implicitShareBiodad, mustDecide: false);
+			_rImplicit = CommonFunctions.TranslateToR(shareBiomom: implicitShareBiomom, shareBiodad: implicitShareBiodad, mustDecide: false);//Possibly 'true' later one
 
 			//_rFull = RGen1Pass1.CalculateRFull(shareBiomom: shareBiomom, shareBiodad: shareBiodad,
 			//   multiple: (MultipleBirth)_drValue.MultipleBirthIfSameSex, isMZ: (Tristate)_drValue.IsMz, isRelatedInMZManual: (Tristate)_drValue.IsRelatedInMzManual,
 			//   idRelated: _idRelatedLeft, dtRoster: _dsLinks.tblRosterGen1);
 
-			if ( !_drValue.IsRPass1Null() )
+			if ( !_drValue.IsRPass1Null() ) {
 				_rFull = (float)_drValue.RPass1;
-			else
+			}
+			else { //Don't do the expensive interpolation unless it will be used
+				Tristate shareBiomom = AddressBiomom(explicitShareBiomom, implicitShareBiomom);
+				Tristate shareBiodad = AddressBiodad(explicitShareBiodad, implicitShareBiodad);
 				_rFull = CommonFunctions.TranslateToR(shareBiomom: shareBiomom, shareBiodad: shareBiodad, mustDecide: true);
+			}
 
 			_r = CalculateR(_rFull);
 		}

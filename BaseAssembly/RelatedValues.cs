@@ -256,7 +256,7 @@ namespace Nls.BaseAssembly {
 				drNew.ID = relatedID;
 				drNew.MultipleBirthIfSameSex = (byte)assignPass1.MultipleBirthIfSameSex;
 				drNew.IsMz = (byte)assignPass1.IsMZ;
-				drNew.IsRelatedInMzManual = (byte)assignPass1.IsRelatedInMzManual;
+				//drNew.IsRelatedInMzManual = (byte)assignPass1.IsRelatedInMzManual;
 				//LinksDataSet.tblRelatedValuesRow drUpdated = _dsLinks.tblRelatedValues.FindByID(relatedID);
 
 				Int16? subject1MostRecent = SurveyTimeMostRecent(subject1Tag);
