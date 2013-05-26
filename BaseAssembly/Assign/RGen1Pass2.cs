@@ -21,10 +21,10 @@ namespace Nls.BaseAssembly.Assign {
 		private readonly Int32 _idRelatedRight = Int32.MinValue;
 		private readonly Int32 _idRelatedOlderAboutYounger = Int32.MinValue;//usually equal to _idRelatedLeft
 
-		private readonly Tristate _implicitShareBiomom;
-		private readonly Tristate _implicitShareBiodad;
-		private readonly Tristate _explicitShareBiomom;
-		private readonly Tristate _explicitShareBiodad;
+		//private readonly Tristate _implicitShareBiomom;
+		//private readonly Tristate _implicitShareBiodad;
+		//private readonly Tristate _explicitShareBiomom;
+		//private readonly Tristate _explicitShareBiodad;
 		private readonly Tristate _shareBiomom;
 		private readonly Tristate _shareBiodad;
 
@@ -76,18 +76,23 @@ namespace Nls.BaseAssembly.Assign {
 			_drValue = _dsLinks.tblRelatedValues.FindByID(_idRelatedLeft);
 			_dtMarkersGen1 = MarkerGen1.PairRelevantMarkerRows(_idRelatedLeft, _idRelatedRight, _dsLinks, _extendedID);
 
-			_implicitShareBiomom = AddressImplicitBiomom();
-			_implicitShareBiodad = AddressImplicitBiodad();
-			_rImplicit = CommonFunctions.TranslateToR(shareBiomom: _implicitShareBiomom, shareBiodad: _implicitShareBiodad, mustDecide: false);
+			Tristate implicitShareBiomom = AddressImplicitBiomom();
+			Tristate implicitShareBiodad = AddressImplicitBiodad();
+			_rImplicit = CommonFunctions.TranslateToR(shareBiomom: implicitShareBiomom, shareBiodad: implicitShareBiodad, mustDecide: false);
 
-			AddressExplicit();
+			Tristate explicitShareBiomom = AddressExplicitBiomom();
+			Tristate explicitShareBiodad = AddressExplicitBiodad();
+			_rExplicit = CommonFunctions.TranslateToR(shareBiomom: explicitShareBiomom, shareBiodad: explicitShareBiodad, mustDecide: false);
+
 			AddressOverall();
 			//Trace.Write(_r);
 
 			//_rPeek = CalculateRPeek();
 		}
-
-
+		#endregion
+		#region Public Methods
+		#endregion
+		#region Private Methods - Estimate R
 		private Tristate AddressImplicitBiomom ( ) {
 			Tristate implicitBiomomPass1 = (Tristate)_drValue.ImplicitShareBiomomPass1;
 			if ( implicitBiomomPass1 != Tristate.DoNotKnow ) return implicitBiomomPass1;
@@ -130,23 +135,30 @@ namespace Nls.BaseAssembly.Assign {
 				return ImplicitShareBioparent(biodadInHH1980, biodadInHH1978, biodadInHH1977, biodadInHH1976);
 			}
 		}
-		private void AddressExplicit ( ) {
+		private Tristate AddressExplicitBiomom ( ) {
 			Tristate explicitBiomomPass1 = (Tristate)_drValue.ExplicitShareBiomomPass1;
-			Tristate explicitBiodadPass1 = (Tristate)_drValue.ExplicitShareBiodadPass1;
+			if ( explicitBiomomPass1 != Tristate.DoNotKnow ) return explicitBiomomPass1;
 
-			//_explicitShareBiomom = ImplicitShareBioparent();
-			//_explicitShareBiodad = ImplicitShareBioparent();
-			//_rExplicit = CommonFunctions.TranslateToR(shareBiomom: _explicitShareBiomom, shareBiodad: _explicitShareBiodad, mustDecide: false);
-			_rExplicit = CalculateRExplicit();
+			DataColumn dcPass1 = _dsLinks.tblRelatedValues.ExplicitShareBiomomPass1Column;
+			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+
+			InterpolateShare interpolate = new InterpolateShare(pairs);
+			return interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+		}
+		private Tristate AddressExplicitBiodad ( ) {
+			Tristate explicitBiodadPass1 = (Tristate)_drValue.ExplicitShareBiodadPass1;
+			if ( explicitBiodadPass1 != Tristate.DoNotKnow ) return explicitBiodadPass1;
+
+			DataColumn dcPass1 = _dsLinks.tblRelatedValues.ExplicitShareBiodadPass1Column;
+			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+
+			InterpolateShare interpolate = new InterpolateShare(pairs);
+			return interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
 		}
 		private void AddressOverall ( ) {
 			_rFull = CalculateRFull();
 			_r = CalculateR();
 		}
-		#endregion
-		#region Public Methods
-		#endregion
-		#region Private Methods - Estimate R
 		private Tristate ImplicitShareBioparent ( MarkerEvidence inHH1980, MarkerEvidence inHH1978, MarkerEvidence inHH1977, MarkerEvidence inHH1976 ) {//{ 1980, 1979, 1978, 1977, 1976 }
 			//MarkerEvidence biomomInHH1980,MarkerEvidence  biodadInHH1980, MarkerEvidence biomomInHH1978,MarkerEvidence  biodadInHH1978, MarkerEvidence biomomInHH1977, MarkerEvidence biodadInHH1977,MarkerEvidence  biomomInHH1976, MarkerEvidence biodadInHH1976 
 			//if ( !_drValue.IsRImplicitPass1Null() )	return (float?)_drValue.RImplicitPass1;

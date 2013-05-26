@@ -76,14 +76,14 @@
 
 
 % \textbf{RelationshipPaths Considered}: includedRelationshipPaths;\\
-\textbf{Newer Links Version}: 59;
-\textbf{Older Links Version}: 58;
+\textbf{Newer Links Version}: 60;
+\textbf{Older Links Version}: 59;
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-Newer Links: Uses In HH 76-80
-Older Links: Interpolates In HH79; weakens Explicity Pass 1
+Newer Links: Interpolates Explicit; no ambiguous yet
+Older Links: Uses In HH 76-80
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -102,7 +102,29 @@ Older Links: Interpolates In HH79; weakens Explicity Pass 1
 \end{figure}
 
 % latex table generated in R 3.0.0 by xtable 1.7-1 package
-% Sat May 25 23:10:15 2013
+% Sun May 26 00:44:15 2013
+\begin{table}[ht]
+\centering
+{\large
+\begin{tabular}{lrrrrr}
+  \hline
+R & Implicit2004 & Implicit & Roster & Explicit & Eventual \\ 
+  \hline
+0 & - &   1 & 478 &  41 & 512 \\ 
+  0.125 &  76 & - &  96 & - &  96 \\ 
+  0.25 &  43 &  12 & - & 273 & 266 \\ 
+  0.375 & 310 & - & - & - & - \\ 
+  0.5 & 1877 & 2493 & - & 3598 & 3891 \\ 
+  0.75 &  32 & - & - & - &  11 \\ 
+  1 & - & - & - & - &  11 \\ 
+  - & 2964 & 2796 & 4728 & 1390 & 515 \\ 
+   \hline
+\end{tabular}
+}
+\caption{Counts for Gen1Housemates} 
+\end{table}
+% latex table generated in R 3.0.0 by xtable 1.7-1 package
+% Sun May 26 00:44:15 2013
 \begin{table}[ht]
 \centering
 {\large
@@ -122,33 +144,10 @@ R & Implicit2004 & Implicit & Roster & Explicit & Eventual \\
    \hline
 \end{tabular}
 }
-\caption{Counts for Gen1Housemates} 
-\end{table}
-% latex table generated in R 3.0.0 by xtable 1.7-1 package
-% Sat May 25 23:10:15 2013
-\begin{table}[ht]
-\centering
-{\large
-\begin{tabular}{lrrrrr}
-  \hline
-R & Implicit2004 & Implicit & Roster & Explicit & Eventual \\ 
-  \hline
-0 & - &   1 & 478 &  35 & 512 \\ 
-  0.125 &  76 & - &  96 & - &  96 \\ 
-  0.130999997258186 & - & - & - &   1 & - \\ 
-  0.25 &  43 & - & - & 249 & 265 \\ 
-  0.375 & 310 & - & - &  54 & - \\ 
-  0.5 & 1877 & 841 & - & 3461 & 3688 \\ 
-  0.75 &  32 & - & - & - &  11 \\ 
-  1 & - & - & - & - &  11 \\ 
-  - & 2964 & 4460 & 4728 & 1502 & 719 \\ 
-   \hline
-\end{tabular}
-}
 \caption{Counts for Gen1Housemates (Previous version of links)} 
 \end{table}
 % latex table generated in R 3.0.0 by xtable 1.7-1 package
-% Sat May 25 23:10:15 2013
+% Sun May 26 00:44:15 2013
 \begin{table}[ht]
 \centering
 {\large
@@ -163,7 +162,7 @@ R & Implicit2004 & Implicit & Explicit & Eventual \\
 \caption{Counts for Gen2Siblings} 
 \end{table}
 % latex table generated in R 3.0.0 by xtable 1.7-1 package
-% Sat May 25 23:10:15 2013
+% Sun May 26 00:44:15 2013
 \begin{table}[ht]
 \centering
 {\large
@@ -181,94 +180,91 @@ R & Implicit2004 & Implicit & Explicit & Eventual \\
 
 
 % latex table generated in R 3.0.0 by xtable 1.7-1 package
-% Sat May 25 23:10:15 2013
+% Sun May 26 00:44:16 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrr}
   \hline
 Count & RImplicit2004 & RImplicit & RExplicit & RRoster & Delta \\ 
   \rowcolor{goodColor}  \hline
-1172 & 0.500 & 0.500 & 0.500 & - & 798 \\ 
-   \rowcolor{sosoColor} 942 & - & - & 0.500 & - & -441 \\ 
-   \rowcolor{goodColor} 760 & - & 0.500 & 0.500 & - & 439 \\ 
-   \rowcolor{nullColor} 477 & - & - & - & - & -88 \\ 
-   \rowcolor{sosoColor} 301 & 0.500 & - & 0.500 & - & -804 \\ 
-   \rowcolor{nullColor} 282 & - & - & - & 0.000 & -43 \\ 
-  214 & 0.500 & 0.500 & - & - & 147 \\ 
-   \rowcolor{sosoColor} 198 & - & - & 0.250 & - & -5 \\ 
-   \rowcolor{sosoColor} 184 & 0.375 & - & 0.500 & - & -28 \\ 
-  135 & - & 0.500 & - & - & 87 \\ 
-   \rowcolor{nullColor} 60 & 0.500 & - & - & 0.000 & -43 \\ 
-   \rowcolor{nullColor} 47 & 0.500 & - & - & - & -148 \\ 
-   \rowcolor{nullColor} 47 & 0.375 & - & - & - & -3 \\ 
-  43 & - & 0.500 & - & 0.000 & 42 \\ 
-  43 & 0.500 & 0.500 & - & 0.000 & 43 \\ 
-   \rowcolor{nullColor} 38 & 0.125 & - & - & 0.125 & -9 \\ 
-   \rowcolor{sosoColor} 35 & - & - & 0.375 & - & -2 \\ 
-   \rowcolor{goodColor} 34 & 0.375 & 0.500 & 0.500 & - & 28 \\ 
-   \rowcolor{nullColor} 30 & - & - & - & 0.125 & -3 \\ 
-   \rowcolor{sosoColor} 23 & - & - & 0.000 & - & -3 \\ 
-   \rowcolor{sosoColor} 17 & 0.375 & - & 0.250 & - & 0 \\ 
-   \rowcolor{badColor} 14 & 0.500 & 0.500 & 0.250 & - & 8 \\ 
-   \rowcolor{sosoColor} 12 & 0.250 & - & 0.500 & - & -5 \\ 
-  12 & 0.125 & 0.500 & - & 0.125 & 9 \\ 
-   \rowcolor{sosoColor} 10 & 0.125 & - & 0.500 & - & -4 \\ 
-   \rowcolor{nullColor} 10 & 0.375 & - & - & 0.000 & -1 \\ 
-   \rowcolor{sosoColor} 9 & 0.750 & - & 0.500 & - & -7 \\ 
-   \rowcolor{nullColor} 9 & 0.250 & - & - & 0.000 & -2 \\ 
-   \rowcolor{nullColor} 9 & 0.250 & - & - & - & -1 \\ 
-   \rowcolor{goodColor} 9 & 0.750 & 0.500 & 0.500 & - & 7 \\ 
-   \rowcolor{nullColor} 7 & 0.750 & - & - & - & 0 \\ 
-   \rowcolor{goodColor} 7 & 0.250 & 0.500 & 0.500 & - & 5 \\ 
+1192 & 0.500 & 0.500 & 0.500 & - & 20 \\ 
+   \rowcolor{sosoColor} 1013 & - & - & 0.500 & - & 71 \\ 
+   \rowcolor{goodColor} 787 & - & 0.500 & 0.500 & - & 27 \\ 
+   \rowcolor{nullColor} 417 & - & - & - & - & -60 \\ 
+   \rowcolor{sosoColor} 314 & 0.500 & - & 0.500 & - & 13 \\ 
+   \rowcolor{nullColor} 282 & - & - & - & 0.000 & 0 \\ 
+   \rowcolor{sosoColor} 218 & - & - & 0.250 & - & 20 \\ 
+  200 & 0.500 & 0.500 & - & - & -14 \\ 
+   \rowcolor{sosoColor} 187 & 0.375 & - & 0.500 & - & 3 \\ 
+  110 & - & 0.500 & - & - & -25 \\ 
+   \rowcolor{nullColor} 60 & 0.500 & - & - & 0.000 & 0 \\ 
+   \rowcolor{nullColor} 48 & 0.375 & - & - & - & 1 \\ 
+  43 & 0.500 & 0.500 & - & 0.000 & 0 \\ 
+  43 & - & 0.500 & - & 0.000 & 0 \\ 
+   \rowcolor{nullColor} 37 & 0.500 & - & - & - & -10 \\ 
+   \rowcolor{nullColor} 37 & 0.125 & - & - & 0.125 & -1 \\ 
+   \rowcolor{goodColor} 34 & 0.375 & 0.500 & 0.500 & - & 0 \\ 
+   \rowcolor{nullColor} 30 & - & - & - & 0.125 & 0 \\ 
+   \rowcolor{sosoColor} 27 & - & - & 0.000 & - & 4 \\ 
+   \rowcolor{sosoColor} 18 & 0.375 & - & 0.250 & - & 1 \\ 
+   \rowcolor{badColor} 14 & 0.500 & 0.500 & 0.250 & - & 0 \\ 
+   \rowcolor{sosoColor} 13 & 0.250 & - & 0.500 & - & 1 \\ 
+  12 & 0.125 & 0.500 & - & 0.125 & 0 \\ 
+   \rowcolor{sosoColor} 10 & 0.125 & - & 0.500 & - & 0 \\ 
+   \rowcolor{nullColor} 10 & 0.375 & - & - & 0.000 & 0 \\ 
+   \rowcolor{sosoColor} 10 & 0.750 & - & 0.500 & - & 1 \\ 
+   \rowcolor{nullColor} 9 & 0.250 & - & - & 0.000 & 0 \\ 
+   \rowcolor{goodColor} 9 & 0.750 & 0.500 & 0.500 & - & 0 \\ 
+   \rowcolor{nullColor} 8 & 0.250 & - & - & - & -1 \\ 
+   \rowcolor{badColor} 8 & - & 0.500 & 0.250 & - & 2 \\ 
+   \rowcolor{goodColor} 7 & 0.250 & 0.500 & 0.500 & - & 0 \\ 
+   \rowcolor{nullColor} 6 & 0.750 & - & - & - & -1 \\ 
+   \rowcolor{badColor} 6 & 0.500 & 0.250 & 0.500 & - & 0 \\ 
    \rowcolor{sosoColor} 6 & - & - & 0.250 & 0.000 & 0 \\ 
-   \rowcolor{badColor} 6 & - & 0.500 & 0.250 & - & 5 \\ 
-   \rowcolor{badColor} 6 & 0.500 & 0.250 & 0.500 & - & 6 \\ 
-  6 & 0.500 & 0.500 & 0.375 & - & 6 \\ 
-   \rowcolor{sosoColor} 5 & 0.375 & - & 0.375 & - & 0 \\ 
-   \rowcolor{sosoColor} 4 & 0.500 & - & 0.250 & - & -8 \\ 
-   \rowcolor{sosoColor} 4 & 0.500 & - & 0.375 & - & -6 \\ 
-   \rowcolor{nullColor} 4 & 0.750 & - & - & 0.000 & -1 \\ 
-   \rowcolor{sosoColor} 4 & - & - & 0.500 & 0.000 & -1 \\ 
+   \rowcolor{sosoColor} 5 & 0.500 & - & 0.250 & - & 1 \\ 
+   \rowcolor{goodColor} 4 & 0.125 & 0.500 & 0.500 & - & 0 \\ 
    \rowcolor{nullColor} 4 & 0.125 & - & - & - & 0 \\ 
+  4 & 0.375 & 0.500 & - & - & 0 \\ 
    \rowcolor{nullColor} 4 & 0.375 & - & - & 0.125 & 0 \\ 
-  4 & - & 0.500 & 0.375 & - & 2 \\ 
-  4 & 0.375 & 0.500 & - & - & 3 \\ 
-  4 & - & 0.500 & - & 0.125 & 3 \\ 
-   \rowcolor{goodColor} 4 & 0.125 & 0.500 & 0.500 & - & 4 \\ 
+   \rowcolor{nullColor} 4 & 0.750 & - & - & 0.000 & 0 \\ 
+  4 & - & 0.500 & - & 0.125 & 0 \\ 
+   \rowcolor{sosoColor} 4 & - & - & 0.500 & 0.000 & 0 \\ 
    \rowcolor{nullColor} 3 & 0.125 & - & - & 0.000 & 0 \\ 
-  3 & 0.375 & 0.500 & - & 0.000 & 1 \\ 
-   \rowcolor{badColor} 3 & - & 0.500 & 0.000 & - & 3 \\ 
+  3 & 0.375 & 0.500 & - & 0.000 & 0 \\ 
+   \rowcolor{badColor} 3 & - & 0.500 & 0.000 & - & 0 \\ 
+   \rowcolor{badColor} 3 & - & 0.250 & 0.500 & - & 1 \\ 
+   \rowcolor{badColor} 2 & 0.125 & 0.500 & 0.000 & - & 0 \\ 
+  2 & 0.250 & 0.500 & - & 0.000 & 0 \\ 
    \rowcolor{sosoColor} 2 & 0.250 & - & 0.250 & - & 0 \\ 
   2 & 0.750 & 0.500 & - & - & 0 \\ 
+   \rowcolor{badColor} 2 & - & 0.500 & 0.000 & 0.000 & 0 \\ 
    \rowcolor{sosoColor} 2 & - & - & 0.000 & 0.125 & 0 \\ 
-   \rowcolor{badColor} 2 & 0.125 & 0.500 & 0.000 & - & 2 \\ 
-  2 & 0.250 & 0.500 & - & 0.000 & 2 \\ 
-   \rowcolor{badColor} 2 & - & 0.250 & 0.500 & - & 2 \\ 
-   \rowcolor{badColor} 2 & - & 0.500 & 0.000 & 0.000 & 2 \\ 
-   \rowcolor{sosoColor} 1 & 0.125 & - & 0.000 & - & -2 \\ 
+   \rowcolor{badColor} 2 & 0.500 & 0.500 & 0.000 & - & 1 \\ 
+   \rowcolor{sosoColor} 1 & 0.125 & - & 0.000 & - & 0 \\ 
    \rowcolor{sosoColor} 1 & 0.125 & - & 0.250 & - & 0 \\ 
    \rowcolor{sosoColor} 1 & 0.125 & - & 0.500 & 0.125 & 0 \\ 
+  1 & 0.250 & 0.500 & - & - & 0 \\ 
    \rowcolor{nullColor} 1 & 0.250 & - & - & 0.125 & 0 \\ 
+   \rowcolor{goodColor} 1 & 0.375 & 0.500 & 0.500 & 0.000 & 0 \\ 
    \rowcolor{sosoColor} 1 & 0.375 & - & 0.000 & 0.000 & 0 \\ 
-   \rowcolor{badColor} 1 & 0.500 & 0.500 & 0.000 & - & 0 \\ 
-   \rowcolor{badColor} 1 & 0.500 & 0.500 & 0.131 & - & 0 \\ 
+  1 & 0.500 & 0.250 & - & 0.125 & 0 \\ 
+  1 & 0.500 & 0.250 & - & - & 0 \\ 
+   \rowcolor{goodColor} 1 & 0.500 & 0.500 & 0.500 & 0.000 & 0 \\ 
+  1 & 0.500 & 0.500 & - & 0.125 & 0 \\ 
+  1 & 0.750 & 0.500 & - & 0.000 & 0 \\ 
   1 & - & 0.000 & - & 0.000 & 0 \\ 
+  1 & - & 0.250 & - & 0.000 & 0 \\ 
+   \rowcolor{goodColor} 1 & - & 0.500 & 0.500 & 0.000 & 0 \\ 
    \rowcolor{sosoColor} 1 & - & - & 0.250 & 0.125 & 0 \\ 
    \rowcolor{sosoColor} 1 & - & - & 0.500 & 0.125 & 0 \\ 
-  1 & 0.250 & 0.500 & - & - & 1 \\ 
-   \rowcolor{goodColor} 1 & 0.375 & 0.500 & 0.500 & 0.000 & 1 \\ 
-  1 & 0.500 & 0.250 & - & 0.125 & 1 \\ 
-  1 & 0.500 & 0.250 & - & - & 1 \\ 
-   \rowcolor{goodColor} 1 & 0.500 & 0.500 & 0.500 & 0.000 & 1 \\ 
-  1 & 0.500 & 0.500 & - & 0.125 & 1 \\ 
-  1 & 0.750 & 0.500 & - & 0.000 & 1 \\ 
-  1 & - & 0.250 & - & 0.000 & 1 \\ 
-  1 & - & 0.250 & - & - & 1 \\ 
-   \rowcolor{goodColor} 1 & - & 0.500 & 0.500 & 0.000 & 1 \\ 
-   \rowcolor{nullColor} 0 & 0.500 & - & - & 0.125 & -2 \\ 
-   \rowcolor{sosoColor} 0 & - & - & 0.000 & 0.000 & -2 \\ 
-   \rowcolor{sosoColor} 0 & 0.375 & - & 0.500 & 0.000 & -1 \\ 
-   \rowcolor{sosoColor} 0 & 0.500 & - & 0.500 & 0.000 & -1 \\ 
+   \rowcolor{sosoColor} 1 & 0.125 & - & 0.000 & 0.125 & 1 \\ 
+   \rowcolor{sosoColor} 0 & - & - & 0.375 & - & -35 \\ 
+  0 & 0.500 & 0.500 & 0.375 & - & -6 \\ 
+   \rowcolor{sosoColor} 0 & 0.375 & - & 0.375 & - & -5 \\ 
+   \rowcolor{sosoColor} 0 & 0.500 & - & 0.375 & - & -4 \\ 
+  0 & - & 0.500 & 0.375 & - & -4 \\ 
+   \rowcolor{badColor} 0 & 0.500 & 0.500 & 0.131 & - & -1 \\ 
+  0 & - & 0.250 & - & - & -1 \\ 
    \hline
 \end{tabular}
 \caption{Counts for Gen1Housemates} 

@@ -146,7 +146,8 @@ namespace Nls.BaseAssembly.Assign {
 			_rExplicitOldestSibVersion = CalculateRExplicitSingleSibVersion(explicitBiomomFromOlder, explicitBiodadFromOlder);
 			_rExplicitYoungestSibVersion = CalculateRExplicitSingleSibVersion(explicitBiomomFromYounger, explicitBiodadFromYounger);
 			_rExplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _explicitShareBiomomPass1, shareBiodad: _explicitShareBiodadPass1, mustDecide: true);
-			_rPass1 = CalculateRPass1(shareBiomom: _shareBiomomPass1, shareBiodad: _shareBiodadPass1); // CommonFunctions.TranslateToR(shareBiomom: _shareBiomomPass1, shareBiodad: _shareBiodadPass1, mustDecide: false);
+
+			_rPass1 = CalculateRPass1(shareBiomom: _shareBiomomPass1, shareBiodad: _shareBiodadPass1); 
 		}
 		#endregion //#region Public Methods #endregion #region Private Methods #endregion
 		#region Private Methods - Estimate R
@@ -230,6 +231,7 @@ namespace Nls.BaseAssembly.Assign {
 				return rRoster;
 			}
 			else {
+				//The implicits & explicits were already combined to get the values of shareBiomom & shareBiodad.
 				return CommonFunctions.TranslateToR(shareBiomom: shareBiomom, shareBiodad: shareBiodad, mustDecide: false);
 			}
 		}
