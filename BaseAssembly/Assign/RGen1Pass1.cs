@@ -28,7 +28,7 @@ namespace Nls.BaseAssembly.Assign {
 		private readonly Tristate _isMZ;
 		private readonly Tristate _isRelatedInMZManual;
 		//private Int16 _rosterAssignment=Int16.MinValue;
-		//private float? _rRoster = float.NaN;
+		private float? _rRoster = float.NaN;
 		private float? _rImplicitPass1 = null;// float.NaN;
 		private float? _rImplicit2004 = float.NaN;
 
@@ -89,6 +89,12 @@ namespace Nls.BaseAssembly.Assign {
 			_drSubjectDetails2 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.Subject2Tag);
 			_extendedID = _drLeft.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1.ExtendedID;
 
+			//LinksDataSet.tblRosterGen1Row drRoster = _dsLinks.tblRosterGen1.FindByRelatedID(drLeft.ID);
+			//Tristate rosterShareBiomom = (Tristate)drRoster.ShareBiomom;
+			//Tristate rosterShareBiodad = (Tristate)drRoster.ShareBiodad;
+			//if ( drRoster.IsRNull() ) _rRoster = null;
+			//else _rRoster = (float)drRoster.R;
+
 			if ( _drSubjectDetails1.BirthOrderInNls <= _drSubjectDetails2.BirthOrderInNls ) {//This is the way it usually is.  Remember that twins were assigned tied birth orders
 				_idRelatedOlderAboutYounger = _idRelatedLeft;
 				_idRelatedYoungerAboutOlder = _idRelatedRight;
@@ -140,7 +146,7 @@ namespace Nls.BaseAssembly.Assign {
 			_rExplicitOldestSibVersion = CalculateRExplicitSingleSibVersion(explicitBiomomFromOlder, explicitBiodadFromOlder);
 			_rExplicitYoungestSibVersion = CalculateRExplicitSingleSibVersion(explicitBiomomFromYounger, explicitBiodadFromYounger);
 			_rExplicitPass1 = CommonFunctions.TranslateToR(shareBiomom: _explicitShareBiomomPass1, shareBiodad: _explicitShareBiodadPass1, mustDecide: true);
-			_rPass1 = CommonFunctions.TranslateToR(shareBiomom: _shareBiomomPass1, shareBiodad: _shareBiodadPass1, mustDecide: false);
+			_rPass1 = CalculateRPass1(shareBiomom: _shareBiomomPass1, shareBiodad: _shareBiodadPass1); // CommonFunctions.TranslateToR(shareBiomom: _shareBiomomPass1, shareBiodad: _shareBiodadPass1, mustDecide: false);
 		}
 		#endregion //#region Public Methods #endregion #region Private Methods #endregion
 		#region Private Methods - Estimate R
@@ -178,7 +184,7 @@ namespace Nls.BaseAssembly.Assign {
 			Trace.Assert(dr != null, "Exactly one row should be retrieved from tblRosterGen1.");
 			if ( dr.Resolved ) {
 				Trace.Assert(!dr.IsRNull(), "If R is resolved by the roster, then R shouldn't be NaN.");
-				return (float?)dr.R;
+				return (float)dr.R;
 			}
 			else {
 				return null;
@@ -204,7 +210,7 @@ namespace Nls.BaseAssembly.Assign {
 				return null; //The could still be cousins or something else
 			}
 		}
-		private float? CalculateRPass1 ( ) {
+		private float? CalculateRPass1 ( Tristate shareBiomom, Tristate shareBiodad ) {
 			float? rRoster = CalculateRRoster(_idRelatedOlderAboutYounger);
 
 			if ( this.IsMZ == BaseAssembly.Tristate.Yes ) {
@@ -223,14 +229,8 @@ namespace Nls.BaseAssembly.Assign {
 			else if ( rRoster.HasValue ) {
 				return rRoster;
 			}
-			else if ( RExplicitPass1.HasValue ) {
-				return RExplicitPass1;
-			}
-			else if ( RImplicitPass1.HasValue ) {
-				return RImplicitPass1;
-			}
 			else {
-				return null;
+				return CommonFunctions.TranslateToR(shareBiomom: shareBiomom, shareBiodad: shareBiodad, mustDecide: false);
 			}
 		}
 		private MarkerEvidence ReduceShareBioparentToOne ( MarkerType markerType, Int32 maxMarkerCount, Int32 idRelated ) {

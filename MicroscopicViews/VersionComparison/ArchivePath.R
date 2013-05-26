@@ -77,6 +77,6 @@ g1 <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Vers
   theme(legend.position = "none") 
 g1
 
-g2 <- g1 %+% dsRocExplicitRoster + xlab("Disagreement (Roster vs Explicit)")
-g2 
+# g2 <- g1 %+% dsRocExplicitRoster + xlab("Disagreement (Roster vs Explicit)")
+# g2 
 (elapsed <- Sys.time() - startTime)
