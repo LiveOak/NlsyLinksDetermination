@@ -43,6 +43,7 @@ namespace Nls.BaseAssembly {
 		InterviewDateDay = 20,
 		InterviewDateMonth = 21,
 		InterviewDateYear = 22,
+
 		Gen1SiblingIsATwinOrTrip1994 = 25,
 		Gen1MultipleSiblingType1994 = 26,
 		Gen1ListedTwinCorrect1994 = 27,
@@ -52,6 +53,7 @@ namespace Nls.BaseAssembly {
 		MotherOrBothInHHGen2 = 37,
 		FatherHasAsthmaGen2 = 40,
 		BioKidCountGen1 = 48,
+
 		Gen1ChildsIDByBirthOrder = 49,
 		HerTwinsTripsAreListed = 50,
 		HerTwinsAreMz = 52,
@@ -66,6 +68,7 @@ namespace Nls.BaseAssembly {
 		Gen1EyeColor = 71,
 		Gen2HairColor_NOTUSED = 72,
 		Gen2EyeColor_NOTUSED = 73,
+
 		BabyDaddyInHH = 81,
 		BabyDaddyAlive = 82,
 		BabyDaddyEverLiveInHH = 83,
@@ -78,9 +81,11 @@ namespace Nls.BaseAssembly {
 		BabyDaddyHasAsthma = 90,
 		BabyDaddyLeftHHMonthOrNeverInHH = 91,
 		BabyDaddyLeftHHYearTwoDigit = 92,
+
 		SubjectID = 100,
 		ExtendedFamilyID = 101,
 		Gender = 102,
+
 		Gen2CFatherLivingInHH = 121,
 		Gen2CFatherAlive = 122,
 		Gen2CFatherDistanceFromMotherFuzzyCeiling = 123,
@@ -89,10 +94,12 @@ namespace Nls.BaseAssembly {
 		Gen2YAFatherAlive_NOTUSED = 142,
 		Gen2YADeathMonth = 143,
 		Gen2YADeathYearFourDigit = 144,
+
 		Gen1HeightInches = 200,
 		Gen1WeightPounds = 201,
 		Gen1AfqtScaled2Decimals_NOTUSED = 202,
 		Gen1AfqtScaled5Decimals = 203,
+
 		Gen1FatherAlive = 300,
 		Gen1FatherDeathCause = 301,
 		Gen1FatherDeathAge = 302,
@@ -105,6 +112,7 @@ namespace Nls.BaseAssembly {
 		Gen1FatherBirthMonth = 309,
 		Gen1FatherBirthYear = 310,
 		Gen1FatherAge = 311,
+
 		Gen1MotherAlive = 320,
 		Gen1MotherDeathCause = 321,
 		Gen1MotherDeathAge = 322,
@@ -117,16 +125,19 @@ namespace Nls.BaseAssembly {
 		Gen1MotherBirthYear = 330,
 		Gen1MotherAge = 331,
 		Gen1AlwaysLivedWithBothParents = 340,
+
 		Gen2HeightInchesTotal = 500,
 		Gen2HeightFeetOnly = 501,
 		Gen2HeightInchesRemainder = 502,
 		Gen2HeightInchesTotalMotherSupplement = 503,
+
 		Gen1ListIncorrectGen2TwinTrips_NOTINTAGCURRENTLY = 9993,
 		Gen1VerifyFirstGen2TwinsTrips_NOTINTAGSETCURRENTLY = 9994,
 		Gen1FirstIncorrectTwinTripYoungerOrOlder_NOTUSED = 9995,
 		Gen1FirstIncorrectTwinTripAgeDifference_NOTUSED = 9996,
 		Gen1SecondIncorrectTwinTripYoungerOrOlder_NOTUSED = 9997,
 		Gen1SecondIncorrectTwinTripAgeDifference_NOTUSED = 9998,
+
 		NotTranslated = 9999,
 		//Gen2YInHHGen1 = 81,
 		//Gen2YAliveGen1 = 82,

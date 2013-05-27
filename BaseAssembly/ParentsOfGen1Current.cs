@@ -325,16 +325,36 @@ namespace Nls.BaseAssembly {
 			if ( dtInput.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Current.");
 
 			LinksDataSet.tblParentsOfGen1CurrentRow dr = dtInput.FindBySubjectTag(subjectTag);
-			switch(item){
-				case Item.Gen1FatherDeathAge:
-					if ( dr.IsBiodadDeathAgeNull() ) return null;
-					else return dr.BiodadDeathAge;
+			switch ( item ) {
 				case Item.Gen1MotherDeathAge:
 					if ( dr.IsBiomomDeathAgeNull() ) return null;
 					else return dr.BiomomDeathAge;
+				case Item.Gen1FatherDeathAge:
+					if ( dr.IsBiodadDeathAgeNull() ) return null;
+					else return dr.BiodadDeathAge;
 				default:
-					throw new ArgumentOutOfRangeException("item", item,"The function does not accommodate that item.");
+					throw new ArgumentOutOfRangeException("item", item, "The function does not accommodate that item.");
 			}
+		}
+		public static Tristate RetrieveUSBorn ( Int32 subjectTag, Item item, LinksDataSet.tblParentsOfGen1CurrentDataTable dtInput ) {
+			if ( dtInput == null ) throw new ArgumentNullException("dtInput");
+			if ( dtInput.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Current.");
+
+			LinksDataSet.tblParentsOfGen1CurrentRow dr = dtInput.FindBySubjectTag(subjectTag);
+			Int16 response = Int16.MaxValue;
+			switch ( item ) {
+				case Item.Gen1MotherBirthCountry: response = dr.BiomomUSBorn; break;
+				case Item.Gen1FatherBirthCountry: response = dr.BiodadUSBorn; break;
+				default: throw new ArgumentOutOfRangeException("item", item, "The function does not accommodate that item.");
+			}
+			return( CommonFunctions.TranslateYesNo( (YesNo)response));
+
+			//switch ( ynResponse ) {
+			//   case  YesNo.No: return Tristate.No;
+			//   case YesNo.Yes: return Tristate.Yes;
+			//   case -6: return Tristate.DoNotKnow;
+			//   default: throw new InvalidOperationException("The USBorn response was not recognized.");
+			//}
 		}
 		#endregion
 	}

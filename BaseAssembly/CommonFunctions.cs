@@ -61,13 +61,20 @@ namespace Nls.BaseAssembly {
 				default: return yn;  //Don't modify the other values.
 			}
 		}
-		public static bool? TranslateYesNo ( YesNo yn ) {
+		public static Tristate TranslateYesNo ( YesNo yn ) {
 			switch ( yn ) {
-				case YesNo.Yes: return true;
-				case YesNo.No: return false;
-				default: return null;
+				case YesNo.Yes: return  Tristate.Yes;
+				case YesNo.No: return Tristate.No;
+				default: return Tristate.DoNotKnow;
 			}
 		}
+		//public static bool? TranslateYesNo ( YesNo yn ) {
+		//   switch ( yn ) {
+		//      case YesNo.Yes: return true;
+		//      case YesNo.No: return false;
+		//      default: return null;
+		//   }
+		//}
 		public static byte LastTwoDigitsOfGen2SubjectID ( LinksDataSet.tblSubjectRow drSubject ) {
 			if ( drSubject == null ) throw new ArgumentNullException("drSubject");
 			if ( drSubject.Generation != (byte)Generation.Gen2 ) throw new ArgumentOutOfRangeException("drSubject", drSubject.Generation, "This function is valid for only Gen2 subjects.");

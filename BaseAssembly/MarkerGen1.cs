@@ -53,8 +53,6 @@ namespace Nls.BaseAssembly {
 
 					recordsAdded += FromBioparentDeathAge(MarkerType.Gen1BiodadDeathAge, drRelated, dtParentsCurrent);
 					recordsAdded += FromBioparentDeathAge(MarkerType.Gen1BiomomDeathAge, drRelated, dtParentsCurrent);
-					recordsAdded += FromGen0InHH(Bioparent.Dad, drRelated, dtParentsRetro);
-					recordsAdded += FromGen0InHH(Bioparent.Mom, drRelated, dtParentsRetro);
 				}
 			}
 			sw.Stop();
@@ -120,19 +118,64 @@ namespace Nls.BaseAssembly {
 			const Int32 recordsAdded = 1;
 			return recordsAdded;
 		}
-		private Int32 FromGen0InHH ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
-			TrendLineGen0InHH subject1 = ParentsOfGen1Retro.RetrieveTrend(bioparent, drRelated.Subject1Tag, dtRetro);
-			TrendLineGen0InHH subject2 = ParentsOfGen1Retro.RetrieveTrend(bioparent, drRelated.Subject2Tag, dtRetro);
-			//Int16?[] values2 = BabyDaddy.RetrieveInHH(drRelated.Subject2Tag, surveyYears, dtSubject2);
+		private Int32 FromBioparentUSBorn ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
+			throw new NotImplementedException();
+			//const Int16 year = ItemYears.Gen1BioparentUSBorn;
+			//Tristate subject1 = ParentsOfGen1Current.RetrieveInHHByYear(drRelated.Subject1Tag, bioparent, year, dtRetro);
+			//Tristate subject2 = ParentsOfGen1Current.RetrieveInHHByYear(drRelated.Subject2Tag, bioparent, year, dtRetro);
+			//MarkerEvidence shareBioparent = MarkerEvidence.Missing;
 
-			//TrendLineInteger trend1 = new TrendLineInteger(surveyYears, values1);
-			//TrendLineInteger trend2 = new TrendLineInteger(surveyYears, values2);
-			//TrendComparisonInteger comparison = new TrendComparisonInteger(trend1, trend2);
-			//MarkerEvidence mzEvidence = DetermineShareBabyDaddy.InHH(comparison);
-			//MarkerEvidence biodadEvidence = mzEvidence;
-			//return AddMarkerRow(extendedID, drRelated.ID, markerType, comparison.LastNonMutualNullPointsYear, mzEvidence, biodadEvidence, fromMother);
-			//throw new NotImplementedException();
-			return 0;
+			//if ( (subject1 == Tristate.DoNotKnow) || (subject2 == Tristate.DoNotKnow) )
+			//   shareBioparent = MarkerEvidence.Missing;
+			//else if ( subject1 != subject2 )
+			//   shareBioparent = MarkerEvidence.Unlikely;
+			//else if ( (subject1 == Tristate.Yes) || (subject2 == Tristate.Yes) )
+			//   shareBioparent = MarkerEvidence.StronglySupports;
+			//else if ( (subject1 == Tristate.No) || (subject2 == Tristate.No) )
+			//   shareBioparent = MarkerEvidence.Consistent;
+			//else
+			//   throw new InvalidOperationException("All the conditions should have been caught.");
+
+			//MarkerEvidence mzEvidence = MarkerEvidence.Missing;
+			//MarkerEvidence shareBiomom = MarkerEvidence.Irrelevant;
+			//MarkerEvidence shareBiodad = MarkerEvidence.Irrelevant;
+
+			//switch ( shareBioparent ) {
+			//   case MarkerEvidence.StronglySupports:
+			//   //case MarkerEvidence.Supports:
+			//   case MarkerEvidence.Consistent:
+			//      mzEvidence = MarkerEvidence.Consistent;
+			//      break;
+			//   case MarkerEvidence.Unlikely:
+			//      mzEvidence = MarkerEvidence.Unlikely;
+			//      break;
+			//   //case MarkerEvidence.Disconfirms:
+			//   //   mzEvidence = MarkerEvidence.Disconfirms;
+			//   //   break;
+			//   case MarkerEvidence.Missing:
+			//      mzEvidence = MarkerEvidence.Missing;
+			//      break;
+			//   default:
+			//      throw new InvalidOperationException("The switch should not have gotten here.");
+			//}
+
+			//MarkerType markerType;
+			//switch ( bioparent ) {
+			//   case Bioparent.Dad:
+			//      markerType = MarkerType.Gen1BiodadInHH;
+			//      shareBiodad = shareBioparent;
+			//      break;
+			//   case Bioparent.Mom:
+			//      markerType = MarkerType.Gen1BiomomInHH;
+			//      shareBiomom = shareBioparent;
+			//      break;
+			//   default:
+			//      throw new ArgumentOutOfRangeException("bioparent", bioparent, "The 'bioparent' value wasn't recognized.");
+			//}
+			//AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, year, mzEvidence: mzEvidence, sameGenerationEvidence: MarkerEvidence.Irrelevant,
+			//   biomomEvidence: shareBiomom, biodadEvidence: shareBiodad, biograndparentEvidence: MarkerEvidence.Ambiguous);
+			//const Int32 recordsAdded = 1;
+			//return recordsAdded;
 		}
 		private Int32 FromBioparentDeathAge ( MarkerType markerType, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1CurrentDataTable dtParentsOfGen1Current ) {
 			byte? deathAge1 = null;
@@ -352,3 +395,17 @@ namespace Nls.BaseAssembly {
 		#endregion
 	}
 }
+//private Int32 FromGen0InHH ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
+//   TrendLineGen0InHH subject1 = ParentsOfGen1Retro.RetrieveTrend(bioparent, drRelated.Subject1Tag, dtRetro);
+//   TrendLineGen0InHH subject2 = ParentsOfGen1Retro.RetrieveTrend(bioparent, drRelated.Subject2Tag, dtRetro);
+//   //Int16?[] values2 = BabyDaddy.RetrieveInHH(drRelated.Subject2Tag, surveyYears, dtSubject2);
+
+//   //TrendLineInteger trend1 = new TrendLineInteger(surveyYears, values1);
+//   //TrendLineInteger trend2 = new TrendLineInteger(surveyYears, values2);
+//   //TrendComparisonInteger comparison = new TrendComparisonInteger(trend1, trend2);
+//   //MarkerEvidence mzEvidence = DetermineShareBabyDaddy.InHH(comparison);
+//   //MarkerEvidence biodadEvidence = mzEvidence;
+//   //return AddMarkerRow(extendedID, drRelated.ID, markerType, comparison.LastNonMutualNullPointsYear, mzEvidence, biodadEvidence, fromMother);
+//   //throw new NotImplementedException();
+//   return 0;
+//}

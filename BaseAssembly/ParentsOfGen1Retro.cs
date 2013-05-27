@@ -56,14 +56,14 @@ namespace Nls.BaseAssembly {
 		private Int32 ProcessSubjectGen1 ( LinksDataSet.tblSubjectRow drSubject, LinksDataSet.tblResponseDataTable dtExtendedResponse ) {
 			Int32 subjectTag = drSubject.SubjectTag;
 			Int16 yob = Convert.ToInt16(Mob.Retrieve(drSubject, dtExtendedResponse).Value.Year);
-			bool? bothParentsAlways = DetermineBothParentsAlwaysInHH(_surveyYear, subjectTag, yob, dtExtendedResponse);
+			Tristate bothParentsAlways = DetermineBothParentsAlwaysInHH(_surveyYear, subjectTag, yob, dtExtendedResponse);
 
 			Int32 recordsAdded = 0;
 			recordsAdded += ProcessForOneParent(bothParentsAlways, Bioparent.Dad, yob, drSubject, dtExtendedResponse);
 			recordsAdded += ProcessForOneParent(bothParentsAlways, Bioparent.Mom, yob, drSubject, dtExtendedResponse);
 			return recordsAdded;
 		}
-		private Int32 ProcessForOneParent ( bool? bothParentsAlways, Bioparent parent,Int16 yob, LinksDataSet.tblSubjectRow drSubject, LinksDataSet.tblResponseDataTable dtExtendedResponse ) {
+		private Int32 ProcessForOneParent ( Tristate bothParentsAlways, Bioparent parent,Int16 yob, LinksDataSet.tblSubjectRow drSubject, LinksDataSet.tblResponseDataTable dtExtendedResponse ) {
 			const byte loopIndexForNever = 255;
 			byte[] loopIndicesAndAges = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 };
 			Int32 recordsAdded = 0;
@@ -73,25 +73,20 @@ namespace Nls.BaseAssembly {
 				case Bioparent.Mom: item = Item.Gen1LivedWithMotherAtAgeX; break;
 				default: throw new ArgumentOutOfRangeException("parent");
 			}
-			bool? responseEver = DetermineOneParentEverInHH(item, _surveyYear, drSubject.SubjectTag, loopIndexForNever, dtExtendedResponse);
+			Tristate responseEver = DetermineOneParentEverInHH(item, _surveyYear, drSubject.SubjectTag, loopIndexForNever, dtExtendedResponse);
 
 			foreach ( byte loopIndexAndAge in loopIndicesAndAges ) {
-				bool? inHH;
-				if ( bothParentsAlways.HasValue && bothParentsAlways.Value ) {
-					inHH = true;
-				}
-				else if ( !responseEver.HasValue ) {
-					inHH = null;
-				}
-				else if ( responseEver.Value ) {
+				Tristate inHH;
+				if ( bothParentsAlways == Tristate.Yes ) 
+					inHH =	Tristate.Yes;
+				else if ( responseEver == Tristate.DoNotKnow )
+					inHH = Tristate.DoNotKnow;
+				else if ( responseEver == Tristate.Yes ) 
 					inHH = DetermineParentInHH(Item.Gen1LivedWithFatherAtAgeX, _surveyYear, drSubject.SubjectTag, loopIndexAndAge, dtExtendedResponse);
-				}
-				else if ( !responseEver.Value ) {
-					inHH = false;
-				}
-				else {
+				else if ( responseEver == Tristate.No )
+					inHH = Tristate.No;
+				else 
 					throw new InvalidOperationException("The execution shouldn't have gotten to here in the 'ProcessForOneParent' function.");
-				}
 
 				Int16 yearInHH = Convert.ToInt16(yob + loopIndexAndAge);
 				AddRow(drSubject.SubjectTag, drSubject.ExtendedID, parent, inHH: inHH, age: loopIndexAndAge, yearInHH: yearInHH);
@@ -99,25 +94,25 @@ namespace Nls.BaseAssembly {
 			}
 			return recordsAdded;
 		}
-		private static bool? DetermineBothParentsAlwaysInHH ( Int16 surveyYear, Int32 subjectTag, Int16 yob, LinksDataSet.tblResponseDataTable dtExtended ) {
+		private static Tristate DetermineBothParentsAlwaysInHH ( Int16 surveyYear, Int32 subjectTag, Int16 yob, LinksDataSet.tblResponseDataTable dtExtended ) {
 			Item item = Item.Gen1AlwaysLivedWithBothParents;
 			Int32? responseBothAlways = Retrieve.ResponseNullPossible(surveyYear, item, subjectTag, dtExtended);
 			if ( !responseBothAlways.HasValue )
-				return null;
+				return Tristate.DoNotKnow;
 			else 
 				return CommonFunctions.TranslateYesNo((YesNo)responseBothAlways.Value);
 		}
-		private static bool? DetermineOneParentEverInHH ( Item item, Int16 surveyYear, Int32 subjectTag, byte loopIndex, LinksDataSet.tblResponseDataTable dtExtended ) {
+		private static Tristate DetermineOneParentEverInHH ( Item item, Int16 surveyYear, Int32 subjectTag, byte loopIndex, LinksDataSet.tblResponseDataTable dtExtended ) {
 			Int32? response = Retrieve.ResponseNullPossible(surveyYear, item, subjectTag, loopIndex, dtExtended);
 			if ( !response.HasValue )
-				return null;
+				return Tristate.DoNotKnow;
 			else
 				return CommonFunctions.TranslateYesNo(CommonFunctions.ReverseYesNo((YesNo)response));
 		}
-		private static bool? DetermineParentInHH ( Item item, Int16 surveyYear, Int32 subjectTag, byte loopIndex, LinksDataSet.tblResponseDataTable dtExtended ) {
+		private static Tristate DetermineParentInHH ( Item item, Int16 surveyYear, Int32 subjectTag, byte loopIndex, LinksDataSet.tblResponseDataTable dtExtended ) {
 			Int32? response = Retrieve.ResponseNullPossible(surveyYear, item, subjectTag, loopIndex, dtExtended);
 			if ( !response.HasValue )
-				return null; ;
+				return Tristate.DoNotKnow;
 
 			EnumResponsesGen1.BioparentOfGen1InHH codedResponse = (EnumResponsesGen1.BioparentOfGen1InHH)response.Value;
 			YesNo yn;
@@ -139,15 +134,15 @@ namespace Nls.BaseAssembly {
 			}
 			return CommonFunctions.TranslateYesNo(yn);
 		}
-		private void AddRow ( Int32 subjectTag, Int16 extendedID, Bioparent parent, bool? inHH,  byte age, Int16 yearInHH ) {
+		private void AddRow ( Int32 subjectTag, Int16 extendedID, Bioparent parent, Tristate inHH,  byte age, Int16 yearInHH ) {
 			//lock ( _ds.tblFatherOfGen2 ) {
 			LinksDataSet.tblParentsOfGen1RetroRow drNew = _ds.tblParentsOfGen1Retro.NewtblParentsOfGen1RetroRow();
 			drNew.SubjectTag = subjectTag;
 			drNew.ExtendedID = extendedID;
 			drNew.Bioparent = (byte)parent;
 
-			if ( inHH.HasValue ) drNew.InHH = inHH.Value;
-			else drNew.SetInHHNull();
+			if ( inHH==Tristate.DoNotKnow ) drNew.SetInHHNull();
+			else drNew.InHH = (inHH==Tristate.Yes);
 
 			drNew.Age = age;
 			drNew.Year = yearInHH;
