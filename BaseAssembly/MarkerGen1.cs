@@ -466,7 +466,7 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Public Static Methods
-		internal static MarkerEvidence RetrieveParentCurrentMarker ( Int64 relatedIDLeft, MarkerType markerType, Bioparent bioparent, LinksDataSet.tblMarkerGen1DataTable dtMarker ) {
+		internal static MarkerEvidence RetrieveParentMarkerSingleYear ( Int64 relatedIDLeft, MarkerType markerType, Bioparent bioparent, LinksDataSet.tblMarkerGen1DataTable dtMarker ) {
 			if ( dtMarker == null ) throw new ArgumentNullException("dtMarker");
 			string select = string.Format("{0}={1} AND {2}={3}",
 				relatedIDLeft, dtMarker.RelatedIDColumn.ColumnName,
@@ -483,7 +483,7 @@ namespace Nls.BaseAssembly {
 			else
 				throw new ArgumentOutOfRangeException("markerType", markerType, "The 'bioparent' value is not accepted by this function.");
 		}
-		internal static MarkerEvidence RetrieveParentRetroMarker ( Int64 relatedIDLeft, MarkerType markerType, Int16 year, Bioparent bioparent, LinksDataSet.tblMarkerGen1DataTable dtMarker ) {
+		internal static MarkerEvidence RetrieveParentMarkerMultiYear ( Int64 relatedIDLeft, MarkerType markerType, Int16 year, Bioparent bioparent, LinksDataSet.tblMarkerGen1DataTable dtMarker ) {
 			if ( dtMarker == null ) throw new ArgumentNullException("dtMarker");
 			string select = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				relatedIDLeft, dtMarker.RelatedIDColumn.ColumnName,

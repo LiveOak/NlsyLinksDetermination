@@ -127,11 +127,11 @@ namespace Nls.BaseAssembly.Assign {
 			MarkerEvidence explicitBiomomFromYounger = ReduceShareBioparentToOne(MarkerType.ShareBiomom, ItemYears.Gen1ShareBioparent.Length, _idRelatedYoungerAboutOlder);
 			MarkerEvidence explicitBiodadFromYounger = ReduceShareBioparentToOne(MarkerType.ShareBiodad, ItemYears.Gen1ShareBioparent.Length, _idRelatedYoungerAboutOlder);
 
-			MarkerEvidence biomomInHH1979 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1979, Bioparent.Mom, _dtMarkersGen1);
-			MarkerEvidence biodadInHH1979 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1979, Bioparent.Dad, _dtMarkersGen1);
+			MarkerEvidence biomomInHH1979 = MarkerGen1.RetrieveParentMarkerMultiYear(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1979, Bioparent.Mom, _dtMarkersGen1);
+			MarkerEvidence biodadInHH1979 = MarkerGen1.RetrieveParentMarkerMultiYear(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1979, Bioparent.Dad, _dtMarkersGen1);
 
-			MarkerEvidence biomomDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomDeathAge, Bioparent.Mom, _dtMarkersGen1);
-			MarkerEvidence biodadDeathAge = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadDeathAge, Bioparent.Dad, _dtMarkersGen1);
+			MarkerEvidence biomomDeathAge = MarkerGen1.RetrieveParentMarkerSingleYear(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomDeathAge, Bioparent.Mom, _dtMarkersGen1);
+			MarkerEvidence biodadDeathAge = MarkerGen1.RetrieveParentMarkerSingleYear(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadDeathAge, Bioparent.Dad, _dtMarkersGen1);
 
 			_explicitShareBiomomPass1 = CommonFunctions.TranslateEvidenceToTristate(explicitBiomomFromOlder, explicitBiomomFromYounger);
 			_explicitShareBiodadPass1 = CommonFunctions.TranslateEvidenceToTristate(explicitBiodadFromOlder, explicitBiodadFromYounger);
