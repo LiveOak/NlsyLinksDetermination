@@ -229,12 +229,12 @@ namespace Nls.BaseAssembly.Assign {
 				return Tristate.No;
 			else if ( birthYearAskedIn1988 == MarkerEvidence.Disconfirms )
 				return Tristate.No;
-			else if ( birthYearAskedIn1988 == MarkerEvidence.Supports )
-				return Tristate.Yes;
+			//else if ( birthYearAskedIn1988 == MarkerEvidence.Supports )
+			//   return Tristate.Yes;
 			else if ( birthYearAskedIn1987 == MarkerEvidence.Disconfirms )
 				return Tristate.No;
-			else if ( birthYearAskedIn1987 == MarkerEvidence.Supports )
-				return Tristate.Yes;
+			//else if ( birthYearAskedIn1987 == MarkerEvidence.Supports )
+			//   return Tristate.Yes;
 			//else if ( birthYearAskedIn1988 == MarkerEvidence.Unlikely )
 			//   return Tristate.No;
 			//else if ( birthYearAskedIn1987 == MarkerEvidence.Unlikely )
