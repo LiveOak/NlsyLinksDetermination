@@ -86,7 +86,7 @@ namespace Nls.BaseAssembly {
 			else
 				return drsRaw[0].Value;
 		}
-		internal static Int32? ResponseNullPossible ( Int16 surveyYear, Item itemID, Int32 subjectTag,  LinksDataSet.tblResponseDataTable dt ) {
+		internal static Int32? ResponseNullPossible ( Int16 surveyYear, Item itemID, Int32 subjectTag, LinksDataSet.tblResponseDataTable dt ) {
 			if ( dt == null ) throw new ArgumentNullException("dt");
 			string select = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				subjectTag, dt.SubjectTagColumn.ColumnName,
@@ -113,7 +113,7 @@ namespace Nls.BaseAssembly {
 			else
 				return drsRaw[0].Value;
 		}
-		internal static Int32? ResponseNullPossible (  Item itemID, SurveySource surveySource, Int32 subjectTag, Int32 maxRows, LinksDataSet.tblResponseDataTable dt ) {
+		internal static Int32? ResponseNullPossible ( Item itemID, SurveySource surveySource, Int32 subjectTag, Int32 maxRows, LinksDataSet.tblResponseDataTable dt ) {
 			if ( dt == null ) throw new ArgumentNullException("dt");
 			string select = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				subjectTag, dt.SubjectTagColumn.ColumnName,
@@ -152,12 +152,12 @@ namespace Nls.BaseAssembly {
 				if ( !(drs.Length >= 1) ) throw new ArgumentOutOfRangeException("items", item, "The " + item.ToString() + " was not found in the local copy of dtResponse.");
 			}
 		}
-		internal static LinksDataSet.tblResponseDataTable SubjectsRelevantResponseRows ( Int32 subjectTag, string itemIDsString, Int32 minRowCount,  LinksDataSet.tblResponseDataTable dtResponse ) {
+		internal static LinksDataSet.tblResponseDataTable SubjectsRelevantResponseRows ( Int32 subjectTag, string itemIDsString, Int32 minRowCount, LinksDataSet.tblResponseDataTable dtResponse ) {
 			string select = string.Format("{0}={1} AND {2} in ({3})",
 				subjectTag, dtResponse.SubjectTagColumn.ColumnName,
 				dtResponse.ItemColumn.ColumnName, itemIDsString);
 			LinksDataSet.tblResponseRow[] drs = (LinksDataSet.tblResponseRow[])dtResponse.Select(select);
-			Trace.Assert(drs.Length >= minRowCount, "There should be at least " + minRowCount +" row(s) returned.");
+			Trace.Assert(drs.Length >= minRowCount, "There should be at least " + minRowCount + " row(s) returned.");
 
 			LinksDataSet.tblResponseDataTable dt = new LinksDataSet.tblResponseDataTable();
 			foreach ( LinksDataSet.tblResponseRow dr in drs ) {
@@ -276,6 +276,10 @@ namespace Nls.BaseAssembly {
 			else
 				return Convert.ToByte(drs[0].Value);
 		}
+		//internal static ImportDataSet.tblGeocodeSanitizedRow GeocodeRecord ( Int32 subject1Tag, Int32 subject2Tag, ImportDataSet.tblGeocodeSanitizedDataTable dtGeocode ) {
+		//   //string sql= string.FormatException(
+		//   dtGeocode.FindBySubject1TagSubject2Tag(subject1Tag, subject2Tag);
+		//}
 		#endregion
 	}
 }

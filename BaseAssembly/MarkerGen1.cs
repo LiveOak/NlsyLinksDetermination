@@ -9,20 +9,23 @@ namespace Nls.BaseAssembly {
 	public sealed class MarkerGen1 {
 		#region Fields
 		private readonly LinksDataSet _dsLinks;
+		private readonly ImportDataSet _dsImport;
 		private readonly Item[] _items = { Item.IDOfOther1979RosterGen1, Item.RosterGen1979, Item.IDCodeOfOtherSiblingGen1, Item.ShareBiomomGen1, Item.ShareBiodadGen1};
 			//Unnecssary b/c they're in Retro & Current: Item.Gen1MotherDeathAge, Item.Gen1MotherBirthCountry, Item.Gen1MotherBirthYear, Item.Gen1FatherDeathAge, Item.Gen1FatherBirthCountry, Item.Gen1FatherBirthYear
 		private readonly string _itemIDsString = "";
 		#endregion
 		#region Constructor
-		public MarkerGen1 ( LinksDataSet dsLinks ) {
+		public MarkerGen1 ( LinksDataSet dsLinks, ImportDataSet dsImport ) {
 			if ( dsLinks == null ) throw new ArgumentNullException("dsLinks");
 			if ( dsLinks.tblSubject.Count <= 0 ) throw new ArgumentException("There shouldn't be zero rows in tblSubject.");
 			if ( dsLinks.tblRelatedStructure.Count <= 0 ) throw new ArgumentException("There shouldn't be zero rows in tblRelatedStructure.");
 			if ( dsLinks.tblRosterGen1.Count <= 0 ) throw new ArgumentException("There shouldn't be zero rows in tblRosterGen1.");
 			if ( dsLinks.tblParentsOfGen1Current.Count <= 0 ) throw new ArgumentException("There shouldn't be zero rows in tblParentsOfGen1Current.");
 			if ( dsLinks.tblParentsOfGen1Retro.Count <= 0 ) throw new ArgumentException("There shouldn't be zero rows in tblParentsOfGen1Retro.");
+			if ( dsImport.tblGeocodeSanitized.Count <= 0 ) throw new ArgumentException("There shouldn't be zero rows in tblGeocodeSanitized.");
 			if ( dsLinks.tblMarkerGen1.Count != 0 ) throw new ArgumentException("There should be zero rows in tblMarkerGen1.");
 			_dsLinks = dsLinks;
+			_dsImport = dsImport;
 			_itemIDsString = CommonCalculations.ConvertItemsToString(_items);
 		}
 		#endregion
@@ -57,8 +60,11 @@ namespace Nls.BaseAssembly {
 					recordsAdded += FromBioparentDeathAge(Bioparent.Mom, drRelated, dtParentsCurrent);
 					recordsAdded += FromBioparentDeathAge(Bioparent.Dad, drRelated, dtParentsCurrent);
 
-					recordsAdded += FromBioparentUSBorn(Bioparent.Mom, drRelated, dtParentsCurrent);
-					recordsAdded += FromBioparentUSBorn(Bioparent.Dad, drRelated, dtParentsCurrent);
+					recordsAdded += FromBioparentBirthCountry(Bioparent.Mom, drRelated, _dsImport.tblGeocodeSanitized);
+					recordsAdded += FromBioparentBirthCountry(Bioparent.Dad, drRelated, _dsImport.tblGeocodeSanitized);
+
+					recordsAdded += FromBioparentBirthState(Bioparent.Mom, drRelated, _dsImport.tblGeocodeSanitized);
+					recordsAdded += FromBioparentBirthState(Bioparent.Dad, drRelated, _dsImport.tblGeocodeSanitized);
 
 					foreach ( Int16 year in ItemYears.Gen1BioparentBirthYear ) {
 						recordsAdded += FromBioparentBirthYear(Bioparent.Mom, year, drRelated, dtParentsCurrent);
@@ -130,43 +136,135 @@ namespace Nls.BaseAssembly {
 			const Int32 recordsAdded = 1;
 			return recordsAdded;
 		}
-		private Int32 FromBioparentUSBorn ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1CurrentDataTable dtCurrent ) {
-			const Int16 year = ItemYears.Gen1BioparentUSBorn;
-			Item item;
+		private Int32 FromBioparentBirthCountry ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, ImportDataSet.tblGeocodeSanitizedDataTable dtGeocode ) {
+			const Int16 year = ItemYears.Gen1BioparentBirthCountry;
+			Int32 subjectSmaller = Math.Min(drRelated.Subject1Tag, drRelated.Subject2Tag);
+			Int32 subjectLarger = Math.Max(drRelated.Subject1Tag, drRelated.Subject2Tag);
+			ImportDataSet.tblGeocodeSanitizedRow drGeo = dtGeocode.FindBySubject1TagSubject2Tag(subjectSmaller, subjectLarger);
+
 			MarkerType markerType;
-			switch ( bioparent ) {
-				case Bioparent.Mom: item = Item.Gen1MotherBirthCountry; markerType = MarkerType.Gen1BiomomUSBorn; break;
-				case Bioparent.Dad: item = Item.Gen1FatherBirthCountry; markerType = MarkerType.Gen1BiodadUSBorn; break;
-				default: throw new ArgumentOutOfRangeException("bioparent", bioparent, "The 'FromShareBioparent' function does not accommodate this bioparent value.");
-			}
 
-			Tristate subject1 = ParentsOfGen1Current.RetrieveUSBorn(drRelated.Subject1Tag, item, dtCurrent);
-			Tristate subject2 = ParentsOfGen1Current.RetrieveUSBorn(drRelated.Subject2Tag, item, dtCurrent);
-			MarkerEvidence shareBioparent = MarkerEvidence.Missing;
-
-			if ( (subject1 == Tristate.DoNotKnow) || (subject2 == Tristate.DoNotKnow) )
-				shareBioparent = MarkerEvidence.Missing;
-			else if ( subject1 != subject2 )
-				shareBioparent = MarkerEvidence.Disconfirms;
-			else if ( (subject1 == subject2) )
-				shareBioparent = MarkerEvidence.Consistent;
-			else
-				throw new InvalidOperationException("All the conditions should have been caught.");
-
-			MarkerEvidence mzEvidence = shareBioparent;
+			MarkerEvidence mzEvidence = MarkerEvidence.Irrelevant;
 			MarkerEvidence shareBiomom = MarkerEvidence.Irrelevant;
 			MarkerEvidence shareBiodad = MarkerEvidence.Irrelevant;
 
-			switch ( item ) {
-				case Item.Gen1MotherBirthCountry: shareBiomom = shareBioparent; break;
-				case Item.Gen1FatherBirthCountry: shareBiodad = shareBioparent; break;
-				default: throw new ArgumentOutOfRangeException("item", item, "The 'item' value isn't accommodated by this function.");
+			switch ( bioparent ) {
+				case Bioparent.Mom:
+					markerType = MarkerType.Gen1BiomomBirthCountry;
+					if ( drGeo.BirthMotherCountryMissing_1 || drGeo.BirthMotherCountryMissing_2 )
+						shareBiomom = MarkerEvidence.Missing;
+					else if ( drGeo.BirthMotherCountryEqual )
+						shareBiomom = MarkerEvidence.Consistent;
+					else if ( !drGeo.BirthMotherCountryEqual )
+						shareBiomom = MarkerEvidence.Disconfirms;
+					else
+						throw new InvalidOperationException("The execution should not have gotten here.");
+					mzEvidence = shareBiomom;
+					break;
+				case Bioparent.Dad:
+					markerType = MarkerType.Gen1BiodadBirthCountry;
+					if ( drGeo.BirthFatherCountryMissing_1 || drGeo.BirthFatherCountryMissing_2 )
+						shareBiodad = MarkerEvidence.Missing;
+					else if ( drGeo.BirthFatherCountryEqual )
+						shareBiodad = MarkerEvidence.Consistent;
+					else if ( !drGeo.BirthFatherCountryEqual )
+						shareBiodad = MarkerEvidence.Disconfirms;
+					else
+						throw new InvalidOperationException("The execution should not have gotten here.");
+					mzEvidence = shareBiodad;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException("bioparent", bioparent, "The 'FromShareBioparent' function does not accommodate this bioparent value.");
 			}
+
 			AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, year, mzEvidence: mzEvidence, sameGenerationEvidence: MarkerEvidence.Irrelevant,
 				biomomEvidence: shareBiomom, biodadEvidence: shareBiodad, biograndparentEvidence: MarkerEvidence.Ambiguous);
 			const Int32 recordsAdded = 1;
 			return recordsAdded;
 		}
+		private Int32 FromBioparentBirthState ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, ImportDataSet.tblGeocodeSanitizedDataTable dtGeocode ) {
+			const Int16 year = ItemYears.Gen1BioparentBirthState;
+			Int32 subjectSmaller = Math.Min(drRelated.Subject1Tag, drRelated.Subject2Tag);
+			Int32 subjectLarger = Math.Max(drRelated.Subject1Tag, drRelated.Subject2Tag);
+			ImportDataSet.tblGeocodeSanitizedRow drGeo = dtGeocode.FindBySubject1TagSubject2Tag(subjectSmaller, subjectLarger);
+
+			MarkerType markerType;
+
+			MarkerEvidence mzEvidence = MarkerEvidence.Irrelevant;
+			MarkerEvidence shareBiomom = MarkerEvidence.Irrelevant;
+			MarkerEvidence shareBiodad = MarkerEvidence.Irrelevant;
+
+			switch ( bioparent ) {
+				case Bioparent.Mom:
+					markerType = MarkerType.Gen1BiomomBirthState;
+					if ( drGeo.BirthMotherStateMissing_1 || drGeo.BirthMotherStateMissing_2 )
+						shareBiomom = MarkerEvidence.Missing;
+					else if ( drGeo.BirthMotherStateEqual )
+						shareBiomom = MarkerEvidence.Consistent;
+					else if ( !drGeo.BirthMotherStateEqual )
+						shareBiomom = MarkerEvidence.Disconfirms;
+					else
+						throw new InvalidOperationException("The execution should not have gotten here.");
+					mzEvidence = shareBiomom;
+					break;
+				case Bioparent.Dad:
+					markerType = MarkerType.Gen1BiodadBirthState;
+					if ( drGeo.BirthFatherStateMissing_1 || drGeo.BirthFatherStateMissing_2 )
+						shareBiodad = MarkerEvidence.Missing;
+					else if ( drGeo.BirthFatherStateEqual )
+						shareBiodad = MarkerEvidence.Consistent;
+					else if ( !drGeo.BirthFatherStateEqual )
+						shareBiodad = MarkerEvidence.Disconfirms;
+					else
+						throw new InvalidOperationException("The execution should not have gotten here.");
+					mzEvidence = shareBiodad;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException("bioparent", bioparent, "The 'FromShareBioparent' function does not accommodate this bioparent value.");
+			}
+
+			AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, year, mzEvidence: mzEvidence, sameGenerationEvidence: MarkerEvidence.Irrelevant,
+				biomomEvidence: shareBiomom, biodadEvidence: shareBiodad, biograndparentEvidence: MarkerEvidence.Ambiguous);
+			const Int32 recordsAdded = 1;
+			return recordsAdded;
+		}
+		//private Int32 FromBioparentUSBorn ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1CurrentDataTable dtCurrent ) {
+		//   const Int16 year = ItemYears.Gen1BioparentUSBorn;
+		//   Item item;
+		//   MarkerType markerType;
+		//   switch ( bioparent ) {
+		//      case Bioparent.Mom: item = Item.Gen1MotherBirthCountry; markerType = MarkerType.Gen1BiomomUSBorn; break;
+		//      case Bioparent.Dad: item = Item.Gen1FatherBirthCountry; markerType = MarkerType.Gen1BiodadUSBorn; break;
+		//      default: throw new ArgumentOutOfRangeException("bioparent", bioparent, "The 'FromShareBioparent' function does not accommodate this bioparent value.");
+		//   }
+
+		//   Tristate subject1 = ParentsOfGen1Current.RetrieveUSBorn(drRelated.Subject1Tag, item, dtCurrent);
+		//   Tristate subject2 = ParentsOfGen1Current.RetrieveUSBorn(drRelated.Subject2Tag, item, dtCurrent);
+		//   MarkerEvidence shareBioparent = MarkerEvidence.Missing;
+
+		//   if ( (subject1 == Tristate.DoNotKnow) || (subject2 == Tristate.DoNotKnow) )
+		//      shareBioparent = MarkerEvidence.Missing;
+		//   else if ( subject1 != subject2 )
+		//      shareBioparent = MarkerEvidence.Disconfirms;
+		//   else if ( (subject1 == subject2) )
+		//      shareBioparent = MarkerEvidence.Consistent;
+		//   else
+		//      throw new InvalidOperationException("All the conditions should have been caught.");
+
+		//   MarkerEvidence mzEvidence = shareBioparent;
+		//   MarkerEvidence shareBiomom = MarkerEvidence.Irrelevant;
+		//   MarkerEvidence shareBiodad = MarkerEvidence.Irrelevant;
+
+		//   switch ( item ) {
+		//      case Item.Gen1MotherBirthCountry: shareBiomom = shareBioparent; break;
+		//      case Item.Gen1FatherBirthCountry: shareBiodad = shareBioparent; break;
+		//      default: throw new ArgumentOutOfRangeException("item", item, "The 'item' value isn't accommodated by this function.");
+		//   }
+		//   AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, year, mzEvidence: mzEvidence, sameGenerationEvidence: MarkerEvidence.Irrelevant,
+		//      biomomEvidence: shareBiomom, biodadEvidence: shareBiodad, biograndparentEvidence: MarkerEvidence.Ambiguous);
+		//   const Int32 recordsAdded = 1;
+		//   return recordsAdded;
+		//}
 		private Int32 FromBioparentBirthYear ( Bioparent bioparent, Int16 surveyYear, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1CurrentDataTable dtParentsOfGen1Current ) {
 			//const year = ItemYears.Gen1BioparentBirthYear;
 			Int16? birthYear1 = null;

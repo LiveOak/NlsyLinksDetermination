@@ -216,7 +216,7 @@ namespace Nls.BaseAssembly {
 		}
 		//The questions about their parent's death are asked in the Health-40, (as in 40 years old) and Health-50 module.
 		private static YesNo DetermineUSBorn ( Item item, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
-			const Int16 surveyYear = ItemYears.Gen1BioparentUSBorn;
+			const Int16 surveyYear = ItemYears.Gen1BioparentBirthCountry;
 
 			Int32? response = Retrieve.ResponseNullPossible(surveyYear: surveyYear, itemID: item, subjectTag: subjectTag, dt: dtExtended);
 			if ( !response.HasValue )

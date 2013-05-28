@@ -53,6 +53,7 @@ namespace LinksGui {
 				LoadExtractGen2OutcomesHeight();
 			}
 
+			LoadGeocodeSanitized();//Needed for MarkerGen1
 			LoadLinks2004Gen1();//Needed for RelatedValues
 			LoadLinks2004Gen2();//Needed for RelatedValues
 			//LoadLinks2004Gen1Mz();//Needed for RelatedValues
@@ -154,7 +155,7 @@ namespace LinksGui {
 			//WriteXml(_dsLinks.tblSubjectDetails);
 		}
 		private void btnMarkerGen1_Click ( object sender, RoutedEventArgs e ) {
-			BA.MarkerGen1 marker = new BA.MarkerGen1(_dsLinks);
+			BA.MarkerGen1 marker = new BA.MarkerGen1(_dsLinks, _dsImport);
 			string message = marker.Go();
 			Trace.WriteLine(message);
 			if ( e.Source.ToString() != _combinedButtonTag ) MessageBox.Show(message);
@@ -277,6 +278,10 @@ namespace LinksGui {
 		private void LoadExtractGen2FatherFromGen1 ( ) {
 			BA.ImportDataSetTableAdapters.tblGen2FatherFromGen1TableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen2FatherFromGen1TableAdapter();
 			ta.Fill(_dsImport.tblGen2FatherFromGen1);
+		}
+		private void LoadGeocodeSanitized ( ) {
+			BA.ImportDataSetTableAdapters.tblGeocodeSanitizedTableAdapter ta = new BA.ImportDataSetTableAdapters.tblGeocodeSanitizedTableAdapter();
+			ta.Fill(_dsImport.tblGeocodeSanitized);
 		}
 		private void LoadLinks2004Gen1 ( ) {
 			BA.ImportDataSetTableAdapters.tblLinks2004Gen1TableAdapter ta = new BA.ImportDataSetTableAdapters.tblLinks2004Gen1TableAdapter();

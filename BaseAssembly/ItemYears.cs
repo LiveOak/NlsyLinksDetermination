@@ -11,7 +11,8 @@ namespace Nls.BaseAssembly {
 		public const Int16 Gen1BioparentInHH =  1988 ;
 
 		public const Int16 Gen1BioparentHighestGrade = 1979;
-		public const Int16 Gen1BioparentUSBorn = 1979; //And also the Gen1's biodad's dad.
+		public const Int16 Gen1BioparentBirthCountry = 1979; //And also the Gen1's biodad's dad; It's in the sanitized geocode datset
+		public const Int16 Gen1BioparentBirthState = 1979; //And also the Gen1's biodad's dad; It's in the sanitized geocode datset
 		public const Int16 Gen1BioparentAlive = 0; //It's an XRND.
 		public const Int16 Gen1BioparentDeathAge = 0; //It's an XRND.
 		public const Int16 Gen1BioparentDeathCause = 0; //It's an XRND.

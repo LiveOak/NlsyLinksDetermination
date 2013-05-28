@@ -37,6 +37,7 @@
 		<CollectionViewSource x:Key="tblGen1ImplicitViewSource" Source="{Binding Path=tblGen1Implicit, Source={StaticResource importDataSet}}" />
 		<CollectionViewSource x:Key="tblParentsOfGen1RetroViewSource" Source="{Binding Path=tblParentsOfGen1Retro, Source={StaticResource linksDataSet}}" />
 		<CollectionViewSource x:Key="tblParentsOfGen1CurrentViewSource" Source="{Binding Path=tblParentsOfGen1Current, Source={StaticResource linksDataSet}}" />
+		<CollectionViewSource x:Key="tblGeocodeSanitizedViewSource" Source="{Binding Path=tblGeocodeSanitized, Source={StaticResource importDataSet}}" />
 	</Window.Resources>
 	<Grid Name="grid1" Background="AliceBlue" DataContext="{StaticResource tblGen2LinksViewSource}">
 		<Grid.RowDefinitions>
@@ -1365,6 +1366,41 @@
 						<DataGridTextColumn x:Name="t1765500Column" Binding="{Binding Path=T1765500}" Header="T 1765500" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="t1765600Column" Binding="{Binding Path=T1765600}" Header="T 1765600" Width="SizeToHeader" />
 						<DataGridTextColumn x:Name="t1765700Column" Binding="{Binding Path=T1765700}" Header="T 1765700" Width="SizeToHeader" />
+					</DataGrid.Columns>
+				</DataGrid>
+			</TabItem>
+			<TabItem Header="Geocode" Name="tabGeocode" >
+				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tblGeocodeSanitizedViewSource}}" Name="tblGeocodeSanitizedDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
+					<DataGrid.Columns>
+						<DataGridTextColumn x:Name="subject1TagColumn3" Binding="{Binding Path=Subject1Tag}" Header="Subject 1 Tag" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="subject2TagColumn3" Binding="{Binding Path=Subject2Tag}" Header="Subject 2 Tag" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="dobDifferenceInDays1979V1979Column" Binding="{Binding Path=DobDifferenceInDays1979V1979}" Header="Dob Difference In Days 1979 V 1979" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="dobDifferenceInDays1979V1981Column" Binding="{Binding Path=DobDifferenceInDays1979V1981}" Header="Dob Difference In Days 1979 V 1981" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="dobDifferenceInDays1981V1979Column" Binding="{Binding Path=DobDifferenceInDays1981V1979}" Header="Dob Difference In Days 1981 V 1979" Width="SizeToHeader" />
+						<DataGridTextColumn x:Name="dobDifferenceInDays1981V1981Column" Binding="{Binding Path=DobDifferenceInDays1981V1981}" Header="Dob Difference In Days 1981 V 1981" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="dobDayIsMissing1979_1Column" Binding="{Binding Path=DobDayIsMissing1979_1}" Header="Dob Day Is Missing 1979 1" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="dobDayIsMissing1979_2Column" Binding="{Binding Path=DobDayIsMissing1979_2}" Header="Dob Day Is Missing 1979 2" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthSubjectCountyMissing_1Column" Binding="{Binding Path=BirthSubjectCountyMissing_1}" Header="Birth Subject County Missing 1" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthSubjectCountyMissing_2Column" Binding="{Binding Path=BirthSubjectCountyMissing_2}" Header="Birth Subject County Missing 2" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthSubjectCountyEqualColumn" Binding="{Binding Path=BirthSubjectCountyEqual}" Header="Birth Subject County Equal" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthSubjectStateMissing_1Column" Binding="{Binding Path=BirthSubjectStateMissing_1}" Header="Birth Subject State Missing 1" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthSubjectStateMissing_2Column" Binding="{Binding Path=BirthSubjectStateMissing_2}" Header="Birth Subject State Missing 2" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthSubjectStateEqualColumn" Binding="{Binding Path=BirthSubjectStateEqual}" Header="Birth Subject State Equal" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthSubjectCountryMissing_1Column" Binding="{Binding Path=BirthSubjectCountryMissing_1}" Header="Birth Subject Country Missing 1" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthSubjectCountryMissing_2Column" Binding="{Binding Path=BirthSubjectCountryMissing_2}" Header="Birth Subject Country Missing 2" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthSubjectCountryEqualColumn" Binding="{Binding Path=BirthSubjectCountryEqual}" Header="Birth Subject Country Equal" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthMotherStateMissing_1Column" Binding="{Binding Path=BirthMotherStateMissing_1}" Header="Birth Mother State Missing 1" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthMotherStateMissing_2Column" Binding="{Binding Path=BirthMotherStateMissing_2}" Header="Birth Mother State Missing 2" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthMotherStateEqualColumn" Binding="{Binding Path=BirthMotherStateEqual}" Header="Birth Mother State Equal" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthMotherCountryMissing_1Column" Binding="{Binding Path=BirthMotherCountryMissing_1}" Header="Birth Mother Country Missing 1" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthMotherCountryMissing_2Column" Binding="{Binding Path=BirthMotherCountryMissing_2}" Header="Birth Mother Country Missing 2" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthMotherCountryEqualColumn" Binding="{Binding Path=BirthMotherCountryEqual}" Header="Birth Mother Country Equal" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthFatherStateMissing_1Column" Binding="{Binding Path=BirthFatherStateMissing_1}" Header="Birth Father State Missing 1" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthFatherStateMissing_2Column" Binding="{Binding Path=BirthFatherStateMissing_2}" Header="Birth Father State Missing 2" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthFatherStateEqualColumn" Binding="{Binding Path=BirthFatherStateEqual}" Header="Birth Father State Equal" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthFatherCountryMissing_1Column" Binding="{Binding Path=BirthFatherCountryMissing_1}" Header="Birth Father Country Missing 1" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthFatherCountryMissing_2Column" Binding="{Binding Path=BirthFatherCountryMissing_2}" Header="Birth Father Country Missing 2" Width="SizeToHeader" />
+						<DataGridCheckBoxColumn x:Name="birthFatherCountryEqualColumn" Binding="{Binding Path=BirthFatherCountryEqual}" Header="Birth Father Country Equal" Width="SizeToHeader" />
 					</DataGrid.Columns>
 				</DataGrid>
 			</TabItem>

@@ -76,14 +76,14 @@
 
 
 % \textbf{RelationshipPaths Considered}: includedRelationshipPaths;\\
-\textbf{Newer Links Version}: 67;
-\textbf{Older Links Version}: 65;
+\textbf{Newer Links Version}: 68;
+\textbf{Older Links Version}: 67;
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-Newer Links: Uses USBorn low in Pass2
-Older Links: Implicit no longer forced to make a decision about ambiguity
+Newer Links: Uses GeocodeSantized for USBorn
+Older Links: Uses USBorn low in Pass2
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -102,7 +102,30 @@ Older Links: Implicit no longer forced to make a decision about ambiguity
 \end{figure}
 
 % latex table generated in R 3.0.1 by xtable 1.7-1 package
-% Mon May 27 22:03:46 2013
+% Mon May 27 22:40:29 2013
+\begin{table}[ht]
+\centering
+{\large
+\begin{tabular}{lrrrrr}
+  \hline
+R & Implicit2004 & Implicit & Roster & Explicit & Eventual \\ 
+  \hline
+0 & - &  19 & 478 &  41 & 527 \\ 
+  0.0625 & - & - & - &   2 &   5 \\ 
+  0.125 &  76 & - &  96 & - &  96 \\ 
+  0.25 &  43 &  12 & - & 273 & 268 \\ 
+  0.375 & 310 & - & - &  37 &  31 \\ 
+  0.5 & 1877 & 2493 & - & 3598 & 3888 \\ 
+  0.75 &  32 & - & - & - &  11 \\ 
+  1 & - & - & - & - &  11 \\ 
+  - & 2964 & 2778 & 4728 & 1351 & 465 \\ 
+   \hline
+\end{tabular}
+}
+\caption{Counts for Gen1Housemates} 
+\end{table}
+% latex table generated in R 3.0.1 by xtable 1.7-1 package
+% Mon May 27 22:40:29 2013
 \begin{table}[ht]
 \centering
 {\large
@@ -122,33 +145,10 @@ R & Implicit2004 & Implicit & Roster & Explicit & Eventual \\
    \hline
 \end{tabular}
 }
-\caption{Counts for Gen1Housemates} 
-\end{table}
-% latex table generated in R 3.0.1 by xtable 1.7-1 package
-% Mon May 27 22:03:46 2013
-\begin{table}[ht]
-\centering
-{\large
-\begin{tabular}{lrrrrr}
-  \hline
-R & Implicit2004 & Implicit & Roster & Explicit & Eventual \\ 
-  \hline
-0 & - &   1 & 478 &  41 & 517 \\ 
-  0.125 &  76 & - &  96 & - &  96 \\ 
-  0.130999997258186 & - & - & - &   2 &   6 \\ 
-  0.25 &  43 &  12 & - & 273 & 268 \\ 
-  0.375 & 310 & - & - &  37 &  31 \\ 
-  0.5 & 1877 & 2493 & - & 3598 & 3888 \\ 
-  0.75 &  32 & - & - & - &  11 \\ 
-  1 & - & - & - & - &  11 \\ 
-  - & 2964 & 2796 & 4728 & 1351 & 474 \\ 
-   \hline
-\end{tabular}
-}
 \caption{Counts for Gen1Housemates (Previous version of links)} 
 \end{table}
 % latex table generated in R 3.0.1 by xtable 1.7-1 package
-% Mon May 27 22:03:46 2013
+% Mon May 27 22:40:29 2013
 \begin{table}[ht]
 \centering
 {\large
@@ -163,7 +163,7 @@ R & Implicit2004 & Implicit & Explicit & Eventual \\
 \caption{Counts for Gen2Siblings} 
 \end{table}
 % latex table generated in R 3.0.1 by xtable 1.7-1 package
-% Mon May 27 22:03:46 2013
+% Mon May 27 22:40:29 2013
 \begin{table}[ht]
 \centering
 {\large
@@ -181,7 +181,7 @@ R & Implicit2004 & Implicit & Explicit & Eventual \\
 
 
 % latex table generated in R 3.0.1 by xtable 1.7-1 package
-% Mon May 27 22:03:46 2013
+% Mon May 27 22:40:30 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrr}
@@ -189,38 +189,38 @@ R & Implicit2004 & Implicit & Explicit & Eventual \\
 Count & RImplicit2004 & RImplicit & RExplicit & RRoster & Delta \\ 
   \rowcolor{goodColor}  \hline
 1192 & 0.500 & 0.500 & 0.500 & - & 0 \\ 
-   \rowcolor{sosoColor} 1012 & - & - & 0.500 & - & -1 \\ 
+   \rowcolor{sosoColor} 1011 & - & - & 0.500 & - & -1 \\ 
    \rowcolor{goodColor} 787 & - & 0.500 & 0.500 & - & 0 \\ 
-   \rowcolor{nullColor} 388 & - & - & - & - & -3 \\ 
-   \rowcolor{sosoColor} 314 & 0.500 & - & 0.500 & - & 0 \\ 
-   \rowcolor{nullColor} 260 & - & - & - & 0.000 & -22 \\ 
+   \rowcolor{nullColor} 384 & - & - & - & - & -4 \\ 
+   \rowcolor{sosoColor} 312 & 0.500 & - & 0.500 & - & -2 \\ 
+   \rowcolor{nullColor} 280 & - & - & - & 0.000 & 20 \\ 
    \rowcolor{sosoColor} 218 & - & - & 0.250 & - & 0 \\ 
   195 & 0.500 & 0.500 & - & - & 0 \\ 
-   \rowcolor{sosoColor} 187 & 0.375 & - & 0.500 & - & 0 \\ 
+   \rowcolor{sosoColor} 185 & 0.375 & - & 0.500 & - & -2 \\ 
   108 & - & 0.500 & - & - & 0 \\ 
-   \rowcolor{nullColor} 57 & 0.500 & - & - & 0.000 & -3 \\ 
+   \rowcolor{nullColor} 60 & 0.500 & - & - & 0.000 & 3 \\ 
    \rowcolor{nullColor} 44 & 0.375 & - & - & - & 0 \\ 
   43 & 0.500 & 0.500 & - & 0.000 & 0 \\ 
   43 & - & 0.500 & - & 0.000 & 0 \\ 
    \rowcolor{nullColor} 37 & 0.125 & - & - & 0.125 & 0 \\ 
-   \rowcolor{nullColor} 35 & 0.500 & - & - & - & 0 \\ 
    \rowcolor{goodColor} 34 & 0.375 & 0.500 & 0.500 & - & 0 \\ 
+   \rowcolor{nullColor} 32 & 0.500 & - & - & - & -3 \\ 
    \rowcolor{nullColor} 30 & - & - & - & 0.125 & 0 \\ 
    \rowcolor{sosoColor} 27 & - & - & 0.000 & - & 0 \\ 
    \rowcolor{sosoColor} 25 & - & - & 0.375 & - & 0 \\ 
-  23 & - & 0.000 & - & 0.000 & 22 \\ 
    \rowcolor{sosoColor} 18 & 0.375 & - & 0.250 & - & 0 \\ 
    \rowcolor{badColor} 14 & 0.500 & 0.500 & 0.250 & - & 0 \\ 
    \rowcolor{sosoColor} 13 & 0.250 & - & 0.500 & - & 0 \\ 
   12 & 0.125 & 0.500 & - & 0.125 & 0 \\ 
    \rowcolor{sosoColor} 10 & 0.125 & - & 0.500 & - & 0 \\ 
    \rowcolor{sosoColor} 10 & 0.750 & - & 0.500 & - & 0 \\ 
-   \rowcolor{nullColor} 9 & 0.375 & - & - & 0.000 & -1 \\ 
+   \rowcolor{nullColor} 10 & 0.375 & - & - & 0.000 & 1 \\ 
    \rowcolor{nullColor} 9 & 0.250 & - & - & 0.000 & 0 \\ 
    \rowcolor{goodColor} 9 & 0.750 & 0.500 & 0.500 & - & 0 \\ 
    \rowcolor{nullColor} 8 & 0.250 & - & - & - & 0 \\ 
    \rowcolor{badColor} 8 & - & 0.500 & 0.250 & - & 0 \\ 
    \rowcolor{goodColor} 7 & 0.250 & 0.500 & 0.500 & - & 0 \\ 
+  7 & - & 0.000 & - & - & 4 \\ 
    \rowcolor{badColor} 6 & 0.500 & 0.250 & 0.500 & - & 0 \\ 
    \rowcolor{nullColor} 6 & 0.750 & - & - & - & 0 \\ 
    \rowcolor{sosoColor} 6 & - & - & 0.250 & 0.000 & 0 \\ 
@@ -234,12 +234,12 @@ Count & RImplicit2004 & RImplicit & RExplicit & RRoster & Delta \\
    \rowcolor{nullColor} 4 & 0.750 & - & - & 0.000 & 0 \\ 
   4 & - & 0.500 & - & 0.125 & 0 \\ 
    \rowcolor{sosoColor} 4 & - & - & 0.500 & 0.000 & 0 \\ 
+  3 & - & 0.000 & - & 0.000 & -20 \\ 
    \rowcolor{nullColor} 3 & 0.125 & - & - & 0.000 & 0 \\ 
   3 & 0.375 & 0.500 & - & 0.000 & 0 \\ 
    \rowcolor{badColor} 3 & - & 0.250 & 0.500 & - & 0 \\ 
    \rowcolor{badColor} 3 & - & 0.500 & 0.000 & - & 0 \\ 
-  3 & 0.500 & 0.000 & - & 0.000 & 3 \\ 
-  3 & - & 0.000 & - & - & 3 \\ 
+  3 & 0.500 & 0.000 & - & - & 3 \\ 
    \rowcolor{badColor} 2 & 0.125 & 0.500 & 0.000 & - & 0 \\ 
   2 & 0.250 & 0.500 & - & 0.000 & 0 \\ 
    \rowcolor{sosoColor} 2 & 0.250 & - & 0.250 & - & 0 \\ 
@@ -249,6 +249,9 @@ Count & RImplicit2004 & RImplicit & RExplicit & RRoster & Delta \\
    \rowcolor{badColor} 2 & - & 0.500 & 0.000 & 0.000 & 0 \\ 
   2 & - & 0.500 & 0.375 & - & 0 \\ 
    \rowcolor{sosoColor} 2 & - & - & 0.000 & 0.125 & 0 \\ 
+   \rowcolor{badColor} 2 & - & 0.000 & 0.500 & - & 1 \\ 
+   \rowcolor{badColor} 2 & 0.375 & 0.000 & 0.500 & - & 2 \\ 
+   \rowcolor{badColor} 2 & 0.500 & 0.000 & 0.500 & - & 2 \\ 
    \rowcolor{sosoColor} 1 & 0.125 & - & 0.000 & 0.125 & 0 \\ 
    \rowcolor{sosoColor} 1 & 0.125 & - & 0.000 & - & 0 \\ 
    \rowcolor{sosoColor} 1 & 0.125 & - & 0.250 & - & 0 \\ 
@@ -259,19 +262,17 @@ Count & RImplicit2004 & RImplicit & RExplicit & RRoster & Delta \\
    \rowcolor{sosoColor} 1 & 0.375 & - & 0.000 & 0.000 & 0 \\ 
   1 & 0.500 & 0.250 & - & 0.125 & 0 \\ 
   1 & 0.500 & 0.250 & - & - & 0 \\ 
+   \rowcolor{badColor} 1 & 0.500 & 0.500 & 0.062 & - & 0 \\ 
    \rowcolor{goodColor} 1 & 0.500 & 0.500 & 0.500 & 0.000 & 0 \\ 
   1 & 0.500 & 0.500 & - & 0.125 & 0 \\ 
   1 & 0.750 & 0.500 & - & 0.000 & 0 \\ 
   1 & - & 0.250 & - & 0.000 & 0 \\ 
    \rowcolor{goodColor} 1 & - & 0.500 & 0.500 & 0.000 & 0 \\ 
+   \rowcolor{sosoColor} 1 & - & - & 0.062 & - & 0 \\ 
    \rowcolor{sosoColor} 1 & - & - & 0.250 & 0.125 & 0 \\ 
    \rowcolor{sosoColor} 1 & - & - & 0.500 & 0.125 & 0 \\ 
-  1 & 0.375 & 0.000 & - & 0.000 & 1 \\ 
-   \rowcolor{badColor} 1 & 0.500 & 0.500 & 0.062 & - & 1 \\ 
-   \rowcolor{badColor} 1 & - & 0.000 & 0.500 & - & 1 \\ 
-   \rowcolor{sosoColor} 1 & - & - & 0.062 & - & 1 \\ 
-   \rowcolor{badColor} 0 & 0.500 & 0.500 & 0.131 & - & -1 \\ 
-   \rowcolor{sosoColor} 0 & - & - & 0.131 & - & -1 \\ 
+  0 & 0.500 & 0.000 & - & 0.000 & -3 \\ 
+  0 & 0.375 & 0.000 & - & 0.000 & -1 \\ 
    \hline
 \end{tabular}
 \caption{Counts for Gen1Housemates} 
