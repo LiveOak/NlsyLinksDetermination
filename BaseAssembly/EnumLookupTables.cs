@@ -21,7 +21,7 @@ namespace Nls.BaseAssembly {
 		Gen1BiodadBirthYear = 32,
 		//Gen1BiodadInHH1979 = 33,
 		Gen1BiodadBirthCountry = 34,
-		Gen1BiodadBirthState = 34,
+		Gen1BiodadBirthState = 35,
 		Gen1BiomomInHH = 40,
 		Gen1BiomomDeathAge = 41,
 		Gen1BiomomBirthYear = 42,

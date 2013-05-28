@@ -46,9 +46,10 @@ dsRaw <- dsRaw[dsRaw$RelationshipPath %in% includedRelationshipPaths, ]
 
 
 versionNumbers <- sort(unique(dsRaw$AlgorithmVersion))
-columnsToConsider <- c("RImplicit", "RExplicit", "Count")
+columnsToConsider <- c("RImplicit", "RExplicit", "RRoster", "Count")
 dsRocExplicitImplicit <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=NA_integer_)
 dsRocExplicitRoster <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=NA_integer_)
+dsRocImplicitRoster <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=NA_integer_)
 
 for( versionNumber in versionNumbers ) {
   dsSlice <- dsRaw[dsRaw$AlgorithmVersion==versionNumber, columnsToConsider]  
@@ -59,8 +60,13 @@ for( versionNumber in versionNumbers ) {
   
   goodSumExplicitRoster <- sum(dsSlice[dsSlice$RRoster==dsSlice$RExplicit, "Count"], na.rm=T)
   badSumExplicitRoster <- sum(dsSlice[abs(dsSlice$RRoster - dsSlice$RExplicit) >= .25, "Count"], na.rm=T)
-  dsRocExplicitRoster[dsRocExplicitRoster$Version==versionNumber, c("Good", "Bad")] <- c(goodSumExplicitRoster, badSumExplicitRoster)
+  dsRocExplicitRoster[dsRocExplicitRoster$Version==versionNumber, c("Good", "Bad")] <- c(goodSumExplicitRoster, badSumExplicitRoster)  
+  
+  goodSumImplicitRoster <- sum(dsSlice[dsSlice$RRoster==dsSlice$RImplicit, "Count"], na.rm=T)
+  badSumImplicitRoster <- sum(dsSlice[abs(dsSlice$RRoster - dsSlice$RImplicit) >= .25, "Count"], na.rm=T)
+  dsRocImplicitRoster[dsRocImplicitRoster$Version==versionNumber, c("Good", "Bad")] <- c(goodSumImplicitRoster, badSumImplicitRoster)
 }
+
 
 
 
@@ -70,13 +76,17 @@ for( versionNumber in versionNumbers ) {
 colorVersion <- (sequential_hcl(n=length(versionNumbers), c=c(80, 80), l = c(90, 30)))
 g1 <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Version)) +
   scale_colour_gradientn(colours=colorVersion) +#, color=ColorVersion)
-  scale_x_continuous(name="Disagreement (Implicit vs Explicit)") +#   scale_x_continuous(name="") +
+  scale_x_continuous() +#   scale_x_continuous(name="") +
   scale_y_continuous(name="Agreement") +
+  xlab("Disagreement (Implicit vs Explicit)") +
   layer(geom="path") + layer(geom="text") +
   #coord_cartesian(xlim=c(0, 8000), ylim=c(0, 8000)) + #coord_equal() +
   theme(legend.position = "none") 
 g1
 
-# g2 <- g1 %+% dsRocExplicitRoster + xlab("Disagreement (Roster vs Explicit)")
-# g2 
+g2 <- g1 %+% dsRocExplicitRoster + xlab("Disagreement (Roster vs Explicit)")
+g2 
+
+g3 <- g1 %+% dsRocImplicitRoster + xlab("Disagreement (Roster vs Implicit)")
+g3 
 (elapsed <- Sys.time() - startTime)

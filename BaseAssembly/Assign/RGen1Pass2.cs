@@ -219,8 +219,8 @@ namespace Nls.BaseAssembly.Assign {
 				return Tristate.No;
 			else if ( birthCountry == MarkerEvidence.Disconfirms )
 				return Tristate.No;
-			//else if ( birthState == MarkerEvidence.Disconfirms )
-			//   return Tristate.No;
+			else if ( birthState == MarkerEvidence.Disconfirms )
+				return Tristate.No;
 			else
 				return Tristate.DoNotKnow;
 		}
