@@ -228,43 +228,6 @@ namespace Nls.BaseAssembly {
 			const Int32 recordsAdded = 1;
 			return recordsAdded;
 		}
-		//private Int32 FromBioparentUSBorn ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1CurrentDataTable dtCurrent ) {
-		//   const Int16 year = ItemYears.Gen1BioparentUSBorn;
-		//   Item item;
-		//   MarkerType markerType;
-		//   switch ( bioparent ) {
-		//      case Bioparent.Mom: item = Item.Gen1MotherBirthCountry; markerType = MarkerType.Gen1BiomomUSBorn; break;
-		//      case Bioparent.Dad: item = Item.Gen1FatherBirthCountry; markerType = MarkerType.Gen1BiodadUSBorn; break;
-		//      default: throw new ArgumentOutOfRangeException("bioparent", bioparent, "The 'FromShareBioparent' function does not accommodate this bioparent value.");
-		//   }
-
-		//   Tristate subject1 = ParentsOfGen1Current.RetrieveUSBorn(drRelated.Subject1Tag, item, dtCurrent);
-		//   Tristate subject2 = ParentsOfGen1Current.RetrieveUSBorn(drRelated.Subject2Tag, item, dtCurrent);
-		//   MarkerEvidence shareBioparent = MarkerEvidence.Missing;
-
-		//   if ( (subject1 == Tristate.DoNotKnow) || (subject2 == Tristate.DoNotKnow) )
-		//      shareBioparent = MarkerEvidence.Missing;
-		//   else if ( subject1 != subject2 )
-		//      shareBioparent = MarkerEvidence.Disconfirms;
-		//   else if ( (subject1 == subject2) )
-		//      shareBioparent = MarkerEvidence.Consistent;
-		//   else
-		//      throw new InvalidOperationException("All the conditions should have been caught.");
-
-		//   MarkerEvidence mzEvidence = shareBioparent;
-		//   MarkerEvidence shareBiomom = MarkerEvidence.Irrelevant;
-		//   MarkerEvidence shareBiodad = MarkerEvidence.Irrelevant;
-
-		//   switch ( item ) {
-		//      case Item.Gen1MotherBirthCountry: shareBiomom = shareBioparent; break;
-		//      case Item.Gen1FatherBirthCountry: shareBiodad = shareBioparent; break;
-		//      default: throw new ArgumentOutOfRangeException("item", item, "The 'item' value isn't accommodated by this function.");
-		//   }
-		//   AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, year, mzEvidence: mzEvidence, sameGenerationEvidence: MarkerEvidence.Irrelevant,
-		//      biomomEvidence: shareBiomom, biodadEvidence: shareBiodad, biograndparentEvidence: MarkerEvidence.Ambiguous);
-		//   const Int32 recordsAdded = 1;
-		//   return recordsAdded;
-		//}
 		private Int32 FromBioparentBirthYear ( Bioparent bioparent, Int16 surveyYear, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1CurrentDataTable dtParentsOfGen1Current ) {
 			//const year = ItemYears.Gen1BioparentBirthYear;
 			Int16? birthYear1 = null;
@@ -550,4 +513,41 @@ namespace Nls.BaseAssembly {
 //   //return AddMarkerRow(extendedID, drRelated.ID, markerType, comparison.LastNonMutualNullPointsYear, mzEvidence, biodadEvidence, fromMother);
 //   //throw new NotImplementedException();
 //   return 0;
+//}
+//private Int32 FromBioparentUSBorn ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1CurrentDataTable dtCurrent ) {
+//   const Int16 year = ItemYears.Gen1BioparentUSBorn;
+//   Item item;
+//   MarkerType markerType;
+//   switch ( bioparent ) {
+//      case Bioparent.Mom: item = Item.Gen1MotherBirthCountry; markerType = MarkerType.Gen1BiomomUSBorn; break;
+//      case Bioparent.Dad: item = Item.Gen1FatherBirthCountry; markerType = MarkerType.Gen1BiodadUSBorn; break;
+//      default: throw new ArgumentOutOfRangeException("bioparent", bioparent, "The 'FromShareBioparent' function does not accommodate this bioparent value.");
+//   }
+
+//   Tristate subject1 = ParentsOfGen1Current.RetrieveUSBorn(drRelated.Subject1Tag, item, dtCurrent);
+//   Tristate subject2 = ParentsOfGen1Current.RetrieveUSBorn(drRelated.Subject2Tag, item, dtCurrent);
+//   MarkerEvidence shareBioparent = MarkerEvidence.Missing;
+
+//   if ( (subject1 == Tristate.DoNotKnow) || (subject2 == Tristate.DoNotKnow) )
+//      shareBioparent = MarkerEvidence.Missing;
+//   else if ( subject1 != subject2 )
+//      shareBioparent = MarkerEvidence.Disconfirms;
+//   else if ( (subject1 == subject2) )
+//      shareBioparent = MarkerEvidence.Consistent;
+//   else
+//      throw new InvalidOperationException("All the conditions should have been caught.");
+
+//   MarkerEvidence mzEvidence = shareBioparent;
+//   MarkerEvidence shareBiomom = MarkerEvidence.Irrelevant;
+//   MarkerEvidence shareBiodad = MarkerEvidence.Irrelevant;
+
+//   switch ( item ) {
+//      case Item.Gen1MotherBirthCountry: shareBiomom = shareBioparent; break;
+//      case Item.Gen1FatherBirthCountry: shareBiodad = shareBioparent; break;
+//      default: throw new ArgumentOutOfRangeException("item", item, "The 'item' value isn't accommodated by this function.");
+//   }
+//   AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, year, mzEvidence: mzEvidence, sameGenerationEvidence: MarkerEvidence.Irrelevant,
+//      biomomEvidence: shareBiomom, biodadEvidence: shareBiodad, biograndparentEvidence: MarkerEvidence.Ambiguous);
+//   const Int32 recordsAdded = 1;
+//   return recordsAdded;
 //}

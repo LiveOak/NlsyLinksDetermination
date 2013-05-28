@@ -46,7 +46,7 @@ sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.t
 sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.Subject1Tag, Process.tblRelatedValuesArchive.Subject2Tag,Process.tblRelatedValuesArchive.RImplicitPass1, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.R, Process.tblRelatedValuesArchive.RFull, SameGeneration
   FROM Process.tblRelatedValuesArchive INNER JOIN Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.Subject1Tag = Process.tblRelatedStructure.Subject1Tag AND Process.tblRelatedValuesArchive.Subject2Tag = Process.tblRelatedStructure.Subject2Tag 
   WHERE Process.tblRelatedStructure.RelationshipPath = ", relationshipPath, "  
-      AND (Process.tblRelatedValuesArchive.AlgorithmVersion IN (73, 69))")
+      AND (Process.tblRelatedValuesArchive.AlgorithmVersion IN (73, 65))")
 
 sql <- gsub(pattern="\\n", replacement=" ", sql)
 sqlDescription <- "SELECT * FROM Process.tblArchiveDescription" #AlgorithmVersion, Description
