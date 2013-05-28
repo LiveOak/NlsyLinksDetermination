@@ -20,10 +20,12 @@ namespace Nls.BaseAssembly {
 		Gen1BiodadDeathAge = 31,
 		Gen1BiodadBirthYear = 32,
 		//Gen1BiodadInHH1979 = 33,
+		Gen1BiodadUSBorn = 34,
 		Gen1BiomomInHH = 40,
 		Gen1BiomomDeathAge = 41,
 		Gen1BiomomBirthYear = 42,
 		//Gen1BiomomInHH1979 = 43,
+		Gen1BiomomUSBorn = 44,
 	}
 	public enum Item : short {
 		IDOfOther1979RosterGen1 = 1,

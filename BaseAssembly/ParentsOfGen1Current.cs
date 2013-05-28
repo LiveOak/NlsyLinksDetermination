@@ -309,7 +309,7 @@ namespace Nls.BaseAssembly {
 			if ( dsLinks.tblParentsOfGen1Current.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Retro.");
 
 			string select = string.Format("{0}={1} OR {2}={3}",
-				subject1Tag, dsLinks.tblParentsOfGen1Current.SubjectTagColumn.ColumnName, 
+				subject1Tag, dsLinks.tblParentsOfGen1Current.SubjectTagColumn.ColumnName,
 				subject2Tag, dsLinks.tblParentsOfGen1Current.SubjectTagColumn.ColumnName);
 			LinksDataSet.tblParentsOfGen1CurrentRow[] drs = (LinksDataSet.tblParentsOfGen1CurrentRow[])dsLinks.tblParentsOfGen1Current.Select(select);
 			//Trace.Assert(drs.Length >= 1, "There should be at least one row.");
@@ -320,20 +320,36 @@ namespace Nls.BaseAssembly {
 			}
 			return dt;
 		}
-		public static byte? RetrieveDeathAge ( Int32 subjectTag, Item item, LinksDataSet.tblParentsOfGen1CurrentDataTable dtInput ) {
+		public static Int16? RetrieveBirthYear ( Int32 subjectTag, Bioparent bioparent, LinksDataSet.tblParentsOfGen1CurrentDataTable dtInput ) {
 			if ( dtInput == null ) throw new ArgumentNullException("dtInput");
 			if ( dtInput.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Current.");
 
 			LinksDataSet.tblParentsOfGen1CurrentRow dr = dtInput.FindBySubjectTag(subjectTag);
-			switch ( item ) {
-				case Item.Gen1MotherDeathAge:
+			switch ( bioparent ) {
+				case Bioparent.Mom:
+					if ( dr.IsBiomomBirthYearEstimatedNull() ) return null;
+					else return dr.BiomomBirthYearEstimated;
+				case Bioparent.Dad:
+					if ( dr.IsBiodadBirthYearEstimatedNull() ) return null;
+					else return dr.BiodadBirthYearEstimated;
+				default:
+					throw new ArgumentOutOfRangeException("bioparent", bioparent, "The function does not accommodate that bioparent value.");
+			}
+		}
+		public static byte? RetrieveDeathAge ( Int32 subjectTag, Bioparent bioparent, LinksDataSet.tblParentsOfGen1CurrentDataTable dtInput ) {
+			if ( dtInput == null ) throw new ArgumentNullException("dtInput");
+			if ( dtInput.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Current.");
+
+			LinksDataSet.tblParentsOfGen1CurrentRow dr = dtInput.FindBySubjectTag(subjectTag);
+			switch ( bioparent ) {
+				case Bioparent.Mom:
 					if ( dr.IsBiomomDeathAgeNull() ) return null;
 					else return dr.BiomomDeathAge;
-				case Item.Gen1FatherDeathAge:
+				case Bioparent.Dad:
 					if ( dr.IsBiodadDeathAgeNull() ) return null;
 					else return dr.BiodadDeathAge;
 				default:
-					throw new ArgumentOutOfRangeException("item", item, "The function does not accommodate that item.");
+					throw new ArgumentOutOfRangeException("bioparent", bioparent, "The function does not accommodate that bioparent value.");
 			}
 		}
 		public static Tristate RetrieveUSBorn ( Int32 subjectTag, Item item, LinksDataSet.tblParentsOfGen1CurrentDataTable dtInput ) {
@@ -347,14 +363,7 @@ namespace Nls.BaseAssembly {
 				case Item.Gen1FatherBirthCountry: response = dr.BiodadUSBorn; break;
 				default: throw new ArgumentOutOfRangeException("item", item, "The function does not accommodate that item.");
 			}
-			return( CommonFunctions.TranslateYesNo( (YesNo)response));
-
-			//switch ( ynResponse ) {
-			//   case  YesNo.No: return Tristate.No;
-			//   case YesNo.Yes: return Tristate.Yes;
-			//   case -6: return Tristate.DoNotKnow;
-			//   default: throw new InvalidOperationException("The USBorn response was not recognized.");
-			//}
+			return (CommonFunctions.TranslateYesNo((YesNo)response));
 		}
 		#endregion
 	}
