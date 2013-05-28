@@ -8,7 +8,7 @@ namespace Nls.BaseAssembly {
 		public const float SiblingFull = 0.5f;
 		public const float SiblingAmbiguous = 0.375f;
 		public const float SiblingHalf = 0.25f;
-		public const float SiblingHalfOrLess = 0.131f;
+		public const float SiblingHalfOrLess = 0.0625f;
 		public const float NotRelated = 0f;
 	}
 }

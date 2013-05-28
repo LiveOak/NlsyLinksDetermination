@@ -107,6 +107,7 @@ namespace Nls.BaseAssembly.Assign {
 		private Tristate AddressImplicitBiomom ( ) {
 			Tristate implicitBiomomPass1 = (Tristate)_drValue.ImplicitShareBiomomPass1;
 			if ( implicitBiomomPass1 != Tristate.DoNotKnow ) return implicitBiomomPass1;
+			const Bioparent bioparent = Bioparent.Mom;
 
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.ImplicitShareBiomomPass1Column;
 			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
@@ -118,16 +119,18 @@ namespace Nls.BaseAssembly.Assign {
 				return newShare;
 			}
 			else {
-				MarkerEvidence biomomInHH1980 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1980, Bioparent.Mom, _dtMarkersGen1);
-				MarkerEvidence biomomInHH1978 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1978, Bioparent.Mom, _dtMarkersGen1);
-				MarkerEvidence biomomInHH1977 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1977, Bioparent.Mom, _dtMarkersGen1);
-				MarkerEvidence biomomInHH1976 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1976, Bioparent.Mom, _dtMarkersGen1);
-				return ImplicitShareBioparent(biomomInHH1980, biomomInHH1978, biomomInHH1977, biomomInHH1976);
+				MarkerEvidence usBorn = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomUSBorn, bioparent, _dtMarkersGen1);
+				MarkerEvidence inHH1980 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1980, bioparent, _dtMarkersGen1);
+				MarkerEvidence inHH1978 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1978, bioparent, _dtMarkersGen1);
+				MarkerEvidence inHH1977 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1977, bioparent, _dtMarkersGen1);
+				MarkerEvidence inHH1976 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiomomInHH, 1976, bioparent, _dtMarkersGen1);
+				return ImplicitShareBioparent(usBorn, inHH1980, inHH1978, inHH1977, inHH1976);
 			}
 		}
 		private Tristate AddressImplicitBiodad ( ) {
 			Tristate implicitBiodadPass1 = (Tristate)_drValue.ImplicitShareBiodadPass1;
 			if ( implicitBiodadPass1 != Tristate.DoNotKnow ) return implicitBiodadPass1;
+			const Bioparent bioparent = Bioparent.Dad;
 
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.ImplicitShareBiodadPass1Column;
 			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
@@ -139,11 +142,12 @@ namespace Nls.BaseAssembly.Assign {
 				return newShare;
 			}
 			else {
-				MarkerEvidence biodadInHH1980 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1980, Bioparent.Dad, _dtMarkersGen1);
-				MarkerEvidence biodadInHH1978 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1978, Bioparent.Dad, _dtMarkersGen1);
-				MarkerEvidence biodadInHH1977 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1977, Bioparent.Dad, _dtMarkersGen1);
-				MarkerEvidence biodadInHH1976 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1976, Bioparent.Dad, _dtMarkersGen1);
-				return ImplicitShareBioparent(biodadInHH1980, biodadInHH1978, biodadInHH1977, biodadInHH1976);
+				MarkerEvidence usBorn = MarkerGen1.RetrieveParentCurrentMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadUSBorn, bioparent, _dtMarkersGen1);
+				MarkerEvidence inHH1980 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1980, bioparent, _dtMarkersGen1);
+				MarkerEvidence inHH1978 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1978, bioparent, _dtMarkersGen1);
+				MarkerEvidence inHH1977 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1977, bioparent, _dtMarkersGen1);
+				MarkerEvidence inHH1976 = MarkerGen1.RetrieveParentRetroMarker(_idRelatedOlderAboutYounger, MarkerType.Gen1BiodadInHH, 1976, bioparent, _dtMarkersGen1);
+				return ImplicitShareBioparent(usBorn, inHH1980, inHH1978, inHH1977, inHH1976);
 			}
 		}
 		private Tristate AddressExplicitBiomom ( ) {
@@ -194,7 +198,7 @@ namespace Nls.BaseAssembly.Assign {
 			else
 				return CommonFunctions.TakePriority(explicitShare, implicitShare);
 		}
-		private Tristate ImplicitShareBioparent ( MarkerEvidence inHH1980, MarkerEvidence inHH1978, MarkerEvidence inHH1977, MarkerEvidence inHH1976 ) {//{ 1980, 1979, 1978, 1977, 1976 }
+		private Tristate ImplicitShareBioparent ( MarkerEvidence usBorn, MarkerEvidence inHH1980, MarkerEvidence inHH1978, MarkerEvidence inHH1977, MarkerEvidence inHH1976 ) {//{ 1980, 1979, 1978, 1977, 1976 }
 			if ( inHH1980 == MarkerEvidence.StronglySupports )
 				return Tristate.Yes;
 			else if ( inHH1980 == MarkerEvidence.Disconfirms )
@@ -210,6 +214,8 @@ namespace Nls.BaseAssembly.Assign {
 			else if ( inHH1976 == MarkerEvidence.StronglySupports )
 				return Tristate.Yes;
 			else if ( inHH1976 == MarkerEvidence.Disconfirms )
+				return Tristate.No;
+			else if ( usBorn == MarkerEvidence.Disconfirms )
 				return Tristate.No;
 			else
 				return Tristate.DoNotKnow;
