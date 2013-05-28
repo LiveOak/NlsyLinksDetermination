@@ -205,7 +205,7 @@ namespace Nls.BaseAssembly.Assign {
 				return CommonFunctions.TakePriority(explicitShare, implicitShare);
 		}
 		private Tristate ImplicitShareBioparent ( MarkerEvidence inHH1980, MarkerEvidence inHH1978, MarkerEvidence inHH1977, MarkerEvidence inHH1976, MarkerEvidence birthCountry, MarkerEvidence birthState,
-			MarkerEvidence birthYearAskedIn1988, MarkerEvidence birthYearAskedIn1987) {//{ 1980, 1979, 1978, 1977, 1976 }
+			MarkerEvidence birthYearAskedIn1988, MarkerEvidence birthYearAskedIn1987) {
 
 			if ( inHH1980 == MarkerEvidence.StronglySupports )
 				return Tristate.Yes;
@@ -235,10 +235,10 @@ namespace Nls.BaseAssembly.Assign {
 				return Tristate.No;
 			//else if ( birthYearAskedIn1987 == MarkerEvidence.Supports )
 			//   return Tristate.Yes;
-			else if ( birthYearAskedIn1988 == MarkerEvidence.Unlikely )
-				return Tristate.No;
-			else if ( birthYearAskedIn1987 == MarkerEvidence.Unlikely )
-				return Tristate.No;
+			//else if ( birthYearAskedIn1988 == MarkerEvidence.Unlikely )
+			//   return Tristate.No;
+			//else if ( birthYearAskedIn1987 == MarkerEvidence.Unlikely )
+			//   return Tristate.No;
 			else
 				return Tristate.DoNotKnow;
 		}
