@@ -9,13 +9,13 @@ library(plyr)
 
 #Gen2:
 # oName <- "HeightZGender" #Will October 2012
-oName <- "HeightZGenderAge" #Will October 2012
+# oName <- "HeightZGenderAge" #Will October 2012
 # oName <- "HeightStandarizedFor19to25" #Kelly 2011
 # oName <- "MathStandardized"
 # oName <- "WeightStandardizedForAge19To25"
 #Gen1:
 # oName <- "HeightZGender"
-# oName <- "HeightZGenderAge"
+oName <- "HeightZGenderAge"
 # oName <- "WeightZGender"
 # oName <- "WeightZGenderAge"
 # oName <- "BmiLateTeens"
@@ -46,7 +46,7 @@ sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.t
 sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.Subject1Tag, Process.tblRelatedValuesArchive.Subject2Tag,Process.tblRelatedValuesArchive.RImplicitPass1, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.R, Process.tblRelatedValuesArchive.RFull, SameGeneration
   FROM Process.tblRelatedValuesArchive INNER JOIN Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.Subject1Tag = Process.tblRelatedStructure.Subject1Tag AND Process.tblRelatedValuesArchive.Subject2Tag = Process.tblRelatedStructure.Subject2Tag 
   WHERE Process.tblRelatedStructure.RelationshipPath = ", relationshipPath, "  
-      AND (Process.tblRelatedValuesArchive.AlgorithmVersion IN (72, 69))")
+      AND (Process.tblRelatedValuesArchive.AlgorithmVersion IN (73, 69))")
 
 sql <- gsub(pattern="\\n", replacement=" ", sql)
 sqlDescription <- "SELECT * FROM Process.tblArchiveDescription" #AlgorithmVersion, Description
