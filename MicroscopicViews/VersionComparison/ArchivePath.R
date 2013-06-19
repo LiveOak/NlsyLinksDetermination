@@ -2,8 +2,8 @@ rm(list=ls(all=TRUE))
 require(RODBC)
 require(ggplot2)
 require(colorspace)
-# includedRelationshipPaths <- c(2)
-includedRelationshipPaths <- c(1)
+includedRelationshipPaths <- c(2)
+# includedRelationshipPaths <- c(1)
 archivePath <- "F:/Projects/Nls/NlsyLinksDetermination/MicroscopicViews/CrosstabHistoryArchive.csv"
 
 dsArchive <- read.csv(archivePath)
@@ -17,14 +17,15 @@ deviceWidth <-4.4 #20 #10 #6.5
 # windows(width=deviceWidth, height=deviceHeight)
 
 startTime <- Sys.time()
-sql <- "SELECT Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.RImplicit, 
-    Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RRoster, 
-    Process.tblRelatedValuesArchive.AlgorithmVersion, COUNT(Process.tblRelatedValuesArchive.ID) AS Count
-FROM Process.tblRelatedValuesArchive INNER JOIN
-    Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.Subject1Tag = Process.tblRelatedStructure.Subject1Tag AND 
-    Process.tblRelatedValuesArchive.Subject2Tag = Process.tblRelatedStructure.Subject2Tag
-GROUP BY Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RRoster, 
-    Process.tblRelatedValuesArchive.AlgorithmVersion"
+sql <- "SELECT     Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RExplicit, 
+                      Process.tblRelatedValuesArchive.RRoster, Process.tblRelatedValuesArchive.RRoster AS Expr1, Process.tblRelatedValuesArchive.AlgorithmVersion, 
+                      COUNT(Process.tblRelatedValuesArchive.ID) AS Count, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RFull
+FROM         Process.tblRelatedValuesArchive INNER JOIN
+                      Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.Subject1Tag = Process.tblRelatedStructure.Subject1Tag AND 
+                      Process.tblRelatedValuesArchive.Subject2Tag = Process.tblRelatedStructure.Subject2Tag
+GROUP BY Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RExplicit, 
+                      Process.tblRelatedValuesArchive.RRoster, Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedValuesArchive.RImplicit2004, 
+                      Process.tblRelatedValuesArchive.RFull"
 
 # sql <- "SELECT     Process.tblRelatedValuesArchive.ID, Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.Subject1Tag, 
 #                       Process.tblRelatedValuesArchive.Subject2Tag, Process.tblRelatedValuesArchive.MultipleBirth, Process.tblRelatedValuesArchive.IsMz, 
@@ -43,13 +44,12 @@ odbcCloseAll()
 dsRaw <- rbind(dsRaw, dsArchive)
 dsRaw <- dsRaw[dsRaw$RelationshipPath %in% includedRelationshipPaths, ]
 
-
-
 versionNumbers <- sort(unique(dsRaw$AlgorithmVersion))
-columnsToConsider <- c("RImplicit", "RExplicit", "RRoster", "Count")
+columnsToConsider <- c("RImplicit", "RExplicit", "RRoster", "RImplicit2004", "RFull", "Count")
 dsRocExplicitImplicit <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=NA_integer_)
 dsRocExplicitRoster <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=NA_integer_)
 dsRocImplicitRoster <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=NA_integer_)
+dsRocImplicit2004RFull <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=NA_integer_)
 
 for( versionNumber in versionNumbers ) {
   dsSlice <- dsRaw[dsRaw$AlgorithmVersion==versionNumber, columnsToConsider]  
@@ -65,6 +65,10 @@ for( versionNumber in versionNumbers ) {
   goodSumImplicitRoster <- sum(dsSlice[dsSlice$RRoster==dsSlice$RImplicit, "Count"], na.rm=T)
   badSumImplicitRoster <- sum(dsSlice[abs(dsSlice$RRoster - dsSlice$RImplicit) >= .25, "Count"], na.rm=T)
   dsRocImplicitRoster[dsRocImplicitRoster$Version==versionNumber, c("Good", "Bad")] <- c(goodSumImplicitRoster, badSumImplicitRoster)
+  
+  goodSumImplicit2004RFull <- sum(dsSlice[dsSlice$RImplicit2004 ==dsSlice$RFull, "Count"], na.rm=T)
+  badSumImplicit2004RFull <- sum(dsSlice[abs(dsSlice$RImplicit2004 - dsSlice$RFull) >= .25, "Count"], na.rm=T)
+  dsRocImplicit2004RFull[dsRocImplicit2004Final$Version==versionNumber, c("Good", "Bad")] <- c(goodSumImplicit2004RFull, badSumImplicit2004RFull)
 }
 
 
@@ -74,19 +78,20 @@ for( versionNumber in versionNumbers ) {
 #colorVersion <- factor(sequential_hcl(n=lengWth(versionNumbers)))
 #names(colorVersion) <- versionNumbers
 colorVersion <- (sequential_hcl(n=length(versionNumbers), c=c(80, 80), l = c(90, 30)))
-g1 <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Version)) +
+g <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Version)) +
   scale_colour_gradientn(colours=colorVersion) +#, color=ColorVersion)
   scale_x_continuous() +#   scale_x_continuous(name="") +
   scale_y_continuous(name="Agreement") +
   xlab("Disagreement (Implicit vs Explicit)") +
   layer(geom="path") + layer(geom="text") +
-  #coord_cartesian(xlim=c(0, 8000), ylim=c(0, 8000)) + #coord_equal() +
-  theme(legend.position = "none") 
-g1
+#   coord_cartesian(xlim=c(0, 8000), ylim=c(0, 8000)) + #coord_equal() +
+  theme_bw() + theme(legend.position = "none") 
+g
 
-g2 <- g1 %+% dsRocExplicitRoster + xlab("Disagreement (Roster vs Explicit)")
-g2 
+g %+% dsRocExplicitRoster + xlab("Disagreement (Roster vs Explicit)")
 
-g3 <- g1 %+% dsRocImplicitRoster + xlab("Disagreement (Roster vs Implicit)")
-g3 
+g %+% dsRocImplicitRoster + xlab("Disagreement (Roster vs Implicit)")
+
+g %+% dsRocImplicit2004RFull + xlab("Disagreement (RFull vs Implicit2004)") + coord_cartesian(xlim=c(0, 9000), ylim=c(0, 9000))
+
 (elapsed <- Sys.time() - startTime)
