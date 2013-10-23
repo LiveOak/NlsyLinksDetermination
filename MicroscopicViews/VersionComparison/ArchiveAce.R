@@ -112,10 +112,18 @@ if( relationshipPath==2 ) {
   
 }
 
+#They're called 'dirty' because the final cleaning stage hasn't occurred yet (ie, removing unwanted R groups)
 dsDirtyNewer <- CreatePairLinksSingleEntered(outcomeDataset=dsOutcomes, linksPairDataset=dsLinkingNewer, linksNames=rVersions, outcomeNames=oName)
 dsDirtyOlder <- CreatePairLinksSingleEntered(outcomeDataset=dsOutcomes, linksPairDataset=dsLinkingOlder, linksNames=rVersions, outcomeNames=oName)
 rm(dsOutcomes, dsLinkingNewer, dsLinkingOlder)
 
+table(dsDirtyNewer$RFull)
+mean(!is.na(dsDirtyNewer$RFull)) 
+mean(!is.na(dsDirtyNewer[!is.na(dsDirtyNewer[, oName_1]) & !is.na(dsDirtyNewer[, oName_2]), "RFull"])) 
+
+# table(dsRaw$R)
+# mean(!is.na(dsRaw$R)) 
+# mean(!is.na(dsRaw[!is.na(dsRaw[, oName_1]) & !is.na(dsRaw[, oName_2]), "R"])) 
 
 
 ## @knitr EvalGroup

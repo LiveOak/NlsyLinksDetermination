@@ -45,34 +45,41 @@ dsRaw <- sqlQuery(channel, sql, stringsAsFactors=F)
 odbcCloseAll()
 # colnames(dsRaw) # head(dsRaw)
 # colnames(dsArchive)
-# dsRaw <- plyr::rbind.fill(dsRaw, dsArchive)
-dsRaw <- dsRaw[dsRaw$RelationshipPath %in% includedRelationshipPaths, ]
+dsRaw <- plyr::rbind.fill(dsRaw, dsArchive)
+dsClean <- dsRaw[dsRaw$RelationshipPath %in% includedRelationshipPaths, ]
 
-versionNumbers <- sort(unique(dsRaw$AlgorithmVersion))
+versionNumbers <- sort(unique(dsClean$AlgorithmVersion))
 columnsToConsider <- c("RImplicit", "RExplicit", "RRoster", "RImplicit2004", "RFull", "Count")
 dsRocExplicitImplicit <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=NA_integer_)
 dsRocExplicitRoster <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=NA_integer_)
 dsRocImplicitRoster <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=NA_integer_)
 dsRocImplicit2004RFull <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=NA_integer_)
+# dsProportionLinked <- data.frame(Version=versionNumbers, Total=NA_integer_, WithHeight=NA_integer_)
+
+# dsOutcomes <- read.csv(file="./LinksForDistribution/Outcomes/ExtraOutcomes79.csv", stringsAsFactors=F)
 
 for( versionNumber in versionNumbers ) {
-  dsSlice <- dsRaw[dsRaw$AlgorithmVersion==versionNumber, columnsToConsider]  
+  dsSliceRaw <- dsRaw[dsClean$AlgorithmVersion==versionNumber, columnsToConsider]  
+  dsSliceClean <- dsClean[dsClean$AlgorithmVersion==versionNumber, columnsToConsider]  
   
-  goodSumExplicitImplicit <- sum(dsSlice[dsSlice$RImplicit==dsSlice$RExplicit, "Count"], na.rm=T)
-  badSumExplicitImplicit <- sum(dsSlice[abs(dsSlice$RImplicit - dsSlice$RExplicit) >= .25, "Count"], na.rm=T)
+  goodSumExplicitImplicit <- sum(dsSliceClean[dsSliceClean$RImplicit==dsSliceClean$RExplicit, "Count"], na.rm=T)
+  badSumExplicitImplicit <- sum(dsSliceClean[abs(dsSliceClean$RImplicit - dsSliceClean$RExplicit) >= .25, "Count"], na.rm=T)
   dsRocExplicitImplicit[dsRocExplicitImplicit$Version==versionNumber, c("Good", "Bad")] <- c(goodSumExplicitImplicit, badSumExplicitImplicit)
   
-  goodSumExplicitRoster <- sum(dsSlice[dsSlice$RRoster==dsSlice$RExplicit, "Count"], na.rm=T)
-  badSumExplicitRoster <- sum(dsSlice[abs(dsSlice$RRoster - dsSlice$RExplicit) >= .25, "Count"], na.rm=T)
+  goodSumExplicitRoster <- sum(dsSliceClean[dsSliceClean$RRoster==dsSliceClean$RExplicit, "Count"], na.rm=T)
+  badSumExplicitRoster <- sum(dsSliceClean[abs(dsSliceClean$RRoster - dsSliceClean$RExplicit) >= .25, "Count"], na.rm=T)
   dsRocExplicitRoster[dsRocExplicitRoster$Version==versionNumber, c("Good", "Bad")] <- c(goodSumExplicitRoster, badSumExplicitRoster)  
   
-  goodSumImplicitRoster <- sum(dsSlice[dsSlice$RRoster==dsSlice$RImplicit, "Count"], na.rm=T)
-  badSumImplicitRoster <- sum(dsSlice[abs(dsSlice$RRoster - dsSlice$RImplicit) >= .25, "Count"], na.rm=T)
+  goodSumImplicitRoster <- sum(dsSliceClean[dsSliceClean$RRoster==dsSliceClean$RImplicit, "Count"], na.rm=T)
+  badSumImplicitRoster <- sum(dsSliceClean[abs(dsSliceClean$RRoster - dsSliceClean$RImplicit) >= .25, "Count"], na.rm=T)
   dsRocImplicitRoster[dsRocImplicitRoster$Version==versionNumber, c("Good", "Bad")] <- c(goodSumImplicitRoster, badSumImplicitRoster)
   
-  goodSumImplicit2004RFull <- sum(dsSlice[dsSlice$RImplicit2004 ==dsSlice$RFull, "Count"], na.rm=T)
-  badSumImplicit2004RFull <- sum(dsSlice[abs(dsSlice$RImplicit2004 - dsSlice$RFull) >= .25, "Count"], na.rm=T)
+  goodSumImplicit2004RFull <- sum(dsSliceClean[dsSliceClean$RImplicit2004 ==dsSliceClean$RFull, "Count"], na.rm=T)
+  badSumImplicit2004RFull <- sum(dsSliceClean[abs(dsSliceClean$RImplicit2004 - dsSliceClean$RFull) >= .25, "Count"], na.rm=T)
   dsRocImplicit2004RFull[dsRocImplicit2004RFull$Version==versionNumber, c("Good", "Bad")] <- c(goodSumImplicit2004RFull, badSumImplicit2004RFull)
+  
+#   dsLink <- CreatePairLinksSingleEntered(outcomeDataset=dsOutcomes, linksPairDataset=dsSliceRaw, linksNames=rVersions, outcomeNames=oName)
+  
 }
 
 
@@ -81,8 +88,8 @@ for( versionNumber in versionNumbers ) {
 #dsRoc$ColorVersion <- sequential_hcl(n=length(versionNumbers))
 #colorVersion <- factor(sequential_hcl(n=lengWth(versionNumbers)))
 #names(colorVersion) <- versionNumbers
-colorVersion <- (sequential_hcl(n=length(versionNumbers), c=c(80, 80), l = c(90, 30)))
-g <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Version)) +
+colorVersion <- sequential_hcl(n=length(versionNumbers), c=c(80, 80), l = c(90, 30))
+g1 <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Version)) +
   scale_colour_gradientn(colours=colorVersion) +#, color=ColorVersion)
   scale_x_continuous() +#   scale_x_continuous(name="") +
   scale_y_continuous(name="Agreement") +
@@ -90,12 +97,17 @@ g <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Versi
   layer(geom="path") + layer(geom="text") +
 #   coord_cartesian(xlim=c(0, 8000), ylim=c(0, 8000)) + #coord_equal() +
   theme_bw() + theme(legend.position = "none") 
-g
 
-g %+% dsRocExplicitRoster + xlab("Disagreement (Roster vs Explicit)")
+# g1
+ggsave(filename="./MicroscopicViews/VersionComparison/RocExplicitVsImplicit.png", plot=g1)
 
-g %+% dsRocImplicitRoster + xlab("Disagreement (Roster vs Implicit)")
+g2 <- g1 %+% dsRocExplicitRoster + xlab("Disagreement (Roster vs Explicit)")
+ggsave(filename="./MicroscopicViews/VersionComparison/RocRosterVsExplicit.png", plot=g2)
 
-g %+% dsRocImplicit2004RFull + xlab("Disagreement (RFull vs Implicit2004)") + coord_cartesian(xlim=c(0, 9000), ylim=c(0, 9000))
+g3 <- g1 %+% dsRocImplicitRoster + xlab("Disagreement (Roster vs Implicit)")
+ggsave(filename="./MicroscopicViews/VersionComparison/RocRosterVsImplicit.png", plot=g3)
+
+g4 <- g1 %+% dsRocImplicit2004RFull + xlab("Disagreement (RFull vs Implicit2004)") + coord_cartesian(xlim=c(0, 9000), ylim=c(0, 9000))
+ggsave(filename="./MicroscopicViews/VersionComparison/RocRFullVsImplicit2004.png", plot=g4)
 
 (elapsed <- Sys.time() - startTime)
