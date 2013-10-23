@@ -183,6 +183,7 @@ namespace LinksGui {
 			//WriteXml(_dsLinks.tblRelatedValues);
 		}
 		private void btnRelatedValuesArchive_Click ( object sender, RoutedEventArgs e ) {
+            
 			Int16 algorithmVersion = Int16.Parse(txtAlogrithmNumber.Text);
 			string message = BA.RelatedValues.Archive(algorithmVersion, _dsLinks);
 			Trace.WriteLine(message);
