@@ -46,13 +46,13 @@ sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.t
 sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.Subject1Tag, Process.tblRelatedValuesArchive.Subject2Tag,Process.tblRelatedValuesArchive.RImplicitPass1, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.R, Process.tblRelatedValuesArchive.RFull, SameGeneration
   FROM Process.tblRelatedValuesArchive INNER JOIN Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.Subject1Tag = Process.tblRelatedStructure.Subject1Tag AND Process.tblRelatedValuesArchive.Subject2Tag = Process.tblRelatedStructure.Subject2Tag 
   WHERE Process.tblRelatedStructure.RelationshipPath = ", relationshipPath, "  
-      AND (Process.tblRelatedValuesArchive.AlgorithmVersion IN (73, 65))")
+      AND (Process.tblRelatedValuesArchive.AlgorithmVersion IN (73, 75))")
 
 sql <- gsub(pattern="\\n", replacement=" ", sql)
 sqlDescription <- "SELECT * FROM Process.tblArchiveDescription" #AlgorithmVersion, Description
 
 startTime <- Sys.time()
-channel <- odbcConnect(dsn="BeeNlsLinks")
+channel <- RODBC::odbcDriverConnect("driver={SQL Server};Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 # odbcGetInfo(channel)
 
 dsRaw <- sqlQuery(channel, sql, stringsAsFactors=F)
@@ -86,7 +86,7 @@ relationshipPathPretty <- "RelationshipPathPrettyNotSet"
 if( relationshipPath==1 ) {
   #rVersions <- c("R", "RPass1",  "RExplicit", "RExplicitPass1", "RImplicit2004")
   rVersions <- c("R", "RFull", "RExplicit", "RImplicit", "RImplicitPass1", "RImplicit2004")
-  pathInput <- "F:/Projects/Nls/NlsyLinksDetermination/LinksForDistribution/Outcomes/ExtraOutcomes79.csv"
+  pathInput <- "./LinksForDistribution/Outcomes/ExtraOutcomes79.csv"
   dsOutcomes <- read.csv(file=pathInput, stringsAsFactors=F)
 #   dsOutcomes$AfqtRescaled2006Gaussified <- qnorm(dsOutcomes[, "AfqtRescaled2006"]) #convert from roughly uniform distribution [0, 100], to something Guassianish.
 #   dsOutcomes$AfqtRescaled2006Gaussified <- pmax(pmin(dsOutcomes$AfqtRescaled2006Gaussified, 3.3), -3.3) #The scale above had 0s and 100s, so clamp that in at +/-3.3.

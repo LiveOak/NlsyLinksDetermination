@@ -17,13 +17,16 @@
 
 <<setup, echo=FALSE>>=
 options(width=68) #Doesn't seem to affect the 'newerDescription' below
+
+#Set the chunks' working directory to the repository's base directory; this assumes the report is nested inside of two directories.
+opts_knit$set(root.dir='../../')  #Don't combine this call with any other chunk -espeically one that uses file paths.
 @
 
 <<echo=FALSE>>=
 library(formatR)
 library(stringr)
 rm(list=ls(all=TRUE)) #Clear all the variables before starting a new run.
-pathCode <- "F:/Projects/Nls/NlsyLinksDetermination/MicroscopicViews/VersionComparison/ArchiveComparison.R"
+pathCode <- "./MicroscopicViews/VersionComparison/ArchiveComparison.R"
 source(pathCode)
 @
 % \textbf{RelationshipPaths Considered}: \Sexpr{includedRelationshipPaths};\\
@@ -37,7 +40,7 @@ cat(str_wrap(paste("Older Links:", olderDescription), width=80))
 @
 
 \begin{figure}[htbp]
-<<fig=true, echo=FALSE, fig.width=3.2, fig.height=1.5>>=
+<<echo=FALSE, fig.width=3.2, fig.height=1.5>>=
 if( 1 %in% includedRelationshipPaths ) {
   CreateRoc(relationshipPathID=1)
 }

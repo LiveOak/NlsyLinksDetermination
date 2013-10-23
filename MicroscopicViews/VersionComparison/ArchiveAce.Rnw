@@ -17,11 +17,17 @@
 
 \setlength{\parindent}{0pt}%http://tex.stackexchange.com/questions/49188/how-to-insert-vertical-space-between-paragraphs
 
+
+<<echo=FALSE>>=
+#Set the chunks' working directory to the repository's base directory; this assumes the report is nested inside of two directories.
+opts_knit$set(root.dir='../../')  #Don't combine this call with any other chunk -espeically one that uses file paths.
+@
+
 <<echo=FALSE>>=
 library(stringr)
-pathDirectory <- getwd() #"F:/Projects/Nls/Links2011/MicroscopicViews/VersionComparison/"
+# pathDirectory <- getwd() #"F:/Projects/Nls/Links2011/MicroscopicViews/VersionComparison/"
 # setwd(dir=pathDirectory)
-read_chunk(file.path(pathDirectory, "ArchiveAce.R"))
+read_chunk("./MicroscopicViews/VersionComparison/ArchiveAce.R")
 @
 
 <<Setup, echo=FALSE, tidy=TRUE>>=

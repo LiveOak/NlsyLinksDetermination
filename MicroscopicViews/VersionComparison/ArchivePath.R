@@ -1,13 +1,15 @@
 rm(list=ls(all=TRUE))
 require(RODBC)
 require(ggplot2)
+require(plyr)
 require(colorspace)
 includedRelationshipPaths <- c(2)
 # includedRelationshipPaths <- c(1)
-archivePath <- "F:/Projects/Nls/NlsyLinksDetermination/MicroscopicViews/CrosstabHistoryArchive.csv"
+archivePath <- "./MicroscopicViews/CrosstabHistoryArchive.csv"
 
 dsArchive <- read.csv(archivePath)
-dsArchive <- dsArchive[, -3] #Drop RImplicit2004 column
+# dsArchive <- dsArchive[, -3] #Drop RImplicit2004 column
+dsArchive$RFull <- NA_real_
 
 
 deviceWidth <-4.4 #20 #10 #6.5
@@ -18,7 +20,7 @@ deviceWidth <-4.4 #20 #10 #6.5
 
 startTime <- Sys.time()
 sql <- "SELECT     Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RExplicit, 
-                      Process.tblRelatedValuesArchive.RRoster, Process.tblRelatedValuesArchive.RRoster AS Expr1, Process.tblRelatedValuesArchive.AlgorithmVersion, 
+                      Process.tblRelatedValuesArchive.RRoster, Process.tblRelatedValuesArchive.AlgorithmVersion, 
                       COUNT(Process.tblRelatedValuesArchive.ID) AS Count, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RFull
 FROM         Process.tblRelatedValuesArchive INNER JOIN
                       Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.Subject1Tag = Process.tblRelatedStructure.Subject1Tag AND 
@@ -37,11 +39,13 @@ GROUP BY Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesA
 # FROM         Process.tblRelatedValuesArchive INNER JOIN
 #                       Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.Subject1Tag = Process.tblRelatedStructure.Subject1Tag AND 
 #                       Process.tblRelatedValuesArchive.Subject2Tag = Process.tblRelatedStructure.Subject2Tag"
-channel <- odbcConnect(dsn="BeeNlsLinks")
+channel <- RODBC::odbcDriverConnect("driver={SQL Server};Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 odbcGetInfo(channel)
 dsRaw <- sqlQuery(channel, sql, stringsAsFactors=F)
 odbcCloseAll()
-dsRaw <- rbind(dsRaw, dsArchive)
+# colnames(dsRaw) # head(dsRaw)
+# colnames(dsArchive)
+# dsRaw <- plyr::rbind.fill(dsRaw, dsArchive)
 dsRaw <- dsRaw[dsRaw$RelationshipPath %in% includedRelationshipPaths, ]
 
 versionNumbers <- sort(unique(dsRaw$AlgorithmVersion))
@@ -68,7 +72,7 @@ for( versionNumber in versionNumbers ) {
   
   goodSumImplicit2004RFull <- sum(dsSlice[dsSlice$RImplicit2004 ==dsSlice$RFull, "Count"], na.rm=T)
   badSumImplicit2004RFull <- sum(dsSlice[abs(dsSlice$RImplicit2004 - dsSlice$RFull) >= .25, "Count"], na.rm=T)
-  dsRocImplicit2004RFull[dsRocImplicit2004Final$Version==versionNumber, c("Good", "Bad")] <- c(goodSumImplicit2004RFull, badSumImplicit2004RFull)
+  dsRocImplicit2004RFull[dsRocImplicit2004RFull$Version==versionNumber, c("Good", "Bad")] <- c(goodSumImplicit2004RFull, badSumImplicit2004RFull)
 }
 
 

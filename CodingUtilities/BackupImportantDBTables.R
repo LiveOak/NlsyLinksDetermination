@@ -1,9 +1,10 @@
 require(RODBC)
 rm(list=ls(all=TRUE))
 
-path <- "F:/Projects/Nls/NlsyLinksDetermination/DBFiles/BackupOfNonSubjectData"
+path <- "./DBFiles/BackupOfNonSubjectData"
 
-channel <- odbcConnect("BeeNlsLinks")
+# channel <- odbcConnect("BeeNlsLinks", uid="NlsyReadWrite", pwd="nophi")
+channel <- RODBC::odbcDriverConnect("driver={SQL Server};Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 
 dsItem <- sqlQuery(channel, paste("SELECT * FROM Process.tblItem", sep=""))
 dsLUExtractSource <- sqlQuery(channel, paste("SELECT * FROM Process.tblLUExtractSource", sep=""))
