@@ -20,8 +20,6 @@ namespace Nls.BaseAssembly {
 		//public readonly static Int16[] Gen1BioparentBirthMonth = ItemYears.Gen1BioparentBirthYear;
 		public readonly static Int16[] Gen1BioparentAge = ItemYears.Gen1BioparentBirthYear;
 		
-		
-		
 		public readonly static Int16[] Gen2ShareBiodad = { 2006, 2008, 2010 };
 
 		public readonly static Int16[] FatherAsthmaGen2 = { 2004, 2006, 2008 };
@@ -49,6 +47,5 @@ namespace Nls.BaseAssembly {
 		public readonly static Int16[] Gen2CFatherInHH = { 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1992, 1993, 1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010 };//No 1991
 		public readonly static Int16[] Gen2CFatherAlive = { 1984, 1985, 1986, 1988, 1990, 1992, 1993, 1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010 }; //No 1987, 1989, 1991 (but 1993 is present)
 		public readonly static Int16[] Gen2CFatherDistanceFromMotherFuzzyCeiling = { 1984, 1985, 1986, 1988, 1990, 1992, 1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010 };//No odd years after 1985
-
 	}
 }

@@ -37,8 +37,7 @@ namespace Nls.BaseAssembly {
 			950300, //'STEP-SISTER' on roster (ie, #40), but in 2006 says 950400 shares biomom (but not biodad).
 			950400, //'STEP-BROTHER' on roster (ie, #39), but in 2006 says 950300 shares biomom (but not biodad).
 			967300, //'STEP-BROTHER' on roster (ie, #39), but in 2006 says 967400 shares biomom (but not biodad).
-			967400  //'STEP-BROTHER' on roster (ie, #39), but in 2006 says 967300 shares biomom (but not biodad).
-			
+			967400  //'STEP-BROTHER' on roster (ie, #39), but in 2006 says 967300 shares biomom (but not biodad).			
 		};
 	}
 }

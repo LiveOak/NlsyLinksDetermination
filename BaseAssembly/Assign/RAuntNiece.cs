@@ -120,8 +120,6 @@ namespace Nls.BaseAssembly.Assign {
 			else _rPeek = (float)(RCoefficients.ParentChild * drValuesOfGen1Housemates.RPeek);
 		}
 		#endregion
-		#region Public Methods
-		#endregion
 		#region Private Methods
 		private LinksDataSet.tblRelatedValuesRow Gen1HousematesValues ( Int32 auntTag, Int32 nieceTag ) {
 			RelationshipPath path = RelationshipPath.Gen1Housemates;

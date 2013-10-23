@@ -16,4 +16,4 @@
 		//   return dsLinks.tblSubject.Single(dr => dr.SubjectID == subjectID && dr.Generation == (byte)generation).SubjectTag;
 		//}
 
-				//byte maxLoopIndex = (from dr in drsForLoopIndex select dr.LoopIndex).Max();
+		//byte maxLoopIndex = (from dr in drsForLoopIndex select dr.LoopIndex).Max();
