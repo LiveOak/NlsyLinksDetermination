@@ -51,10 +51,13 @@ dsProportionLinkedLong <- reshape2::melt(dsProportionLinked, id.vars="Version")
 dsProportionLinkedLong <- plyr::rename(dsProportionLinkedLong, replace=c("variable"="Variable", "value"="Value"))
 
 g <- ggplot(dsProportionLinkedLong, aes(x=Version, y=Value, color=Variable, shape=Variable)) +
-  geom_line() +
-  geom_point() +
+  geom_line(alpha=.7) +
+  geom_point(alpha=.7) +
+  scale_color_brewer(type="qual") +
   scale_y_continuous(name="Percent Linked", labels=percent) +
   coord_cartesian(ylim=c(.85, 1)) + 
-  theme_bw() + theme(legend.position = "none") 
+  theme_bw() + 
+  theme(legend.position = c(1, 0), legend.justification=c(1,0))
+  #theme(legend.position = "none") 
 # g
 ggsave(filename="./MicroscopicViews/VersionComparison/ProportionLinked.png", plot=g)
