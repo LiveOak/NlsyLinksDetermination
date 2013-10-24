@@ -46,7 +46,7 @@ for( versionNumber in versionNumbers ) {
 (elapsed <- Sys.time() - startTime)
 
 
-# subset(dsSlice, select = c("Subject1Tag", "Subject2Tag", linksNames))
+# dsProportionLinkedLong <- melt()
 
 
 g <- ggplot(dsProportionLinked, aes(x=Version)) +

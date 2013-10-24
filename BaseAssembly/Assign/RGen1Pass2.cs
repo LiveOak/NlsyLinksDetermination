@@ -254,6 +254,8 @@ namespace Nls.BaseAssembly.Assign {
                 return null;
             else if( sameGeneration == Tristate.No )
                 return null;
+            else if( sameGeneration == Tristate.DoNotKnow )
+                return null;
             else
                 return (float)rFull.Value;
         }
