@@ -98,7 +98,8 @@ namespace Nls.BaseAssembly.Assign {
 				_rFull = CommonFunctions.TranslateToR(shareBiomom: shareBiomom, shareBiodad: shareBiodad, mustDecide: true);
 			}
 
-			_r = CalculateR(_rFull);
+            LinksDataSet.tblRosterGen1Row drRoster = _dsLinks.tblRosterGen1.FindByRelatedID(_drValue.ID);
+            _r = CalculateR(_rFull, (Tristate)drRoster.SameGeneration);
 		}
 		#endregion
 		#region Public Methods
@@ -246,16 +247,16 @@ namespace Nls.BaseAssembly.Assign {
             else
                 return Tristate.DoNotKnow;
         }
-		private static float? CalculateR ( float? rFull ) {
-			if ( !rFull.HasValue )
-				return null;
+        private static float? CalculateR( float? rFull, Tristate sameGeneration ) {
+            if( !rFull.HasValue )
+                return null;
             else if( Constants.Gen1RsToExcludeFromR.Contains(rFull.Value) )
                 return null;
-            //else if( NOT THE SAME GENERATION ) //TODO
-            //    return null;
+            else if( sameGeneration == Tristate.No )
+                return null;
             else
-				return (float)rFull.Value;
-		}
+                return (float)rFull.Value;
+        }
 		private static float? CalculateRPeek ( ) {
 			return null;
 		}

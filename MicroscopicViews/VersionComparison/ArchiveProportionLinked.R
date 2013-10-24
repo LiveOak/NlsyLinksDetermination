@@ -53,6 +53,9 @@ g <- ggplot(dsProportionLinked, aes(x=Version)) +
   geom_line(aes(y=ofDVSameGeneration),  color="blue") +
   geom_line(aes(y=OfDV),  color="purple") +
   geom_line(aes(y=OfTotal), color="black") +
+  geom_point(aes(y=ofDVSameGeneration),  color="blue") +
+  geom_point(aes(y=OfDV),  color="purple") +
+  geom_point(aes(y=OfTotal), color="black") +
   scale_y_continuous(name="Percent Linked", labels=percent) +
 #   xlab("Disagreement (Implicit vs Explicit)") +
   coord_cartesian(ylim=c(.85, 1)) + 

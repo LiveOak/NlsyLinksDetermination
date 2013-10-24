@@ -338,20 +338,21 @@ namespace Nls.BaseAssembly {
 
             LinksDataSet.tblParentsOfGen1CurrentRow dr = dtInput.FindBySubjectTag(subjectTag);
             YesNo response = (YesNo)(dr.AlwaysLivedWithBothBioparents);
+            return CommonFunctions.TranslateYesNo(response);
 
-            switch( response ) {
-                case YesNo.Yes:
-                    return Tristate.Yes;
-                case YesNo.No:
-                    return Tristate.No;
-                case YesNo.ValidSkipOrNoInterviewOrNotInSurvey:
-                case YesNo.InvalidSkip:
-                case YesNo.DoNotKnow:
-                case YesNo.Refusal:
-                    return Tristate.DoNotKnow;
-                default:
-                    throw new InvalidOperationException("The TriState value is not recognized by this function.");
-            }
+            //switch( response ) {
+            //    case YesNo.Yes:
+            //        return Tristate.Yes;
+            //    case YesNo.No:
+            //        return Tristate.No;
+            //    case YesNo.ValidSkipOrNoInterviewOrNotInSurvey:
+            //    case YesNo.InvalidSkip:
+            //    case YesNo.DoNotKnow:
+            //    case YesNo.Refusal:
+            //        return Tristate.DoNotKnow;
+            //    default:
+            //        throw new InvalidOperationException("The TriState value is not recognized by this function.");
+            //}
         }
         public static Int16? RetrieveBirthYear( Int32 subjectTag, Bioparent bioparent, LinksDataSet.tblParentsOfGen1CurrentDataTable dtInput ) {
             if( dtInput == null ) throw new ArgumentNullException("dtInput");
