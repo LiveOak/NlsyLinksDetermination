@@ -1,6 +1,7 @@
 rm(list=ls(all=TRUE))
 require(RODBC)
 require(scales)
+require(reshape2)
 require(ggplot2)
 require(plyr)
 require(colorspace)
@@ -46,18 +47,13 @@ for( versionNumber in versionNumbers ) {
 (elapsed <- Sys.time() - startTime)
 
 
-# dsProportionLinkedLong <- melt()
+dsProportionLinkedLong <- reshape2::melt(dsProportionLinked, id.vars="Version")
+dsProportionLinkedLong <- plyr::rename(dsProportionLinkedLong, replace=c("variable"="Variable", "value"="Value"))
 
-
-g <- ggplot(dsProportionLinked, aes(x=Version)) +
-  geom_line(aes(y=ofDVSameGeneration),  color="blue") +
-  geom_line(aes(y=OfDV),  color="purple") +
-  geom_line(aes(y=OfTotal), color="black") +
-  geom_point(aes(y=ofDVSameGeneration),  color="blue") +
-  geom_point(aes(y=OfDV),  color="purple") +
-  geom_point(aes(y=OfTotal), color="black") +
+g <- ggplot(dsProportionLinkedLong, aes(x=Version, y=Value, color=Variable, shape=Variable)) +
+  geom_line() +
+  geom_point() +
   scale_y_continuous(name="Percent Linked", labels=percent) +
-#   xlab("Disagreement (Implicit vs Explicit)") +
   coord_cartesian(ylim=c(.85, 1)) + 
   theme_bw() + theme(legend.position = "none") 
 # g

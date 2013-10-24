@@ -230,6 +230,8 @@ namespace Nls.BaseAssembly.Assign {
                 return Tristate.No;
             else if( birthState == MarkerEvidence.Disconfirms )
                 return Tristate.No;
+            else if( alwaysWithBothBioparents == MarkerEvidence.StronglySupports )
+                return Tristate.Yes;
             else if( birthYearAskedIn1988 == MarkerEvidence.Disconfirms )
                 return Tristate.No;
             //else if ( birthYearAskedIn1988 == MarkerEvidence.Supports )
@@ -242,8 +244,6 @@ namespace Nls.BaseAssembly.Assign {
             //   return Tristate.No;
             //else if ( birthYearAskedIn1987 == MarkerEvidence.Unlikely )
             //   return Tristate.No;
-            else if( alwaysWithBothBioparents == MarkerEvidence.StronglySupports )
-                return Tristate.Yes;
             else 
                 return Tristate.DoNotKnow;
         }
