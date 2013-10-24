@@ -3,8 +3,8 @@ require(RODBC)
 require(ggplot2)
 require(plyr)
 require(colorspace)
-includedRelationshipPaths <- c(2)
-# includedRelationshipPaths <- c(1)
+# includedRelationshipPaths <- c(2)
+includedRelationshipPaths <- c(1)
 archivePath <- "./MicroscopicViews/CrosstabHistoryArchive.csv"
 
 dsArchive <- read.csv(archivePath)
@@ -45,6 +45,8 @@ dsRaw <- sqlQuery(channel, sql, stringsAsFactors=F)
 odbcCloseAll()
 # colnames(dsRaw) # head(dsRaw)
 # colnames(dsArchive)
+# table(dsRaw$AlgorithmVersion)
+# table(dsClean$AlgorithmVersion)
 dsRaw <- plyr::rbind.fill(dsRaw, dsArchive)
 dsClean <- dsRaw[dsRaw$RelationshipPath %in% includedRelationshipPaths, ]
 
@@ -77,13 +79,7 @@ for( versionNumber in versionNumbers ) {
   goodSumImplicit2004RFull <- sum(dsSliceClean[dsSliceClean$RImplicit2004 ==dsSliceClean$RFull, "Count"], na.rm=T)
   badSumImplicit2004RFull <- sum(dsSliceClean[abs(dsSliceClean$RImplicit2004 - dsSliceClean$RFull) >= .25, "Count"], na.rm=T)
   dsRocImplicit2004RFull[dsRocImplicit2004RFull$Version==versionNumber, c("Good", "Bad")] <- c(goodSumImplicit2004RFull, badSumImplicit2004RFull)
-  
-#   dsLink <- CreatePairLinksSingleEntered(outcomeDataset=dsOutcomes, linksPairDataset=dsSliceRaw, linksNames=rVersions, outcomeNames=oName)
-  
 }
-
-
-
 
 #dsRoc$ColorVersion <- sequential_hcl(n=length(versionNumbers))
 #colorVersion <- factor(sequential_hcl(n=lengWth(versionNumbers)))

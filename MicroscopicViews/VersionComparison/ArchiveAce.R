@@ -117,9 +117,9 @@ dsDirtyNewer <- CreatePairLinksSingleEntered(outcomeDataset=dsOutcomes, linksPai
 dsDirtyOlder <- CreatePairLinksSingleEntered(outcomeDataset=dsOutcomes, linksPairDataset=dsLinkingOlder, linksNames=rVersions, outcomeNames=oName)
 rm(dsOutcomes, dsLinkingNewer, dsLinkingOlder)
 
-table(dsDirtyNewer$RFull)
-mean(!is.na(dsDirtyNewer$RFull)) 
-mean(!is.na(dsDirtyNewer[!is.na(dsDirtyNewer[, oName_1]) & !is.na(dsDirtyNewer[, oName_2]), "RFull"])) 
+# table(dsDirtyNewer$RFull)
+# mean(!is.na(dsDirtyNewer$RFull)) 
+# mean(!is.na(dsDirtyNewer[!is.na(dsDirtyNewer[, oName_1]) & !is.na(dsDirtyNewer[, oName_2]), "RFull"])) 
 
 # table(dsRaw$R)
 # mean(!is.na(dsRaw$R)) 
@@ -174,6 +174,9 @@ for( i in seq_along(rVersions) ) {
   PrintGroupSummary(groupDatasets[[(i-1)*2 + 1]], title=paste(rVersion, "-- Newer Version of Links"))
   PrintGroupSummary(groupDatasets[[(i-1)*2 + 2]], title=paste(rVersion, "-- Older Version of Links"))  
 }
+
+# mean(!is.na(dsDirtyNewer$RFull)) 
+# mean(!is.na(dsDirtyNewer[!is.na(dsDirtyNewer[, oName_1]) & !is.na(dsDirtyNewer[, oName_2]), "RFull"])) 
 
 ## @knitr EvalAndPrintAce
 PrintAces <- function(  ) {

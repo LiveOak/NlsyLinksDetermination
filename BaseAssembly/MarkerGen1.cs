@@ -52,6 +52,7 @@ namespace Nls.BaseAssembly {
 					recordsAdded += FromShareExplicit(Item.ShareBiomomGen1, MarkerType.ShareBiomom, drRelated, dtSubject1);
 					recordsAdded += FromShareExplicit(Item.ShareBiodadGen1, MarkerType.ShareBiodad, drRelated, dtSubject1);
 
+                    recordsAdded += FromAlwaysLivedWithBothBioparents(drRelated, dtParentsCurrent);
 					foreach ( Int16 year in bioparentLiveYears ) {
 						recordsAdded += FromLiveWithBioparent(year, Bioparent.Mom, drRelated, dtParentsRetro);
 						recordsAdded += FromLiveWithBioparent(year, Bioparent.Dad, drRelated, dtParentsRetro);
