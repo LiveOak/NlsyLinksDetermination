@@ -210,9 +210,7 @@ namespace Nls.BaseAssembly.Assign {
         private Tristate ImplicitShareBioparent( MarkerEvidence alwaysWithBothBioparents, MarkerEvidence inHH1980, MarkerEvidence inHH1978, MarkerEvidence inHH1977, MarkerEvidence inHH1976, MarkerEvidence birthCountry, MarkerEvidence birthState,
             MarkerEvidence birthYearAskedIn1988, MarkerEvidence birthYearAskedIn1987 ) {
 
-            if( alwaysWithBothBioparents == MarkerEvidence.StronglySupports )
-                return Tristate.Yes;
-            else if( inHH1980 == MarkerEvidence.StronglySupports )
+            if( inHH1980 == MarkerEvidence.StronglySupports )
                 return Tristate.Yes;
             else if( inHH1980 == MarkerEvidence.Disconfirms )
                 return Tristate.No;
@@ -244,7 +242,9 @@ namespace Nls.BaseAssembly.Assign {
             //   return Tristate.No;
             //else if ( birthYearAskedIn1987 == MarkerEvidence.Unlikely )
             //   return Tristate.No;
-            else
+            else if( alwaysWithBothBioparents == MarkerEvidence.StronglySupports )
+                return Tristate.Yes;
+            else 
                 return Tristate.DoNotKnow;
         }
         private static float? CalculateR( float? rFull, Tristate sameGeneration ) {

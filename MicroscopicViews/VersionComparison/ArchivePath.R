@@ -88,7 +88,7 @@ colorVersion <- sequential_hcl(n=length(versionNumbers), c=c(80, 80), l = c(90, 
 g1 <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Version)) +
   scale_colour_gradientn(colours=colorVersion) +#, color=ColorVersion)
   scale_x_continuous() +#   scale_x_continuous(name="") +
-  scale_y_continuous(name="Agreement") +
+  scale_y_continuous(name="Agreement", labels=comma) +
   xlab("Disagreement (Implicit vs Explicit)") +
   layer(geom="path") + layer(geom="text") +
 #   coord_cartesian(xlim=c(0, 8000), ylim=c(0, 8000)) + #coord_equal() +
