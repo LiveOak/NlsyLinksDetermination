@@ -14,7 +14,8 @@ namespace Nls.BaseAssembly {
 		private readonly Item[] _items = { Item.Gen1FatherAlive, Item.Gen1FatherDeathCause, Item.Gen1FatherDeathAge, Item.Gen1FatherBirthCountry, Item.Gen1FatherHighestGrade, Item.Gen1GrandfatherBirthCountry,
 													Item.Gen1MotherAlive, Item.Gen1MotherDeathCause, Item.Gen1MotherDeathAge, Item.Gen1MotherBirthCountry, Item.Gen1MotherHighestGrade,
 													Item.Gen1FatherBirthYear, Item.Gen1FatherAge, //Item.Gen1FatherBirthMonth, 
-													Item.Gen1MotherBirthYear, Item.Gen1MotherAge	 //Item.Gen1MotherBirthMonth, 
+													Item.Gen1MotherBirthYear, Item.Gen1MotherAge, 	 //Item.Gen1MotherBirthMonth, 
+                                                    Item.Gen1AlwaysLivedWithBothParents
 													};
 		private readonly string _itemIDsString = "";
 		#endregion
@@ -56,81 +57,91 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Private Methods
-		private Int32 ProcessSubjectGen1 ( LinksDataSet.tblSubjectRow drSubject, LinksDataSet.tblResponseDataTable dtExtendedResponse ) {
-			Int32 subjectTag = drSubject.SubjectTag;
+        private Int32 ProcessSubjectGen1( LinksDataSet.tblSubjectRow drSubject, LinksDataSet.tblResponseDataTable dtExtendedResponse ) {
+            Int32 subjectTag = drSubject.SubjectTag;
+            YesNo alwaysWithBothBioparents = DetermineAlwaysWithBothBioparents(subjectTag, dtExtendedResponse);
 
-			//For Biodad
-			Int16? biodadBirthYearReported = DetermineBioparentBirthYearReported(Item.Gen1FatherBirthYear, subjectTag, dtExtendedResponse);
-			Int16? biodadBirthYearEstimated = biodadBirthYearReported; //If subjects don't answer the DOB item, they're asked their age.
-			if ( !biodadBirthYearEstimated.HasValue ) biodadBirthYearEstimated = DetermineBioparentBirthYearEstimated(Item.Gen1FatherAge, subjectTag, dtExtendedResponse, _ds);
+            //For Biodad
+            Int16? biodadBirthYearReported = DetermineBioparentBirthYearReported(Item.Gen1FatherBirthYear, subjectTag, dtExtendedResponse);
+            Int16? biodadBirthYearEstimated = biodadBirthYearReported; //If subjects don't answer the DOB item, they're asked their age.
+            if( !biodadBirthYearEstimated.HasValue ) biodadBirthYearEstimated = DetermineBioparentBirthYearEstimated(Item.Gen1FatherAge, subjectTag, dtExtendedResponse, _ds);
 
-			Int16? biodadYearLastAsked = null;
-			YesNo biodadAlive = YesNo.ValidSkipOrNoInterviewOrNotInSurvey;
-			Gen1BioparentDeathCause biodadDeathCause = Gen1BioparentDeathCause.ValidSkipOrNoInterviewOrNotInSurvey;
-			byte? biodadDeathAge = null;
-			byte? lastHealthModuleBiodadIndex = DetermineLastHealthModuleIndex(Item.Gen1FatherAlive, subjectTag, dtExtendedResponse);
-			if ( lastHealthModuleBiodadIndex.HasValue ) {
-				biodadYearLastAsked = null;
-				biodadAlive = DetermineBioparentAlive(Item.Gen1FatherAlive, lastHealthModuleBiodadIndex.Value, subjectTag, dtExtendedResponse);
-				biodadDeathCause = DetermineBioparentDeathCause(Item.Gen1FatherDeathCause, lastHealthModuleBiodadIndex.Value, subjectTag, dtExtendedResponse);
-				biodadDeathAge = DetermineBioparentDeathAge(Item.Gen1FatherDeathAge, lastHealthModuleBiodadIndex.Value, subjectTag, dtExtendedResponse);
-			}
+            Int16? biodadYearLastAsked = null;
+            YesNo biodadAlive = YesNo.ValidSkipOrNoInterviewOrNotInSurvey;
+            Gen1BioparentDeathCause biodadDeathCause = Gen1BioparentDeathCause.ValidSkipOrNoInterviewOrNotInSurvey;
+            byte? biodadDeathAge = null;
+            byte? lastHealthModuleBiodadIndex = DetermineLastHealthModuleIndex(Item.Gen1FatherAlive, subjectTag, dtExtendedResponse);
+            if( lastHealthModuleBiodadIndex.HasValue ) {
+                biodadYearLastAsked = null;
+                biodadAlive = DetermineBioparentAlive(Item.Gen1FatherAlive, lastHealthModuleBiodadIndex.Value, subjectTag, dtExtendedResponse);
+                biodadDeathCause = DetermineBioparentDeathCause(Item.Gen1FatherDeathCause, lastHealthModuleBiodadIndex.Value, subjectTag, dtExtendedResponse);
+                biodadDeathAge = DetermineBioparentDeathAge(Item.Gen1FatherDeathAge, lastHealthModuleBiodadIndex.Value, subjectTag, dtExtendedResponse);
+            }
 
-			YesNo biodadUSBorn = DetermineUSBorn(Item.Gen1FatherBirthCountry, subjectTag, dtExtendedResponse);
-			byte? biodadHighestGrade = DetermineHighestGrade(Item.Gen1FatherHighestGrade, subjectTag, dtExtendedResponse);
-			YesNo biograndfatherUSBorn = DetermineUSBorn(Item.Gen1GrandfatherBirthCountry, subjectTag, dtExtendedResponse);
+            YesNo biodadUSBorn = DetermineUSBorn(Item.Gen1FatherBirthCountry, subjectTag, dtExtendedResponse);
+            byte? biodadHighestGrade = DetermineHighestGrade(Item.Gen1FatherHighestGrade, subjectTag, dtExtendedResponse);
+            YesNo biograndfatherUSBorn = DetermineUSBorn(Item.Gen1GrandfatherBirthCountry, subjectTag, dtExtendedResponse);
 
-			//For Biomom
-			Int16? biomomBirthYearReported = DetermineBioparentBirthYearReported(Item.Gen1MotherBirthYear, subjectTag, dtExtendedResponse);
-			Int16? biomomBirthYearEstimated = biomomBirthYearReported; //If subjects don't answer the DOB item, they're asked their age.
-			if ( !biomomBirthYearEstimated.HasValue ) biomomBirthYearEstimated = DetermineBioparentBirthYearEstimated(Item.Gen1MotherAge, subjectTag, dtExtendedResponse, _ds);
+            //For Biomom
+            Int16? biomomBirthYearReported = DetermineBioparentBirthYearReported(Item.Gen1MotherBirthYear, subjectTag, dtExtendedResponse);
+            Int16? biomomBirthYearEstimated = biomomBirthYearReported; //If subjects don't answer the DOB item, they're asked their age.
+            if( !biomomBirthYearEstimated.HasValue ) biomomBirthYearEstimated = DetermineBioparentBirthYearEstimated(Item.Gen1MotherAge, subjectTag, dtExtendedResponse, _ds);
 
-			Int16? biomomYearLastAsked = null;
-			YesNo biomomAlive = YesNo.ValidSkipOrNoInterviewOrNotInSurvey;
-			Gen1BioparentDeathCause biomomDeathCause = Gen1BioparentDeathCause.ValidSkipOrNoInterviewOrNotInSurvey;
-			byte? biomomDeathAge = null;
-			byte? lastHealthModuleBiomomIndex = DetermineLastHealthModuleIndex(Item.Gen1MotherAlive, subjectTag, dtExtendedResponse);
-			if ( lastHealthModuleBiomomIndex.HasValue ) {
-				biomomYearLastAsked = null;
-				biomomAlive = DetermineBioparentAlive(Item.Gen1MotherAlive, lastHealthModuleBiomomIndex.Value, subjectTag, dtExtendedResponse);
-				biomomDeathCause = DetermineBioparentDeathCause(Item.Gen1MotherDeathCause, lastHealthModuleBiomomIndex.Value, subjectTag, dtExtendedResponse);
-				biomomDeathAge = DetermineBioparentDeathAge(Item.Gen1MotherDeathAge, lastHealthModuleBiomomIndex.Value, subjectTag, dtExtendedResponse);
-			}
+            Int16? biomomYearLastAsked = null;
+            YesNo biomomAlive = YesNo.ValidSkipOrNoInterviewOrNotInSurvey;
+            Gen1BioparentDeathCause biomomDeathCause = Gen1BioparentDeathCause.ValidSkipOrNoInterviewOrNotInSurvey;
+            byte? biomomDeathAge = null;
+            byte? lastHealthModuleBiomomIndex = DetermineLastHealthModuleIndex(Item.Gen1MotherAlive, subjectTag, dtExtendedResponse);
+            if( lastHealthModuleBiomomIndex.HasValue ) {
+                biomomYearLastAsked = null;
+                biomomAlive = DetermineBioparentAlive(Item.Gen1MotherAlive, lastHealthModuleBiomomIndex.Value, subjectTag, dtExtendedResponse);
+                biomomDeathCause = DetermineBioparentDeathCause(Item.Gen1MotherDeathCause, lastHealthModuleBiomomIndex.Value, subjectTag, dtExtendedResponse);
+                biomomDeathAge = DetermineBioparentDeathAge(Item.Gen1MotherDeathAge, lastHealthModuleBiomomIndex.Value, subjectTag, dtExtendedResponse);
+            }
 
-			YesNo biomomUSBorn = DetermineUSBorn(Item.Gen1MotherBirthCountry, subjectTag, dtExtendedResponse);
-			byte? biomomHighestGrade = DetermineHighestGrade(Item.Gen1MotherHighestGrade, subjectTag, dtExtendedResponse);
+            YesNo biomomUSBorn = DetermineUSBorn(Item.Gen1MotherBirthCountry, subjectTag, dtExtendedResponse);
+            byte? biomomHighestGrade = DetermineHighestGrade(Item.Gen1MotherHighestGrade, subjectTag, dtExtendedResponse);
 
-			//Add row to in-memory database.
-			AddRow(subjectTag,
-				biodadBirthYearReported, biodadBirthYearEstimated, biodadYearLastAsked, biodadAlive, biodadDeathCause, biodadDeathAge, biodadUSBorn, biodadHighestGrade, biograndfatherUSBorn,
-				biomomBirthYearReported, biomomBirthYearEstimated, biomomYearLastAsked, biomomAlive, biomomDeathCause, biomomDeathAge, biomomUSBorn, biomomHighestGrade);
+            //Add row to in-memory database.
+            AddRow(subjectTag, alwaysWithBothBioparents,
+                biodadBirthYearReported, biodadBirthYearEstimated, biodadYearLastAsked, biodadAlive, biodadDeathCause, biodadDeathAge, biodadUSBorn, biodadHighestGrade, biograndfatherUSBorn,
+                biomomBirthYearReported, biomomBirthYearEstimated, biomomYearLastAsked, biomomAlive, biomomDeathCause, biomomDeathAge, biomomUSBorn, biomomHighestGrade);
 
-			const Int32 recordsAdded = 1;
-			return recordsAdded;
-		}
+            const Int32 recordsAdded = 1;
+            return recordsAdded;
+        }
+        private static YesNo DetermineAlwaysWithBothBioparents( Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
+            const Item alwaysWithBothBioparents = Item.Gen1AlwaysLivedWithBothParents;
 
-		private static Int16? DetermineBioparentBirthYearReported ( Item itemBirthYear, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
-			Int16[] surveyYears = ItemYears.Gen1BioparentBirthYear;
-			Trace.Assert(surveyYears.Length == 2, "This function only works if the item exists in only two survey waves.");
+            //LinksDataSet.tblResponseRow[] d3 = (LinksDataSet.tblResponseRow[])dt.Select("Item=340");
 
-			Int32? birthYear2 = Retrieve.ResponseNullPossible(surveyYears[1], itemBirthYear, subjectTag, dtExtended);
-			Int32? birthYear1 = Retrieve.ResponseNullPossible(surveyYears[0], itemBirthYear, subjectTag, dtExtended);
+            Int32? result = Retrieve.ResponseNullPossible(alwaysWithBothBioparents, subjectTag, dtExtended);
+            if( result.HasValue )
+                return (YesNo)(Convert.ToInt16(result.Value));
+            else
+                return YesNo.DoNotKnow;
+        }
+        private static Int16? DetermineBioparentBirthYearReported( Item itemBirthYear, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended ) {
+            Int16[] surveyYears = ItemYears.Gen1BioparentBirthYear;
+            Trace.Assert(surveyYears.Length == 2, "This function only works if the item exists in only two survey waves.");
 
-			Int32? result = null;
-			if ( birthYear2.HasValue && birthYear2.Value >= 0 )
-				result = 1900 + birthYear2.Value;
-			else if ( birthYear1.HasValue && birthYear1.Value >= 0 )
-				result = 1900 + birthYear1.Value;
+            Int32? birthYear2 = Retrieve.ResponseNullPossible(surveyYears[1], itemBirthYear, subjectTag, dtExtended);
+            Int32? birthYear1 = Retrieve.ResponseNullPossible(surveyYears[0], itemBirthYear, subjectTag, dtExtended);
+
+            Int32? result = null;
+            if( birthYear2.HasValue && birthYear2.Value >= 0 )
+                result = 1900 + birthYear2.Value;
+            else if( birthYear1.HasValue && birthYear1.Value >= 0 )
+                result = 1900 + birthYear1.Value;
 
 
-			if ( result.HasValue ) {
-				Trace.Assert(Constants.Gen1BioparentBirthYearReportedMin <= result.Value && result.Value <= Constants.Gen1BioparentBirthYearReportedMax, "The birth year of the Gen1Parent should be within the allowed bounds.");
-				return Convert.ToInt16(result.Value);
-			}
-			else {
-				return null;
-			}
-		}
+            if( result.HasValue ) {
+                Trace.Assert(Constants.Gen1BioparentBirthYearReportedMin <= result.Value && result.Value <= Constants.Gen1BioparentBirthYearReportedMax, "The birth year of the Gen1Parent should be within the allowed bounds.");
+                return Convert.ToInt16(result.Value);
+            } else {
+                return null;
+            }
+        }
 		private static Int16? DetermineBioparentBirthYearEstimated ( Item itemBirthYear, Int32 subjectTag, LinksDataSet.tblResponseDataTable dtExtended, LinksDataSet ds ) {
 			Int16[] surveyYears = ItemYears.Gen1BioparentAge;
 			Trace.Assert(surveyYears.Length == 2, "This function only works if the item exists in only two survey waves.");
@@ -247,13 +258,14 @@ namespace Nls.BaseAssembly {
 			else
 				return Convert.ToByte(response.Value);
 		}
-		private void AddRow ( Int32 subjectTag,
+		private void AddRow ( Int32 subjectTag, YesNo alwaysLivedWithBothBioparents,
 			Int16? biodadBirthYearReported, Int16? biodadBirthYearEstimated, Int16? biodadYearLastAsked, YesNo biodadAlive, Gen1BioparentDeathCause biodadDeathCause, byte? biodadDeathAge, YesNo biodadUSBorn, byte? biodadHighestGrade, YesNo biograndfatherUSBorn,
-			Int16? biomomBirthYearReported, Int16? biomomBirthYearEstimated, Int16? biomomYearLastAsked, YesNo biomomAlive, Gen1BioparentDeathCause biomomDeathCause, byte? biomomDeathAge, YesNo biomomUSBorn, byte? biomomHighestGrade ) {
+			Int16? biomomBirthYearReported, Int16? biomomBirthYearEstimated, Int16? biomomYearLastAsked, YesNo biomomAlive, Gen1BioparentDeathCause biomomDeathCause, byte? biomomDeathAge, YesNo biomomUSBorn, byte? biomomHighestGrade) {
 
 			//lock ( _ds.tblFatherOfGen2 ) {
 			LinksDataSet.tblParentsOfGen1CurrentRow drNew = _ds.tblParentsOfGen1Current.NewtblParentsOfGen1CurrentRow();
 			drNew.SubjectTag = subjectTag;
+            drNew.AlwaysLivedWithBothBioparents = Convert.ToInt16(alwaysLivedWithBothBioparents);
 
 			//Items about biodad (and one about biograndfather)
 			if ( biodadBirthYearReported.HasValue ) drNew.BiodadBirthYearReported = biodadBirthYearReported.Value;
@@ -320,22 +332,43 @@ namespace Nls.BaseAssembly {
 			}
 			return dt;
 		}
-		public static Int16? RetrieveBirthYear ( Int32 subjectTag, Bioparent bioparent, LinksDataSet.tblParentsOfGen1CurrentDataTable dtInput ) {
-			if ( dtInput == null ) throw new ArgumentNullException("dtInput");
-			if ( dtInput.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Current.");
+        public static Tristate RetrieveAlwaysLiveWithBothBioparents( Int32 subjectTag, LinksDataSet.tblParentsOfGen1CurrentDataTable dtInput ) {
+            if( dtInput == null ) throw new ArgumentNullException("dtInput");
+            if( dtInput.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Current.");
 
-			LinksDataSet.tblParentsOfGen1CurrentRow dr = dtInput.FindBySubjectTag(subjectTag);
-			switch ( bioparent ) {
-				case Bioparent.Mom:
-					if ( dr.IsBiomomBirthYearEstimatedNull() ) return null;
-					else return dr.BiomomBirthYearEstimated;
-				case Bioparent.Dad:
-					if ( dr.IsBiodadBirthYearEstimatedNull() ) return null;
-					else return dr.BiodadBirthYearEstimated;
-				default:
-					throw new ArgumentOutOfRangeException("bioparent", bioparent, "The function does not accommodate that bioparent value.");
-			}
-		}
+            LinksDataSet.tblParentsOfGen1CurrentRow dr = dtInput.FindBySubjectTag(subjectTag);
+            YesNo response = (YesNo)(dr.AlwaysLivedWithBothBioparents);
+
+            switch( response ) {
+                case YesNo.Yes:
+                    return Tristate.Yes;
+                case YesNo.No:
+                    return Tristate.No;
+                case YesNo.ValidSkipOrNoInterviewOrNotInSurvey:
+                case YesNo.InvalidSkip:
+                case YesNo.DoNotKnow:
+                case YesNo.Refusal:
+                    return Tristate.DoNotKnow;
+                default:
+                    throw new InvalidOperationException("The TriState value is not recognized by this function.");
+            }
+        }
+        public static Int16? RetrieveBirthYear( Int32 subjectTag, Bioparent bioparent, LinksDataSet.tblParentsOfGen1CurrentDataTable dtInput ) {
+            if( dtInput == null ) throw new ArgumentNullException("dtInput");
+            if( dtInput.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Current.");
+
+            LinksDataSet.tblParentsOfGen1CurrentRow dr = dtInput.FindBySubjectTag(subjectTag);
+            switch( bioparent ) {
+                case Bioparent.Mom:
+                    if( dr.IsBiomomBirthYearEstimatedNull() ) return null;
+                    else return dr.BiomomBirthYearEstimated;
+                case Bioparent.Dad:
+                    if( dr.IsBiodadBirthYearEstimatedNull() ) return null;
+                    else return dr.BiodadBirthYearEstimated;
+                default:
+                    throw new ArgumentOutOfRangeException("bioparent", bioparent, "The function does not accommodate that bioparent value.");
+            }
+        }
 		public static byte? RetrieveDeathAge ( Int32 subjectTag, Bioparent bioparent, LinksDataSet.tblParentsOfGen1CurrentDataTable dtInput ) {
 			if ( dtInput == null ) throw new ArgumentNullException("dtInput");
 			if ( dtInput.Count <= 0 ) throw new ArgumentException("There should be at least one row in tblParentsOfGen1Current.");

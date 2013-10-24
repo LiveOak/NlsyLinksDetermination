@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.10.23)  23 OCT 2013 14:50
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.10.23)  23 OCT 2013 23:09
 entering extended mode
 **ArchiveComparison.tex
 
@@ -238,7 +238,7 @@ ison\ArchiveComparison.aux) )
 Here is how much of TeX's memory you used:
  1898 strings out of 493921
  26713 string characters out of 3147284
- 141492 words of memory out of 3000000
+ 141482 words of memory out of 3000000
  5184 multiletter control sequences out of 15000+200000
  7151 words of font info for 26 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
@@ -248,7 +248,7 @@ sfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
 m/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.p
 fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on ArchiveComparison.pdf (3 pages, 88959 bytes).
+Output written on ArchiveComparison.pdf (3 pages, 89529 bytes).
 PDF statistics:
  44 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

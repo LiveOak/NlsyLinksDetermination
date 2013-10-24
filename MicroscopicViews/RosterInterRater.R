@@ -2,8 +2,6 @@ require(RODBC)
 require(plyr)
 rm(list=ls(all=TRUE))
 
-#A DSN must be defined for this to work.  In a 64-bit OS, it can be tricky: http://support.microsoft.com/kb/942976
-odbcCloseAll()
 channel <- odbcConnect(dsn="BeeNlsLinks")
 odbcGetInfo(channel)
 keepExistingTable <- FALSE

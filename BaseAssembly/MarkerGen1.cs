@@ -79,64 +79,82 @@ namespace Nls.BaseAssembly {
 		}
 		#endregion
 		#region Private Methods -Tier 1
-		private Int32 FromLiveWithBioparent ( Int16 year, Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
-			Tristate subject1 = ParentsOfGen1Retro.RetrieveInHHByYear(drRelated.Subject1Tag, bioparent, year, dtRetro);
-			Tristate subject2 = ParentsOfGen1Retro.RetrieveInHHByYear(drRelated.Subject2Tag, bioparent, year, dtRetro);
-			MarkerEvidence shareBioparent = MarkerEvidence.Missing;
+        private Int32 FromAlwaysLivedWithBothBioparents( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1CurrentDataTable dtCurrent) {
+            const Int16 year = ItemYears.Gen1BioparentInHH;
+            const MarkerType markerType = MarkerType.Gen1AlwaysLivedWithBothBioparents;       
+            Tristate subject1 = ParentsOfGen1Current.RetrieveAlwaysLiveWithBothBioparents(drRelated.Subject1Tag, dtCurrent);
+            Tristate subject2 = ParentsOfGen1Current.RetrieveAlwaysLiveWithBothBioparents(drRelated.Subject2Tag, dtCurrent);
+            
+            MarkerEvidence shareBioparent = MarkerEvidence.Missing;
 
-			if ( (subject1 == Tristate.DoNotKnow) || (subject2 == Tristate.DoNotKnow) )
-				shareBioparent = MarkerEvidence.Missing;
-			else if ( subject1 != subject2 )
-				shareBioparent = MarkerEvidence.Unlikely;
-			else if ( (subject1 == Tristate.Yes) || (subject2 == Tristate.Yes) )
-				shareBioparent = MarkerEvidence.StronglySupports;
-			else if ( (subject1 == Tristate.No) || (subject2 == Tristate.No) )
-				shareBioparent = MarkerEvidence.Consistent;
-			else
-				throw new InvalidOperationException("All the conditions should have been caught.");
+            if( (subject1 == Tristate.Yes) || (subject2 == Tristate.Yes) )
+                shareBioparent = MarkerEvidence.StronglySupports;
+            else 
+                shareBioparent = MarkerEvidence.Ambiguous;
 
-			MarkerEvidence mzEvidence = MarkerEvidence.Missing;
-			MarkerEvidence shareBiomom = MarkerEvidence.Irrelevant;
-			MarkerEvidence shareBiodad = MarkerEvidence.Irrelevant;
+            AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, year, mzEvidence: MarkerEvidence.Irrelevant, sameGenerationEvidence: MarkerEvidence.Irrelevant,
+                biomomEvidence: shareBioparent, biodadEvidence: shareBioparent, biograndparentEvidence: MarkerEvidence.Ambiguous);
+            const Int32 recordsAdded = 1;
+            return recordsAdded;
+        }
+        private Int32 FromLiveWithBioparent( Int16 year, Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
+            Tristate subject1 = ParentsOfGen1Retro.RetrieveInHHByYear(drRelated.Subject1Tag, bioparent, year, dtRetro);
+            Tristate subject2 = ParentsOfGen1Retro.RetrieveInHHByYear(drRelated.Subject2Tag, bioparent, year, dtRetro);
+            MarkerEvidence shareBioparent = MarkerEvidence.Missing;
 
-			switch ( shareBioparent ) {
-				case MarkerEvidence.StronglySupports:
-				//case MarkerEvidence.Supports:
-				case MarkerEvidence.Consistent:
-					mzEvidence = MarkerEvidence.Consistent;
-					break;
-				case MarkerEvidence.Unlikely:
-					mzEvidence = MarkerEvidence.Unlikely;
-					break;
-				//case MarkerEvidence.Disconfirms:
-				//   mzEvidence = MarkerEvidence.Disconfirms;
-				//   break;
-				case MarkerEvidence.Missing:
-					mzEvidence = MarkerEvidence.Missing;
-					break;
-				default:
-					throw new InvalidOperationException("The switch should not have gotten here.");
-			}
+            if( (subject1 == Tristate.DoNotKnow) || (subject2 == Tristate.DoNotKnow) )
+                shareBioparent = MarkerEvidence.Missing;
+            else if( subject1 != subject2 )
+                shareBioparent = MarkerEvidence.Unlikely;
+            else if( (subject1 == Tristate.Yes) || (subject2 == Tristate.Yes) )
+                shareBioparent = MarkerEvidence.StronglySupports;
+            else if( (subject1 == Tristate.No) || (subject2 == Tristate.No) )
+                shareBioparent = MarkerEvidence.Consistent;
+            else
+                throw new InvalidOperationException("All the conditions should have been caught.");
 
-			MarkerType markerType;
-			switch ( bioparent ) {
-				case Bioparent.Dad:
-					markerType = MarkerType.Gen1BiodadInHH;
-					shareBiodad = shareBioparent;
-					break;
-				case Bioparent.Mom:
-					markerType = MarkerType.Gen1BiomomInHH;
-					shareBiomom = shareBioparent;
-					break;
-				default:
-					throw new ArgumentOutOfRangeException("bioparent", bioparent, "The 'bioparent' value wasn't recognized.");
-			}
-			AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, year, mzEvidence: mzEvidence, sameGenerationEvidence: MarkerEvidence.Irrelevant,
-				biomomEvidence: shareBiomom, biodadEvidence: shareBiodad, biograndparentEvidence: MarkerEvidence.Ambiguous);
-			const Int32 recordsAdded = 1;
-			return recordsAdded;
-		}
-		private Int32 FromBioparentBirthCountry ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, ImportDataSet.tblGeocodeSanitizedDataTable dtGeocode ) {
+            MarkerEvidence mzEvidence = MarkerEvidence.Missing;
+            MarkerEvidence shareBiomom = MarkerEvidence.Irrelevant;
+            MarkerEvidence shareBiodad = MarkerEvidence.Irrelevant;
+
+            switch( shareBioparent ) {
+                case MarkerEvidence.StronglySupports:
+                //case MarkerEvidence.Supports:
+                case MarkerEvidence.Consistent:
+                    mzEvidence = MarkerEvidence.Consistent;
+                    break;
+                case MarkerEvidence.Unlikely:
+                    mzEvidence = MarkerEvidence.Unlikely;
+                    break;
+                //case MarkerEvidence.Disconfirms:
+                //   mzEvidence = MarkerEvidence.Disconfirms;
+                //   break;
+                case MarkerEvidence.Missing:
+                    mzEvidence = MarkerEvidence.Missing;
+                    break;
+                default:
+                    throw new InvalidOperationException("The switch should not have gotten here.");
+            }
+
+            MarkerType markerType;
+            switch( bioparent ) {
+                case Bioparent.Dad:
+                    markerType = MarkerType.Gen1BiodadInHH;
+                    shareBiodad = shareBioparent;
+                    break;
+                case Bioparent.Mom:
+                    markerType = MarkerType.Gen1BiomomInHH;
+                    shareBiomom = shareBioparent;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("bioparent", bioparent, "The 'bioparent' value wasn't recognized.");
+            }
+            AddMarkerRow(drRelated.ExtendedID, drRelated.ID, markerType, year, mzEvidence: mzEvidence, sameGenerationEvidence: MarkerEvidence.Irrelevant,
+                biomomEvidence: shareBiomom, biodadEvidence: shareBiodad, biograndparentEvidence: MarkerEvidence.Ambiguous);
+            const Int32 recordsAdded = 1;
+            return recordsAdded;
+        }
+        private Int32 FromBioparentBirthCountry( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, ImportDataSet.tblGeocodeSanitizedDataTable dtGeocode ) {
 			const Int16 year = ItemYears.Gen1BioparentBirthCountry;
 			Int32 subjectSmaller = Math.Min(drRelated.Subject1Tag, drRelated.Subject2Tag);
 			Int32 subjectLarger = Math.Max(drRelated.Subject1Tag, drRelated.Subject2Tag);
