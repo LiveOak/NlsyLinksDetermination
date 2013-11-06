@@ -4,12 +4,11 @@ require(lubridate)
 rm(list=ls(all=TRUE))
 
 generation <- 2
-pathInputHeight <- file.path(getwd(), "LinksForDistribution/Outcomes/Gen2Height/Gen2Height.csv")
-pathInputMath <- file.path(getwd(), "OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv")
-pathOutput <- file.path(getwd(), "LinksForDistribution/Outcomes/OutcomesGen2.csv")
+pathInputHeight <- "./LinksForDistribution/Outcomes/Gen2Height/Gen2Height.csv"
+pathInputMath <- "./OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv"
+pathOutput <- "./LinksForDistribution/Outcomes/OutcomesGen2.csv"
 
-odbcCloseAll()
-channel <- odbcConnect(dsn="BeeNlsLinks")
+channel <- RODBC::odbcDriverConnect("driver={SQL Server};Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 odbcGetInfo(channel)
 keepExistingTable <- FALSE
 ds <- sqlQuery(channel, paste0("SELECT * FROM dbo.vewOutcomes WHERE Generation=", generation))
@@ -43,5 +42,3 @@ HistogramWithCurve(ds$HeightZGender, "HeightZGender")
 HistogramWithCurve(ds$MathStandardized, "MathStandardized")
 
 write.csv(ds, pathOutput, row.names=F)
-
-

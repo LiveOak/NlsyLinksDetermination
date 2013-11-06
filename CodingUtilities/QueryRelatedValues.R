@@ -1,7 +1,7 @@
 require(RODBC)
 rm(list=ls(all=TRUE))
 
-channel <- odbcConnect("BeeNlsLinks")
+channel <- RODBC::odbcDriverConnect("driver={SQL Server};Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 ds <- sqlQuery(channel, paste("SELECT * FROM dbo.vewRelatedValues", sep=""))
 odbcClose(channel)
 
@@ -24,7 +24,7 @@ ds$Subject2ID[!secondGen1] <- ds$Subject2Tag[!secondGen1]
 # }
 
 #ds
-write.csv(ds, "F:/Projects/Nls/NlsyLinksDetermination/Links2011V52.csv", row.names=FALSE)
+write.csv(ds, "./Links2011V83.csv", row.names=FALSE)
 summary(ds)
 
 

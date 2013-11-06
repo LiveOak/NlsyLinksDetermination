@@ -4,13 +4,12 @@ require(lubridate)
 rm(list=ls(all=TRUE))
 
 generation <- 1
-pathInputFertility <- file.path(getwd(), "OutsideData/AfiAmen2012-09-20/AfiAfm.csv")
-# pathPoliticalInput <- "F:/Projects/RDev/NlsyLinksStaging/Datasets/PoliticalData.csv"
-# pathAsqtInput <- "F:/Projects/RDev/NlsyLinksStaging/Datasets/Gen1Afqt.csv"
-pathOutput <- file.path(getwd(), "LinksForDistribution/Outcomes/OutcomesGen1.csv")
+pathInputFertility <- "./OutsideData/AfiAmen2012-09-20/AfiAfm.csv"
+# pathPoliticalInput <- "./Datasets/PoliticalData.csv"
+# pathAsqtInput <- "./Datasets/Gen1Afqt.csv"
+pathOutput <- "./LinksForDistribution/Outcomes/OutcomesGen1.csv"
 
-odbcCloseAll()
-channel <- odbcConnect(dsn="BeeNlsLinks")
+channel <- RODBC::odbcDriverConnect("driver={SQL Server};Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 odbcGetInfo(channel)
 keepExistingTable <- FALSE
 ds <- sqlQuery(channel, paste0("SELECT * FROM dbo.vewOutcomes WHERE Generation=", generation))

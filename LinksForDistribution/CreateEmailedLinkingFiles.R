@@ -5,7 +5,7 @@ rm(list=ls(all=TRUE))
 require(NlsyLinks)
 
 #Set the working directory (change this for your computer).
-pathDirectory <- "F:/Projects/Nls/NlsyLinksDetermination/LinksForDistribution"
+pathDirectory <- "./LinksForDistribution"
 
 
 #Uncomment this line to retain all links.  (Comment out the other assignments to 'desiredPaths')
@@ -30,7 +30,7 @@ dsLinking <- Links79PairExpanded[Links79PairExpanded$RelationshipPath %in% desir
 # write.csv(dsLinking, 'Gen1LinksForBrianV36.csv', row.names=F)
 
 
-write.csv(dsLinking, file=file.path(pathDirectory, 'Gen1HousematesLinksV52.csv'), row.names=FALSE)
+write.csv(dsLinking, file="./LinksForDistribution/Gen1HousematesLinksV52.csv", row.names=FALSE)
 
 # dsLinking$RelationshipPath <- as.character(dsLinking$RelationshipPath) #For the sake of SAS, so the value is in there as a string, and doesn't require the format crap in SAS code.
 
