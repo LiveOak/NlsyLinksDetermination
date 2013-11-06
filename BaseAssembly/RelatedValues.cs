@@ -28,20 +28,20 @@ namespace Nls.BaseAssembly {
 			Stopwatch sw = new Stopwatch();
 			sw.Start();
 			Int32 gen1HousematesCount = Gen1Housemates();
-			//Int32 gen2SiblingsCount = Gen2Siblings();
-			//Int32 gen2CousinsCount = Gen2Cousins();
-			//Int32 parentChildCount = ParentChild();
-			//Int32 auntNieceCount = AuntNiece();
-			Int32 gen2SiblingsCount = 0;// Gen2Siblings();
-			Int32 gen2CousinsCount = 0;//Gen2Cousins();
-			Int32 parentChildCount = 0;//ParentChild();
-			Int32 auntNieceCount = 0;// AuntNiece();			
+            Int32 gen2SiblingsCount = Gen2Siblings();
+            Int32 gen2CousinsCount = Gen2Cousins();
+            Int32 parentChildCount = ParentChild();
+            Int32 auntNieceCount = AuntNiece();
+            //Int32 gen2SiblingsCount = 0;// Gen2Siblings();
+            //Int32 gen2CousinsCount = 0;//Gen2Cousins();
+            //Int32 parentChildCount = 0;//ParentChild();
+            //Int32 auntNieceCount = 0;// AuntNiece();			
 
 			if ( gen1HousematesCount > 0 ) Trace.Assert(gen1HousematesCount == Constants.Gen1HousematesPathCount, "The number of Gen1 Housemate paths should be correct.");
-			//if ( gen2SiblingsCount > 0 ) Trace.Assert(gen2SiblingsCount == Constants.Gen2SiblingsPathCount, "The number of Gen2 Sibling paths should be correct.");
-			//if ( gen2CousinsCount > 0 ) Trace.Assert(gen2CousinsCount == Constants.Gen2CousinsPathCount, "The number of Gen2 Cousins paths should be correct.");
-			//if ( parentChildCount > 0 ) Trace.Assert(parentChildCount == Constants.ParentChildPathCount, "The number of ParentChild paths should be correct.");
-			//if ( auntNieceCount > 0 ) Trace.Assert(auntNieceCount == Constants.AuntNiecePathCount, "The number of AuntNiece paths should be correct.");
+            if( gen2SiblingsCount > 0 ) Trace.Assert(gen2SiblingsCount == Constants.Gen2SiblingsPathCount, "The number of Gen2 Sibling paths should be correct.");
+            if( gen2CousinsCount > 0 ) Trace.Assert(gen2CousinsCount == Constants.Gen2CousinsPathCount, "The number of Gen2 Cousins paths should be correct.");
+            if( parentChildCount > 0 ) Trace.Assert(parentChildCount == Constants.ParentChildPathCount, "The number of ParentChild paths should be correct.");
+            if( auntNieceCount > 0 ) Trace.Assert(auntNieceCount == Constants.AuntNiecePathCount, "The number of AuntNiece paths should be correct.");
 
 			Int32 recordsAdded = gen1HousematesCount + gen2SiblingsCount + gen2CousinsCount + parentChildCount + auntNieceCount;
 			sw.Stop();
