@@ -5,25 +5,19 @@ channel <- RODBC::odbcDriverConnect("driver={SQL Server};Server=Bee\\Bass; Datab
 ds <- sqlQuery(channel, paste("SELECT * FROM dbo.vewRelatedValues", sep=""))
 odbcClose(channel)
 
-ds$GenerationSubject1 <- 2
-ds$GenerationSubject2 <- 2
 
-firstGen1 <- (ds$GenerationSubject1 == 1)
-secondGen1 <- (ds$GenerationSubject2 == 1)
-ds$Subject1ID <- rep(NA, nrow(ds))
-ds$Subject2ID <- rep(NA, nrow(ds))
+isGen1Subject1 <- grepl("\\d{1,}00\\b", ds$Subject1Tag, perl=TRUE);
+isGen1Subject2 <- grepl("\\d{1,}00\\b", ds$Subject2Tag, perl=TRUE);
 
-ds$Subject1ID[firstGen1] <- ds$Subject1Tag[firstGen1] / 100
-ds$Subject2ID[secondGen1] <- ds$Subject1Tag[secondGen1] / 100
+ds$GenerationSubject1 <- ifelse(isGen1Subject1, 1, 2)
+ds$GenerationSubject2 <- ifelse(isGen1Subject2, 1, 2)
 
-ds$Subject1ID[!firstGen1] <- ds$Subject1Tag[!firstGen1]
-ds$Subject2ID[!secondGen1] <- ds$Subject2Tag[!secondGen1]
+ds$Subject1ID <- ifelse(isGen1Subject1, ds$Subject1Tag / 100, ds$Subject1Tag)
+ds$Subject2ID <- ifelse(isGen1Subject2, ds$Subject1Tag / 100, ds$Subject2Tag)
 
-# for( i in seq(nrow(ds))) {
-#   if(ds$GenerationSubject1[i] == 1 )
-# }
 
-#ds
+ds <- ds[order(ds$ExtendedID, ds$Subject1Tag, ds$Subject2Tag), ]
+
 write.csv(ds, "./Links2011V83.csv", row.names=FALSE)
 summary(ds)
 
