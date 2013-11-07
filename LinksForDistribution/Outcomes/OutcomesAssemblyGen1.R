@@ -9,7 +9,7 @@ pathInputFertility <- "./OutsideData/AfiAmen2012-09-20/AfiAfm.csv"
 # pathAsqtInput <- "./Datasets/Gen1Afqt.csv"
 pathOutput <- "./LinksForDistribution/Outcomes/OutcomesGen1.csv"
 
-channel <- RODBC::odbcDriverConnect("driver={SQL Server};Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
+channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 odbcGetInfo(channel)
 keepExistingTable <- FALSE
 ds <- sqlQuery(channel, paste0("SELECT * FROM dbo.vewOutcomes WHERE Generation=", generation))

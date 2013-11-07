@@ -4,17 +4,17 @@ rm(list=ls(all=TRUE))
 path <- "./DBFiles/BackupOfNonSubjectData"
 
 # channel <- odbcConnect("BeeNlsLinks", uid="NlsyReadWrite", pwd="nophi")
-channel <- RODBC::odbcDriverConnect("driver={SQL Server};Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
+channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 
-dsItem <- sqlQuery(channel, paste("SELECT * FROM Process.tblItem", sep=""))
-dsLUExtractSource <- sqlQuery(channel, paste("SELECT * FROM Process.tblLUExtractSource", sep=""))
-dsLUMarkerEvidence <- sqlQuery(channel, paste("SELECT * FROM Process.tblLUMarkerEvidence", sep=""))
-dsLUMarkerType <- sqlQuery(channel, paste("SELECT * FROM Process.tblLUMarkerType", sep=""))
-dsLURelationshipPath <- sqlQuery(channel, paste("SELECT * FROM Process.tblLURelationshipPath", sep=""))
-dsLUSurveySource <- sqlQuery(channel, paste("SELECT * FROM Process.tblLUSurveySource", sep=""))
-dsVariable <- sqlQuery(channel, paste("SELECT * FROM Process.tblVariable", sep=""))
-dsMz <- sqlQuery(channel, paste("SELECT * FROM Process.tblMzManual", sep=""))
-dsRArchive <- sqlQuery(channel, paste("SELECT * FROM Process.tblRelatedValuesArchive", sep=""))
+dsItem <- sqlQuery(channel, "SELECT * FROM Process.tblItem")
+dsLUExtractSource <- sqlQuery(channel, "SELECT * FROM Process.tblLUExtractSource")
+dsLUMarkerEvidence <- sqlQuery(channel, "SELECT * FROM Process.tblLUMarkerEvidence")
+dsLUMarkerType <- sqlQuery(channel, "SELECT * FROM Process.tblLUMarkerType")
+dsLURelationshipPath <- sqlQuery(channel, "SELECT * FROM Process.tblLURelationshipPath")
+dsLUSurveySource <- sqlQuery(channel, "SELECT * FROM Process.tblLUSurveySource")
+dsVariable <- sqlQuery(channel, "SELECT * FROM Process.tblVariable")
+dsMz <- sqlQuery(channel, "SELECT * FROM Process.tblMzManual")
+dsRArchive <- sqlQuery(channel, "SELECT * FROM Process.tblRelatedValuesArchive")
 
 odbcClose(channel)
 
