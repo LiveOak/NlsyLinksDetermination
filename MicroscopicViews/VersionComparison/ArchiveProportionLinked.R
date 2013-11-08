@@ -30,7 +30,7 @@ odbcCloseAll()
 versionNumbers <- sort(unique(ds$AlgorithmVersion))
 dsProportionLinked <- data.frame(Version=versionNumbers, OfTotal=NA_integer_, OfDV=NA_integer_, ofDVSameGeneration=NA_integer_)
 
-dsOutcomes <- read.csv(file="./LinksForDistribution/Outcomes/ExtraOutcomes79.csv", stringsAsFactors=F)
+dsOutcomes <- read.csv(file="./ForDistribution/Outcomes/ExtraOutcomes79.csv", stringsAsFactors=F)
 
 for( versionNumber in versionNumbers ) {
   dsSlice <- ds[ds$AlgorithmVersion==versionNumber, ]  

@@ -58,7 +58,7 @@ dsRocImplicitRoster <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=
 dsRocImplicit2004RFull <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=NA_integer_)
 # dsProportionLinked <- data.frame(Version=versionNumbers, Total=NA_integer_, WithHeight=NA_integer_)
 
-# dsOutcomes <- read.csv(file="./LinksForDistribution/Outcomes/ExtraOutcomes79.csv", stringsAsFactors=F)
+# dsOutcomes <- read.csv(file="./ForDistribution/Outcomes/ExtraOutcomes79.csv", stringsAsFactors=F)
 
 for( versionNumber in versionNumbers ) {
   dsSliceRaw <- dsRaw[dsClean$AlgorithmVersion==versionNumber, columnsToConsider]  

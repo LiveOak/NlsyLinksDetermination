@@ -2,7 +2,7 @@
 # #   but not when knitr calls individual chunks.
 # rm(list=ls(all=TRUE)) #Clear the memory for any variables set from any previous runs.
 # pathInputKellyOutcomes <-  file.path(getwd(), "OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv")
-# pathOutputSubjectHeight <- file.path(getwd(), "LinksForDistribution/Outcomes/Gen2Height/Gen2Height.csv")
+# pathOutputSubjectHeight <- file.path(getwd(), "ForDistribution/Outcomes/Gen2Height/Gen2Height.csv")
 # 
 # ## @knitr LoadPackages
 # require(RODBC)

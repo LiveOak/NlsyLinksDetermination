@@ -11,7 +11,7 @@ value RltnshpP
 ;
 
 DATA  rdata ;
-INFILE  "F:/Projects/Nls/NlsyLinksDetermination/LinksForDistribution/Gen1HousematesLinksForSasV52.csv" 
+INFILE  "D:/Projects/BG/Links2011/Nls/NlsyLinksDetermination/ForDistribution/Gen1HousematesLinksForSasV52.csv" 
      DSD 
      LRECL= 95 ;
 INPUT

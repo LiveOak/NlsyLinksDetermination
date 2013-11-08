@@ -7,7 +7,7 @@ generation <- 1
 pathInputFertility <- "./OutsideData/AfiAmen2012-09-20/AfiAfm.csv"
 # pathPoliticalInput <- "./Datasets/PoliticalData.csv"
 # pathAsqtInput <- "./Datasets/Gen1Afqt.csv"
-pathOutput <- "./LinksForDistribution/Outcomes/OutcomesGen1.csv"
+pathOutput <- "./ForDistribution/Outcomes/OutcomesGen1.csv"
 
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 odbcGetInfo(channel)

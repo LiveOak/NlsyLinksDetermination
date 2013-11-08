@@ -6,7 +6,7 @@ dsSubjectDetails79 <- sqlQuery(channel, "SELECT * FROM NlsLinks.dbo.vewSubjectDe
 algorithmVersion <- max(sqlQuery(channel, "SELECT MAX(AlgorithmVersion) as AlgorithmVersion  FROM [NlsLinks].[Process].[tblRelatedValuesArchive]"))
 odbcClose(channel)
 
-fileName <- sprintf("./LinksForDistribution/SubjectDetails/SubjectDetailsV%d.csv", algorithmVersion)
+fileName <- sprintf("./ForDistribution/SubjectDetails/SubjectDetailsV%d.csv", algorithmVersion)
 
 write.csv(dsSubjectDetails79, file=fileName, row.names=FALSE)
 summary(dsSubjectDetails79)

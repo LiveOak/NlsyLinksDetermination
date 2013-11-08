@@ -86,7 +86,7 @@ relationshipPathPretty <- "RelationshipPathPrettyNotSet"
 if( relationshipPath==1 ) {
   #rVersions <- c("R", "RPass1",  "RExplicit", "RExplicitPass1", "RImplicit2004")
   rVersions <- c("R", "RFull", "RExplicit", "RImplicit", "RImplicitPass1", "RImplicit2004")
-  pathInput <- "./LinksForDistribution/Outcomes/ExtraOutcomes79.csv"
+  pathInput <- "./ForDistribution/Outcomes/ExtraOutcomes79.csv"
   dsOutcomes <- read.csv(file=pathInput, stringsAsFactors=F)
 #   dsOutcomes$AfqtRescaled2006Gaussified <- qnorm(dsOutcomes[, "AfqtRescaled2006"]) #convert from roughly uniform distribution [0, 100], to something Guassianish.
 #   dsOutcomes$AfqtRescaled2006Gaussified <- pmax(pmin(dsOutcomes$AfqtRescaled2006Gaussified, 3.3), -3.3) #The scale above had 0s and 100s, so clamp that in at +/-3.3.

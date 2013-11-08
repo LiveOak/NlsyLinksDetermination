@@ -4,9 +4,9 @@ require(lubridate)
 rm(list=ls(all=TRUE))
 
 generation <- 2
-pathInputHeight <- "./LinksForDistribution/Outcomes/Gen2Height/Gen2Height.csv"
+pathInputHeight <- "./ForDistribution/Outcomes/Gen2Height/Gen2Height.csv"
 pathInputMath <- "./OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv"
-pathOutput <- "./LinksForDistribution/Outcomes/OutcomesGen2.csv"
+pathOutput <- "./ForDistribution/Outcomes/OutcomesGen2.csv"
 
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 odbcGetInfo(channel)

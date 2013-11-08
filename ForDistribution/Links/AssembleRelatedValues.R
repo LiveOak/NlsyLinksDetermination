@@ -22,7 +22,7 @@ ds$Subject1ID <- as.integer(ds$Subject1ID)
 ds$Subject2ID <- as.integer(ds$Subject2ID)
 
 
-fileName <- sprintf("./LinksForDistribution/Links/Links2011V%d.csv", algorithmVersion)
+fileName <- sprintf("./ForDistribution/Links/Links2011V%d.csv", algorithmVersion)
 
 write.csv(ds, file=fileName, row.names=FALSE)
 summary(ds)
