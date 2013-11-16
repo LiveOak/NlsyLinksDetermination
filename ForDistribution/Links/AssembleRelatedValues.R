@@ -2,24 +2,24 @@ rm(list=ls(all=TRUE))
 require(RODBC)
 
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
-ds <- sqlQuery(channel, "SELECT * FROM dbo.vewRelatedValues ORDER BY ExtendedID, Subject1Tag, Subject2Tag")
+ds <- sqlQuery(channel, "SELECT * FROM dbo.vewRelatedValues ORDER BY ExtendedID, SubjectTag_S1, SubjectTag_S2")
 algorithmVersion <- max(sqlQuery(channel, "SELECT MAX(AlgorithmVersion) as AlgorithmVersion  FROM [NlsLinks].[Process].[tblRelatedValuesArchive]"))
 odbcClose(channel)
 
-isGen1Subject1 <- grepl("^\\d{1,7}00$", ds$Subject1Tag, perl=TRUE);
-isGen1Subject2 <- grepl("^\\d{1,7}00$", ds$Subject2Tag, perl=TRUE);
+isGen1_S1 <- grepl("^\\d{1,7}00$", ds$SubjectTag_S1, perl=TRUE);
+isGen1_S2 <- grepl("^\\d{1,7}00$", ds$SubjectTag_S2, perl=TRUE);
 
-ds$GenerationSubject1 <- ifelse(isGen1Subject1, 1L, 2L)
-ds$GenerationSubject2 <- ifelse(isGen1Subject2, 1L, 2L)
+ds$Generation_S1 <- ifelse(isGen1_S1, 1L, 2L)
+ds$Generation_S2 <- ifelse(isGen1_S2, 1L, 2L)
 
-ds$Subject1ID <- ifelse(isGen1Subject1, ds$Subject1Tag / 100, ds$Subject1Tag)
-ds$Subject2ID <- ifelse(isGen1Subject2, ds$Subject2Tag / 100, ds$Subject2Tag)
+ds$SubjectID_S1 <- ifelse(isGen1_S1, ds$SubjectTag_S1 / 100, ds$SubjectTag_S1)
+ds$SubjectID_S2 <- ifelse(isGen1_S2, ds$SubjectTag_S2 / 100, ds$SubjectTag_S2)
 
-if( any((ds$Subject1ID %% 1) != 0) ) stop("A Gen2 subject was accidentally classified as Gen1.")
-if( any((ds$Subject2ID %% 1) != 0) ) stop("A Gen2 subject was accidentally classified as Gen1.")
+if( any((ds$SubjectID_S1 %% 1) != 0) ) stop("A Gen2 subject was accidentally classified as Gen1.")
+if( any((ds$SubjectID_S2 %% 1) != 0) ) stop("A Gen2 subject was accidentally classified as Gen1.")
 
-ds$Subject1ID <- as.integer(ds$Subject1ID)
-ds$Subject2ID <- as.integer(ds$Subject2ID)
+ds$SubjectID_S1 <- as.integer(ds$SubjectID_S1)
+ds$SubjectID_S2 <- as.integer(ds$SubjectID_S2)
 
 
 fileName <- sprintf("./ForDistribution/Links/Links2011V%d.csv", algorithmVersion)
