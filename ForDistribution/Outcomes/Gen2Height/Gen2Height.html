@@ -185,7 +185,7 @@ hljs.initHighlightingOnLoad();
 <h2>Define the age cutoffs to keep ages within the same Window as Gen1 Heights.  Define the height cutoffs to exclude values that are more likely to be entry errors or a developmental disorder, than a true reflection of additive genetics</h2>
 
 <pre><code class="r">pathInputKellyOutcomes &lt;-  &quot;./OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv&quot;
-pathOutputSubjectHeight &lt;- &quot;./ForDistribution/Outcomes/Gen2Height/Gen2Height.csv&quot;
+pathOutput &lt;- &quot;./ForDistribution/Outcomes/Gen2Height/Gen2Height.csv&quot;
 
 inchesTotalMin &lt;- 56 #4&#39;8&quot;
 inchesTotalMax &lt;- 80 #7&#39;0&quot;
@@ -252,21 +252,13 @@ summary(dsLong)
  Max.   :38.0      Max.   :2.0  
 </code></pre>
 
-<pre><code class="r">summary(dsSubject)
+<pre><code class="r">nrow(dsSubject)
 </code></pre>
 
-<pre><code>   SubjectTag     
- Min.   :    201  
- 1st Qu.: 310402  
- Median : 604606  
- Mean   : 601232  
- 3rd Qu.: 876228  
- Max.   :1267501  
+<pre><code>[1] 11504
 </code></pre>
 
 <pre><code class="r">
-
-
 ####################################################################################
 </code></pre>
 
@@ -520,7 +512,7 @@ Warning: Removed 6417 rows containing missing values (geom_point).
 
 <h2>Write the OutcomeData to CSV</h2>
 
-<pre><code class="r">write.csv(ds, pathOutputSubjectHeight, row.names=FALSE)
+<pre><code class="r">write.csv(ds, pathOutput, row.names=FALSE)
 </code></pre>
 
 </body>

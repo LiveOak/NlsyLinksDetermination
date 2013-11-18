@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Calculating Gen2 Height</title>
+<title>Calculating Gen1 Height</title>
 
 <style type="text/css">
 body, td {
@@ -178,13 +178,13 @@ hljs.initHighlightingOnLoad();
 </head>
 
 <body>
-<h1>Calculating Gen2 Height</h1>
+<h1>Calculating Gen1 Height</h1>
 
 <p>This sequence picks a single height value per Gen2 subject.</p>
 
 <h2>Define the age cutoffs to keep ages within the same Window as Gen1 Heights.  Define the height cutoffs to exclude values that are more likely to be entry errors or a developmental disorder, than a true reflection of additive genetics</h2>
 
-<pre><code class="r">pathOutputSubjectHeight &lt;- &quot;./ForDistribution/Outcomes/Gen1Height/Gen1Height.csv&quot;
+<pre><code class="r">pathOutput &lt;- &quot;./ForDistribution/Outcomes/Gen1Height/Gen1Height.csv&quot;
 
 inchesTotalMin &lt;- 56 #4&#39;8&quot;
 inchesTotalMax &lt;- 80 #7&#39;0&quot;
@@ -203,13 +203,7 @@ zMax &lt;- -zMin
 
 <h2>Load the appropriate information from the SQL Server database</h2>
 
-<pre><code class="r">#Equivalent ages for 1981 Heights are 16-24 (ignoring two 15-year-old and 1 26-year-old)
-# SELECT count([AgeSelfReportYears]), FLOOR([AgeCalculateYears]) AS Age
-# FROM [NlsLinks].[Process].[tblSurveyTime]
-# WHERE SurveyYear=1981
-# GROUP BY floor([AgeCalculateYears]) ORDER BY Age
-
-channel &lt;- RODBC::odbcDriverConnect(&quot;driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi&quot;)
+<pre><code class="r">channel &lt;- RODBC::odbcDriverConnect(&quot;driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi&quot;)
 dsLong &lt;- sqlQuery(channel, 
                    &quot;SELECT * 
                     FROM [NlsLinks].[Process].[vewOutcome]
@@ -251,16 +245,10 @@ summary(dsLong)
  Max.   :26.8      Max.   :2.0  
 </code></pre>
 
-<pre><code class="r">summary(dsSubject)
+<pre><code class="r">nrow(dsSubject)
 </code></pre>
 
-<pre><code>   SubjectTag     
- Min.   :    100  
- 1st Qu.: 317225  
- Median : 634350  
- Mean   : 634350  
- 3rd Qu.: 951475  
- Max.   :1268600  
+<pre><code>[1] 12686
 </code></pre>
 
 <pre><code class="r">
@@ -460,7 +448,7 @@ qplot(ds$Age, binwidth=.5) #Make sure ages are within window, and favoring older
 
 <h2>Write the OutcomeData to CSV</h2>
 
-<pre><code class="r">write.csv(ds, pathOutputSubjectHeight, row.names=FALSE)
+<pre><code class="r">write.csv(ds, pathOutput, row.names=FALSE)
 </code></pre>
 
 </body>

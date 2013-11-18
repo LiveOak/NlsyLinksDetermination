@@ -1,5 +1,5 @@
-# Calculating Gen1 Height
-This sequence picks a single height value per Gen2 subject.
+# Calculating Gen1 Weight
+This sequence picks a single Weight value per Gen2 subject.
 
 ```{r, echo=FALSE, message=F} 
 #Set the chunks' working directory to the repository's base directory; this assumes the report is nested inside of two directories.
@@ -15,13 +15,13 @@ opts_chunk$set(
   tidy=FALSE, 
   size="small"
   )
-read_chunk("./ForDistribution/Outcomes/Gen1Height/Gen1Height.R") #This allows knitr to call chunks tagged in the underlying .R file.
+read_chunk("./ForDistribution/Outcomes/Gen1Weight/Gen1Weight.R") #This allows knitr to call chunks tagged in the underlying .R file.
 ```
 
 
 ```{r LoadPackages, echo=FALSE, message=FALSE}
 ```
-## Define the age cutoffs to keep ages within the same Window as Gen1 Heights.  Define the height cutoffs to exclude values that are more likely to be entry errors or a developmental disorder, than a true reflection of additive genetics
+## Define the age cutoffs to keep ages within the same Window as Gen1 Weights.  Define the Weight cutoffs to exclude values that are more likely to be entry errors or a developmental disorder, than a true reflection of additive genetics
 ```{r DefineGlobals}
 ```
 
@@ -33,7 +33,7 @@ read_chunk("./ForDistribution/Outcomes/Gen1Height/Gen1Height.R") #This allows kn
 ```{r TweakData}
 ```
 
-## Show the height data with age of the subject when the height was taken.  Filter out records where the age or the height is outside of the desired window.
+## Show the Weight data with age of the subject when the Weight was taken.  Filter out records where the age or the Weight is outside of the desired window.
 ```{r FilterValuesAndAges, fig.height=5, cache=TRUE}
 ```
 ## Standardize by Gender & Age.  Calculated Age (using SurveyDate and MOB) has been truncated to integers.  

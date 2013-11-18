@@ -13,7 +13,7 @@ This sequence picks a single height value per Gen2 subject.
 
 ```r
 pathInputKellyOutcomes <-  "./OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv"
-pathOutputSubjectHeight <- "./ForDistribution/Outcomes/Gen2Height/Gen2Height.csv"
+pathOutput <- "./ForDistribution/Outcomes/Gen2Height/Gen2Height.csv"
 
 inchesTotalMin <- 56 #4'8"
 inchesTotalMax <- 80 #7'0"
@@ -84,22 +84,14 @@ summary(dsLong)
 ```
 
 ```r
-summary(dsSubject)
+nrow(dsSubject)
 ```
 
 ```
-   SubjectTag     
- Min.   :    201  
- 1st Qu.: 310402  
- Median : 604606  
- Mean   : 601232  
- 3rd Qu.: 876228  
- Max.   :1267501  
+[1] 11504
 ```
 
 ```r
-
-
 
 ####################################################################################
 ```
@@ -406,6 +398,6 @@ Warning: Removed 6417 rows containing missing values (geom_point).
 ## Write the OutcomeData to CSV
 
 ```r
-write.csv(ds, pathOutputSubjectHeight, row.names=FALSE)
+write.csv(ds, pathOutput, row.names=FALSE)
 ```
 
