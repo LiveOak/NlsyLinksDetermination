@@ -98,6 +98,8 @@ namespace Nls.BaseAssembly {
         
         private global::System.Data.DataRelation relationFK_tblParentsOfGen1Current_tblSubject;
         
+        private global::System.Data.DataRelation relationFK_tblOutcome_tblItem;
+        
         private global::System.Data.DataRelation relationFK_tblOutcome_tblSubject;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
@@ -703,6 +705,7 @@ namespace Nls.BaseAssembly {
             this.relationFK_tblParentsOfGen1Retro_tblSubject = this.Relations["FK_tblParentsOfGen1Retro_tblSubject"];
             this.relationFK_tblRelatedValues_tblRelatedStructure = this.Relations["FK_tblRelatedValues_tblRelatedStructure"];
             this.relationFK_tblParentsOfGen1Current_tblSubject = this.Relations["FK_tblParentsOfGen1Current_tblSubject"];
+            this.relationFK_tblOutcome_tblItem = this.Relations["FK_tblOutcome_tblItem"];
             this.relationFK_tblOutcome_tblSubject = this.Relations["FK_tblOutcome_tblSubject"];
         }
         
@@ -822,6 +825,10 @@ namespace Nls.BaseAssembly {
                         this.tabletblSubject.SubjectTagColumn}, new global::System.Data.DataColumn[] {
                         this.tabletblParentsOfGen1Current.SubjectTagColumn}, false);
             this.Relations.Add(this.relationFK_tblParentsOfGen1Current_tblSubject);
+            this.relationFK_tblOutcome_tblItem = new global::System.Data.DataRelation("FK_tblOutcome_tblItem", new global::System.Data.DataColumn[] {
+                        this.tabletblItem.IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tabletblOutcome.ItemColumn}, false);
+            this.Relations.Add(this.relationFK_tblOutcome_tblItem);
             this.relationFK_tblOutcome_tblSubject = new global::System.Data.DataRelation("FK_tblOutcome_tblSubject", new global::System.Data.DataColumn[] {
                         this.tabletblSubject.SubjectTagColumn}, new global::System.Data.DataColumn[] {
                         this.tabletblOutcome.SubjectTagColumn}, false);
@@ -8852,7 +8859,7 @@ namespace Nls.BaseAssembly {
             
             private global::System.Data.DataColumn columnSubjectTag;
             
-            private global::System.Data.DataColumn columnOutcome;
+            private global::System.Data.DataColumn columnItem;
             
             private global::System.Data.DataColumn columnSurveyYear;
             
@@ -8909,9 +8916,9 @@ namespace Nls.BaseAssembly {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn OutcomeColumn {
+            public global::System.Data.DataColumn ItemColumn {
                 get {
-                    return this.columnOutcome;
+                    return this.columnItem;
                 }
             }
             
@@ -8968,16 +8975,19 @@ namespace Nls.BaseAssembly {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public tblOutcomeRow AddtblOutcomeRow(int ID, tblSubjectRow parenttblSubjectRowByFK_tblOutcome_tblSubject, byte Outcome, short SurveyYear, int Value) {
+            public tblOutcomeRow AddtblOutcomeRow(tblSubjectRow parenttblSubjectRowByFK_tblOutcome_tblSubject, tblItemRow parenttblItemRowByFK_tblOutcome_tblItem, short SurveyYear, int Value) {
                 tblOutcomeRow rowtblOutcomeRow = ((tblOutcomeRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        ID,
                         null,
-                        Outcome,
+                        null,
+                        null,
                         SurveyYear,
                         Value};
                 if ((parenttblSubjectRowByFK_tblOutcome_tblSubject != null)) {
                     columnValuesArray[1] = parenttblSubjectRowByFK_tblOutcome_tblSubject[0];
+                }
+                if ((parenttblItemRowByFK_tblOutcome_tblItem != null)) {
+                    columnValuesArray[2] = parenttblItemRowByFK_tblOutcome_tblItem[0];
                 }
                 rowtblOutcomeRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowtblOutcomeRow);
@@ -9010,7 +9020,7 @@ namespace Nls.BaseAssembly {
             internal void InitVars() {
                 this.columnID = base.Columns["ID"];
                 this.columnSubjectTag = base.Columns["SubjectTag"];
-                this.columnOutcome = base.Columns["Outcome"];
+                this.columnItem = base.Columns["Item"];
                 this.columnSurveyYear = base.Columns["SurveyYear"];
                 this.columnValue = base.Columns["Value"];
             }
@@ -9022,18 +9032,26 @@ namespace Nls.BaseAssembly {
                 base.Columns.Add(this.columnID);
                 this.columnSubjectTag = new global::System.Data.DataColumn("SubjectTag", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSubjectTag);
-                this.columnOutcome = new global::System.Data.DataColumn("Outcome", typeof(byte), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnOutcome);
+                this.columnItem = new global::System.Data.DataColumn("Item", typeof(short), null, global::System.Data.MappingType.Element);
+                this.columnItem.ExtendedProperties.Add("Generator_ColumnPropNameInRow", "Item");
+                this.columnItem.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "ItemColumn");
+                this.columnItem.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "columnItem");
+                this.columnItem.ExtendedProperties.Add("Generator_UserColumnName", "Item");
+                base.Columns.Add(this.columnItem);
                 this.columnSurveyYear = new global::System.Data.DataColumn("SurveyYear", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSurveyYear);
                 this.columnValue = new global::System.Data.DataColumn("Value", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnValue);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
+                this.columnID.AutoIncrement = true;
+                this.columnID.AutoIncrementSeed = -1;
+                this.columnID.AutoIncrementStep = -1;
                 this.columnID.AllowDBNull = false;
+                this.columnID.ReadOnly = true;
                 this.columnID.Unique = true;
                 this.columnSubjectTag.AllowDBNull = false;
-                this.columnOutcome.AllowDBNull = false;
+                this.columnItem.AllowDBNull = false;
                 this.columnSurveyYear.AllowDBNull = false;
                 this.columnValue.AllowDBNull = false;
             }
@@ -11015,6 +11033,17 @@ namespace Nls.BaseAssembly {
                 }
                 else {
                     return ((tblResponseRow[])(base.GetChildRows(this.Table.ChildRelations["FK_tblResponse_tblItem"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public tblOutcomeRow[] GettblOutcomeRows() {
+                if ((this.Table.ChildRelations["FK_tblOutcome_tblItem"] == null)) {
+                    return new tblOutcomeRow[0];
+                }
+                else {
+                    return ((tblOutcomeRow[])(base.GetChildRows(this.Table.ChildRelations["FK_tblOutcome_tblItem"])));
                 }
             }
         }
@@ -13402,12 +13431,12 @@ namespace Nls.BaseAssembly {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public byte Outcome {
+            public short Item {
                 get {
-                    return ((byte)(this[this.tabletblOutcome.OutcomeColumn]));
+                    return ((short)(this[this.tabletblOutcome.ItemColumn]));
                 }
                 set {
-                    this[this.tabletblOutcome.OutcomeColumn] = value;
+                    this[this.tabletblOutcome.ItemColumn] = value;
                 }
             }
             
@@ -13430,6 +13459,17 @@ namespace Nls.BaseAssembly {
                 }
                 set {
                     this[this.tabletblOutcome.ValueColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public tblItemRow tblItemRow {
+                get {
+                    return ((tblItemRow)(this.GetParentRow(this.Table.ParentRelations["FK_tblOutcome_tblItem"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_tblOutcome_tblItem"]);
                 }
             }
             
@@ -24151,47 +24191,46 @@ SELECT SubjectTag, BiodadBirthYearReported, BiodadBirthYearEstimated, BiodadYear
             tableMapping.DataSetTable = "tblOutcome";
             tableMapping.ColumnMappings.Add("ID", "ID");
             tableMapping.ColumnMappings.Add("SubjectTag", "SubjectTag");
-            tableMapping.ColumnMappings.Add("Outcome", "Outcome");
+            tableMapping.ColumnMappings.Add("Item", "Item");
             tableMapping.ColumnMappings.Add("SurveyYear", "SurveyYear");
             tableMapping.ColumnMappings.Add("Value", "Value");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
             this._adapter.DeleteCommand.CommandText = "DELETE FROM [Process].[tblOutcome] WHERE (([ID] = @Original_ID) AND ([SubjectTag]" +
-                " = @Original_SubjectTag) AND ([Outcome] = @Original_Outcome) AND ([SurveyYear] =" +
-                " @Original_SurveyYear) AND ([Value] = @Original_Value))";
+                " = @Original_SubjectTag) AND ([Item] = @Original_Item) AND ([SurveyYear] = @Orig" +
+                "inal_SurveyYear) AND ([Value] = @Original_Value))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SubjectTag", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjectTag", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Outcome", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Outcome", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Item", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Item", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SurveyYear", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SurveyYear", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Value", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Value", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [Process].[tblOutcome] ([ID], [SubjectTag], [Outcome], [SurveyYear], " +
-                "[Value]) VALUES (@ID, @SubjectTag, @Outcome, @SurveyYear, @Value);\r\nSELECT ID, S" +
-                "ubjectTag, Outcome, SurveyYear, Value FROM Process.tblOutcome WHERE (ID = @ID)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [Process].[tblOutcome] ([SubjectTag], [Item], [SurveyYear], [Value]) " +
+                "VALUES (@SubjectTag, @Item, @SurveyYear, @Value);\r\nSELECT ID, SubjectTag, Item, " +
+                "SurveyYear, Value FROM Process.tblOutcome WHERE (ID = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SubjectTag", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjectTag", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Outcome", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Outcome", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Item", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Item", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SurveyYear", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SurveyYear", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Value", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Value", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [Process].[tblOutcome] SET [ID] = @ID, [SubjectTag] = @SubjectTag, [Outcome] = @Outcome, [SurveyYear] = @SurveyYear, [Value] = @Value WHERE (([ID] = @Original_ID) AND ([SubjectTag] = @Original_SubjectTag) AND ([Outcome] = @Original_Outcome) AND ([SurveyYear] = @Original_SurveyYear) AND ([Value] = @Original_Value));
-SELECT ID, SubjectTag, Outcome, SurveyYear, Value FROM Process.tblOutcome WHERE (ID = @ID)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Process].[tblOutcome] SET [SubjectTag] = @SubjectTag, [Item] = @Item, [SurveyYear] = @SurveyYear, [Value] = @Value WHERE (([ID] = @Original_ID) AND ([SubjectTag] = @Original_SubjectTag) AND ([Item] = @Original_Item) AND ([SurveyYear] = @Original_SurveyYear) AND ([Value] = @Original_Value));
+SELECT ID, SubjectTag, Item, SurveyYear, Value FROM Process.tblOutcome WHERE (ID = @ID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SubjectTag", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjectTag", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Outcome", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Outcome", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Item", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Item", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SurveyYear", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SurveyYear", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Value", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Value", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SubjectTag", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjectTag", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Outcome", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Outcome", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Item", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Item", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SurveyYear", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SurveyYear", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Value", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Value", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -24207,7 +24246,7 @@ SELECT ID, SubjectTag, Outcome, SurveyYear, Value FROM Process.tblOutcome WHERE 
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT ID, SubjectTag, Outcome, SurveyYear, Value FROM Process.tblOutcome";
+            this._commandCollection[0].CommandText = "SELECT ID, SubjectTag, Item, SurveyYear, Value FROM Process.tblOutcome";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -24268,10 +24307,10 @@ SELECT ID, SubjectTag, Outcome, SurveyYear, Value FROM Process.tblOutcome WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, int Original_SubjectTag, byte Original_Outcome, short Original_SurveyYear, int Original_Value) {
+        public virtual int Delete(int Original_ID, int Original_SubjectTag, short Original_Item, short Original_SurveyYear, int Original_Value) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_SubjectTag));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((byte)(Original_Outcome));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((short)(Original_Item));
             this.Adapter.DeleteCommand.Parameters[3].Value = ((short)(Original_SurveyYear));
             this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_Value));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
@@ -24294,12 +24333,11 @@ SELECT ID, SubjectTag, Outcome, SurveyYear, Value FROM Process.tblOutcome WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int ID, int SubjectTag, byte Outcome, short SurveyYear, int Value) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ID));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(SubjectTag));
-            this.Adapter.InsertCommand.Parameters[2].Value = ((byte)(Outcome));
-            this.Adapter.InsertCommand.Parameters[3].Value = ((short)(SurveyYear));
-            this.Adapter.InsertCommand.Parameters[4].Value = ((int)(Value));
+        public virtual int Insert(int SubjectTag, short Item, short SurveyYear, int Value) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(SubjectTag));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((short)(Item));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((short)(SurveyYear));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(Value));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -24320,17 +24358,17 @@ SELECT ID, SubjectTag, Outcome, SurveyYear, Value FROM Process.tblOutcome WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, int SubjectTag, byte Outcome, short SurveyYear, int Value, int Original_ID, int Original_SubjectTag, byte Original_Outcome, short Original_SurveyYear, int Original_Value) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(SubjectTag));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((byte)(Outcome));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((short)(SurveyYear));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Value));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_ID));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_SubjectTag));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((byte)(Original_Outcome));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((short)(Original_SurveyYear));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_Value));
+        public virtual int Update(int SubjectTag, short Item, short SurveyYear, int Value, int Original_ID, int Original_SubjectTag, short Original_Item, short Original_SurveyYear, int Original_Value, int ID) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(SubjectTag));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((short)(Item));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((short)(SurveyYear));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Value));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_ID));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_SubjectTag));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((short)(Original_Item));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((short)(Original_SurveyYear));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_Value));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -24351,8 +24389,8 @@ SELECT ID, SubjectTag, Outcome, SurveyYear, Value FROM Process.tblOutcome WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int SubjectTag, byte Outcome, short SurveyYear, int Value, int Original_ID, int Original_SubjectTag, byte Original_Outcome, short Original_SurveyYear, int Original_Value) {
-            return this.Update(Original_ID, SubjectTag, Outcome, SurveyYear, Value, Original_ID, Original_SubjectTag, Original_Outcome, Original_SurveyYear, Original_Value);
+        public virtual int Update(int SubjectTag, short Item, short SurveyYear, int Value, int Original_ID, int Original_SubjectTag, short Original_Item, short Original_SurveyYear, int Original_Value) {
+            return this.Update(SubjectTag, Item, SurveyYear, Value, Original_ID, Original_SubjectTag, Original_Item, Original_SurveyYear, Original_Value, Original_ID);
         }
     }
     
