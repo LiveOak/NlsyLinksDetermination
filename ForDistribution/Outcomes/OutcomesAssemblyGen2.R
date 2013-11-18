@@ -10,12 +10,8 @@ pathOutput <- "./ForDistribution/Outcomes/OutcomesGen2.csv"
 
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 odbcGetInfo(channel)
-keepExistingTable <- FALSE
-ds <- sqlQuery(channel, paste0("SELECT * FROM dbo.vewOutcomes WHERE Generation=", generation))
+ds <- sqlQuery(channel, paste0("SELECT SubjectTag FROM Process.tblSubject WHERE Generation=", generation))
 odbcClose(channel)
-variablesToDropEventually <- c("ExtendedID", "Gender", "Mob", "Yob", "Age", "HeightInchesLateTeens", "WeightPoundsLateTeens", "AfqtRescaled2006", "BmiLateTeens")
-ds <- ds[, !(colnames(ds) %in% variablesToDropEventually)]
-
 
 ### Merge Height
 dsHeight <- read.csv(pathInputHeight, stringsAsFactors=F)

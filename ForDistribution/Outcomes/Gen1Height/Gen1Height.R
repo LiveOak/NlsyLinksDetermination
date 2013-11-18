@@ -14,8 +14,7 @@ require(testit) #For Assert
 # require(parallel)
 
 ## @knitr DefineGlobals
-pathInputKellyOutcomes <-  "./OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv"
-pathOutputSubjectHeight <- "./ForDistribution/Outcomes/Gen2Height/Gen2Height.csv"
+pathOutputSubjectHeight <- "./ForDistribution/Outcomes/Gen1Height/Gen1Height.csv"
 
 inchesTotalMin <- 56 #4'8"
 inchesTotalMax <- 80 #7'0"
@@ -41,22 +40,20 @@ channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Data
 dsLong <- sqlQuery(channel, 
                    "SELECT * 
                     FROM [NlsLinks].[Process].[vewOutcome]
-                    WHERE Generation=2 AND ItemLabel in ('Gen2HeightFeetOnly', 'Gen2HeightInchesRemainder') 
+                    WHERE Generation=1 AND ItemLabel in ('Gen1HeightInches') 
                     ORDER BY SubjectTag, SurveyYear" 
                    , stringsAsFactors=FALSE
 )
 dsSubject <- sqlQuery(channel, 
                     "SELECT SubjectTag 
                     FROM [NlsLinks].[Process].[tblSubject]
-                    WHERE Generation=2 
+                    WHERE Generation=1 
                     ORDER BY SubjectTag" 
                     , stringsAsFactors=FALSE
 )
 odbcClose(channel)
 summary(dsLong)
 summary(dsSubject)
-
-
 
 ####################################################################################
 ## @knitr TweakData
@@ -67,24 +64,11 @@ dsLong$AgeSelfReportYears <- NULL
 testit::assert("All outcomes should have a loop index of zero", all(dsLong$LoopIndex==0))
 dsLong$LoopIndex <- NULL
 
-####################################################################################
-## @knitr CalculateTotalInches
-CombineHeightUnits <- function( df ) {
-  feet <- df[df$ItemLabel=='Gen2HeightFeetOnly', 'Value']
-  feet <- ifelse(feetOnlyMin <= feet & feet <= feetOnlyMax, feet, NA)  
-  inches <- df[df$ItemLabel=='Gen2HeightInchesRemainder', 'Value']
-  inches <- ifelse(inchesOnlyMin <= inches & inches <= inchesOnlyMax, inches, NA)
-  return( data.frame(InchesTotal=feet*12 + inches) )
-} 
-#Combine to one row per SubjectYear combination
-system.time( 
-  dsYearStatic <- ddply(dsLong, c("SubjectTag", "SurveyYear", "Age", "Gender"), CombineHeightUnits)
-)#17.34; 23.94 sec
-
-dsYear <- dsYearStatic
+dsYear <- dsLong[, c("SubjectTag", "SurveyYear", "Age", "Gender", "Value")]
 nrow(dsYear)
 rm(dsLong)
 
+dsYear <- plyr::rename(x=dsYear, replace=c("Value"="InchesTotal"))
 ####################################################################################
 ## @knitr FilterValuesAndAges
 #Filter out records with undesired height values
@@ -96,11 +80,11 @@ summary(dsYear)
 qplot(dsYear$InchesTotal, binwidth=1, main="After Filtering Out Extreme Heights") #Make sure ages are normalish with no extreme values.
 
 #Filter out records with undesired age values
-ggplot(dsYear, aes(x=Age, y=InchesTotal, group=SubjectTag)) + geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
+ggplot(dsYear, aes(x=Age, y=InchesTotal, group=SubjectTag)) + geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 dsYear <- dsYear[!is.na(dsYear$Age), ]
 dsYear <- dsYear[ageMin <= dsYear$Age & dsYear$Age <= ageMax, ]
 nrow(dsYear)
-ggplot(dsYear, aes(x=Age, y=InchesTotal, group=SubjectTag)) + geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
+ggplot(dsYear, aes(x=Age, y=InchesTotal, group=SubjectTag)) + geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 
 ####################################################################################
 ## @knitr Standarize
@@ -113,12 +97,12 @@ qplot(dsYear$HeightZGenderAge, binwidth=.25) #Make sure ages are normalish with 
 ## @knitr DetermineZForClipping
 ggplot(dsYear, aes(x=Age, y=HeightZGenderAge, group=SubjectTag)) + 
   annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
-  geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
+  geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 dsYear <- dsYear[zMin <= dsYear$HeightZGenderAge & dsYear$HeightZGenderAge <= zMax, ]
 nrow(dsYear)
 ggplot(dsYear, aes(x=Age, y=HeightZGenderAge, group=SubjectTag)) + 
   annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
-  geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
+  geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 
 ####################################################################################
 ## @knitr ReduceToOneRecordPerSubject
@@ -134,22 +118,6 @@ nrow(ds)
 
 qplot(ds$Age, binwidth=.5) #Make sure ages are within window, and favoring older values
 qplot(ds$HeightZGenderAge, binwidth=.25) #Make sure ages are normalish with no extreme values.
-
-####################################################################################
-## @knitr ComparingWithKelly 
-#   Compare against Kelly's previous versions of Gen2 Height
-dsKelly <- read.csv(pathInputKellyOutcomes, stringsAsFactors=FALSE)
-dsKelly <- dsKelly[, c("SubjectTag", "HeightStandarizedFor19to25")]
-dsOldVsNew <- join(x=ds, y=dsKelly, by="SubjectTag", type="full")
-nrow(dsOldVsNew)
-
-#See if the new version is missing a lot of values that the old version caught.
-#   The denominator isn't exactly right, because it doesn't account for the 2010 values missing in the new version.
-table(is.na(dsOldVsNew$HeightZGenderAge), is.na(dsOldVsNew$HeightStandarizedFor19to25), dnn=c("NewIsMissing", "OldIsMissing"))
-#View the correlation
-cor(dsOldVsNew$HeightZGenderAge,dsOldVsNew$HeightStandarizedFor19to25, use="complete.obs")
-#Compare against an x=y identity line.
-ggplot(dsOldVsNew, aes(x=HeightStandarizedFor19to25, y=HeightZGenderAge)) + geom_point(shape=1) + geom_abline() + geom_smooth(method="loess")
 
 ####################################################################################
 ## @knitr WriteToCsv
