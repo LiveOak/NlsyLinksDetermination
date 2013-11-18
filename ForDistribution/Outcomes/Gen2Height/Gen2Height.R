@@ -1,8 +1,7 @@
-#This next line is run when the whole file is executed, 
-#   but not when knitr calls individual chunks.
+#This next line is run when the whole file is executed, but not when knitr calls individual chunks.
 rm(list=ls(all=TRUE)) #Clear the memory for any variables set from any previous runs.
 
-
+####################################################################################
 ## @knitr LoadPackages
 require(RODBC)
 require(plyr)
@@ -12,6 +11,7 @@ require(mgcv) #For GAM smoother
 require(MASS) #For RLM
 require(testit) #For Assert
 
+####################################################################################
 ## @knitr DefineGlobals
 pathInputKellyOutcomes <-  "./OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv"
 pathOutput <- "./ForDistribution/Outcomes/Gen2Height/Gen2Height.csv"
@@ -27,6 +27,7 @@ ageMax <- 24
 zMin <- -3
 zMax <- -zMin 
 
+extractVariablesString <- "'Gen2HeightFeetOnly', 'Gen2HeightInchesRemainder'"
 
 ####################################################################################
 ## @knitr LoadData
@@ -38,18 +39,27 @@ zMax <- -zMin
 
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 dsLong <- sqlQuery(channel, 
-                   "SELECT * 
-                    FROM [NlsLinks].[Process].[vewOutcome]
-                    WHERE Generation=2 AND ItemLabel in ('Gen2HeightFeetOnly', 'Gen2HeightInchesRemainder') 
-                    ORDER BY SubjectTag, SurveyYear" 
-                   , stringsAsFactors=FALSE
+                    paste0(
+                      "SELECT * 
+                      FROM [NlsLinks].[Process].[vewOutcome]
+                      WHERE Generation=2 AND ItemLabel in (", extractVariablesString, ") 
+                      ORDER BY SubjectTag, SurveyYear" 
+                    ), stringsAsFactors=FALSE
 )
 dsSubject <- sqlQuery(channel, 
-                    "SELECT SubjectTag 
+                      "SELECT SubjectTag 
                     FROM [NlsLinks].[Process].[tblSubject]
                     WHERE Generation=2 
                     ORDER BY SubjectTag" 
                     , stringsAsFactors=FALSE
+)
+dsVariable <- sqlQuery(channel,
+                   paste0(
+                      "SELECT * 
+                      FROM [NlsLinks].[dbo].[vewVariable]
+                      WHERE (Translate = 1) AND ItemLabel in (", extractVariablesString, ") 
+                       ORDER BY Item, SurveyYear, VariableCode"                      
+                   ), stringsAsFactors=FALSE
 )
 odbcClose(channel)
 summary(dsLong)
@@ -151,6 +161,12 @@ ggplot(dsOldVsNew, aes(x=HeightStandarizedFor19to25, y=HeightZGenderAge)) + geom
 ####################################################################################
 ## @knitr WriteToCsv
 write.csv(ds, pathOutput, row.names=FALSE)
+
+####################################################################################
+## @knitr DisplayVariables
+dsVariable[, c("VariableCode", "SurveyYear", "Item", "ItemLabel", "Generation", "ExtractSource", "ID")]
+
+
 
 ## @knitr Write to SQL Server database
 # channel <- odbcConnect("BeeNlsLinks")

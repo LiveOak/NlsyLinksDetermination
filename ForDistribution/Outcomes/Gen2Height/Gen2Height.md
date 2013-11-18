@@ -26,6 +26,7 @@ ageMax <- 24
 zMin <- -3
 zMax <- -zMin 
 
+extractVariablesString <- "'Gen2HeightFeetOnly', 'Gen2HeightInchesRemainder'"
 
 ####################################################################################
 ```
@@ -42,45 +43,47 @@ zMax <- -zMin
 
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 dsLong <- sqlQuery(channel, 
-                   "SELECT * 
-                    FROM [NlsLinks].[Process].[vewOutcome]
-                    WHERE Generation=2 AND ItemLabel in ('Gen2HeightFeetOnly', 'Gen2HeightInchesRemainder') 
-                    ORDER BY SubjectTag, SurveyYear" 
-                   , stringsAsFactors=FALSE
+                    paste0(
+                      "SELECT * 
+                      FROM [NlsLinks].[Process].[vewOutcome]
+                      WHERE Generation=2 AND ItemLabel in (", extractVariablesString, ") 
+                      ORDER BY SubjectTag, SurveyYear" 
+                    ), stringsAsFactors=FALSE
 )
 dsSubject <- sqlQuery(channel, 
-                    "SELECT SubjectTag 
+                      "SELECT SubjectTag 
                     FROM [NlsLinks].[Process].[tblSubject]
                     WHERE Generation=2 
                     ORDER BY SubjectTag" 
                     , stringsAsFactors=FALSE
+)
+dsVariable <- sqlQuery(channel,
+                   paste0(
+                      "SELECT * 
+                      FROM [NlsLinks].[dbo].[vewVariable]
+                      WHERE (Translate = 1) AND ItemLabel in (", extractVariablesString, ") 
+                       ORDER BY Item, SurveyYear, VariableCode"                      
+                   ), stringsAsFactors=FALSE
 )
 odbcClose(channel)
 summary(dsLong)
 ```
 
 ```
-   SubjectTag        SurveyYear        Item      ItemLabel        
- Min.   :    301   Min.   :1994   Min.   :501   Length:70614      
- 1st Qu.: 267702   1st Qu.:2002   1st Qu.:501   Class :character  
- Median : 546901   Median :2006   Median :502   Mode  :character  
- Mean   : 550041   Mean   :2004   Mean   :502                     
- 3rd Qu.: 805901   3rd Qu.:2008   3rd Qu.:502                     
- Max.   :1266703   Max.   :2010   Max.   :502                     
-     Value         LoopIndex   Generation  SurveyDate        AgeSelfReportYears
- Min.   :-2.00   Min.   :0   Min.   :2    Length:70614       Mode:logical      
- 1st Qu.: 5.00   1st Qu.:0   1st Qu.:2    Class :character   NA's:70614        
- Median : 5.00   Median :0   Median :2    Mode  :character                     
- Mean   : 5.23   Mean   :0   Mean   :2                                         
- 3rd Qu.: 6.00   3rd Qu.:0   3rd Qu.:2                                         
- Max.   :11.00   Max.   :0   Max.   :2                                         
- AgeCalculateYears     Gender   
- Min.   :13.7      Min.   :1.0  
- 1st Qu.:17.2      1st Qu.:1.0  
- Median :20.3      Median :2.0  
- Mean   :21.0      Mean   :1.5  
- 3rd Qu.:24.2      3rd Qu.:2.0  
- Max.   :38.0      Max.   :2.0  
+   SubjectTag        SurveyYear        Item      ItemLabel             Value         LoopIndex   Generation
+ Min.   :    301   Min.   :1994   Min.   :501   Length:70614       Min.   :-2.00   Min.   :0   Min.   :2   
+ 1st Qu.: 267702   1st Qu.:2002   1st Qu.:501   Class :character   1st Qu.: 5.00   1st Qu.:0   1st Qu.:2   
+ Median : 546901   Median :2006   Median :502   Mode  :character   Median : 5.00   Median :0   Median :2   
+ Mean   : 550041   Mean   :2004   Mean   :502                      Mean   : 5.23   Mean   :0   Mean   :2   
+ 3rd Qu.: 805901   3rd Qu.:2008   3rd Qu.:502                      3rd Qu.: 6.00   3rd Qu.:0   3rd Qu.:2   
+ Max.   :1266703   Max.   :2010   Max.   :502                      Max.   :11.00   Max.   :0   Max.   :2   
+  SurveyDate        AgeSelfReportYears AgeCalculateYears     Gender   
+ Length:70614       Mode:logical       Min.   :13.7      Min.   :1.0  
+ Class :character   NA's:70614         1st Qu.:17.2      1st Qu.:1.0  
+ Mode  :character                      Median :20.3      Median :2.0  
+                                       Mean   :21.0      Mean   :1.5  
+                                       3rd Qu.:24.2      3rd Qu.:2.0  
+                                       Max.   :38.0      Max.   :2.0  
 ```
 
 ```r
@@ -129,7 +132,7 @@ system.time(
 
 ```
    user  system elapsed 
-  18.10    2.31   20.44 
+  18.11    2.23   20.35 
 ```
 
 ```r
@@ -290,20 +293,13 @@ summary(ds)
 ```
 
 ```
-   SubjectTag        SurveyYear        Age           Gender      InchesTotal  
- Min.   :    301   Min.   :1994   Min.   :16.0   Min.   :1.00   Min.   :56.0  
- 1st Qu.: 266202   1st Qu.:2004   1st Qu.:20.0   1st Qu.:1.00   1st Qu.:64.0  
- Median : 537401   Median :2008   Median :23.0   Median :1.00   Median :67.0  
- Mean   : 545706   Mean   :2007   Mean   :21.5   Mean   :1.49   Mean   :67.5  
- 3rd Qu.: 804403   3rd Qu.:2010   3rd Qu.:24.0   3rd Qu.:2.00   3rd Qu.:71.0  
- Max.   :1266703   Max.   :2010   Max.   :24.0   Max.   :2.00   Max.   :79.0  
- HeightZGender    HeightZGenderAge 
- Min.   :-3.290   Min.   :-2.9855  
- 1st Qu.:-0.705   1st Qu.:-0.7195  
- Median :-0.059   Median :-0.0730  
- Mean   : 0.016   Mean   :-0.0016  
- 3rd Qu.: 0.587   3rd Qu.: 0.5766  
- Max.   : 2.949   Max.   : 2.9905  
+   SubjectTag        SurveyYear        Age           Gender      InchesTotal   HeightZGender    HeightZGenderAge 
+ Min.   :    301   Min.   :1994   Min.   :16.0   Min.   :1.00   Min.   :56.0   Min.   :-3.290   Min.   :-2.9855  
+ 1st Qu.: 266202   1st Qu.:2004   1st Qu.:20.0   1st Qu.:1.00   1st Qu.:64.0   1st Qu.:-0.705   1st Qu.:-0.7195  
+ Median : 537401   Median :2008   Median :23.0   Median :1.00   Median :67.0   Median :-0.059   Median :-0.0730  
+ Mean   : 545706   Mean   :2007   Mean   :21.5   Mean   :1.49   Mean   :67.5   Mean   : 0.016   Mean   :-0.0016  
+ 3rd Qu.: 804403   3rd Qu.:2010   3rd Qu.:24.0   3rd Qu.:2.00   3rd Qu.:71.0   3rd Qu.: 0.587   3rd Qu.: 0.5766  
+ Max.   :1266703   Max.   :2010   Max.   :24.0   Max.   :2.00   Max.   :79.0   Max.   : 2.949   Max.   : 2.9905  
 ```
 
 ```r
@@ -399,5 +395,37 @@ Warning: Removed 6417 rows containing missing values (geom_point).
 
 ```r
 write.csv(ds, pathOutput, row.names=FALSE)
+
+####################################################################################
+```
+
+
+## NLSY Variables
+Each row in the table represents and NLSY variable that was used.  The first column is the official "R Number" designated by the NLSY.  The remaining columns are values we assigned to help the plumbing and data manipulation.
+
+```r
+dsVariable[, c("VariableCode", "SurveyYear", "Item", "ItemLabel", "Generation", "ExtractSource", "ID")]
+```
+
+```
+   VariableCode SurveyYear Item                 ItemLabel Generation ExtractSource   ID
+1      Y0308300       1994  501        Gen2HeightFeetOnly          2             9 1944
+2      Y0609600       1996  501        Gen2HeightFeetOnly          2             9 1946
+3      Y0903900       1998  501        Gen2HeightFeetOnly          2             9 1948
+4      Y1150800       2000  501        Gen2HeightFeetOnly          2             9 1951
+5      Y1385800       2002  501        Gen2HeightFeetOnly          2             9 1953
+6      Y1637500       2004  501        Gen2HeightFeetOnly          2             9 1955
+7      Y1891100       2006  501        Gen2HeightFeetOnly          2             9 1957
+8      Y2207000       2008  501        Gen2HeightFeetOnly          2             9 1959
+9      Y2544700       2010  501        Gen2HeightFeetOnly          2             9 1961
+10     Y0308400       1994  502 Gen2HeightInchesRemainder          2             9 1945
+11     Y0609700       1996  502 Gen2HeightInchesRemainder          2             9 1947
+12     Y0904000       1998  502 Gen2HeightInchesRemainder          2             9 1950
+13     Y1150900       2000  502 Gen2HeightInchesRemainder          2             9 1952
+14     Y1385900       2002  502 Gen2HeightInchesRemainder          2             9 1954
+15     Y1637600       2004  502 Gen2HeightInchesRemainder          2             9 1956
+16     Y1891200       2006  502 Gen2HeightInchesRemainder          2             9 1958
+17     Y2207100       2008  502 Gen2HeightInchesRemainder          2             9 1960
+18     Y2544800       2010  502 Gen2HeightInchesRemainder          2             9 1962
 ```
 

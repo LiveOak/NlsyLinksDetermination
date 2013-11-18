@@ -7,7 +7,7 @@ opts_knit$set(root.dir='../../../')  #Don't combine this call with any other chu
 ```
 
 ```{r SetOptions, echo=FALSE, cache=FALSE}
-options(width=80)
+options(width=120)
 opts_chunk$set(
   comment="", 
   warning=TRUE, 
@@ -59,4 +59,9 @@ Make sure they roughly agree. There are a few differences, including (1) the age
 
 ## Write the OutcomeData to CSV
 ```{r WriteToCsv } 
+```
+
+## NLSY Variables
+Each row in the table represents and NLSY variable that was used.  The first column is the official "R Number" designated by the NLSY.  The remaining columns are values we assigned to help the plumbing and data manipulation.
+```{r DisplayVariables } 
 ```

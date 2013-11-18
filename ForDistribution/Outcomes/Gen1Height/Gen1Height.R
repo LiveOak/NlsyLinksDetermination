@@ -1,8 +1,7 @@
-#This next line is run when the whole file is executed, 
-#   but not when knitr calls individual chunks.
+#This next line is run when the whole file is executed, but not when knitr calls individual chunks.
 rm(list=ls(all=TRUE)) #Clear the memory for any variables set from any previous runs.
 
-
+####################################################################################
 ## @knitr LoadPackages
 require(RODBC)
 require(plyr)
@@ -12,6 +11,7 @@ require(mgcv) #For GAM smoother
 require(MASS) #For RLM
 require(testit) #For Assert
 
+####################################################################################
 ## @knitr DefineGlobals
 pathOutput <- "./ForDistribution/Outcomes/Gen1Height/Gen1Height.csv"
 
@@ -25,7 +25,6 @@ ageMin <- 16
 ageMax <- 24
 zMin <- -3
 zMax <- -zMin 
-
 
 ####################################################################################
 ## @knitr LoadData
