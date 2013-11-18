@@ -175,9 +175,9 @@ namespace LinksGui {
 			if ( e.Source.ToString() != _combinedButtonTag ) MessageBox.Show(message);
 			//WriteXml(_dsLinks.tblRelatedValues);
 		}
-		private void btnOutcomes_Click ( object sender, RoutedEventArgs e ) {
-			BA.Outcomes outcomes = new BA.Outcomes(_dsLinks);
-			string message = outcomes.Go();
+		private void btnOutcome_Click ( object sender, RoutedEventArgs e ) {
+			BA.Outcome outcome = new BA.Outcome(_dsLinks);
+			string message = outcome.Go();
 			Trace.WriteLine(message);
 			if ( e.Source.ToString() != _combinedButtonTag ) MessageBox.Show(message);
 			//WriteXml(_dsLinks.tblRelatedValues);
@@ -210,7 +210,7 @@ namespace LinksGui {
 			BulkUpdate(schemaName, _dsLinks.tblMarkerGen1, LoadMarkerGen1);
 			BulkUpdate(schemaName, _dsLinks.tblMarkerGen2, LoadMarkerGen2);
 			BulkUpdate(schemaName, _dsLinks.tblRelatedValues, LoadRelatedValues);
-			BulkUpdate(schemaName, _dsLinks.tblOutcomes, LoadOutcomes);
+			BulkUpdate(schemaName, _dsLinks.tblOutcome, LoadOutcomes);
 			BulkUpdate(schemaName, _dsLinks.tblRelatedValuesArchive, null);
 
 			sw.Stop();
@@ -414,8 +414,8 @@ namespace LinksGui {
 			vs.View.MoveCurrentToFirst();
 		}
 		private void LoadOutcomes ( ) {
-			BA.LinksDataSetTableAdapters.tblOutcomesTableAdapter ta = new BA.LinksDataSetTableAdapters.tblOutcomesTableAdapter();
-			ta.Fill(_dsLinks.tblOutcomes);
+			BA.LinksDataSetTableAdapters.tblOutcomeTableAdapter ta = new BA.LinksDataSetTableAdapters.tblOutcomeTableAdapter();
+			ta.Fill(_dsLinks.tblOutcome);
 		}
 		private void LoadRelatedValuesNextVersionNumber ( ) {
 			Int16 currentMaxVersion = Int16.MinValue;
@@ -470,7 +470,7 @@ namespace LinksGui {
 			btnMarkerGen1_Click(sender, e);
 			btnMarkerGen2_Click(sender, e);
 			btnRelatedValues_Click(sender, e);
-			btnOutcomes_Click(sender, e);
+			btnOutcome_Click(sender, e);
 			btnRelatedValuesArchive_Click(sender, e);
 
 			sw.Stop();

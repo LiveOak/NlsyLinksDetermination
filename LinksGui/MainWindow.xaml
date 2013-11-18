@@ -103,8 +103,8 @@
 			<Button Name="btnRelatedValues" Grid.Column="13" Click="btnRelatedValues_Click">
 				<TextBlock>Related<LineBreak/>Values</TextBlock>
 			</Button>
-			<Button Name="btnOutcomes" Grid.Column="14" Click="btnOutcomes_Click">
-				<TextBlock>Outcomes</TextBlock>
+			<Button Name="btnOutcoms" Grid.Column="14" Click="btnOutcome_Click">
+				<TextBlock>Outcome</TextBlock>
 			</Button>
 			<Button Name="btnRelatedValuesArchive" Grid.Column="15" Click="btnRelatedValuesArchive_Click">
 				<TextBlock>Related<LineBreak/>Archive</TextBlock>
@@ -1799,18 +1799,9 @@
 					</DataGrid.Columns>
 				</DataGrid>
 			</TabItem>
-			<TabItem Header="Outcomes" Name="tabOutcomes" >
-				<DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True"  ItemsSource="{Binding Source={StaticResource tblOutcomesViewSource}}" Name="tblOutcomesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >
-					<DataGrid.Columns>
-						<DataGridTextColumn x:Name="subjectTagColumn6" Binding="{Binding Path=SubjectTag}" Header="Subject Tag" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="heightInchesLateTeensColumn" Binding="{Binding Path=HeightInchesLateTeens}" Header="Height Inches Late Teens" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="weightPoundsLateTeensColumn" Binding="{Binding Path=WeightPoundsLateTeens}" Header="Weight Pounds Late Teens" Width="SizeToHeader" />
-						<DataGridTextColumn x:Name="afqtRescaled2006BoundedColumn" Binding="{Binding Path=AfqtRescaled2006Bounded}" Header="Afqt Rescaled 2006 Bounded" Width="SizeToHeader" />
-					</DataGrid.Columns>
-				</DataGrid>
-			</TabItem>
+			<TabItem Header="Outcomes" Name="tabOutcome" />
 
-		</TabControl>
+        </TabControl>
 
     </Grid>
 </Window>
