@@ -15,8 +15,9 @@ opts_chunk$set(
   tidy=FALSE, 
   size="small"
   )
-read_chunk("./ForDistribution/Outcomes/Gen2Height/Gen2Height.R") #This allows knitr to call chunks tagged in the underlying .R file.
+read_chunk("./ForDistribution/Outcomes/Gen1Height/Gen1Height.R") #This allows knitr to call chunks tagged in the underlying .R file.
 ```
+
 
 ```{r LoadPackages, echo=FALSE, message=FALSE}
 ```

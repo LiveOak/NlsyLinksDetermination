@@ -1,6 +1,7 @@
 require(RODBC)
 require(plyr)
 require(lubridate)
+require(testit)
 rm(list=ls(all=TRUE))
 
 ####################################
@@ -20,16 +21,37 @@ pathOutput <- "./ForDistribution/Outcomes/OutcomesGen1.csv"
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 odbcGetInfo(channel)
 keepExistingTable <- FALSE
-dsLong <- sqlQuery(channel, paste0("SELECT * FROM Process.vewOutcome WHERE Generation=", generation))
-dsSubject <- sqlQuery(channel, paste0("SELECT SubjectTag, ExtendedID, SubjectID, Generation FROM Process.tblSubject WHERE Generation=", generation))
+dsLong <- sqlQuery(channel, paste0("SELECT * FROM Process.vewOutcome WHERE Generation=", generation), stringsAsFactors=FALSE)
+ds <- sqlQuery(channel, paste0("SELECT * FROM Process.vewSubjectDetails WHERE Generation=", generation))
 
 odbcClose(channel)
 
 ####################################
-### Create Wide Dataset
+### Tweak Input Datasets
 ####################################
-ds <- count(dsLong, vars=c("SubjectTag", "SubjectID", "Generation"))
-ds <- plyr::rename(ds, replace=c("freq"="OutcomeCount"))
+
+testit::assert("All outcomes should have a loop index of zero", all(dsLong$LoopIndex==0))
+dsLong$LoopIndex <- NULL
+
+dsLong$Age <- floor(ifelse(is.na(dsLong$AgeCalculateYears), dsLong$AgeCalculateYears, dsLong$AgeSelfReportYears)) #This could still be null.
+
+####################################
+### Assemble Height
+####################################
+dsLongHeight <- dsLong[dsLong$ItemLabel=='Gen1HeightInches', ]
+
+dsLongHeight <- ddply(dsLongHeight, c("Gender"), transform, HeightZGender=scale(Value))
+dsLongHeight$HeightZGender <- pmax(pmin(dsLongHeight$HeightZGender, 3), -3)  
+
+dsLongHeight <- ddply(dsLongHeight, c("Gender", "Age"), transform, HeightZGenderAge=scale(Value))
+dsLongHeight$HeightZGenderAge <- pmax(pmin(dsLongHeight$HeightZGenderAge, 3), -3)
+
+
+
+
+
+# ds <- count(dsLong, vars=c("SubjectTag", "SubjectID", "Generation"))
+# ds <- plyr::rename(ds, replace=c("freq"="OutcomeCount"))
 
 # variablesToDropEventually <- c("ExtendedID", "Gender", "Mob", "Yob", "Age", "HeightInchesLateTeens", 
 #                                "WeightPoundsLateTeens",  "BmiLateTeens") #"AfqtRescaled2006",
@@ -42,12 +64,7 @@ ds <- plyr::rename(ds, replace=c("freq"="OutcomeCount"))
 # table(floor(ds$Age))
 # ds$Age <- ifelse(ds$Age==27, NA, ds$Age)
 # 
-# ds <- ddply(ds, c("Gender"), transform, HeightZGender=scale(HeightInchesLateTeens))
-# ds$HeightZGender <- pmax(pmin(ds$HeightZGender, 3), -3)  
-# 
-# ds <- ddply(ds, c("Gender", "Age"), transform, HeightZGenderAge=scale(HeightInchesLateTeens))
-# ds$HeightZGenderAge <- pmax(pmin(ds$HeightZGenderAge, 3), -3)
-# 
+
 # 
 # ds <- ddply(ds, .(Gender), transform, WeightZGender=scale(WeightPoundsLateTeens))
 # # ds$WeightZGender <- pmax(pmin(ds$WeightZGender, 3), -3)
