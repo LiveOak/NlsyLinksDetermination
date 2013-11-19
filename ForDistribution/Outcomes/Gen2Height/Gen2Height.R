@@ -16,8 +16,8 @@ require(testit) #For Assert
 pathInputKellyOutcomes <-  "./OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv"
 pathOutput <- "./ForDistribution/Outcomes/Gen2Height/Gen2Height.csv"
 
-inchesTotalMin <- 56 #4'8"
-inchesTotalMax <- 80 #7'0"
+DVMin <- 56 #4'8"
+DVMax <- 80 #7'0"
 feetOnlyMin <- 4
 feetOnlyMax <- 8
 inchesOnlyMin <- 0
@@ -75,13 +75,13 @@ testit::assert("All outcomes should have a loop index of zero", all(dsLong$LoopI
 dsLong$LoopIndex <- NULL
 
 ####################################################################################
-## @knitr CalculateTotalInches
+## @knitr CalculateDV
 CombineHeightUnits <- function( df ) {
   feet <- df[df$ItemLabel=='Gen2HeightFeetOnly', 'Value']
   feet <- ifelse(feetOnlyMin <= feet & feet <= feetOnlyMax, feet, NA)  
   inches <- df[df$ItemLabel=='Gen2HeightInchesRemainder', 'Value']
   inches <- ifelse(inchesOnlyMin <= inches & inches <= inchesOnlyMax, inches, NA)
-  return( data.frame(InchesTotal=feet*12 + inches) )
+  return( data.frame(DV=feet*12 + inches) )
 } 
 #Combine to one row per SubjectYear combination
 system.time( 
@@ -95,35 +95,37 @@ rm(dsLong)
 ####################################################################################
 ## @knitr FilterValuesAndAges
 #Filter out records with undesired height values
-qplot(dsYear$InchesTotal, binwidth=1, main="Before Filtering Out Extreme Heights") #Make sure ages are normalish with no extreme values.
-dsYear <- dsYear[!is.na(dsYear$InchesTotal), ]
-dsYear <- dsYear[inchesTotalMin <= dsYear$InchesTotal & dsYear$InchesTotal <= inchesTotalMax, ]
+qplot(dsYear$DV, binwidth=1, main="Before Filtering Out Extreme Heights")
+dsYear <- dsYear[!is.na(dsYear$DV), ]
+dsYear <- dsYear[DVMin <= dsYear$DV & dsYear$DV <= DVMax, ]
 nrow(dsYear)
 summary(dsYear)
-qplot(dsYear$InchesTotal, binwidth=1, main="After Filtering Out Extreme Heights") #Make sure ages are normalish with no extreme values.
+qplot(dsYear$DV, binwidth=1, main="After Filtering Out Extreme Heights") 
 
 #Filter out records with undesired age values
-ggplot(dsYear, aes(x=Age, y=InchesTotal, group=SubjectTag)) + geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
+qplot(dsYear$Age, binwidth=1, main="Before Filtering Out Extreme Ages") 
+ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 dsYear <- dsYear[!is.na(dsYear$Age), ]
 dsYear <- dsYear[ageMin <= dsYear$Age & dsYear$Age <= ageMax, ]
 nrow(dsYear)
-ggplot(dsYear, aes(x=Age, y=InchesTotal, group=SubjectTag)) + geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
+qplot(dsYear$Age, binwidth=1, main="After Filtering Out Extreme Ages") 
+ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 
 ####################################################################################
 ## @knitr Standarize
-dsYear <- ddply(dsYear, c("Gender"), transform, HeightZGender=scale(InchesTotal))
-dsYear <- ddply(dsYear, c("Gender", "Age"), transform, HeightZGenderAge=scale(InchesTotal))
+# dsYear <- ddply(dsYear, c("Gender"), transform, ZGender=scale(DV))
+dsYear <- ddply(dsYear, c("Gender", "Age"), transform, ZGenderAge=scale(DV))
 nrow(dsYear)
-qplot(dsYear$HeightZGenderAge, binwidth=.25) #Make sure ages are normalish with no extreme values.
+qplot(dsYear$ZGenderAge, binwidth=.25)
 
 ####################################################################################
 ## @knitr DetermineZForClipping
-ggplot(dsYear, aes(x=Age, y=HeightZGenderAge, group=SubjectTag)) + 
+ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) + 
   annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
   geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
-dsYear <- dsYear[zMin <= dsYear$HeightZGenderAge & dsYear$HeightZGenderAge <= zMax, ]
+dsYear <- dsYear[zMin <= dsYear$ZGenderAge & dsYear$ZGenderAge <= zMax, ]
 nrow(dsYear)
-ggplot(dsYear, aes(x=Age, y=HeightZGenderAge, group=SubjectTag)) + 
+ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) + 
   annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
   geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 
@@ -140,7 +142,8 @@ ds <- plyr::join(x=dsSubject, y=ds, by="SubjectTag", type="left", match="first")
 nrow(ds) 
 
 qplot(ds$Age, binwidth=.5) #Make sure ages are within window, and favoring older values
-qplot(ds$HeightZGenderAge, binwidth=.25) #Make sure ages are normalish with no extreme values.
+qplot(ds$ZGenderAge, binwidth=.25) #Make sure ages are normalish with no extreme values.
+table(is.na(ds$ZGenderAge))
 
 ####################################################################################
 ## @knitr ComparingWithKelly 
@@ -152,11 +155,11 @@ nrow(dsOldVsNew)
 
 #See if the new version is missing a lot of values that the old version caught.
 #   The denominator isn't exactly right, because it doesn't account for the 2010 values missing in the new version.
-table(is.na(dsOldVsNew$HeightZGenderAge), is.na(dsOldVsNew$HeightStandarizedFor19to25), dnn=c("NewIsMissing", "OldIsMissing"))
+table(is.na(dsOldVsNew$HeightStandarizedFor19to25), is.na(dsOldVsNew$ZGenderAge), dnn=c("NewIsMissing", "OldIsMissing"))
 #View the correlation
-cor(dsOldVsNew$HeightZGenderAge,dsOldVsNew$HeightStandarizedFor19to25, use="complete.obs")
+cor(dsOldVsNew$HeightStandarizedFor19to25, dsOldVsNew$ZGenderAge, use="complete.obs")
 #Compare against an x=y identity line.
-ggplot(dsOldVsNew, aes(x=HeightStandarizedFor19to25, y=HeightZGenderAge)) + geom_point(shape=1) + geom_abline() + geom_smooth(method="loess")
+ggplot(dsOldVsNew, aes(x=HeightStandarizedFor19to25, y=ZGenderAge)) + geom_point(shape=1) + geom_abline() + geom_smooth(method="loess")
 
 ####################################################################################
 ## @knitr WriteToCsv
@@ -178,12 +181,12 @@ dsVariable[, c("VariableCode", "SurveyYear", "Item", "ItemLabel", "Generation", 
 # CombineHeightUnits <- function( df ) {
 #   feet <- df[df$Item==501, 'Value']
 #   inches <- df[df$Item==502, 'Value']
-#   return( data.frame(FeetOnly=feet, InchesOnly=inches))#, InchesTotal=inchesTotal) )
+#   return( data.frame(FeetOnly=feet, InchesOnly=inches))#, DV=DV) )
 # }
 # system.time({  
 #   dsHeightWide <- ddply(dsLong, c("SubjectTag", "SurveyYear"), CombineHeightUnits)
 #   dsHeightWide$FeetOnly <- ifelse(feetOnlyMin <= dsHeightWide$FeetOnly & dsHeightWide$FeetOnly <= feetOnlyMax, dsHeightWide$FeetOnly, NA)
 #   dsHeightWide$InchesOnly <- ifelse(inchesOnlyMin <= dsHeightWide$InchesOnly & dsHeightWide$InchesOnly <= inchesOnlyMax, dsHeightWide$InchesOnly, NA)
-#   dsHeightWide$InchesTotal <- dsHeightWide$FeetOnly*12 + dsHeightWide$InchesOnly
+#   dsHeightWide$DV <- dsHeightWide$FeetOnly*12 + dsHeightWide$InchesOnly
 #   dsHeightWide <- dsHeightWide[, !(colnames(dsHeightWide) %in% c("FeetOnly", "InchesOnly"))]
 # }) #24.93 sec

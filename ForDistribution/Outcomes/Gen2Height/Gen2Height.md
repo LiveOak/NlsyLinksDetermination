@@ -15,8 +15,8 @@ This sequence picks a single height value per Gen2 subject.
 pathInputKellyOutcomes <-  "./OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv"
 pathOutput <- "./ForDistribution/Outcomes/Gen2Height/Gen2Height.csv"
 
-inchesTotalMin <- 56 #4'8"
-inchesTotalMax <- 80 #7'0"
+DVMin <- 56 #4'8"
+DVMax <- 80 #7'0"
 feetOnlyMin <- 4
 feetOnlyMax <- 8
 inchesOnlyMin <- 0
@@ -70,20 +70,20 @@ summary(dsLong)
 ```
 
 ```
-   SubjectTag        SurveyYear        Item      ItemLabel             Value         LoopIndex   Generation
- Min.   :    301   Min.   :1994   Min.   :501   Length:70614       Min.   :-2.00   Min.   :0   Min.   :2   
- 1st Qu.: 267702   1st Qu.:2002   1st Qu.:501   Class :character   1st Qu.: 5.00   1st Qu.:0   1st Qu.:2   
- Median : 546901   Median :2006   Median :502   Mode  :character   Median : 5.00   Median :0   Median :2   
- Mean   : 550041   Mean   :2004   Mean   :502                      Mean   : 5.23   Mean   :0   Mean   :2   
- 3rd Qu.: 805901   3rd Qu.:2008   3rd Qu.:502                      3rd Qu.: 6.00   3rd Qu.:0   3rd Qu.:2   
- Max.   :1266703   Max.   :2010   Max.   :502                      Max.   :11.00   Max.   :0   Max.   :2   
-  SurveyDate        AgeSelfReportYears AgeCalculateYears     Gender   
- Length:70614       Mode:logical       Min.   :13.7      Min.   :1.0  
- Class :character   NA's:70614         1st Qu.:17.2      1st Qu.:1.0  
- Mode  :character                      Median :20.3      Median :2.0  
-                                       Mean   :21.0      Mean   :1.5  
-                                       3rd Qu.:24.2      3rd Qu.:2.0  
-                                       Max.   :38.0      Max.   :2.0  
+   SubjectTag        SurveyYear        Item      ItemLabel             Value         LoopIndex   Generation  SurveyDate       
+ Min.   :    301   Min.   :1994   Min.   :501   Length:70614       Min.   :-2.00   Min.   :0   Min.   :2    Length:70614      
+ 1st Qu.: 267702   1st Qu.:2002   1st Qu.:501   Class :character   1st Qu.: 5.00   1st Qu.:0   1st Qu.:2    Class :character  
+ Median : 546901   Median :2006   Median :502   Mode  :character   Median : 5.00   Median :0   Median :2    Mode  :character  
+ Mean   : 550041   Mean   :2004   Mean   :502                      Mean   : 5.23   Mean   :0   Mean   :2                      
+ 3rd Qu.: 805901   3rd Qu.:2008   3rd Qu.:502                      3rd Qu.: 6.00   3rd Qu.:0   3rd Qu.:2                      
+ Max.   :1266703   Max.   :2010   Max.   :502                      Max.   :11.00   Max.   :0   Max.   :2                      
+ AgeSelfReportYears AgeCalculateYears     Gender   
+ Mode:logical       Min.   :13.7      Min.   :1.0  
+ NA's:70614         1st Qu.:17.2      1st Qu.:1.0  
+                    Median :20.3      Median :2.0  
+                    Mean   :21.0      Mean   :1.5  
+                    3rd Qu.:24.2      3rd Qu.:2.0  
+                    Max.   :38.0      Max.   :2.0  
 ```
 
 ```r
@@ -122,7 +122,7 @@ CombineHeightUnits <- function( df ) {
   feet <- ifelse(feetOnlyMin <= feet & feet <= feetOnlyMax, feet, NA)  
   inches <- df[df$ItemLabel=='Gen2HeightInchesRemainder', 'Value']
   inches <- ifelse(inchesOnlyMin <= inches & inches <= inchesOnlyMax, inches, NA)
-  return( data.frame(InchesTotal=feet*12 + inches) )
+  return( data.frame(DV=feet*12 + inches) )
 } 
 #Combine to one row per SubjectYear combination
 system.time( 
@@ -132,7 +132,7 @@ system.time(
 
 ```
    user  system elapsed 
-  18.11    2.23   20.35 
+  18.92    2.38   21.31 
 ```
 
 ```r
@@ -156,14 +156,14 @@ rm(dsLong)
 
 ```r
 #Filter out records with undesired height values
-qplot(dsYear$InchesTotal, binwidth=1, main="Before Filtering Out Extreme Heights") #Make sure ages are normalish with no extreme values.
+qplot(dsYear$DV, binwidth=1, main="Before Filtering Out Extreme Heights")
 ```
 
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges1.png) 
 
 ```r
-dsYear <- dsYear[!is.na(dsYear$InchesTotal), ]
-dsYear <- dsYear[inchesTotalMin <= dsYear$InchesTotal & dsYear$InchesTotal <= inchesTotalMax, ]
+dsYear <- dsYear[!is.na(dsYear$DV), ]
+dsYear <- dsYear[DVMin <= dsYear$DV & dsYear$DV <= DVMax, ]
 nrow(dsYear)
 ```
 
@@ -176,7 +176,7 @@ summary(dsYear)
 ```
 
 ```
-   SubjectTag        SurveyYear        Age           Gender     InchesTotal  
+   SubjectTag        SurveyYear        Age           Gender          DV      
  Min.   :    301   Min.   :1994   Min.   :13.0   Min.   :1.0   Min.   :56.0  
  1st Qu.: 267502   1st Qu.:2002   1st Qu.:17.0   1st Qu.:1.0   1st Qu.:64.0  
  Median : 546701   Median :2006   Median :20.0   Median :2.0   Median :67.0  
@@ -186,7 +186,7 @@ summary(dsYear)
 ```
 
 ```r
-qplot(dsYear$InchesTotal, binwidth=1, main="After Filtering Out Extreme Heights") #Make sure ages are normalish with no extreme values.
+qplot(dsYear$DV, binwidth=1, main="After Filtering Out Extreme Heights") 
 ```
 
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges2.png) 
@@ -194,10 +194,16 @@ qplot(dsYear$InchesTotal, binwidth=1, main="After Filtering Out Extreme Heights"
 ```r
 
 #Filter out records with undesired age values
-ggplot(dsYear, aes(x=Age, y=InchesTotal, group=SubjectTag)) + geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
+qplot(dsYear$Age, binwidth=1, main="Before Filtering Out Extreme Ages") 
 ```
 
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges3.png) 
+
+```r
+ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
+```
+
+![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges4.png) 
 
 ```r
 dsYear <- dsYear[!is.na(dsYear$Age), ]
@@ -210,10 +216,16 @@ nrow(dsYear)
 ```
 
 ```r
-ggplot(dsYear, aes(x=Age, y=InchesTotal, group=SubjectTag)) + geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
+qplot(dsYear$Age, binwidth=1, main="After Filtering Out Extreme Ages") 
 ```
 
-![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges4.png) 
+![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges5.png) 
+
+```r
+ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
+```
+
+![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges6.png) 
 
 ```r
 
@@ -223,8 +235,8 @@ ggplot(dsYear, aes(x=Age, y=InchesTotal, group=SubjectTag)) + geom_line(alpha=.2
 ## Standardize by Gender & Age.  Calculated Age (using SurveyDate and MOB) has been truncated to integers.  
 
 ```r
-dsYear <- ddply(dsYear, c("Gender"), transform, HeightZGender=scale(InchesTotal))
-dsYear <- ddply(dsYear, c("Gender", "Age"), transform, HeightZGenderAge=scale(InchesTotal))
+# dsYear <- ddply(dsYear, c("Gender"), transform, ZGender=scale(DV))
+dsYear <- ddply(dsYear, c("Gender", "Age"), transform, ZGenderAge=scale(DV))
 nrow(dsYear)
 ```
 
@@ -233,7 +245,7 @@ nrow(dsYear)
 ```
 
 ```r
-qplot(dsYear$HeightZGenderAge, binwidth=.25) #Make sure ages are normalish with no extreme values.
+qplot(dsYear$ZGenderAge, binwidth=.25)
 ```
 
 ![plot of chunk Standarize](figure/Standarize.png) 
@@ -247,7 +259,7 @@ qplot(dsYear$HeightZGenderAge, binwidth=.25) #Make sure ages are normalish with 
 ## Determine Z-score to clip at.  Adjust as necessary (zMin & zMax were defined at the top of the page).  The white box extends between zMin and zMax.
 
 ```r
-ggplot(dsYear, aes(x=Age, y=HeightZGenderAge, group=SubjectTag)) + 
+ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) + 
   annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
   geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 ```
@@ -255,7 +267,7 @@ ggplot(dsYear, aes(x=Age, y=HeightZGenderAge, group=SubjectTag)) +
 ![plot of chunk DetermineZForClipping](figure/DetermineZForClipping1.png) 
 
 ```r
-dsYear <- dsYear[zMin <= dsYear$HeightZGenderAge & dsYear$HeightZGenderAge <= zMax, ]
+dsYear <- dsYear[zMin <= dsYear$ZGenderAge & dsYear$ZGenderAge <= zMax, ]
 nrow(dsYear)
 ```
 
@@ -264,7 +276,7 @@ nrow(dsYear)
 ```
 
 ```r
-ggplot(dsYear, aes(x=Age, y=HeightZGenderAge, group=SubjectTag)) + 
+ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) + 
   annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
   geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 ```
@@ -293,7 +305,7 @@ summary(ds)
 ```
 
 ```
-   SubjectTag        SurveyYear        Age           Gender      InchesTotal   HeightZGender    HeightZGenderAge 
+   SubjectTag        SurveyYear        Age           Gender           DV          ZGender         ZGenderAge     
  Min.   :    301   Min.   :1994   Min.   :16.0   Min.   :1.00   Min.   :56.0   Min.   :-3.290   Min.   :-2.9855  
  1st Qu.: 266202   1st Qu.:2004   1st Qu.:20.0   1st Qu.:1.00   1st Qu.:64.0   1st Qu.:-0.705   1st Qu.:-0.7195  
  Median : 537401   Median :2008   Median :23.0   Median :1.00   Median :67.0   Median :-0.059   Median :-0.0730  
@@ -323,10 +335,20 @@ qplot(ds$Age, binwidth=.5) #Make sure ages are within window, and favoring older
 ![plot of chunk ReduceToOneRecordPerSubject](figure/ReduceToOneRecordPerSubject1.png) 
 
 ```r
-qplot(ds$HeightZGenderAge, binwidth=.25) #Make sure ages are normalish with no extreme values.
+qplot(ds$ZGenderAge, binwidth=.25) #Make sure ages are normalish with no extreme values.
 ```
 
 ![plot of chunk ReduceToOneRecordPerSubject](figure/ReduceToOneRecordPerSubject2.png) 
+
+```r
+table(is.na(ds$ZGenderAge))
+```
+
+```
+
+FALSE  TRUE 
+ 7069  4435 
+```
 
 ```r
 
@@ -354,19 +376,19 @@ nrow(dsOldVsNew)
 
 #See if the new version is missing a lot of values that the old version caught.
 #   The denominator isn't exactly right, because it doesn't account for the 2010 values missing in the new version.
-table(is.na(dsOldVsNew$HeightZGenderAge), is.na(dsOldVsNew$HeightStandarizedFor19to25), dnn=c("NewIsMissing", "OldIsMissing"))
+table(is.na(dsOldVsNew$HeightStandarizedFor19to25), is.na(dsOldVsNew$ZGenderAge), dnn=c("NewIsMissing", "OldIsMissing"))
 ```
 
 ```
             OldIsMissing
 NewIsMissing FALSE TRUE
-       FALSE  5089 1980
-       TRUE     34 4403
+       FALSE  5089   34
+       TRUE   1980 4403
 ```
 
 ```r
 #View the correlation
-cor(dsOldVsNew$HeightZGenderAge,dsOldVsNew$HeightStandarizedFor19to25, use="complete.obs")
+cor(dsOldVsNew$HeightStandarizedFor19to25, dsOldVsNew$ZGenderAge, use="complete.obs")
 ```
 
 ```
@@ -375,7 +397,7 @@ cor(dsOldVsNew$HeightZGenderAge,dsOldVsNew$HeightStandarizedFor19to25, use="comp
 
 ```r
 #Compare against an x=y identity line.
-ggplot(dsOldVsNew, aes(x=HeightStandarizedFor19to25, y=HeightZGenderAge)) + geom_point(shape=1) + geom_abline() + geom_smooth(method="loess")
+ggplot(dsOldVsNew, aes(x=HeightStandarizedFor19to25, y=ZGenderAge)) + geom_point(shape=1) + geom_abline() + geom_smooth(method="loess")
 ```
 
 ```

@@ -1,4 +1,4 @@
-"SubjectTag","SurveyYear","Age","Gender","InchesTotal","HeightZGender","HeightZGenderAge"
+"SubjectTag","SurveyYear","Age","Gender","DV","ZGender","ZGenderAge"
 201,NA,NA,NA,NA,NA,NA
 202,NA,NA,NA,NA,NA,NA
 301,2002,21,2,66,0.497058848728117,0.489423327229364

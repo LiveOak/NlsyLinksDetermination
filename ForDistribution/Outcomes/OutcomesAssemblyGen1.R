@@ -16,13 +16,15 @@ odbcClose(channel)
 
 ### Merge Height
 dsHeight <- read.csv(pathInputHeight, stringsAsFactors=F)
-dsHeight <- dsHeight[, c("SubjectTag", "HeightZGender", "HeightZGenderAge")]
+dsHeight <- dsHeight[, c("SubjectTag", "ZGender", "ZGenderAge")]
+dsHeight <- plyr::rename(dsHeight, replace=c("ZGender"="HeightZGender", "ZGenderAge"="HeightZGenderAge"))
 ds <- merge(x=ds, y=dsHeight, by="SubjectTag", all.x=TRUE)
 rm(dsHeight)
 
 ### Merge Weight
 dsWeight <- read.csv(pathInputWeight, stringsAsFactors=F)
-dsWeight <- dsWeight[, c("SubjectTag", "WeightZGender", "WeightZGenderAge")]
+dsWeight <- dsWeight[, c("SubjectTag", "ZGender", "ZGenderAge")]
+dsWeight <- plyr::rename(dsWeight, replace=c("ZGender"="WeightZGender", "ZGenderAge"="WeightZGenderAge"))
 ds <- merge(x=ds, y=dsWeight, by="SubjectTag", all.x=TRUE)
 rm(dsWeight)
 

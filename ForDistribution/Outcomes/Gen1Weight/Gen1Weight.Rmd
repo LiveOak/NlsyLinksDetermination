@@ -7,7 +7,7 @@ opts_knit$set(root.dir='../../../')  #Don't combine this call with any other chu
 ```
 
 ```{r SetOptions, echo=FALSE, cache=FALSE}
-options(width=80)
+options(width=130)
 opts_chunk$set(
   comment="", 
   warning=TRUE, 
@@ -50,4 +50,9 @@ read_chunk("./ForDistribution/Outcomes/Gen1Weight/Gen1Weight.R") #This allows kn
 
 ## Write the OutcomeData to CSV
 ```{r WriteToCsv } 
+```
+
+## NLSY Variables
+Each row in the table represents and NLSY variable that was used.  The first column is the official "R Number" designated by the NLSY.  The remaining columns are values we assigned to help the plumbing and data manipulation.
+```{r DisplayVariables } 
 ```

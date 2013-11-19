@@ -7,7 +7,7 @@ opts_knit$set(root.dir='../../../')  #Don't combine this call with any other chu
 ```
 
 ```{r SetOptions, echo=FALSE, cache=FALSE}
-options(width=120)
+options(width=130)
 opts_chunk$set(
   comment="", 
   warning=TRUE, 
@@ -33,7 +33,7 @@ read_chunk("./ForDistribution/Outcomes/Gen2Height/Gen2Height.R") #This allows kn
 ```
 
 ## Combine the feet and inches to get total inches.  
-```{r CalculateTotalInches, fig.height=2, cache=TRUE}
+```{r CalculateDV, fig.height=2, cache=TRUE}
 ```
 
 ## Show the height data with age of the subject when the height was taken.  Filter out records where the age or the height is outside of the desired window.
