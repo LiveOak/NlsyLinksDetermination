@@ -14,11 +14,11 @@ library(plyr)
 # oName <- "MathStandardized"
 # oName <- "WeightStandardizedForAge19To25"
 #Gen1:
-# oName <- "HeightZGender"
+oName <- "HeightZGender"
 # oName <- "HeightZGenderAge"
 # oName <- "WeightZGender"
 # oName <- "WeightZGenderAge"
-oName <- "IQZGenderAge"
+# oName <- "IQZGenderAge"
 
 # oName <- "BmiLateTeens"
 # oName <- "AfqtRescaled2006"
@@ -31,7 +31,7 @@ oName <- "IQZGenderAge"
 
 oName_1 <- paste0(oName, "_S1")
 oName_2 <- paste0(oName, "_S2")
-relationshipPath <- 1
+relationshipPath <- 2
 
 rGroupsToDrop <- c(0, .125, .0625)# 0, .375, .75)#.125, .375, .75)
 dropIfHousematesAreNotSameGeneration <- FALSE
