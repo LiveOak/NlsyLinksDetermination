@@ -28,9 +28,6 @@ dsWeight <- plyr::rename(dsWeight, replace=c("ZGenderAge"="WeightZGenderAge")) #
 ds <- merge(x=ds, y=dsWeight, by="SubjectTag", all.x=TRUE)
 rm(dsWeight)
 
-
-
-
 HistogramWithCurve <- function( scores, title="", breaks=30) {
   hist(scores, breaks=breaks, freq=F, main=title)
   curve(dnorm(x, mean=mean(scores, na.rm=T),  sd=sd(scores, na.rm=T)), add=T)  

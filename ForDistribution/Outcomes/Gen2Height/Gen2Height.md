@@ -42,28 +42,26 @@ extractVariablesString <- "'Gen2HeightFeetOnly', 'Gen2HeightInchesRemainder'"
 # GROUP BY floor([AgeCalculateYears]) ORDER BY Age
 
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
-dsLong <- sqlQuery(channel, 
-                    paste0(
-                      "SELECT * 
-                      FROM [NlsLinks].[Process].[vewOutcome]
-                      WHERE Generation=2 AND ItemLabel in (", extractVariablesString, ") 
-                      ORDER BY SubjectTag, SurveyYear" 
-                    ), stringsAsFactors=FALSE
+dsLong <- sqlQuery(channel,  paste0(
+  "SELECT * 
+  FROM [NlsLinks].[Process].[vewOutcome]
+  WHERE Generation=2 AND ItemLabel in (", extractVariablesString, ") 
+  ORDER BY SubjectTag, SurveyYear" 
+  ), stringsAsFactors=FALSE
 )
 dsSubject <- sqlQuery(channel, 
-                      "SELECT SubjectTag 
-                    FROM [NlsLinks].[Process].[tblSubject]
-                    WHERE Generation=2 
-                    ORDER BY SubjectTag" 
-                    , stringsAsFactors=FALSE
+  "SELECT SubjectTag 
+  FROM [NlsLinks].[Process].[tblSubject]
+  WHERE Generation=2 
+  ORDER BY SubjectTag" 
+  , stringsAsFactors=FALSE
 )
-dsVariable <- sqlQuery(channel,
-                   paste0(
-                      "SELECT * 
-                      FROM [NlsLinks].[dbo].[vewVariable]
-                      WHERE (Translate = 1) AND ItemLabel in (", extractVariablesString, ") 
-                       ORDER BY Item, SurveyYear, VariableCode"                      
-                   ), stringsAsFactors=FALSE
+dsVariable <- sqlQuery(channel, paste0(
+  "SELECT * 
+  FROM [NlsLinks].[dbo].[vewVariable]
+  WHERE (Translate = 1) AND ItemLabel in (", extractVariablesString, ") 
+  ORDER BY Item, SurveyYear, VariableCode"                      
+  ), stringsAsFactors=FALSE
 )
 odbcClose(channel)
 summary(dsLong)
@@ -71,7 +69,7 @@ summary(dsLong)
 
 ```
    SubjectTag        SurveyYear        Item      ItemLabel             Value         LoopIndex   Generation  SurveyDate       
- Min.   :    301   Min.   :1994   Min.   :501   Length:70614       Min.   :-2.00   Min.   :0   Min.   :2    Length:70614      
+ Min.   :    301   Min.   :1994   Min.   :501   Length:141228      Min.   :-2.00   Min.   :0   Min.   :2    Length:141228     
  1st Qu.: 267702   1st Qu.:2002   1st Qu.:501   Class :character   1st Qu.: 5.00   1st Qu.:0   1st Qu.:2    Class :character  
  Median : 546901   Median :2006   Median :502   Mode  :character   Median : 5.00   Median :0   Median :2    Mode  :character  
  Mean   : 550041   Mean   :2004   Mean   :502                      Mean   : 5.23   Mean   :0   Mean   :2                      
@@ -79,7 +77,7 @@ summary(dsLong)
  Max.   :1266703   Max.   :2010   Max.   :502                      Max.   :11.00   Max.   :0   Max.   :2                      
  AgeSelfReportYears AgeCalculateYears     Gender   
  Mode:logical       Min.   :13.7      Min.   :1.0  
- NA's:70614         1st Qu.:17.2      1st Qu.:1.0  
+ NA's:141228        1st Qu.:17.2      1st Qu.:1.0  
                     Median :20.3      Median :2.0  
                     Mean   :21.0      Mean   :1.5  
                     3rd Qu.:24.2      3rd Qu.:2.0  
@@ -132,7 +130,7 @@ system.time(
 
 ```
    user  system elapsed 
-  18.92    2.38   21.31 
+  20.50    4.13   24.64 
 ```
 
 ```r
@@ -142,7 +140,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 35307
+[1] 70614
 ```
 
 ```r
@@ -168,7 +166,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 35067
+[1] 70134
 ```
 
 ```r
@@ -212,7 +210,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 22795
+[1] 45590
 ```
 
 ```r
@@ -241,7 +239,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 22795
+[1] 45590
 ```
 
 ```r
@@ -272,7 +270,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 22733
+[1] 45466
 ```
 
 ```r
@@ -292,7 +290,7 @@ ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) +
 ## Pick the subject's oldest record (within that age window).  Then examine the age & Z values
 
 ```r
-ds <- ddply(dsYear, "SubjectTag", subset, rank(-Age)==1)
+ds <- ddply(dsYear, "SubjectTag", subset, rank(-Age, ties.method="first")==1)
 nrow(ds) 
 ```
 
@@ -305,13 +303,13 @@ summary(ds)
 ```
 
 ```
-   SubjectTag        SurveyYear        Age           Gender           DV          ZGender         ZGenderAge     
- Min.   :    301   Min.   :1994   Min.   :16.0   Min.   :1.00   Min.   :56.0   Min.   :-3.290   Min.   :-2.9855  
- 1st Qu.: 266202   1st Qu.:2004   1st Qu.:20.0   1st Qu.:1.00   1st Qu.:64.0   1st Qu.:-0.705   1st Qu.:-0.7195  
- Median : 537401   Median :2008   Median :23.0   Median :1.00   Median :67.0   Median :-0.059   Median :-0.0730  
- Mean   : 545706   Mean   :2007   Mean   :21.5   Mean   :1.49   Mean   :67.5   Mean   : 0.016   Mean   :-0.0016  
- 3rd Qu.: 804403   3rd Qu.:2010   3rd Qu.:24.0   3rd Qu.:2.00   3rd Qu.:71.0   3rd Qu.: 0.587   3rd Qu.: 0.5766  
- Max.   :1266703   Max.   :2010   Max.   :24.0   Max.   :2.00   Max.   :79.0   Max.   : 2.949   Max.   : 2.9905  
+   SubjectTag        SurveyYear        Age           Gender           DV         ZGenderAge     
+ Min.   :    301   Min.   :1994   Min.   :16.0   Min.   :1.00   Min.   :56.0   Min.   :-2.9859  
+ 1st Qu.: 266202   1st Qu.:2004   1st Qu.:20.0   1st Qu.:1.00   1st Qu.:64.0   1st Qu.:-0.7197  
+ Median : 537401   Median :2008   Median :23.0   Median :1.00   Median :67.0   Median :-0.0730  
+ Mean   : 545706   Mean   :2007   Mean   :21.5   Mean   :1.49   Mean   :67.5   Mean   :-0.0016  
+ 3rd Qu.: 804403   3rd Qu.:2010   3rd Qu.:24.0   3rd Qu.:2.00   3rd Qu.:71.0   3rd Qu.: 0.5767  
+ Max.   :1266703   Max.   :2010   Max.   :24.0   Max.   :2.00   Max.   :79.0   Max.   : 2.9911  
 ```
 
 ```r

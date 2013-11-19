@@ -202,10 +202,8 @@ extractVariablesString &lt;- &quot;&#39;Gen1HeightInches&#39;, &#39;Gen1HeightFe
 GetTotalInchesFromMash &lt;- function( mash ) {
   feet &lt;- as.integer(gsub(pattern=&quot;^(\\d{1})(\\d{2})$&quot;, replacement=&quot;\\1&quot;, x=mash))
   inches &lt;- as.integer(gsub(pattern=&quot;^(\\d{1})(\\d{2})$&quot;, replacement=&quot;\\2&quot;, x=mash))
-#   print(paste(mash, &quot;:&quot;, feet, inches))
   return( feet*12 + inches )
 } 
-
 
 ####################################################################################
 </code></pre>

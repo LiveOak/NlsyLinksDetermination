@@ -31,36 +31,31 @@ extractVariablesString <- "'Gen1HeightInches', 'Gen1HeightFeetInchesMashed'"
 GetTotalInchesFromMash <- function( mash ) {
   feet <- as.integer(gsub(pattern="^(\\d{1})(\\d{2})$", replacement="\\1", x=mash))
   inches <- as.integer(gsub(pattern="^(\\d{1})(\\d{2})$", replacement="\\2", x=mash))
-#   print(paste(mash, ":", feet, inches))
   return( feet*12 + inches )
 } 
-
 
 ####################################################################################
 ## @knitr LoadData
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
-dsLong <- sqlQuery(channel, 
-                   paste0(
-                     "SELECT * 
-                      FROM [NlsLinks].[Process].[vewOutcome]
-                      WHERE Generation=1 AND ItemLabel in (", extractVariablesString, ") 
-                      ORDER BY SubjectTag, SurveyYear" 
-                   ), stringsAsFactors=FALSE
+dsLong <- sqlQuery(channel, paste0(
+  "SELECT * 
+  FROM [NlsLinks].[Process].[vewOutcome]
+  WHERE Generation=1 AND ItemLabel in (", extractVariablesString, ") 
+  ORDER BY SubjectTag, SurveyYear" 
+  ), stringsAsFactors=FALSE
 )
-dsSubject <- sqlQuery(channel, 
-                      "SELECT SubjectTag 
-                    FROM [NlsLinks].[Process].[tblSubject]
-                    WHERE Generation=1 
-                    ORDER BY SubjectTag" 
-                      , stringsAsFactors=FALSE
+dsSubject <- sqlQuery(channel, "SELECT SubjectTag 
+  FROM [NlsLinks].[Process].[tblSubject]
+  WHERE Generation=1 
+  ORDER BY SubjectTag" 
+  , stringsAsFactors=FALSE
 )
-dsVariable <- sqlQuery(channel,
-                       paste0(
-                         "SELECT * 
-                      FROM [NlsLinks].[dbo].[vewVariable]
-                      WHERE (Translate = 1) AND ItemLabel in (", extractVariablesString, ") 
-                       ORDER BY Item, SurveyYear, VariableCode"                      
-                       ), stringsAsFactors=FALSE
+dsVariable <- sqlQuery(channel, paste0(
+  "SELECT * 
+  FROM [NlsLinks].[dbo].[vewVariable]
+  WHERE (Translate = 1) AND ItemLabel in (", extractVariablesString, ") 
+  ORDER BY Item, SurveyYear, VariableCode"                      
+  ), stringsAsFactors=FALSE
 )
 odbcClose(channel)
 summary(dsLong)

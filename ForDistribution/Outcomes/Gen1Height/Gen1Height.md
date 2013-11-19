@@ -30,10 +30,8 @@ extractVariablesString <- "'Gen1HeightInches', 'Gen1HeightFeetInchesMashed'"
 GetTotalInchesFromMash <- function( mash ) {
   feet <- as.integer(gsub(pattern="^(\\d{1})(\\d{2})$", replacement="\\1", x=mash))
   inches <- as.integer(gsub(pattern="^(\\d{1})(\\d{2})$", replacement="\\2", x=mash))
-#   print(paste(mash, ":", feet, inches))
   return( feet*12 + inches )
 } 
-
 
 ####################################################################################
 ```

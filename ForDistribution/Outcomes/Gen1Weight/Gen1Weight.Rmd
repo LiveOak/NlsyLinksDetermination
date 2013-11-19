@@ -6,7 +6,7 @@ This sequence picks a single Weight value per Gen2 subject.
 opts_knit$set(root.dir='../../../')  #Don't combine this call with any other chunk -espeically one that uses file paths.
 ```
 
-```{r SetOptions, echo=FALSE, cache=FALSE}
+```{r SetOptions, echo=FALSE}
 options(width=130)
 opts_chunk$set(
   autodep=TRUE,
@@ -34,18 +34,19 @@ read_chunk("./ForDistribution/Outcomes/Gen1Weight/Gen1Weight.R") #This allows kn
 ```
 
 ## Show the Weight data with age of the subject when the Weight was taken.  Filter out records where the age or the Weight is outside of the desired window.
-```{r FilterValuesAndAges, fig.height=5, cache=TRUE}
+```{r FilterValuesAndAges, fig.height=5}
 ```
+
 ## Standardize by Gender & Age.  Calculated Age (using SurveyDate and MOB) has been truncated to integers.  
-```{r Standarize, fig.height=2, cache=TRUE}
+```{r Standarize, fig.height=2}
 ```
 
 ## Determine Z-score to clip at.  Adjust as necessary (zMin & zMax were defined at the top of the page).  The white box extends between zMin and zMax.
-```{r DetermineZForClipping, fig.height=5, cache=TRUE}
+```{r DetermineZForClipping, fig.height=5}
 ```
 
 ## Pick the subject's oldest record (within that age window).  Then examine the age & Z values
-```{r ReduceToOneRecordPerSubject, fig.width=4,fig.height=2.8, cache=TRUE} 
+```{r ReduceToOneRecordPerSubject, fig.width=4,fig.height=2.8} 
 ```
 
 ## Write the OutcomeData to CSV
