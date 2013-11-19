@@ -46,7 +46,8 @@ relationshipPathsPretty <- paste0("(", paste(levels(Links79Pair$RelationshipPath
 rVersions <- c("R", "RFull", "RExplicit", "RImplicit",  "RImplicit2004") #"RImplicitPass1",
 # rVersions <- c("R", "RFull", "RPass1", "RImplicit", "RExplicit", "RExplicitPass1", "RImplicit2004")
 
-rGroupsToDrop <- c(0, .0625)# 0, .375, .75)#.125, .375, .75)
+#rGroupsToDrop <- c(0, .0625)# 0, .375, .75)#.125, .375, .75)
+rGroupsToDrop <- c()# 0, .375, .75)#.125, .375, .75)
 dropIfHousematesAreNotSameGeneration <- FALSE
 startNewPage <- c(F, T, F, T, F, T, F)
 
