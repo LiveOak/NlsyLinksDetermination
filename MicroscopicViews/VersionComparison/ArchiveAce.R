@@ -37,7 +37,7 @@ oName <- "HeightZGenderAge"
 oName_1 <- paste0(oName, "_S1")
 oName_2 <- paste0(oName, "_S2")
 
-relationshipPaths <- c(1, 2, 3)
+relationshipPaths <- c(1, 2, 3, 4)
 relationshipPathsString <- paste0("(", paste(relationshipPaths, collapse=","), ")")
 
 relationshipPathsPretty <- paste0("(", paste(levels(Links79Pair$RelationshipPath)[relationshipPaths], collapse=", "), ")")
@@ -46,7 +46,7 @@ relationshipPathsPretty <- paste0("(", paste(levels(Links79Pair$RelationshipPath
 rVersions <- c("R", "RFull", "RExplicit", "RImplicit",  "RImplicit2004") #"RImplicitPass1",
 # rVersions <- c("R", "RFull", "RPass1", "RImplicit", "RExplicit", "RExplicitPass1", "RImplicit2004")
 
-rGroupsToDrop <- c(0, .125, .0625)# 0, .375, .75)#.125, .375, .75)
+rGroupsToDrop <- c(0, .0625)# 0, .375, .75)#.125, .375, .75)
 dropIfHousematesAreNotSameGeneration <- FALSE
 startNewPage <- c(F, T, F, T, F, T, F)
 
