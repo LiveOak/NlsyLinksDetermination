@@ -38,6 +38,8 @@ dsLong <- sqlQuery(channel, paste0(
   ORDER BY SubjectTag, SurveyYear" 
   ), stringsAsFactors=FALSE
 )
+
+
 dsSubject <- sqlQuery(channel, 
   "SELECT SubjectTag 
   FROM [NlsLinks].[Process].[tblSubject]
@@ -77,38 +79,42 @@ rm(dsLong)
 
 qplot(dsYear$Value, binwidth=.05, main="Before Gaussification")
 
-# dsYear$AfqtRescaled2006Gaussified <- qnorm(dsYear$Value) #convert from roughly uniform distribution [0, 100], to something Gaussianish.
-# dsYear$AfqtRescaled2006Gaussified <- pmax(pmin(dsYear$AfqtRescaled2006Gaussified, 3), -3) #The scale above had 0s and 100s, so clamp that in at +/-3.
-# dsYear <- plyr::rename(x=dsYear, replace=c("AfqtRescaled2006Gaussified"="DV"))
+dsYear$AfqtRescaled2006Gaussified <- qnorm(dsYear$Value) #convert from roughly uniform distribution [0, 100], to something Gaussianish.
+dsYear$AfqtRescaled2006Gaussified <- pmax(pmin(dsYear$AfqtRescaled2006Gaussified, 3), -3) #The scale above had 0s and 100s, so clamp that in at +/-3.
+dsYear <- plyr::rename(x=dsYear, replace=c("AfqtRescaled2006Gaussified"="DV"))
 
-dsYear <- plyr::rename(x=dsYear, replace=c("Value"="DV"))
+# dsYear <- plyr::rename(x=dsYear, replace=c("Value"="DV"))
 
 
 ####################################################################################
 ## @knitr FilterValuesAndAges
 #Filter out records with undesired DV values
-qplot(dsYear$DV, binwidth=1, main="Before Filtering Out Extreme DV values")
+qplot(dsYear$DV, binwidth=.25, main="Before Filtering Out Extreme DV values")
 dsYear <- dsYear[!is.na(dsYear$DV), ]
 dsYear <- dsYear[DVMin <= dsYear$DV & dsYear$DV <= DVMax, ]
 nrow(dsYear)
 summary(dsYear)
-qplot(dsYear$DV, binwidth=1, main="After Filtering Out Extreme DV values")
+qplot(dsYear$DV, binwidth=.25, main="After Filtering Out Extreme DV values")
 
 #Filter out records with undesired age values
-qplot(dsYear$Age, binwidth=1, main="Before Filtering Out Extreme Ages") 
+qplot(dsYear$Age, binwidth=.25, main="Before Filtering Out Extreme Ages") 
 ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 dsYear <- dsYear[!is.na(dsYear$Age), ]
 dsYear <- dsYear[ageMin <= dsYear$Age & dsYear$Age <= ageMax, ]
 nrow(dsYear)
-qplot(dsYear$Age, binwidth=1, main="After Filtering Out Extreme Ages") 
+qplot(dsYear$Age, binwidth=.25, main="After Filtering Out Extreme Ages") 
 ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 
 ####################################################################################
 ## @knitr Standarize
-# dsYear <- ddply(dsYear, c("Gender"), transform, ZGender=scale(DV))
+# dsYear <- ddply(dsYear, c("Gender"), transform, ZGenderAge=scale(DV))  #WATCH OUT-This is a quick hack with age.
 dsYear <- ddply(dsYear, c("Gender", "Age"), transform, ZGenderAge=scale(DV))
+# dsYear$ZGenderAge <- dsYear$DV
 nrow(dsYear)
 qplot(dsYear$ZGenderAge, binwidth=.25)
+
+
+# dsYear$ZGenderAge <- rnorm(n=nrow(dsYear))
 
 ####################################################################################
 ## @knitr DetermineZForClipping

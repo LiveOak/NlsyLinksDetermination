@@ -93,7 +93,7 @@ if( relationshipPath==1 ) {
 }
 if( relationshipPath==2 ) {
   relationshipPathPretty <- "Gen2Siblings"
-  rVersions <- c("R", "RFull", "RPass1", "RImplicit", "RImplicitPass1", "RExplicit", "RExplicitPass1", "RImplicit2004")
+  rVersions <- c("R", "RFull", "RPass1", "RImplicit", "RExplicit", "RExplicitPass1", "RImplicit2004")
 
   if ( oName == "HeightZAgeGender" ) {
     dsOutcomes <- read.csv("F:/Projects/RDev/NlsyLinksStaging/Datasets/Gen2Height.csv")

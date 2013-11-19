@@ -131,11 +131,11 @@ qplot(dsYear$Value, binwidth=.05, main="Before Gaussification")
 
 ```r
 
-# dsYear$AfqtRescaled2006Gaussified <- qnorm(dsYear$Value) #convert from roughly uniform distribution [0, 100], to something Gaussianish.
-# dsYear$AfqtRescaled2006Gaussified <- pmax(pmin(dsYear$AfqtRescaled2006Gaussified, 3), -3) #The scale above had 0s and 100s, so clamp that in at +/-3.
-# dsYear <- plyr::rename(x=dsYear, replace=c("AfqtRescaled2006Gaussified"="DV"))
+dsYear$AfqtRescaled2006Gaussified <- qnorm(dsYear$Value) #convert from roughly uniform distribution [0, 100], to something Gaussianish.
+dsYear$AfqtRescaled2006Gaussified <- pmax(pmin(dsYear$AfqtRescaled2006Gaussified, 3), -3) #The scale above had 0s and 100s, so clamp that in at +/-3.
+dsYear <- plyr::rename(x=dsYear, replace=c("AfqtRescaled2006Gaussified"="DV"))
 
-dsYear <- plyr::rename(x=dsYear, replace=c("Value"="DV"))
+# dsYear <- plyr::rename(x=dsYear, replace=c("Value"="DV"))
 
 
 ####################################################################################
@@ -146,7 +146,7 @@ dsYear <- plyr::rename(x=dsYear, replace=c("Value"="DV"))
 
 ```r
 #Filter out records with undesired DV values
-qplot(dsYear$DV, binwidth=1, main="Before Filtering Out Extreme DV values")
+qplot(dsYear$DV, binwidth=.25, main="Before Filtering Out Extreme DV values")
 ```
 
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges1.png) 
@@ -166,18 +166,18 @@ summary(dsYear)
 ```
 
 ```
-   SubjectTag        SurveyYear        Age           Gender          DV       
- Min.   :    200   Min.   :1981   Min.   :15.0   Min.   :1.0   Min.   :0.000  
- 1st Qu.: 316625   1st Qu.:1981   1st Qu.:18.0   1st Qu.:1.0   1st Qu.:0.168  
- Median : 630650   Median :1981   Median :20.0   Median :1.0   Median :0.386  
- Mean   : 631985   Mean   :1981   Mean   :19.8   Mean   :1.5   Mean   :0.424  
- 3rd Qu.: 945475   3rd Qu.:1981   3rd Qu.:22.0   3rd Qu.:2.0   3rd Qu.:0.663  
- Max.   :1268600   Max.   :1981   Max.   :24.0   Max.   :2.0   Max.   :1.000  
-                                  NA's   :193                                 
+   SubjectTag        SurveyYear        Age           Gender        Value             DV        
+ Min.   :    200   Min.   :1981   Min.   :15.0   Min.   :1.0   Min.   :0.000   Min.   :-3.000  
+ 1st Qu.: 316625   1st Qu.:1981   1st Qu.:18.0   1st Qu.:1.0   1st Qu.:0.168   1st Qu.:-0.963  
+ Median : 630650   Median :1981   Median :20.0   Median :1.0   Median :0.386   Median :-0.289  
+ Mean   : 631985   Mean   :1981   Mean   :19.8   Mean   :1.5   Mean   :0.424   Mean   :-0.262  
+ 3rd Qu.: 945475   3rd Qu.:1981   3rd Qu.:22.0   3rd Qu.:2.0   3rd Qu.:0.663   3rd Qu.: 0.420  
+ Max.   :1268600   Max.   :1981   Max.   :24.0   Max.   :2.0   Max.   :1.000   Max.   : 3.000  
+                                  NA's   :193                                                  
 ```
 
 ```r
-qplot(dsYear$DV, binwidth=1, main="After Filtering Out Extreme DV values")
+qplot(dsYear$DV, binwidth=.25, main="After Filtering Out Extreme DV values")
 ```
 
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges2.png) 
@@ -185,7 +185,7 @@ qplot(dsYear$DV, binwidth=1, main="After Filtering Out Extreme DV values")
 ```r
 
 #Filter out records with undesired age values
-qplot(dsYear$Age, binwidth=1, main="Before Filtering Out Extreme Ages") 
+qplot(dsYear$Age, binwidth=.25, main="Before Filtering Out Extreme Ages") 
 ```
 
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges3.png) 
@@ -219,7 +219,7 @@ nrow(dsYear)
 ```
 
 ```r
-qplot(dsYear$Age, binwidth=1, main="After Filtering Out Extreme Ages") 
+qplot(dsYear$Age, binwidth=.25, main="After Filtering Out Extreme Ages") 
 ```
 
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges5.png) 
@@ -243,8 +243,9 @@ geom_path: Each group consist of only one observation. Do you need to adjust the
 ## Standardize by Gender & Age.  Calculated Age (using SurveyDate and MOB) has been truncated to integers.  
 
 ```r
-# dsYear <- ddply(dsYear, c("Gender"), transform, ZGender=scale(DV))
+# dsYear <- ddply(dsYear, c("Gender"), transform, ZGenderAge=scale(DV))  #WATCH OUT-This is a quick hack with age.
 dsYear <- ddply(dsYear, c("Gender", "Age"), transform, ZGenderAge=scale(DV))
+# dsYear$ZGenderAge <- dsYear$DV
 nrow(dsYear)
 ```
 
@@ -259,6 +260,9 @@ qplot(dsYear$ZGenderAge, binwidth=.25)
 ![plot of chunk Standarize](figure/Standarize.png) 
 
 ```r
+
+
+# dsYear$ZGenderAge <- rnorm(n=nrow(dsYear))
 
 ####################################################################################
 ```
@@ -284,7 +288,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 11719
+[1] 11680
 ```
 
 ```r
@@ -339,7 +343,7 @@ table(is.na(ds$ZGenderAge))
 ```
 
 FALSE  TRUE 
-11719   967 
+11680  1006 
 ```
 
 ```r

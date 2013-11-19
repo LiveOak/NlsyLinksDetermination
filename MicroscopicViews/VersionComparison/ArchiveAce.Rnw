@@ -25,8 +25,6 @@ opts_knit$set(root.dir='../../')  #Don't combine this call with any other chunk 
 
 <<echo=FALSE>>=
 library(stringr)
-# pathDirectory <- getwd() #"F:/Projects/Nls/Links2011/MicroscopicViews/VersionComparison/"
-# setwd(dir=pathDirectory)
 read_chunk("./MicroscopicViews/VersionComparison/ArchiveAce.R")
 @
 
