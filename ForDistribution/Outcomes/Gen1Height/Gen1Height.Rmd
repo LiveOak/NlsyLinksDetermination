@@ -6,27 +6,28 @@ This sequence picks a single height value per Gen2 subject.
 opts_knit$set(root.dir='../../../')  #Don't combine this call with any other chunk -espeically one that uses file paths.
 ```
 
-```{r SetOptions, echo=FALSE, cache=FALSE}
+```{r SetOptions, echo=FALSE, cache=TRUE}
 options(width=130)
 opts_chunk$set(
+  autodep=TRUE,
   comment="", 
   warning=TRUE, 
   echo=TRUE, 
   tidy=FALSE, 
   size="small"
   )
-read_chunk("./ForDistribution/Outcomes/Gen1Height/Gen1Height.R") #This allows knitr to call chunks tagged in the underlying .R file.
+pathSourceCode <- "./ForDistribution/Outcomes/Gen1Height/Gen1Height.R"
+read_chunk(pathSourceCode) #This allows knitr to call chunks tagged in the underlying .R file.
 ```
 
-
-```{r LoadPackages, echo=FALSE, message=FALSE}
+```{r LoadPackages, echo=FALSE, message=FALSE, cache=TRUE, dependson='SetOptions'}
 ```
 ## Define the age cutoffs to keep ages within the same Window as Gen1 Heights.  Define the height cutoffs to exclude values that are more likely to be entry errors or a developmental disorder, than a true reflection of additive genetics
 ```{r DefineGlobals}
 ```
 
 ## Load the appropriate information from the SQL Server database
-```{r LoadData}
+```{r LoadData, codeBehindTime=file.info(pathSourceCode)$mtime, cache=TRUE}
 ```
 
 ## Make necessary Adjustments

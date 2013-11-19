@@ -26,7 +26,15 @@ ageMax <- 24
 zMin <- -3
 zMax <- -zMin 
 
-extractVariablesString <- "'Gen1HeightInches'"
+extractVariablesString <- "'Gen1HeightInches', 'Gen1HeightFeetInchesMashed'"
+
+GetTotalInchesFromMash <- function( mash ) {
+  feet <- as.integer(gsub(pattern="^(\\d{1})(\\d{2})$", replacement="\\1", x=mash))
+  inches <- as.integer(gsub(pattern="^(\\d{1})(\\d{2})$", replacement="\\2", x=mash))
+#   print(paste(mash, ":", feet, inches))
+  return( feet*12 + inches )
+} 
+
 
 ####################################################################################
 ## @knitr LoadData
@@ -67,11 +75,14 @@ dsLong$AgeSelfReportYears <- NULL
 testit::assert("All outcomes should have a loop index of zero", all(dsLong$LoopIndex==0))
 dsLong$LoopIndex <- NULL
 
+dsLong$Value <- ifelse(dsLong$ItemLabel=='Gen1HeightFeetInchesMashed', GetTotalInchesFromMash(dsLong$Value), dsLong$Value)
+
 dsYear <- dsLong[, c("SubjectTag", "SurveyYear", "Age", "Gender", "Value")]
 nrow(dsYear)
 rm(dsLong)
 
 dsYear <- plyr::rename(x=dsYear, replace=c("Value"="DV"))
+
 ####################################################################################
 ## @knitr FilterValuesAndAges
 #Filter out records with undesired DV values
@@ -111,7 +122,7 @@ ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) +
 
 ####################################################################################
 ## @knitr ReduceToOneRecordPerSubject
-ds <- ddply(dsYear, "SubjectTag", subset, rank(-Age)==1)
+ds <- ddply(dsYear, "SubjectTag", subset, rank(-Age, ties.method="first")==1)
 nrow(ds) 
 summary(ds)
 # SELECT [Mob], [LastSurveyYearCompleted], [AgeAtLastSurvey]

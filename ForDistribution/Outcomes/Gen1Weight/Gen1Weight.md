@@ -9,7 +9,6 @@ This sequence picks a single Weight value per Gen2 subject.
 
 
 
-
 ## Define the age cutoffs to keep ages within the same Window as Gen1 Weights.  Define the Weight cutoffs to exclude values that are more likely to be entry errors or a developmental disorder, than a true reflection of additive genetics
 
 ```r
@@ -21,7 +20,7 @@ DVMax <- 350
 ageMin <- 16
 ageMax <- 24
 zMin <- -3
-zMax <- -zMin 
+zMax <- 5
 
 extractVariablesString <- "'Gen1WeightPounds'"
 
@@ -62,19 +61,19 @@ summary(dsLong)
 
 ```
    SubjectTag        SurveyYear        Item      ItemLabel             Value       LoopIndex   Generation  SurveyDate       
- Min.   :    200   Min.   :1982   Min.   :201   Length:12086       Min.   : 53   Min.   :0   Min.   :1    Length:12086      
- 1st Qu.: 316225   1st Qu.:1982   1st Qu.:201   Class :character   1st Qu.:125   1st Qu.:0   1st Qu.:1    Class :character  
- Median : 629650   Median :1982   Median :201   Mode  :character   Median :145   Median :0   Median :1    Mode  :character  
- Mean   : 631966   Mean   :1982   Mean   :201                      Mean   :148   Mean   :0   Mean   :1                      
- 3rd Qu.: 948675   3rd Qu.:1982   3rd Qu.:201                      3rd Qu.:165   3rd Qu.:0   3rd Qu.:1                      
- Max.   :1268600   Max.   :1982   Max.   :201                      Max.   :350   Max.   :0   Max.   :1                      
+ Min.   :    200   Min.   :1981   Min.   :201   Length:47138       Min.   : 53   Min.   :0   Min.   :1    Length:47138      
+ 1st Qu.: 310300   1st Qu.:1981   1st Qu.:201   Class :character   1st Qu.:125   1st Qu.:0   1st Qu.:1    Class :character  
+ Median : 617600   Median :1982   Median :201   Mode  :character   Median :145   Median :0   Median :1    Mode  :character  
+ Mean   : 621815   Mean   :1982   Mean   :201                      Mean   :148   Mean   :0   Mean   :1                      
+ 3rd Qu.: 927800   3rd Qu.:1982   3rd Qu.:201                      3rd Qu.:165   3rd Qu.:0   3rd Qu.:1                      
+ Max.   :1268600   Max.   :1985   Max.   :201                      Max.   :375   Max.   :0   Max.   :1                      
  AgeSelfReportYears AgeCalculateYears     Gender   
- Min.   :17.0       Min.   :16.6      Min.   :1.0  
- 1st Qu.:19.0       1st Qu.:19.4      1st Qu.:1.0  
- Median :21.0       Median :21.4      Median :1.0  
- Mean   :20.8       Mean   :21.3      Mean   :1.5  
- 3rd Qu.:23.0       3rd Qu.:23.3      3rd Qu.:2.0  
- Max.   :25.0       Max.   :26.8      Max.   :2.0  
+ Min.   :16.0       Min.   :15.6      Min.   :1.0  
+ 1st Qu.:19.0       1st Qu.:19.6      1st Qu.:1.0  
+ Median :21.0       Median :21.7      Median :1.0  
+ Mean   :21.2       Mean   :21.7      Mean   :1.5  
+ 3rd Qu.:23.0       3rd Qu.:23.6      3rd Qu.:2.0  
+ Max.   :28.0       Max.   :28.7      Max.   :2.0  
 ```
 
 ```r
@@ -106,7 +105,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 12086
+[1] 47138
 ```
 
 ```r
@@ -133,7 +132,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 12063
+[1] 47051
 ```
 
 ```r
@@ -142,12 +141,12 @@ summary(dsYear)
 
 ```
    SubjectTag        SurveyYear        Age           Gender          DV     
- Min.   :    200   Min.   :1982   Min.   :16.0   Min.   :1.0   Min.   : 90  
- 1st Qu.: 316150   1st Qu.:1982   1st Qu.:19.0   1st Qu.:1.0   1st Qu.:125  
- Median : 629500   Median :1982   Median :21.0   Median :1.0   Median :145  
- Mean   : 631958   Mean   :1982   Mean   :20.8   Mean   :1.5   Mean   :148  
- 3rd Qu.: 948750   3rd Qu.:1982   3rd Qu.:23.0   3rd Qu.:2.0   3rd Qu.:165  
- Max.   :1268600   Max.   :1982   Max.   :26.0   Max.   :2.0   Max.   :350  
+ Min.   :    200   Min.   :1981   Min.   :15.0   Min.   :1.0   Min.   : 90  
+ 1st Qu.: 310400   1st Qu.:1981   1st Qu.:19.0   1st Qu.:1.0   1st Qu.:125  
+ Median : 617600   Median :1982   Median :21.0   Median :1.0   Median :145  
+ Mean   : 621865   Mean   :1982   Mean   :21.2   Mean   :1.5   Mean   :148  
+ 3rd Qu.: 928000   3rd Qu.:1982   3rd Qu.:23.0   3rd Qu.:2.0   3rd Qu.:165  
+ Max.   :1268600   Max.   :1985   Max.   :28.0   Max.   :2.0   Max.   :350  
 ```
 
 ```r
@@ -168,10 +167,6 @@ qplot(dsYear$Age, binwidth=1, main="Before Filtering Out Extreme Ages")
 ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 ```
 
-```
-geom_path: Each group consist of only one observation. Do you need to adjust the group aesthetic?
-```
-
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges4.png) 
 
 ```r
@@ -181,7 +176,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 11770
+[1] 42427
 ```
 
 ```r
@@ -192,10 +187,6 @@ qplot(dsYear$Age, binwidth=1, main="After Filtering Out Extreme Ages")
 
 ```r
 ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
-```
-
-```
-geom_path: Each group consist of only one observation. Do you need to adjust the group aesthetic?
 ```
 
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges6.png) 
@@ -214,7 +205,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 11770
+[1] 42427
 ```
 
 ```r
@@ -237,10 +228,6 @@ ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) +
   geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 ```
 
-```
-geom_path: Each group consist of only one observation. Do you need to adjust the group aesthetic?
-```
-
 ![plot of chunk DetermineZForClipping](figure/DetermineZForClipping1.png) 
 
 ```r
@@ -249,17 +236,13 @@ nrow(dsYear)
 ```
 
 ```
-[1] 11621
+[1] 42369
 ```
 
 ```r
 ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) + 
   annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
   geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
-```
-
-```
-geom_path: Each group consist of only one observation. Do you need to adjust the group aesthetic?
 ```
 
 ![plot of chunk DetermineZForClipping](figure/DetermineZForClipping2.png) 
@@ -273,12 +256,12 @@ geom_path: Each group consist of only one observation. Do you need to adjust the
 ## Pick the subject's oldest record (within that age window).  Then examine the age & Z values
 
 ```r
-ds <- ddply(dsYear, "SubjectTag", subset, rank(-Age)==1)
+ds <- ddply(dsYear, "SubjectTag", subset, rank(-Age, ties.method="first")==1)
 nrow(ds) 
 ```
 
 ```
-[1] 11621
+[1] 12400
 ```
 
 ```r
@@ -286,13 +269,13 @@ summary(ds)
 ```
 
 ```
-   SubjectTag        SurveyYear        Age           Gender          DV        ZGenderAge     
- Min.   :    200   Min.   :1982   Min.   :16.0   Min.   :1.0   Min.   : 90   Min.   :-2.7219  
- 1st Qu.: 316100   1st Qu.:1982   1st Qu.:19.0   1st Qu.:1.0   1st Qu.:125   1st Qu.:-0.6894  
- Median : 627600   Median :1982   Median :21.0   Median :1.0   Median :145   Median :-0.1711  
- Mean   : 630888   Mean   :1982   Mean   :20.7   Mean   :1.5   Mean   :146   Mean   :-0.0506  
- 3rd Qu.: 947100   3rd Qu.:1982   3rd Qu.:23.0   3rd Qu.:2.0   3rd Qu.:165   3rd Qu.: 0.4530  
- Max.   :1268600   Max.   :1982   Max.   :24.0   Max.   :2.0   Max.   :250   Max.   : 2.9981  
+   SubjectTag        SurveyYear        Age           Gender           DV        ZGenderAge    
+ Min.   :    200   Min.   :1981   Min.   :16.0   Min.   :1.00   Min.   : 90   Min.   :-2.472  
+ 1st Qu.: 318075   1st Qu.:1982   1st Qu.:22.0   1st Qu.:1.00   1st Qu.:128   1st Qu.:-0.673  
+ Median : 632950   Median :1985   Median :23.0   Median :1.00   Median :149   Median :-0.153  
+ Mean   : 633896   Mean   :1984   Mean   :22.4   Mean   :1.49   Mean   :151   Mean   : 0.007  
+ 3rd Qu.: 950025   3rd Qu.:1985   3rd Qu.:24.0   3rd Qu.:2.00   3rd Qu.:170   3rd Qu.: 0.472  
+ Max.   :1268600   Max.   :1985   Max.   :24.0   Max.   :2.00   Max.   :300   Max.   : 4.965  
 ```
 
 ```r
@@ -328,7 +311,7 @@ table(is.na(ds$ZGenderAge))
 ```
 
 FALSE  TRUE 
-11621  1065 
+12400   286 
 ```
 
 ```r
@@ -355,6 +338,8 @@ dsVariable[, c("VariableCode", "SurveyYear", "Item", "ItemLabel", "Generation", 
 
 ```
   VariableCode SurveyYear Item        ItemLabel Generation ExtractSource   ID
-1     R0779900       1982  201 Gen1WeightPounds          1             8 1890
+1     R0481700       1981  201 Gen1WeightPounds          1             8 2185
+2     R0779900       1982  201 Gen1WeightPounds          1             8 1890
+3     R1774000       1985  201 Gen1WeightPounds          1             8 2186
 ```
 

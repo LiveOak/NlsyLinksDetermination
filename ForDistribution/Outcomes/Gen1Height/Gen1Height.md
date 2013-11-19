@@ -9,7 +9,6 @@ This sequence picks a single height value per Gen2 subject.
 
 
 
-
 ## Define the age cutoffs to keep ages within the same Window as Gen1 Heights.  Define the height cutoffs to exclude values that are more likely to be entry errors or a developmental disorder, than a true reflection of additive genetics
 
 ```r
@@ -26,7 +25,15 @@ ageMax <- 24
 zMin <- -3
 zMax <- -zMin 
 
-extractVariablesString <- "'Gen1HeightInches'"
+extractVariablesString <- "'Gen1HeightInches', 'Gen1HeightFeetInchesMashed'"
+
+GetTotalInchesFromMash <- function( mash ) {
+  feet <- as.integer(gsub(pattern="^(\\d{1})(\\d{2})$", replacement="\\1", x=mash))
+  inches <- as.integer(gsub(pattern="^(\\d{1})(\\d{2})$", replacement="\\2", x=mash))
+#   print(paste(mash, ":", feet, inches))
+  return( feet*12 + inches )
+} 
+
 
 ####################################################################################
 ```
@@ -64,20 +71,20 @@ summary(dsLong)
 ```
 
 ```
-   SubjectTag        SurveyYear        Item      ItemLabel             Value        LoopIndex   Generation  SurveyDate       
- Min.   :    200   Min.   :1982   Min.   :200   Length:12092       Min.   :48.0   Min.   :0   Min.   :1    Length:12092      
- 1st Qu.: 316075   1st Qu.:1982   1st Qu.:200   Class :character   1st Qu.:64.0   1st Qu.:0   1st Qu.:1    Class :character  
- Median : 629350   Median :1982   Median :200   Mode  :character   Median :67.0   Median :0   Median :1    Mode  :character  
- Mean   : 631787   Mean   :1982   Mean   :200                      Mean   :67.1   Mean   :0   Mean   :1                      
- 3rd Qu.: 948425   3rd Qu.:1982   3rd Qu.:200                      3rd Qu.:70.0   3rd Qu.:0   3rd Qu.:1                      
- Max.   :1268600   Max.   :1982   Max.   :200                      Max.   :83.0   Max.   :0   Max.   :1                      
+   SubjectTag        SurveyYear        Item      ItemLabel             Value       LoopIndex   Generation  SurveyDate       
+ Min.   :    100   Min.   :1981   Min.   :200   Length:47190       Min.   : 48   Min.   :0   Min.   :1    Length:47190      
+ 1st Qu.: 310000   1st Qu.:1981   1st Qu.:200   Class :character   1st Qu.: 65   1st Qu.:0   1st Qu.:1    Class :character  
+ Median : 617250   Median :1982   Median :200   Mode  :character   Median : 69   Median :0   Median :1    Mode  :character  
+ Mean   : 621589   Mean   :1982   Mean   :201                      Mean   :184   Mean   :0   Mean   :1                      
+ 3rd Qu.: 927600   3rd Qu.:1982   3rd Qu.:204                      3rd Qu.:500   3rd Qu.:0   3rd Qu.:1                      
+ Max.   :1268600   Max.   :1985   Max.   :204                      Max.   :611   Max.   :0   Max.   :1                      
  AgeSelfReportYears AgeCalculateYears     Gender   
- Min.   :17.0       Min.   :16.6      Min.   :1.0  
- 1st Qu.:19.0       1st Qu.:19.4      1st Qu.:1.0  
- Median :21.0       Median :21.4      Median :1.0  
- Mean   :20.8       Mean   :21.3      Mean   :1.5  
- 3rd Qu.:23.0       3rd Qu.:23.3      3rd Qu.:2.0  
- Max.   :25.0       Max.   :26.8      Max.   :2.0  
+ Min.   :16.0       Min.   :15.6      Min.   :1.0  
+ 1st Qu.:19.0       1st Qu.:19.6      1st Qu.:1.0  
+ Median :21.0       Median :21.7      Median :1.0  
+ Mean   :21.2       Mean   :21.7      Mean   :1.5  
+ 3rd Qu.:23.0       3rd Qu.:23.6      3rd Qu.:2.0  
+ Max.   :28.0       Max.   :28.7      Max.   :2.0  
 ```
 
 ```r
@@ -104,18 +111,21 @@ dsLong$AgeSelfReportYears <- NULL
 testit::assert("All outcomes should have a loop index of zero", all(dsLong$LoopIndex==0))
 dsLong$LoopIndex <- NULL
 
+dsLong$Value <- ifelse(dsLong$ItemLabel=='Gen1HeightFeetInchesMashed', GetTotalInchesFromMash(dsLong$Value), dsLong$Value)
+
 dsYear <- dsLong[, c("SubjectTag", "SurveyYear", "Age", "Gender", "Value")]
 nrow(dsYear)
 ```
 
 ```
-[1] 12092
+[1] 47190
 ```
 
 ```r
 rm(dsLong)
 
 dsYear <- plyr::rename(x=dsYear, replace=c("Value"="DV"))
+
 ####################################################################################
 ```
 
@@ -136,7 +146,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 12068
+[1] 47097
 ```
 
 ```r
@@ -145,12 +155,12 @@ summary(dsYear)
 
 ```
    SubjectTag        SurveyYear        Age           Gender          DV      
- Min.   :    200   Min.   :1982   Min.   :16.0   Min.   :1.0   Min.   :56.0  
- 1st Qu.: 316375   1st Qu.:1982   1st Qu.:19.0   1st Qu.:1.0   1st Qu.:64.0  
- Median : 629350   Median :1982   Median :21.0   Median :1.0   Median :67.0  
- Mean   : 631960   Mean   :1982   Mean   :20.8   Mean   :1.5   Mean   :67.1  
- 3rd Qu.: 948725   3rd Qu.:1982   3rd Qu.:23.0   3rd Qu.:2.0   3rd Qu.:70.0  
- Max.   :1268600   Max.   :1982   Max.   :26.0   Max.   :2.0   Max.   :80.0  
+ Min.   :    100   Min.   :1981   Min.   :15.0   Min.   :1.0   Min.   :56.0  
+ 1st Qu.: 310300   1st Qu.:1981   1st Qu.:19.0   1st Qu.:1.0   1st Qu.:64.0  
+ Median : 617300   Median :1982   Median :21.0   Median :1.0   Median :67.0  
+ Mean   : 621755   Mean   :1982   Mean   :21.2   Mean   :1.5   Mean   :67.1  
+ 3rd Qu.: 927900   3rd Qu.:1982   3rd Qu.:23.0   3rd Qu.:2.0   3rd Qu.:70.0  
+ Max.   :1268600   Max.   :1985   Max.   :28.0   Max.   :2.0   Max.   :80.0  
 ```
 
 ```r
@@ -171,10 +181,6 @@ qplot(dsYear$Age, binwidth=1, main="Before Filtering Out Extreme Ages")
 ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 ```
 
-```
-geom_path: Each group consist of only one observation. Do you need to adjust the group aesthetic?
-```
-
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges4.png) 
 
 ```r
@@ -184,7 +190,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 11776
+[1] 42468
 ```
 
 ```r
@@ -195,10 +201,6 @@ qplot(dsYear$Age, binwidth=1, main="After Filtering Out Extreme Ages")
 
 ```r
 ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
-```
-
-```
-geom_path: Each group consist of only one observation. Do you need to adjust the group aesthetic?
 ```
 
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges6.png) 
@@ -217,7 +219,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 11776
+[1] 42468
 ```
 
 ```r
@@ -240,10 +242,6 @@ ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) +
   geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 ```
 
-```
-geom_path: Each group consist of only one observation. Do you need to adjust the group aesthetic?
-```
-
 ![plot of chunk DetermineZForClipping](figure/DetermineZForClipping1.png) 
 
 ```r
@@ -252,17 +250,13 @@ nrow(dsYear)
 ```
 
 ```
-[1] 11748
+[1] 42355
 ```
 
 ```r
 ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) + 
   annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
   geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
-```
-
-```
-geom_path: Each group consist of only one observation. Do you need to adjust the group aesthetic?
 ```
 
 ![plot of chunk DetermineZForClipping](figure/DetermineZForClipping2.png) 
@@ -276,12 +270,12 @@ geom_path: Each group consist of only one observation. Do you need to adjust the
 ## Pick the subject's oldest record (within that age window).  Then examine the age & Z values
 
 ```r
-ds <- ddply(dsYear, "SubjectTag", subset, rank(-Age)==1)
+ds <- ddply(dsYear, "SubjectTag", subset, rank(-Age, ties.method="first")==1)
 nrow(ds) 
 ```
 
 ```
-[1] 11748
+[1] 12411
 ```
 
 ```r
@@ -290,12 +284,12 @@ summary(ds)
 
 ```
    SubjectTag        SurveyYear        Age           Gender          DV         ZGenderAge     
- Min.   :    200   Min.   :1982   Min.   :16.0   Min.   :1.0   Min.   :56.0   Min.   :-2.9620  
- 1st Qu.: 315375   1st Qu.:1982   1st Qu.:19.0   1st Qu.:1.0   1st Qu.:64.0   1st Qu.:-0.7553  
- Median : 626450   Median :1982   Median :21.0   Median :1.0   Median :67.0   Median :-0.0533  
- Mean   : 630444   Mean   :1982   Mean   :20.7   Mean   :1.5   Mean   :67.1   Mean   : 0.0028  
- 3rd Qu.: 946425   3rd Qu.:1982   3rd Qu.:23.0   3rd Qu.:2.0   3rd Qu.:70.0   3rd Qu.: 0.6813  
- Max.   :1268600   Max.   :1982   Max.   :24.0   Max.   :2.0   Max.   :79.0   Max.   : 2.9719  
+ Min.   :    100   Min.   :1981   Min.   :16.0   Min.   :1.0   Min.   :57.0   Min.   :-2.9879  
+ 1st Qu.: 317850   1st Qu.:1982   1st Qu.:22.0   1st Qu.:1.0   1st Qu.:64.0   1st Qu.:-0.7512  
+ Median : 633200   Median :1985   Median :23.0   Median :1.0   Median :67.0   Median :-0.0631  
+ Mean   : 633795   Mean   :1984   Mean   :22.4   Mean   :1.5   Mean   :67.2   Mean   :-0.0101  
+ 3rd Qu.: 949450   3rd Qu.:1985   3rd Qu.:24.0   3rd Qu.:2.0   3rd Qu.:70.0   3rd Qu.: 0.6570  
+ Max.   :1268600   Max.   :1985   Max.   :24.0   Max.   :2.0   Max.   :79.0   Max.   : 2.9867  
 ```
 
 ```r
@@ -331,7 +325,7 @@ table(is.na(ds$ZGenderAge))
 ```
 
 FALSE  TRUE 
-11748   938 
+12411   275 
 ```
 
 ```r
@@ -357,7 +351,9 @@ dsVariable[, c("VariableCode", "SurveyYear", "Item", "ItemLabel", "Generation", 
 ```
 
 ```
-  VariableCode SurveyYear Item        ItemLabel Generation ExtractSource   ID
-1     R0779800       1982  200 Gen1HeightInches          1             8 1889
+  VariableCode SurveyYear Item                  ItemLabel Generation ExtractSource   ID
+1     R0779800       1982  200           Gen1HeightInches          1             8 1889
+2     R1773900       1985  200           Gen1HeightInches          1             8 2184
+3     R0481600       1981  204 Gen1HeightFeetInchesMashed          1             8 2183
 ```
 

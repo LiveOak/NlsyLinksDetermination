@@ -131,7 +131,7 @@ ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) +
 
 ####################################################################################
 ## @knitr ReduceToOneRecordPerSubject
-ds <- ddply(dsYear, "SubjectTag", subset, rank(-Age)==1)
+ds <- ddply(dsYear, "SubjectTag", subset, rank(-Age, ties.method="first")==1)
 nrow(ds) 
 summary(ds)
 # SELECT [Mob], [LastSurveyYearCompleted], [AgeAtLastSurvey]

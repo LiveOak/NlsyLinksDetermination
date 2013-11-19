@@ -9,6 +9,7 @@ opts_knit$set(root.dir='../../../')  #Don't combine this call with any other chu
 ```{r SetOptions, echo=FALSE, cache=FALSE}
 options(width=130)
 opts_chunk$set(
+  autodep=TRUE,
   comment="", 
   warning=TRUE, 
   echo=TRUE, 
@@ -17,7 +18,6 @@ opts_chunk$set(
   )
 read_chunk("./ForDistribution/Outcomes/Gen1Weight/Gen1Weight.R") #This allows knitr to call chunks tagged in the underlying .R file.
 ```
-
 
 ```{r LoadPackages, echo=FALSE, message=FALSE}
 ```
