@@ -37,7 +37,7 @@ oName <- "HeightZGenderAge"
 oName_1 <- paste0(oName, "_S1")
 oName_2 <- paste0(oName, "_S2")
 
-relationshipPaths <- c(1, 2)
+relationshipPaths <- c(1, 2, 3)
 relationshipPathsString <- paste0("(", paste(relationshipPaths, collapse=","), ")")
 
 relationshipPathsPretty <- paste0("(", paste(levels(Links79Pair$RelationshipPath)[relationshipPaths], collapse=", "), ")")
