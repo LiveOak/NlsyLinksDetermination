@@ -32,7 +32,7 @@ read_chunk("./MicroscopicViews/VersionComparison/ArchiveAce.R")
 @
 
 \textbf{Outcome}: \Sexpr{oName};\\
-\textbf{Relationship Paths}: \Sexpr{paste0(relationshipPathsPretty, " [IDs:", relationshipPathsString, "]", collapse="-")};\\
+\textbf{Relationship Paths}: \Sexpr{paste0(relationshipPathsPretty, " [IDs:", relationshipPathsString, "]")};\\
 \textbf{Newer Links Version}: \Sexpr{newerVersionNumber};
 \textbf{Older Links Version}: \Sexpr{olderVersionNumber};
 

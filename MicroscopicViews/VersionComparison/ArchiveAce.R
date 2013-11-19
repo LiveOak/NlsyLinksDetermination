@@ -30,14 +30,15 @@ oName <- "HeightZGenderAge"
 # oName <- "Afi"
 # oName <- "Afm"
 
-# determinantThreshold <- 1e-5
-# determinantThreshold <- 1e-15
+# oName <- "RandomFakeOutcome"
 
+# determinantThreshold <- 1e-5
 
 oName_1 <- paste0(oName, "_S1")
 oName_2 <- paste0(oName, "_S2")
 
-relationshipPaths <- c(1, 2, 3, 4)
+# relationshipPaths <- c(2)
+relationshipPaths <- c(1, 2, 3, 4, 5)
 relationshipPathsString <- paste0("(", paste(relationshipPaths, collapse=","), ")")
 
 relationshipPathsPretty <- paste0("(", paste(levels(Links79Pair$RelationshipPath)[relationshipPaths], collapse=", "), ")")
@@ -80,10 +81,17 @@ elapsedTime <- Sys.time() - startTime
 
 # sum(dsRaw$SameGeneration != 1)
 if( dropIfHousematesAreNotSameGeneration ) {
-  dsRaw <- dsRaw[dsRaw$SameGeneration ==1 , ]
+  dsRaw <- dsRaw[dsRaw$SameGeneration ==1, ]
 }
 
 # dsRaw$R <- ifelse(dsRaw$R==.75, 1, dsRaw$R)
+# 42025/42773
+# sum(!is.na(Links79PairExpanded$RFull))
+# sum(!is.na(Links79PairExpanded$RFull))/nrow(Links79PairExpanded)
+# mean(!is.na(Links79PairExpanded$RFull))
+# table(Links79Pair$RelationshipPath)
+# mean(Links79Pair$RelationshipPath %in% c('Gen1Housemates', 'Gen2Cousins', 'AuntNiece'))
+# cbind(Links79Pair$RelationshipPath, (Links79Pair$RelationshipPath %in% c('Gen1Housemates', 'Gen2Cousins', ' AuntNiece')))
 
 olderVersionNumber <- min(dsRaw$AlgorithmVersion)
 olderDescription <- dsDescription[dsDescription$AlgorithmVersion==olderVersionNumber, 'Description']
@@ -98,6 +106,7 @@ dsLinkingOlder <- dsRaw[dsRaw$AlgorithmVersion==olderVersionNumber, ]
 rm(dsRaw)
 
 dsOutcomes <- read.csv(file=pathInput, stringsAsFactors=F)
+dsOutcomes$RandomFakeOutcome <- rnorm(n=nrow(dsOutcomes))
 dsOutcomes <- dsOutcomes[, c("SubjectTag", oName)]
 
 #They're called 'dirty' because the final cleaning stage hasn't occurred yet (ie, removing unwanted R groups)
@@ -118,7 +127,7 @@ rm(dsOutcomes, dsLinkingNewer, dsLinkingOlder)
 groupDatasets <- list() # rep(NA_character_, 2*length(rVersions))
 dsAce <- data.frame(Version=rVersions, NewASq=NA_real_, NewCSq=NA_real_, NewESq=NA_real_, NewN=NA_integer_, OldASq=NA_real_, OldCSq=NA_real_, OldESq=NA_real_, OldN=NA_integer_)
 for( i in seq_along(rVersions) ) {
-  rVersion <-  rVersions[i]
+  rVersion <-  rVersions[i] # rVersion <- "RFull"
 #  print(rVersion)
   dsGroupSummaryNewer <- RGroupSummary(dsDirtyNewer, oName_1, oName_2, rName=rVersion)#, determinantThreshold=determinantThreshold)
   dsGroupSummaryOlder <- RGroupSummary(dsDirtyOlder, oName_1, oName_2, rName=rVersion)#, determinantThreshold=determinantThreshold)
@@ -172,6 +181,7 @@ for( i in seq_along(rVersions) ) {
 PrintAces <- function(  ) {
   dsT <- dsAce
   dsT <- cbind(dsT[, 1], numcolwise(round)(dsT,digits=2))
+  dsT <- cbind(dsT[, 1], numcolwise(scales::comma)(dsT))
   dsT <- t(apply(dsT, 1, function(x) gsub("^0.", ".", x)))
   
   colnames(dsT) <- c("$R$ Variant", "$a_{new}^2$", "$c_{new}^2$", "$e_{new}^2$", "$N_{new}$", "$a_{old}^2$", "$c_{old}^2$", "$e_{old}^2$", "$N_{old}$")
