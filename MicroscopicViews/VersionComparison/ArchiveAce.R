@@ -7,6 +7,10 @@ library(colorspace)
 library(xtable)
 library(plyr)
 
+#Define CSV of outcomes/phenotypes
+pathInput <- "./ForDistribution/Outcomes/ExtraOutcomes79.csv"
+#dsOutcomes <- read.csv("F:/Projects/Nls/NlsyLinksDetermination/CodingUtilities/Gen2Height/ExtraOutcomes79FromKelly2012March.csv")
+
 #Gen2:
 # oName <- "HeightZGender" #Will October 2012
 # oName <- "HeightZGenderAge" #Will October 2012
@@ -14,8 +18,8 @@ library(plyr)
 # oName <- "MathStandardized"
 # oName <- "WeightStandardizedForAge19To25"
 #Gen1:
-oName <- "HeightZGender"
-# oName <- "HeightZGenderAge"
+# oName <- "HeightZGender"
+oName <- "HeightZGenderAge"
 # oName <- "WeightZGender"
 # oName <- "WeightZGenderAge"
 # oName <- "IQZGenderAge"
@@ -29,9 +33,18 @@ oName <- "HeightZGender"
 # determinantThreshold <- 1e-5
 # determinantThreshold <- 1e-15
 
+
 oName_1 <- paste0(oName, "_S1")
 oName_2 <- paste0(oName, "_S2")
-relationshipPath <- 2
+
+relationshipPaths <- c(1, 2)
+relationshipPathsString <- paste0("(", paste(relationshipPaths, collapse=","), ")")
+
+relationshipPathsPretty <- paste0("(", paste(levels(Links79Pair$RelationshipPath)[relationshipPaths], collapse=", "), ")")
+
+
+rVersions <- c("R", "RFull", "RExplicit", "RImplicit",  "RImplicit2004") #"RImplicitPass1",
+# rVersions <- c("R", "RFull", "RPass1", "RImplicit", "RExplicit", "RExplicitPass1", "RImplicit2004")
 
 rGroupsToDrop <- c(0, .125, .0625)# 0, .375, .75)#.125, .375, .75)
 dropIfHousematesAreNotSameGeneration <- FALSE
@@ -41,7 +54,7 @@ suppressGroupTables <- TRUE
 
 sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.SubjectTag_S1, Process.tblRelatedValuesArchive.SubjectTag_S2,Process.tblRelatedValuesArchive.RImplicitPass1, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.R, Process.tblRelatedValuesArchive.RFull, SameGeneration
   FROM Process.tblRelatedValuesArchive INNER JOIN Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.SubjectTag_S1 = Process.tblRelatedStructure.SubjectTag_S1 AND Process.tblRelatedValuesArchive.SubjectTag_S2 = Process.tblRelatedStructure.SubjectTag_S2 
-  WHERE Process.tblRelatedStructure.RelationshipPath = ", relationshipPath, " 
+  WHERE Process.tblRelatedStructure.RelationshipPath IN ", relationshipPathsString, " 
       AND (Process.tblRelatedValuesArchive.AlgorithmVersion IN (SELECT TOP (2) AlgorithmVersion FROM Process.tblRelatedValuesArchive AS tblRelatedValuesArchive_1 
     GROUP BY AlgorithmVersion ORDER BY AlgorithmVersion DESC))")
 
@@ -83,30 +96,8 @@ dsLinkingNewer <- dsRaw[dsRaw$AlgorithmVersion==newerVersionNumber, ]
 dsLinkingOlder <- dsRaw[dsRaw$AlgorithmVersion==olderVersionNumber, ]
 rm(dsRaw)
 
-relationshipPathPretty <- "RelationshipPathPrettyNotSet"
-if( relationshipPath==1 ) {
-  relationshipPathPretty <- "Gen1Housemates"
-  rVersions <- c("R", "RFull", "RExplicit", "RImplicit",  "RImplicit2004") #"RImplicitPass1",
-  #pathInput <- "./ForDistribution/Outcomes/ExtraOutcomes79.csv"
-  pathInput <- "./ForDistribution/Outcomes/OutcomesGen1.csv"
-  dsOutcomes <- read.csv(file=pathInput, stringsAsFactors=F)
-}
-if( relationshipPath==2 ) {
-  relationshipPathPretty <- "Gen2Siblings"
-  rVersions <- c("R", "RFull", "RPass1", "RImplicit", "RExplicit", "RExplicitPass1", "RImplicit2004")
-
-  if ( oName == "HeightZAgeGender" ) {
-    dsOutcomes <- read.csv("F:/Projects/RDev/NlsyLinksStaging/Datasets/Gen2Height.csv")
-    dsOutcomes <- dsOutcomes[, c("SubjectTag", oName)]
-  }
-  else if ( oName == "HeightStandarizedFor19to25" ) {
-    dsOutcomes <- read.csv("F:/Projects/Nls/NlsyLinksDetermination/CodingUtilities/Gen2Height/ExtraOutcomes79FromKelly2012March.csv")
-    dsOutcomes <- dsOutcomes[, c("SubjectTag", oName)]
-  }
-  else {
-    dsOutcomes <- ExtraOutcomes79[, c("SubjectTag", oName)]
-  }  
-}
+dsOutcomes <- read.csv(file=pathInput, stringsAsFactors=F)
+dsOutcomes <- dsOutcomes[, c("SubjectTag", oName)]
 
 #They're called 'dirty' because the final cleaning stage hasn't occurred yet (ie, removing unwanted R groups)
 dsDirtyNewer <- CreatePairLinksSingleEntered(outcomeDataset=dsOutcomes, linksPairDataset=dsLinkingNewer, linksNames=rVersions, outcomeNames=oName)

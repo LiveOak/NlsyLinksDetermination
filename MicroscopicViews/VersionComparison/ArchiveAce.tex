@@ -77,16 +77,16 @@
 
 
 
-\textbf{Outcome}: HeightZGender;\\
-\textbf{RelationshipPath}: Gen2Siblings [ID:2];
+\textbf{Outcome}: HeightZGenderAge;\\
+\textbf{Relationship Paths}: (Gen1Housemates, Gen2Siblings) [IDs:(1,2)];\\
 \textbf{Newer Links Version}: 84;
-\textbf{Older Links Version}: 84;
+\textbf{Older Links Version}: 83;
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
 Newer Links: Adds Gen1 back
-Older Links: Adds Gen1 back
+Older Links: Reverts to V82
 R Groups specifically excluded: { 0, 0.125, 0.0625 }
 Drop pair if housemates are not confirmed in the same generation: FALSE
 \end{verbatim}
@@ -100,7 +100,7 @@ Drop pair if housemates are not confirmed in the same generation: FALSE
 \section{Ace - Comparison of $R$ Variants} 
 (See the final table for an explanation of the different $R$ variants.)
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Nov 19 14:05:08 2013
+% Tue Nov 19 14:27:18 2013
 \begin{table}[ht]
 \centering
 {\large
@@ -108,13 +108,11 @@ Drop pair if housemates are not confirmed in the same generation: FALSE
   \hline
 $R$ Variant & $a_{new}^2$ & $c_{new}^2$ & $e_{new}^2$ & $N_{new}$ & $a_{old}^2$ & $c_{old}^2$ & $e_{old}^2$ & $N_{old}$ \\ 
   \hline
-R & .80 & .03 & .17 & 5884 & .80 & .03 & .17 & 5884 \\ 
-  RFull & .80 & .03 & .17 & 5884 & .80 & .03 & .17 & 5884 \\ 
-  RPass1 & .80 & .03 & .17 & 5875 & .80 & .03 & .17 & 5875 \\ 
-  RImplicit & .81 & .02 & .17 & 5618 & .81 & .02 & .17 & 5618 \\ 
-  RExplicit & .75 & .04 & .20 & 5845 & .75 & .04 & .20 & 5845 \\ 
-  RExplicitPass1 & .73 & .05 & .21 & 5820 & .73 & .05 & .21 & 5820 \\ 
-  RImplicit2004 & .83 & .01 & .15 & 5844 & .83 & .01 & .15 & 5844 \\ 
+R & .79 & .05 & .16 & 10069 & .70 & .11 & .18 & 4185 \\ 
+  RFull & .80 & .04 & .16 & 10140 & .73 & .10 & .17 & 4256 \\ 
+  RExplicit & .85 & .02 & .13 &  9682 & .95 & .00 & .05 & 3837 \\ 
+  RImplicit & .82 & .02 & .16 &  9253 & .73 & .08 & .19 & 3635 \\ 
+  RImplicit2004 & .84 & .02 & .14 &  8088 & .57 & .19 & .24 & 2244 \\ 
    \hline
 \end{tabular}
 }
@@ -123,234 +121,181 @@ R & .80 & .03 & .17 & 5884 & .80 & .03 & .17 & 5884 \\
 
 
 \section{Subgroups --  R }% latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Nov 19 14:05:08 2013
+% Tue Nov 19 14:27:18 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrrrrrrrl}
   \hline
 R & Included in SEM & $N_{Pairs}$ & $\bar{x}_1$ & $\bar{x}_2$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
   \hline
-0.250 & TRUE & 1862 & -0.04 & -0.07 & 1.03 & 1.04 & 0.27 & 0.26 & 1.0 & TRUE \\ 
-  0.375 & TRUE & 46 & 0.25 & -0.08 & 1.10 & 0.94 & 0.44 & 0.43 & 0.8 & TRUE \\ 
-  0.500 & TRUE & 3960 & 0.02 & -0.02 & 0.97 & 0.96 & 0.39 & 0.41 & 0.8 & TRUE \\ 
+0.062 & FALSE & 39 & -0.41 & -0.12 & 0.84 & 0.83 & 0.24 & 0.29 & 0.6 & TRUE \\ 
+  0.125 & FALSE & 64 & -0.18 & -0.56 & 0.81 & 0.94 & 0.10 & 0.12 & 0.8 & TRUE \\ 
+  0.250 & TRUE & 2142 & -0.05 & -0.06 & 1.04 & 1.06 & 0.27 & 0.26 & 1.0 & TRUE \\ 
+  0.375 & TRUE & 46 & 0.22 & -0.11 & 1.07 & 0.96 & 0.43 & 0.42 & 0.8 & TRUE \\ 
+  0.500 & TRUE & 7854 & -0.03 & -0.03 & 0.97 & 0.99 & 0.43 & 0.44 & 0.8 & TRUE \\ 
   0.750 & FALSE & 0 &  &  &  &  &  &  &  & FALSE \\ 
-  1.000 & TRUE & 16 & -0.09 & -0.16 & 0.97 & 1.02 & 0.92 & 0.93 & 0.1 & TRUE \\ 
+  1.000 & TRUE & 27 & -0.11 & -0.13 & 0.69 & 0.99 & 0.69 & 0.83 & 0.2 & TRUE \\ 
    \hline
 \end{tabular}
 \caption{R -- Newer Version of Links} 
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Nov 19 14:05:08 2013
+% Tue Nov 19 14:27:18 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrrrrrrrl}
   \hline
 R & Included in SEM & $N_{Pairs}$ & $\bar{x}_1$ & $\bar{x}_2$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
   \hline
-0.250 & TRUE & 1862 & -0.04 & -0.07 & 1.03 & 1.04 & 0.27 & 0.26 & 1.0 & TRUE \\ 
-  0.375 & TRUE & 46 & 0.25 & -0.08 & 1.10 & 0.94 & 0.44 & 0.43 & 0.8 & TRUE \\ 
-  0.500 & TRUE & 3960 & 0.02 & -0.02 & 0.97 & 0.96 & 0.39 & 0.41 & 0.8 & TRUE \\ 
-  0.750 & FALSE & 0 &  &  &  &  &  &  &  & FALSE \\ 
-  1.000 & TRUE & 16 & -0.09 & -0.16 & 0.97 & 1.02 & 0.92 & 0.93 & 0.1 & TRUE \\ 
+0.062 & FALSE & 39 & -0.41 & -0.12 & 0.84 & 0.83 & 0.24 & 0.29 & 0.6 & TRUE \\ 
+  0.125 & FALSE & 64 & -0.18 & -0.56 & 0.81 & 0.94 & 0.10 & 0.12 & 0.8 & TRUE \\ 
+  0.250 & TRUE & 280 & 0.05 & 0.06 & 1.02 & 1.18 & 0.27 & 0.24 & 1.1 & TRUE \\ 
+  0.500 & TRUE & 3894 & -0.05 & -0.03 & 0.97 & 1.02 & 0.47 & 0.47 & 0.8 & TRUE \\ 
+  1.000 & TRUE & 11 & -0.09 & -0.01 & 0.32 & 0.95 & 0.36 & 0.65 & 0.2 & TRUE \\ 
    \hline
 \end{tabular}
 \caption{R -- Older Version of Links} 
 \end{table}
 \newpage 
 \section{Subgroups --  RFull }% latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Nov 19 14:05:08 2013
+% Tue Nov 19 14:27:18 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrrrrrrrl}
   \hline
 RFull & Included in SEM & $N_{Pairs}$ & $\bar{x}_1$ & $\bar{x}_2$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
   \hline
-0.250 & TRUE & 1862 & -0.04 & -0.07 & 1.03 & 1.04 & 0.27 & 0.26 & 1.0 & TRUE \\ 
-  0.375 & TRUE & 46 & 0.25 & -0.08 & 1.10 & 0.94 & 0.44 & 0.43 & 0.8 & TRUE \\ 
-  0.500 & TRUE & 3960 & 0.02 & -0.02 & 0.97 & 0.96 & 0.39 & 0.41 & 0.8 & TRUE \\ 
-  0.750 & FALSE & 0 &  &  &  &  &  &  &  & FALSE \\ 
-  1.000 & TRUE & 16 & -0.09 & -0.16 & 0.97 & 1.02 & 0.92 & 0.93 & 0.1 & TRUE \\ 
+0.000 & FALSE & 537 & 0.02 & -0.02 & 0.95 & 0.81 & 0.21 & 0.24 & 0.7 & TRUE \\ 
+  0.062 & FALSE & 43 & -0.45 & -0.14 & 0.81 & 0.81 & 0.19 & 0.24 & 0.6 & TRUE \\ 
+  0.125 & FALSE & 92 & -0.02 & -0.47 & 0.95 & 0.99 & 0.16 & 0.17 & 0.9 & TRUE \\ 
+  0.250 & TRUE & 2154 & -0.05 & -0.06 & 1.04 & 1.06 & 0.27 & 0.26 & 1.0 & TRUE \\ 
+  0.375 & TRUE & 60 & 0.23 & 0.02 & 1.17 & 0.98 & 0.40 & 0.37 & 1.0 & TRUE \\ 
+  0.500 & TRUE & 7888 & -0.03 & -0.03 & 0.97 & 0.99 & 0.43 & 0.44 & 0.8 & TRUE \\ 
+  0.750 & TRUE & 11 & -0.14 & 0.10 & 0.87 & 0.81 & 0.66 & 0.79 & 0.3 & TRUE \\ 
+  1.000 & TRUE & 27 & -0.11 & -0.13 & 0.69 & 0.99 & 0.69 & 0.83 & 0.2 & TRUE \\ 
    \hline
 \end{tabular}
 \caption{RFull -- Newer Version of Links} 
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Nov 19 14:05:08 2013
+% Tue Nov 19 14:27:18 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrrrrrrrl}
   \hline
 RFull & Included in SEM & $N_{Pairs}$ & $\bar{x}_1$ & $\bar{x}_2$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
   \hline
-0.250 & TRUE & 1862 & -0.04 & -0.07 & 1.03 & 1.04 & 0.27 & 0.26 & 1.0 & TRUE \\ 
-  0.375 & TRUE & 46 & 0.25 & -0.08 & 1.10 & 0.94 & 0.44 & 0.43 & 0.8 & TRUE \\ 
-  0.500 & TRUE & 3960 & 0.02 & -0.02 & 0.97 & 0.96 & 0.39 & 0.41 & 0.8 & TRUE \\ 
-  0.750 & FALSE & 0 &  &  &  &  &  &  &  & FALSE \\ 
-  1.000 & TRUE & 16 & -0.09 & -0.16 & 0.97 & 1.02 & 0.92 & 0.93 & 0.1 & TRUE \\ 
+0.000 & FALSE & 537 & 0.02 & -0.02 & 0.95 & 0.81 & 0.21 & 0.24 & 0.7 & TRUE \\ 
+  0.062 & FALSE & 43 & -0.45 & -0.14 & 0.81 & 0.81 & 0.19 & 0.24 & 0.6 & TRUE \\ 
+  0.125 & FALSE & 92 & -0.02 & -0.47 & 0.95 & 0.99 & 0.16 & 0.17 & 0.9 & TRUE \\ 
+  0.250 & TRUE & 292 & 0.04 & 0.07 & 1.00 & 1.16 & 0.25 & 0.23 & 1.1 & TRUE \\ 
+  0.375 & TRUE & 14 & 0.24 & 0.44 & 1.61 & 0.86 & 0.31 & 0.26 & 1.3 & TRUE \\ 
+  0.500 & TRUE & 3928 & -0.05 & -0.03 & 0.97 & 1.02 & 0.46 & 0.47 & 0.8 & TRUE \\ 
+  0.750 & TRUE & 11 & -0.14 & 0.10 & 0.87 & 0.81 & 0.66 & 0.79 & 0.3 & TRUE \\ 
+  1.000 & TRUE & 11 & -0.09 & -0.01 & 0.32 & 0.95 & 0.36 & 0.65 & 0.2 & TRUE \\ 
    \hline
 \end{tabular}
 \caption{RFull -- Older Version of Links} 
 \end{table}
-\section{Subgroups --  RPass1 }% latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Nov 19 14:05:08 2013
-\begin{table}[ht]
-\centering
-\begin{tabular}{rlrrrrrrrrl}
-  \hline
-RPass1 & Included in SEM & $N_{Pairs}$ & $\bar{x}_1$ & $\bar{x}_2$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
-  \hline
-0.250 & TRUE & 1858 & -0.04 & -0.07 & 1.03 & 1.05 & 0.27 & 0.26 & 1.0 & TRUE \\ 
-  0.375 & TRUE & 45 & 0.25 & -0.08 & 1.12 & 0.96 & 0.45 & 0.43 & 0.9 & TRUE \\ 
-  0.500 & TRUE & 3956 & 0.02 & -0.02 & 0.97 & 0.96 & 0.39 & 0.41 & 0.8 & TRUE \\ 
-  0.750 & FALSE & 0 &  &  &  &  &  &  &  & FALSE \\ 
-  1.000 & TRUE & 16 & -0.09 & -0.16 & 0.97 & 1.02 & 0.92 & 0.93 & 0.1 & TRUE \\ 
-   \hline
-\end{tabular}
-\caption{RPass1 -- Newer Version of Links} 
-\end{table}
-% latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Nov 19 14:05:08 2013
-\begin{table}[ht]
-\centering
-\begin{tabular}{rlrrrrrrrrl}
-  \hline
-RPass1 & Included in SEM & $N_{Pairs}$ & $\bar{x}_1$ & $\bar{x}_2$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
-  \hline
-0.250 & TRUE & 1858 & -0.04 & -0.07 & 1.03 & 1.05 & 0.27 & 0.26 & 1.0 & TRUE \\ 
-  0.375 & TRUE & 45 & 0.25 & -0.08 & 1.12 & 0.96 & 0.45 & 0.43 & 0.9 & TRUE \\ 
-  0.500 & TRUE & 3956 & 0.02 & -0.02 & 0.97 & 0.96 & 0.39 & 0.41 & 0.8 & TRUE \\ 
-  0.750 & FALSE & 0 &  &  &  &  &  &  &  & FALSE \\ 
-  1.000 & TRUE & 16 & -0.09 & -0.16 & 0.97 & 1.02 & 0.92 & 0.93 & 0.1 & TRUE \\ 
-   \hline
-\end{tabular}
-\caption{RPass1 -- Older Version of Links} 
-\end{table}
-\newpage 
-\section{Subgroups --  RImplicit }% latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Nov 19 14:05:08 2013
-\begin{table}[ht]
-\centering
-\begin{tabular}{rlrrrrrrrrl}
-  \hline
-RImplicit & Included in SEM & $N_{Pairs}$ & $\bar{x}_1$ & $\bar{x}_2$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
-  \hline
-0.250 & TRUE & 1743 & -0.04 & -0.09 & 1.04 & 1.04 & 0.27 & 0.26 & 1.0 & TRUE \\ 
-  0.500 & TRUE & 3859 & 0.02 & -0.02 & 0.97 & 0.97 & 0.39 & 0.41 & 0.8 & TRUE \\ 
-  0.750 & FALSE & 0 &  &  &  &  &  &  &  & FALSE \\ 
-  1.000 & TRUE & 16 & -0.09 & -0.16 & 0.97 & 1.02 & 0.92 & 0.93 & 0.1 & TRUE \\ 
-   \hline
-\end{tabular}
-\caption{RImplicit -- Newer Version of Links} 
-\end{table}
-% latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Nov 19 14:05:08 2013
-\begin{table}[ht]
-\centering
-\begin{tabular}{rlrrrrrrrrl}
-  \hline
-RImplicit & Included in SEM & $N_{Pairs}$ & $\bar{x}_1$ & $\bar{x}_2$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
-  \hline
-0.250 & TRUE & 1743 & -0.04 & -0.09 & 1.04 & 1.04 & 0.27 & 0.26 & 1.0 & TRUE \\ 
-  0.500 & TRUE & 3859 & 0.02 & -0.02 & 0.97 & 0.97 & 0.39 & 0.41 & 0.8 & TRUE \\ 
-  0.750 & FALSE & 0 &  &  &  &  &  &  &  & FALSE \\ 
-  1.000 & TRUE & 16 & -0.09 & -0.16 & 0.97 & 1.02 & 0.92 & 0.93 & 0.1 & TRUE \\ 
-   \hline
-\end{tabular}
-\caption{RImplicit -- Older Version of Links} 
-\end{table}
 \section{Subgroups --  RExplicit }% latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Nov 19 14:05:08 2013
+% Tue Nov 19 14:27:18 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrrrrrrrl}
   \hline
 RExplicit & Included in SEM & $N_{Pairs}$ & $\bar{x}_1$ & $\bar{x}_2$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
   \hline
-0.250 & TRUE & 1767 & -0.05 & -0.08 & 1.04 & 1.04 & 0.29 & 0.28 & 1.0 & TRUE \\ 
-  0.375 & TRUE & 180 & 0.09 & 0.02 & 0.91 & 1.14 & 0.14 & 0.14 & 1.0 & TRUE \\ 
-  0.500 & TRUE & 3882 & 0.02 & -0.03 & 0.97 & 0.95 & 0.39 & 0.41 & 0.8 & TRUE \\ 
-  1.000 & TRUE & 16 & -0.09 & -0.16 & 0.97 & 1.02 & 0.92 & 0.93 & 0.1 & TRUE \\ 
+0.000 & FALSE & 41 & -0.06 & 0.34 & 0.82 & 1.05 & 0.22 & 0.24 & 0.8 & TRUE \\ 
+  0.062 & FALSE & 2 & -0.01 & -1.21 & 0.22 & 0.26 & 0.24 & 1.00 & 0.0 & FALSE \\ 
+  0.250 & TRUE & 2035 & -0.06 & -0.07 & 1.05 & 1.06 & 0.29 & 0.28 & 1.0 & TRUE \\ 
+  0.375 & TRUE & 216 & 0.04 & 0.01 & 0.92 & 1.14 & 0.17 & 0.17 & 1.0 & TRUE \\ 
+  0.500 & TRUE & 7415 & -0.03 & -0.03 & 0.97 & 0.99 & 0.43 & 0.44 & 0.8 & TRUE \\ 
+  1.000 & TRUE & 16 & -0.13 & -0.21 & 0.99 & 1.06 & 0.95 & 0.92 & 0.2 & TRUE \\ 
    \hline
 \end{tabular}
 \caption{RExplicit -- Newer Version of Links} 
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Nov 19 14:05:08 2013
+% Tue Nov 19 14:27:18 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrrrrrrrl}
   \hline
 RExplicit & Included in SEM & $N_{Pairs}$ & $\bar{x}_1$ & $\bar{x}_2$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
   \hline
-0.250 & TRUE & 1767 & -0.05 & -0.08 & 1.04 & 1.04 & 0.29 & 0.28 & 1.0 & TRUE \\ 
-  0.375 & TRUE & 180 & 0.09 & 0.02 & 0.91 & 1.14 & 0.14 & 0.14 & 1.0 & TRUE \\ 
-  0.500 & TRUE & 3882 & 0.02 & -0.03 & 0.97 & 0.95 & 0.39 & 0.41 & 0.8 & TRUE \\ 
-  1.000 & TRUE & 16 & -0.09 & -0.16 & 0.97 & 1.02 & 0.92 & 0.93 & 0.1 & TRUE \\ 
+0.000 & FALSE & 41 & -0.06 & 0.34 & 0.82 & 1.05 & 0.22 & 0.24 & 0.8 & TRUE \\ 
+  0.062 & FALSE & 2 & -0.01 & -1.21 & 0.22 & 0.26 & 0.24 & 1.00 & 0.0 & FALSE \\ 
+  0.250 & TRUE & 268 & 0.06 & 0.07 & 1.07 & 1.21 & 0.29 & 0.26 & 1.2 & TRUE \\ 
+  0.375 & TRUE & 36 & -0.07 & 0.04 & 1.03 & 1.08 & 0.33 & 0.32 & 1.0 & TRUE \\ 
+  0.500 & TRUE & 3533 & -0.05 & -0.02 & 0.96 & 1.02 & 0.47 & 0.47 & 0.8 & TRUE \\ 
    \hline
 \end{tabular}
 \caption{RExplicit -- Older Version of Links} 
 \end{table}
 \newpage 
-\section{Subgroups --  RExplicitPass1 }% latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Nov 19 14:05:08 2013
+\section{Subgroups --  RImplicit }% latex table generated in R 3.0.2 by xtable 1.7-1 package
+% Tue Nov 19 14:27:18 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrrrrrrrl}
   \hline
-RExplicitPass1 & Included in SEM & $N_{Pairs}$ & $\bar{x}_1$ & $\bar{x}_2$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
+RImplicit & Included in SEM & $N_{Pairs}$ & $\bar{x}_1$ & $\bar{x}_2$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
   \hline
-0.250 & TRUE & 1765 & -0.05 & -0.08 & 1.04 & 1.04 & 0.29 & 0.28 & 1.0 & TRUE \\ 
-  0.375 & TRUE & 180 & 0.09 & 0.02 & 0.91 & 1.14 & 0.14 & 0.14 & 1.0 & TRUE \\ 
-  0.500 & TRUE & 3860 & 0.02 & -0.03 & 0.97 & 0.95 & 0.39 & 0.40 & 0.8 & TRUE \\ 
-  1.000 & TRUE & 15 & -0.10 & -0.19 & 1.03 & 1.09 & 0.98 & 0.92 & 0.2 & TRUE \\ 
+0.000 & FALSE & 183 & 0.07 & -0.04 & 0.90 & 0.72 & 0.14 & 0.17 & 0.6 & TRUE \\ 
+  0.250 & TRUE & 1906 & -0.06 & -0.09 & 1.03 & 1.02 & 0.26 & 0.26 & 1.0 & TRUE \\ 
+  0.500 & TRUE & 7331 & -0.02 & -0.02 & 0.98 & 0.99 & 0.42 & 0.42 & 0.8 & TRUE \\ 
+  0.750 & FALSE & 0 &  &  &  &  &  &  &  & FALSE \\ 
+  1.000 & TRUE & 16 & -0.13 & -0.21 & 0.99 & 1.06 & 0.95 & 0.92 & 0.2 & TRUE \\ 
    \hline
 \end{tabular}
-\caption{RExplicitPass1 -- Newer Version of Links} 
+\caption{RImplicit -- Newer Version of Links} 
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Nov 19 14:05:08 2013
+% Tue Nov 19 14:27:18 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrrrrrrrl}
   \hline
-RExplicitPass1 & Included in SEM & $N_{Pairs}$ & $\bar{x}_1$ & $\bar{x}_2$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
+RImplicit & Included in SEM & $N_{Pairs}$ & $\bar{x}_1$ & $\bar{x}_2$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
   \hline
-0.250 & TRUE & 1765 & -0.05 & -0.08 & 1.04 & 1.04 & 0.29 & 0.28 & 1.0 & TRUE \\ 
-  0.375 & TRUE & 180 & 0.09 & 0.02 & 0.91 & 1.14 & 0.14 & 0.14 & 1.0 & TRUE \\ 
-  0.500 & TRUE & 3860 & 0.02 & -0.03 & 0.97 & 0.95 & 0.39 & 0.40 & 0.8 & TRUE \\ 
-  1.000 & TRUE & 15 & -0.10 & -0.19 & 1.03 & 1.09 & 0.98 & 0.92 & 0.2 & TRUE \\ 
+0.000 & FALSE & 183 & 0.07 & -0.04 & 0.90 & 0.72 & 0.14 & 0.17 & 0.6 & TRUE \\ 
+  0.250 & TRUE & 163 & -0.02 & 0.01 & 0.83 & 0.87 & 0.19 & 0.22 & 0.7 & TRUE \\ 
+  0.500 & TRUE & 3472 & -0.03 & -0.02 & 0.98 & 1.02 & 0.44 & 0.45 & 0.8 & TRUE \\ 
    \hline
 \end{tabular}
-\caption{RExplicitPass1 -- Older Version of Links} 
+\caption{RImplicit -- Older Version of Links} 
 \end{table}
 \section{Subgroups --  RImplicit2004 }% latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Nov 19 14:05:08 2013
+% Tue Nov 19 14:27:18 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrrrrrrrl}
   \hline
 RImplicit2004 & Included in SEM & $N_{Pairs}$ & $\bar{x}_1$ & $\bar{x}_2$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
   \hline
-0.250 & TRUE & 1466 & -0.05 & -0.08 & 1.00 & 1.03 & 0.26 & 0.25 & 1.0 & TRUE \\ 
-  0.375 & TRUE & 962 & -0.05 & -0.06 & 1.00 & 0.92 & 0.30 & 0.31 & 0.8 & TRUE \\ 
-  0.500 & TRUE & 3401 & 0.04 & -0.01 & 0.97 & 0.98 & 0.40 & 0.41 & 0.8 & TRUE \\ 
-  1.000 & TRUE & 15 & -0.03 & -0.14 & 0.99 & 1.09 & 0.96 & 0.93 & 0.1 & TRUE \\ 
+0.125 & FALSE & 73 & -0.07 & -0.25 & 0.79 & 1.01 & 0.12 & 0.13 & 0.8 & TRUE \\ 
+  0.250 & TRUE & 1509 & -0.08 & -0.10 & 1.00 & 1.02 & 0.26 & 0.26 & 1.0 & TRUE \\ 
+  0.375 & TRUE & 1268 & -0.06 & -0.05 & 0.99 & 0.97 & 0.34 & 0.35 & 0.8 & TRUE \\ 
+  0.500 & TRUE & 5266 & 0.01 & -0.02 & 0.97 & 0.98 & 0.42 & 0.43 & 0.8 & TRUE \\ 
+  0.750 & TRUE & 30 & 0.02 & 0.03 & 0.60 & 0.91 & 0.42 & 0.57 & 0.4 & TRUE \\ 
+  1.000 & TRUE & 15 & -0.07 & -0.19 & 1.01 & 1.13 & 1.00 & 0.93 & 0.2 & TRUE \\ 
    \hline
 \end{tabular}
 \caption{RImplicit2004 -- Newer Version of Links} 
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Nov 19 14:05:08 2013
+% Tue Nov 19 14:27:18 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrrrrrrrl}
   \hline
 RImplicit2004 & Included in SEM & $N_{Pairs}$ & $\bar{x}_1$ & $\bar{x}_2$ & $s_1^2$ & $s_2^2$ & $s_{1,2}$ & $r$ & Determinant & PosDefinite \\ 
   \hline
-0.250 & TRUE & 1466 & -0.05 & -0.08 & 1.00 & 1.03 & 0.26 & 0.25 & 1.0 & TRUE \\ 
-  0.375 & TRUE & 962 & -0.05 & -0.06 & 1.00 & 0.92 & 0.30 & 0.31 & 0.8 & TRUE \\ 
-  0.500 & TRUE & 3401 & 0.04 & -0.01 & 0.97 & 0.98 & 0.40 & 0.41 & 0.8 & TRUE \\ 
-  1.000 & TRUE & 15 & -0.03 & -0.14 & 0.99 & 1.09 & 0.96 & 0.93 & 0.1 & TRUE \\ 
+0.125 & FALSE & 73 & -0.07 & -0.25 & 0.79 & 1.01 & 0.12 & 0.13 & 0.8 & TRUE \\ 
+  0.250 & TRUE & 43 & -0.13 & -0.07 & 0.75 & 1.04 & 0.22 & 0.25 & 0.7 & TRUE \\ 
+  0.375 & TRUE & 306 & -0.02 & 0.02 & 0.94 & 1.14 & 0.46 & 0.44 & 0.9 & TRUE \\ 
+  0.500 & TRUE & 1865 & -0.00 & -0.00 & 0.95 & 0.98 & 0.45 & 0.47 & 0.7 & TRUE \\ 
+  0.750 & TRUE & 30 & 0.02 & 0.03 & 0.60 & 0.91 & 0.42 & 0.57 & 0.4 & TRUE \\ 
    \hline
 \end{tabular}
 \caption{RImplicit2004 -- Older Version of Links} 

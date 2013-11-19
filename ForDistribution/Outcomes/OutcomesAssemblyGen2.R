@@ -14,8 +14,9 @@ ds <- sqlQuery(channel, paste0("SELECT SubjectTag FROM Process.tblSubject WHERE 
 odbcClose(channel)
 
 ### Merge Height
-dsHeight <- read.csv(pathInputHeight, stringsAsFactors=F)
-dsHeight <- dsHeight[, c("SubjectTag", "HeightZGender","HeightZGenderAge")]
+dsHeight <- read.csv(pathInputHeight, stringsAsFactors=F) 
+dsHeight <- dsHeight[, c("SubjectTag", "ZGenderAge")] #, "HeightZGender"
+dsHeight <- plyr::rename(dsHeight, replace=c( "ZGenderAge"="HeightZGenderAge")) #"ZGender"="HeightZGender",
 ds <- merge(x=ds, y=dsHeight, by="SubjectTag", all.x=TRUE)
 rm(dsHeight)
 
@@ -34,7 +35,7 @@ HistogramWithCurve <- function( scores, title="", breaks=30) {
 par(mar=c(2,2,2,0), mgp=c(1,0,0), tcl=0)
 
 HistogramWithCurve(ds$HeightZGenderAge, "HeightZGenderAge")
-HistogramWithCurve(ds$HeightZGender, "HeightZGender")
+# HistogramWithCurve(ds$HeightZGender, "HeightZGender")
 HistogramWithCurve(ds$MathStandardized, "MathStandardized")
 
 write.csv(ds, pathOutput, row.names=F)
