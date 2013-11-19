@@ -30,6 +30,8 @@ extractVariablesString <- "'Gen1AfqtScaled3Decimals'"
 
 ####################################################################################
 ## @knitr LoadData
+dsExtract <- read.csv(file="D:/Projects/BG/Links2011/NlsyLinksDetermination/Extracts/Gen1Outcomes.csv", stringsAsFactors=F)
+
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 dsLong <- sqlQuery(channel, paste0(
   "SELECT * 
@@ -57,6 +59,18 @@ dsVariable <- sqlQuery(channel, paste0(
 odbcClose(channel)
 summary(dsLong)
 nrow(dsSubject)
+
+
+# Compare
+dsExtract$SubjectTag <- dsExtract$R0000100*100
+dsExtract$DV <- dsExtract$R0618301
+dsExtract$DV <- ifelse(dsExtract$DV<0, NA, dsExtract$DV)
+dsCompare <- merge(x=dsExtract, y=dsLong, by="SubjectTag", all=TRUE)
+
+
+qplot(dsCompare$DV, dsCompare$Value)
+table(!is.na(dsCompare$DV), !is.na(dsCompare$Value))
+
 
 ####################################################################################
 ## @knitr TweakData

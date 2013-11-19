@@ -34,6 +34,8 @@ extractVariablesString <- "'Gen1AfqtScaled3Decimals'"
 ## Load the appropriate information from the SQL Server database
 
 ```r
+dsExtract <- read.csv(file="D:/Projects/BG/Links2011/NlsyLinksDetermination/Extracts/Gen1Outcomes.csv", stringsAsFactors=F)
+
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 dsLong <- sqlQuery(channel, paste0(
   "SELECT * 
@@ -42,6 +44,8 @@ dsLong <- sqlQuery(channel, paste0(
   ORDER BY SubjectTag, SurveyYear" 
   ), stringsAsFactors=FALSE
 )
+
+
 dsSubject <- sqlQuery(channel, 
   "SELECT SubjectTag 
   FROM [NlsLinks].[Process].[tblSubject]
@@ -88,6 +92,37 @@ nrow(dsSubject)
 ```
 
 ```r
+
+
+# Compare
+dsExtract$SubjectTag <- dsExtract$R0000100*100
+dsExtract$DV <- dsExtract$R0618301
+dsExtract$DV <- ifelse(dsExtract$DV<0, NA, dsExtract$DV)
+dsCompare <- merge(x=dsExtract, y=dsLong, by="SubjectTag", all=TRUE)
+
+
+qplot(dsCompare$DV, dsCompare$Value)
+```
+
+```
+Warning: Removed 772 rows containing missing values (geom_point).
+```
+
+![plot of chunk LoadData](figure/LoadData.png) 
+
+```r
+table(!is.na(dsCompare$DV), !is.na(dsCompare$Value))
+```
+
+```
+       
+        FALSE  TRUE
+  FALSE   772     0
+  TRUE      0 11914
+```
+
+```r
+
 
 ####################################################################################
 ```
