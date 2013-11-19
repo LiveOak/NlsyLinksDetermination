@@ -38,7 +38,8 @@ dsLong <- sqlQuery(channel, paste0(
   ORDER BY SubjectTag, SurveyYear" 
   ), stringsAsFactors=FALSE
 )
-dsSubject <- sqlQuery(channel, "SELECT SubjectTag 
+dsSubject <- sqlQuery(channel, 
+  "SELECT SubjectTag 
   FROM [NlsLinks].[Process].[tblSubject]
   WHERE Generation=1 
   ORDER BY SubjectTag" 
@@ -67,15 +68,21 @@ dsLong$LoopIndex <- NULL
 #The NLS Investigator can return only integers, so it multiplied everything by 10000.  See R06183.01.
 #   Then I divide by 100 again to convert it to a proportion.
 dsLong$Value <- dsLong$Value/(1000 * 100)
-
-dsLong$AfqtRescaled2006Gaussified <- qnorm(dsLong$Value) #convert from roughly uniform distribution [0, 100], to something Gaussianish.
-dsLong$AfqtRescaled2006Gaussified <- pmax(pmin(dsLong$AfqtRescaled2006Gaussified, 3), -3) #The scale above had 0s and 100s, so clamp that in at +/-3.
-
-dsYear <- dsLong[, c("SubjectTag", "SurveyYear", "Age", "Gender", "AfqtRescaled2006Gaussified")]
+dsYear <- dsLong[, c("SubjectTag", "SurveyYear", "Age", "Gender", "Value")]
 nrow(dsYear)
 rm(dsLong)
 
-dsYear <- plyr::rename(x=dsYear, replace=c("AfqtRescaled2006Gaussified"="DV"))
+####################################################################################
+## @knitr Gaussify
+
+qplot(dsYear$Value, binwidth=.05, main="Before Gaussification")
+
+# dsYear$AfqtRescaled2006Gaussified <- qnorm(dsYear$Value) #convert from roughly uniform distribution [0, 100], to something Gaussianish.
+# dsYear$AfqtRescaled2006Gaussified <- pmax(pmin(dsYear$AfqtRescaled2006Gaussified, 3), -3) #The scale above had 0s and 100s, so clamp that in at +/-3.
+# dsYear <- plyr::rename(x=dsYear, replace=c("AfqtRescaled2006Gaussified"="DV"))
+
+dsYear <- plyr::rename(x=dsYear, replace=c("Value"="DV"))
+
 
 ####################################################################################
 ## @knitr FilterValuesAndAges

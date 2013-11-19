@@ -33,6 +33,10 @@ read_chunk(pathSourceCode) #This allows knitr to call chunks tagged in the under
 ```{r TweakData}
 ```
 
+## Convert the proportions into Z scores, if desired
+```{r Gaussify, fig.height=5}
+```
+
 ## Show the IQ data with age of the subject when the IQ was taken.  Filter out records where the age or the IQ is outside of the desired window.
 ```{r FilterValuesAndAges, fig.height=5}
 ```

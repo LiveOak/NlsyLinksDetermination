@@ -76,6 +76,4 @@ $RExplicit_{Pass1}$ & Uses only explicit items \& supposed to be fooled only by 
 \end{tabular}
 
 
-
-
 \end{document}

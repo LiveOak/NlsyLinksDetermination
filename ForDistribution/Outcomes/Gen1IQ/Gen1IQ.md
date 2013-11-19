@@ -27,7 +27,6 @@ zMax <- -zMin
 
 extractVariablesString <- "'Gen1AfqtScaled3Decimals'"
 
-
 ####################################################################################
 ```
 
@@ -43,7 +42,8 @@ dsLong <- sqlQuery(channel, paste0(
   ORDER BY SubjectTag, SurveyYear" 
   ), stringsAsFactors=FALSE
 )
-dsSubject <- sqlQuery(channel, "SELECT SubjectTag 
+dsSubject <- sqlQuery(channel, 
+  "SELECT SubjectTag 
   FROM [NlsLinks].[Process].[tblSubject]
   WHERE Generation=1 
   ORDER BY SubjectTag" 
@@ -106,11 +106,7 @@ dsLong$LoopIndex <- NULL
 #The NLS Investigator can return only integers, so it multiplied everything by 10000.  See R06183.01.
 #   Then I divide by 100 again to convert it to a proportion.
 dsLong$Value <- dsLong$Value/(1000 * 100)
-
-dsLong$AfqtRescaled2006Gaussified <- qnorm(dsLong$Value) #convert from roughly uniform distribution [0, 100], to something Gaussianish.
-dsLong$AfqtRescaled2006Gaussified <- pmax(pmin(dsLong$AfqtRescaled2006Gaussified, 3), -3) #The scale above had 0s and 100s, so clamp that in at +/-3.
-
-dsYear <- dsLong[, c("SubjectTag", "SurveyYear", "Age", "Gender", "AfqtRescaled2006Gaussified")]
+dsYear <- dsLong[, c("SubjectTag", "SurveyYear", "Age", "Gender", "Value")]
 nrow(dsYear)
 ```
 
@@ -121,7 +117,26 @@ nrow(dsYear)
 ```r
 rm(dsLong)
 
-dsYear <- plyr::rename(x=dsYear, replace=c("AfqtRescaled2006Gaussified"="DV"))
+####################################################################################
+```
+
+
+## Convert the proportions into Z scores, if desired
+
+```r
+qplot(dsYear$Value, binwidth=.05, main="Before Gaussification")
+```
+
+![plot of chunk Gaussify](figure/Gaussify.png) 
+
+```r
+
+# dsYear$AfqtRescaled2006Gaussified <- qnorm(dsYear$Value) #convert from roughly uniform distribution [0, 100], to something Gaussianish.
+# dsYear$AfqtRescaled2006Gaussified <- pmax(pmin(dsYear$AfqtRescaled2006Gaussified, 3), -3) #The scale above had 0s and 100s, so clamp that in at +/-3.
+# dsYear <- plyr::rename(x=dsYear, replace=c("AfqtRescaled2006Gaussified"="DV"))
+
+dsYear <- plyr::rename(x=dsYear, replace=c("Value"="DV"))
+
 
 ####################################################################################
 ```
@@ -151,14 +166,14 @@ summary(dsYear)
 ```
 
 ```
-   SubjectTag        SurveyYear        Age           Gender          DV        
- Min.   :    200   Min.   :1981   Min.   :15.0   Min.   :1.0   Min.   :-3.000  
- 1st Qu.: 316625   1st Qu.:1981   1st Qu.:18.0   1st Qu.:1.0   1st Qu.:-0.963  
- Median : 630650   Median :1981   Median :20.0   Median :1.0   Median :-0.289  
- Mean   : 631985   Mean   :1981   Mean   :19.8   Mean   :1.5   Mean   :-0.262  
- 3rd Qu.: 945475   3rd Qu.:1981   3rd Qu.:22.0   3rd Qu.:2.0   3rd Qu.: 0.420  
- Max.   :1268600   Max.   :1981   Max.   :24.0   Max.   :2.0   Max.   : 3.000  
-                                  NA's   :193                                  
+   SubjectTag        SurveyYear        Age           Gender          DV       
+ Min.   :    200   Min.   :1981   Min.   :15.0   Min.   :1.0   Min.   :0.000  
+ 1st Qu.: 316625   1st Qu.:1981   1st Qu.:18.0   1st Qu.:1.0   1st Qu.:0.168  
+ Median : 630650   Median :1981   Median :20.0   Median :1.0   Median :0.386  
+ Mean   : 631985   Mean   :1981   Mean   :19.8   Mean   :1.5   Mean   :0.424  
+ 3rd Qu.: 945475   3rd Qu.:1981   3rd Qu.:22.0   3rd Qu.:2.0   3rd Qu.:0.663  
+ Max.   :1268600   Max.   :1981   Max.   :24.0   Max.   :2.0   Max.   :1.000  
+                                  NA's   :193                                 
 ```
 
 ```r
@@ -269,7 +284,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 11680
+[1] 11719
 ```
 
 ```r
@@ -324,7 +339,7 @@ table(is.na(ds$ZGenderAge))
 ```
 
 FALSE  TRUE 
-11680  1006 
+11719   967 
 ```
 
 ```r

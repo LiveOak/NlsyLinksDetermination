@@ -15,9 +15,11 @@ library(plyr)
 # oName <- "WeightStandardizedForAge19To25"
 #Gen1:
 # oName <- "HeightZGender"
-oName <- "HeightZGenderAge"
+# oName <- "HeightZGenderAge"
 # oName <- "WeightZGender"
 # oName <- "WeightZGenderAge"
+oName <- "IQZGenderAge"
+
 # oName <- "BmiLateTeens"
 # oName <- "AfqtRescaled2006"
 # oName <- "AfqtRescaled2006Gaussified"
@@ -27,24 +29,24 @@ oName <- "HeightZGenderAge"
 # determinantThreshold <- 1e-5
 # determinantThreshold <- 1e-15
 
-oName_1 <- paste0(oName, "_1")
-oName_2 <- paste0(oName, "_2")
+oName_1 <- paste0(oName, "_S1")
+oName_2 <- paste0(oName, "_S2")
 relationshipPath <- 1
 
-rGroupsToDrop <- c(0, .0625)# 0, .375, .75)#.125, .375, .75)
+rGroupsToDrop <- c(0, .125, .0625)# 0, .375, .75)#.125, .375, .75)
 dropIfHousematesAreNotSameGeneration <- FALSE
 startNewPage <- c(F, T, F, T, F, T, F)
 
 suppressGroupTables <- TRUE
 
-sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.Subject1Tag, Process.tblRelatedValuesArchive.Subject2Tag,Process.tblRelatedValuesArchive.RImplicitPass1, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.R, Process.tblRelatedValuesArchive.RFull, SameGeneration
-  FROM Process.tblRelatedValuesArchive INNER JOIN Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.Subject1Tag = Process.tblRelatedStructure.Subject1Tag AND Process.tblRelatedValuesArchive.Subject2Tag = Process.tblRelatedStructure.Subject2Tag 
+sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.SubjectTag_S1, Process.tblRelatedValuesArchive.SubjectTag_S2,Process.tblRelatedValuesArchive.RImplicitPass1, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.R, Process.tblRelatedValuesArchive.RFull, SameGeneration
+  FROM Process.tblRelatedValuesArchive INNER JOIN Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.SubjectTag_S1 = Process.tblRelatedStructure.SubjectTag_S1 AND Process.tblRelatedValuesArchive.SubjectTag_S2 = Process.tblRelatedStructure.SubjectTag_S2 
   WHERE Process.tblRelatedStructure.RelationshipPath = ", relationshipPath, " 
       AND (Process.tblRelatedValuesArchive.AlgorithmVersion IN (SELECT TOP (2) AlgorithmVersion FROM Process.tblRelatedValuesArchive AS tblRelatedValuesArchive_1 
     GROUP BY AlgorithmVersion ORDER BY AlgorithmVersion DESC))")
 
-# sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.Subject1Tag, Process.tblRelatedValuesArchive.Subject2Tag,Process.tblRelatedValuesArchive.RImplicitPass1, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.R, Process.tblRelatedValuesArchive.RFull, SameGeneration
-#   FROM Process.tblRelatedValuesArchive INNER JOIN Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.Subject1Tag = Process.tblRelatedStructure.Subject1Tag AND Process.tblRelatedValuesArchive.Subject2Tag = Process.tblRelatedStructure.Subject2Tag 
+# sql <- paste("SELECT Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.SubjectTag_S2, Process.tblRelatedValuesArchive.SubjectTag_S2,Process.tblRelatedValuesArchive.RImplicitPass1, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.R, Process.tblRelatedValuesArchive.RFull, SameGeneration
+#   FROM Process.tblRelatedValuesArchive INNER JOIN Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.SubjectTag_S1 = Process.tblRelatedStructure.SubjectTag_S1 AND Process.tblRelatedValuesArchive.SubjectTag_S2 = Process.tblRelatedStructure.SubjectTag_S2 
 #   WHERE Process.tblRelatedStructure.RelationshipPath = ", relationshipPath, "  
 #       AND (Process.tblRelatedValuesArchive.AlgorithmVersion IN (73, 75))")
 
@@ -67,7 +69,6 @@ if( dropIfHousematesAreNotSameGeneration ) {
   dsRaw <- dsRaw[dsRaw$SameGeneration ==1 , ]
 }
 
-
 # dsRaw$R <- ifelse(dsRaw$R==.75, 1, dsRaw$R)
 
 olderVersionNumber <- min(dsRaw$AlgorithmVersion)
@@ -84,20 +85,16 @@ rm(dsRaw)
 
 relationshipPathPretty <- "RelationshipPathPrettyNotSet"
 if( relationshipPath==1 ) {
-  #rVersions <- c("R", "RPass1",  "RExplicit", "RExplicitPass1", "RImplicit2004")
-  rVersions <- c("R", "RFull", "RExplicit", "RImplicit", "RImplicitPass1", "RImplicit2004")
-  pathInput <- "./ForDistribution/Outcomes/ExtraOutcomes79.csv"
-  dsOutcomes <- read.csv(file=pathInput, stringsAsFactors=F)
-#   dsOutcomes$AfqtRescaled2006Gaussified <- qnorm(dsOutcomes[, "AfqtRescaled2006"]) #convert from roughly uniform distribution [0, 100], to something Guassianish.
-#   dsOutcomes$AfqtRescaled2006Gaussified <- pmax(pmin(dsOutcomes$AfqtRescaled2006Gaussified, 3.3), -3.3) #The scale above had 0s and 100s, so clamp that in at +/-3.3.
-  
   relationshipPathPretty <- "Gen1Housemates"
-#   dsOutcomes$HeightInchesLateTeens <- ifelse(dsOutcomes$HeightInchesLateTeens > 55, dsOutcomes$HeightInchesLateTeens, NA)
+  rVersions <- c("R", "RFull", "RExplicit", "RImplicit",  "RImplicit2004") #"RImplicitPass1",
+  #pathInput <- "./ForDistribution/Outcomes/ExtraOutcomes79.csv"
+  pathInput <- "./ForDistribution/Outcomes/OutcomesGen1.csv"
+  dsOutcomes <- read.csv(file=pathInput, stringsAsFactors=F)
 }
 if( relationshipPath==2 ) {
-  rVersions <- c("R", "RFull", "RPass1", "RImplicit", "RImplicitPass1", "RExplicit", "RExplicitPass1", "RImplicit2004")
   relationshipPathPretty <- "Gen2Siblings"
-  
+  rVersions <- c("R", "RFull", "RPass1", "RImplicit", "RImplicitPass1", "RExplicit", "RExplicitPass1", "RImplicit2004")
+
   if ( oName == "HeightZAgeGender" ) {
     dsOutcomes <- read.csv("F:/Projects/RDev/NlsyLinksStaging/Datasets/Gen2Height.csv")
     dsOutcomes <- dsOutcomes[, c("SubjectTag", oName)]
@@ -108,8 +105,7 @@ if( relationshipPath==2 ) {
   }
   else {
     dsOutcomes <- ExtraOutcomes79[, c("SubjectTag", oName)]
-  }
-  
+  }  
 }
 
 #They're called 'dirty' because the final cleaning stage hasn't occurred yet (ie, removing unwanted R groups)
@@ -130,7 +126,7 @@ rm(dsOutcomes, dsLinkingNewer, dsLinkingOlder)
 groupDatasets <- list() # rep(NA_character_, 2*length(rVersions))
 dsAce <- data.frame(Version=rVersions, NewASq=NA_real_, NewCSq=NA_real_, NewESq=NA_real_, NewN=NA_integer_, OldASq=NA_real_, OldCSq=NA_real_, OldESq=NA_real_, OldN=NA_integer_)
 for( i in seq_along(rVersions) ) {
-  rVersion <- rVersions[i]
+  rVersion <-  rVersions[i]
 #  print(rVersion)
   dsGroupSummaryNewer <- RGroupSummary(dsDirtyNewer, oName_1, oName_2, rName=rVersion)#, determinantThreshold=determinantThreshold)
   dsGroupSummaryOlder <- RGroupSummary(dsDirtyOlder, oName_1, oName_2, rName=rVersion)#, determinantThreshold=determinantThreshold)
@@ -155,12 +151,14 @@ for( i in seq_along(rVersions) ) {
 PrintGroupSummary <- function( dsSummary, title="Group Summary"  ) {
   colnames(dsSummary)[colnames(dsSummary)=="Included"] <- "Included in SEM"
   colnames(dsSummary)[colnames(dsSummary)=="PairCount"] <- "$N_{Pairs}$"
+  colnames(dsSummary)[colnames(dsSummary)=="O1Mean"] <- "$\\bar{x}_1$"
+  colnames(dsSummary)[colnames(dsSummary)=="O2Mean"] <- "$\\bar{x}_2$"
   colnames(dsSummary)[colnames(dsSummary)=="O1Variance"] <- "$s_1^2$"
   colnames(dsSummary)[colnames(dsSummary)=="O2Variance"] <- "$s_2^2$"
   colnames(dsSummary)[colnames(dsSummary)=="O1O2Covariance"] <- "$s_{1,2}$"
   colnames(dsSummary)[colnames(dsSummary)=="Correlation"] <- "$r$"
   
-  digitsFormat <- c(0,3,0,0,2,2,2,2,1,0) #Include a dummy at the beginning, for the row.names.
+  digitsFormat <- c(0,3,0,0,2,2,2,2,2,2,1,0) #Include a dummy at the beginning, for the row.names.
   textTable <- xtable(dsSummary, caption=title, digits=digitsFormat)
   print(textTable, include.rownames=F, sanitize.text.function = function(x) {x}) # size="large", size="small",
 }
