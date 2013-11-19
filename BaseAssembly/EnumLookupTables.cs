@@ -102,8 +102,8 @@ namespace Nls.BaseAssembly {
 
 		Gen1HeightInches = 200,
 		Gen1WeightPounds = 201,
-		Gen1AfqtScaled2Decimals_NOTUSED = 202,
-		Gen1AfqtScaled5Decimals = 203,
+		Gen1AfqtScaled0Decimals_NOTUSED = 202,
+		Gen1AfqtScaled3Decimals = 203,
 
 		Gen1FatherAlive = 300,
 		Gen1FatherDeathCause = 301,

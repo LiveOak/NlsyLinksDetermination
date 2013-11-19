@@ -1,12 +1,12 @@
-# Calculating Gen1 Weight
-This sequence picks a single Weight value per Gen1 subject.
+# Calculating Gen1 IQ
+This sequence picks a single IQ value per Gen1 subject.
 
 ```{r, echo=FALSE, message=F} 
 #Set the chunks' working directory to the repository's base directory; this assumes the report is nested inside of two directories.
 opts_knit$set(root.dir='../../../')  #Don't combine this call with any other chunk -espeically one that uses file paths.
 ```
 
-```{r SetOptions, echo=FALSE}
+```{r SetOptions, echo=FALSE, cache=FALSE}
 options(width=130)
 opts_chunk$set(
   comment="", 
@@ -15,24 +15,25 @@ opts_chunk$set(
   tidy=FALSE, 
   size="small"
   )
-read_chunk("./ForDistribution/Outcomes/Gen1Weight/Gen1Weight.R") #This allows knitr to call chunks tagged in the underlying .R file.
+pathSourceCode <- "./ForDistribution/Outcomes/Gen1IQ/Gen1IQ.R"
+read_chunk(pathSourceCode) #This allows knitr to call chunks tagged in the underlying .R file.
 ```
 
 ```{r LoadPackages, echo=FALSE, message=FALSE}
 ```
-## Define the age cutoffs to keep ages within the same Window as Gen1 Weights.  Define the Weight cutoffs to exclude values that are more likely to be entry errors or a developmental disorder, than a true reflection of additive genetics
+## Define the age cutoffs to keep ages within the same Window as Gen1 IQ.  Define the IQ cutoffs to exclude values that are more likely to be entry errors or a developmental disorder, than a true reflection of additive genetics
 ```{r DefineGlobals}
 ```
 
 ## Load the appropriate information from the SQL Server database
-```{r LoadData}
+```{r LoadData, codeBehindTime=file.info(pathSourceCode)$mtime}
 ```
 
 ## Make necessary Adjustments
 ```{r TweakData}
 ```
 
-## Show the Weight data with age of the subject when the Weight was taken.  Filter out records where the age or the Weight is outside of the desired window.
+## Show the IQ data with age of the subject when the IQ was taken.  Filter out records where the age or the IQ is outside of the desired window.
 ```{r FilterValuesAndAges, fig.height=5}
 ```
 
@@ -49,10 +50,10 @@ read_chunk("./ForDistribution/Outcomes/Gen1Weight/Gen1Weight.R") #This allows kn
 ```
 
 ## Write the OutcomeData to CSV
-```{r WriteToCsv } 
+```{r WriteToCsv} 
 ```
 
 ## NLSY Variables
 Each row in the table represents and NLSY variable that was used.  The first column is the official "R Number" designated by the NLSY.  The remaining columns are values we assigned to help the plumbing and data manipulation.
-```{r DisplayVariables } 
+```{r DisplayVariables} 
 ```

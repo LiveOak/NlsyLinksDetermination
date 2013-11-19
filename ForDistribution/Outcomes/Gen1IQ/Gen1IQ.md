@@ -1,5 +1,5 @@
-# Calculating Gen1 Weight
-This sequence picks a single Weight value per Gen1 subject.
+# Calculating Gen1 IQ
+This sequence picks a single IQ value per Gen1 subject.
 
 
 
@@ -9,20 +9,24 @@ This sequence picks a single Weight value per Gen1 subject.
 
 
 
-## Define the age cutoffs to keep ages within the same Window as Gen1 Weights.  Define the Weight cutoffs to exclude values that are more likely to be entry errors or a developmental disorder, than a true reflection of additive genetics
+## Define the age cutoffs to keep ages within the same Window as Gen1 IQ.  Define the IQ cutoffs to exclude values that are more likely to be entry errors or a developmental disorder, than a true reflection of additive genetics
 
 ```r
-pathOutput <- "./ForDistribution/Outcomes/Gen1Weight/Gen1Weight.csv"
+pathOutput <- "./ForDistribution/Outcomes/Gen1IQ/Gen1IQ.csv"
 
-DVMin <- 90 
-DVMax <- 350 
-
+DVMin <- -10
+DVMax <- 10
+feetOnlyMin <- 4
+feetOnlyMax <- 8
+inchesOnlyMin <- 0
+inchesOnlyMax <- 11
 ageMin <- 16
 ageMax <- 24
 zMin <- -3
-zMax <- 5
+zMax <- -zMin 
 
-extractVariablesString <- "'Gen1WeightPounds'"
+extractVariablesString <- "'Gen1AfqtScaled3Decimals'"
+
 
 ####################################################################################
 ```
@@ -39,8 +43,7 @@ dsLong <- sqlQuery(channel, paste0(
   ORDER BY SubjectTag, SurveyYear" 
   ), stringsAsFactors=FALSE
 )
-dsSubject <- sqlQuery(channel, 
-  "SELECT SubjectTag 
+dsSubject <- sqlQuery(channel, "SELECT SubjectTag 
   FROM [NlsLinks].[Process].[tblSubject]
   WHERE Generation=1 
   ORDER BY SubjectTag" 
@@ -58,20 +61,22 @@ summary(dsLong)
 ```
 
 ```
-   SubjectTag        SurveyYear        Item      ItemLabel             Value       LoopIndex   Generation  SurveyDate       
- Min.   :    200   Min.   :1981   Min.   :201   Length:35053       Min.   : 47   Min.   :0   Min.   :1    Length:35053      
- 1st Qu.: 308100   1st Qu.:1981   1st Qu.:201   Class :character   1st Qu.:125   1st Qu.:0   1st Qu.:1    Class :character  
- Median : 613200   Median :1982   Median :201   Mode  :character   Median :145   Median :0   Median :1    Mode  :character  
- Mean   : 618321   Mean   :1983   Mean   :201                      Mean   :148   Mean   :0   Mean   :1                      
- 3rd Qu.: 921400   3rd Qu.:1985   3rd Qu.:201                      3rd Qu.:165   3rd Qu.:0   3rd Qu.:1                      
- Max.   :1268600   Max.   :1985   Max.   :201                      Max.   :375   Max.   :0   Max.   :1                      
+   SubjectTag        SurveyYear        Item      ItemLabel             Value          LoopIndex   Generation  SurveyDate       
+ Min.   :    200   Min.   :1981   Min.   :203   Length:11914       Min.   :     0   Min.   :0   Min.   :1    Length:11914      
+ 1st Qu.: 316625   1st Qu.:1981   1st Qu.:203   Class :character   1st Qu.: 16772   1st Qu.:0   1st Qu.:1    Class :character  
+ Median : 630650   Median :1981   Median :203   Mode  :character   Median : 38624   Median :0   Median :1    Mode  :character  
+ Mean   : 631985   Mean   :1981   Mean   :203                      Mean   : 42396   Mean   :0   Mean   :1                      
+ 3rd Qu.: 945475   3rd Qu.:1981   3rd Qu.:203                      3rd Qu.: 66290   3rd Qu.:0   3rd Qu.:1                      
+ Max.   :1268600   Max.   :1981   Max.   :203                      Max.   :100000   Max.   :0   Max.   :1                      
+                                                                                                                               
  AgeSelfReportYears AgeCalculateYears     Gender   
  Min.   :16.0       Min.   :15.6      Min.   :1.0  
- 1st Qu.:19.0       1st Qu.:19.7      1st Qu.:1.0  
- Median :21.0       Median :21.9      Median :1.0  
- Mean   :21.3       Mean   :21.8      Mean   :1.5  
- 3rd Qu.:23.0       3rd Qu.:23.7      3rd Qu.:2.0  
- Max.   :28.0       Max.   :28.7      Max.   :2.0  
+ 1st Qu.:18.0       1st Qu.:18.3      1st Qu.:1.0  
+ Median :20.0       Median :20.3      Median :1.0  
+ Mean   :19.8       Mean   :20.3      Mean   :1.5  
+ 3rd Qu.:22.0       3rd Qu.:22.2      3rd Qu.:2.0  
+ Max.   :24.0       Max.   :24.7      Max.   :2.0  
+ NA's   :193        NA's   :193                    
 ```
 
 ```r
@@ -98,27 +103,35 @@ dsLong$AgeSelfReportYears <- NULL
 testit::assert("All outcomes should have a loop index of zero", all(dsLong$LoopIndex==0))
 dsLong$LoopIndex <- NULL
 
-dsYear <- dsLong[, c("SubjectTag", "SurveyYear", "Age", "Gender", "Value")]
+#The NLS Investigator can return only integers, so it multiplied everything by 10000.  See R06183.01.
+#   Then I divide by 100 again to convert it to a proportion.
+dsLong$Value <- dsLong$Value/(1000 * 100)
+
+dsLong$AfqtRescaled2006Gaussified <- qnorm(dsLong$Value) #convert from roughly uniform distribution [0, 100], to something Gaussianish.
+dsLong$AfqtRescaled2006Gaussified <- pmax(pmin(dsLong$AfqtRescaled2006Gaussified, 3), -3) #The scale above had 0s and 100s, so clamp that in at +/-3.
+
+dsYear <- dsLong[, c("SubjectTag", "SurveyYear", "Age", "Gender", "AfqtRescaled2006Gaussified")]
 nrow(dsYear)
 ```
 
 ```
-[1] 35053
+[1] 11914
 ```
 
 ```r
 rm(dsLong)
 
-dsYear <- plyr::rename(x=dsYear, replace=c("Value"="DV"))
+dsYear <- plyr::rename(x=dsYear, replace=c("AfqtRescaled2006Gaussified"="DV"))
+
 ####################################################################################
 ```
 
 
-## Show the Weight data with age of the subject when the Weight was taken.  Filter out records where the age or the Weight is outside of the desired window.
+## Show the IQ data with age of the subject when the IQ was taken.  Filter out records where the age or the IQ is outside of the desired window.
 
 ```r
 #Filter out records with undesired DV values
-qplot(dsYear$DV, binwidth=1, main="Before Filtering Out Extreme DVs")
+qplot(dsYear$DV, binwidth=1, main="Before Filtering Out Extreme DV values")
 ```
 
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges1.png) 
@@ -130,7 +143,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 34988
+[1] 11914
 ```
 
 ```r
@@ -138,17 +151,18 @@ summary(dsYear)
 ```
 
 ```
-   SubjectTag        SurveyYear        Age           Gender          DV     
- Min.   :    200   Min.   :1981   Min.   :15.0   Min.   :1.0   Min.   : 90  
- 1st Qu.: 308200   1st Qu.:1981   1st Qu.:19.0   1st Qu.:1.0   1st Qu.:125  
- Median : 613200   Median :1982   Median :21.0   Median :1.0   Median :145  
- Mean   : 618385   Mean   :1983   Mean   :21.3   Mean   :1.5   Mean   :149  
- 3rd Qu.: 921600   3rd Qu.:1985   3rd Qu.:23.0   3rd Qu.:2.0   3rd Qu.:165  
- Max.   :1268600   Max.   :1985   Max.   :28.0   Max.   :2.0   Max.   :350  
+   SubjectTag        SurveyYear        Age           Gender          DV        
+ Min.   :    200   Min.   :1981   Min.   :15.0   Min.   :1.0   Min.   :-3.000  
+ 1st Qu.: 316625   1st Qu.:1981   1st Qu.:18.0   1st Qu.:1.0   1st Qu.:-0.963  
+ Median : 630650   Median :1981   Median :20.0   Median :1.0   Median :-0.289  
+ Mean   : 631985   Mean   :1981   Mean   :19.8   Mean   :1.5   Mean   :-0.262  
+ 3rd Qu.: 945475   3rd Qu.:1981   3rd Qu.:22.0   3rd Qu.:2.0   3rd Qu.: 0.420  
+ Max.   :1268600   Max.   :1981   Max.   :24.0   Max.   :2.0   Max.   : 3.000  
+                                  NA's   :193                                  
 ```
 
 ```r
-qplot(dsYear$DV, binwidth=1, main="After Filtering Out Extreme DVs") 
+qplot(dsYear$DV, binwidth=1, main="After Filtering Out Extreme DV values")
 ```
 
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges2.png) 
@@ -165,6 +179,18 @@ qplot(dsYear$Age, binwidth=1, main="Before Filtering Out Extreme Ages")
 ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 ```
 
+```
+Warning: Removed 193 rows containing missing values (stat_smooth).
+```
+
+```
+geom_path: Each group consist of only one observation. Do you need to adjust the group aesthetic?
+```
+
+```
+Warning: Removed 193 rows containing missing values (geom_point).
+```
+
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges4.png) 
 
 ```r
@@ -174,7 +200,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 30657
+[1] 11719
 ```
 
 ```r
@@ -185,6 +211,10 @@ qplot(dsYear$Age, binwidth=1, main="After Filtering Out Extreme Ages")
 
 ```r
 ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
+```
+
+```
+geom_path: Each group consist of only one observation. Do you need to adjust the group aesthetic?
 ```
 
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges6.png) 
@@ -204,11 +234,11 @@ nrow(dsYear)
 ```
 
 ```
-[1] 30657
+[1] 11719
 ```
 
 ```r
-qplot(dsYear$ZGenderAge, binwidth=.25) 
+qplot(dsYear$ZGenderAge, binwidth=.25)
 ```
 
 ![plot of chunk Standarize](figure/Standarize.png) 
@@ -227,6 +257,10 @@ ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) +
   geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 ```
 
+```
+geom_path: Each group consist of only one observation. Do you need to adjust the group aesthetic?
+```
+
 ![plot of chunk DetermineZForClipping](figure/DetermineZForClipping1.png) 
 
 ```r
@@ -235,13 +269,17 @@ nrow(dsYear)
 ```
 
 ```
-[1] 30618
+[1] 11680
 ```
 
 ```r
 ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) + 
   annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
   geom_line(alpha=.2) + geom_point(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
+```
+
+```
+geom_path: Each group consist of only one observation. Do you need to adjust the group aesthetic?
 ```
 
 ![plot of chunk DetermineZForClipping](figure/DetermineZForClipping2.png) 
@@ -255,33 +293,9 @@ ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) +
 ## Pick the subject's oldest record (within that age window).  Then examine the age & Z values
 
 ```r
-ds <- ddply(dsYear, "SubjectTag", subset, rank(-Age, ties.method="first")==1)
-nrow(ds) 
-```
+#The ASFT was asked only once of the Gen1 subjects, so I don't need to reduce.
+ds <- dsYear
 
-```
-[1] 12402
-```
-
-```r
-summary(ds)
-```
-
-```
-   SubjectTag        SurveyYear        Age           Gender           DV        ZGenderAge    
- Min.   :    200   Min.   :1981   Min.   :16.0   Min.   :1.00   Min.   : 90   Min.   :-2.483  
- 1st Qu.: 318025   1st Qu.:1982   1st Qu.:22.0   1st Qu.:1.00   1st Qu.:128   1st Qu.:-0.677  
- Median : 632850   Median :1985   Median :23.0   Median :1.00   Median :149   Median :-0.159  
- Mean   : 633855   Mean   :1984   Mean   :22.4   Mean   :1.49   Mean   :151   Mean   : 0.002  
- 3rd Qu.: 949975   3rd Qu.:1985   3rd Qu.:24.0   3rd Qu.:2.00   3rd Qu.:170   3rd Qu.: 0.484  
- Max.   :1268600   Max.   :1985   Max.   :24.0   Max.   :2.00   Max.   :300   Max.   : 4.945  
-```
-
-```r
-# SELECT [Mob], [LastSurveyYearCompleted], [AgeAtLastSurvey]
-#   FROM [NlsLinks].[dbo].[vewSubjectDetails79]
-#   WHERE Generation=2 and AgeAtLastSurvey >=16
-#After the 2010 survey, there were 7,201 subjects who were at least 16 at the last survey.
 ds <- plyr::join(x=dsSubject, y=ds, by="SubjectTag", type="left", match="first")
 nrow(ds) 
 ```
@@ -310,7 +324,7 @@ table(is.na(ds$ZGenderAge))
 ```
 
 FALSE  TRUE 
-12402   284 
+11680  1006 
 ```
 
 ```r
@@ -336,9 +350,7 @@ dsVariable[, c("VariableCode", "SurveyYear", "Item", "ItemLabel", "Generation", 
 ```
 
 ```
-  VariableCode SurveyYear Item        ItemLabel Generation ExtractSource   ID
-1     R0481700       1981  201 Gen1WeightPounds          1             8 2185
-2     R0779900       1982  201 Gen1WeightPounds          1             8 1890
-3     R1774000       1985  201 Gen1WeightPounds          1             8 2186
+  VariableCode SurveyYear Item               ItemLabel Generation ExtractSource   ID
+1     R0618301       1981  203 Gen1AfqtScaled3Decimals          1             8 1912
 ```
 

@@ -1,5 +1,5 @@
 # Calculating Gen1 Height
-This sequence picks a single height value per Gen2 subject.
+This sequence picks a single height value per Gen1 subject.
 
 
 
@@ -41,28 +41,25 @@ GetTotalInchesFromMash <- function( mash ) {
 
 ```r
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
-dsLong <- sqlQuery(channel, 
-                   paste0(
-                     "SELECT * 
-                      FROM [NlsLinks].[Process].[vewOutcome]
-                      WHERE Generation=1 AND ItemLabel in (", extractVariablesString, ") 
-                      ORDER BY SubjectTag, SurveyYear" 
-                   ), stringsAsFactors=FALSE
+dsLong <- sqlQuery(channel, paste0(
+  "SELECT * 
+  FROM [NlsLinks].[Process].[vewOutcome]
+  WHERE Generation=1 AND ItemLabel in (", extractVariablesString, ") 
+  ORDER BY SubjectTag, SurveyYear" 
+  ), stringsAsFactors=FALSE
 )
-dsSubject <- sqlQuery(channel, 
-                      "SELECT SubjectTag 
-                    FROM [NlsLinks].[Process].[tblSubject]
-                    WHERE Generation=1 
-                    ORDER BY SubjectTag" 
-                      , stringsAsFactors=FALSE
+dsSubject <- sqlQuery(channel, "SELECT SubjectTag 
+  FROM [NlsLinks].[Process].[tblSubject]
+  WHERE Generation=1 
+  ORDER BY SubjectTag" 
+  , stringsAsFactors=FALSE
 )
-dsVariable <- sqlQuery(channel,
-                       paste0(
-                         "SELECT * 
-                      FROM [NlsLinks].[dbo].[vewVariable]
-                      WHERE (Translate = 1) AND ItemLabel in (", extractVariablesString, ") 
-                       ORDER BY Item, SurveyYear, VariableCode"                      
-                       ), stringsAsFactors=FALSE
+dsVariable <- sqlQuery(channel, paste0(
+  "SELECT * 
+  FROM [NlsLinks].[dbo].[vewVariable]
+  WHERE (Translate = 1) AND ItemLabel in (", extractVariablesString, ") 
+  ORDER BY Item, SurveyYear, VariableCode"                      
+  ), stringsAsFactors=FALSE
 )
 odbcClose(channel)
 summary(dsLong)
@@ -70,18 +67,18 @@ summary(dsLong)
 
 ```
    SubjectTag        SurveyYear        Item      ItemLabel             Value       LoopIndex   Generation  SurveyDate       
- Min.   :    100   Min.   :1981   Min.   :200   Length:47190       Min.   : 48   Min.   :0   Min.   :1    Length:47190      
- 1st Qu.: 310000   1st Qu.:1981   1st Qu.:200   Class :character   1st Qu.: 65   1st Qu.:0   1st Qu.:1    Class :character  
- Median : 617250   Median :1982   Median :200   Mode  :character   Median : 69   Median :0   Median :1    Mode  :character  
- Mean   : 621589   Mean   :1982   Mean   :201                      Mean   :184   Mean   :0   Mean   :1                      
- 3rd Qu.: 927600   3rd Qu.:1982   3rd Qu.:204                      3rd Qu.:500   3rd Qu.:0   3rd Qu.:1                      
+ Min.   :    100   Min.   :1981   Min.   :200   Length:35098       Min.   : 48   Min.   :0   Min.   :1    Length:35098      
+ 1st Qu.: 307725   1st Qu.:1981   1st Qu.:200   Class :character   1st Qu.: 66   1st Qu.:0   1st Qu.:1    Class :character  
+ Median : 612900   Median :1982   Median :200   Mode  :character   Median : 70   Median :0   Median :1    Mode  :character  
+ Mean   : 618076   Mean   :1983   Mean   :201                      Mean   :224   Mean   :0   Mean   :1                      
+ 3rd Qu.: 921175   3rd Qu.:1985   3rd Qu.:204                      3rd Qu.:504   3rd Qu.:0   3rd Qu.:1                      
  Max.   :1268600   Max.   :1985   Max.   :204                      Max.   :611   Max.   :0   Max.   :1                      
  AgeSelfReportYears AgeCalculateYears     Gender   
  Min.   :16.0       Min.   :15.6      Min.   :1.0  
- 1st Qu.:19.0       1st Qu.:19.6      1st Qu.:1.0  
- Median :21.0       Median :21.7      Median :1.0  
- Mean   :21.2       Mean   :21.7      Mean   :1.5  
- 3rd Qu.:23.0       3rd Qu.:23.6      3rd Qu.:2.0  
+ 1st Qu.:19.0       1st Qu.:19.8      1st Qu.:1.0  
+ Median :21.0       Median :21.9      Median :2.0  
+ Mean   :21.3       Mean   :21.8      Mean   :1.5  
+ 3rd Qu.:23.0       3rd Qu.:23.8      3rd Qu.:2.0  
  Max.   :28.0       Max.   :28.7      Max.   :2.0  
 ```
 
@@ -116,7 +113,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 47190
+[1] 35098
 ```
 
 ```r
@@ -144,7 +141,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 47097
+[1] 35029
 ```
 
 ```r
@@ -154,10 +151,10 @@ summary(dsYear)
 ```
    SubjectTag        SurveyYear        Age           Gender          DV      
  Min.   :    100   Min.   :1981   Min.   :15.0   Min.   :1.0   Min.   :56.0  
- 1st Qu.: 310300   1st Qu.:1981   1st Qu.:19.0   1st Qu.:1.0   1st Qu.:64.0  
- Median : 617300   Median :1982   Median :21.0   Median :1.0   Median :67.0  
- Mean   : 621755   Mean   :1982   Mean   :21.2   Mean   :1.5   Mean   :67.1  
- 3rd Qu.: 927900   3rd Qu.:1982   3rd Qu.:23.0   3rd Qu.:2.0   3rd Qu.:70.0  
+ 1st Qu.: 308000   1st Qu.:1981   1st Qu.:19.0   1st Qu.:1.0   1st Qu.:64.0  
+ Median : 613000   Median :1982   Median :21.0   Median :1.0   Median :67.0  
+ Mean   : 618240   Mean   :1983   Mean   :21.3   Mean   :1.5   Mean   :67.1  
+ 3rd Qu.: 921500   3rd Qu.:1985   3rd Qu.:23.0   3rd Qu.:2.0   3rd Qu.:70.0  
  Max.   :1268600   Max.   :1985   Max.   :28.0   Max.   :2.0   Max.   :80.0  
 ```
 
@@ -188,7 +185,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 42468
+[1] 30692
 ```
 
 ```r
@@ -208,6 +205,7 @@ ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_
 ####################################################################################
 ```
 
+
 ## Standardize by Gender & Age.  Calculated Age (using SurveyDate and MOB) has been truncated to integers.  
 
 ```r
@@ -217,7 +215,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 42468
+[1] 30692
 ```
 
 ```r
@@ -248,7 +246,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 42355
+[1] 30609
 ```
 
 ```r
@@ -273,7 +271,7 @@ nrow(ds)
 ```
 
 ```
-[1] 12411
+[1] 12410
 ```
 
 ```r
@@ -282,12 +280,12 @@ summary(ds)
 
 ```
    SubjectTag        SurveyYear        Age           Gender          DV         ZGenderAge     
- Min.   :    100   Min.   :1981   Min.   :16.0   Min.   :1.0   Min.   :57.0   Min.   :-2.9879  
- 1st Qu.: 317850   1st Qu.:1982   1st Qu.:22.0   1st Qu.:1.0   1st Qu.:64.0   1st Qu.:-0.7512  
- Median : 633200   Median :1985   Median :23.0   Median :1.0   Median :67.0   Median :-0.0631  
- Mean   : 633795   Mean   :1984   Mean   :22.4   Mean   :1.5   Mean   :67.2   Mean   :-0.0101  
- 3rd Qu.: 949450   3rd Qu.:1985   3rd Qu.:24.0   3rd Qu.:2.0   3rd Qu.:70.0   3rd Qu.: 0.6570  
- Max.   :1268600   Max.   :1985   Max.   :24.0   Max.   :2.0   Max.   :79.0   Max.   : 2.9867  
+ Min.   :    100   Min.   :1981   Min.   :16.0   Min.   :1.0   Min.   :57.0   Min.   :-2.9301  
+ 1st Qu.: 317825   1st Qu.:1982   1st Qu.:22.0   1st Qu.:1.0   1st Qu.:64.0   1st Qu.:-0.7238  
+ Median : 633250   Median :1985   Median :23.0   Median :1.0   Median :67.0   Median :-0.0448  
+ Mean   : 633780   Mean   :1984   Mean   :22.4   Mean   :1.5   Mean   :67.2   Mean   :-0.0081  
+ 3rd Qu.: 949375   3rd Qu.:1985   3rd Qu.:24.0   3rd Qu.:2.0   3rd Qu.:70.0   3rd Qu.: 0.6484  
+ Max.   :1268600   Max.   :1985   Max.   :24.0   Max.   :2.0   Max.   :79.0   Max.   : 2.9965  
 ```
 
 ```r
@@ -323,7 +321,7 @@ table(is.na(ds$ZGenderAge))
 ```
 
 FALSE  TRUE 
-12411   275 
+12410   276 
 ```
 
 ```r

@@ -1,5 +1,5 @@
 # Calculating Gen1 Height
-This sequence picks a single height value per Gen2 subject.
+This sequence picks a single height value per Gen1 subject.
 
 ```{r, echo=FALSE, message=F} 
 #Set the chunks' working directory to the repository's base directory; this assumes the report is nested inside of two directories.
@@ -50,10 +50,10 @@ read_chunk(pathSourceCode) #This allows knitr to call chunks tagged in the under
 ```
 
 ## Write the OutcomeData to CSV
-```{r WriteToCsv } 
+```{r WriteToCsv} 
 ```
 
 ## NLSY Variables
 Each row in the table represents and NLSY variable that was used.  The first column is the official "R Number" designated by the NLSY.  The remaining columns are values we assigned to help the plumbing and data manipulation.
-```{r DisplayVariables } 
+```{r DisplayVariables} 
 ```

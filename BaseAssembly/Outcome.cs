@@ -10,7 +10,7 @@ namespace Nls.BaseAssembly {
         #region Fields
         private readonly LinksDataSet _ds;
         //private readonly Item[] _items;
-        private readonly Item[] _itemsGen1 = { Item.Gen1HeightInches, Item.Gen1WeightPounds, Item.Gen1AfqtScaled5Decimals };
+        private readonly Item[] _itemsGen1 = { Item.Gen1HeightInches, Item.Gen1WeightPounds, Item.Gen1AfqtScaled3Decimals };
         private readonly Item[] _itemsGen2 = { Item.Gen2CFatherAlive};
         private readonly string _itemIDsString = "";
         private readonly string _itemIDsStringGen1 = "";

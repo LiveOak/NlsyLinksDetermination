@@ -69,7 +69,7 @@ summary(dsLong)
 
 ```
    SubjectTag        SurveyYear        Item      ItemLabel             Value         LoopIndex   Generation  SurveyDate       
- Min.   :    301   Min.   :1994   Min.   :501   Length:141228      Min.   :-2.00   Min.   :0   Min.   :2    Length:141228     
+ Min.   :    301   Min.   :1994   Min.   :501   Length:70614       Min.   :-2.00   Min.   :0   Min.   :2    Length:70614      
  1st Qu.: 267702   1st Qu.:2002   1st Qu.:501   Class :character   1st Qu.: 5.00   1st Qu.:0   1st Qu.:2    Class :character  
  Median : 546901   Median :2006   Median :502   Mode  :character   Median : 5.00   Median :0   Median :2    Mode  :character  
  Mean   : 550041   Mean   :2004   Mean   :502                      Mean   : 5.23   Mean   :0   Mean   :2                      
@@ -77,7 +77,7 @@ summary(dsLong)
  Max.   :1266703   Max.   :2010   Max.   :502                      Max.   :11.00   Max.   :0   Max.   :2                      
  AgeSelfReportYears AgeCalculateYears     Gender   
  Mode:logical       Min.   :13.7      Min.   :1.0  
- NA's:141228        1st Qu.:17.2      1st Qu.:1.0  
+ NA's:70614         1st Qu.:17.2      1st Qu.:1.0  
                     Median :20.3      Median :2.0  
                     Mean   :21.0      Mean   :1.5  
                     3rd Qu.:24.2      3rd Qu.:2.0  
@@ -130,7 +130,7 @@ system.time(
 
 ```
    user  system elapsed 
-  20.50    4.13   24.64 
+  18.75    2.00   20.77 
 ```
 
 ```r
@@ -140,7 +140,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 70614
+[1] 35307
 ```
 
 ```r
@@ -166,7 +166,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 70134
+[1] 35067
 ```
 
 ```r
@@ -210,7 +210,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 45590
+[1] 22795
 ```
 
 ```r
@@ -230,6 +230,7 @@ ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_
 ####################################################################################
 ```
 
+
 ## Standardize by Gender & Age.  Calculated Age (using SurveyDate and MOB) has been truncated to integers.  
 
 ```r
@@ -239,7 +240,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 45590
+[1] 22795
 ```
 
 ```r
@@ -270,7 +271,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 45466
+[1] 22733
 ```
 
 ```r
@@ -304,12 +305,12 @@ summary(ds)
 
 ```
    SubjectTag        SurveyYear        Age           Gender           DV         ZGenderAge     
- Min.   :    301   Min.   :1994   Min.   :16.0   Min.   :1.00   Min.   :56.0   Min.   :-2.9859  
- 1st Qu.: 266202   1st Qu.:2004   1st Qu.:20.0   1st Qu.:1.00   1st Qu.:64.0   1st Qu.:-0.7197  
+ Min.   :    301   Min.   :1994   Min.   :16.0   Min.   :1.00   Min.   :56.0   Min.   :-2.9855  
+ 1st Qu.: 266202   1st Qu.:2004   1st Qu.:20.0   1st Qu.:1.00   1st Qu.:64.0   1st Qu.:-0.7195  
  Median : 537401   Median :2008   Median :23.0   Median :1.00   Median :67.0   Median :-0.0730  
  Mean   : 545706   Mean   :2007   Mean   :21.5   Mean   :1.49   Mean   :67.5   Mean   :-0.0016  
- 3rd Qu.: 804403   3rd Qu.:2010   3rd Qu.:24.0   3rd Qu.:2.00   3rd Qu.:71.0   3rd Qu.: 0.5767  
- Max.   :1266703   Max.   :2010   Max.   :24.0   Max.   :2.00   Max.   :79.0   Max.   : 2.9911  
+ 3rd Qu.: 804403   3rd Qu.:2010   3rd Qu.:24.0   3rd Qu.:2.00   3rd Qu.:71.0   3rd Qu.: 0.5766  
+ Max.   :1266703   Max.   :2010   Max.   :24.0   Max.   :2.00   Max.   :79.0   Max.   : 2.9905  
 ```
 
 ```r
@@ -355,7 +356,6 @@ FALSE  TRUE
 
 
 ## Compare with Kelly's height values.  
-
 Make sure they roughly agree. There are a few differences, including (1) the age range is a little shifted, (2) the 2010 survey wasn't available, (3) the cutoff scores were more generous, and (4) the order of standardization & clipping *might* have been different.
 
 ```r
