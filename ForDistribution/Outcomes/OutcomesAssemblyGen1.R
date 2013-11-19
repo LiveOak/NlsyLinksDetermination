@@ -6,6 +6,7 @@ rm(list=ls(all=TRUE))
 generation <- 1
 pathInputHeight <- "./ForDistribution/Outcomes/Gen1Height/Gen1Height.csv"
 pathInputWeight <- "./ForDistribution/Outcomes/Gen1Weight/Gen1Weight.csv"
+pathInputIQ <- "./ForDistribution/Outcomes/Gen1IQ/Gen1IQ.csv"
 pathOutput <- "./ForDistribution/Outcomes/OutcomesGen1.csv"
 
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
@@ -28,6 +29,13 @@ dsWeight <- plyr::rename(dsWeight, replace=c("ZGenderAge"="WeightZGenderAge")) #
 ds <- merge(x=ds, y=dsWeight, by="SubjectTag", all.x=TRUE)
 rm(dsWeight)
 
+### Merge ASFT IQ
+dsIQ <- read.csv(pathInputIQ, stringsAsFactors=F)
+dsIQ <- dsIQ[, c("SubjectTag", "ZGenderAge")]
+dsIQ <- plyr::rename(dsIQ, replace=c("ZGenderAge"="IQZGenderAge")) 
+ds <- merge(x=ds, y=dsIQ, by="SubjectTag", all.x=TRUE)
+rm(dsIQ)
+
 HistogramWithCurve <- function( scores, title="", breaks=30) {
   hist(scores, breaks=breaks, freq=F, main=title)
   curve(dnorm(x, mean=mean(scores, na.rm=T),  sd=sd(scores, na.rm=T)), add=T)  
@@ -35,9 +43,8 @@ HistogramWithCurve <- function( scores, title="", breaks=30) {
 par(mar=c(2,2,2,0), mgp=c(1,0,0), tcl=0)
 
 HistogramWithCurve(ds$HeightZGenderAge, "HeightZGenderAge")
-HistogramWithCurve(ds$HeightZGender, "HeightZGender")
-HistogramWithCurve(ds$HeightZGenderAge, "WeightZGenderAge")
-HistogramWithCurve(ds$HeightZGender, "WeightZGender")
+HistogramWithCurve(ds$WeightZGenderAge, "WeightZGenderAge")
+HistogramWithCurve(ds$IQZGenderAge, "IQZGenderAge")
 # HistogramWithCurve(ds$MathStandardized, "MathStandardized")
 
 write.csv(ds, pathOutput, row.names=F)
