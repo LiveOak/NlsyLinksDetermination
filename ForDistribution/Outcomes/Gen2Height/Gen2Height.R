@@ -153,7 +153,7 @@ nrow(dsOldVsNew)
 
 #See if the new version is missing a lot of values that the old version caught.
 #   The denominator isn't exactly right, because it doesn't account for the 2010 values missing in the new version.
-table(is.na(dsOldVsNew$HeightStandarizedFor19to25), is.na(dsOldVsNew$ZGenderAge), dnn=c("NewIsMissing", "OldIsMissing"))
+table(is.na(dsOldVsNew$HeightStandarizedFor19to25), is.na(dsOldVsNew$ZGenderAge), dnn=c("OldIsMissing", "NewIsMissing"))
 #View the correlation
 cor(dsOldVsNew$HeightStandarizedFor19to25, dsOldVsNew$ZGenderAge, use="complete.obs")
 #Compare against an x=y identity line.

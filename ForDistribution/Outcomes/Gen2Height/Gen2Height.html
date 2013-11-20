@@ -238,18 +238,18 @@ summary(dsLong)
 </code></pre>
 
 <pre><code>   SubjectTag        SurveyYear        Item      ItemLabel             Value         LoopIndex   Generation  SurveyDate       
- Min.   :    301   Min.   :1994   Min.   :501   Length:70614       Min.   :-2.00   Min.   :0   Min.   :2    Length:70614      
- 1st Qu.: 267702   1st Qu.:2002   1st Qu.:501   Class :character   1st Qu.: 5.00   1st Qu.:0   1st Qu.:2    Class :character  
- Median : 546901   Median :2006   Median :502   Mode  :character   Median : 5.00   Median :0   Median :2    Mode  :character  
- Mean   : 550041   Mean   :2004   Mean   :502                      Mean   : 5.23   Mean   :0   Mean   :2                      
- 3rd Qu.: 805901   3rd Qu.:2008   3rd Qu.:502                      3rd Qu.: 6.00   3rd Qu.:0   3rd Qu.:2                      
+ Min.   :    301   Min.   :1994   Min.   :501   Length:70288       Min.   : 0.00   Min.   :0   Min.   :2    Length:70288      
+ 1st Qu.: 267701   1st Qu.:2002   1st Qu.:501   Class :character   1st Qu.: 5.00   1st Qu.:0   1st Qu.:2    Class :character  
+ Median : 546702   Median :2006   Median :501   Mode  :character   Median : 5.00   Median :0   Median :2    Mode  :character  
+ Mean   : 549940   Mean   :2004   Mean   :502                      Mean   : 5.27   Mean   :0   Mean   :2                      
+ 3rd Qu.: 805702   3rd Qu.:2008   3rd Qu.:502                      3rd Qu.: 6.00   3rd Qu.:0   3rd Qu.:2                      
  Max.   :1266703   Max.   :2010   Max.   :502                      Max.   :11.00   Max.   :0   Max.   :2                      
  AgeSelfReportYears AgeCalculateYears     Gender   
  Mode:logical       Min.   :13.7      Min.   :1.0  
- NA&#39;s:70614         1st Qu.:17.2      1st Qu.:1.0  
+ NA&#39;s:70288         1st Qu.:17.2      1st Qu.:1.0  
                     Median :20.3      Median :2.0  
                     Mean   :21.0      Mean   :1.5  
-                    3rd Qu.:24.2      3rd Qu.:2.0  
+                    3rd Qu.:24.3      3rd Qu.:2.0  
                     Max.   :38.0      Max.   :2.0  
 </code></pre>
 
@@ -291,7 +291,7 @@ system.time(
 </code></pre>
 
 <pre><code>   user  system elapsed 
-  18.75    2.00   20.77 
+  19.70    2.42   22.16 
 </code></pre>
 
 <pre><code class="r">
@@ -299,7 +299,7 @@ dsYear &lt;- dsYearStatic
 nrow(dsYear)
 </code></pre>
 
-<pre><code>[1] 35307
+<pre><code>[1] 35121
 </code></pre>
 
 <pre><code class="r">rm(dsLong)
@@ -492,11 +492,11 @@ nrow(dsOldVsNew)
 <pre><code class="r">
 #See if the new version is missing a lot of values that the old version caught.
 #   The denominator isn&#39;t exactly right, because it doesn&#39;t account for the 2010 values missing in the new version.
-table(is.na(dsOldVsNew$HeightStandarizedFor19to25), is.na(dsOldVsNew$ZGenderAge), dnn=c(&quot;NewIsMissing&quot;, &quot;OldIsMissing&quot;))
+table(is.na(dsOldVsNew$HeightStandarizedFor19to25), is.na(dsOldVsNew$ZGenderAge), dnn=c(&quot;OldIsMissing&quot;, &quot;NewIsMissing&quot;))
 </code></pre>
 
-<pre><code>            OldIsMissing
-NewIsMissing FALSE TRUE
+<pre><code>            NewIsMissing
+OldIsMissing FALSE TRUE
        FALSE  5089   34
        TRUE   1980 4403
 </code></pre>

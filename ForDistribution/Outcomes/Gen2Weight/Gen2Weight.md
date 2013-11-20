@@ -1,5 +1,5 @@
-# Calculating Gen2 Height
-This sequence picks a single height value per Gen2 subject.
+# Calculating Gen2 Weight
+This sequence picks a single Weight value per Gen2 subject.
 
 
 
@@ -9,24 +9,21 @@ This sequence picks a single height value per Gen2 subject.
 
 
 
-## Define the age cutoffs to keep ages within the same Window as Gen1 Heights.  Define the height cutoffs to exclude values that are more likely to be entry errors or a developmental disorder, than a true reflection of additive genetics
+## Define the age cutoffs to keep ages within the same Window as Gen1 Weights.  Define the Weight cutoffs to exclude values that are more likely to be entry errors or a developmental disorder, than a true reflection of additive genetics
 
 ```r
 pathInputKellyOutcomes <-  "./OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv"
-pathOutput <- "./ForDistribution/Outcomes/Gen2Height/Gen2Height.csv"
+pathOutput <- "./ForDistribution/Outcomes/Gen2Weight/Gen2Weight.csv"
 
-DVMin <- 56 #4'8"
-DVMax <- 80 #7'0"
-feetOnlyMin <- 4
-feetOnlyMax <- 8
-inchesOnlyMin <- 0
-inchesOnlyMax <- 11
+DVMin <- 90 
+DVMax <- 350 
+
 ageMin <- 16
 ageMax <- 24
 zMin <- -3
-zMax <- -zMin 
+zMax <- 5
 
-extractVariablesString <- "'Gen2HeightFeetOnly', 'Gen2HeightInchesRemainder'"
+extractVariablesString <- "'Gen2WeightPoundsYA'"
 
 ####################################################################################
 ```
@@ -35,12 +32,6 @@ extractVariablesString <- "'Gen2HeightFeetOnly', 'Gen2HeightInchesRemainder'"
 ## Load the appropriate information from the SQL Server database
 
 ```r
-#Equivalent ages for 1981 Heights are 16-24 (ignoring two 15-year-old and 1 26-year-old)
-# SELECT count([AgeSelfReportYears]), FLOOR([AgeCalculateYears]) AS Age
-# FROM [NlsLinks].[Process].[tblSurveyTime]
-# WHERE SurveyYear=1981
-# GROUP BY floor([AgeCalculateYears]) ORDER BY Age
-
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 dsLong <- sqlQuery(channel,  paste0(
   "SELECT * 
@@ -68,19 +59,19 @@ summary(dsLong)
 ```
 
 ```
-   SubjectTag        SurveyYear        Item      ItemLabel             Value         LoopIndex   Generation  SurveyDate       
- Min.   :    301   Min.   :1994   Min.   :501   Length:70288       Min.   : 0.00   Min.   :0   Min.   :2    Length:70288      
- 1st Qu.: 267701   1st Qu.:2002   1st Qu.:501   Class :character   1st Qu.: 5.00   1st Qu.:0   1st Qu.:2    Class :character  
- Median : 546702   Median :2006   Median :501   Mode  :character   Median : 5.00   Median :0   Median :2    Mode  :character  
- Mean   : 549940   Mean   :2004   Mean   :502                      Mean   : 5.27   Mean   :0   Mean   :2                      
- 3rd Qu.: 805702   3rd Qu.:2008   3rd Qu.:502                      3rd Qu.: 6.00   3rd Qu.:0   3rd Qu.:2                      
- Max.   :1266703   Max.   :2010   Max.   :502                      Max.   :11.00   Max.   :0   Max.   :2                      
+   SubjectTag        SurveyYear        Item      ItemLabel             Value       LoopIndex   Generation  SurveyDate       
+ Min.   :    301   Min.   :1994   Min.   :504   Length:33167       Min.   : 70   Min.   :0   Min.   :2    Length:33167      
+ 1st Qu.: 266952   1st Qu.:2002   1st Qu.:504   Class :character   1st Qu.:135   1st Qu.:0   1st Qu.:2    Class :character  
+ Median : 543602   Median :2006   Median :504   Mode  :character   Median :158   Median :0   Median :2    Mode  :character  
+ Mean   : 548188   Mean   :2005   Mean   :504                      Mean   :165   Mean   :0   Mean   :2                      
+ 3rd Qu.: 804401   3rd Qu.:2008   3rd Qu.:504                      3rd Qu.:185   3rd Qu.:0   3rd Qu.:2                      
+ Max.   :1266703   Max.   :2010   Max.   :504                      Max.   :766   Max.   :0   Max.   :2                      
  AgeSelfReportYears AgeCalculateYears     Gender   
- Mode:logical       Min.   :13.7      Min.   :1.0  
- NA's:70288         1st Qu.:17.2      1st Qu.:1.0  
-                    Median :20.3      Median :2.0  
-                    Mean   :21.0      Mean   :1.5  
-                    3rd Qu.:24.3      3rd Qu.:2.0  
+ Mode:logical       Min.   :14.0      Min.   :1.0  
+ NA's:33167         1st Qu.:17.4      1st Qu.:1.0  
+                    Median :20.6      Median :2.0  
+                    Mean   :21.2      Mean   :1.5  
+                    3rd Qu.:24.5      3rd Qu.:2.0  
                     Max.   :38.0      Max.   :2.0  
 ```
 
@@ -115,32 +106,13 @@ dsLong$LoopIndex <- NULL
 ## Combine the feet and inches to get total inches.  
 
 ```r
-CombineHeightUnits <- function( df ) {
-  feet <- df[df$ItemLabel=='Gen2HeightFeetOnly', 'Value']
-  feet <- ifelse(feetOnlyMin <= feet & feet <= feetOnlyMax, feet, NA)  
-  inches <- df[df$ItemLabel=='Gen2HeightInchesRemainder', 'Value']
-  inches <- ifelse(inchesOnlyMin <= inches & inches <= inchesOnlyMax, inches, NA)
-  return( data.frame(DV=feet*12 + inches) )
-} 
-#Combine to one row per SubjectYear combination
-system.time( 
-  dsYearStatic <- ddply(dsLong, c("SubjectTag", "SurveyYear", "Age", "Gender"), CombineHeightUnits)
-)#17.34; 23.94 sec
-```
-
-```
-   user  system elapsed 
-  19.70    2.42   22.16 
-```
-
-```r
-
-dsYear <- dsYearStatic
+dsYear <- dsLong[, c("SubjectTag", "SurveyYear", "Age", "Gender", "Value")]
+dsYear <- plyr::rename(dsYear, replace=c("Value"="DV"))
 nrow(dsYear)
 ```
 
 ```
-[1] 35121
+[1] 33167
 ```
 
 ```r
@@ -150,11 +122,11 @@ rm(dsLong)
 ```
 
 
-## Show the height data with age of the subject when the height was taken.  Filter out records where the age or the height is outside of the desired window.
+## Show the Weight data with age of the subject when the Weight was taken.  Filter out records where the age or the Weight is outside of the desired window.
 
 ```r
-#Filter out records with undesired height values
-qplot(dsYear$DV, binwidth=1, main="Before Filtering Out Extreme Heights")
+#Filter out records with undesired Weight values
+qplot(dsYear$DV, binwidth=1, main="Before Filtering Out Extreme Weights")
 ```
 
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges1.png) 
@@ -166,7 +138,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 35067
+[1] 33033
 ```
 
 ```r
@@ -174,17 +146,17 @@ summary(dsYear)
 ```
 
 ```
-   SubjectTag        SurveyYear        Age           Gender          DV      
- Min.   :    301   Min.   :1994   Min.   :13.0   Min.   :1.0   Min.   :56.0  
- 1st Qu.: 267502   1st Qu.:2002   1st Qu.:17.0   1st Qu.:1.0   1st Qu.:64.0  
- Median : 546701   Median :2006   Median :20.0   Median :2.0   Median :67.0  
- Mean   : 549932   Mean   :2004   Mean   :20.5   Mean   :1.5   Mean   :67.2  
- 3rd Qu.: 805901   3rd Qu.:2008   3rd Qu.:24.0   3rd Qu.:2.0   3rd Qu.:70.0  
- Max.   :1266703   Max.   :2010   Max.   :38.0   Max.   :2.0   Max.   :80.0  
+   SubjectTag        SurveyYear        Age           Gender          DV     
+ Min.   :    301   Min.   :1994   Min.   :14.0   Min.   :1.0   Min.   : 90  
+ 1st Qu.: 266901   1st Qu.:2002   1st Qu.:17.0   1st Qu.:1.0   1st Qu.:135  
+ Median : 543402   Median :2006   Median :20.0   Median :2.0   Median :158  
+ Mean   : 548024   Mean   :2005   Mean   :20.7   Mean   :1.5   Mean   :164  
+ 3rd Qu.: 803901   3rd Qu.:2008   3rd Qu.:24.0   3rd Qu.:2.0   3rd Qu.:185  
+ Max.   :1266703   Max.   :2010   Max.   :38.0   Max.   :2.0   Max.   :350  
 ```
 
 ```r
-qplot(dsYear$DV, binwidth=1, main="After Filtering Out Extreme Heights") 
+qplot(dsYear$DV, binwidth=1, main="After Filtering Out Extreme Weights") 
 ```
 
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges2.png) 
@@ -210,7 +182,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 22795
+[1] 21501
 ```
 
 ```r
@@ -240,7 +212,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 22795
+[1] 21501
 ```
 
 ```r
@@ -271,7 +243,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 22733
+[1] 21495
 ```
 
 ```r
@@ -296,7 +268,7 @@ nrow(ds)
 ```
 
 ```
-[1] 7069
+[1] 7041
 ```
 
 ```r
@@ -304,13 +276,13 @@ summary(ds)
 ```
 
 ```
-   SubjectTag        SurveyYear        Age           Gender           DV         ZGenderAge     
- Min.   :    301   Min.   :1994   Min.   :16.0   Min.   :1.00   Min.   :56.0   Min.   :-2.9855  
- 1st Qu.: 266202   1st Qu.:2004   1st Qu.:20.0   1st Qu.:1.00   1st Qu.:64.0   1st Qu.:-0.7195  
- Median : 537401   Median :2008   Median :23.0   Median :1.00   Median :67.0   Median :-0.0730  
- Mean   : 545706   Mean   :2007   Mean   :21.5   Mean   :1.49   Mean   :67.5   Mean   :-0.0016  
- 3rd Qu.: 804403   3rd Qu.:2010   3rd Qu.:24.0   3rd Qu.:2.00   3rd Qu.:71.0   3rd Qu.: 0.5766  
- Max.   :1266703   Max.   :2010   Max.   :24.0   Max.   :2.00   Max.   :79.0   Max.   : 2.9905  
+   SubjectTag        SurveyYear        Age           Gender           DV        ZGenderAge    
+ Min.   :    301   Min.   :1994   Min.   :16.0   Min.   :1.00   Min.   : 90   Min.   :-2.336  
+ 1st Qu.: 266202   1st Qu.:2004   1st Qu.:20.0   1st Qu.:1.00   1st Qu.:140   1st Qu.:-0.685  
+ Median : 537401   Median :2008   Median :23.0   Median :1.00   Median :160   Median :-0.221  
+ Mean   : 545143   Mean   :2007   Mean   :21.5   Mean   :1.49   Mean   :168   Mean   :-0.003  
+ 3rd Qu.: 803102   3rd Qu.:2010   3rd Qu.:24.0   3rd Qu.:2.00   3rd Qu.:190   3rd Qu.: 0.494  
+ Max.   :1266703   Max.   :2010   Max.   :24.0   Max.   :2.00   Max.   :350   Max.   : 4.932  
 ```
 
 ```r
@@ -346,7 +318,7 @@ table(is.na(ds$ZGenderAge))
 ```
 
 FALSE  TRUE 
- 7069  4435 
+ 7041  4463 
 ```
 
 ```r
@@ -355,13 +327,13 @@ FALSE  TRUE
 ```
 
 
-## Compare with Kelly's height values.  
+## Compare with Kelly's Weight values.  
 Make sure they roughly agree. There are a few differences, including (1) the age range is a little shifted, (2) the 2010 survey wasn't available, (3) the cutoff scores were more generous, and (4) the order of standardization & clipping *might* have been different.
 
 ```r
-#   Compare against Kelly's previous versions of Gen2 Height
+#   Compare against Kelly's previous versions of Gen2 Weight
 dsKelly <- read.csv(pathInputKellyOutcomes, stringsAsFactors=FALSE)
-dsKelly <- dsKelly[, c("SubjectTag", "HeightStandarizedFor19to25")]
+dsKelly <- dsKelly[, c("SubjectTag", "WeightStandardizedForAge19To25")]
 dsOldVsNew <- join(x=ds, y=dsKelly, by="SubjectTag", type="full")
 nrow(dsOldVsNew)
 ```
@@ -374,33 +346,33 @@ nrow(dsOldVsNew)
 
 #See if the new version is missing a lot of values that the old version caught.
 #   The denominator isn't exactly right, because it doesn't account for the 2010 values missing in the new version.
-table(is.na(dsOldVsNew$HeightStandarizedFor19to25), is.na(dsOldVsNew$ZGenderAge), dnn=c("OldIsMissing", "NewIsMissing"))
+table(is.na(dsOldVsNew$WeightStandardizedForAge19To25), is.na(dsOldVsNew$ZGenderAge), dnn=c("OldIsMissing", "NewIsMissing"))
 ```
 
 ```
             NewIsMissing
 OldIsMissing FALSE TRUE
-       FALSE  5089   34
-       TRUE   1980 4403
+       FALSE  5073   42
+       TRUE   1968 4423
 ```
 
 ```r
 #View the correlation
-cor(dsOldVsNew$HeightStandarizedFor19to25, dsOldVsNew$ZGenderAge, use="complete.obs")
+cor(dsOldVsNew$WeightStandardizedForAge19To25, dsOldVsNew$ZGenderAge, use="complete.obs")
 ```
 
 ```
-[1] 0.9553
+[1] 0.9274
 ```
 
 ```r
 #Compare against an x=y identity line.
-ggplot(dsOldVsNew, aes(x=HeightStandarizedFor19to25, y=ZGenderAge)) + geom_point(shape=1) + geom_abline() + geom_smooth(method="loess")
+ggplot(dsOldVsNew, aes(x=WeightStandardizedForAge19To25, y=ZGenderAge)) + geom_point(shape=1) + geom_abline() + geom_smooth(method="loess")
 ```
 
 ```
-Warning: Removed 6417 rows containing missing values (stat_smooth).
-Warning: Removed 6417 rows containing missing values (geom_point).
+Warning: Removed 6433 rows containing missing values (stat_smooth).
+Warning: Removed 6433 rows containing missing values (geom_point).
 ```
 
 ![plot of chunk ComparingWithKelly](figure/ComparingWithKelly.png) 
@@ -428,24 +400,14 @@ dsVariable[, c("VariableCode", "SurveyYear", "Item", "ItemLabel", "Generation", 
 ```
 
 ```
-   VariableCode SurveyYear Item                 ItemLabel Generation ExtractSource   ID
-1      Y0308300       1994  501        Gen2HeightFeetOnly          2             9 1944
-2      Y0609600       1996  501        Gen2HeightFeetOnly          2             9 1946
-3      Y0903900       1998  501        Gen2HeightFeetOnly          2             9 1948
-4      Y1150800       2000  501        Gen2HeightFeetOnly          2             9 1951
-5      Y1385800       2002  501        Gen2HeightFeetOnly          2             9 1953
-6      Y1637500       2004  501        Gen2HeightFeetOnly          2             9 1955
-7      Y1891100       2006  501        Gen2HeightFeetOnly          2             9 1957
-8      Y2207000       2008  501        Gen2HeightFeetOnly          2             9 1959
-9      Y2544700       2010  501        Gen2HeightFeetOnly          2             9 1961
-10     Y0308400       1994  502 Gen2HeightInchesRemainder          2             9 1945
-11     Y0609700       1996  502 Gen2HeightInchesRemainder          2             9 1947
-12     Y0904000       1998  502 Gen2HeightInchesRemainder          2             9 1950
-13     Y1150900       2000  502 Gen2HeightInchesRemainder          2             9 1952
-14     Y1385900       2002  502 Gen2HeightInchesRemainder          2             9 1954
-15     Y1637600       2004  502 Gen2HeightInchesRemainder          2             9 1956
-16     Y1891200       2006  502 Gen2HeightInchesRemainder          2             9 1958
-17     Y2207100       2008  502 Gen2HeightInchesRemainder          2             9 1960
-18     Y2544800       2010  502 Gen2HeightInchesRemainder          2             9 1962
+  VariableCode SurveyYear Item          ItemLabel Generation ExtractSource   ID
+1     Y0308500       1994  504 Gen2WeightPoundsYA          2            12 2187
+2     Y0904100       1998  504 Gen2WeightPoundsYA          2            12 2188
+3     Y1151000       2000  504 Gen2WeightPoundsYA          2            12 2189
+4     Y1386000       2002  504 Gen2WeightPoundsYA          2            12 2190
+5     Y1637700       2004  504 Gen2WeightPoundsYA          2            12 2191
+6     Y1891300       2006  504 Gen2WeightPoundsYA          2            12 2192
+7     Y2207200       2008  504 Gen2WeightPoundsYA          2            12 2193
+8     Y2544900       2010  504 Gen2WeightPoundsYA          2            12 2194
 ```
 

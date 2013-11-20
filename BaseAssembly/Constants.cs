@@ -68,8 +68,9 @@ namespace Nls.BaseAssembly {
 		public const Int32 Gen2BirthYearMax = 2010;
 
 		public static readonly Int32[] Gen1PassoverResponses = {  -4, -5 };
-		public static readonly Int32[] Gen1PassoverResponsesNoNegatives = { -1, -2, -3, -4, -5 };
-		public static readonly Int32[] Gen2PassoverResponses = { -7 };
+        public static readonly Int32[] Gen1PassoverResponsesNoNegatives = { -1, -2, -3, -4, -5 };
+        public static readonly Int32[] Gen2PassoverResponses = { -7 };
+        public static readonly Int32[] Gen2PassoverResponseNoNegatives = { -1, -2, -3, -4, -5 , -6, - 7 };
 		#endregion
 		#region SurveyYears
 		//See the class Nls.BaseAssembly.SurveyYears

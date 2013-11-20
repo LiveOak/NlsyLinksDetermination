@@ -20,6 +20,13 @@ dsHeight <- plyr::rename(dsHeight, replace=c( "ZGenderAge"="HeightZGenderAge")) 
 ds <- merge(x=ds, y=dsHeight, by="SubjectTag", all.x=TRUE)
 rm(dsHeight)
 
+### Merge Weight
+dsWeight <- read.csv(pathInputHeight, stringsAsFactors=F) 
+dsWeight <- dsWeight[, c("SubjectTag", "ZGenderAge")] 
+dsWeight <- plyr::rename(dsWeight, replace=c( "ZGenderAge"="WeightZGenderAge"))
+ds <- merge(x=ds, y=dsWeight, by="SubjectTag", all.x=TRUE)
+rm(dsWeight)
+
 ### Merge Math
 dsMath <- read.csv(pathInputMath, stringsAsFactors=F)
 dsMath <- dsMath[, c("SubjectTag", "MathStandardized")]
@@ -35,6 +42,7 @@ HistogramWithCurve <- function( scores, title="", breaks=30) {
 par(mar=c(2,2,2,0), mgp=c(1,0,0), tcl=0)
 
 HistogramWithCurve(ds$HeightZGenderAge, "HeightZGenderAge")
+HistogramWithCurve(ds$WeightZGenderAge, "WeightZGenderAge")
 # HistogramWithCurve(ds$HeightZGender, "HeightZGender")
 HistogramWithCurve(ds$MathStandardized, "MathStandardized")
 

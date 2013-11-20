@@ -19,9 +19,9 @@ pathInput <- "./ForDistribution/Outcomes/ExtraOutcomes79.csv"
 # oName <- "WeightStandardizedForAge19To25"
 #Gen1:
 # oName <- "HeightZGender"
-oName <- "HeightZGenderAge"
+# oName <- "HeightZGenderAge"
 # oName <- "WeightZGender"
-# oName <- "WeightZGenderAge"
+oName <- "WeightZGenderAge"
 # oName <- "IQZGenderAge"
 
 # oName <- "BmiLateTeens"
@@ -37,8 +37,8 @@ oName <- "HeightZGenderAge"
 oName_1 <- paste0(oName, "_S1")
 oName_2 <- paste0(oName, "_S2")
 
-# relationshipPaths <- c(2)
-relationshipPaths <- c(1, 2, 3, 4, 5)
+relationshipPaths <- c(1, 2)
+# relationshipPaths <- c(1, 2, 3, 4, 5)
 relationshipPathsString <- paste0("(", paste(relationshipPaths, collapse=","), ")")
 
 relationshipPathsPretty <- paste0("(", paste(levels(Links79Pair$RelationshipPath)[relationshipPaths], collapse=", "), ")")

@@ -16,18 +16,15 @@ require(testit) #For Assert
 pathInputKellyOutcomes <-  "./OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv"
 pathOutput <- "./ForDistribution/Outcomes/Gen2Weight/Gen2Weight.csv"
 
-DVMin <- 56 #4'8"
-DVMax <- 80 #7'0"
-feetOnlyMin <- 4
-feetOnlyMax <- 8
-inchesOnlyMin <- 0
-inchesOnlyMax <- 11
+DVMin <- 90 
+DVMax <- 350 
+
 ageMin <- 16
 ageMax <- 24
 zMin <- -3
-zMax <- -zMin 
+zMax <- 5
 
-extractVariablesString <- "'Gen2WeightPounds'"
+extractVariablesString <- "'Gen2WeightPoundsYA'"
 
 ####################################################################################
 ## @knitr LoadData
@@ -68,13 +65,8 @@ dsLong$LoopIndex <- NULL
 
 ####################################################################################
 ## @knitr CalculateDV
-
-#Combine to one row per SubjectYear combination
-system.time( 
-  dsYearStatic <- ddply(dsLong, c("SubjectTag", "SurveyYear", "Age", "Gender"), CombineHeightUnits)
-)#17.34; 23.94 sec
-
-dsYear <- dsYearStatic
+dsYear <- dsLong[, c("SubjectTag", "SurveyYear", "Age", "Gender", "Value")]
+dsYear <- plyr::rename(dsYear, replace=c("Value"="DV"))
 nrow(dsYear)
 rm(dsLong)
 
@@ -135,17 +127,17 @@ table(is.na(ds$ZGenderAge))
 ## @knitr ComparingWithKelly 
 #   Compare against Kelly's previous versions of Gen2 Weight
 dsKelly <- read.csv(pathInputKellyOutcomes, stringsAsFactors=FALSE)
-dsKelly <- dsKelly[, c("SubjectTag", "WeightStandarizedFor19to25")]
+dsKelly <- dsKelly[, c("SubjectTag", "WeightStandardizedForAge19To25")]
 dsOldVsNew <- join(x=ds, y=dsKelly, by="SubjectTag", type="full")
 nrow(dsOldVsNew)
 
 #See if the new version is missing a lot of values that the old version caught.
 #   The denominator isn't exactly right, because it doesn't account for the 2010 values missing in the new version.
-table(is.na(dsOldVsNew$WeightStandarizedFor19to25), is.na(dsOldVsNew$ZGenderAge), dnn=c("NewIsMissing", "OldIsMissing"))
+table(is.na(dsOldVsNew$WeightStandardizedForAge19To25), is.na(dsOldVsNew$ZGenderAge), dnn=c("OldIsMissing", "NewIsMissing"))
 #View the correlation
-cor(dsOldVsNew$WeightStandarizedFor19to25, dsOldVsNew$ZGenderAge, use="complete.obs")
+cor(dsOldVsNew$WeightStandardizedForAge19To25, dsOldVsNew$ZGenderAge, use="complete.obs")
 #Compare against an x=y identity line.
-ggplot(dsOldVsNew, aes(x=WeightStandarizedFor19to25, y=ZGenderAge)) + geom_point(shape=1) + geom_abline() + geom_smooth(method="loess")
+ggplot(dsOldVsNew, aes(x=WeightStandardizedForAge19To25, y=ZGenderAge)) + geom_point(shape=1) + geom_abline() + geom_smooth(method="loess")
 
 ####################################################################################
 ## @knitr WriteToCsv
