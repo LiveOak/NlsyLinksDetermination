@@ -17,8 +17,8 @@ pathInputKellyOutcomes <-  "./OutsideData/KellyHeightWeightMath2012-03-09/ExtraO
 pathOutput <- "./ForDistribution/Outcomes/Gen2Math/Gen2Math.csv"
 
 # dvName <- "Gen2PiatMathRaw"
-dvName <- "Gen2PiatMathPercentile"
-# dvName <- "Gen2PiatMathStandard"
+# dvName <- "Gen2PiatMathPercentile"
+dvName <- "Gen2PiatMathStandard"
 
 rawMin <- 0
 rawMax <- 84
@@ -144,15 +144,15 @@ ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_
 ####################################################################################
 ## @knitr ReduceToOneRecordPerSubject
 #ds <- ddply(dsYear, "SubjectTag", summarize, ZGenderAge=median(ZGenderAge))
-# ds <- ddply(dsYear, "SubjectTag", summarize, Score=median(DV))
-ds <- ddply(dsYear, "SubjectTag", summarize, Score=qnorm(median(DV)/100))
+ds <- ddply(dsYear, "SubjectTag", summarize, Score=median(DV), Age=median(Age))
+# ds <- ddply(dsYear, "SubjectTag", summarize, Score=qnorm(median(DV)/100)) #This Gaussifies the percentile scores
 nrow(ds) 
 summary(ds)
 ds <- plyr::join(x=dsSubject, y=ds, by="SubjectTag", type="left", match="first")
 nrow(ds) 
 
-# qplot(ds$Age, binwidth=.5) #Make sure ages are within window, and favoring older values
-qplot(ds$Score, binwidth=.25) #Make sure ages are normalish with no extreme values.
+qplot(ds$Age, binwidth=.5) #Make sure (median) ages are normalish with no extreme values.
+qplot(ds$Score, binwidth=.25) #Make sure (median) scores are normalish with no extreme values.
 table(is.na(ds$Score))
 
 ####################################################################################
