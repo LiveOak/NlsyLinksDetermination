@@ -12,30 +12,31 @@ pathOutput <- "./ForDistribution/Outcomes/OutcomesGen2.csv"
 
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 odbcGetInfo(channel)
-ds <- sqlQuery(channel, paste0("SELECT SubjectTag FROM Process.tblSubject WHERE Generation=", generation))
+ds <- sqlQuery(channel, paste0("SELECT SubjectTag, SubjectID, Generation FROM Process.tblSubject WHERE Generation=", generation))
 odbcClose(channel)
 
 ### Merge Height
 dsHeight <- read.csv(pathInputHeight, stringsAsFactors=F) 
 dsHeight <- dsHeight[, c("SubjectTag", "ZGenderAge")] #, "HeightZGender"
-dsHeight <- plyr::rename(dsHeight, replace=c( "ZGenderAge"="HeightZGenderAge")) #"ZGender"="HeightZGender",
+dsHeight <- plyr::rename(dsHeight, replace=c("ZGenderAge"="HeightZGenderAge")) #"ZGender"="HeightZGender",
 ds <- merge(x=ds, y=dsHeight, by="SubjectTag", all.x=TRUE)
 rm(dsHeight)
 
 ### Merge Weight
 dsWeight <- read.csv(pathInputHeight, stringsAsFactors=F) 
 dsWeight <- dsWeight[, c("SubjectTag", "ZGenderAge")] 
-dsWeight <- plyr::rename(dsWeight, replace=c( "ZGenderAge"="WeightZGenderAge"))
+dsWeight <- plyr::rename(dsWeight, replace=c("ZGenderAge"="WeightZGenderAge"))
 ds <- merge(x=ds, y=dsWeight, by="SubjectTag", all.x=TRUE)
 rm(dsWeight)
 
 ### Merge Math
 dsMath <- read.csv(pathInputMath, stringsAsFactors=F)
 # dsMath <- dsMath[, c("SubjectTag", "ZGenderAge")]
-# dsMath <- plyr::rename(dsMath, replace=c( "ZGenderAge"="MathZGenderAge"))
+# dsMath <- plyr::rename(dsMath, replace=c("ZGenderAge"="MathZGenderAge"))
 dsMath <- dsMath[, c("SubjectTag", "Score")]
-dsMath <- plyr::rename(dsMath, replace=c( "Score"="MathStandard"))
-# dsMath <- plyr::rename(dsMath, replace=c( "Score"="MathGaussified"))
+dsMath <- plyr::rename(dsMath, replace=c("Score"="MathStandardized"))
+# dsMath <- plyr::rename(dsMath, replace=c("Score"="MathStandard"))
+# dsMath <- plyr::rename(dsMath, replace=c("Score"="MathGaussified"))
 ds <- merge(x=ds, y=dsMath, by="SubjectTag", all.x=TRUE)
 rm(dsMath)
 

@@ -11,23 +11,19 @@ library(plyr)
 pathInput <- "./ForDistribution/Outcomes/ExtraOutcomes79.csv"
 #dsOutcomes <- read.csv("F:/Projects/Nls/NlsyLinksDetermination/CodingUtilities/Gen2Height/ExtraOutcomes79FromKelly2012March.csv")
 
-#Gen2:
-# oName <- "MathStandardized"
 # oName <- "HeightZGender"
-# oName <- "HeightZGenderAge"
+oName <- "HeightZGenderAge"
 # oName <- "WeightZGender"
 # oName <- "WeightZGenderAge"
+
+# oName <- "AfqtRescaled2006Gaussified" #Gen1 only
+# oName <- "Afi"#Gen1 only
+# oName <- "Afm" #Gen1 only
+
 # oName <- "IQZGenderAge" #Gen1 only
 # oName <- "MathZGenderAge" #Gen2 only
-oName <- "MathStandard" #Gen2 only
+# oName <- "MathStandard" #Gen2 only
 # oName <- "MathGaussified" #Gen2 only
-
-
-# oName <- "BmiLateTeens"
-# oName <- "AfqtRescaled2006"
-# oName <- "AfqtRescaled2006Gaussified"
-# oName <- "Afi"
-# oName <- "Afm"
 
 # oName <- "RandomFakeOutcome"
 
@@ -36,7 +32,7 @@ oName <- "MathStandard" #Gen2 only
 oName_1 <- paste0(oName, "_S1")
 oName_2 <- paste0(oName, "_S2")
 
-relationshipPaths <- c(2)
+relationshipPaths <- c(1)
 # relationshipPaths <- c(1, 2, 3, 4, 5)
 relationshipPathsString <- paste0("(", paste(relationshipPaths, collapse=","), ")")
 
@@ -46,8 +42,8 @@ relationshipPathsPretty <- paste0("(", paste(levels(Links79Pair$RelationshipPath
 rVersions <- c("R", "RFull", "RExplicit", "RImplicit",  "RImplicit2004") #"RImplicitPass1",
 # rVersions <- c("R", "RFull", "RPass1", "RImplicit", "RExplicit", "RExplicitPass1", "RImplicit2004")
 
-#rGroupsToDrop <- c(0, .0625)# 0, .375, .75)#.125, .375, .75)
-rGroupsToDrop <- c()# 0, .375, .75)#.125, .375, .75)
+#rGroupsToDrop <- c(0, .0625, .125, .375, .75)
+rGroupsToDrop <- c()
 dropIfHousematesAreNotSameGeneration <- FALSE
 startNewPage <- c(F, T, F, T, F, T, F)
 
