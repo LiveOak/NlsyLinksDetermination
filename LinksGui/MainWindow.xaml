@@ -39,6 +39,7 @@
         <CollectionViewSource x:Key="tblParentsOfGen1CurrentViewSource" Source="{Binding Path=tblParentsOfGen1Current, Source={StaticResource linksDataSet}}" />
         <CollectionViewSource x:Key="tblGeocodeSanitizedViewSource" Source="{Binding Path=tblGeocodeSanitized, Source={StaticResource importDataSet}}" />
         <CollectionViewSource x:Key="tblGen2OutcomesWeightViewSource" Source="{Binding tblGen2OutcomesWeight, Source={StaticResource importDataSet}}"/>
+        <CollectionViewSource x:Key="tblGen2OutcomesMathViewSource" Source="{Binding tblGen2OutcomesMath, Source={StaticResource importDataSet}}"/>
     </Window.Resources>
     <Grid Name="grid1" Background="AliceBlue" DataContext="{StaticResource tblGen2LinksViewSource}">
         <Grid.RowDefinitions>
@@ -1507,7 +1508,9 @@
             </TabItem>
             <TabItem Header="Gen2O-Weight" Name="tabGen2OutcomesWeight" >
                 <DataGrid ItemsSource="{Binding Source={StaticResource tblGen2OutcomesWeightViewSource}}"/>
-
+            </TabItem>
+            <TabItem Header="Gen2O-Math" Name="tabGen2OutcomesMath" >
+                <DataGrid ItemsSource="{Binding Source={StaticResource tblGen2OutcomesMathViewSource}}" />
             </TabItem>
             <TabItem Header="Item" Name="tabItem" >
                 <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource tblItemViewSource}}" Name="tblItemDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" >

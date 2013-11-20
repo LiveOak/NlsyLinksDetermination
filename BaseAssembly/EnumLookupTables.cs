@@ -170,8 +170,9 @@ namespace Nls.BaseAssembly {
 		Gen1Outcomes = 8,
 		Gen2OutcomesHeight = 9,
 		Gen1Explicit = 10,
-		Gen1Implicit = 11,
+        Gen1Implicit = 11,
         Gen2OutcomesWeight = 12,
+        Gen2OutcomesMath= 13,
     }
 	public enum SurveySource : byte {
 		NoInterview = 0,

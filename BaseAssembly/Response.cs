@@ -23,6 +23,7 @@ namespace Nls.BaseAssembly {
             if( dsImport.tblGen1Outcomes.Count == 0 ) throw new InvalidOperationException("tblGen1Outcomes must NOT be empty before reading responses from it.");
             if( dsImport.tblGen2OutcomesHeight.Count == 0 ) throw new InvalidOperationException("tblGen2OutcomesHeight must NOT be empty before reading responses from it.");
             if( dsImport.tblGen2OutcomesWeight.Count == 0 ) throw new InvalidOperationException("tblGen2OutcomesWeight must NOT be empty before reading responses from it.");
+            if( dsImport.tblGen2OutcomesMath.Count == 0 ) throw new InvalidOperationException("tblGen2OutcomesMath must NOT be empty before reading responses from it.");
 			_dsImport = dsImport;
 			_dsLinks = dsLinks;
 		}
@@ -43,6 +44,7 @@ namespace Nls.BaseAssembly {
             reponseRecordsAddedCount += TranslateExtractSource(ExtractSource.Gen1Outcomes, Generation.Gen1, false, Constants.Gen1PassoverResponsesNoNegatives, _dsImport.tblGen1Outcomes);
             reponseRecordsAddedCount += TranslateExtractSource(ExtractSource.Gen2OutcomesHeight, Generation.Gen2, false, Constants.Gen2PassoverResponseNoNegatives, _dsImport.tblGen2OutcomesHeight);
             reponseRecordsAddedCount += TranslateExtractSource(ExtractSource.Gen2OutcomesWeight, Generation.Gen2, false, Constants.Gen2PassoverResponseNoNegatives, _dsImport.tblGen2OutcomesWeight);
+            reponseRecordsAddedCount += TranslateExtractSource(ExtractSource.Gen2OutcomesMath, Generation.Gen2, false, Constants.Gen2PassoverResponseNoNegatives, _dsImport.tblGen2OutcomesMath);
 			sw.Stop();
 			return string.Format("{0:N0} response records were translated.\nElapsed time: {1}", reponseRecordsAddedCount, sw.Elapsed.ToString());
 		}
@@ -123,6 +125,7 @@ namespace Nls.BaseAssembly {
                 case ExtractSource.Gen1Outcomes: return _dsImport.tblGen1Outcomes.TableName;
                 case ExtractSource.Gen2OutcomesHeight: return _dsImport.tblGen2OutcomesHeight.TableName;
                 case ExtractSource.Gen2OutcomesWeight: return _dsImport.tblGen2OutcomesWeight.TableName;
+                case ExtractSource.Gen2OutcomesMath: return _dsImport.tblGen2OutcomesMath.TableName;
 				default: throw new ArgumentOutOfRangeException("extractSource", extractSource, "The Extract Source is not recognized in this function.");
 			}
 		}

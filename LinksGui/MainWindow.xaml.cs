@@ -52,6 +52,7 @@ namespace LinksGui {
 				LoadExtractGen1Outcomes();
                 LoadExtractGen2OutcomesHeight();
                 LoadExtractGen2OutcomesWeight();
+                LoadExtractGen2OutcomesMath();
 			}
 
 			LoadGeocodeSanitized();//Needed for MarkerGen1
@@ -303,6 +304,10 @@ namespace LinksGui {
         private void LoadExtractGen2OutcomesWeight( ) {
             BA.ImportDataSetTableAdapters.tblGen2OutcomesWeightTableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen2OutcomesWeightTableAdapter();
             ta.Fill(_dsImport.tblGen2OutcomesWeight);
+        }
+        private void LoadExtractGen2OutcomesMath( ) {
+            BA.ImportDataSetTableAdapters.tblGen2OutcomesMathTableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen2OutcomesMathTableAdapter();
+            ta.Fill(_dsImport.tblGen2OutcomesMath);
         }
 		private void LoadItem ( ) {
 			BA.LinksDataSetTableAdapters.tblItemTableAdapter ta = new BA.LinksDataSetTableAdapters.tblItemTableAdapter();
