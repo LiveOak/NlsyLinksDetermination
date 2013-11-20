@@ -238,8 +238,8 @@ namespace Nls.BaseAssembly {
 		}
 		internal static LinksDataSet.tblMzManualRow MzManualRecord ( LinksDataSet.tblSubjectRow dr1, LinksDataSet.tblSubjectRow dr2, LinksDataSet dsLinks ) {
 			string select = string.Format("{0}={1} AND {2}={3}",
-				dr1.SubjectTag, dsLinks.tblMzManual.Subject1TagColumn.ColumnName,
-				dr2.SubjectTag, dsLinks.tblMzManual.Subject2TagColumn.ColumnName);
+				dr1.SubjectTag, dsLinks.tblMzManual.SubjectTag_S1Column.ColumnName,
+				dr2.SubjectTag, dsLinks.tblMzManual.SubjectTag_S2Column.ColumnName);
 			LinksDataSet.tblMzManualRow[] drs = (LinksDataSet.tblMzManualRow[])dsLinks.tblMzManual.Select(select);
 			switch ( drs.Length ) {
 				case 0:
@@ -278,7 +278,7 @@ namespace Nls.BaseAssembly {
 		}
 		//internal static ImportDataSet.tblGeocodeSanitizedRow GeocodeRecord ( Int32 subject1Tag, Int32 subject2Tag, ImportDataSet.tblGeocodeSanitizedDataTable dtGeocode ) {
 		//   //string sql= string.FormatException(
-		//   dtGeocode.FindBySubject1TagSubject2Tag(subject1Tag, subject2Tag);
+		//   dtGeocode.FindBySubjectTag_S1SubjectTag_S2(subject1Tag, subject2Tag);
 		//}
 		#endregion
 	}

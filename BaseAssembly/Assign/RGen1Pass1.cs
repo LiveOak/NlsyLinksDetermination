@@ -86,8 +86,8 @@ namespace Nls.BaseAssembly.Assign {
 			_drRight = drRight;
 			_idRelatedLeft = _drLeft.ID;
 			_idRelatedRight = _drRight.ID;
-			_drSubjectDetails1 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.Subject1Tag);
-			_drSubjectDetails2 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.Subject2Tag);
+			_drSubjectDetails1 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.SubjectTag_S1);
+			_drSubjectDetails2 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.SubjectTag_S2);
 			_extendedID = _drLeft.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1.ExtendedID;
 
 			//LinksDataSet.tblRosterGen1Row drRoster = _dsLinks.tblRosterGen1.FindByRelatedID(drLeft.ID);
@@ -107,7 +107,7 @@ namespace Nls.BaseAssembly.Assign {
 
 			_dtMarkersGen1 = MarkerGen1.PairRelevantMarkerRows(_idRelatedLeft, _idRelatedRight, _dsLinks, _extendedID);
 
-			LinksDataSet.tblMzManualRow drMz = Retrieve.MzManualRecord(_drLeft.Subject1Tag, _drLeft.Subject2Tag, _dsLinks);
+			LinksDataSet.tblMzManualRow drMz = Retrieve.MzManualRecord(_drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2, _dsLinks);
 
 			if ( drMz == null ) {
 				_multipleBirth = MultipleBirth.No;
@@ -167,8 +167,8 @@ namespace Nls.BaseAssembly.Assign {
 				return Tristate.DoNotKnow;
 		}
 		private float? RetrieveRImplicit2004 ( ) {
-			ImportDataSet.tblLinks2004Gen1Row drV1 = _dsImport.tblLinks2004Gen1.FindBySubject1TagSubject2Tag(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
-			ImportDataSet.tblLinks2004Gen1Row drV2 = _dsImport.tblLinks2004Gen1.FindBySubject1TagSubject2Tag(_drLeft.Subject2Tag, _drLeft.Subject1Tag);
+			ImportDataSet.tblLinks2004Gen1Row drV1 = _dsImport.tblLinks2004Gen1.FindBySubjectTag_S1SubjectTag_S2(_drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2);
+			ImportDataSet.tblLinks2004Gen1Row drV2 = _dsImport.tblLinks2004Gen1.FindBySubjectTag_S1SubjectTag_S2(_drLeft.SubjectTag_S2, _drLeft.SubjectTag_S1);
 			if ( drV1 != null ) {
 				if ( drV1.IsRecommendedRelatednessNull() ) return null;
 				else return drV1.RecommendedRelatedness;

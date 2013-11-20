@@ -79,8 +79,8 @@ namespace Nls.BaseAssembly {
 			const MarkerType markerType = MarkerType.BabyDaddyDeathDate;
 			const bool fromMother = true;
 			Int16[] surveyYears = ItemYears.BabyDaddyDeathDate;
-			DateTime?[] dates1 = BabyDaddy.RetrieveDeathDates(drRelated.Subject1Tag, surveyYears, dtBabyDaddySubject1);
-			DateTime?[] dates2 = BabyDaddy.RetrieveDeathDates(drRelated.Subject2Tag, surveyYears, dtBabyDaddySubject2);
+			DateTime?[] dates1 = BabyDaddy.RetrieveDeathDates(drRelated.SubjectTag_S1, surveyYears, dtBabyDaddySubject1);
+			DateTime?[] dates2 = BabyDaddy.RetrieveDeathDates(drRelated.SubjectTag_S2, surveyYears, dtBabyDaddySubject2);
 
 			TrendLineDate trend1 = new TrendLineDate(surveyYears, dates1);
 			TrendLineDate trend2 = new TrendLineDate(surveyYears, dates2);
@@ -93,8 +93,8 @@ namespace Nls.BaseAssembly {
 			const MarkerType markerType = MarkerType.BabyDaddyAlive;
 			const bool fromMother = true;
 			Int16[] surveyYears = ItemYears.BabyDaddyIsAlive;
-			Int16?[] points1 = BabyDaddy.RetrieveIsAlive(drRelated.Subject1Tag, surveyYears, dtBabyDaddySubject1);
-			Int16?[] points2 = BabyDaddy.RetrieveIsAlive(drRelated.Subject2Tag, surveyYears, dtBabyDaddySubject2);
+			Int16?[] points1 = BabyDaddy.RetrieveIsAlive(drRelated.SubjectTag_S1, surveyYears, dtBabyDaddySubject1);
+			Int16?[] points2 = BabyDaddy.RetrieveIsAlive(drRelated.SubjectTag_S2, surveyYears, dtBabyDaddySubject2);
 
 			TrendLineInteger trend1 = new TrendLineInteger(surveyYears, points1);
 			TrendLineInteger trend2 = new TrendLineInteger(surveyYears, points2);
@@ -107,8 +107,8 @@ namespace Nls.BaseAssembly {
 			const MarkerType markerType = MarkerType.BabyDaddyInHH;
 			const bool fromMother = true;
 			Int16[] surveyYears = ItemYears.BabyDaddyInHH;
-			Int16?[] values1 = BabyDaddy.RetrieveInHH(drRelated.Subject1Tag, surveyYears, dtBabyDaddySubject1);
-			Int16?[] values2 = BabyDaddy.RetrieveInHH(drRelated.Subject2Tag, surveyYears, dtBabyDaddySubject2);
+			Int16?[] values1 = BabyDaddy.RetrieveInHH(drRelated.SubjectTag_S1, surveyYears, dtBabyDaddySubject1);
+			Int16?[] values2 = BabyDaddy.RetrieveInHH(drRelated.SubjectTag_S2, surveyYears, dtBabyDaddySubject2);
 
 			TrendLineInteger trend1 = new TrendLineInteger(surveyYears, values1);
 			TrendLineInteger trend2 = new TrendLineInteger(surveyYears, values2);
@@ -121,8 +121,8 @@ namespace Nls.BaseAssembly {
 			const MarkerType markerType = MarkerType.BabyDaddyLeftHHDate;
 			const bool fromMother = true;
 			Int16[] surveyYears = ItemYears.BabyDaddyLeftHHDate;
-			DateTime?[] dates1 = BabyDaddy.RetrieveLeftHHDates(drRelated.Subject1Tag, surveyYears, dtBabyDaddySubject1);
-			DateTime?[] dates2 = BabyDaddy.RetrieveLeftHHDates(drRelated.Subject2Tag, surveyYears, dtBabyDaddySubject2);
+			DateTime?[] dates1 = BabyDaddy.RetrieveLeftHHDates(drRelated.SubjectTag_S1, surveyYears, dtBabyDaddySubject1);
+			DateTime?[] dates2 = BabyDaddy.RetrieveLeftHHDates(drRelated.SubjectTag_S2, surveyYears, dtBabyDaddySubject2);
 
 			TrendLineDate trend1 = new TrendLineDate(surveyYears, dates1);
 			TrendLineDate trend2 = new TrendLineDate(surveyYears, dates2);
@@ -135,8 +135,8 @@ namespace Nls.BaseAssembly {
 			const MarkerType markerType = MarkerType.BabyDaddyDistanceFromHH;
 			const bool fromMother = true;
 			Int16[] surveyYears = ItemYears.BabyDaddyDistanceFromHHFuzzyCeiling;
-			Int16?[] distances1 = BabyDaddy.RetrieveDistanceFromHH(drRelated.Subject1Tag, surveyYears, dtBabyDaddySubject1);
-			Int16?[] distances2 = BabyDaddy.RetrieveDistanceFromHH(drRelated.Subject2Tag, surveyYears, dtBabyDaddySubject2);
+			Int16?[] distances1 = BabyDaddy.RetrieveDistanceFromHH(drRelated.SubjectTag_S1, surveyYears, dtBabyDaddySubject1);
+			Int16?[] distances2 = BabyDaddy.RetrieveDistanceFromHH(drRelated.SubjectTag_S2, surveyYears, dtBabyDaddySubject2);
 
 			TrendLineInteger trend1 = new TrendLineInteger(surveyYears, distances1);
 			TrendLineInteger trend2 = new TrendLineInteger(surveyYears, distances2);
@@ -149,8 +149,8 @@ namespace Nls.BaseAssembly {
 			const MarkerType markerType = MarkerType.BabyDaddyAsthma;
 			const bool fromMother = true;
 			Int16[] surveyYears = ItemYears.BabyDaddyAsthma;
-			Int16?[] distances1 = BabyDaddy.RetrieveAsthma(drRelated.Subject1Tag, surveyYears, dtBabyDaddySubject1);
-			Int16?[] distances2 = BabyDaddy.RetrieveAsthma(drRelated.Subject2Tag, surveyYears, dtBabyDaddySubject2);
+			Int16?[] distances1 = BabyDaddy.RetrieveAsthma(drRelated.SubjectTag_S1, surveyYears, dtBabyDaddySubject1);
+			Int16?[] distances2 = BabyDaddy.RetrieveAsthma(drRelated.SubjectTag_S2, surveyYears, dtBabyDaddySubject2);
 
 			TrendLineInteger trend1 = new TrendLineInteger(surveyYears, distances1);
 			TrendLineInteger trend2 = new TrendLineInteger(surveyYears, distances2);
@@ -198,8 +198,8 @@ namespace Nls.BaseAssembly {
 			const MarkerType markerType = MarkerType.Gen2CFatherAlive;
 			const bool fromMother = false;
 			Int16[] surveyYears = ItemYears.Gen2CFatherAlive;
-			Int16?[] points1 = FatherOfGen2.RetrieveIsAlive(drRelated.Subject1Tag, surveyYears, dtFatherSubject1);
-			Int16?[] points2 = FatherOfGen2.RetrieveIsAlive(drRelated.Subject2Tag, surveyYears, dtFatherSubject2);
+			Int16?[] points1 = FatherOfGen2.RetrieveIsAlive(drRelated.SubjectTag_S1, surveyYears, dtFatherSubject1);
+			Int16?[] points2 = FatherOfGen2.RetrieveIsAlive(drRelated.SubjectTag_S2, surveyYears, dtFatherSubject2);
 
 			TrendLineInteger trend1 = new TrendLineInteger(surveyYears, points1);
 			TrendLineInteger trend2 = new TrendLineInteger(surveyYears, points2);
@@ -212,8 +212,8 @@ namespace Nls.BaseAssembly {
 			const MarkerType markerType = MarkerType.Gen2CFatherInHH;
 			const bool fromMother = false;
 			Int16[] surveyYears = ItemYears.Gen2CFatherInHH;
-			Int16?[] values1 = FatherOfGen2.RetrieveInHH(drRelated.Subject1Tag, surveyYears, dtFatherSubject1);
-			Int16?[] values2 = FatherOfGen2.RetrieveInHH(drRelated.Subject2Tag, surveyYears, dtFatherSubject2);
+			Int16?[] values1 = FatherOfGen2.RetrieveInHH(drRelated.SubjectTag_S1, surveyYears, dtFatherSubject1);
+			Int16?[] values2 = FatherOfGen2.RetrieveInHH(drRelated.SubjectTag_S2, surveyYears, dtFatherSubject2);
 
 			TrendLineInteger trend1 = new TrendLineInteger(surveyYears, values1);
 			TrendLineInteger trend2 = new TrendLineInteger(surveyYears, values2);
@@ -226,8 +226,8 @@ namespace Nls.BaseAssembly {
 			const MarkerType markerType = MarkerType.Gen2CFatherDistanceFromHH;
 			const bool fromMother = false;
 			Int16[] surveyYears = ItemYears.Gen2CFatherDistanceFromMotherFuzzyCeiling;
-			Int16?[] distances1 = FatherOfGen2.RetrieveDistanceFromHH(drRelated.Subject1Tag, surveyYears, dtFatherSubject1);
-			Int16?[] distances2 = FatherOfGen2.RetrieveDistanceFromHH(drRelated.Subject2Tag, surveyYears, dtFatherSubject2);
+			Int16?[] distances1 = FatherOfGen2.RetrieveDistanceFromHH(drRelated.SubjectTag_S1, surveyYears, dtFatherSubject1);
+			Int16?[] distances2 = FatherOfGen2.RetrieveDistanceFromHH(drRelated.SubjectTag_S2, surveyYears, dtFatherSubject2);
 
 			TrendLineInteger trend1 = new TrendLineInteger(surveyYears, distances1);
 			TrendLineInteger trend2 = new TrendLineInteger(surveyYears, distances2);

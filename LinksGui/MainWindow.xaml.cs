@@ -50,7 +50,8 @@ namespace LinksGui {
 				LoadExtractGen2ImplicitFather();
 				LoadExtractGen2FatherFromGen1();
 				LoadExtractGen1Outcomes();
-				LoadExtractGen2OutcomesHeight();
+                LoadExtractGen2OutcomesHeight();
+                LoadExtractGen2OutcomesWeight();
 			}
 
 			LoadGeocodeSanitized();//Needed for MarkerGen1
@@ -296,10 +297,14 @@ namespace LinksGui {
 			BA.ImportDataSetTableAdapters.tblGen1OutcomesTableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen1OutcomesTableAdapter();
 			ta.Fill(_dsImport.tblGen1Outcomes);
 		}
-		private void LoadExtractGen2OutcomesHeight ( ) {
-			BA.ImportDataSetTableAdapters.tblGen2OutcomesHeightTableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen2OutcomesHeightTableAdapter();
-			ta.Fill(_dsImport.tblGen2OutcomesHeight);
-		}
+        private void LoadExtractGen2OutcomesHeight( ) {
+            BA.ImportDataSetTableAdapters.tblGen2OutcomesHeightTableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen2OutcomesHeightTableAdapter();
+            ta.Fill(_dsImport.tblGen2OutcomesHeight);
+        }
+        private void LoadExtractGen2OutcomesWeight( ) {
+            BA.ImportDataSetTableAdapters.tblGen2OutcomesWeightTableAdapter ta = new BA.ImportDataSetTableAdapters.tblGen2OutcomesWeightTableAdapter();
+            ta.Fill(_dsImport.tblGen2OutcomesWeight);
+        }
 		private void LoadItem ( ) {
 			BA.LinksDataSetTableAdapters.tblItemTableAdapter ta = new BA.LinksDataSetTableAdapters.tblItemTableAdapter();
 			ta.Fill(_dsLinks.tblItem);
@@ -479,9 +484,5 @@ namespace LinksGui {
 			Trace.WriteLine(message);
 			MessageBox.Show(message);
 		}
-
- 
-
-
 	}
 }

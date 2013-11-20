@@ -97,8 +97,8 @@ namespace Nls.Tests.BaseFixture {
         }
         private static double? RetrieveRImplicit( Int32 subjectTag1, Int32 subjectTag2 ) {
             string select = string.Format("{0}={1} AND {2}={3}",
-                subjectTag1, _ds.tblRelatedStructure.Subject1TagColumn.ColumnName,
-                subjectTag2, _ds.tblRelatedStructure.Subject2TagColumn.ColumnName);
+                subjectTag1, _ds.tblRelatedStructure.SubjectTag_S1Column.ColumnName,
+                subjectTag2, _ds.tblRelatedStructure.SubjectTag_S2Column.ColumnName);
             LinksDataSet.tblRelatedStructureRow[] drsStructure = (LinksDataSet.tblRelatedStructureRow[])_ds.tblRelatedStructure.Select(select);
             Trace.Assert(drsStructure.Length == 1, "There should be exactly one row returned.");
             Int32 relatedID = drsStructure[0].ID;

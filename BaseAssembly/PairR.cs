@@ -57,8 +57,8 @@ namespace Nls.BaseAssembly {
 			string select = string.Format("{0}={1} AND {2}={3} AND ({4}={5} OR {6}={7} OR {6}={5} OR {4}={7}) AND {5}<{7}",
 				extendedID, ds.tblRelatedStructure.ExtendedIDColumn.ColumnName,
 				(byte)RelationshipPath.Gen1Housemates, ds.tblRelatedStructure.RelationshipPathColumn.ColumnName,
-				subjectTag1, ds.tblRelatedStructure.Subject1TagColumn.ColumnName,
-				subjectTag2, ds.tblRelatedStructure.Subject2TagColumn.ColumnName);
+				subjectTag1, ds.tblRelatedStructure.SubjectTag_S1Column.ColumnName,
+				subjectTag2, ds.tblRelatedStructure.SubjectTag_S2Column.ColumnName);
 			LinksDataSet.tblRelatedStructureRow[] drsStructure = (LinksDataSet.tblRelatedStructureRow[])ds.tblRelatedStructure.Select(select);
 			Trace.Assert(drsStructure.Length >= 1, "At least one record should be returned.");
 
@@ -72,7 +72,7 @@ namespace Nls.BaseAssembly {
 					pass1 = null;
 				else
 					pass1 = Convert.ToSingle(drValue[dcPass1]);//pass1 = (float)drValue.RImplicitPass1;				
-				pairs[i] = new PairR(dr.Subject1Tag, dr.Subject2Tag, relatedID, pass1);
+				pairs[i] = new PairR(dr.SubjectTag_S1, dr.SubjectTag_S2, relatedID, pass1);
 			}
 			return pairs;
 		}
@@ -93,8 +93,8 @@ namespace Nls.BaseAssembly {
 			string select = string.Format("{0}={1} AND {2}={3} AND ({4}={5} OR {6}={7} OR {6}={5} OR {4}={7}) AND {5}<{7}",
 				extendedID, ds.tblRelatedStructure.ExtendedIDColumn.ColumnName,
 				(byte)RelationshipPath.Gen2Siblings, ds.tblRelatedStructure.RelationshipPathColumn.ColumnName,
-				subjectTag1, ds.tblRelatedStructure.Subject1TagColumn.ColumnName,
-				subjectTag2, ds.tblRelatedStructure.Subject2TagColumn.ColumnName);
+				subjectTag1, ds.tblRelatedStructure.SubjectTag_S1Column.ColumnName,
+				subjectTag2, ds.tblRelatedStructure.SubjectTag_S2Column.ColumnName);
 			LinksDataSet.tblRelatedStructureRow[] drsStructure = (LinksDataSet.tblRelatedStructureRow[])ds.tblRelatedStructure.Select(select);
 			Trace.Assert(drsStructure.Length >= 1, "At least one record should be returned.");
 
@@ -108,7 +108,7 @@ namespace Nls.BaseAssembly {
 					pass1 = null;
 				else
 					pass1 = Convert.ToSingle(drValue[dcPass1]);//pass1 = (float)drValue.RImplicitPass1;				
-				pairs[i] = new PairR(dr.Subject1Tag, dr.Subject2Tag, relatedID, pass1);
+				pairs[i] = new PairR(dr.SubjectTag_S1, dr.SubjectTag_S2, relatedID, pass1);
 			}
 			return pairs;
 		}

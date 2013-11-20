@@ -54,8 +54,8 @@ namespace Nls.BaseAssembly.Assign {
 			_drRight = drRight;
 			_idRelatedLeft = _drLeft.ID;
 			_idRelatedRight = _drRight.ID;
-			_drSubjectDetails1 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.Subject1Tag);
-			_drSubjectDetails2 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.Subject2Tag);
+			_drSubjectDetails1 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.SubjectTag_S1);
+			_drSubjectDetails2 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.SubjectTag_S2);
 			_extendedID = _drLeft.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1.ExtendedID;
 
 			if ( _drSubjectDetails1.BirthOrderInNls <= _drSubjectDetails2.BirthOrderInNls ) {//This is the way it usually is.  Recall twins were assigned tied birth orders
@@ -92,10 +92,10 @@ namespace Nls.BaseAssembly.Assign {
 		private float? CalculateRImplicitMother ( MarkerEvidence babyDaddyDeathDate, MarkerEvidence babyDaddyAlive, MarkerEvidence babyDaddyInHH, MarkerEvidence babyDaddyLeftHHDate, MarkerEvidence babyDaddyDistanceFromHH ) {
 			if ( !_drValue.IsRImplicitPass1Null() ) return (float?)_drValue.RImplicitPass1;
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.RImplicitPass1Column;
-			PairR[] pairs = PairR.BuildRelatedPairsOfGen2Sibs(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+			PairR[] pairs = PairR.BuildRelatedPairsOfGen2Sibs(dcPass1, _drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2, _drLeft.ExtendedID, _dsLinks);
 
 			InterpolateR interpolate = new InterpolateR(pairs);
-			float? newRImplicit = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+			float? newRImplicit = interpolate.Interpolate(_drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2);
 			if ( newRImplicit.HasValue ) {
 				return newRImplicit;
 			}
@@ -155,19 +155,19 @@ namespace Nls.BaseAssembly.Assign {
 		private float? CalculateRExplicit ( ) {
 			if ( !_drValue.IsRExplicitPass1Null() ) return (float?)_drValue.RExplicitPass1;
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.RExplicitPass1Column;
-			PairR[] pairs = PairR.BuildRelatedPairsOfGen2Sibs(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+			PairR[] pairs = PairR.BuildRelatedPairsOfGen2Sibs(dcPass1, _drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2, _drLeft.ExtendedID, _dsLinks);
 
 			InterpolateR interpolate = new InterpolateR(pairs);
-			float? newRExplicit = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+			float? newRExplicit = interpolate.Interpolate(_drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2);
 			return RGen2Pass1.ExplicitAgreementWithTwins((Tristate)_drValue.IsMz, (MultipleBirth)_drValue.MultipleBirthIfSameSex, newRExplicit);
 		}
 		private float? CalculateRFull ( ) {
 			if ( !_drValue.IsRPass1Null() ) return (float?)_drValue.RPass1;
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.RPass1Column;
-			PairR[] pairs = PairR.BuildRelatedPairsOfGen2Sibs(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+			PairR[] pairs = PairR.BuildRelatedPairsOfGen2Sibs(dcPass1, _drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2, _drLeft.ExtendedID, _dsLinks);
 
 			InterpolateR interpolate = new InterpolateR(pairs);
-			float? newR = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+			float? newR = interpolate.Interpolate(_drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2);
 			if ( newR.HasValue )
 				return newR;
 			else if ( _rImplicit.HasValue )

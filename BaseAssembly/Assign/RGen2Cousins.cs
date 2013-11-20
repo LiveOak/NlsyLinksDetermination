@@ -67,8 +67,8 @@ namespace Nls.BaseAssembly.Assign {
 			_dsLinks = dsLinks;
 			_idRelatedLeft = drLeft.ID;
 
-			_drBare1 = _dsLinks.tblSubject.FindBySubjectTag(drLeft.Subject1Tag);
-			_drBare2 = _dsLinks.tblSubject.FindBySubjectTag(drLeft.Subject2Tag);
+			_drBare1 = _dsLinks.tblSubject.FindBySubjectTag(drLeft.SubjectTag_S1);
+			_drBare2 = _dsLinks.tblSubject.FindBySubjectTag(drLeft.SubjectTag_S2);
 			Trace.Assert(_drBare1.Generation == (byte)Generation.Gen2, "The generation should be Gen2.");
 			Trace.Assert(_drBare2.Generation == (byte)Generation.Gen2, "The generation should be Gen2.");
 			

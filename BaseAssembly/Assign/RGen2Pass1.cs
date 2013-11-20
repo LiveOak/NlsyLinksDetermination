@@ -73,10 +73,10 @@ namespace Nls.BaseAssembly.Assign {
 			_drRight = drRight;
 			_idRelatedLeft = _drLeft.ID;
 			_idRelatedRight = _drRight.ID;
-			_drBare1 = _dsLinks.tblSubject.FindBySubjectTag(drLeft.Subject1Tag);
-			_drBare2 = _dsLinks.tblSubject.FindBySubjectTag(drLeft.Subject2Tag);
-			_drSubjectDetails1 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.Subject1Tag);
-			_drSubjectDetails2 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.Subject2Tag);
+			_drBare1 = _dsLinks.tblSubject.FindBySubjectTag(drLeft.SubjectTag_S1);
+			_drBare2 = _dsLinks.tblSubject.FindBySubjectTag(drLeft.SubjectTag_S2);
+			_drSubjectDetails1 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.SubjectTag_S1);
+			_drSubjectDetails2 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.SubjectTag_S2);
 			_extendedID = _drLeft.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1.ExtendedID;
 
 			if ( _drSubjectDetails1.BirthOrderInNls <= _drSubjectDetails2.BirthOrderInNls ) {//This is the way it usually is.  Recall twins were assigned tied birth orders

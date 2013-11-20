@@ -62,8 +62,8 @@ namespace Nls.BaseAssembly.Assign {
 			_drRight = drRight;
 			_idRelatedLeft = _drLeft.ID;
 			_idRelatedRight = _drRight.ID;
-			_drSubjectDetails1 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.Subject1Tag);
-			_drSubjectDetails2 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.Subject2Tag);
+			_drSubjectDetails1 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.SubjectTag_S1);
+			_drSubjectDetails2 = _dsLinks.tblSubjectDetails.FindBySubjectTag(drLeft.SubjectTag_S2);
 			_extendedID = _drLeft.tblSubjectRowByFK_tblRelatedStructure_tblSubject_Subject1.ExtendedID;
 
 			if ( _drSubjectDetails1.BirthOrderInNls <= _drSubjectDetails2.BirthOrderInNls ) {//This is the way it usually is.  Recall twins were assigned tied birth orders
@@ -111,10 +111,10 @@ namespace Nls.BaseAssembly.Assign {
 			const Bioparent bioparent = Bioparent.Mom;
 
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.ImplicitShareBiomomPass1Column;
-			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2, _drLeft.ExtendedID, _dsLinks);
 
 			InterpolateShare interpolate = new InterpolateShare(pairs);
-			Tristate newShare = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+			Tristate newShare = interpolate.Interpolate(_drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2);
 
 			if ( newShare != Tristate.DoNotKnow ) {
 				return newShare;
@@ -138,10 +138,10 @@ namespace Nls.BaseAssembly.Assign {
 			const Bioparent bioparent = Bioparent.Dad;
 
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.ImplicitShareBiodadPass1Column;
-			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2, _drLeft.ExtendedID, _dsLinks);
 
 			InterpolateShare interpolate = new InterpolateShare(pairs);
-			Tristate newShare = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+			Tristate newShare = interpolate.Interpolate(_drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2);
 
 			if ( newShare != Tristate.DoNotKnow ) {
 				return newShare;
@@ -164,30 +164,30 @@ namespace Nls.BaseAssembly.Assign {
 			if ( explicitBiomomPass1 != Tristate.DoNotKnow ) return explicitBiomomPass1;
 
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.ExplicitShareBiomomPass1Column;
-			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2, _drLeft.ExtendedID, _dsLinks);
 
 			InterpolateShare interpolate = new InterpolateShare(pairs);
-			return interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+			return interpolate.Interpolate(_drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2);
 		}
 		private Tristate AddressExplicitBiodad ( ) {
 			Tristate explicitBiodadPass1 = (Tristate)_drValue.ExplicitShareBiodadPass1;
 			if ( explicitBiodadPass1 != Tristate.DoNotKnow ) return explicitBiodadPass1;
 
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.ExplicitShareBiodadPass1Column;
-			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2, _drLeft.ExtendedID, _dsLinks);
 
 			InterpolateShare interpolate = new InterpolateShare(pairs);
-			return interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+			return interpolate.Interpolate(_drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2);
 		}
 		private Tristate AddressBiomom ( Tristate explicitShare, Tristate implicitShare ) {
 			Tristate biomomPass1 = (Tristate)_drValue.ShareBiomomPass1;
 			if ( biomomPass1 != Tristate.DoNotKnow ) return biomomPass1;
 
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.ShareBiomomPass1Column;
-			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2, _drLeft.ExtendedID, _dsLinks);
 
 			InterpolateShare interpolate = new InterpolateShare(pairs);
-			Tristate newShare = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+			Tristate newShare = interpolate.Interpolate(_drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2);
 			if ( newShare != Tristate.DoNotKnow )
 				return newShare;
 			else
@@ -198,10 +198,10 @@ namespace Nls.BaseAssembly.Assign {
 			if ( biodadPass1 != Tristate.DoNotKnow ) return biodadPass1;
 
 			DataColumn dcPass1 = _dsLinks.tblRelatedValues.ShareBiodadPass1Column;
-			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+			PairShare[] pairs = PairShare.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2, _drLeft.ExtendedID, _dsLinks);
 
 			InterpolateShare interpolate = new InterpolateShare(pairs);
-			Tristate newShare = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+			Tristate newShare = interpolate.Interpolate(_drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2);
 			if ( newShare != Tristate.DoNotKnow )
 				return newShare;
 			else
@@ -268,10 +268,10 @@ namespace Nls.BaseAssembly.Assign {
 //private float? CalculateRExplicit ( ) {//Int32 idRelated
 //   if ( !_drValue.IsRExplicitPass1Null() ) return (float?)_drValue.RExplicitPass1;
 //   DataColumn dcPass1 = _dsLinks.tblRelatedValues.RExplicitPass1Column;
-//   PairR[] pairs = PairR.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.Subject1Tag, _drLeft.Subject2Tag, _drLeft.ExtendedID, _dsLinks);
+//   PairR[] pairs = PairR.BuildRelatedPairsOfGen1Housemates(dcPass1, _drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2, _drLeft.ExtendedID, _dsLinks);
 
 //   //InterpolateBioparent interpolate = new InterpolateBioparent(pairs);
-//   //float? newRExplicit = interpolate.Interpolate(_drLeft.Subject1Tag, _drLeft.Subject2Tag);
+//   //float? newRExplicit = interpolate.Interpolate(_drLeft.SubjectTag_S1, _drLeft.SubjectTag_S2);
 //   //if ( newRExplicit.HasValue ) 
 //   //   return newRExplicit;
 //   //else 

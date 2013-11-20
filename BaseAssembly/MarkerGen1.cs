@@ -83,8 +83,8 @@ namespace Nls.BaseAssembly {
         private Int32 FromAlwaysLivedWithBothBioparents( LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1CurrentDataTable dtCurrent) {
             const Int16 year = ItemYears.Gen1BioparentInHH;
             const MarkerType markerType = MarkerType.Gen1AlwaysLivedWithBothBioparents;       
-            Tristate subject1 = ParentsOfGen1Current.RetrieveAlwaysLiveWithBothBioparents(drRelated.Subject1Tag, dtCurrent);
-            Tristate subject2 = ParentsOfGen1Current.RetrieveAlwaysLiveWithBothBioparents(drRelated.Subject2Tag, dtCurrent);
+            Tristate subject1 = ParentsOfGen1Current.RetrieveAlwaysLiveWithBothBioparents(drRelated.SubjectTag_S1, dtCurrent);
+            Tristate subject2 = ParentsOfGen1Current.RetrieveAlwaysLiveWithBothBioparents(drRelated.SubjectTag_S2, dtCurrent);
             
             MarkerEvidence shareBioparent = MarkerEvidence.Missing;
 
@@ -99,8 +99,8 @@ namespace Nls.BaseAssembly {
             return recordsAdded;
         }
         private Int32 FromLiveWithBioparent( Int16 year, Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
-            Tristate subject1 = ParentsOfGen1Retro.RetrieveInHHByYear(drRelated.Subject1Tag, bioparent, year, dtRetro);
-            Tristate subject2 = ParentsOfGen1Retro.RetrieveInHHByYear(drRelated.Subject2Tag, bioparent, year, dtRetro);
+            Tristate subject1 = ParentsOfGen1Retro.RetrieveInHHByYear(drRelated.SubjectTag_S1, bioparent, year, dtRetro);
+            Tristate subject2 = ParentsOfGen1Retro.RetrieveInHHByYear(drRelated.SubjectTag_S2, bioparent, year, dtRetro);
             MarkerEvidence shareBioparent = MarkerEvidence.Missing;
 
             if( (subject1 == Tristate.DoNotKnow) || (subject2 == Tristate.DoNotKnow) )
@@ -157,9 +157,9 @@ namespace Nls.BaseAssembly {
         }
         private Int32 FromBioparentBirthCountry( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, ImportDataSet.tblGeocodeSanitizedDataTable dtGeocode ) {
 			const Int16 year = ItemYears.Gen1BioparentBirthCountry;
-			Int32 subjectSmaller = Math.Min(drRelated.Subject1Tag, drRelated.Subject2Tag);
-			Int32 subjectLarger = Math.Max(drRelated.Subject1Tag, drRelated.Subject2Tag);
-			ImportDataSet.tblGeocodeSanitizedRow drGeo = dtGeocode.FindBySubject1TagSubject2Tag(subjectSmaller, subjectLarger);
+			Int32 subjectSmaller = Math.Min(drRelated.SubjectTag_S1, drRelated.SubjectTag_S2);
+			Int32 subjectLarger = Math.Max(drRelated.SubjectTag_S1, drRelated.SubjectTag_S2);
+			ImportDataSet.tblGeocodeSanitizedRow drGeo = dtGeocode.FindBySubjectTag_S1SubjectTag_S2(subjectSmaller, subjectLarger);
 
 			MarkerType markerType;
 
@@ -203,9 +203,9 @@ namespace Nls.BaseAssembly {
 		}
 		private Int32 FromBioparentBirthState ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, ImportDataSet.tblGeocodeSanitizedDataTable dtGeocode ) {
 			const Int16 year = ItemYears.Gen1BioparentBirthState;
-			Int32 subjectSmaller = Math.Min(drRelated.Subject1Tag, drRelated.Subject2Tag);
-			Int32 subjectLarger = Math.Max(drRelated.Subject1Tag, drRelated.Subject2Tag);
-			ImportDataSet.tblGeocodeSanitizedRow drGeo = dtGeocode.FindBySubject1TagSubject2Tag(subjectSmaller, subjectLarger);
+			Int32 subjectSmaller = Math.Min(drRelated.SubjectTag_S1, drRelated.SubjectTag_S2);
+			Int32 subjectLarger = Math.Max(drRelated.SubjectTag_S1, drRelated.SubjectTag_S2);
+			ImportDataSet.tblGeocodeSanitizedRow drGeo = dtGeocode.FindBySubjectTag_S1SubjectTag_S2(subjectSmaller, subjectLarger);
 
 			MarkerType markerType;
 
@@ -259,8 +259,8 @@ namespace Nls.BaseAssembly {
 				default: throw new ArgumentOutOfRangeException("bioparent", bioparent, "The function does not accommodate this bioparent value.");
 			}
 
-			birthYear1 = ParentsOfGen1Current.RetrieveBirthYear(drRelated.Subject1Tag, bioparent, dtParentsOfGen1Current);
-			birthYear2 = ParentsOfGen1Current.RetrieveBirthYear(drRelated.Subject2Tag, bioparent, dtParentsOfGen1Current);
+			birthYear1 = ParentsOfGen1Current.RetrieveBirthYear(drRelated.SubjectTag_S1, bioparent, dtParentsOfGen1Current);
+			birthYear2 = ParentsOfGen1Current.RetrieveBirthYear(drRelated.SubjectTag_S2, bioparent, dtParentsOfGen1Current);
 
 			if ( !birthYear1.HasValue || !birthYear2.HasValue )
 				return 0;
@@ -314,8 +314,8 @@ namespace Nls.BaseAssembly {
 				default: throw new ArgumentOutOfRangeException("bioparent", bioparent, "The 'FromShareBioparent' function does not accommodate this bioparent value.");
 			}
 			
-			deathAge1 = ParentsOfGen1Current.RetrieveDeathAge(drRelated.Subject1Tag, bioparent, dtParentsOfGen1Current);
-			deathAge2 = ParentsOfGen1Current.RetrieveDeathAge(drRelated.Subject2Tag, bioparent, dtParentsOfGen1Current);
+			deathAge1 = ParentsOfGen1Current.RetrieveDeathAge(drRelated.SubjectTag_S1, bioparent, dtParentsOfGen1Current);
+			deathAge2 = ParentsOfGen1Current.RetrieveDeathAge(drRelated.SubjectTag_S2, bioparent, dtParentsOfGen1Current);
 
 			if ( !deathAge1.HasValue || !deathAge2.HasValue )
 				return 0;
@@ -520,9 +520,9 @@ namespace Nls.BaseAssembly {
 	}
 }
 //private Int32 FromGen0InHH ( Bioparent bioparent, LinksDataSet.tblRelatedStructureRow drRelated, LinksDataSet.tblParentsOfGen1RetroDataTable dtRetro ) {
-//   TrendLineGen0InHH subject1 = ParentsOfGen1Retro.RetrieveTrend(bioparent, drRelated.Subject1Tag, dtRetro);
-//   TrendLineGen0InHH subject2 = ParentsOfGen1Retro.RetrieveTrend(bioparent, drRelated.Subject2Tag, dtRetro);
-//   //Int16?[] values2 = BabyDaddy.RetrieveInHH(drRelated.Subject2Tag, surveyYears, dtSubject2);
+//   TrendLineGen0InHH subject1 = ParentsOfGen1Retro.RetrieveTrend(bioparent, drRelated.SubjectTag_S1, dtRetro);
+//   TrendLineGen0InHH subject2 = ParentsOfGen1Retro.RetrieveTrend(bioparent, drRelated.SubjectTag_S2, dtRetro);
+//   //Int16?[] values2 = BabyDaddy.RetrieveInHH(drRelated.SubjectTag_S2, surveyYears, dtSubject2);
 
 //   //TrendLineInteger trend1 = new TrendLineInteger(surveyYears, values1);
 //   //TrendLineInteger trend2 = new TrendLineInteger(surveyYears, values2);
@@ -543,8 +543,8 @@ namespace Nls.BaseAssembly {
 //      default: throw new ArgumentOutOfRangeException("bioparent", bioparent, "The 'FromShareBioparent' function does not accommodate this bioparent value.");
 //   }
 
-//   Tristate subject1 = ParentsOfGen1Current.RetrieveUSBorn(drRelated.Subject1Tag, item, dtCurrent);
-//   Tristate subject2 = ParentsOfGen1Current.RetrieveUSBorn(drRelated.Subject2Tag, item, dtCurrent);
+//   Tristate subject1 = ParentsOfGen1Current.RetrieveUSBorn(drRelated.SubjectTag_S1, item, dtCurrent);
+//   Tristate subject2 = ParentsOfGen1Current.RetrieveUSBorn(drRelated.SubjectTag_S2, item, dtCurrent);
 //   MarkerEvidence shareBioparent = MarkerEvidence.Missing;
 
 //   if ( (subject1 == Tristate.DoNotKnow) || (subject2 == Tristate.DoNotKnow) )

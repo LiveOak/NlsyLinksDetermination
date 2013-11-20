@@ -1,6 +1,6 @@
 require(RODBC)
 rm(list=ls(all=TRUE))
-pathCsv <- "F:/Projects/Nls/Links2011/Extracts/Gen2OutcomesHeight.csv"
+pathCsv <- "./Extracts/Gen2OutcomesHeight.csv"
 ds <- read.csv(pathCsv, header=TRUE)
 
 odbcCloseAll()

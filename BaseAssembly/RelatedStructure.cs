@@ -31,8 +31,8 @@ namespace Nls.BaseAssembly {
 			if ( ds.tblRelatedStructure.Count <= 0 ) throw new ArgumentException("tblRelatedStructure should have more than one row.", "ds");
 			string sql = string.Format("{0}={1} AND {2}={3} AND {4}={5}",
 				(byte)relationshipPath, ds.tblRelatedStructure.RelationshipPathColumn.ColumnName,
-				subject1Tag, ds.tblRelatedStructure.Subject1TagColumn.ColumnName,
-				subject2Tag, ds.tblRelatedStructure.Subject2TagColumn.ColumnName);
+				subject1Tag, ds.tblRelatedStructure.SubjectTag_S1Column.ColumnName,
+				subject2Tag, ds.tblRelatedStructure.SubjectTag_S2Column.ColumnName);
 			LinksDataSet.tblRelatedStructureRow[] drs = (LinksDataSet.tblRelatedStructureRow[])ds.tblRelatedStructure.Select(sql);
 			Trace.Assert(drs.Length == 1, "There should be exactly one row retrieved.");
 			return drs[0];
@@ -64,8 +64,8 @@ namespace Nls.BaseAssembly {
 
 			LinksDataSet.tblRelatedStructureRow drNew = this._dsLinks.tblRelatedStructure.NewtblRelatedStructureRow();
 			drNew.ExtendedID = extendedID;
-			drNew.Subject1Tag = drSubject1.SubjectTag;
-			drNew.Subject2Tag = drSubject2.SubjectTag;
+			drNew.SubjectTag_S1 = drSubject1.SubjectTag;
+			drNew.SubjectTag_S2 = drSubject2.SubjectTag;
 			drNew.RelationshipPath = (byte)GetRelationshipPath(drSubject1, drSubject2);
 			drNew.EverSharedHouse = (bool)SharedHouse((RelationshipPath)(drNew.RelationshipPath));
 			_dsLinks.tblRelatedStructure.AddtblRelatedStructureRow(drNew);

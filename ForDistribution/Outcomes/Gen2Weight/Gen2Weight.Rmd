@@ -1,0 +1,67 @@
+# Calculating Gen2 Weight
+This sequence picks a single Weight value per Gen2 subject.
+
+```{r, echo=FALSE, message=F} 
+#Set the chunks' working directory to the repository's base directory; this assumes the report is nested inside of two directories.
+opts_knit$set(root.dir='../../../')  #Don't combine this call with any other chunk -espeically one that uses file paths.
+```
+
+```{r SetOptions, echo=FALSE}
+options(width=130)
+opts_chunk$set(
+  comment="", 
+  warning=TRUE, 
+  echo=TRUE, 
+  tidy=FALSE, 
+  size="small"
+  )
+read_chunk("./ForDistribution/Outcomes/Gen2Weight/Gen2Weight.R") #This allows knitr to call chunks tagged in the underlying .R file.
+```
+
+```{r LoadPackages, echo=FALSE, message=FALSE}
+```
+## Define the age cutoffs to keep ages within the same Window as Gen1 Weights.  Define the Weight cutoffs to exclude values that are more likely to be entry errors or a developmental disorder, than a true reflection of additive genetics
+```{r DefineGlobals}
+```
+
+## Load the appropriate information from the SQL Server database
+```{r LoadData}
+```
+
+## Make necessary Adjustments
+```{r TweakData}
+```
+
+## Combine the feet and inches to get total inches.  
+```{r CalculateDV, fig.height=2}
+```
+
+## Show the Weight data with age of the subject when the Weight was taken.  Filter out records where the age or the Weight is outside of the desired window.
+```{r FilterValuesAndAges, fig.height=5}
+```
+
+## Standardize by Gender & Age.  Calculated Age (using SurveyDate and MOB) has been truncated to integers.  
+```{r Standarize, fig.height=2}
+```
+
+## Determine Z-score to clip at.  Adjust as necessary (zMin & zMax were defined at the top of the page).  The white box extends between zMin and zMax.
+```{r DetermineZForClipping, fig.height=5}
+```
+
+## Pick the subject's oldest record (within that age window).  Then examine the age & Z values
+```{r ReduceToOneRecordPerSubject, fig.width=4,fig.height=2.8} 
+```
+
+## Compare with Kelly's Weight values.  
+Make sure they roughly agree. There are a few differences, including (1) the age range is a little shifted, (2) the 2010 survey wasn't available, (3) the cutoff scores were more generous, and (4) the order of standardization & clipping *might* have been different.
+```{r ComparingWithKelly, fig.width=9, fig.height=6} 
+```
+
+## Write the OutcomeData to CSV
+```{r WriteToCsv } 
+```
+
+## NLSY Variables
+Each row in the table represents and NLSY variable that was used.  The first column is the official "R Number" designated by the NLSY.  The remaining columns are values we assigned to help the plumbing and data manipulation.
+```{r DisplayVariables } 
+```

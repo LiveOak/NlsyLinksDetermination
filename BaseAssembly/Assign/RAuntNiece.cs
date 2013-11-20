@@ -66,13 +66,13 @@ namespace Nls.BaseAssembly.Assign {
 			_dsLinks = dsLinks;
 			_idRelatedLeft = drLeft.ID;
 			
-			if ( CommonCalculations.GenerationOfSubjectTag(drLeft.Subject1Tag) == Generation.Gen1 ) {
-				_drBareAunt = _dsLinks.tblSubject.FindBySubjectTag(drLeft.Subject1Tag);
-				_drBareNiece = _dsLinks.tblSubject.FindBySubjectTag(drLeft.Subject2Tag);
+			if ( CommonCalculations.GenerationOfSubjectTag(drLeft.SubjectTag_S1) == Generation.Gen1 ) {
+				_drBareAunt = _dsLinks.tblSubject.FindBySubjectTag(drLeft.SubjectTag_S1);
+				_drBareNiece = _dsLinks.tblSubject.FindBySubjectTag(drLeft.SubjectTag_S2);
 			}
 			else {
-				_drBareAunt = _dsLinks.tblSubject.FindBySubjectTag(drLeft.Subject2Tag);
-				_drBareNiece = _dsLinks.tblSubject.FindBySubjectTag(drLeft.Subject1Tag);
+				_drBareAunt = _dsLinks.tblSubject.FindBySubjectTag(drLeft.SubjectTag_S2);
+				_drBareNiece = _dsLinks.tblSubject.FindBySubjectTag(drLeft.SubjectTag_S1);
 			}
 			Trace.Assert(_drBareAunt.Generation == (byte)Generation.Gen1, "The generation should not be the same for a aunt-niece relationship.");
 			Trace.Assert(_drBareNiece.Generation == (byte)Generation.Gen2, "The generation should not be the same for a aunt-niece relationship.");
