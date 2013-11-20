@@ -5,7 +5,9 @@ rm(list=ls(all=TRUE))
 
 generation <- 2
 pathInputHeight <- "./ForDistribution/Outcomes/Gen2Height/Gen2Height.csv"
-pathInputMath <- "./OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv"
+pathInputWeight <- "./ForDistribution/Outcomes/Gen2Weight/Gen2Weight.csv"
+pathInputMath <- "./ForDistribution/Outcomes/Gen2Math/Gen2Math.csv"
+# pathInputMath <- "./OutsideData/KellyHeightWeightMath2012-03-09/ExtraOutcomes79FromKelly2012March.csv"
 pathOutput <- "./ForDistribution/Outcomes/OutcomesGen2.csv"
 
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
@@ -29,7 +31,8 @@ rm(dsWeight)
 
 ### Merge Math
 dsMath <- read.csv(pathInputMath, stringsAsFactors=F)
-dsMath <- dsMath[, c("SubjectTag", "MathStandardized")]
+dsMath <- dsMath[, c("SubjectTag", "ZGenderAge")]
+dsMath <- plyr::rename(dsMath, replace=c( "ZGenderAge"="MathZGenderAge"))
 ds <- merge(x=ds, y=dsMath, by="SubjectTag", all.x=TRUE)
 rm(dsMath)
 
@@ -44,6 +47,7 @@ par(mar=c(2,2,2,0), mgp=c(1,0,0), tcl=0)
 HistogramWithCurve(ds$HeightZGenderAge, "HeightZGenderAge")
 HistogramWithCurve(ds$WeightZGenderAge, "WeightZGenderAge")
 # HistogramWithCurve(ds$HeightZGender, "HeightZGender")
-HistogramWithCurve(ds$MathStandardized, "MathStandardized")
+HistogramWithCurve(ds$MathZGenderAge, "MathZGenderAge")
+# HistogramWithCurve(ds$MathStandardized, "MathStandardized")
 
 write.csv(ds, pathOutput, row.names=F)

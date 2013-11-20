@@ -12,16 +12,12 @@ pathInput <- "./ForDistribution/Outcomes/ExtraOutcomes79.csv"
 #dsOutcomes <- read.csv("F:/Projects/Nls/NlsyLinksDetermination/CodingUtilities/Gen2Height/ExtraOutcomes79FromKelly2012March.csv")
 
 #Gen2:
-# oName <- "HeightZGender" #Will October 2012
-# oName <- "HeightZGenderAge" #Will October 2012
-# oName <- "HeightStandarizedFor19to25" #Kelly 2011
 # oName <- "MathStandardized"
-# oName <- "WeightStandardizedForAge19To25"
-#Gen1:
 # oName <- "HeightZGender"
 # oName <- "HeightZGenderAge"
 # oName <- "WeightZGender"
-oName <- "WeightZGenderAge"
+# oName <- "WeightZGenderAge"
+oName <- "MathZGenderAge"
 # oName <- "IQZGenderAge"
 
 # oName <- "BmiLateTeens"
@@ -37,7 +33,7 @@ oName <- "WeightZGenderAge"
 oName_1 <- paste0(oName, "_S1")
 oName_2 <- paste0(oName, "_S2")
 
-relationshipPaths <- c(1, 2)
+relationshipPaths <- c(2)
 # relationshipPaths <- c(1, 2, 3, 4, 5)
 relationshipPathsString <- paste0("(", paste(relationshipPaths, collapse=","), ")")
 
