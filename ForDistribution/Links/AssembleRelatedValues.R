@@ -1,5 +1,6 @@
 rm(list=ls(all=TRUE))
 require(RODBC)
+require(plyr)
 
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 ds <- sqlQuery(channel, "SELECT * FROM dbo.vewRelatedValues ORDER BY ExtendedID, SubjectTag_S1, SubjectTag_S2")
@@ -23,6 +24,8 @@ ds$SubjectID_S2 <- as.integer(ds$SubjectID_S2)
 
 
 fileName <- sprintf("./ForDistribution/Links/Links2011V%d.csv", algorithmVersion)
+
+plyr::count(ds, vars=c("RelationshipPath", "R"))
 
 write.csv(ds, file=fileName, row.names=FALSE)
 summary(ds)

@@ -43,7 +43,7 @@ rVersions <- c("R", "RFull", "RExplicit", "RImplicit",  "RImplicit2004") #"RImpl
 # rVersions <- c("R", "RFull", "RPass1", "RImplicit", "RExplicit", "RExplicitPass1", "RImplicit2004")
 
 #rGroupsToDrop <- c(0, .0625, .125, .375, .75)
-rGroupsToDrop <- c()
+rGroupsToDrop <- c(0, .0625, .125)
 dropIfHousematesAreNotSameGeneration <- FALSE
 startNewPage <- c(F, T, F, T, F, T, F)
 

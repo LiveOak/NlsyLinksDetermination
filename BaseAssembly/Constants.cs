@@ -18,7 +18,8 @@ namespace Nls.BaseAssembly {
 		public const string Gen1GenderColumn = "R0214800"; //In tblGen1Links
 		public const string Gen2SubjectIDColumn = "C0000100";
 		public const string Gen2GenderColumn = "C0005400";
-		public static float[] Gen1RsToExcludeFromR { get { return new float[] { 0f, .375f, .75f }; } }
+		//public static float[] Gen1RsToExcludeFromR { get { return new float[] { 0f, .375f, .75f }; } }
+        public static float[] Gen1RsToExcludeFromR { get { return new float[] { 0f, .0625f, .125f, .375f, .75f }; } }
 		#endregion
 		#region  IDs
 		public const Int32 Gen1IDMin = 1;//Sync with tblLUItem
