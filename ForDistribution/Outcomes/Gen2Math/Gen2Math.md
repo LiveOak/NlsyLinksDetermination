@@ -123,14 +123,6 @@ dsLong$AgeSelfReportYears <- NULL
 testit::assert("All outcomes should have a loop index of zero", all(dsLong$LoopIndex==0))
 dsLong$LoopIndex <- NULL
 
-# #There is at least one bad value, so I'm stripping them out before they get to the averaging (Subject 859801 has a '0' for the Standard, which should have a min of '65')
-# dsLong[(dsLong$ItemLabel=='Gen2PiatMathRaw') & (dsLong$Value > rawMax), 'Value'] <- NA_integer_
-# dsLong[(dsLong$ItemLabel=='Gen2PiatMathRaw') & (dsLong$Value < rawMin), 'Value'] <- NA_integer_
-# dsLong[(dsLong$ItemLabel=='Gen2PiatMathPercentile') & (dsLong$Value > percentileMax), 'Value'] <- NA_integer_
-# dsLong[(dsLong$ItemLabel=='Gen2PiatMathPercentile') & (dsLong$Value < percentileMin), 'Value'] <- NA_integer_
-# dsLong[(dsLong$ItemLabel=='Gen2PiatMathStandard') & (dsLong$Value > standardMax), 'Value'] <- NA_integer_
-# dsLong[(dsLong$ItemLabel=='Gen2PiatMathStandard') & (dsLong$Value < standardMin), 'Value'] <- NA_integer_
-
 ####################################################################################
 ```
 
@@ -138,18 +130,6 @@ dsLong$LoopIndex <- NULL
 ## Combine the feet and inches to get total inches.  
 
 ```r
-# CombineScores <- function( df ) {
-#   rawScores <- df[df$ItemLabel=='Gen2PiatMathRaw', 'Value']
-#   percentileScores <- df[df$ItemLabel=='Gen2PiatMathPercentile', 'Value']
-#   standardScores <- df[df$ItemLabel=='Gen2PiatMathStandard', 'Value']
-#   
-#   data.frame(
-#     Raw=mean(rawScores, na.rm=T),
-#     Percentile=mean(percentileScores, na.rm=T),
-#     Standard=mean(standardScores, na.rm=T)
-#   )
-# }
-
 #Combine to one row per SubjectYear combination
 # system.time( 
 #   dsYearStatic <- ddply(dsLong, c("SubjectTag", "SurveyYear", "Age", "Gender"), nrow)
@@ -176,6 +156,8 @@ rm(dsLong)
 ## Show the Math data with age of the subject when the Math was taken.  Filter out records where the age or the Math is outside of the desired window.
 
 ```r
+# #There is at least one bad value --Subject 859801 has a '0' for the Standard, which should have a min of '65'.
+
 #Filter out records with undesired Math values
 qplot(dsYear$DV, binwidth=1, main="Before Filtering Out Extreme Maths")
 ```
@@ -256,72 +238,41 @@ ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_
 
 ```r
 
+# ####################################################################################
+# ## @knitr Standarize
+# dsYear <- ddply(dsYear, c("Gender"), transform, ZGender=scale(DV))
+# dsYear <- ddply(dsYear, c("Gender", "Age"), transform, ZGenderAge=scale(DV))
+# nrow(dsYear)
+# qplot(dsYear$ZGenderAge, binwidth=.25)
+# 
+# ####################################################################################
+# ## @knitr DetermineZForClipping
+# ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) + 
+#   annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
+#   geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
+# dsYear <- dsYear[zMin <= dsYear$ZGenderAge & dsYear$ZGenderAge <= zMax, ]
+# nrow(dsYear)
+# ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) + 
+#   annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
+#   geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
+
 ####################################################################################
 ```
 
 
 ## Standardize by Gender & Age.  Calculated Age (using SurveyDate and MOB) has been truncated to integers.  
 
-```r
-# dsYear <- ddply(dsYear, c("Gender"), transform, ZGender=scale(DV))
-dsYear <- ddply(dsYear, c("Gender", "Age"), transform, ZGenderAge=scale(DV))
-nrow(dsYear)
-```
-
-```
-[1] 32375
-```
-
-```r
-qplot(dsYear$ZGenderAge, binwidth=.25)
-```
-
-![plot of chunk Standarize](figure/Standarize.png) 
-
-```r
-
-####################################################################################
-```
 
 
 ## Determine Z-score to clip at.  Adjust as necessary (zMin & zMax were defined at the top of the page).  The white box extends between zMin and zMax.
 
-```r
-ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) + 
-  annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
-  geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
-```
-
-![plot of chunk DetermineZForClipping](figure/DetermineZForClipping1.png) 
-
-```r
-dsYear <- dsYear[zMin <= dsYear$ZGenderAge & dsYear$ZGenderAge <= zMax, ]
-nrow(dsYear)
-```
-
-```
-[1] 32345
-```
-
-```r
-ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) + 
-  annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
-  geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
-```
-
-![plot of chunk DetermineZForClipping](figure/DetermineZForClipping2.png) 
-
-```r
-
-####################################################################################
-```
 
 
 ## Pick the subject's oldest record (within that age window).  Then examine the age & Z values
 
 ```r
-#ds <- ddply(dsYear, "SubjectTag", subset, rank(-Age, ties.method="first")==1)
-ds <- ddply(dsYear, "SubjectTag", summarize, ZGenderAge=median(ZGenderAge))
+#ds <- ddply(dsYear, "SubjectTag", summarize, ZGenderAge=median(ZGenderAge))
+ds <- ddply(dsYear, "SubjectTag", summarize, Score=median(DV))
 nrow(ds) 
 ```
 
@@ -334,20 +285,16 @@ summary(ds)
 ```
 
 ```
-   SubjectTag        ZGenderAge     
- Min.   :    201   Min.   :-2.6837  
- 1st Qu.: 276902   1st Qu.:-0.5766  
- Median : 553702   Median :-0.0045  
- Mean   : 560749   Mean   :-0.0225  
- 3rd Qu.: 826505   3rd Qu.: 0.5691  
- Max.   :1266703   Max.   : 2.8289  
+   SubjectTag          Score      
+ Min.   :    201   Min.   : 65.0  
+ 1st Qu.: 276902   1st Qu.: 92.5  
+ Median : 553702   Median :100.0  
+ Mean   : 560749   Mean   :100.1  
+ 3rd Qu.: 826505   3rd Qu.:108.5  
+ Max.   :1266703   Max.   :135.0  
 ```
 
 ```r
-# SELECT [Mob], [LastSurveyYearCompleted], [AgeAtLastSurvey]
-#   FROM [NlsLinks].[dbo].[vewSubjectDetails79]
-#   WHERE Generation=2 and AgeAtLastSurvey >=16
-#After the 2010 survey, there were 7,201 subjects who were at least 16 at the last survey.
 ds <- plyr::join(x=dsSubject, y=ds, by="SubjectTag", type="left", match="first")
 nrow(ds) 
 ```
@@ -359,13 +306,13 @@ nrow(ds)
 ```r
 
 # qplot(ds$Age, binwidth=.5) #Make sure ages are within window, and favoring older values
-qplot(ds$ZGenderAge, binwidth=.25) #Make sure ages are normalish with no extreme values.
+qplot(ds$Score, binwidth=.25) #Make sure ages are normalish with no extreme values.
 ```
 
 ![plot of chunk ReduceToOneRecordPerSubject](figure/ReduceToOneRecordPerSubject.png) 
 
 ```r
-table(is.na(ds$ZGenderAge))
+table(is.na(ds$Score))
 ```
 
 ```
@@ -399,7 +346,7 @@ nrow(dsOldVsNew)
 
 #See if the new version is missing a lot of values that the old version caught.
 #   The denominator isn't exactly right, because it doesn't account for the 2010 values missing in the new version.
-table(is.na(dsOldVsNew$MathStandardized), is.na(dsOldVsNew$ZGenderAge), dnn=c("OldIsMissing", "NewIsMissing"))
+table(is.na(dsOldVsNew$MathStandardized), is.na(dsOldVsNew$Score), dnn=c("OldIsMissing", "NewIsMissing"))
 ```
 
 ```
@@ -411,16 +358,16 @@ OldIsMissing FALSE TRUE
 
 ```r
 #View the correlation
-cor(dsOldVsNew$MathStandardized, dsOldVsNew$ZGenderAge, use="complete.obs")
+cor(dsOldVsNew$MathStandardized, dsOldVsNew$Score, use="complete.obs")
 ```
 
 ```
-[1] 0.866
+[1] 0.8699
 ```
 
 ```r
 #Compare against an x=y identity line.
-ggplot(dsOldVsNew, aes(x=MathStandardized, y=ZGenderAge)) + geom_point(shape=1) + geom_abline() + geom_smooth(method="loess")
+ggplot(dsOldVsNew, aes(x=MathStandardized, y=Score)) + geom_point(shape=1) + geom_abline() + geom_smooth(method="loess")
 ```
 
 ```

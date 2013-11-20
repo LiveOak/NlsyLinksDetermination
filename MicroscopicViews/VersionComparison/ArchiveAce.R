@@ -17,8 +17,10 @@ pathInput <- "./ForDistribution/Outcomes/ExtraOutcomes79.csv"
 # oName <- "HeightZGenderAge"
 # oName <- "WeightZGender"
 # oName <- "WeightZGenderAge"
-oName <- "MathZGenderAge"
-# oName <- "IQZGenderAge"
+# oName <- "IQZGenderAge" #Gen1 only
+# oName <- "MathZGenderAge" #Gen2 only
+oName <- "MathStandard" #Gen2 only
+
 
 # oName <- "BmiLateTeens"
 # oName <- "AfqtRescaled2006"

@@ -85,27 +85,8 @@ dsLong$AgeSelfReportYears <- NULL
 testit::assert("All outcomes should have a loop index of zero", all(dsLong$LoopIndex==0))
 dsLong$LoopIndex <- NULL
 
-# #There is at least one bad value, so I'm stripping them out before they get to the averaging (Subject 859801 has a '0' for the Standard, which should have a min of '65')
-# dsLong[(dsLong$ItemLabel=='Gen2PiatMathRaw') & (dsLong$Value > rawMax), 'Value'] <- NA_integer_
-# dsLong[(dsLong$ItemLabel=='Gen2PiatMathRaw') & (dsLong$Value < rawMin), 'Value'] <- NA_integer_
-# dsLong[(dsLong$ItemLabel=='Gen2PiatMathPercentile') & (dsLong$Value > percentileMax), 'Value'] <- NA_integer_
-# dsLong[(dsLong$ItemLabel=='Gen2PiatMathPercentile') & (dsLong$Value < percentileMin), 'Value'] <- NA_integer_
-# dsLong[(dsLong$ItemLabel=='Gen2PiatMathStandard') & (dsLong$Value > standardMax), 'Value'] <- NA_integer_
-# dsLong[(dsLong$ItemLabel=='Gen2PiatMathStandard') & (dsLong$Value < standardMin), 'Value'] <- NA_integer_
-
 ####################################################################################
 ## @knitr CalculateDV
-# CombineScores <- function( df ) {
-#   rawScores <- df[df$ItemLabel=='Gen2PiatMathRaw', 'Value']
-#   percentileScores <- df[df$ItemLabel=='Gen2PiatMathPercentile', 'Value']
-#   standardScores <- df[df$ItemLabel=='Gen2PiatMathStandard', 'Value']
-#   
-#   data.frame(
-#     Raw=mean(rawScores, na.rm=T),
-#     Percentile=mean(percentileScores, na.rm=T),
-#     Standard=mean(standardScores, na.rm=T)
-#   )
-# }
 
 #Combine to one row per SubjectYear combination
 # system.time( 
@@ -121,6 +102,8 @@ rm(dsLong)
 
 ####################################################################################
 ## @knitr FilterValuesAndAges
+# #There is at least one bad value --Subject 859801 has a '0' for the Standard, which should have a min of '65'.
+
 #Filter out records with undesired Math values
 qplot(dsYear$DV, binwidth=1, main="Before Filtering Out Extreme Maths")
 dsYear <- dsYear[!is.na(dsYear$DV), ]
@@ -138,40 +121,36 @@ nrow(dsYear)
 qplot(dsYear$Age, binwidth=1, main="After Filtering Out Extreme Ages") 
 ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 
-####################################################################################
-## @knitr Standarize
+# ####################################################################################
+# ## @knitr Standarize
 # dsYear <- ddply(dsYear, c("Gender"), transform, ZGender=scale(DV))
-dsYear <- ddply(dsYear, c("Gender", "Age"), transform, ZGenderAge=scale(DV))
-nrow(dsYear)
-qplot(dsYear$ZGenderAge, binwidth=.25)
-
-####################################################################################
-## @knitr DetermineZForClipping
-ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) + 
-  annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
-  geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
-dsYear <- dsYear[zMin <= dsYear$ZGenderAge & dsYear$ZGenderAge <= zMax, ]
-nrow(dsYear)
-ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) + 
-  annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
-  geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
+# dsYear <- ddply(dsYear, c("Gender", "Age"), transform, ZGenderAge=scale(DV))
+# nrow(dsYear)
+# qplot(dsYear$ZGenderAge, binwidth=.25)
+# 
+# ####################################################################################
+# ## @knitr DetermineZForClipping
+# ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) + 
+#   annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
+#   geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
+# dsYear <- dsYear[zMin <= dsYear$ZGenderAge & dsYear$ZGenderAge <= zMax, ]
+# nrow(dsYear)
+# ggplot(dsYear, aes(x=Age, y=ZGenderAge, group=SubjectTag)) + 
+#   annotate("rect", xmin=min(dsYear$Age), xmax=max(dsYear$Age), ymin=zMin, ymax= zMax, fill="gray99") +
+#   geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 
 ####################################################################################
 ## @knitr ReduceToOneRecordPerSubject
-#ds <- ddply(dsYear, "SubjectTag", subset, rank(-Age, ties.method="first")==1)
-ds <- ddply(dsYear, "SubjectTag", summarize, ZGenderAge=median(ZGenderAge))
+#ds <- ddply(dsYear, "SubjectTag", summarize, ZGenderAge=median(ZGenderAge))
+ds <- ddply(dsYear, "SubjectTag", summarize, Score=median(DV))
 nrow(ds) 
 summary(ds)
-# SELECT [Mob], [LastSurveyYearCompleted], [AgeAtLastSurvey]
-#   FROM [NlsLinks].[dbo].[vewSubjectDetails79]
-#   WHERE Generation=2 and AgeAtLastSurvey >=16
-#After the 2010 survey, there were 7,201 subjects who were at least 16 at the last survey.
 ds <- plyr::join(x=dsSubject, y=ds, by="SubjectTag", type="left", match="first")
 nrow(ds) 
 
 # qplot(ds$Age, binwidth=.5) #Make sure ages are within window, and favoring older values
-qplot(ds$ZGenderAge, binwidth=.25) #Make sure ages are normalish with no extreme values.
-table(is.na(ds$ZGenderAge))
+qplot(ds$Score, binwidth=.25) #Make sure ages are normalish with no extreme values.
+table(is.na(ds$Score))
 
 ####################################################################################
 ## @knitr ComparingWithKelly 
@@ -183,11 +162,11 @@ nrow(dsOldVsNew)
 
 #See if the new version is missing a lot of values that the old version caught.
 #   The denominator isn't exactly right, because it doesn't account for the 2010 values missing in the new version.
-table(is.na(dsOldVsNew$MathStandardized), is.na(dsOldVsNew$ZGenderAge), dnn=c("OldIsMissing", "NewIsMissing"))
+table(is.na(dsOldVsNew$MathStandardized), is.na(dsOldVsNew$Score), dnn=c("OldIsMissing", "NewIsMissing"))
 #View the correlation
-cor(dsOldVsNew$MathStandardized, dsOldVsNew$ZGenderAge, use="complete.obs")
+cor(dsOldVsNew$MathStandardized, dsOldVsNew$Score, use="complete.obs")
 #Compare against an x=y identity line.
-ggplot(dsOldVsNew, aes(x=MathStandardized, y=ZGenderAge)) + geom_point(shape=1) + geom_abline() + geom_smooth(method="loess")
+ggplot(dsOldVsNew, aes(x=MathStandardized, y=Score)) + geom_point(shape=1) + geom_abline() + geom_smooth(method="loess")
 
 ####################################################################################
 ## @knitr WriteToCsv
@@ -196,5 +175,4 @@ write.csv(ds, pathOutput, row.names=FALSE)
 ####################################################################################
 ## @knitr DisplayVariables
 dsVariable[, c("VariableCode", "SurveyYear", "Item", "ItemLabel", "Generation", "ExtractSource", "ID")]
-
 
