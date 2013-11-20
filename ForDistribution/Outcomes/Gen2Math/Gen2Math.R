@@ -17,8 +17,8 @@ pathInputKellyOutcomes <-  "./OutsideData/KellyHeightWeightMath2012-03-09/ExtraO
 pathOutput <- "./ForDistribution/Outcomes/Gen2Math/Gen2Math.csv"
 
 # dvName <- "Gen2PiatMathRaw"
-# dvName <- "Gen2PiatMathPercentile"
-dvName <- "Gen2PiatMathStandard"
+dvName <- "Gen2PiatMathPercentile"
+# dvName <- "Gen2PiatMathStandard"
 
 rawMin <- 0
 rawMax <- 84
@@ -85,6 +85,7 @@ dsLong$AgeSelfReportYears <- NULL
 testit::assert("All outcomes should have a loop index of zero", all(dsLong$LoopIndex==0))
 dsLong$LoopIndex <- NULL
 
+
 ####################################################################################
 ## @knitr CalculateDV
 
@@ -95,6 +96,7 @@ dsLong$LoopIndex <- NULL
 # table(dsYearStatic$V1)
 dsYearStatic <- dsLong[, c("SubjectTag", "SurveyYear", "Age", "Gender", "Value")]
 dsYearStatic <- plyr::rename(dsYearStatic, replace=c("Value"="DV"))
+
 
 dsYear <- dsYearStatic
 nrow(dsYear)
@@ -142,7 +144,8 @@ ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_
 ####################################################################################
 ## @knitr ReduceToOneRecordPerSubject
 #ds <- ddply(dsYear, "SubjectTag", summarize, ZGenderAge=median(ZGenderAge))
-ds <- ddply(dsYear, "SubjectTag", summarize, Score=median(DV))
+# ds <- ddply(dsYear, "SubjectTag", summarize, Score=median(DV))
+ds <- ddply(dsYear, "SubjectTag", summarize, Score=qnorm(median(DV)/100))
 nrow(ds) 
 summary(ds)
 ds <- plyr::join(x=dsSubject, y=ds, by="SubjectTag", type="left", match="first")

@@ -34,7 +34,8 @@ dsMath <- read.csv(pathInputMath, stringsAsFactors=F)
 # dsMath <- dsMath[, c("SubjectTag", "ZGenderAge")]
 # dsMath <- plyr::rename(dsMath, replace=c( "ZGenderAge"="MathZGenderAge"))
 dsMath <- dsMath[, c("SubjectTag", "Score")]
-dsMath <- plyr::rename(dsMath, replace=c( "Score"="MathStandard"))
+#dsMath <- plyr::rename(dsMath, replace=c( "Score"="MathStandard"))
+dsMath <- plyr::rename(dsMath, replace=c( "Score"="MathGaussified"))
 ds <- merge(x=ds, y=dsMath, by="SubjectTag", all.x=TRUE)
 rm(dsMath)
 
@@ -50,6 +51,7 @@ HistogramWithCurve(ds$HeightZGenderAge, "HeightZGenderAge")
 HistogramWithCurve(ds$WeightZGenderAge, "WeightZGenderAge")
 # HistogramWithCurve(ds$HeightZGender, "HeightZGender")
 # HistogramWithCurve(ds$MathZGenderAge, "MathZGenderAge")
-HistogramWithCurve(ds$MathStandard, "MathStandard")
+# HistogramWithCurve(ds$MathStandard, "MathStandard")
+HistogramWithCurve(ds$MathGaussified, "MathGaussified")
 
 write.csv(ds, pathOutput, row.names=F)

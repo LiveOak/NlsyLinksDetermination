@@ -16,8 +16,8 @@ pathInputKellyOutcomes <-  "./OutsideData/KellyHeightWeightMath2012-03-09/ExtraO
 pathOutput <- "./ForDistribution/Outcomes/Gen2Math/Gen2Math.csv"
 
 # dvName <- "Gen2PiatMathRaw"
-# dvName <- "Gen2PiatMathPercentile"
-dvName <- "Gen2PiatMathStandard"
+dvName <- "Gen2PiatMathPercentile"
+# dvName <- "Gen2PiatMathStandard"
 
 rawMin <- 0
 rawMax <- 84
@@ -81,14 +81,14 @@ summary(dsLong)
 ```
 
 ```
-   SubjectTag        SurveyYear        Item      ItemLabel             Value       LoopIndex   Generation  SurveyDate       
- Min.   :    201   Min.   :1986   Min.   :513   Length:33815       Min.   :  0   Min.   :0   Min.   :2    Length:33815      
- 1st Qu.: 265501   1st Qu.:1992   1st Qu.:513   Class :character   1st Qu.: 91   1st Qu.:0   1st Qu.:2    Class :character  
- Median : 529501   Median :1996   Median :513   Mode  :character   Median :101   Median :0   Median :2    Mode  :character  
- Mean   : 542962   Mean   :1996   Mean   :513                      Mean   :101   Mean   :0   Mean   :2                      
- 3rd Qu.: 800603   3rd Qu.:2000   3rd Qu.:513                      3rd Qu.:110   3rd Qu.:0   3rd Qu.:2                      
- Max.   :1266703   Max.   :2010   Max.   :513                      Max.   :135   Max.   :0   Max.   :2                      
-                                                                                                                            
+   SubjectTag        SurveyYear        Item      ItemLabel             Value        LoopIndex   Generation  SurveyDate       
+ Min.   :    201   Min.   :1986   Min.   :512   Length:33815       Min.   : 0.0   Min.   :0   Min.   :2    Length:33815      
+ 1st Qu.: 265501   1st Qu.:1992   1st Qu.:512   Class :character   1st Qu.:28.0   1st Qu.:0   1st Qu.:2    Class :character  
+ Median : 529501   Median :1996   Median :512   Mode  :character   Median :52.0   Median :0   Median :2    Mode  :character  
+ Mean   : 542962   Mean   :1996   Mean   :512                      Mean   :51.2   Mean   :0   Mean   :2                      
+ 3rd Qu.: 800603   3rd Qu.:2000   3rd Qu.:512                      3rd Qu.:75.0   3rd Qu.:0   3rd Qu.:2                      
+ Max.   :1266703   Max.   :2010   Max.   :512                      Max.   :99.0   Max.   :0   Max.   :2                      
+                                                                                                                             
  AgeSelfReportYears AgeCalculateYears     Gender   
  Min.   : 4.9       Min.   : 4.5      Min.   :1.0  
  1st Qu.: 7.2       1st Qu.: 7.3      1st Qu.:1.0  
@@ -123,6 +123,7 @@ dsLong$AgeSelfReportYears <- NULL
 testit::assert("All outcomes should have a loop index of zero", all(dsLong$LoopIndex==0))
 dsLong$LoopIndex <- NULL
 
+
 ####################################################################################
 ```
 
@@ -137,6 +138,7 @@ dsLong$LoopIndex <- NULL
 # table(dsYearStatic$V1)
 dsYearStatic <- dsLong[, c("SubjectTag", "SurveyYear", "Age", "Gender", "Value")]
 dsYearStatic <- plyr::rename(dsYearStatic, replace=c("Value"="DV"))
+
 
 dsYear <- dsYearStatic
 nrow(dsYear)
@@ -171,7 +173,7 @@ nrow(dsYear)
 ```
 
 ```
-[1] 33814
+[1] 33815
 ```
 
 ```r
@@ -179,14 +181,14 @@ summary(dsYear)
 ```
 
 ```
-   SubjectTag        SurveyYear        Age           Gender          DV     
- Min.   :    201   Min.   :1986   Min.   : 4.0   Min.   :1.0   Min.   : 65  
- 1st Qu.: 265501   1st Qu.:1992   1st Qu.: 7.0   1st Qu.:1.0   1st Qu.: 91  
- Median : 529501   Median :1996   Median : 9.0   Median :1.0   Median :101  
- Mean   : 542953   Mean   :1996   Mean   : 9.2   Mean   :1.5   Mean   :101  
- 3rd Qu.: 800603   3rd Qu.:2000   3rd Qu.:12.0   3rd Qu.:2.0   3rd Qu.:110  
- Max.   :1266703   Max.   :2010   Max.   :18.0   Max.   :2.0   Max.   :135  
-                                  NA's   :1097                              
+   SubjectTag        SurveyYear        Age           Gender          DV      
+ Min.   :    201   Min.   :1986   Min.   : 4.0   Min.   :1.0   Min.   : 0.0  
+ 1st Qu.: 265501   1st Qu.:1992   1st Qu.: 7.0   1st Qu.:1.0   1st Qu.:28.0  
+ Median : 529501   Median :1996   Median : 9.0   Median :1.0   Median :52.0  
+ Mean   : 542962   Mean   :1996   Mean   : 9.2   Mean   :1.5   Mean   :51.2  
+ 3rd Qu.: 800603   3rd Qu.:2000   3rd Qu.:12.0   3rd Qu.:2.0   3rd Qu.:75.0  
+ Max.   :1266703   Max.   :2010   Max.   :18.0   Max.   :2.0   Max.   :99.0  
+                                  NA's   :1098                               
 ```
 
 ```r
@@ -208,8 +210,8 @@ ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_
 ```
 
 ```
-Warning: Removed 1097 rows containing missing values (stat_smooth).
-Warning: Removed 1014 rows containing missing values (geom_path).
+Warning: Removed 1098 rows containing missing values (stat_smooth).
+Warning: Removed 1015 rows containing missing values (geom_path).
 ```
 
 ![plot of chunk FilterValuesAndAges](figure/FilterValuesAndAges4.png) 
@@ -272,7 +274,8 @@ ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_
 
 ```r
 #ds <- ddply(dsYear, "SubjectTag", summarize, ZGenderAge=median(ZGenderAge))
-ds <- ddply(dsYear, "SubjectTag", summarize, Score=median(DV))
+# ds <- ddply(dsYear, "SubjectTag", summarize, Score=median(DV))
+ds <- ddply(dsYear, "SubjectTag", summarize, Score=qnorm(median(DV)/100))
 nrow(ds) 
 ```
 
@@ -285,13 +288,13 @@ summary(ds)
 ```
 
 ```
-   SubjectTag          Score      
- Min.   :    201   Min.   : 65.0  
- 1st Qu.: 276902   1st Qu.: 92.5  
- Median : 553702   Median :100.0  
- Mean   : 560749   Mean   :100.1  
- 3rd Qu.: 826505   3rd Qu.:108.5  
- Max.   :1266703   Max.   :135.0  
+   SubjectTag          Score        
+ Min.   :    201   Min.   :-2.3263  
+ 1st Qu.: 276902   1st Qu.:-0.4959  
+ Median : 553702   Median : 0.0125  
+ Mean   : 560749   Mean   : 0.0084  
+ 3rd Qu.: 826505   3rd Qu.: 0.5534  
+ Max.   :1266703   Max.   : 2.3263  
 ```
 
 ```r
@@ -362,7 +365,7 @@ cor(dsOldVsNew$MathStandardized, dsOldVsNew$Score, use="complete.obs")
 ```
 
 ```
-[1] 0.8699
+[1] 0.8681
 ```
 
 ```r
@@ -400,19 +403,19 @@ dsVariable[, c("VariableCode", "SurveyYear", "Item", "ItemLabel", "Generation", 
 ```
 
 ```
-   VariableCode SurveyYear Item            ItemLabel Generation ExtractSource   ID
-1      C0580100       1986  513 Gen2PiatMathStandard          2            13 2197
-2      C0799600       1988  513 Gen2PiatMathStandard          2            13 2200
-3      C0998800       1990  513 Gen2PiatMathStandard          2            13 2203
-4      C1198800       1992  513 Gen2PiatMathStandard          2            13 2206
-5      C1507800       1994  513 Gen2PiatMathStandard          2            13 2209
-6      C1564700       1996  513 Gen2PiatMathStandard          2            13 2212
-7      C1800100       1998  513 Gen2PiatMathStandard          2            13 2215
-8      C2503700       2000  513 Gen2PiatMathStandard          2            13 2218
-9      C2532200       2002  513 Gen2PiatMathStandard          2            13 2221
-10     C2803000       2004  513 Gen2PiatMathStandard          2            13 2224
-11     C3111500       2006  513 Gen2PiatMathStandard          2            13 2227
-12     C3615200       2008  513 Gen2PiatMathStandard          2            13 2230
-13     C3993800       2010  513 Gen2PiatMathStandard          2            13 2233
+   VariableCode SurveyYear Item              ItemLabel Generation ExtractSource   ID
+1      C0580000       1986  512 Gen2PiatMathPercentile          2            13 2196
+2      C0799500       1988  512 Gen2PiatMathPercentile          2            13 2199
+3      C0998700       1990  512 Gen2PiatMathPercentile          2            13 2202
+4      C1198700       1992  512 Gen2PiatMathPercentile          2            13 2205
+5      C1507700       1994  512 Gen2PiatMathPercentile          2            13 2208
+6      C1564600       1996  512 Gen2PiatMathPercentile          2            13 2211
+7      C1800000       1998  512 Gen2PiatMathPercentile          2            13 2214
+8      C2503600       2000  512 Gen2PiatMathPercentile          2            13 2217
+9      C2532100       2002  512 Gen2PiatMathPercentile          2            13 2220
+10     C2802900       2004  512 Gen2PiatMathPercentile          2            13 2223
+11     C3111400       2006  512 Gen2PiatMathPercentile          2            13 2226
+12     C3615100       2008  512 Gen2PiatMathPercentile          2            13 2229
+13     C3993700       2010  512 Gen2PiatMathPercentile          2            13 2232
 ```
 
