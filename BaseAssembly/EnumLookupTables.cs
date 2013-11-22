@@ -90,6 +90,7 @@ namespace Nls.BaseAssembly {
 		SubjectID = 100,
 		ExtendedFamilyID = 101,
 		Gender = 102,
+        RaceCohort=103,
 
 		Gen2CFatherLivingInHH = 121,
 		Gen2CFatherAlive = 122,
@@ -203,11 +204,16 @@ namespace Nls.BaseAssembly {
 		TwinOrTrip = 3,
 		DontKnow = 255,
 	}
-	public enum Gender : byte {
-		Male = 1,
-		Female = 2,
-		InvalidSkipGen2 = 255,
-	}
+    public enum Gender : byte {
+        Male = 1,
+        Female = 2,
+        InvalidSkipGen2 = 255,
+    }
+    public enum RaceCohort : byte {
+        Hispanic = 1,
+        Black = 2,
+        Nbnh = 255,
+    }
 	public enum MarkerEvidence : byte {
 		Irrelevant = 0,
 		StronglySupports = 1,

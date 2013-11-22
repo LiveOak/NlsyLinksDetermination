@@ -10,7 +10,7 @@ namespace Nls.BaseAssembly {
 		#region Fields
 		private readonly LinksDataSet _ds;
 		private readonly Item[] _items = { Item.DateOfBirthMonth, Item.DateOfBirthYearGen1, Item.DateOfBirthYearGen2,
-													Item.Gen1MomOfGen2Subject,
+													Item.Gen1MomOfGen2Subject, Item.RaceCohort,
 													Item.BioKidCountGen1,Item.BioKidCountGen2,
 													Item.Gen1ChildsIDByBirthOrder, Item.BirthOrderInNlsGen2,
 													Item.BabyDaddyAlive, Item.BabyDaddyDeathMonth, Item.BabyDaddyDeathYearTwoDigit, Item.BabyDaddyDeathYearFourDigit};
@@ -98,6 +98,7 @@ namespace Nls.BaseAssembly {
 		#region Private Methods
 		private Int32 ProcessSubject ( LinksDataSet.tblSubjectRow drSubject, LinksDataSet.tblResponseDataTable dtExtended, LinksDataSet.tblSubjectRow[] subjectsInExtendedFamily ) {//, LinksDataSet.tblResponseDataTable dtResponseFamily
 			Int32 subjectTag = drSubject.SubjectTag;
+            RaceCohort race = (RaceCohort)(Retrieve.Response(Item.RaceCohort, drSubject.SubjectTag, dtExtended));
 			DateTime? mob = Mob.Retrieve(drSubject, dtExtended);
 
 			byte siblingCountInNls = DetermineSiblingCountInNls(drSubject);
@@ -120,7 +121,7 @@ namespace Nls.BaseAssembly {
 			bool? isBiodadDead = biodadDeath.IsDead;
 			DateTime? biodadDeathDate = biodadDeath.DeathDate;
 
-			AddRow(subjectTag, siblingCountInNls, birthOrderInNls, similarAgeCount, hasMzPossibly, kidCountBio, kidCountInNls, mob, lastSurveyYear, lastAge, isDead, deathDate, isBiodadDead, biodadDeathDate);
+            AddRow(subjectTag, race, siblingCountInNls, birthOrderInNls, similarAgeCount, hasMzPossibly, kidCountBio, kidCountInNls, mob, lastSurveyYear, lastAge, isDead, deathDate, isBiodadDead, biodadDeathDate);
 			return 1;
 		}
 		private static  DeathCondition DetermineSubjectDeath ( ) {
@@ -304,15 +305,16 @@ namespace Nls.BaseAssembly {
 			else
 				return new LastSurvey(drs[0].SurveyYear, (float)drs[0].AgeCalculateYears); //There's only one case where the calculated age is missing; in this case it's not their last survey, so it doesn't matter here.
 		}
-		private void AddRow ( Int32 subjectTag, byte siblingCountInNls, byte birthOrderInNls, byte similarAgeCount, bool hasMzPossibly, byte? kidCountBio, byte? kidCountInNls, 
+		private void AddRow ( Int32 subjectTag, RaceCohort raceCohort, byte siblingCountInNls, byte birthOrderInNls, byte similarAgeCount, bool hasMzPossibly, byte? kidCountBio, byte? kidCountInNls, 
 			DateTime? mob, Int16? lastSurveyYearCompleted, float? ageAtLastSurvey,
 			bool isDead, DateTime? deathDate, bool? isBiodadDead, DateTime? biodadDeathDate) {
 
 			lock ( _ds.tblSubjectDetails ) {
 				LinksDataSet.tblSubjectDetailsRow drNew = _ds.tblSubjectDetails.NewtblSubjectDetailsRow();
 				drNew.SubjectTag = subjectTag;
-				drNew.SiblingCountInNls = siblingCountInNls;
-				drNew.BirthOrderInNls = birthOrderInNls;
+                drNew.RaceCohort = Convert.ToByte(raceCohort);
+                drNew.SiblingCountInNls = siblingCountInNls;
+                drNew.BirthOrderInNls = birthOrderInNls;
 				drNew.SimilarAgeCount = similarAgeCount;
 				drNew.HasMzPossibly = hasMzPossibly;
 
