@@ -26,8 +26,8 @@ g <- ggplot(ds, aes(xmin=StartYear, xmax=StopYear, ymin=HeightMin, ymax=HeightMa
 #   annotate("rect", xmin=-Inf, xmax=Inf, ymin=c(1)-.3, ymax=c(1)+.3, fill="gray90") +
   
   annotate("rect", xmin=2010, xmax=2014, ymin=-Inf, ymax=Inf, fill="gray80") +
-  
-  geom_vline(x=2006, color=hcl(h=240), size=4) +
+#   annotate("segment", x=2006, xend=2006, y=-Inf, yend=2.5, color=hcl(h=240), size=4) +
+#   geom_vline(x=2006, color=hcl(h=240), size=4) +
 #   annotate("text", x=2006.5, y=3, label="Explicit Items\nFirst Asked\nin 2006", color=hcl(h=240, c=55, l=55), hjust=0.5, size=7, lineheight=.8) +
   
   geom_rect(color=NA) + #The color bars of data
@@ -43,7 +43,8 @@ g <- ggplot(ds, aes(xmin=StartYear, xmax=StopYear, ymin=HeightMin, ymax=HeightMa
   
 #   scale_y_discrete(labels=c("", "Nlsy79\n(Generation 1)", "", "", "")) + #, limits=c(1, 4)) +
 #   scale_y_discrete(labels=c("", "Nlsy79\n(Generation 1)", "Nlsy79\n(Generation 2)", "", "")) + #, limits=c(1, 4)) +
-  scale_y_discrete(labels=c("", "Nlsy79\n(Generation 1)", "Nlsy79\n(Generation 2)", "Nlsy97", "")) + #, limits=c(1, 4)) +
+#   scale_y_discrete(labels=c("", "Nlsy79\n(Generation 1)", "Nlsy79\n(Generation 2)", "Nlsy97", "")) + #, limits=c(1, 4)) +
+  scale_y_discrete(labels=c("", "NLSY79\n(Generation 1)", "NLSYC\n(Generation 2)", "NLSY97", "")) + #, limits=c(1, 4)) +
   
   scale_fill_brewer(palette="Set2", limits=c("Fertility", "Surveys", "DOB")) +
   #coord_cartesian(ylim=c(1-2*width, maxMaxHeight + 1*width)) +
