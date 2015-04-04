@@ -1,6 +1,8 @@
 rm(list=ls(all=TRUE)) #Clear all the variables before starting a new run.
+
 require(ggplot2)
 require(colorspace)
+
 pathDoubleEntered <- "./Analysis/Df/2012-01-13/DoubleEntered.csv"
 dvName <- "HtSt19to25"
 #dvName <- "MathStd"
@@ -52,15 +54,22 @@ dsClean <- subset(ds, !is.na(Dv_1) & !is.na(Dv_2) & !is.na(R) & !is.na(ds$Relati
 colorPalette <- heat_hcl(12, h=c(160, 260), c = c(15, 70), l = c(90, 60), power=c(1.5, 3))
 #colorPalette <- rev(colorPalette)
 
+BookTheme <- theme_bw() +
+  theme(axis.text = element_text(colour="gray40")) +
+  theme(axis.title = element_text(colour="gray40")) +
+  theme(panel.border = element_rect(colour="gray80")) +
+  theme(axis.ticks = element_blank())
+
 p <- ggplot(dsClean, aes(x=Dv_1, y=Dv_2))
-p <- p +# stat_binhex(aes(x=Dv_1, y=Dv_2), binwidth = c(1, 1) ) +  
+p <- p +# stat_binhex(aes(x=Dv_1, y=Dv_2), binwidth = c(1, 1) ) + 
+  geom_abline(col="gray70", lwd=1) +
+  stat_binhex(binwidth = c(1, 1) ) + 
   #scale_fill_gradient( low="red", high="blue", trans="log") +
   #scale_fill_manual(colorPalette) +
   #scale_fill_gradientn(colours=colorPalette, trans="log") +
   scale_fill_gradientn("Frequency", colours=colorPalette) +
   #scale_fill_continuous(low = "grey80", high = "black") +
   #scale_colour_gradientn(colour = rainbow(7)) +
-  stat_binhex(binwidth = c(1, 1) ) +
   
   #layer(geom="hex", stat_params=list(binwidth=c(10,10))) + #, stat="bin"
   #layer(geom="hex", mapping=aes(x=Dv_1, y=Dv_2), stat_params=list(binwidth=c(1, 1)))
@@ -79,11 +88,14 @@ p <- p +# stat_binhex(aes(x=Dv_1, y=Dv_2), binwidth = c(1, 1) ) +
   #scale_x_continuous(name=dvName)#, breaks=gridLineLocations, labels=gridLineLocations) +
   coord_equal(ratio=1) +
   coord_fixed(xlim=dvRange, ylim=dvRange) + 
+  BookTheme + 
   theme(legend.position = "top") +
+  theme(legend.text = element_text(size=7)) +
   labs(x="Adult Height (Standardized)", y=NULL)
 
 print(p)
 summary(p)
+ggplot2::ggsave("./Publications/2012Scotland/CorrelationsByGroup.png", width=6, height=3)
 
 #stat_binhex(aes(x=Dv_1, y=Dv_2), binwidth = c(1, 1) )
 #layer(geom="hex", stat_params=list(binwidth=c(1, 1))) 
