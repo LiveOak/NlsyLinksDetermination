@@ -1,7 +1,7 @@
 rm(list=ls(all=TRUE)) #Clear all the variables before starting a new run.
 require(ggplot2)
 require(colorspace)
-pathDoubleEntered <- "F:/Projects/Nls/Links2011/Analysis/Df/2012-01-13/DoubleEntered.csv"
+pathDoubleEntered <- "./Analysis/Df/2012-01-13/DoubleEntered.csv"
 dvName <- "HtSt19to25"
 #dvName <- "MathStd"
 #dvName <- "ReadRecStd"
@@ -42,8 +42,6 @@ ds$RelationshipCategory[ds$R == .5 & ds$MultipleBirth>0] <- "DZ"
 ds$RelationshipCategory[ds$R == .75] <- "AZ"
 ds$RelationshipCategory[ds$R == 1] <- "MZ"
 
-
-
 dvRange <- range(ds$Dv_1, na.rm=T)
 gridLineLocations <- pretty(dvRange)
 lmcoef <- coef(lm(Dv_2 ~ Dv_1, ds))
@@ -78,13 +76,11 @@ p <- p +# stat_binhex(aes(x=Dv_1, y=Dv_2), binwidth = c(1, 1) ) +
   
   #facet_grid(.~ R) +
   facet_grid(. ~ RelationshipCategory ) +
-  opts(aspect.ratio=1) + 
   #scale_x_continuous(name=dvName)#, breaks=gridLineLocations, labels=gridLineLocations) +
-  scale_x_continuous(name="Adult Height (Standardized)") +
-  scale_y_continuous(name="") +#, breaks=gridLineLocations) + 
   coord_equal(ratio=1) +
-  coord_cartesian(xlim=dvRange, ylim=dvRange) + 
-  opts(legend.position = "top")
+  coord_fixed(xlim=dvRange, ylim=dvRange) + 
+  theme(legend.position = "top") +
+  labs(x="Adult Height (Standardized)", y=NULL)
 
 print(p)
 summary(p)

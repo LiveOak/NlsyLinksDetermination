@@ -1,11 +1,13 @@
 #rm(list=ls(all=TRUE)) #Clear all the variables before starting a new run.
-require(e1071) #For Skewness function
-require(xtable)
+library(ggplot2) 
+library(e1071) #For Skewness function
+library(xtable)
 #################################################################################################
 # Exclude some observations, define some constants and desfine a helper function
 #################################################################################################
 #pathDoubleEntered <- "F:/Projects/Nls/Links2011/Analysis/Df/2012-01-13/BMI_Sex_Intell_DoubleEntry_Linked.csv"
-pathDoubleEntered <- "F:/Projects/Nls/Links2011/Analysis/Df/2012-01-13/DoubleEntered.csv"
+#pathDoubleEntered <- "F:/Projects/Nls/Links2011/Analysis/Df/2012-01-13/DoubleEntered.csv"
+pathDoubleEntered <- "./Analysis/Df/2012-01-13/DoubleEntered.csv"
 dvName <- "HtSt19to25"
 #dvName <- "MathStd"
 #dvName <- "ReadRecStd"
@@ -245,31 +247,32 @@ PlotSubgroup <- function( dsSubgroup, title, showLoess=T, sectionTitle=""){
   p <- ggplot(dsClean)
 
   if( showLoess ) {
-    p + stat_binhex(aes(x=Dv_1, y=Dv_2), binwidth = c(1, 1) ) +  
+    p <- p + stat_binhex(aes(x=Dv_1, y=Dv_2), binwidth = c(1, 1) ) +  
       #geom_smooth(aes(x=Dv_1, y=Dv_2), method="loess", size = 1.5, col="green") +
       geom_abline(intercept=lmcoef[1], slope=lmcoef[2], col="tomato") +
       geom_smooth(aes(x=Dv_1, y=Dv_2), method="lm", se=F, col="gold") +
      #facet_grid(.~ R) +
       facet_grid(. ~ RelationshipCategory ) +
-      opts(aspect.ratio=1) + 
       scale_x_continuous(name=title, breaks=gridLineLocations, labels=gridLineLocations) +
       scale_y_continuous(name=sectionTitle, breaks=gridLineLocations) + coord_equal(ratio=1) +
-      coord_cartesian(xlim=dvRange, ylim=dvRange)
+      coord_fixed(xlim=dvRange, ylim=dvRange)
     #+opts(aspect.ratio=1, title=title) +
   }
   else {
-    p + stat_binhex(aes(x=Dv_1, y=Dv_2), binwidth = c(1, 1) ) +  
+    p <- p + stat_binhex(aes(x=Dv_1, y=Dv_2), binwidth = c(1, 1) ) +  
       geom_abline(intercept=lmcoef[1], slope=lmcoef[2], col="tomato") +
       geom_smooth(aes(x=Dv_1, y=Dv_2), method="lm", se=F, col="gold") +
-      facet_grid(.~ R) + opts(aspect.ratio=1) + 
+      facet_grid(.~ R) + 
       scale_x_continuous(title, breaks=gridLineLocations)+ scale_y_continuous(sectionTitle, breaks=gridLineLocations) + # coord_equal(ratio = 1)
-      coord_cartesian(xlim=dvRange, ylim=dvRange)   
+      coord_fixed(xlim=dvRange, ylim=dvRange)   
   }
 
   #coord_cartesian(xlim=range(ds$Dv_1), ylim=range(ds$Dv_2))
   #p + geom_density(aes(x=Dv_1, y=Dv_2), data)
+  return( p )
 }
 PlotSubgroup(dsSubgroup=ds, title="Total Sample")
+
 resultTotal
 
 
@@ -279,7 +282,6 @@ resultTotal
 #   geom_smooth(aes(x=Dv_1, y=Dv_2), method="lm", se=F, col="gold") +
 #   #facet_grid(.~ R) +
 #   facet_grid(. ~ RelationshipCategory ) +
-#   opts(aspect.ratio=1) + 
 #   scale_x_continuous(name=title, breaks=gridLineLocations, labels=gridLineLocations) +
 #   scale_y_continuous(name=sectionTitle, breaks=gridLineLocations) + coord_equal(ratio=1) +
-#   coord_cartesian(xlim=dvRange, ylim=dvRange)
+#   coord_fixed(xlim=dvRange, ylim=dvRange)
