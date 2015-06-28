@@ -1,8 +1,8 @@
 rm(list=ls(all=TRUE))
-require(RODBC)
-require(ggplot2)
-require(plyr)
-require(colorspace)
+library(RODBC)
+library(ggplot2)
+library(plyr)
+library(colorspace)
 # includedRelationshipPaths <- c(2)
 includedRelationshipPaths <- c(1)
 archivePath <- "./MicroscopicViews/CrosstabHistoryArchive.csv"

@@ -2,7 +2,7 @@ rm(list=ls(all=TRUE))
 library(NlsyLinks)
 library(lubridate)
 library(plyr) #Load the package into memory.
-require(knitr)
+library(knitr)
 # dsLinksGen1 <- Links79Pair[Links79Pair$RelationshipPath=="Gen1Housemates", ]
 pathOut <- "F:/Projects/Nls/Links2011/CodingUtilities/Geocode/FakeGeocode.csv"
 

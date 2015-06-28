@@ -1,5 +1,5 @@
 #rm(list=ls(all=TRUE))
-require(NlsyLinks) 
+library(NlsyLinks) 
 if( names(dev.cur()) != "null device" ) dev.off()
 deviceWidth <- 4#6.5#10#20
 heightToWidthRatio <- .75
@@ -52,7 +52,7 @@ ace <- AceLavaanGroup(dsClean)
 ace
 
 #Step 12: Inspect the output further
-require(lavaan) #Load the package to access methods of the lavaan class.
+library(lavaan) #Load the package to access methods of the lavaan class.
 GetDetails(ace)
 
 hist(dsOutcomes$BirthWeightInOunces)
@@ -61,7 +61,7 @@ length(dsOutcomes$BirthWeightInOunces)
 
 
 hist(dsOutcomes$BirthWeightInOunces, breaks=500, border="NA", col="blue")
-require(ggplot2)
+library(ggplot2)
 qplot(dsOutcomes$BirthWeightInOunces, fill=I("blue"), xlab="Birth Weight (in ounces)", ylab="Frequency", binwidth=2) #color=I("blue"),
 
 head(sort(dsOutcomes$BirthWeightInOunces, decreasing=T))

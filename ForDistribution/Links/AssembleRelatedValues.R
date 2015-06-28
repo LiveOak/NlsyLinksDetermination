@@ -1,6 +1,6 @@
 rm(list=ls(all=TRUE))
-require(RODBC)
-require(plyr)
+library(RODBC)
+library(plyr)
 
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 ds <- sqlQuery(channel, "SELECT * FROM dbo.vewRelatedValues ORDER BY ExtendedID, SubjectTag_S1, SubjectTag_S2")

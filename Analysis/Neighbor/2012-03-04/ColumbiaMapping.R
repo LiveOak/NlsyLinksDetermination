@@ -1,8 +1,8 @@
 #Run this plot first so that you see what the data in these two shapefiles look like
 rm(list=ls(all=TRUE))
-require(sp)
-require(rgdal)
-require(rgeos)
+library(sp)
+library(rgdal)
+library(rgeos)
 
 # if( names(dev.cur()) != "null device" ) dev.off()
 # deviceWidth <- 8 #20 #10 #6.5

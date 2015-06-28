@@ -15,7 +15,7 @@
 Gen2 Link Version: 2011V28.
 
 <<echo=F,print=F>>=
-require(e1071) #For Skewness function
+library(e1071) #For Skewness function
 pathDoubleEntered <- "F:/Projects/Nls/Links2011/Analysis/Df/2011-11-13/DoubleEntered.csv"
 ageFloorInclusive <- 19
 ambiguousImplicitSiblingR <- .375

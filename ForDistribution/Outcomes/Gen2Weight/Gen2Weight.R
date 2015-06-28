@@ -3,13 +3,13 @@ rm(list=ls(all=TRUE)) #Clear the memory for any variables set from any previous 
 
 ####################################################################################
 ## @knitr LoadPackages
-require(RODBC)
-require(plyr)
-require(ggplot2)
-require(scales)
-require(mgcv) #For GAM smoother
-require(MASS) #For RLM
-require(testit) #For Assert
+library(RODBC)
+library(plyr)
+library(ggplot2)
+library(scales)
+library(mgcv) #For GAM smoother
+library(MASS) #For RLM
+library(testit) #For Assert
 
 ####################################################################################
 ## @knitr DefineGlobals

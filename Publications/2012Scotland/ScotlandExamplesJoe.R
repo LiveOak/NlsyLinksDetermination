@@ -1,7 +1,7 @@
 rm(list=ls(all=TRUE)) #Clear all the variables before starting a new run.
 
-require(ggplot2)
-require(colorspace)
+library(ggplot2)
+library(colorspace)
 
 pathDoubleEntered <- "./Analysis/Df/2012-01-13/DoubleEntered.csv"
 dvName <- "HtSt19to25"

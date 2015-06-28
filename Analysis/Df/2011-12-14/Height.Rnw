@@ -13,10 +13,10 @@
 Gen2 Link Version: 2011V28.
 
 <<echo=F,print=F>>=
-require(e1071) #For Skewness function
-require(xtable)
-require(hexbin)
-require(ggplot2)
+library(e1071) #For Skewness function
+library(xtable)
+library(hexbin)
+library(ggplot2)
 #################################################################################################
 # Exclude some observations, define some constants and desfine a helper function
 #################################################################################################

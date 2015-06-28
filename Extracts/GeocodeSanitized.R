@@ -1,4 +1,4 @@
-require(RODBC)
+library(RODBC)
 rm(list=ls(all=TRUE))
 # pathCsv <- "F:/Projects/Nls/Links2011/Extracts/RosterGen1.csv"
 # tableName <- "Process.tblLURosterGen1"

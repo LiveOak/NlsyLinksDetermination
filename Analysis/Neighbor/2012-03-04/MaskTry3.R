@@ -1,4 +1,4 @@
-require(gpclib)
+library(gpclib)
 
 set.seed(100)
 a <- cbind(rnorm(100), rnorm(100))

@@ -1,6 +1,6 @@
 #example of openMX ACE model for height
 #rm(list=ls(all=TRUE)) #Clear all the variables before starting a new run.
-require(OpenMx)
+library(OpenMx)
 
 # directory <- "F:/Projects/Nls/Links2011/Analysis/Df/2011-12-18/"
 #  pathInput <-  paste(directory, "SingleEntered.csv", sep="")

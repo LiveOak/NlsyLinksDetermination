@@ -1,6 +1,6 @@
-# require(RODBC)
-require(plyr)
-# require(lubridate)
+# library(RODBC)
+library(plyr)
+# library(lubridate)
 rm(list=ls(all=TRUE))
 
 pathInputGen1 <- "./ForDistribution/Outcomes/OutcomesGen1.csv"

@@ -1,5 +1,5 @@
-require(RODBC)
-require(plyr)
+library(RODBC)
+library(plyr)
 rm(list=ls(all=TRUE))
 
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")

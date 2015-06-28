@@ -1,7 +1,7 @@
 rm(list=ls(all=TRUE)) #Clear all the variables before starting a new run.
-require(e1071) #For Skewness function
-require(lattice)
-require(xtable)
+library(e1071) #For Skewness function
+library(lattice)
+library(xtable)
 #################################################################################################
 # Exclude some observations, define some constants and desfine a helper function
 #################################################################################################

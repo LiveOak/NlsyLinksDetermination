@@ -1,4 +1,4 @@
-require(rgeos)
+library(rgeos)
 
 data(meuse.grid)
 gridded(meuse.grid) = ~x+y

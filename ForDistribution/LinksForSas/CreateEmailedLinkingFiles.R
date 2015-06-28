@@ -2,7 +2,7 @@ rm(list=ls(all=TRUE))
 
 #install.packages("NlsyLinks") #Currently, the default package location (on CRAN) has only Gen2Siblings
 #install.packages("NlsyLinks", repos="http://R-Forge.R-project.org") #Uncomment this line to get beyond Gen2Siblings.
-require(NlsyLinks)
+library(NlsyLinks)
 
 #Set the working directory (change this for your computer).
 pathDirectory <- "./ForDistribution/LinksForSas"
@@ -57,14 +57,14 @@ write.csv(Links79PairExpanded[Links79PairExpanded$RelationshipPath == "Gen2Sibli
 # dsLinking$RelationshipPath <- as.character(dsLinking$RelationshipPath) #For the sake of SAS, so the value is in there as a string, and doesn't require the format crap in SAS code.
 
 # #install.packages("plyr")
-# require(plyr)
+# library(plyr)
 # count(dsLinking, vars="R")
 # table(dsLinking$R)
 # sum(is.na(dsLinking$R))
 
 
 #install.packages("foreign")
-require(foreign)
+library(foreign)
 write.foreign(df = Links79PairExpanded, 
               datafile = file.path(pathDirectory, 'SasLinks.csv'), 
               codefile = file.path(pathDirectory, 'SasCodeForLinks.sas'),

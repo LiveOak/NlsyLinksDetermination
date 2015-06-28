@@ -42,7 +42,7 @@ write.csv(ds, pathOutputDouble)
 #Set the remaining ambiguous pairs to an fixed constant.
 #ds[is.na(ds$R), "R"] <- .375
 
-require(e1071)
+library(e1071)
 #Total sample
 ds$Dv_1 <- ds$HtSt19to25_1
 ds$Dv_2 <- ds$HtSt19to25_2

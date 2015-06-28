@@ -1,6 +1,6 @@
 rm(list=ls(all=TRUE)) #Clear the memory for any variables set from any previous runs.
-require(ggplot2)
-require(grid)
+library(ggplot2)
+library(grid)
 
 inputPath <- "./Publications/2013France/Graphs/Timeline.csv"
 outputPath <- "./Publications/2013France/Graphs/Timeline.png"

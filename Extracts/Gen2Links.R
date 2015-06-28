@@ -1,5 +1,5 @@
-require(RODBC)
-require(ggplot2)
+library(RODBC)
+library(ggplot2)
 rm(list=ls(all=TRUE))
 pathCsv <- "./Extracts/Gen2Links.csv"
 ds <- read.csv(pathCsv, header=TRUE)

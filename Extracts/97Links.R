@@ -1,8 +1,8 @@
-require(RODBC)
-require(plyr)
-require(ggplot2)
+library(RODBC)
+library(plyr)
+library(ggplot2)
 rm(list=ls(all=TRUE))
-pathCsv <- "F:/Projects/Nls/NlsyLinksDetermination/Extracts/97Links.csv"
+pathCsv <- "./Extracts/97Links.csv"
 ds <- read.csv(pathCsv, header=TRUE)
 
 # unique(ds$R1193000)
@@ -25,7 +25,7 @@ ds <- read.csv(pathCsv, header=TRUE)
 
 # #A DSN must be defined for this to work.  In a 64-bit OS, it can be tricky: http://support.microsoft.com/kb/942976
 # odbcCloseAll()
-# channel <- odbcConnect(dsn="BeeNlsLinks")
+# channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 # odbcGetInfo(channel)
 # keepExistingTable <- FALSE
 # sqlSave(channel, dat=ds, tablename="Extract.tblGen1Links", safer=keepExistingTable, rownames=FALSE, append=FALSE)

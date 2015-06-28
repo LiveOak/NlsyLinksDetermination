@@ -1,4 +1,4 @@
-require(spatstat)
+library(spatstat)
 w <- owin(c(0,10),c(0,10), poly=list(x=c(1,2,3,2,1), y=c(2,3,4,6,7)))
 ## Not run: plot(w)
 

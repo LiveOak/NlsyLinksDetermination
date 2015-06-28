@@ -11,7 +11,7 @@ remove.packages("plyr")
 install_github("plyr", ref = "plyr-1.8-rc")
 
 #Restart R Session
-require(plyr)
+library(plyr)
 sessionInfo() #Verify the plyr_1.8 is attached (not 1.7)
 library(devtools)
 install_github("gtable", ref = "gtable-0.1.2-rc")

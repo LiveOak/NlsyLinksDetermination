@@ -1,5 +1,5 @@
-require(RODBC)
-require(plyr)
+library(RODBC)
+library(plyr)
 rm(list=ls(all=TRUE))
 pathOutput <- 'F:/Projects/Nls/Links2011/MicroscopicViews/RosterAssignments.csv'
 

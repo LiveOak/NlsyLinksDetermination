@@ -1,5 +1,5 @@
 rm(list=ls(all=TRUE))
-require(RODBC)
+library(RODBC)
 
 channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 dsSubjectDetails79 <- sqlQuery(channel, "SELECT * FROM NlsLinks.dbo.vewSubjectDetails79Heavy")

@@ -34,7 +34,7 @@ ds <- subset(ds, AgeHt1>=ageFloor & AgeHt2>=ageFloor)
 #Set the remaining ambiguous pairs to an fixed constant.
 ds[is.na(ds$R), "R"] <- .375
 
-require(e1071)
+library(e1071)
 #Total sample
 brief <- summary(lm(HtSt1 ~ 1 + HtSt2 + R + HtSt2*R, data=ds))
 coeficients <- coef(brief)

@@ -1,7 +1,7 @@
-require(RODBC)
-require(plyr)
-require(lubridate)
-require(testit)
+library(RODBC)
+library(plyr)
+library(lubridate)
+library(testit)
 rm(list=ls(all=TRUE))
 
 ####################################

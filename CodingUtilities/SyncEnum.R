@@ -1,4 +1,4 @@
-require(RODBC)
+library(RODBC)
 rm(list=ls(all=TRUE))
 
 channel <- odbcConnect("BeeNlsLinks")
