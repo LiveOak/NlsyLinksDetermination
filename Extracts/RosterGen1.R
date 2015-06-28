@@ -5,7 +5,7 @@ ds <- read.csv(pathCsv, header=TRUE)
 
 #A DSN must be defined for this to work.  In a 64-bit OS, it can be tricky: http://support.microsoft.com/kb/942976
 odbcCloseAll()
-channel <- odbcConnect(dsn="BeeNlsLinks")
+channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 odbcGetInfo(channel)
 keepExistingTable <- FALSE
 sqlSave(channel, dat=ds, tablename="Process.tblLURosterGen1", safer=keepExistingTable, rownames=FALSE, append=FALSE)

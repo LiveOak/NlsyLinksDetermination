@@ -9,7 +9,7 @@ library(plyr)
 
 #Define CSV of outcomes/phenotypes
 pathInput <- "./ForDistribution/Outcomes/ExtraOutcomes79.csv"
-#dsOutcomes <- read.csv("F:/Projects/Nls/NlsyLinksDetermination/CodingUtilities/Gen2Height/ExtraOutcomes79FromKelly2012March.csv")
+#dsOutcomes <- read.csv("./CodingUtilities/Gen2Height/ExtraOutcomes79FromKelly2012March.csv")
 
 # oName <- "HeightZGender"
 oName <- "HeightZGenderAge"

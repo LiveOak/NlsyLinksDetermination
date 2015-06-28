@@ -5,7 +5,7 @@ pathOutput <- 'F:/Projects/Nls/Links2011/MicroscopicViews/RosterAssignments.csv'
 
 #A DSN must be defined for this to work.  In a 64-bit OS, it can be tricky: http://support.microsoft.com/kb/942976
 odbcCloseAll()
-channel <- odbcConnect(dsn="BeeNlsLinks")
+channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 odbcGetInfo(channel)
 keepExistingTable <- FALSE
 # dsRelatedLeft <- sqlQuery(channel, query="SELECT * FROM Process.tblRelatedStructure WHERE RelationshipPath=1 AND Subject1Tag<Subject2Tag")

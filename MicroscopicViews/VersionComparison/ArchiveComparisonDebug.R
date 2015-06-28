@@ -23,7 +23,7 @@ includedRelationshipPaths <- c(1, 2)
 # sqlDescription <- "SELECT * FROM Process.tblArchiveDescription" #AlgorithmVersion, Description
 # 
 # startTime <- Sys.time()
-# channel <- odbcConnect(dsn="BeeNlsLinks")
+# channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 # odbcGetInfo(channel)
 # 
 # dsRaw <- sqlQuery(channel, sql, stringsAsFactors=F)

@@ -2,7 +2,7 @@ require(RODBC)
 require(plyr)
 rm(list=ls(all=TRUE))
 
-channel <- odbcConnect(dsn="BeeNlsLinks")
+channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 odbcGetInfo(channel)
 keepExistingTable <- FALSE
 #dsRelated <- sqlFetch(channel, sqtable="Process.tblRelatedStructure")
@@ -53,7 +53,7 @@ sum(dsTalliedUnique$V1)
 # dsRelatedLeft$Subject1Tag
 #   sum(is.na(dsRelatedLeft$ID))
 
-channel <- odbcConnect(dsn="BeeNlsLinks")
+channel <- RODBC::odbcDriverConnect("driver={SQL Server}; Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 odbcGetInfo(channel)
 keepExistingTable <- FALSE
 sqlSave(channel, dat=dsTalliedUnique, tablename="Process.tblLURosterGen1Assignment", safer=keepExistingTable, rownames=FALSE, append=FALSE)

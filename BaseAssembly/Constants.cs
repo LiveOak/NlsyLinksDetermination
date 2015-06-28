@@ -37,7 +37,7 @@ namespace Nls.BaseAssembly {
 		//public const Int32 Gen2SiblingPathCount = 22150;//Double entered;
 
 		public const Int32 Gen1HousematesPathCount = 5302;//Single entered;
-		public const Int32 Gen2SiblingsPathCount = 11088; //11075 in 2008;//Single entered;
+        public const Int32 Gen2SiblingsPathCount = 11512; //11088 in 2010; //11075 in 2008;//Single entered;
 		public const Int32 Gen2CousinsPathCount = 4995;//4972 in 2008;//Single entered;
 		public const Int32 ParentChildPathCount = 11504;//Single entered;
 		public const Int32 AuntNiecePathCount = 9884;//9870 in 2008;//Single entered;
@@ -66,7 +66,7 @@ namespace Nls.BaseAssembly {
 		public const Int32 Gen1BirthYearMin = 55;//R0410300 (in 1981) is preferred over R000050 (in 1979).  See http://www.nlsinfo.org/nlsy79/docs/79html/79text/age.htm
 		public const Int32 Gen1BirthYearMax = 65;
 		public const Int32 Gen2BirthYearMin = 1970;//C000570
-		public const Int32 Gen2BirthYearMax = 2010;
+		public const Int32 Gen2BirthYearMax = 2014;
 
 		public static readonly Int32[] Gen1PassoverResponses = {  -4, -5 };
         public static readonly Int32[] Gen1PassoverResponsesNoNegatives = { -1, -2, -3, -4, -5 };
