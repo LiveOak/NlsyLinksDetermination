@@ -21,7 +21,9 @@ namespace Nls.BaseAssembly {
 													Item.DateOfBirthMonth, Item.DateOfBirthYearGen1, Item.DateOfBirthYearGen2,
 													Item.InterviewDateDay, Item.InterviewDateMonth, Item.InterviewDateYear};
 		private readonly string _itemIDsString = "";
-		private static IList<OverridesGen1.SubjectYear> _overrides = OverridesGen1.InverviewDateInvalidSkip;
+        private static IList<OverridesGen1.SubjectYear> _overrides = OverridesGen1.InverviewDateInvalidSkip;
+        private const float ageBiasCorrectionInYears = 0.5f;
+        private const float ageBiasCorrectionInMonths = 0.5f;
 		#endregion
 		#region Constructor
 		public SurveyTime ( LinksDataSet ds ) {
@@ -163,7 +165,7 @@ namespace Nls.BaseAssembly {
 				return null;
 			}
 			else {
-				float ageInYears = (float)drsResponse[0].Value;
+				float ageInYears = (float)drsResponse[0].Value + ageBiasCorrectionInYears;
 				Trace.Assert(ageInYears > 0, "Age should be positive (non-null) value, at this point of the execution.");
 				return ageInYears;
 			}
@@ -183,7 +185,7 @@ namespace Nls.BaseAssembly {
 			}
 			else {
 				Trace.Assert(drsResponse[0].Generation == (byte)Generation.Gen2, "Only Gen2 subjects should be answering this item (specifically the Cs -not the YAs).");
-				float ageInYears = (float)(drsResponse[0].Value / monthsPerYear);
+				float ageInYears = (float)((drsResponse[0].Value + ageBiasCorrectionInMonths) / monthsPerYear);
 				Trace.Assert(ageInYears > 0, "Age should be positive (non-null) value, at this point of the execution.");
 				return ageInYears;
 			}
