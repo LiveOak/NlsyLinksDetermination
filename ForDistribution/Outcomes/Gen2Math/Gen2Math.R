@@ -42,6 +42,8 @@ if(dvName=='Gen2PiatMathStandard') {
 
 ageMin <- 5
 ageMax <- 15
+# ageMin <- 0
+# ageMax <- 6
 zMin <- -3
 zMax <- -zMin 
 
@@ -119,6 +121,12 @@ qplot(dsYear$Age, binwidth=1, main="Before Filtering Out Extreme Ages")
 ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
 dsYear <- dsYear[!is.na(dsYear$Age), ]
 dsYear <- dsYear[ageMin <= dsYear$Age & dsYear$Age <= ageMax, ]
+length(unique(dsYear$SubjectTag)) #6821 on 2015-06 through the 2010 wave.
+
+table(dsYear$Age) #2015-06 through the 2010 wave
+#   4    5    6 
+# 124 3412 3527 
+
 nrow(dsYear)
 qplot(dsYear$Age, binwidth=1, main="After Filtering Out Extreme Ages") 
 ggplot(dsYear, aes(x=Age, y=DV, group=SubjectTag)) + geom_line(alpha=.2) + geom_smooth(method="rlm", aes(group=NA), size=2)
