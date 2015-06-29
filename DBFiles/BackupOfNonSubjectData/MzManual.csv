@@ -1,4 +1,4 @@
-"ID","Subject1Tag","Subject2Tag","Generation","MultipleBirthIfSameSex","IsMz","Undecided","Related","Notes"
+"ID","SubjectTag_S1","SubjectTag_S2","Generation","MultipleBirthIfSameSex","IsMz","Undecided","Related","Notes"
 1,5003,5004,2,2,0,0,1,"Very Consistent"
 3,14303,14304,2,2,0,0,1,"Different Gender"
 5,15904,15905,2,2,0,0,1,NA
