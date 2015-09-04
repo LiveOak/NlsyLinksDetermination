@@ -23,22 +23,22 @@ sql <- "SELECT     Process.tblRelatedStructure.RelationshipPath, Process.tblRela
                       Process.tblRelatedValuesArchive.RRoster, Process.tblRelatedValuesArchive.AlgorithmVersion, 
                       COUNT(Process.tblRelatedValuesArchive.ID) AS Count, Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RFull
 FROM         Process.tblRelatedValuesArchive INNER JOIN
-                      Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.Subject1Tag = Process.tblRelatedStructure.Subject1Tag AND 
-                      Process.tblRelatedValuesArchive.Subject2Tag = Process.tblRelatedStructure.Subject2Tag
+                      Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.SubjectTag_S1 = Process.tblRelatedStructure.SubjectTag_S1 AND 
+                      Process.tblRelatedValuesArchive.SubjectTag_S2 = Process.tblRelatedStructure.SubjectTag_S2
 GROUP BY Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RExplicit, 
                       Process.tblRelatedValuesArchive.RRoster, Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedValuesArchive.RImplicit2004, 
                       Process.tblRelatedValuesArchive.RFull"
 
-# sql <- "SELECT     Process.tblRelatedValuesArchive.ID, Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.Subject1Tag, 
-#                       Process.tblRelatedValuesArchive.Subject2Tag, Process.tblRelatedValuesArchive.MultipleBirth, Process.tblRelatedValuesArchive.IsMz, 
+# sql <- "SELECT     Process.tblRelatedValuesArchive.ID, Process.tblRelatedValuesArchive.AlgorithmVersion, Process.tblRelatedStructure.RelationshipPath, Process.tblRelatedValuesArchive.SubjectTag_S1, 
+#                       Process.tblRelatedValuesArchive.SubjectTag_S2, Process.tblRelatedValuesArchive.MultipleBirth, Process.tblRelatedValuesArchive.IsMz, 
 #                       Process.tblRelatedValuesArchive.Subject1LastSurvey, Process.tblRelatedValuesArchive.Subject2LastSurvey, Process.tblRelatedValuesArchive.RImplicitPass1, 
 #                       Process.tblRelatedValuesArchive.RImplicit, Process.tblRelatedValuesArchive.RImplicitSubject, Process.tblRelatedValuesArchive.RImplicitMother, 
 #                       Process.tblRelatedValuesArchive.RImplicit2004, Process.tblRelatedValuesArchive.RExplicitOldestSibVersion, 
 #                       Process.tblRelatedValuesArchive.RExplicitYoungestSibVersion, Process.tblRelatedValuesArchive.RExplicitPass1, Process.tblRelatedValuesArchive.RExplicit, 
 #                       Process.tblRelatedValuesArchive.RPass1, Process.tblRelatedValuesArchive.R, Process.tblRelatedValuesArchive.RPeek                  
 # FROM         Process.tblRelatedValuesArchive INNER JOIN
-#                       Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.Subject1Tag = Process.tblRelatedStructure.Subject1Tag AND 
-#                       Process.tblRelatedValuesArchive.Subject2Tag = Process.tblRelatedStructure.Subject2Tag"
+#                       Process.tblRelatedStructure ON Process.tblRelatedValuesArchive.SubjectTag_S1 = Process.tblRelatedStructure.SubjectTag_S1 AND 
+#                       Process.tblRelatedValuesArchive.SubjectTag_S2 = Process.tblRelatedStructure.SubjectTag_S2"
 channel <- RODBC::odbcDriverConnect("driver={SQL Server};Server=Bee\\Bass; Database=NlsLinks; Uid=NlsyReadWrite; Pwd=nophi")
 odbcGetInfo(channel)
 dsRaw <- sqlQuery(channel, sql, stringsAsFactors=F)
@@ -88,7 +88,7 @@ colorVersion <- sequential_hcl(n=length(versionNumbers), c=c(80, 80), l = c(90, 
 g1 <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Version)) +
   scale_colour_gradientn(colours=colorVersion) +#, color=ColorVersion)
   scale_x_continuous() +#   scale_x_continuous(name="") +
-  scale_y_continuous(name="Agreement", labels=comma) +
+  scale_y_continuous(name="Agreement", labels=scales::comma) +
   xlab("Disagreement (Implicit vs Explicit)") +
   layer(geom="path") + layer(geom="text") +
 #   coord_cartesian(xlim=c(0, 8000), ylim=c(0, 8000)) + #coord_equal() +
