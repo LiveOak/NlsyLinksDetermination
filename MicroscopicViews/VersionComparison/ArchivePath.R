@@ -81,6 +81,15 @@ for( versionNumber in versionNumbers ) {
   dsRocImplicit2004RFull[dsRocImplicit2004RFull$Version==versionNumber, c("Good", "Bad")] <- c(goodSumImplicit2004RFull, badSumImplicit2004RFull)
 }
 
+
+reportTheme <- theme_bw() +
+  theme(axis.text = element_text(colour="gray40")) +
+  theme(axis.title = element_text(colour="gray40")) +
+  theme(panel.border = element_rect(colour="gray80")) +
+  theme(axis.ticks = element_line(colour="gray80")) + 
+  theme(axis.ticks = element_blank()) +
+  theme(legend.position = "none") 
+
 #dsRoc$ColorVersion <- sequential_hcl(n=length(versionNumbers))
 #colorVersion <- factor(sequential_hcl(n=lengWth(versionNumbers)))
 #names(colorVersion) <- versionNumbers
@@ -98,11 +107,8 @@ g1 <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Vers
   scale_x_continuous() +#   scale_x_continuous(name="") +
   scale_y_continuous(labels=scales::comma) +
   labs(x="Pairs in Disagreement (Implicit vs Explicit)", y="Pairs in Agreement") +
-  # coord_cartesian(xlim=c(0, 8000), ylim=c(0, 8000)) + #coord_equal() +
-  theme_bw() + 
-  theme(axis.ticks = element_blank()) +
-  theme(legend.position = "none") 
-
+  reportTheme
+  # coord_cartesian(xlim=c(0, 8000), ylim=c(0, 8000)) + #coord_equal()
 # g1
 # ggsave(filename="./MicroscopicViews/VersionComparison/RocExplicitVsImplicit.png", plot=g1)
 
@@ -129,10 +135,7 @@ g1Publish <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, col
   scale_x_continuous() +#   scale_x_continuous(name="") +
   scale_y_continuous(labels=scales::comma) +
   labs(x="Pairs in Disagreement (Implicit vs Explicit)", y="Pairs in Agreement") +
-  # coord_cartesian(xlim=c(0, 8000), ylim=c(0, 8000)) + #coord_equal() +
-  theme_bw() + 
-  theme(axis.ticks = element_blank()) +
-  theme(legend.position = "none") 
+  reportTheme
 
 # g1Publish
 ggsave(filename="./MicroscopicViews/VersionComparison/RocExplicitVsImplicit.png", plot=g1Publish)
