@@ -8,11 +8,9 @@ includedRelationshipPaths <- c(1)
 archivePath <- "./MicroscopicViews/CrosstabHistoryArchive.csv"
 
 dsArchive <- read.csv(archivePath)
-# dsArchive <- dsArchive[, -3] #Drop RImplicit2004 column
 dsArchive$RFull <- NA_real_
 
-
-deviceWidth <-4.4 #20 #10 #6.5
+deviceWidth <- 4.4 #20 #10 #6.5
 # if( names(dev.cur()) != "null device" ) dev.off()
 # aspectRatio <- 1
 # deviceHeight <- 3.99 #deviceWidth * aspectRatio
@@ -125,8 +123,14 @@ g4 <- g1 %+% dsRocImplicit2004RFull +
   coord_cartesian(xlim=c(0, 9000), ylim=c(0, 9000))
 ggsave(filename="./MicroscopicViews/VersionComparison/RocRFullVsImplicit2004.png", plot=g4)
 
-
+arrowColor <- "gray50"
 g1Publish <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Version)) +
+#   annotate("segment", x=6, xend=34, y=905, yend=2189, arrow=grid::arrow(length=grid::unit(0.3,"cm")), color=arrowColor, alpha=.7) + #58 to 59
+#   annotate("segment", x=78, xend=212, y=2336, yend=2511, arrow=grid::arrow(length=grid::unit(0.3,"cm")), color=arrowColor, alpha=.7) + #69 to 70
+#   annotate("segment", x=212, xend=136, y=1811, yend=1799, arrow=grid::arrow(length=grid::unit(0.3,"cm")), color=arrowColor, alpha=.7) + #70 to 71
+#   annotate("text", x=6, y=905, label="A", color=arrowColor, alpha=.5) + #58 to 59
+#   annotate("text", x=78, y=2336, label="B", color=arrowColor, alpha=.5) + #69 to 70
+#   annotate("text", x=212, y=1811, label="C", color=arrowColor, alpha=.5) + #70 to 71
   geom_path() +
   geom_point(data=dsRocExplicitImplicitForPoints, shape=21, size=3, alpha=.7) +
   geom_text(data=dsRocExplicitImplicitForLabels) +
