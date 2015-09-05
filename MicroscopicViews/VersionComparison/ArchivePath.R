@@ -84,26 +84,56 @@ for( versionNumber in versionNumbers ) {
 #dsRoc$ColorVersion <- sequential_hcl(n=length(versionNumbers))
 #colorVersion <- factor(sequential_hcl(n=lengWth(versionNumbers)))
 #names(colorVersion) <- versionNumbers
-colorVersion <- sequential_hcl(n=length(versionNumbers), c=c(80, 80), l = c(90, 30))
+desiredLabels <- sort(unique(c(69, 74, 82, range(versionNumbers), seq(from=0, to=max(versionNumbers), by=5))))
+dsRocExplicitImplicitForLabels <- dsRocExplicitImplicit[dsRocExplicitImplicit$Version %in% desiredLabels, ]
+dsRocExplicitImplicitForPoints <- dsRocExplicitImplicit[!(dsRocExplicitImplicit$Version %in% desiredLabels), ]
+
+colorVersion <- sequential_hcl(n=length(versionNumbers), c=c(130,40), l=c(130,30))
+
 g1 <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Version)) +
+  geom_path() +
+  geom_point(shape=21, size=3, alpha=.7) +
+  geom_text() +
   scale_colour_gradientn(colours=colorVersion) +#, color=ColorVersion)
   scale_x_continuous() +#   scale_x_continuous(name="") +
-  scale_y_continuous(name="Agreement", labels=scales::comma) +
-  xlab("Disagreement (Implicit vs Explicit)") +
-  layer(geom="path") + layer(geom="text") +
-#   coord_cartesian(xlim=c(0, 8000), ylim=c(0, 8000)) + #coord_equal() +
-  theme_bw() + theme(legend.position = "none") 
+  scale_y_continuous(labels=scales::comma) +
+  labs(x="Pairs in Disagreement (Implicit vs Explicit)", y="Pairs in Agreement") +
+  # coord_cartesian(xlim=c(0, 8000), ylim=c(0, 8000)) + #coord_equal() +
+  theme_bw() + 
+  theme(axis.ticks = element_blank()) +
+  theme(legend.position = "none") 
 
 # g1
-ggsave(filename="./MicroscopicViews/VersionComparison/RocExplicitVsImplicit.png", plot=g1)
+# ggsave(filename="./MicroscopicViews/VersionComparison/RocExplicitVsImplicit.png", plot=g1)
 
-g2 <- g1 %+% dsRocExplicitRoster + xlab("Disagreement (Roster vs Explicit)")
+g2 <- g1 %+% dsRocExplicitRoster + 
+  labs(x="Pairs in Disagreement (Roster vs Explicit)")
 ggsave(filename="./MicroscopicViews/VersionComparison/RocRosterVsExplicit.png", plot=g2)
 
-g3 <- g1 %+% dsRocImplicitRoster + xlab("Disagreement (Roster vs Implicit)")
+g3 <- g1 %+% dsRocImplicitRoster + 
+  labs(x="Pairs in Disagreement (Roster vs Implicit)")
 ggsave(filename="./MicroscopicViews/VersionComparison/RocRosterVsImplicit.png", plot=g3)
 
-g4 <- g1 %+% dsRocImplicit2004RFull + xlab("Disagreement (RFull vs Implicit2004)") + coord_cartesian(xlim=c(0, 9000), ylim=c(0, 9000))
+g4 <- g1 %+% dsRocImplicit2004RFull + 
+  labs(x="Pairs in Disagreement (RFull vs Implicit2004)") + 
+  coord_cartesian(xlim=c(0, 9000), ylim=c(0, 9000))
 ggsave(filename="./MicroscopicViews/VersionComparison/RocRFullVsImplicit2004.png", plot=g4)
 
+
+g1Publish <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Version)) +
+  geom_path() +
+  geom_point(data=dsRocExplicitImplicitForPoints, shape=21, size=3, alpha=.7) +
+  geom_text(data=dsRocExplicitImplicitForLabels) +
+  # geom_text() +
+  scale_colour_gradientn(colours=colorVersion) +#, color=ColorVersion)
+  scale_x_continuous() +#   scale_x_continuous(name="") +
+  scale_y_continuous(labels=scales::comma) +
+  labs(x="Pairs in Disagreement (Implicit vs Explicit)", y="Pairs in Agreement") +
+  # coord_cartesian(xlim=c(0, 8000), ylim=c(0, 8000)) + #coord_equal() +
+  theme_bw() + 
+  theme(axis.ticks = element_blank()) +
+  theme(legend.position = "none") 
+
+# g1Publish
+ggsave(filename="./MicroscopicViews/VersionComparison/RocExplicitVsImplicit.png", plot=g1Publish)
 (elapsed <- Sys.time() - startTime)
