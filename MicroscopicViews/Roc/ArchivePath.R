@@ -32,11 +32,12 @@ sql <-
     Process.tblRelatedValuesArchive.RFull"
 
 reportTheme <- theme_light() +
-  theme(axis.text = element_text(colour="gray40")) +
-  theme(axis.title = element_text(colour="gray40")) +
-  theme(panel.border = element_rect(colour="gray80")) +
-  theme(axis.ticks.length = grid::unit(0, "cm")) +
-  theme(legend.position = "none") 
+  theme(axis.ticks.length  = grid::unit(0, "cm")) +
+  theme(axis.text          = element_text(colour="gray40")) +
+  theme(axis.title         = element_text(colour="gray40")) +
+  theme(panel.border       = element_rect(colour="gray90")) +
+  theme(panel.grid.major   = element_line(colour="gray90")) +
+  theme(legend.position    = "none") 
 
 # @knitr load_data ------------------------------
 dsArchive <- read.csv(archivePath, stringsAsFactors=F) # 'ds' stands for 'datasets'
@@ -90,10 +91,10 @@ for( versionNumber in versionNumbers ) {
 }
 
 # @knitr roc_explicit_vs_implicit ------------------------------
-arrowColor <- "gray70"
+arrowColor <- "gray90"
 dsPublish <- dsRocExplicitImplicit[dsRocExplicitImplicit$Version<=40, ]
 g1Publish <- ggplot(dsPublish, aes(y=Good, x=Bad, label=Version, color=Version)) + 
-  geom_abline(color=arrowColor, alpha=.5, linetype="F5") +
+  geom_abline(color=arrowColor, linetype="F5") +
   geom_path(size=3, alpha=.15, lineend="round") +
   # geom_point(shape=21, size=3, alpha=.7) +
   # geom_text(data=dsRocExplicitImplicitForLabels) +

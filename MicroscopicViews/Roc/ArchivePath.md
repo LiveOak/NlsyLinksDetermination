@@ -48,11 +48,12 @@ sql <-
     Process.tblRelatedValuesArchive.RFull"
 
 reportTheme <- theme_light() +
-  theme(axis.text = element_text(colour="gray40")) +
-  theme(axis.title = element_text(colour="gray40")) +
-  theme(panel.border = element_rect(colour="gray80")) +
-  theme(axis.ticks.length = grid::unit(0, "cm")) +
-  theme(legend.position = "none") 
+  theme(axis.ticks.length  = grid::unit(0, "cm")) +
+  theme(axis.text          = element_text(colour="gray40")) +
+  theme(axis.title         = element_text(colour="gray40")) +
+  theme(panel.border       = element_rect(colour="gray90")) +
+  theme(panel.grid.major   = element_line(colour="gray90")) +
+  theme(legend.position    = "none") 
 ```
 
 <!-- Declare any global functions specific to a Rmd output.  Suppress the output. --> 
@@ -131,10 +132,10 @@ for( versionNumber in versionNumbers ) {
 
 
 ```r
-arrowColor <- "gray70"
+arrowColor <- "gray90"
 dsPublish <- dsRocExplicitImplicit[dsRocExplicitImplicit$Version<=40, ]
 g1Publish <- ggplot(dsPublish, aes(y=Good, x=Bad, label=Version, color=Version)) + 
-  geom_abline(color=arrowColor, alpha=.5, linetype="F5") +
+  geom_abline(color=arrowColor, linetype="F5") +
   geom_path(size=3, alpha=.15, lineend="round") +
   # geom_point(shape=21, size=3, alpha=.7) +
   # geom_text(data=dsRocExplicitImplicitForLabels) +
@@ -159,7 +160,7 @@ gridExtra::grid.arrange(
 )
 ```
 
-![](figure_pdf/roc_explicit_vs_implicit-1.pdf) 
+![](figure_raw/roc_explicit_vs_implicit-1.png) 
 
 
 ```r
@@ -176,7 +177,7 @@ g1 <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Vers
 g1
 ```
 
-![](figure_pdf/base_graph-1.pdf) 
+![](figure_raw/base_graph-1.png) 
 
 
 ```r
@@ -184,7 +185,7 @@ g1 %+% dsRocExplicitRoster +
   labs(x="Pairs in Disagreement (Roster vs Explicit)")
 ```
 
-![](figure_pdf/roc_roster_vs_explicit-1.pdf) 
+![](figure_raw/roc_roster_vs_explicit-1.png) 
 
 
 ```r
@@ -192,7 +193,7 @@ g1 %+% dsRocImplicitRoster +
   labs(x="Pairs in Disagreement (Roster vs Implicit)")
 ```
 
-![](figure_pdf/roc_roster_vs_implicit-1.pdf) 
+![](figure_raw/roc_roster_vs_implicit-1.png) 
 
 
 ```r
@@ -201,7 +202,7 @@ g1 %+% dsRocImplicit2004RFull +
   coord_cartesian(xlim=c(0, 9000), ylim=c(0, 9000))
 ```
 
-![](figure_pdf/roc_full_vs_implicit_2004-1.pdf) 
+![](figure_raw/roc_full_vs_implicit_2004-1.png) 
 
 
 # Session Information
@@ -209,7 +210,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by Will at 2015-09-26, 18:01 -0500
+Report rendered by Will at 2015-09-26, 18:19 -0500
 ```
 
 ```
