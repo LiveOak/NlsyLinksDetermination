@@ -159,7 +159,7 @@ gridExtra::grid.arrange(
 )
 ```
 
-![](figure_raw/roc_explicit_vs_implicit-1.png) 
+![](figure_pdf/roc_explicit_vs_implicit-1.pdf) 
 
 
 ```r
@@ -176,7 +176,7 @@ g1 <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Vers
 g1
 ```
 
-![](figure_raw/base_graph-1.png) 
+![](figure_pdf/base_graph-1.pdf) 
 
 
 ```r
@@ -184,7 +184,7 @@ g1 %+% dsRocExplicitRoster +
   labs(x="Pairs in Disagreement (Roster vs Explicit)")
 ```
 
-![](figure_raw/roc_roster_vs_explicit-1.png) 
+![](figure_pdf/roc_roster_vs_explicit-1.pdf) 
 
 
 ```r
@@ -192,7 +192,7 @@ g1 %+% dsRocImplicitRoster +
   labs(x="Pairs in Disagreement (Roster vs Implicit)")
 ```
 
-![](figure_raw/roc_roster_vs_implicit-1.png) 
+![](figure_pdf/roc_roster_vs_implicit-1.pdf) 
 
 
 ```r
@@ -201,7 +201,7 @@ g1 %+% dsRocImplicit2004RFull +
   coord_cartesian(xlim=c(0, 9000), ylim=c(0, 9000))
 ```
 
-![](figure_raw/roc_full_vs_implicit_2004-1.png) 
+![](figure_pdf/roc_full_vs_implicit_2004-1.pdf) 
 
 
 # Session Information
@@ -209,7 +209,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by Will at 2015-09-26, 17:58 -0500
+Report rendered by Will at 2015-09-26, 18:01 -0500
 ```
 
 ```
