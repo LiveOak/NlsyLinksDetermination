@@ -1,4 +1,4 @@
-# Skeleton Report 1
+# ROC of Link's Progression
 
 This report describes the amount of agreement between different "Relatedness" variables (eg, `RImplicit`, `RExplicit`) across different algorithm versions.
 
@@ -21,8 +21,9 @@ This report describes the amount of agreement between different "Relatedness" va
 ```r
 library(RODBC, quietly=TRUE)
 library(ggplot2, quietly=TRUE)
-# library(plyr, quietly=TRUEr)
-library(colorspace, quietly=TRUE)
+requireNamespace("colorspace", quietly=TRUE)
+requireNamespace("grid", quietly=TRUE)
+requireNamespace("gridExtra", quietly=TRUE)
 ```
 
 <!-- Load any global functions and variables declared in the R file.  Suppress the output. --> 
@@ -50,8 +51,7 @@ reportTheme <- theme_light() +
   theme(axis.text = element_text(colour="gray40")) +
   theme(axis.title = element_text(colour="gray40")) +
   theme(panel.border = element_rect(colour="gray80")) +
-  theme(axis.ticks = element_line(colour="gray80")) + 
-  theme(axis.ticks = element_blank()) +
+  theme(axis.ticks.length = grid::unit(0, "cm")) +
   theme(legend.position = "none") 
 ```
 
@@ -92,7 +92,7 @@ dsClean <- dsRaw[dsRaw$RelationshipPath %in% includedRelationshipPaths, ]
 
 versionNumbers <- sort(unique(dsClean$AlgorithmVersion))
 # colorVersion <- sequential_hcl(n=length(versionNumbers), c=c(130,40), l=c(130,30))
-colorVersion <- sequential_hcl(n=length(versionNumbers), c=c(90,0), l=c(60,0))
+colorVersion <- colorspace::sequential_hcl(n=length(versionNumbers), c=c(90,0), l=c(60,0))
 
 dsRocExplicitImplicit <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=NA_integer_)
 dsRocExplicitRoster <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=NA_integer_)
@@ -131,34 +131,35 @@ for( versionNumber in versionNumbers ) {
 
 
 ```r
-arrowColor <- "gray50"
+arrowColor <- "gray70"
 dsPublish <- dsRocExplicitImplicit[dsRocExplicitImplicit$Version<=40, ]
 g1Publish <- ggplot(dsPublish, aes(y=Good, x=Bad, label=Version, color=Version)) + 
-  geom_abline(color=arrowColor, alpha=.5, linetype=2) +
-  #   annotate("segment", x=6, xend=34, y=905, yend=2189, arrow=grid::arrow(length=grid::unit(0.3,"cm")), color=arrowColor, alpha=.7) + #58 to 59
-  #   annotate("segment", x=78, xend=212, y=2336, yend=2511, arrow=grid::arrow(length=grid::unit(0.3,"cm")), color=arrowColor, alpha=.7) + #69 to 70
-  #   annotate("segment", x=212, xend=136, y=1811, yend=1799, arrow=grid::arrow(length=grid::unit(0.3,"cm")), color=arrowColor, alpha=.7) + #70 to 71
-  #   annotate("text", x=6, y=905, label="A", color=arrowColor, alpha=.5) + #58 to 59
-  #   annotate("text", x=78, y=2336, label="B", color=arrowColor, alpha=.5) + #69 to 70
-  #   annotate("text", x=212, y=1811, label="C", color=arrowColor, alpha=.5) + #70 to 71
-  geom_path(size=3, alpha=.15) +
+  geom_abline(color=arrowColor, alpha=.5, linetype="F5") +
+  geom_path(size=3, alpha=.15, lineend="round") +
   # geom_point(shape=21, size=3, alpha=.7) +
   # geom_text(data=dsRocExplicitImplicitForLabels) +
   geom_text(alpha=.7) +
   scale_colour_gradientn(colours=colorVersion) +#, color=ColorVersion)
   scale_x_continuous(labels=scales::comma) +
   scale_y_continuous(labels=scales::comma) +
-  labs(x="Pairs in Disagreement (Implicit vs Explicit)", y="Pairs in Agreement") +
-  reportTheme
+  reportTheme +
+  theme(plot.margin = grid::unit(c(0, .2, 0, 0), "lines")) +
+  labs(x="Pairs in Disagreement (Implicit vs Explicit)", y="Pairs in Agreement", title=NULL)
 
-g1Publish
+x_limit <- c(225, 425)
+y_limit <- c(5850, 7550)
+xy_max <- 7800
 
-g1Publish + coord_fixed(xlim=c(0, 7600), ylim=c(0, 7600), ratio=1)
+xy_ratio <- (diff(x_limit)/diff(y_limit)) / (xy_max/xy_max)
 
-# ggsave(filename="./MicroscopicViews/VersionComparison/RocExplicitVsImplicit.png", plot=g1Publish)
+gridExtra::grid.arrange(
+  g1Publish + coord_fixed(xlim=c(0, xy_max), ylim=c(0, xy_max), ratio=1),
+  g1Publish + coord_fixed(xlim=x_limit, ylim=y_limit, ratio=xy_ratio) + labs(y=""),
+  ncol = 2
+)
 ```
 
-![](figure_raw/roc_explicit_vs_implicit-1.png) ![](figure_raw/roc_explicit_vs_implicit-2.png) 
+![](figure_raw/roc_explicit_vs_implicit-1.png) 
 
 
 ```r
@@ -176,16 +177,6 @@ g1
 ```
 
 ![](figure_raw/base_graph-1.png) 
-
-```r
-print(g1)
-```
-
-![](figure_raw/base_graph-2.png) 
-
-```r
-# ggsave(filename="./MicroscopicViews/VersionComparison/roc_roster_vs_explicit.png", plot=g1)
-```
 
 
 ```r
@@ -218,7 +209,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by Will at 2015-09-26, 16:29 -0500
+Report rendered by Will at 2015-09-26, 17:58 -0500
 ```
 
 ```
@@ -234,10 +225,11 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] colorspace_1.2-6 ggplot2_1.0.1    RODBC_1.3-12     knitr_1.11      
+[1] ggplot2_1.0.1 RODBC_1.3-12  knitr_1.11   
 
 loaded via a namespace (and not attached):
- [1] Rcpp_0.12.1     digest_0.6.8    MASS_7.3-44     grid_3.2.2      plyr_1.8.3      gtable_0.1.2    formatR_1.2.1  
- [8] magrittr_1.5    scales_0.3.0    evaluate_0.8    stringi_0.5-5   reshape2_1.4.1  rmarkdown_0.8   labeling_0.3   
-[15] proto_0.3-10    tools_3.2.2     stringr_1.0.0   munsell_0.4.2   yaml_2.1.13     htmltools_0.2.6
+ [1] Rcpp_0.12.1      digest_0.6.8     MASS_7.3-44      grid_3.2.2       plyr_1.8.3       gtable_0.1.2    
+ [7] formatR_1.2.1    magrittr_1.5     scales_0.3.0     evaluate_0.8     stringi_0.5-5    reshape2_1.4.1  
+[13] rmarkdown_0.8    labeling_0.3     proto_0.3-10     tools_3.2.2      stringr_1.0.0    munsell_0.4.2   
+[19] yaml_2.1.13      colorspace_1.2-6 htmltools_0.2.6  gridExtra_2.0.0 
 ```

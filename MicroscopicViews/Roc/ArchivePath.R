@@ -8,8 +8,9 @@ rm(list=ls(all=TRUE)) #Clear the memory of variables from previous run. This is 
 # @knitr load_packages ------------------------------
 library(RODBC, quietly=TRUE)
 library(ggplot2, quietly=TRUE)
-# library(plyr, quietly=TRUEr)
-library(colorspace, quietly=TRUE)
+requireNamespace("colorspace", quietly=TRUE)
+requireNamespace("grid", quietly=TRUE)
+requireNamespace("gridExtra", quietly=TRUE)
 
 # @knitr declare_globals ------------------------------
 options(show.signif.stars=F) #Turn off the annotations on p-values
@@ -34,8 +35,7 @@ reportTheme <- theme_light() +
   theme(axis.text = element_text(colour="gray40")) +
   theme(axis.title = element_text(colour="gray40")) +
   theme(panel.border = element_rect(colour="gray80")) +
-  theme(axis.ticks = element_line(colour="gray80")) + 
-  theme(axis.ticks = element_blank()) +
+  theme(axis.ticks.length = grid::unit(0, "cm")) +
   theme(legend.position = "none") 
 
 # @knitr load_data ------------------------------
@@ -54,7 +54,7 @@ dsClean <- dsRaw[dsRaw$RelationshipPath %in% includedRelationshipPaths, ]
 
 versionNumbers <- sort(unique(dsClean$AlgorithmVersion))
 # colorVersion <- sequential_hcl(n=length(versionNumbers), c=c(130,40), l=c(130,30))
-colorVersion <- sequential_hcl(n=length(versionNumbers), c=c(90,0), l=c(60,0))
+colorVersion <- colorspace::sequential_hcl(n=length(versionNumbers), c=c(90,0), l=c(60,0))
 
 dsRocExplicitImplicit <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=NA_integer_)
 dsRocExplicitRoster <- data.frame(Version=versionNumbers, Good=NA_integer_, Bad=NA_integer_)
@@ -90,31 +90,32 @@ for( versionNumber in versionNumbers ) {
 }
 
 # @knitr roc_explicit_vs_implicit ------------------------------
-arrowColor <- "gray50"
+arrowColor <- "gray70"
 dsPublish <- dsRocExplicitImplicit[dsRocExplicitImplicit$Version<=40, ]
 g1Publish <- ggplot(dsPublish, aes(y=Good, x=Bad, label=Version, color=Version)) + 
-  geom_abline(color=arrowColor, alpha=.5, linetype=2) +
-  #   annotate("segment", x=6, xend=34, y=905, yend=2189, arrow=grid::arrow(length=grid::unit(0.3,"cm")), color=arrowColor, alpha=.7) + #58 to 59
-  #   annotate("segment", x=78, xend=212, y=2336, yend=2511, arrow=grid::arrow(length=grid::unit(0.3,"cm")), color=arrowColor, alpha=.7) + #69 to 70
-  #   annotate("segment", x=212, xend=136, y=1811, yend=1799, arrow=grid::arrow(length=grid::unit(0.3,"cm")), color=arrowColor, alpha=.7) + #70 to 71
-  #   annotate("text", x=6, y=905, label="A", color=arrowColor, alpha=.5) + #58 to 59
-  #   annotate("text", x=78, y=2336, label="B", color=arrowColor, alpha=.5) + #69 to 70
-  #   annotate("text", x=212, y=1811, label="C", color=arrowColor, alpha=.5) + #70 to 71
-  geom_path(size=3, alpha=.15) +
+  geom_abline(color=arrowColor, alpha=.5, linetype="F5") +
+  geom_path(size=3, alpha=.15, lineend="round") +
   # geom_point(shape=21, size=3, alpha=.7) +
   # geom_text(data=dsRocExplicitImplicitForLabels) +
   geom_text(alpha=.7) +
   scale_colour_gradientn(colours=colorVersion) +#, color=ColorVersion)
   scale_x_continuous(labels=scales::comma) +
   scale_y_continuous(labels=scales::comma) +
-  labs(x="Pairs in Disagreement (Implicit vs Explicit)", y="Pairs in Agreement") +
-  reportTheme
+  reportTheme +
+  theme(plot.margin = grid::unit(c(0, .2, 0, 0), "lines")) +
+  labs(x="Pairs in Disagreement (Implicit vs Explicit)", y="Pairs in Agreement", title=NULL)
 
-g1Publish
+x_limit <- c(225, 425)
+y_limit <- c(5850, 7550)
+xy_max <- 7800
 
-g1Publish + coord_fixed(xlim=c(0, 7600), ylim=c(0, 7600), ratio=1)
+xy_ratio <- (diff(x_limit)/diff(y_limit)) / (xy_max/xy_max)
 
-# ggsave(filename="./MicroscopicViews/VersionComparison/RocExplicitVsImplicit.png", plot=g1Publish)
+gridExtra::grid.arrange(
+  g1Publish + coord_fixed(xlim=c(0, xy_max), ylim=c(0, xy_max), ratio=1),
+  g1Publish + coord_fixed(xlim=x_limit, ylim=y_limit, ratio=xy_ratio) + labs(y=""),
+  ncol = 2
+)
 
 # @knitr base_graph ------------------------------
 g1 <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Version)) +
@@ -128,8 +129,6 @@ g1 <- ggplot(dsRocExplicitImplicit, aes(y=Good, x=Bad, label=Version, color=Vers
   reportTheme
 # coord_cartesian(xlim=c(0, 8000), ylim=c(0, 8000)) + #coord_equal()
 g1
-print(g1)
-# ggsave(filename="./MicroscopicViews/VersionComparison/roc_roster_vs_explicit.png", plot=g1)
 
 # @knitr roc_roster_vs_explicit ------------------------------
 g1 %+% dsRocExplicitRoster + 
