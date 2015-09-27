@@ -2,9 +2,9 @@ Cohort, Label,StartYear,StopYear, Offset
 1,DOB,1955,1965,-1.5
 2,DOB,1970,2009,-1.5
 3,DOB,1980,1984,-1.5
-1,Surveys,1979,2010,-0.5
-2,Surveys,1986,2010,-0.5
-3,Surveys,1997,2010,-0.5
+1,Surveys,1979,2014,-0.5
+2,Surveys,1986,2014,-0.5
+3,Surveys,1997,2014,-0.5
 1,Fertility,1970,2009,0.5
-2,Fertility,1987,2010,0.5
-3,Fertility,1994,2010,0.5
+2,Fertility,1987,2014,0.5
+3,Fertility,1994,2014,0.5
