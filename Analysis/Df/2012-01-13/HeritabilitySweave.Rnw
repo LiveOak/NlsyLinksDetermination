@@ -17,8 +17,8 @@
 library(ggplot2)
 
 rm(list=ls(all=TRUE)) #Clear all the variables before starting a new run.
-pathCode <- "F:/Projects/Nls/Links2011/Analysis/Df/2012-01-13/HeritabilityCode.R"
-pathCodeMx <- "F:/Projects/Nls/Links2011/Analysis/Df/2012-01-13/MxAceEstimates.R"
+pathCode <- "./Analysis/Df/2012-01-13/HeritabilityCode.R"
+pathCodeMx <- "./Analysis/Df/2012-01-13/MxAceEstimates.R"
 source(pathCodeMx)
 source(pathCode)
 @

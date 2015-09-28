@@ -1,6 +1,6 @@
 % -*- mode: noweb; noweb-default-code-mode: R-mode; -*-
 \documentclass[a4paper]{article}
-
+\SweaveOpts{echo=FALSE}
 \usepackage{a4wide}
 \usepackage{lscape}
 \usepackage[margin=.2in]{geometry}
@@ -8,116 +8,22 @@
 \title{Heritability by Subgroup}
 \author{Joe Rodger's BG Team}
 
-\usepackage{Sweave}
 \begin{document}
-\input{HeritabilitySweave-concordance}
+\SweaveOpts{concordance=TRUE}
 \maketitle
 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
-% Here is some text that is rendered almost explictly
-Gen2 Link Version: 2011V28.  DV Names: `\verb@HtSt19to25_1@' and `\verb@HtSt19to25_2@' in
 
-`\verb@F:/Projects/Nls/Links2011/Analysis/Df/2012-01-13/DoubleEntered.csv@'.
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning in file(filename, "{}r"{}, encoding = encoding): cannot open file './Analysis/Df/2012-01-13/MxAceEstimates.R': No such file or directory}}
 
-%This uses DF method 1, where all four coefficients are estimated (ie, the original DF method). DF Counts reflect the double entry.
-%This uses DF method 3, where only two coefficients are estimated (Rodgers and Kohler, 2005, BG).  DF Counts reflect the double entry.
-This uses OpenMX, based off the example that David emailed Dec 16, 2011.  The dataset was reduced to single entered (and counts reflect this).
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in file(filename, "{}r"{}, encoding = encoding): cannot open the connection}}
 
-%Implicit ambiguous sibs were assigned R=0.375.
-Ambiguous sibs were EXCLUDED from the ACE.
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning in file(filename, "{}r"{}, encoding = encoding): cannot open file './Analysis/Df/2012-01-13/HeritabilityCode.R': No such file or directory}}
 
-All height measures are from 19-25 years of age, standardized by gender (Kelly restandardized early Jan 2012).  
-%Z-Scores are restricted to  +/-20.
-% latex table generated in R 2.15.1 by xtable 1.7-0 package
-% Sat Sep 01 15:19:51 2012
-\begin{table}[ht]
-\begin{center}
-{\footnotesize
-\begin{tabular}{lr|rrr|rrr|rrrrrr|rrrrr}
- Subgroup & $N$ & $h^2$ & $c^2$ & $e^2$ & $\bar{X}$ & $\sigma$ & $\sigma^3$ & $N_{.25}$ & $N_{.375}$ & $N_{Full}$ & $N_{Dz}$ & $N_{.75}$ & $N_{Mz}$ & $r_{.25}$ & $r_{.375}$ & $r_{Full}$ & $r_{Dz}$ & $r_{Mz}$ \\ 
- Total & 3487 & 0.81 & 0.01 & 0.19 & -0.0 & 1.0 & -0.0 & 2114 & 58 & 4728 & 48 & 0 & 26 & 0.25 & 0.48 & 0.39 & 0.50 & 0.95 \\ 
-   \hline
-FF & 877 & 0.94 & 0.00 & 0.05 & -0.0 & 1.0 & 0.1 & 562 & 10 & 1158 & 14 & 0 & 10 & 0.32 & 0.10 & 0.45 & 0.23 & 0.95 \\ 
-  MF & 1735 & 0.55 & 0.09 & 0.35 & 0.0 & 1.0 & -0.1 & 1062 & 26 & 2356 & 26 & 0 & 0 & 0.23 & 0.53 & 0.36 & 0.50 &  \\ 
-  MM & 875 & 0.82 & 0.00 & 0.18 & -0.1 & 1.0 & -0.0 & 490 & 22 & 1214 & 8 & 0 & 16 & 0.20 & 0.45 & 0.36 & 0.54 & 0.94 \\ 
-   \hline
-Hispanic & 878 & 0.28 & 0.27 & 0.46 & -0.4 & 0.9 & 0.1 & 396 & 14 & 1336 & 10 & 0 & 0 & 0.33 & 0.53 & 0.40 & 0.04 &  \\ 
-  Black & 1429 & 0.57 & 0.03 & 0.40 & -0.0 & 1.0 & 0.0 & 1324 & 40 & 1466 & 18 & 0 & 10 & 0.18 & 0.49 & 0.29 & 0.41 & 0.88 \\ 
-  NBNH & 1180 & 0.74 & 0.00 & 0.26 & 0.2 & 1.0 & -0.3 & 394 & 4 & 1926 & 20 & 0 & 16 & 0.27 & -1.00 & 0.34 & 0.56 & 0.95 \\ 
-   \hline
-Hisp FF & 205 & 0.07 & 0.42 & 0.51 & -0.4 & 0.9 & 0.2 & 106 & 2 & 302 & 0 & 0 & 0 & 0.42 & -1.00 & 0.47 &  &  \\ 
-  Hisp MF & 420 & 0.42 & 0.17 & 0.41 & -0.3 & 1.0 & 0.1 & 190 & 8 & 634 & 8 & 0 & 0 & 0.27 & 0.93 & 0.37 & 0.23 &  \\ 
-  Hisp MM & 253 & 0.12 & 0.33 & 0.55 & -0.4 & 0.9 & 0.0 & 100 & 4 & 400 & 2 & 0 & 0 & 0.35 & -0.33 & 0.40 & -1.00 &  \\ 
-   \hline
-Black FF & 387 & 0.15 & 0.24 & 0.61 & -0.0 & 1.0 & 0.1 & 376 & 6 & 382 & 6 & 0 & 4 & 0.28 & -0.16 & 0.32 & -0.31 & 0.80 \\ 
-  Black MF & 716 & 0.47 & 0.07 & 0.46 & 0.0 & 1.0 & 0.0 & 664 & 18 & 742 & 8 & 0 & 0 & 0.18 & 0.17 & 0.30 & 0.59 &  \\ 
-  Black MM & 326 & 0.58 & 0.00 & 0.42 & -0.1 & 1.0 & 0.1 & 284 & 16 & 342 & 4 & 0 & 6 & 0.07 & 0.59 & 0.24 & -0.33 & 0.89 \\ 
-   \hline
-NBNH FF & 285 & 0.98 & 0.00 & 0.02 & 0.2 & 1.0 & -0.1 & 80 & 2 & 474 & 8 & 0 & 6 & 0.20 & -1.00 & 0.46 & 0.84 & 0.97 \\ 
-  NBNH MF & 599 & 0.32 & 0.15 & 0.53 & 0.3 & 1.0 & -0.4 & 208 & 0 & 980 & 10 & 0 & 0 & 0.26 &  & 0.30 & 0.35 &  \\ 
-  NBNH MM & 296 & 0.71 & 0.00 & 0.29 & 0.2 & 1.0 & -0.2 & 106 & 2 & 472 & 2 & 0 & 10 & 0.32 & -1.00 & 0.29 & -1.00 & 0.94 \\ 
-  \end{tabular}
-}
-\label{tab:two}
-\end{center}
-\end{table}%\end{landscape}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Get the results for the graphs
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Total
- %Default size for remaining graphs
-\section{Total Sample}
-% \begin{figure}[htbp]
-% <<fig=true>>=
-%   PlotSubgroup(dsSubgroup=ds, title="Total Sample")
-% @
-% \end{figure}
-Plot Explanation: Each row of graphs isolates a subgroup.  
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in file(filename, "{}r"{}, encoding = encoding): cannot open the connection}}\end{kframe}
+\end{knitrout}
 
-Each cell in a row isolates a unique value of R; this is displayed in the gray header above each cell. 
 
-Axis and hexbin sizes are constants across all rows.
 
-The orange line is the LS regression for the row (repeated in each cell).
-
-The yellow line is the LS regression for the cell.
-
-The green line is the loess for each cell.  It's bandwidth is not constant across allrows.
-
-The hexbin density color is not constant across rows.
-
-Relevant portions of the table are repeated on each page.
-%\newpage
-%\section{By Gender}
-%<<label=tab1,echo=FALSE,results=tex>>=
-%PrintDescriptivesTableFewerColumns(rbind( resultTotal,  resultFF, resultMF, resultMM))
-%@
-%\begin{figure}[htbp]
-%<<fig=true>>=
-%  PlotSubgroup(dsSubgroup=dsFF, title="FF")
-%@
-%<<fig=true>>=
-%  PlotSubgroup(dsSubgroup=dsMF, title="MF")
-%@
-%<<fig=true>>=
-%  PlotSubgroup(dsSubgroup=dsMM, title="MM")
-%@
-%\end{figure}
-
-%\newpage
-%\section{By Race}
-%<<label=tab1,echo=FALSE,results=tex>>=
-%PrintDescriptivesTableFewerColumns(rbind( resultTotal, resultHispanic, resultBlack, resultNBNH))
-%@
-%\begin{figure}[htbp]
-%<<fig=true>>=
-%  PlotSubgroup(dsSubgroup=dsHispanic, title="Hispanics", showLoess=F)
-%@
-%<<fig=true>>=
-%  PlotSubgroup(dsSubgroup=dsBlack, title="Blacks")
-%@
-%<<fig=true>>=
-%  PlotSubgroup(dsSubgroup=dsNBNH, title="NBNH")
-%@
-%\end{figure}
-\end{document}

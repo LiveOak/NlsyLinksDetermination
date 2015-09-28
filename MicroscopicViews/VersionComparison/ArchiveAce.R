@@ -120,10 +120,15 @@ rm(dsOutcomes, dsLinkingNewer, dsLinkingOlder)
 
 ## @knitr EvalGroup
 groupDatasets <- list() # rep(NA_character_, 2*length(rVersions))
-dsAce <- data.frame(Version=rVersions, NewASq=NA_real_, NewCSq=NA_real_, NewESq=NA_real_, NewN=NA_integer_, OldASq=NA_real_, OldCSq=NA_real_, OldESq=NA_real_, OldN=NA_integer_)
+dsAce <- data.frame(
+  Version=rVersions, 
+  NewASq=NA_real_, NewCSq=NA_real_, NewESq=NA_real_, NewN=NA_integer_, 
+  OldASq=NA_real_, OldCSq=NA_real_, OldESq=NA_real_, OldN=NA_integer_
+)
+
 for( i in seq_along(rVersions) ) {
   rVersion <-  rVersions[i] # rVersion <- "RFull"
-#  print(rVersion)
+  # print(rVersion)
   dsGroupSummaryNewer <- RGroupSummary(dsDirtyNewer, oName_1, oName_2, rName=rVersion)#, determinantThreshold=determinantThreshold)
   dsGroupSummaryOlder <- RGroupSummary(dsDirtyOlder, oName_1, oName_2, rName=rVersion)#, determinantThreshold=determinantThreshold)
   
@@ -136,9 +141,17 @@ for( i in seq_along(rVersions) ) {
   dsCleanNewer <- CleanSemAceDataset(dsDirty=dsDirtyNewer, dsGroupSummaryNewer, oName_1, oName_2, rName=rVersion)
   dsCleanOlder <- CleanSemAceDataset(dsDirty=dsDirtyOlder, dsGroupSummaryOlder, oName_1, oName_2, rName=rVersion)
   
+  AceLavaanGroup(dsCleanNewer, printOutput = T)
   aceNewer <- AceLavaanGroup(dsCleanNewer)
   aceOlder <- AceLavaanGroup(dsCleanOlder)   
-  dsAce[i, 2:9] <- c(aceNewer@ASquared, aceNewer@CSquared, aceNewer@ESquared, aceNewer@CaseCount, aceOlder@ASquared, aceOlder@CSquared, aceOlder@ESquared, aceOlder@CaseCount)
+  
+  estNewer <- lavaan::parameterEstimates(aceNewer@Details$lavaan)
+  estOlder <- lavaan::parameterEstimates(aceOlder@Details$lavaan)
+  
+  dsAce[i, 2:9] <- c(
+    aceNewer@ASquared, aceNewer@CSquared, aceNewer@ESquared, aceNewer@CaseCount, 
+    aceOlder@ASquared, aceOlder@CSquared, aceOlder@ESquared, aceOlder@CaseCount
+  )
 }
 # dsAce
 # groupDatasets[[1]]
